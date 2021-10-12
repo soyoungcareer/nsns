@@ -1,5 +1,6 @@
 package com.kh.spring.test;
 
 public class PushTest {
-	// 1. ¼Ò¿µ
+	// 1. ï¿½Ò¿ï¿½
+	// 2. hyunì •
 }
