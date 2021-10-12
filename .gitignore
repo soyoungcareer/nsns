@@ -15,6 +15,9 @@ local.properties
 .loadpath
 .recommenders
 
+## 특정 폴더 제외 ##
+target/classes/*.*
+
 # External tool builders
 .externalToolBuilders/
 
