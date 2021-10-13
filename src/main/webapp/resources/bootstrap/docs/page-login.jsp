@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,7 +21,7 @@
         <h1>Vali</h1>
       </div>
       <div class="login-box">
-        <form class="login-form" action="index.html">
+        <form class="login-form" action="index.jsp">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
           <div class="form-group">
             <label class="control-label">USERNAME</label>
@@ -43,7 +45,7 @@
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
           </div>
         </form>
-        <form class="forget-form" action="index.html">
+        <form class="forget-form" action="index.jsp">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
