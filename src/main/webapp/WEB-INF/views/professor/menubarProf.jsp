@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.spring.member.vo.Professor"%>
+<%-- <%
+	Professor loginUser = (Professor)session.getAttribute("loginUser");
+	String contextPath = request.getContextPath();
+%> --%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:site" content="@pratikborsadiya">
     <meta property="twitter:creator" content="@pratikborsadiya">
+    
     <!-- Open Graph Meta-->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Vali Admin">
@@ -15,34 +21,32 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Vali Admin - Free Bootstrap 4 Admin Template</title>
+
+    <title>낙성대학교 - 교수메뉴</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="resources/bootstrap/docs/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
   </head>
+
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">Vali</a>
-      <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <header class="app-header"><a class="app-header__logo" href="">낙성학사행정시스템</a>
+      <!-- Sidebar toggle button-->
+      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+      
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
-
-      	<li class="calendar">
-         <a class="calendar-link" href="calendar.ca" style="color: white;">학사일정</a>
-
-      <!-- 수강신청 페이지 확인용 -->
-       <li class="register">
-         <a class="register-link" href="register.reg" style="color: white;">수강신청</a>
-
-        </li>
         <li class="app-search">
           <input class="app-search__input" type="search" placeholder="Search">
           <button class="app-search__button"><i class="fa fa-search"></i></button>
         </li>
+        
         <!--Notification Menu-->
         <li class="dropdown"><a class="app-nav__item" href="" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
           <ul class="app-notification dropdown-menu dropdown-menu-right">
@@ -84,65 +88,55 @@
             <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
           </ul>
         </li>
+        
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i>Profile</a></li>
-            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
+            <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
+            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i>로그아웃</a></li>
           </ul>
         </li>
       </ul>
     </header>
+    
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">John Doe</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+          <p class="app-sidebar__user-name"><span><%-- <%= loginUser.getProfName() %> --%>교수</span></p>
+          <p class="app-sidebar__user-designation"><%-- <%= loginUser.getProfDept() %> --%>과</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">UI Elements</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
-            <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Cards</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Widgets</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
+            <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> 강의목록 조회</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의정보 수정</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의삭제</a></li>
           </ul>
         </li>
-        <li><a class="app-menu__item" href=""><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">성적관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Components</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Custom Components</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 성적 등록/조회/수정</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 이의신청 확인</a></li>
           </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 출결 관리</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의평가 조회</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학적변동 승인</a></li>
           </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Login Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Lockscreen Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> User Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Error Page</a></li>
-          </ul>
-        </li>
-        <li><a class="app-menu__item" href=""><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Docs</span></a></li>
       </ul>
     </aside>
+   
    
         <div class="col-md-6">
           <div class="tile">
@@ -155,6 +149,8 @@
       <div>
       	<h1> </h1>
       </div>
+      
+      
     <!-- Essential javascripts for application to work-->
     <script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
     <script src="resources/bootstrap/docs/js/popper.min.js"></script>
