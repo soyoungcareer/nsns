@@ -30,6 +30,10 @@
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
+      <!-- 수강신청 페이지 확인용 -->
+       <li class="register">
+         <a class="register-link" href="register.reg" style="color: white;">수강신청</a>
+        </li>
         <li class="app-search">
           <input class="app-search__input" type="search" placeholder="Search">
           <button class="app-search__button"><i class="fa fa-search"></i></button>
