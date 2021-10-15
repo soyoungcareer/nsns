@@ -6,22 +6,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LectRegisterController {
 
- @RequestMapping("register.reg")
+ @RequestMapping("register.reg") //수강신청
  public String registerPage() {
 
 		return "lectRegister/lectRegister";
 	}
- @RequestMapping("cart.reg")
+ @RequestMapping("cart.reg") //장바구니
  public String cartPage() {
 
 		return "lectRegister/registerCart";
 	}
- @RequestMapping("timeBoard.reg")
+ @RequestMapping("timeBoard.reg") //시간표
  public String timeBoardPage() {
 
 		return "lectRegister/timeBoard";
 	}
- @RequestMapping("lectRegisterEdit.reg")
+ @RequestMapping("lectRegisterEdit.reg") //관리자용 과목 설명 수정페이지
  public String lectRegisterEditPage() {
 
 		return "lectRegister/lectRegisterEdit";
