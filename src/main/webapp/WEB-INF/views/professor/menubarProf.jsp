@@ -22,7 +22,7 @@
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
 
-    <title>낙성대학교(교수)</title>
+    <title>낙성대학교 - 교수메뉴</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -93,7 +93,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
-            <li><a class="dropdown-item" href="profMypage.pr"><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
+            <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
             <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i>로그아웃</a></li>
           </ul>
         </li>
@@ -113,7 +113,7 @@
         <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="profCreateLec.pr"><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
             <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> 강의목록 조회</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의정보 수정</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의삭제</a></li>
