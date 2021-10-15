@@ -19,5 +19,7 @@ public class Acalendar { //학사일정
 	private String title; //제목
 	private Date start; //시작일자
 	private Date end; //마지막일자
+	private String category; // 구분
 	private String backgroundColor; // 배경색
+	private String description; // 설명
 }
