@@ -2,7 +2,22 @@ package com.kh.spring.member.vo;
 
 import java.sql.Date;
 
+<<<<<<< HEAD
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
+public class Professor { 
+=======
 public class Professor {
+>>>>>>> refs/heads/master
 
 	private String profId;		//  "PROF_ID"		VARCHAR2(20)		NOT NULL,
 	private String profPwd;		//  "PROF_PWD"		VARCHAR2(30)		NOT NULL,

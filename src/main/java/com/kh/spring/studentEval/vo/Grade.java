@@ -1,6 +1,21 @@
 package com.kh.spring.studentEval.vo;
 
+<<<<<<< HEAD
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
+public class Grade { 
+=======
 public class Grade {
+>>>>>>> refs/heads/master
 
 	private int gradeNo; 		// 	"GRADE_NO"			NUMBER		NOT NULL,
 	private int studentId; 		// 	"STU_ID"			NUMBER		NOT NULL,
