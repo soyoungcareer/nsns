@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Attendance {
+public class Attendance { 
 
 	private int attendNo; 			// 출석번호	"ATTEND_NO"			NUMBER		NOT NULL,
 	private int studentId; 			// 학번		"STU_ID"			NUMBER		NOT NULL,

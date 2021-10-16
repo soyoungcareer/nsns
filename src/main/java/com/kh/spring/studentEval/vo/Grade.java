@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Grade {
+public class Grade { 
 
 	private int gradeNo; 		// 	"GRADE_NO"			NUMBER		NOT NULL,
 	private int studentId; 		// 	"STU_ID"			NUMBER		NOT NULL,

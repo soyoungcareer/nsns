@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Professor {
+public class Professor { 
 
 	private String profId;		//  "PROF_ID"		VARCHAR2(20)		NOT NULL,
 	private String profPwd;		//  "PROF_PWD"		VARCHAR2(30)		NOT NULL,
