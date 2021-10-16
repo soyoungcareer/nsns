@@ -30,6 +30,7 @@
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
+<<<<<<< HEAD
       	<!-- -----------------------------------
       		소영 교수페이지 확인용 임시 생성 메뉴 		시작 
       	------------------------------------- -->
@@ -39,6 +40,8 @@
       	<!-- -----------------------------------
       		소영 교수페이지 확인용 임시 생성 메뉴 		끝
       	------------------------------------- -->
+=======
+>>>>>>> refs/heads/master
 
       	<li class="calendar">
          <a class="calendar-link" href="calendar.ca" style="color: white;">학사일정</a>
