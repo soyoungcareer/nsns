@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+
+	<resultMap id="noticeResultSet" type="Notice">
+		<id property="ntcNo" column="NTC_NO"/>
+		<result property="ntcCategory" column="NTC_CATEGORY"/>
+		<result property="ntcTitle" column="NTC_TITLE"/>
+		<result property="ntcContent" column="NTC_CONTENT"/>
+		<result property="ntcWriter" column="NTC_WRITER"/>
+		<result property="count" column="COUNT"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectNListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM NOTICE
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<select id="selectNList" resultMap="boardResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE STATUS = 'Y'
+		ORDER BY NTC_NO DESC
+	</select>
+
+</mapper>
