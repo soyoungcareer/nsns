@@ -1,6 +1,7 @@
 package com.kh.spring.notice.model.vo;
 
 public class PageInfo {
+	
 	private int currentPage;
 	private int listCount;
 

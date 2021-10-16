@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Notice {
 	
 	private int ntcNo;
-	private int ntcCategory;
+	private int ntcCategory;//
 	private String ntcTitle;
 	private String ntcContent;
 	private String ntcWriter;

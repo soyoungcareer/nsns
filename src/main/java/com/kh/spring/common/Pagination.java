@@ -20,8 +20,8 @@ public class Pagination {
 		}
 		
 		PageInfo pi = new PageInfo( currentPage,listCount, startPage, endPage, maxPage, pageLimit, boardLimit);
-		return pi;
 		
+		return pi;
 	}
 
 }
