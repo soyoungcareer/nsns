@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수강신청</title>
+<title>성적조회페이지</title>
 </head>
 <body>
- <jsp:include page="lectRegisterMenubar.jsp"/>
+	<jsp:include page="../lectRegister/lectRegisterMenubar.jsp"/>
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
@@ -142,13 +142,13 @@
 											<td> 테스트 연결 서버 </td>
 											<!-- 우선 LectRegisterController로 연결 -->
 											<td><a
-												href="gradePage.reg">성적조회 페이지</a></td>
+												href="lectRegisterEdit.reg">성적조회 페이지</a></td>
 											<td><a
 												href="lectRegisterEdit.reg">강의평가 페이지</a></td>
 											<td><a
 												href="lectRegisterEdit.reg">이의신청 페이지</a></td>
 											<td><a
-												href="creditPage.reg">학점조회 페이지</a></td>
+												href="lectRegisterEdit.reg">학점조회 페이지</a></td>
 												<!--CertificateController로 연결 -->
 											<td><a
 												href="graduation.cer">졸업증명서 페이지</a></td>
@@ -160,23 +160,6 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>
-							<div class="row" style="justify-content: center;">
-								<div class="col-lg-6" style="justify-content: center;">
-									<div>
-										<ul class="pagination" style="justify-content: center;">
-											<li class="page-item disabled"><a class="page-link"
-												href="#">«</a></li>
-											<li class="page-item active"><a class="page-link"
-												href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">4</a></li>
-											<li class="page-item"><a class="page-link" href="#">5</a></li>
-											<li class="page-item"><a class="page-link" href="#">»</a></li>
-										</ul>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>

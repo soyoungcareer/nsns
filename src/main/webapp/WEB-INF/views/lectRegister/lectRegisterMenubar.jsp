@@ -4,18 +4,7 @@
 <html lang="en">
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <!-- Twitter meta-->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:site" content="@pratikborsadiya">
-    <meta property="twitter:creator" content="@pratikborsadiya">
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>수강신청</title>
+   <title>수강신청</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +15,8 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href=""><img src="${ pageContext.servletContext.contextPath }/resources/images/registe.png" style="width: 35px; margin-right: 6px; margin-bottom: 13px">수강신청</a>
+    <header class="app-header"><a class="app-header__logo" href="register.reg" style="font-family: sans-serif; font-size: large;">
+    <i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px; margin-bottom: 5px'"></i>수강신청</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -53,14 +43,14 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" >
-        <div>
+      <div class="app-sidebar__user">
+        <div style="margin-left: 10px">
           <p class="app-sidebar__user-name">John Doe</p>
           <p class="app-sidebar__user-designation">Frontend Developer</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="register.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">수강신청</span></a></li>
+        <li><a class="app-menu__item" href="register.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">수강신청</span></a></li>
         <li><a class="app-menu__item" href="cart.reg" ><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">장바구니</span></a>
         </li>
         <li><a class="app-menu__item" href="timeBoard.reg"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">시간표</span></a></li>
@@ -68,8 +58,6 @@
     </aside>
    
         
-      	<h1> </h1>
-      </div>
     <!-- Essential javascripts for application to work-->
     <script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
     <script src="resources/bootstrap/docs/js/popper.min.js"></script>
@@ -79,12 +67,7 @@
     <script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/chart.js"></script>
-    <script type="text/javascript">
-    	$('.app-menu__item').on("click", function() {
-    		  $('.app-menu__item').addClass(' active'); 
-		});
-	   
-	            
-    </script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/select2.min.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-datepicker.min.js"></script>
   </body>
 </html>
