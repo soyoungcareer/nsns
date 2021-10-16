@@ -115,8 +115,6 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 교수 계정 등록</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 교수 계정 조회</a></li>
-            <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Notifications</a></li> -->
           </ul>
         </li>
         

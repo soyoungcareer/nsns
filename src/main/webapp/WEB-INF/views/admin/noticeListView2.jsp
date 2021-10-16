@@ -96,8 +96,7 @@
 	                		</c:otherwise>
 	                	</c:choose>
                     </c:forEach>
-                    
-                    
+ 
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
                 			<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>

@@ -11,9 +11,7 @@ public class PageInfo {
 
 	private int boardLimit;
 	
-	public PageInfo() {
-		
-	}
+	public PageInfo() {}
 	
 	public PageInfo(int currentPage, int listCount,int startPage, int endPage,  int maxPage, int pageLimit, int boardLimit) {
 		super();

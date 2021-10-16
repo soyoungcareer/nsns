@@ -18,7 +18,7 @@ public class NoticeController2 {
 	
 	@Autowired
 	private NoticeService noticeService;
-	/*
+	/*//
 	@RequestMapping("list.ntc")
 	public String noticeTest() {
 		return "admin/noticeListView";

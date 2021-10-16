@@ -7,7 +7,6 @@ public class Pagination {
 	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		
 		// * maxPage : 총 페이지 수
-		
 		int maxPage = (int)Math.ceil((double)listCount/boardLimit);
 		
 		// * startPage : 현재 페이지에 보여지는 페이징 바의 시작 수

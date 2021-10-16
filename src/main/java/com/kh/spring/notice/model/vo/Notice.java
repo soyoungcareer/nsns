@@ -13,9 +13,7 @@ public class Notice {
 	private Date createDate;
 	private String status;
 	
-	public Notice() {
-		// TODO Auto-generated constructor stub
-	}
+	public Notice() {}
 
 	public Notice(int ntcNo, int ntcCategory, String ntcTitle, String ntcContent, String ntcWriter, int count,
 			Date createDate, String status) {

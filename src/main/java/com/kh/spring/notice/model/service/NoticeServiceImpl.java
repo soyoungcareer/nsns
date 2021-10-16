@@ -19,7 +19,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public int selectNListCount() {
-		// TODO Auto-generated method stub
+		
 		return noticeDao.selectNListCount(sqlSession);
 	}
 

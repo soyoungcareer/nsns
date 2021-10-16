@@ -11,7 +11,7 @@ import com.kh.spring.notice.model.vo.PageInfo;
 public class NoticeDao {
 
 	public int selectNListCount(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("adminMapper.selectNListCount");
 	}
 
