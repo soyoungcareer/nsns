@@ -7,7 +7,7 @@
 <title>강의 설명 수정 페이지</title>
 </head>
 <body>
-<jsp:include page="lectRegisterMenubar.jsp"/>
+<jsp:include page="lectRegisterMenubar.jsp"/> 
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">

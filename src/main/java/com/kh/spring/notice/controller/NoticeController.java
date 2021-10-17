@@ -13,7 +13,7 @@ import com.kh.spring.notice.model.service.NoticeService;
 import com.kh.spring.notice.model.vo.Notice;
 import com.kh.spring.notice.model.vo.PageInfo;
 
-//@Controller
+//@Controller 
 public class NoticeController {
 	
 	@Autowired

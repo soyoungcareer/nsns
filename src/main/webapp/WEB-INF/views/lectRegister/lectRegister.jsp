@@ -7,7 +7,7 @@
 <title>수강신청</title>
 </head>
 <body>
- <jsp:include page="lectRegisterMenubar.jsp"/>
+ <jsp:include page="lectRegisterMenubar.jsp"/> 
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
@@ -148,7 +148,7 @@
 											<td><a
 												href="lectRegisterEdit.reg">이의신청 페이지</a></td>
 											<td><a
-												href="credit.reg">학점조회 페이지</a></td>
+												href="credit.reg">학점조회 페이지</a></td> 
 												<!--CertificateController로 연결 -->
 											<td><a
 												href="graduation.cer">졸업증명서 페이지</a></td>

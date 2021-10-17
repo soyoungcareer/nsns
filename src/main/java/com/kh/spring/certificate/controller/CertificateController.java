@@ -11,7 +11,7 @@ public class CertificateController {
 
 		return "certificate/graduation";
 	}
-	@RequestMapping("certificate.cer") // 자격증 페이지
+	@RequestMapping("certificate.cer") // 자격증 페이지 
 	public String certificatePage() {
 
 		return "certificate/certificate";

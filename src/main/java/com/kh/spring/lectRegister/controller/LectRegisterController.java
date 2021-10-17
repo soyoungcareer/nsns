@@ -14,14 +14,14 @@ public class LectRegisterController {
  @RequestMapping("cart.reg") //장바구니
  public String cartPage() {
 
-		return "lectRegister/registerCart";
+		return "lectRegister/registerCart"; 
 	}
  @RequestMapping("timeBoard.reg") //시간표
- public String timeBoardPage() {
+ public String timeBoardPage() { 
 
 		return "lectRegister/timeBoard";
 	}
- @RequestMapping("lectRegisterEdit.reg") //관리자용 과목 설명 수정페이지
+ @RequestMapping("lectRegisterEdit.reg") //관리자용 과목 설명 수정페이지 
  public String lectRegisterEditPage() {
 
 		return "lectRegister/lectRegisterEdit";

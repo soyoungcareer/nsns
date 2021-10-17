@@ -7,7 +7,7 @@
 <title>시간표</title>
 </head>
 <body>
-	<jsp:include page="lectRegisterMenubar.jsp" />
+	<jsp:include page="lectRegisterMenubar.jsp" /> 
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">

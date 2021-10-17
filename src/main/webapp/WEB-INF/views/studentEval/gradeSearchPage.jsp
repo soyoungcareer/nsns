@@ -7,7 +7,7 @@
 <title>성적조회페이지</title>
 </head>
 <body>
-	<jsp:include page="../student/studentMenubar.jsp"/>
+	<jsp:include page="../student/studentMenubar.jsp"/> 
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
