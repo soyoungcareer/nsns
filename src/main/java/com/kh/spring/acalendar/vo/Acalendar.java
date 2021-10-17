@@ -1,4 +1,4 @@
-package com.kh.spring.acalendar.model.vo;
+package com.kh.spring.acalendar.vo;
 
 import java.util.Date;
 

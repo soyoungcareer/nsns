@@ -17,7 +17,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교</title>
+    <title>Calendar - Vali Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="page-user.jsp"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="/stuinfo.st"><i class="fa fa-user fa-lg"></i> Profile</a></li>
             <li><a class="dropdown-item" href="page-login.jsp"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
@@ -57,8 +57,8 @@
         </div>
       </div>
    	<ul class="app-menu">
-   	    <li><a class="app-menu__item" href="/calendar.ca" ><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">학사일정</span></a></li>
-        <li><a class="app-menu__item" href="/upload.ca"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">학사일정 관리</span></a></li>
+        <li><a class="app-menu__item" href="/upload.ca"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">학사일정 등록</span></a></li>
+        <li><a class="app-menu__item" href="/calendar.ca" ><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">학사일정 조회</span></a></li>
       </ul>
     </aside>
 </body>

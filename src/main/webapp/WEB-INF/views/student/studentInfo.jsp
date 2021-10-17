@@ -35,7 +35,7 @@
       	</div>
 
         
-        <div class="col-md-8">
+        <div class="col-md-8" >
           <div class="tab-content">
               <div class="tile user-settings">
                 <h4 class="line-head" style="color:gray;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 학생의 개인정보 수정은 이메일, 전화번호, 주소만  가능합니다.</i></h4>
@@ -79,12 +79,15 @@
                     </div>
                   </div>
                     
+                   
                    <div class="row mb-4">
                     <div class="clearfix"></div>
 	                    <div class="col-md-5 mb-4">
 	                      <label>이메일</label>
 	                      <input class="form-control" type="text">
 	                    </div>
+	                    
+	                    
                     </div>
                     
                      <div class="row mb-4">
@@ -111,7 +114,6 @@
                 </form>
         
         </div>
-      </div>
       </div>
     </main>
    

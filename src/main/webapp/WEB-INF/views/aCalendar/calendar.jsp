@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>낙성대학교</title>
+    <title>Calendar - Vali Admin</title>
    </head>
   <body class="app sidebar-mini">
 	
