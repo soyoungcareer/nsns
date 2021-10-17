@@ -12,7 +12,7 @@ import com.kh.spring.common.Pagination;
 import com.kh.spring.notice.model.service.NoticeService;
 import com.kh.spring.notice.model.vo.Notice;
 import com.kh.spring.notice.model.vo.PageInfo;
-
+//
 //@Controller 
 public class NoticeController {
 	

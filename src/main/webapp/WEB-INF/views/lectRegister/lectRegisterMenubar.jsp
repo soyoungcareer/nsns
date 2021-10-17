@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="app sidebar-mini">
+  <!-- 추가 -->
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="register.reg" style="font-family: sans-serif; font-size: large;">
     <i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px; margin-bottom: 5px'"></i>수강신청</a>

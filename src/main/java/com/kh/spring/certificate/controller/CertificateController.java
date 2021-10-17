@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CertificateController {
 
-	@RequestMapping("graduation.cer") // 졸업 증명서
+	@RequestMapping("graduation.cer") // 졸업 증명서- 추가
 	public String graduationPage() {
 
 		return "certificate/graduation";

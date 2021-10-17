@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LectRegisterController {
 
- @RequestMapping("register.reg") //수강신청
+ @RequestMapping("register.reg") //수강신청- 추가
  public String registerPage() {
 
 		return "lectRegister/lectRegister";

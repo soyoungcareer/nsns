@@ -8,6 +8,7 @@
 </head>
 <body>
 	<jsp:include page="../student/studentMenubar.jsp"/>
+	<!-- 추가 -->
 	<main class="app-content" >
 		<div class="app-title" >
 			<div class="div" >
