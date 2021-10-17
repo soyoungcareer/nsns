@@ -142,13 +142,13 @@
 											<td> 테스트 연결 서버 </td>
 											<!-- 우선 LectRegisterController로 연결 -->
 											<td><a
-												href="grade.gra">성적조회 페이지</a></td>
+												href="gradePage.reg">성적조회 페이지</a></td>
 											<td><a
 												href="lectRegisterEdit.reg">강의평가 페이지</a></td>
 											<td><a
 												href="lectRegisterEdit.reg">이의신청 페이지</a></td>
 											<td><a
-												href="credit.reg">학점조회 페이지</a></td>
+												href="creditPage.reg">학점조회 페이지</a></td>
 												<!--CertificateController로 연결 -->
 											<td><a
 												href="graduation.cer">졸업증명서 페이지</a></td>

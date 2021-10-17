@@ -26,12 +26,12 @@ public class LectRegisterController {
 
 		return "lectRegister/lectRegisterEdit";
 	}
- @RequestMapping("grade.gra") //성적 조회 페이지
+ @RequestMapping("gradePage.reg") //관리자용 과목 설명 수정페이지
  public String gradeSearchPage() {
 
 		return "studentEval/gradeSearchPage";
 	}
- @RequestMapping("credit.reg") //학점 조회 페이지
+ @RequestMapping("creditPage.reg") //관리자용 과목 설명 수정페이지
  public String creditSearchPage() {
 
 		return "studentEval/creditSearchPage";

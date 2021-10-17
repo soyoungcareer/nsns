@@ -7,7 +7,7 @@
 <title>이수학점조회</title>
 </head>
 <body>
-	<jsp:include page="../student/studentMenubar.jsp"/>
+	<jsp:include page="../lectRegister/lectRegisterMenubar.jsp"/>
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
