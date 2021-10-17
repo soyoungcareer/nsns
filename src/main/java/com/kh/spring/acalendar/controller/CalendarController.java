@@ -5,13 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.GsonBuilder;
-import com.kh.spring.acalendar.vo.Acalendar;
+import com.kh.spring.acalendar.model.vo.Acalendar;
 
 @Controller
 public class CalendarController {
@@ -45,8 +47,21 @@ public class CalendarController {
 		return "aCalendar/uploadCalendar";
 	}
 	
-	@RequestMapping("/insert.ca")
-	public String insertCalendar() { // 일정 db에 업로드
+	@RequestMapping("/insert.ca") //학사일정 db에 insert
+	public String insertCalendar(String title, String start, String end, String backgroundColor, HttpSession session) throws ParseException { // 일정 db에 업로드
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+		Date startDay = format.parse(start);
+		Date endDay = format.parse(end);
+		
+		Acalendar ac = new Acalendar();
+		ac.setTitle(title);
+		ac.setStart(startDay);
+		ac.setEnd(endDay);
+		ac.setBackgroundColor(backgroundColor);
+		
+		System.out.println(ac);
+		
 		
 		return "aCalendar/uploadCalendar";
 	}
