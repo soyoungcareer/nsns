@@ -7,7 +7,7 @@
 <title>성적조회페이지</title>
 </head>
 <body>
-	<jsp:include page="../lectRegister/lectRegisterMenubar.jsp"/>
+	<jsp:include page="../student/studentMenubar.jsp"/>
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
@@ -20,7 +20,7 @@
 			<h2 class="" id="buttons">
 							<img class="menu-bar-2"
 								src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
-								style="margin-right: 10px;"></img>수강신청
+								style="margin-right: 10px;"></img>성적조회
 			</h2>
 		</div>
 		<div class="tile mb-4" >

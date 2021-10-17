@@ -7,7 +7,7 @@
 <title>졸업증명서 출력</title>
 </head>
 <body>
-	<jsp:include page="../lectRegister/lectRegisterMenubar.jsp" />
+	<jsp:include page="../student/studentMenubar.jsp"/>
 	<main class="app-content" >
 		<div class="app-title" >
 			<div class="div" >
