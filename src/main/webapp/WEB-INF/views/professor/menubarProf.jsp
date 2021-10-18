@@ -32,11 +32,18 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<!-- style -->
+	<style>
+	.app-header__logo {
+		font-size: large;
+	}	
+	</style>
   </head>
 
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">낙성학사행정시스템</a>
+    <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }">
+    <i class="fa fa-briefcase mr-2" aria-hidden="true"></i>낙성학사행정시스템</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       
@@ -47,53 +54,11 @@
           <button class="app-search__button"><i class="fa fa-search"></i></button>
         </li>
         
-        <!--Notification Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
-          <ul class="app-notification dropdown-menu dropdown-menu-right">
-            <li class="app-notification__title">You have 4 new notifications.</li>
-            <div class="app-notification__content">
-              <li><a class="app-notification__item" href=""><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Lisa sent you a mail</p>
-                    <p class="app-notification__meta">2 min ago</p>
-                  </div></a></li>
-              <li><a class="app-notification__item" href=""><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Mail server not working</p>
-                    <p class="app-notification__meta">5 min ago</p>
-                  </div></a></li>
-              <li><a class="app-notification__item" href=""><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Transaction complete</p>
-                    <p class="app-notification__meta">2 days ago</p>
-                  </div></a></li>
-              <div class="app-notification__content">
-                <li><a class="app-notification__item" href=""><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Lisa sent you a mail</p>
-                      <p class="app-notification__meta">2 min ago</p>
-                    </div></a></li>
-                <li><a class="app-notification__item" href=""><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Mail server not working</p>
-                      <p class="app-notification__meta">5 min ago</p>
-                    </div></a></li>
-                <li><a class="app-notification__item" href=""><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Transaction complete</p>
-                      <p class="app-notification__meta">2 days ago</p>
-                    </div></a></li>
-              </div>
-            </div>
-            <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
-          </ul>
-        </li>
-        
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
-            <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
+            <li><a class="dropdown-item" href="profMypage.pr"><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
             <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i>로그아웃</a></li>
           </ul>
         </li>
@@ -103,7 +68,7 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+      <div class="app-sidebar__user"><!-- <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image"> -->
         <div>
           <p class="app-sidebar__user-name"><span><%-- <%= loginUser.getProfName() %> --%>교수</span></p>
           <p class="app-sidebar__user-designation"><%-- <%= loginUser.getProfDept() %> --%>과</p>
@@ -113,10 +78,9 @@
         <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
-            <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> 강의목록 조회</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의정보 수정</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의삭제</a></li>
+            <li><a class="treeview-item" href="profCreateLec.pr"><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
+            <li><a class="treeview-item" href="profLectureDetail.pr"><i class="icon fa fa-circle-o"></i> 강의목록 조회/수정/삭제</a></li>
+<!--             <li><a class="treeview-item" href="profLectureDetail.pr" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> 강의목록 조회</a></li> -->
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">성적관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -127,29 +91,15 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
+            <li><a class="treeview-item" href="profStudentDetail.pr"><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
+            <li><a class="treeview-item" href="profConsult.pr"><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 출결 관리</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의평가 조회</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학적변동 승인</a></li>
+            <li><a class="treeview-item" href="profStudentStatus.pr"><i class="icon fa fa-circle-o"></i> 학적변동 승인</a></li>
           </ul>
         </li>
       </ul>
     </aside>
-   
-   
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Support Requests</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-            </div>
-          </div>
-      </div>
-      <div>
-      	<h1> </h1>
-      </div>
-      
       
     <!-- Essential javascripts for application to work-->
     <script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
