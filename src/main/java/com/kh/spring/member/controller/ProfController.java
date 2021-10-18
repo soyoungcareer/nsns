@@ -20,4 +20,34 @@ public class ProfController {
 	public String profCreateLecture() {
 		return "professor/profCreateLecture";
 	}
+
+	@RequestMapping("profLectureDetail.pr")
+	public String profLectureDetail() {
+		return "professor/profLectureView";
+	}
+	
+	@RequestMapping("profEditLec.pr")
+	public String profEditLecture() {
+		return "professor/profEditLecture";
+	}
+	
+	@RequestMapping("profDeleteLec.pr")
+	public String profDeleteLecture() {
+		return "professor/profDeleteLecture";
+	}
+	
+	@RequestMapping("profConsult.pr")
+	public String profConsult() {
+		return "professor/profConsult";
+	}
+	
+	@RequestMapping("profStudentStatus.pr")
+	public String profStudentStatus() {
+		return "professor/profStudentStatus";
+	}
+	
+	@RequestMapping("profStudentDetail.pr")
+	public String profStudentDetail() {
+		return "professor/profStudentDetail";
+	}
 }

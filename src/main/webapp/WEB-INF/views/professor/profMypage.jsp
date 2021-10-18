@@ -9,7 +9,7 @@
 <body>
 	<jsp:include page="menubarProf.jsp"/>
 	 
-	<div class="content-body">
+	<main class="app-content">
 		<div class="app-title">
 			<div>
 				<h1>
@@ -74,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</main>
 
 </body>
 </html>

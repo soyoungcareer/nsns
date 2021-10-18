@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
-<%
-	ArrayList<Subject> list = (ArrayList<Subject>)request.getAttribute("list");
-	int count = 1;
-	String contextPath = request.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>낙성대학교(교수) - 강의목록 조회</title>
+<title>낙성대학교(교수) - 학적변동 승인</title>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -19,14 +14,14 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 강의 관리
+					<i class="fa fa-edit"></i> 학생 관리
 				</h1>
 				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">강의 관리</li>
-				<li class="breadcrumb-item"><a href="profLectureDetail.pr">강의목록 조회</a></li>
+				<li class="breadcrumb-item">학생 관리</li>
+				<li class="breadcrumb-item"><a href="profStudentStatus.pr">학적변동 승인</a></li>
 			</ul>
 		</div>
 		
@@ -37,7 +32,7 @@
 						<div id="sampleTable_wrapper"
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 							<div class="row">
-								<h3 class="tile-title">강의목록</h3>
+								<h3 class="tile-title">학적변동신청 목록</h3>
 <!-- 								<div class="col-sm-12 col-md-6">
 									<div class="dataTables_length" id="sampleTable_length">
 										<label>Show <select name="sampleTable_length"
@@ -74,40 +69,35 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">강의코드</th>
+													style="width: 57.475px;">신청일자</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">교과목명</th>
+													style="width: 60.375px;">학적변동</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Position: activate to sort column ascending"
-													style="width: 130.762px;">이수구분</th>
-<!-- 교수 본인의 담당과목만 조회가능하므로 교수명은 삭제..?
+													style="width: 130.762px;">승인상태</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">교수명</th> -->
+													style="width: 52.9125px;">학년</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">학점</th>
+													style="width: 52.9125px;">학적구분</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의실</th>
+													style="width: 52.9125px;">복학예정일</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의시간</th>
+													style="width: 52.9125px;">승인일자</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의형태</th>
-<!-- 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의계획서</th> -->
+													style="width: 52.9125px;">사유</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -117,7 +107,7 @@
 ------------------------------------------------------------- -->
 <%-- 										<% if(list.isEmpty()) { %>
 											<tr>
-												<td colspan="4">개설된 강의가 없습니다.</td>
+												<td colspan="4">신청 내용이 없습니다.</td>
 											</tr>
 										<% } else { %>
 											<% for(Subject a : list) { %>
@@ -130,9 +120,6 @@
 													<td><%= a.getSubClass() %></td>
 													<td><%= a.getSubTime() %>v</td>
 													<td><%= a.getSubType() %>v</td>
-													<!-- -------------------------------------------
-														강의계획서 넣기...? 
-													--------------------------------------------- -->
 												</tr>
 											<% } %>
 										<% } %> --%>
@@ -269,9 +256,20 @@
 							
 							
 							<div class="row">
+								<label class="control-label col-md-3">
+					              <input type="checkbox"><span class="label-text">승인</span>
+					            </label>
+					            <label class="control-label col-md-3">
+					              <input type="checkbox"><span class="label-text">반려</span>
+					            </label>
+								<div class="form-group row">
+				                  <label class="control-label col-md-3">반려사유</label>
+				                  <div class="col-md-8">
+				                    <input class="form-control" type="text" placeholder="반려사유 입력">
+				                  </div>
+				                </div>
 				                <div class="form-group col-md-4 align-self-end">
-				                  <input type="button" class="btn btn-warning" type="button" onclick="location.href='<%=contextPath%>/profEditLec.pr'" value="강의수정"/>
-				                  <input type="button" class="btn btn-danger" type="button" onclick="location.href='<%=contextPath%>/profDeleteLec.pr'" value="강의삭제"/>
+				                  <input type="button" class="btn btn-primary" type="button" onclick="" value="저장"/>
 				                </div>
 			                </div>
 							
