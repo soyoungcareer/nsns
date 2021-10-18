@@ -43,6 +43,14 @@
       	<li class="calendar">
          <a class="calendar-link" href="calendar.ca" style="color: white;">학사일정</a>
 
+      	<li class="calendar">
+         <a class="calendar-link" href="javascript:void(window.open('lecMove.me'))" style="color: white;">온라인강의</a>
+
+
+      	<li class="calendar">
+         <a class="calendar-link" href="facMove.me" style="color: white;">시설물대여</a>
+
+
       <!-- 수강신청 페이지 확인용 -->
        <li class="register">
          <a class="register-link" href="register.reg" style="color: white;">수강신청</a>
@@ -153,17 +161,8 @@
       </ul>
     </aside>
    
-        <div class="col-md-6">
-          <div class="tile">
-            <h3 class="tile-title">Support Requests</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-            </div>
-          </div>
-      </div>
-      <div>
-      	<h1> </h1>
-      </div>
+   
+    
     <!-- Essential javascripts for application to work-->
     <script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
     <script src="resources/bootstrap/docs/js/popper.min.js"></script>
