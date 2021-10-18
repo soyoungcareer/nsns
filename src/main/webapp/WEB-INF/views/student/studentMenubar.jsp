@@ -44,7 +44,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="/stuinfo.st"><i class="fa fa-user fa-lg"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i>Profile</a></li>
             <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
@@ -84,8 +84,8 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments"></i><span class="app-menu__label">상담</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 상담신청</a></li>
+            <li><a class="treeview-item" href="consultStatusPage.con"><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
+            <li><a class="treeview-item" href="applyPage.con"><i class="icon fa fa-circle-o"></i> 상담신청</a></li>
           </ul>
         </li>
       </ul>
