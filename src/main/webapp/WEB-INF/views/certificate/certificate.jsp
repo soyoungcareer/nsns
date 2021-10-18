@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <title>자격증</title>
 </head>
 <body>
@@ -14,6 +14,7 @@
 				<h1></h1>
 				<p></p>
 			</div>
+			<!-- 추가 -->
 			<ul class="app-breadcrumb breadcrumb">
 				<li class=""><a href="#" style="color: #222d32;"><i
 						class="fa fa-headphones fa-3x" aria-hidden="true"></i>
