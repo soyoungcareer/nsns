@@ -12,8 +12,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
-				<h1></h1>
-				<p></p>
+				<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
@@ -133,7 +132,7 @@
 											<th>이수구분</th>
 											<th>강의시간</th>
 											<th>교수명</th>
-											<th>장바구니</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -147,8 +146,8 @@
 											<td>월123</td>
 											<td>김교수</td>
 											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강담기</button></td>
+													class="btn btn-danger" type="button"
+													style="margin-left: 10px;">삭제하기</button></td>
 										</tr>
 										<tr>
 											<td>FD801</td>
@@ -159,8 +158,8 @@
 											<td>월123</td>
 											<td>이교수</td>
 											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강담기</button></td>
+													class="btn btn-danger" type="button"
+													style="margin-left: 10px;">삭제하기</button></td>
 										</tr>
 										<tr>
 											<td>FD801</td>
@@ -171,8 +170,8 @@
 											<td>월123</td>
 											<td>이교수</td>
 											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강담기</button></td>
+													class="btn btn-danger" type="button"
+													style="margin-left: 10px;">삭제하기</button></td>
 										</tr>
 										<tr>
 											<td>FD801</td>
@@ -183,8 +182,8 @@
 											<td>월123</td>
 											<td>이교수</td>
 											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강담기</button></td>
+													class="btn btn-danger" type="button"
+													style="margin-left: 10px;">삭제하기</button></td>
 										</tr>
 										<tr>
 											<td>FD801</td>
@@ -195,8 +194,8 @@
 											<td>월123</td>
 											<td>이교수</td>
 											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강담기</button></td>
+													class="btn btn-danger" type="button"
+													style="margin-left: 10px;">삭제하기</button></td>
 										</tr>
 									</tbody>
 								</table>

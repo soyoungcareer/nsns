@@ -16,8 +16,7 @@
   <body class="app sidebar-mini">
   <!-- 추가 -->
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="register.reg" style="font-family: sans-serif; font-size: large;">
-    <i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px; margin-bottom: 5px'"></i>수강신청</a>
+    <header class="app-header"><a class="app-header__logo" href="">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">

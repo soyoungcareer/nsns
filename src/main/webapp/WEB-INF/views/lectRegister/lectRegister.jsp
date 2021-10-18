@@ -12,6 +12,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
+			<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
@@ -145,9 +146,9 @@
 											<td><a
 												href="grade.gra">성적조회 페이지</a></td>
 											<td><a
-												href="lectRegisterEdit.reg">강의평가 페이지</a></td>
+												href="evaluation.ev">강의평가 페이지</a></td>
 											<td><a
-												href="lectRegisterEdit.reg">이의신청 페이지</a></td>
+												href="gradeObject.obj">이의신청 페이지</a></td>
 											<td><a
 												href="credit.reg">학점조회 페이지</a></td> 
 												<!--CertificateController로 연결 -->

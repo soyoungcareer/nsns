@@ -12,8 +12,7 @@
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
-				<h1></h1>
-				<p></p>
+				<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>

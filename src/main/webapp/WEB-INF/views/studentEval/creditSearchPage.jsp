@@ -8,14 +8,10 @@
 </head>
 <body>
 	<jsp:include page="../student/studentMenubar.jsp"/> 
-	<!-- 추가 -->
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
-			</ul>
 		</div>
 		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
 			<h2 class="" id="buttons">
