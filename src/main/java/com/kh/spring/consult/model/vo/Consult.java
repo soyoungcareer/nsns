@@ -1,4 +1,4 @@
-package com.kh.spring.consult.vo;
+package com.kh.spring.consult.model.vo;
 
 import java.util.Date;
 
