@@ -7,13 +7,17 @@
 	</settings>
 
 	<typeAliases>
-	         
-		
+	         <typeAlias type="com.kh.spring.lectRegister.vo.LectRegister" alias="LectRegister"/>
+			 <typeAlias type="com.kh.spring.major.vo.Subject" alias="Subject"/>
+			 <typeAlias type="com.kh.spring.major.vo.Department" alias="Department"/>
+			 <typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
+			 <typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
+			 <typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
 	</typeAliases>
 
 
 	<mappers>
-		
+		<mapper resource="mappers/lectRegister-mapper.xml"/>
 	</mappers>
 
 

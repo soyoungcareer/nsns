@@ -69,5 +69,6 @@
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/chart.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/select2.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-datepicker.min.js"></script>
+  	 <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-notify.min.js"></script>
   </body>
 </html>
