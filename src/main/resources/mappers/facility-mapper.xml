@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="facilityMapper">
+
+
+	<resultMap id="facilityResultSet" type="facility">
+		<id property="facNo" column="FAC_NO" />
+		<result property="stuId" column="STU_ID" />
+		<result property="facName" column="FAC_NAME" />
+		<result property="facStatus" column="FAC_STATUS" />
+		<result property="facReason" column="FAC_REASON" />
+		<result property="facPeriod" column="FAC_PERIOD" />
+		<result property="facDate" column="FAC_DATE" />
+		<result property="fileBName" column="ORIGIN_NAME" />
+		<result property="fileFName" column="CHANGE_NAME" />
+
+
+	</resultMap>
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM
+		FACILITY
+	</select>
+
+
+
+	<select id="selectList" resultMap="facilityResultSet">
+		SELECT *
+		FROM FACILITY
+		ORDER BY
+		FAC_NO DESC
+	</select>
+
+
+
+	<select id="selectFacility" parameterType="_int" resultMap="facilityResultSet">
+		SELECT * FROM FACILITY
+		WHERE FAC_NO = #{no}
+
+	</select>
+
+	<insert id="inserFacility" parameterType="facility">
+		INSERT INTO FACILITY
+		VALUES(SEQ_FAC_NO.NEXTVAL,NULL, #{facName}, DEFAULT,
+		NULL,NULL, DEFAULT,#{fileBName},#{fileFName}
+		)
+	</insert>
+
+
+</mapper>
