@@ -15,8 +15,11 @@ import lombok.ToString;
 @ToString 
 public class Student { //학생
 	private int stuId; //학생아이디
+	private String stuName; //학생이름
 	private int deptCode; //학부코드
+	private String deptName; 
 	private String profId; //담당교수
+	private String proName;
 	private String stuPwd; //학생비번
 	private String ssn; //주민번호
 	private String email; //이메일

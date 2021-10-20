@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,7 +71,7 @@
         <li><a class="app-menu__item" href="credit.reg"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">이수학점</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-address-card-o"></i><span class="app-menu__label">학생상태</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
+            <li><a class="treeview-item" href="stuStatusPage.stu"><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 휴학신청</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 복학신청</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 자퇴신청</a></li>
@@ -100,7 +101,20 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
-    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/chart.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/sweetalert.min.js"></script>
+    
+  	<c:if test="${!empty message}">
+   		<script>
+			$.notify({
+		  		title: "",
+		  		message: "${message}",
+		  		icon: 'fa fa-check' 
+		  	},{
+		  		type: "info"
+		  	});
+		</script>
+    </c:if>
 
   </body>
 </html>

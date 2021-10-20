@@ -1,4 +1,4 @@
-package com.kh.spring.studentStatus.vo;
+package com.kh.spring.studentStatus.model.vo;
 
 import java.util.Date;
 

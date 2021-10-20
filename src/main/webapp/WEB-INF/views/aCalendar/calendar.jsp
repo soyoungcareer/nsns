@@ -63,7 +63,7 @@
     
     function fn_get_events(){
 		$.ajax({
-			url: '/calendar.do', 
+			url: '/calendarEvent.ca', 
 			dataType: 'json', 
 			success: function(list) {
 				console.log(list);
