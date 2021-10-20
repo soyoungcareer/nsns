@@ -226,6 +226,48 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<!-- common fileupload -->
+
+		<dependency>
+
+			<groupId>commons-fileupload</groupId>
+
+			<artifactId>commons-fileupload</artifactId>
+
+			<version>1.2.1</version>
+
+		</dependency>
+
+
+
+		<dependency>
+
+			<groupId>commons-io</groupId>
+
+			<artifactId>commons-io</artifactId>
+
+			<version>1.4</version>
+
+		</dependency>
+
 		<!-- * 추가유용라이브러리(서버재부팅없이 자바코드 수정이 가능한 라이브러리 springloaded) 서버에가서 agumnent 
 			탭 -javaagent:C:\Users\{사용자계정}\.m2\repository\org\springframework\springloaded\1.2.8.RELEASE\springloaded-1.2.8.RELEASE.jar 
 			-noverify 추가하고 Modules 탭으로 이동해서 Auto reloading enabled를 선택 해제 -->
