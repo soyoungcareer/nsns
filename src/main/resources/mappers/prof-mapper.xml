@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="profMapper">
+
+	<!-- 교수 -->
+	<resultMap id="profResultSet" type="Professor">
+		<id property="profId" column="PROF_ID"/>
+		<result property="profPwd" column="PROF_PWD"/>
+		<result property="profName" column="PROF_NAME"/>
+		<result property="profDept" column="DEPT_CODE"/>
+		<result property="profRrn" column="PROF_RRN"/>
+		<result property="profEmail" column="PROF_EMAIL"/>
+		<result property="profPhone" column="PROF_PHONE"/>
+		<result property="profAddress" column="PROF_ADDRESS"/>
+		<result property="profStatus" column="PROF_STATUS"/>
+		<result property="profEmpdate" column="PROF_EMPDATE"/>
+	</resultMap>
+	
+	<!-- 강의 -->
+	<resultMap id="profSubResultSet" type="Subject">
+		<id property="subCode" column="SUB_CODE"/>
+		<result property="subTitle" column="SUB_TITLE"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="subDivs" column="SUB_DIVS"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="subCredit" column="SUB_CREDIT"/>
+		<result property="subClass" column="SUB_CLASS"/>
+		<result property="subTime" column="SUB_TIME"/>
+		<result property="subType" column="SUB_TYPE"/>
+		<result property="subYear" column="SUB_YEAR"/>
+		<result property="subSmst" column="SUB_SMST"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<!-- 학생 -->
+	<resultMap type="Student" id="profStudResultSet">
+		<id property="stuId" column="STU_ID"/>
+		<result property="deptCode" column="DEPT_CODE"/>	
+		<result property="profId" column="PROF_ID"/>	
+		<result property="stuPwd" column="STU_PWD"/>	
+		<result property="ssn" column="STU_NAME"/>	
+		<result property="email" column="EMAIL"/>	
+		<result property="phone" column="PHONE"/>	
+		<result property="address" column="ADDRESS"/>	
+		<result property="stuCredit" column="STU_CREDIT"/>	
+		<result property="graduationDate" column="GRADUATION_DATE"/>	
+		<result property="addmissionDate" column="ADDMISSION_DATE"/>	
+		<result property="stuStatus" column="STU_STATUS"/>	
+	</resultMap>
+	
+	
+	<!-- 로그인 교수 -->
+	<select id="loginProf" parameterType="Professor" resultMap="profResultSet">
+		SELECT * FROM PROFESSOR
+		WHERE PROF_ID=#{profId} AND STATUS='Y'
+	</select>
+	
+	<!-- 교수 마이페이지 개인정보 조회 -->
+	<select id="selectProf" parameterType="Professor" resultMap="profResultSet">
+		SELECT PROF_ID, PROF_NAME, DEPT_TITLE, PROF_EMAIL, PROF_PHONE, PROF_ADDRESS
+		FROM PROFESSOR
+		JOIN DEPARTMENT USING (DEPT_CODE)
+		WHERE PROF_ID=#{profId} AND STATUS='Y'
+	</select>
+	
+	<!-- 교수 마이페이지 개인정보 업데이트 -->
+	<update id="updateProf" parameterType="Professor">
+		UPDATE PROFESSOR
+		SET PROF_EMAIL=#{profEmail}, PROF_PHONE=#{profPhone}, PROF_ADDRESS=#{profAddress}
+		WHERE PROF_ID=#{profId}
+	</update>
+</mapper>

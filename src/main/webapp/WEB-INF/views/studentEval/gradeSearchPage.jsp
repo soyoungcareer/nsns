@@ -79,7 +79,8 @@
 											<td>전공필수</td>
 											<td style="padding: 0px; padding-top: 5px"><button
 													class="btn btn-primary" type="button"
-													style="margin-left: 10px;" id="gradeObjPop">신청하기</button></td>
+													style="margin-left: 10px;" id="gradeObjPop"
+													data-toggle="modal" data-target="#gradeObjModal">신청하기</button></td>
 											<td style="padding: 0px; padding-top: 5px" id="evaluation"><button
 													class="btn btn-primary" type="button"
 													style="margin-left: 10px;">신청하기</button></td>
@@ -161,16 +162,71 @@
 			</div>
 		</div>
 	</main>
-	
+	<div class="modal fade" id="gradeObjModal">
+		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table;">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h2 class="modal-title" id="buttons">
+						<img class="menu-bar-2"
+							src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
+							style="margin-right: 10px;"></img>이의 신청
+					</h2>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<form action="gradeObjNewPop.obj" method="post">
+					<!-- Modal Body -->
+					<div class="modal-body">
+						<div class="form-group row">
+							<label class="control-label col-md-2">교과목명</label>
+							<div class="col-md-4">
+								<input class="form-control col-md-12" type="text" disabled>
+							</div>
+							<label class="control-label col-md-2">강의코드</label>
+							<div class="col-md-4">
+								<input class="form-control col-md-12" type="text" disabled>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-md-2">교수명</label>
+							<div class="col-md-4">
+								<input class="form-control col-md-12" type="text" disabled>
+							</div>
+							<label class="control-label col-md-2">등급</label>
+							<div class="col-md-4">
+								<input class="form-control col-md-12" type="text" disabled>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-md-2">이의 제목</label>
+							<div class="col-md-10">
+								<input class="form-control col-md-12" type="text">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="control-label col-md-2">상세 내용</label>
+							<div class="col-md-10">
+								<textarea class="form-control" rows="6" placeholder=""></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">제출하기</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		$("#evaluation").click(function() {
 			location.href="evaluation.ev";
 		});
 		$("#gradeObj").click(function() {
 			location.href="gradeObject.obj";
-		});
-		$("#gradeObjPop").click(function() {
-			window.open("gradeObjNewPop.obj", "문의쓰기", "top=100px, left=300px, height=530px, width=900px, resizable=no");
 		});
 	</script>
 </body>
