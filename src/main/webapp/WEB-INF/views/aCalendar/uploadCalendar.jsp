@@ -35,7 +35,6 @@
 			<div class="tile-body">
 			
               <form id="uploadCalendar" action="insert.ca" method="get" onsubmit="return chekcDate();">
-              
                 <div class="form-group row" style="margin-top:40px;">
                   <label class="control-label col-md-5" style="margin-left:50px;">일정명</label>
                   <div class="col-md-5">
@@ -68,9 +67,8 @@
                   
             <div class="tile-footer" style="margin-top:30px;">
               <div class="row">
-              	<div class="col-md-9 "></div>
               	<div class="col-md-3 ">
-                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>
+                  <button id="submitBtn" class="btn btn-primary" type="submit">등록</button>
               	</div>
               </div>
             </div>
@@ -86,15 +84,9 @@
               <h4 class="title"><i class="fa fa-file-text-o" aria-hidden="true"></i> 학사일정 리스트 </h4>
             </div>
             	<div class="col-sm-12 col-md-6">
-	                <div style="margin-top:50px">
-	                   <label>
-	                   		<select name="sampleTable_length" aria-controls="sampleTable" class="form-control form-control-sm" style="width: 100px">
-								<option value="2021">2021년</option>
-							</select>
-	                   </label>
-	                   &nbsp; &nbsp; &nbsp;
-	                   <label>
+	                <div style="margin-top:50px;">
 	                    <select name="sampleTable_length" aria-controls="sampleTable" class="form-control form-control-sm" style="width: 70px">
+								<option value="%">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>
 								<option value="3">3월</option>
@@ -108,27 +100,20 @@
 								<option value="11">11월</option>
 								<option value="12">12월</option>
 						</select>
-						</label>
 					</div>
 				</div>
            <table class="table table-hover table-bordered" id="calendarTable" style="margin-top:10px;">
 				<thead>
 						<tr>
+							<th>번호</th>
 							<th>일정명</th>
 							<th>시작일</th>
 							<th>마지막일</th>
-							<th></th>
-							
 						</tr>
 					</thead>
 					
 					<tbody>
-						<tr>
-							<td>test</td>
-							<td>2021/01/10</td>
-							<td>2021/01/11</td>
-							<td style="padding: 0px; padding-top: 5px"><button class="btn btn-danger btn-sm" type="button" style="margin-left:10px"> 삭제</button></td>
-						</tr>
+						
 					</tbody>
 			</table>
           </div>
@@ -144,10 +129,22 @@
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/select2.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/dropzone.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/sweetalert.min.js"></script>
     
-      
+  	<c:if test="${!empty message}">
+   		<script>
+			$.notify({
+		  		title: "update : ",
+		  		message: "${message}",
+		  		icon: 'fa fa-check' 
+		  	},{
+		  		type: "info"
+		  	});
+		</script>
+    </c:if>
+    
+    <script type="text/javascript">
       $('#start').datepicker({
     	  	format : "yyyy/mm/dd",
       		autoclose: true,
@@ -164,17 +161,76 @@
       function chekcDate() {
     	  
     	  if ($('#start').val() >  $('#end').val()) {
-    		  
               alert('마지막 일자가 앞설 수 없습니다.');
-              
               $('#end').select();
-              
               return false;
           }
     	  
           return true
       }
       
+       $(function(){
+    	   	var op = $("select[name=sampleTable_length]").val();
+    	   	console.log(op);
+    	   	
+    	   	callEvents(op);
+    	   
+    		$("select[name=sampleTable_length]").change(function(){
+    		   op = $(this).val(); //값이 바뀔 때 마다 변수 op의 값도 바뀌어야한다.
+    		   console.log(op); 
+    		   callEvents(op);
+    		 });
+    	   
+ 		});
+
+  
+       function callEvents(op) {
+    	   $.ajax({
+				url: "calendar.li",
+				data: {op: op},
+				dataType:"json",
+				success: function(list){
+					console.log(list);
+					
+					if(list.length != 0){
+						$("#calendarTable > tbody").empty();
+					
+						var str = '';
+						
+						$.each(list, function(i){
+							str += '<tr>'+'<td>'+
+							list[i].acId + '</td><td>'+
+              	 	 		list[i].title + '</td><td>'+
+              		 		list[i].start + '</td><td>'+
+              		 		list[i].end + '</td>'+
+              				'&nbsp;<td style="padding: 0px; padding-top: 5px"><button class="btn btn-danger btn-sm" type="button" style="margin-left:10px" onclick="deleteEvents();"> 삭제</button></td>'
+              				+ '</tr>'
+       					});
+							$("#calendarTable").append(str); 
+						
+						} else if(list.length == 0) {
+							
+	 						$("#calendarTable > tbody").empty();
+	 						
+	 						var str = '<tbody><tr>'+
+	 						'<td colspan="4" style="text-align:center;">'
+	 						+ "조회된 학사일정 리스트가 없습니다." + '</td>' 
+	 						+ '</tr></<tbody>'
+	 						$("#calendarTable").append(str); 
+						}
+				},
+				error:function(){
+					console.log("Ajax 통신 실패");
+				}
+			});
+       }
+       
+       function deleteEvents(){
+    	   for(let i = 1; i<calendarTable.rows.length; i++){
+    		   let acId = calendarTable.rows[i].cells[0].innerText;
+    		   location.href="delete.ca?acId="+ acId;
+    	   }
+       }
        
     
     </script>

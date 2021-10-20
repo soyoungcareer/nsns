@@ -49,10 +49,10 @@
       
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
-        <li class="app-search">
+<!--         <li class="app-search">
           <input class="app-search__input" type="search" placeholder="Search">
           <button class="app-search__button"><i class="fa fa-search"></i></button>
-        </li>
+        </li> -->
         
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
@@ -75,7 +75,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
+        <li><a class="app-menu__item active" href="profMenu.pr"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="profCreateLec.pr"><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
@@ -85,16 +85,16 @@
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">성적관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 성적 등록/조회/수정</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 이의신청 확인</a></li>
+            <li><a class="treeview-item" href="profGradeMain.pr"><i class="icon fa fa-circle-o"></i> 성적 등록/조회/수정</a></li>
+            <li><a class="treeview-item" href="profGradeObj.pr"><i class="icon fa fa-circle-o"></i> 이의신청 확인</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="profStudentDetail.pr"><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
             <li><a class="treeview-item" href="profConsult.pr"><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 출결 관리</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의평가 조회</a></li>
+            <li><a class="treeview-item" href="profAttend.pr"><i class="icon fa fa-circle-o"></i> 출결 관리</a></li>
+            <li><a class="treeview-item" href="profEvaluation.pr"><i class="icon fa fa-circle-o"></i> 강의평가 조회</a></li>
             <li><a class="treeview-item" href="profStudentStatus.pr"><i class="icon fa fa-circle-o"></i> 학적변동 승인</a></li>
           </ul>
         </li>

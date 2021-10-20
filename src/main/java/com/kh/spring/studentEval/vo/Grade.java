@@ -22,4 +22,13 @@ public class Grade {
 	private String gradeResult; // 	"GRADE_RESULT"		VARCHAR2(5)		NOT NULL,
 	private int gradeCredit; 	// 	"GRADE_CREDIT"		NUMBER		NOT NULL
 	
+	private String deptName;	  	// 학과(전공)
+	private String studentStatus; 	// 학적상태
+	private int attendance;			// 출석
+	private int assignment;			// 과제
+	private int midExam;			// 중간
+	private int finExam;			// 기말
+	private int total;				// 점수(총점)
+	
+	// 학년, 평가방법?
 }

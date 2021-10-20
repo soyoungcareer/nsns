@@ -3,7 +3,6 @@
     import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
 <%
 	ArrayList<Subject> list = (ArrayList<Subject>)request.getAttribute("list");
-	int count = 1;
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
@@ -36,6 +35,7 @@
 					<div class="table-responsive">
 						<div id="sampleTable_wrapper"
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
 							<div class="row">
 								<h3 class="tile-title">학생목록 조회</h3>
 <!-- 								<div class="col-sm-12 col-md-6">
@@ -57,6 +57,27 @@
 											aria-controls="sampleTable"></label>
 									</div>
 								</div> -->
+							</div>
+							<div class="row">
+								<div class="form-group col-md-5">
+									<div class="form-group col-md-5">
+									  <label class="control-label" for="subYear">학년도</label>
+									  <select class="form-control" id="subYear">
+									  	<!-- -------------------------------------
+									  		option 반복문으로 수정하기
+									  	-------------------------------------- -->
+									    <option>2021</option>
+									    <option>2020</option>
+									  </select>
+									</div>
+									<div class="form-group col-md-5">
+									  <label class="control-label" for="subSeme">학기</label>
+									  <select class="form-control" id="subSeme">
+									    <option>1</option>
+									    <option>2</option>
+									  </select>
+									</div>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
@@ -200,10 +221,10 @@
 									</table>
 								</div>
 							</div>
-							
-							
+
 							<div class="row">
 								<div class="col-sm-12">
+								
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
 										id="sampleTable" role="grid"

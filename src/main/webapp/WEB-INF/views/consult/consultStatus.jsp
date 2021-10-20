@@ -76,11 +76,80 @@
         </div>
     </main>
     
+    <div class="modal fade" id="layerpop">
+			<div class="modal-dialog modal-md">
+					<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">신청내역 상세조회</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+	               <!-- Modal Body -->
+	               <div class="modal-body">
+	                   <div class="form-group row">
+	                  <label class="control-label col-md-3">상담구분</label>
+	                  <div class="col-md-5">
+	                    <input class="form-control" type="text" value="진로" readonly>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group row">
+	                  <label class="control-label col-md-3">희망날짜</label>
+	                  <div class="col-md-5">
+	                    <input class="form-control" type="text" value="2021/09/30" readonly>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group row">
+	                  <label class="control-label col-md-3">상담사유</label>
+	                  <div class="col-md-8">
+	                    <textarea class="form-control" rows="4">현재상태로 취업이 가능한지 궁금합니다.</textarea>
+	                  </div>
+	                </div>
+                
+	                <div class="form-group row">
+					     <table class="table table-bordered " id="consultStatus" style="margin-top:10px;">
+								<thead>
+									<tr>
+										<th>신청현황</th>
+										<th>기타</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+								
+									<tr>
+										<td>반려</td>
+										<td>교수님 바빠서 시간안된다.</td>
+									</tr>
+									
+									<tr>
+										<td>승인</td>
+										<td></td>
+									</tr>
+									
+									<tr>
+										<td>교수 승인 대기중</td>
+										<td><button class="btn btn-danger btn-sm" type="button">신청취소</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+	               </div>
+				  <!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+						</div>								
+											
+					</div>
+				</div>
+		</div>
     
          
 	<script>    		
     		$(document).on("click", "#consultTable >tbody > tr >td", function(event) {
-    			window.open("consultPopup.con", "상담 상세 조회", "top=100px, left=300px, height=550px, width=650px, resizable=no");
+    			$('div.modal').modal();
     		});
     </script>
     

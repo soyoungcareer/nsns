@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="studentMapper">
+
+	<resultMap id="studentResultMap" type="Student">
+		<id property="stuId" column="STU_ID"/>
+		<result property="stuName" column="STU_NAME"/>
+		<result property="deptName" column="DEPT_TITLE"/>
+		<result property="proName" column="PROF_NAME"/>
+		<result property="ssn" column="SSN"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="stuCredit" column="STU_CREDIT"/>
+		<result property="stuStatus" column="STU_STATUS"/>
+	</resultMap>
+	
+	<select id="studentInfo" parameterType="string" resultMap="studentResultMap">
+		SELECT 
+		STU_ID,STU_NAME,DEPT_TITLE,PROF_NAME,SSN,EMAIL,PHONE,ADDRESS,STU_CREDIT,STU_STATUS
+		FROM STUDENT
+		JOIN DEPARTMENT USING (DEPT_CODE)
+		JOIN PROFESSOR USING (PROF_ID)
+		WHERE STU_ID = #{stuId}
+	</select>
+	
+	<update id="updateStu" parameterType="Student">
+		UPDATE STUDENT
+		SET EMAIL= #{email} ,PHONE= #{phone}, ADDRESS = #{address}
+		WHERE STU_ID =  #{stuId}
+	</update>
+	
+</mapper>

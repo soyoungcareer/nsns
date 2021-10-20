@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="calendarMapper">
+
+	<resultMap id="calendarResultMap" type="Acalendar">
+		<id property="acId" column="AC_ID"/>
+		<result property="title" column="TITLE"/>
+		<result property="start" column="START" javaType="java.sql.Date"/>
+		<result property="end" column="END" javaType="java.sql.Date"/>
+		<result property="backgroundColor" column="BACKGROUNDCOLOR"/>
+	</resultMap>
+	
+	<resultMap id="calendarEventsResultMap" type="Acalendar">
+		<id property="acId" column="AC_ID"/>
+		<result property="title" column="TITLE"/>
+		<result property="start" column="START" javaType="java.util.Date"/>
+		<result property="end" column="E" javaType="java.util.Date"/>
+		<result property="backgroundColor" column="BACKGROUNDCOLOR"/>
+	</resultMap>
+	
+	<insert id="insertCalendar" parameterType="Acalendar">
+		INSERT INTO ACADEMIC_CALENDAR
+		VALUES (SEQ_AC_ID.NEXTVAL, #{title}, #{start}, #{end}, #{backgroundColor})
+	</insert>
+	
+	<select id="calendarList" parameterType="string" resultMap="calendarResultMap">
+		SELECT*
+		FROM ACADEMIC_CALENDAR 
+		WHERE EXTRACT (MONTH FROM "START") LIKE #{op}
+		ORDER BY "START"
+	</select>
+	
+	<select id="calendarEvents" resultMap="calendarEventsResultMap">
+		<![CDATA[
+			SELECT AC_ID, TITLE, "START", END+1 as "E", backgroundColor
+			FROM ACADEMIC_CALENDAR 
+		]]>
+	</select>
+	
+	<select id="deleteCalendar"  parameterType="string">
+		DELETE  
+		FROM ACADEMIC_CALENDAR 
+		WHERE AC_ID = #{acId}
+	</select>
+	
+</mapper>

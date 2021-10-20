@@ -14,6 +14,6 @@ public class GradeObjectController {
 	@RequestMapping("gradeObjNewPop.obj") // 이의 신청 팝업 페이지
 	public String gradeObjectPopPage() {
 
-		return "gradeObject/gradeObjectPopup";
+		return "studentEval/gradeSearchPage";
 	}
 }

@@ -39,23 +39,23 @@
           <div class="tab-content">
               <div class="tile user-settings">
                 <h4 class="line-head" style="color:gray;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 학생의 개인정보 수정은 이메일, 전화번호, 주소만  가능합니다.</i></h4>
-                <form>
+                <form action="updateStudent.stu" method="post">
                   <div class="row mb-4">
                     <div class="col-md-3">
                       <label>이름</label>
-                      <input class="form-control" type="text"  value="유재석" readonly>
+                      <input class="form-control" type="text" id="stuName"  name="stuName" value="${student.stuName}" readonly>
                     </div>
                     <div class="col-md-3">
                       <label>학번</label>
-                      <input class="form-control" type="text" value="20143309" readonly>
+                      <input class="form-control" type="text" id="stuId" name="stuId" value="${student.stuId}" readonly>
                     </div>
                       <div class="col-md-3">
 	                      <label>전공</label>
-	                      <input class="form-control" type="text" value="시각디자인" readonly>
+	                      <input class="form-control" type="text" id="deptName" name="deptName" value="${student.deptName}" readonly>
 	                    </div>
 	                    <div class="col-md-3">
 	                      <label>담당 교수</label>
-	                      <input class="form-control" type="text" value="이효리" readonly>
+	                      <input class="form-control" type="text" id="proName" name="proName" value="${student.proName}" readonly>
 	                    </div>
                     </div>
                    
@@ -63,19 +63,15 @@
                   <div class="row mb-5">
                   <div class="col-md-3">
                       <label>학적상태</label>
-                      <input class="form-control" type="text"  value="재학중" readonly>
+                      <input class="form-control" type="text"  id="stuStatus" name="stuStatus"  value="${student.stuStatus}"  readonly>
                     </div>
                     <div class="col-md-3">
                       <label>수강학점</label>
-                      <input class="form-control" type="text"  value="30" readonly>
+                      <input class="form-control" type="number" id="stuCredit" name="stuCredit"  value="${student.stuCredit}" readonly>
                     </div>
-                    <div class="col-md-3">
-                      <label>입학연도</label>
-                      <input class="form-control" type="text"  value="2021-03-07" readonly>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                       <label>주민번호</label>
-                      <input class="form-control" type="text" value="940312-1075318" readonly>
+                      <input class="form-control" type="text"  id="ssn" name="ssn" value="${student.ssn}" readonly>
                     </div>
                   </div>
                     
@@ -83,7 +79,7 @@
                     <div class="clearfix"></div>
 	                    <div class="col-md-5 mb-4">
 	                      <label>이메일</label>
-	                      <input class="form-control" type="text">
+	                      <input class="form-control" type="email"  id="email" name="email" value="${student.email}">
 	                    </div>
                     </div>
                     
@@ -91,7 +87,7 @@
                 		<div class="clearfix"></div>
 		                  <div class="col-md-5 mb-4">
 		                      <label>전화번호</label>
-		                      <input class="form-control" type="text">
+		                      <input class="form-control" type="tel" id="phone" name="phone" value="${student.phone}">
 		                  </div>
                       </div>
                       
@@ -99,17 +95,18 @@
 	                    <div class="clearfix"></div>
 	                    <div class="col-md-8 mb-4">
 	                      <label>주소</label>
-	                      <input class="form-control" type="text">
+	                      <input class="form-control" type="text"  id="address" name="address" value="${student.address}"> 
 	                    </div>
                     </div>
                     
                     
                   <div class="row mb-4">
-                    <div class="col-md-10"> </div>
-                      <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> 수정하기 </button>
+                     <div class="col-md-3 mb-4">
+                      <button class="btn btn-primary" type="submit">수정하기 </button>
                   </div>
+                   </div>
+                   
                 </form>
-        
         </div>
       </div>
       </div>
