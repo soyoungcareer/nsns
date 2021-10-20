@@ -7,13 +7,18 @@
 	</settings>
 
 	<typeAliases>
-	         
-		
+	     <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
+		 <typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
+		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentDo" alias="StudentDo"/>
+		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/>
+		 	 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentStatus" alias="StudentStatus"/>
 	</typeAliases>
 
 
 	<mappers>
-		
+		<mapper resource="/mappers/calendar-mapper.xml"/> 
+		<mapper resource="/mappers/student-mapper.xml"/> 
+		<mapper resource="/mappers/studentStatus-mapper.xml"/> 
 	</mappers>
 
 
