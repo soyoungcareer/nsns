@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gradeMapper">
+
+	<!-- 성적 -->
+	<resultMap type="Grade" id="gradeResultSet">
+		<id property="gradeNo" column="GRADE_NO"/>
+		<result property="studentId" column="STU_ID"/>
+		<result property="subCode" column="SUB_CODE"/>
+		<result property="gradeYear" column="GRADE_YEAR"/>
+		<result property="gradeSemester" column="GRADE_SEMESTER"/>
+		<result property="gradeResult" column="GRADE_RESULT"/>
+		<result property="gradeCredit" column="GRADE_CREDIT"/>
+		<result property="attendance" column="ATTENDANCE"/>
+		<result property="assignment" column="ASSIGNMENT"/>
+		<result property="midExam" column="MIDEXAM"/>
+		<result property="finExam" column="FINEXAM"/>
+	</resultMap>
+	
+	
+	<select id="selectListCount" parameterType="Grade" resultMap="gradeResultSet">
+		SELECT COUNT(*)
+		FROM GRADE
+		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
+	</select>
+	
+	<select id="selectList" parameterType="Grade" resultMap="gradeResultSet">
+		SELECT * FROM GRADE
+		WHERE STU_ID=#{studentId} AND SUB_CODE=#{subCode}
+	</select>
+	
+	<update id="increaseCount" parameterType="_int">
+		UPDATE GRADE
+		SET COUNT = COUNT + 1
+		WHERE GRADE_NO=#{gradeNo}
+	</update>
+	
+	<select id="selectGrade" parameterType="_int" resultMap="gradeResultMap">
+		SELECT *
+		FROM GRADE
+		WHERE GRADE_NO={gradeNo}
+	</select>
+</mapper>
