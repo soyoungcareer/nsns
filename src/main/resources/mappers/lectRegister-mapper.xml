@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lectRegisterMapper">
+
+	<resultMap id="professorSet" type="Professor">
+		<id property="profId" column="PROF_ID" />
+		<result property="profPwd" column="PROF_PWD" />
+		<result property="profName" column="PROF_NAME" />
+		<result property="profDept" column="DEPT_CODE" />
+		<result property="profRrn" column="PROF_RRN" />
+		<result property="profEmail" column="PROF_EMAIL" />
+		<result property="profPhone" column="PROF_PHONE" />
+		<result property="profAddress" column="PROF_ADDRESS" />
+		<result property="profStatus" column="PROF_STATUS" />
+		<result property="profEmpdate" column="PROF_EMPDATE" />
+	</resultMap>
+	
+	<resultMap id="subjectListSet" type="Subject">
+		<id property="subCode" column="SUB_CODE" />
+		<result property="subTitle" column="SUB_TITLE" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="subDivs" column="SUB_DIVS" />
+		<result property="profId" column="PROF_ID" />
+		<result property="subCredit" column="SUB_CREDIT" />
+		<result property="subClass" column="SUB_CLASS" />
+		<result property="subTime" column="SUB_TIME" />
+		<result property="subType" column="SUB_TYPE" />
+		<result property="subYear" column="SUB_YEAR" />
+		<result property="subSmst" column="SUB_SMST" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+	
+	<resultMap id="LecRegProListSet" type="LecRegPro">
+		<collection property="subject" resultMap="subjectListSet"/>
+		<collection property="professor" resultMap="professorSet"/>
+		<collection property="department" resultMap="departListSet"/>
+	</resultMap>
+	
+	<resultMap id="LecRegProListSet2" type="LecRegPro">
+		<collection property="subject" resultMap="subjectListSet"/>
+		<collection property="professor" resultMap="professorSet"/>
+		<collection property="lectRegister" resultMap="RegisterResultSet"/>
+		<collection property="department" resultMap="departListSet"/>
+	</resultMap>
+	
+	<resultMap id="departListSet" type="Department">
+		<id property="deptCode" column="DEPT_CODE" />
+		<result property="deptTitle" column="DEPT_TITLE" />
+	</resultMap>
+	
+	<resultMap id="RegisterResultSet" type="LectRegister">
+		<id property="regNo" column="LECT_REG_NO" />
+		<result property="subCode" column="SUB_CODE" />
+		<result property="stuId" column="STU_ID" />
+		<result property="year" column="YEAR" />
+		<result property="semester" column="SEMESTER" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+	
+
+
+	<select id="lectReListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM SUBJECT
+		WHERE STATUS ='Y'
+	</select>
+	<select id="lectReList" resultMap="LecRegProListSet">
+		SELECT A.SUB_CODE, A.SUB_TITLE, C.DEPT_TITLE, A.SUB_DIVS, A.SUB_CREDIT, A.SUB_TIME, B.PROF_NAME
+		FROM SUBJECT A
+		JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
+		JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
+		WHERE A.STATUS = 'Y'
+		ORDER BY A.SUB_CODE DESC
+	</select>
+	<select id="departList" resultMap="departListSet">
+		SELECT *
+		FROM DEPARTMENT
+		ORDER BY DEPT_CODE
+	</select>
+	<select id="selectRegisterList" parameterType="_int" resultMap="LecRegProListSet2">
+		SELECT B.SUB_CODE, B.SUB_TITLE, D.DEPT_TITLE, B.SUB_DIVS, B.SUB_CREDIT, B.SUB_TIME, C.PROF_NAME
+		FROM LECT_REGISTER A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
+	</select>
+	<select id="lectReDetail"  parameterType="_int" resultMap="LecRegProListSet">
+		SELECT *
+		FROM SUBJECT A
+		JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
+		JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
+		WHERE A.SUB_CODE=#{subCode} AND A.STATUS = 'Y'
+	</select>
+	<insert id="regiInsert" parameterType="LectRegister">
+		INSERT INTO LECT_REGISTER
+		values(SEQ_LECT_REG_NO.NEXTVAL, #{subCode}, #{stuId}, #{year}, #{semester}, default)
+	</insert>
+	<update id="registerDelete" parameterType="LectRegister">
+		UPDATE LECT_REGISTER
+		SET STATUS='N'
+		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester}
+	</update>
+	<select id="searchListCount" resultType="_int" parameterType="SearchReg">
+		SELECT COUNT(*)
+		FROM SUBJECT
+		WHERE STATUS ='Y'
+		<choose>
+			<when test='condition1 == 0 and condition2 == 0 and search=="%"'>
+			</when>
+			<when test='condition1 != 0 and condition2 == 0 and search=="%"'>
+			 	AND SUB_DIVS=#{condition1}
+			</when>
+			<when test='condition1 == 0 and condition2 != 0 and search=="%"'>
+				AND DEPT_CODE=#{condition2}
+			</when>
+			<when test='condition1 == 0 and condition2 == 0 and search!="%"'>
+				AND SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+			<when test='condition1 != 0 and condition2 != 0 and search=="%"'>
+				AND SUB_DIVS=#{condition1}
+				AND DEPT_CODE=#{condition2}
+			</when>
+			<when test='condition1 == 0 and condition2 != 0 and search!="%"'>
+				AND DEPT_CODE=#{condition2}
+				AND SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+			<when test='condition1 != 0 and condition2 == 0 and search!="%"'>
+				AND SUB_DIVS=#{condition1}
+				AND SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+			<when test='condition1 != 0 and condition2 != 0 and search!="%"'>
+				AND SUB_DIVS=#{condition1}
+				AND DEPT_CODE=#{condition2}
+				AND SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+		</choose>
+	</select>
+	
+	<select id="searchLectReList" parameterType="SearchReg" resultMap="LecRegProListSet">
+		SELECT A.SUB_CODE, A.SUB_TITLE, C.DEPT_TITLE, A.SUB_DIVS, A.SUB_CREDIT, A.SUB_TIME, B.PROF_NAME
+		FROM SUBJECT A
+		JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
+		JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
+		WHERE A.STATUS = 'Y'
+		<choose>
+			<when test='condition1 == 0 and condition2 == 0 and search=="%"'>
+			</when>
+			<when test='condition1 != 0 and condition2 == 0 and search=="%"'>
+			 	AND A.SUB_DIVS=#{condition1}
+			</when>
+			<when test='condition1 == 0 and condition2 != 0 and search=="%"'>
+				AND A.DEPT_CODE=#{condition2}
+			</when>
+			<when test='condition1 == 0 and condition2 == 0 and search!="%"'>
+				AND A.SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+			<when test='condition1 != 0 and condition2 != 0 and search=="%"'>
+				AND A.SUB_DIVS=#{condition1}
+				AND A.DEPT_CODE=#{condition2}
+			</when>
+			<when test='condition1 == 0 and condition2 != 0 and search!="%"'>
+				AND A.DEPT_CODE=#{condition2}
+				AND A.SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+			<when test='condition1 != 0 and condition2 == 0 and search!="%"'>
+				AND A.SUB_DIVS=#{condition1}
+				AND A.SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+			<when test='condition1 != 0 and condition2 != 0 and search!="%"'>
+				AND A.SUB_DIVS=#{condition1}
+				AND A.DEPT_CODE=#{condition2}
+				AND A.SUB_TITLE LIKE '%'|| #{search} ||'%'
+			</when>
+		</choose>
+		ORDER BY A.SUB_CODE DESC
+	</select>
+</mapper>
