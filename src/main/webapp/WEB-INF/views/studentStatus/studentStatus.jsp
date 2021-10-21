@@ -15,7 +15,7 @@
     
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-comments"></i> 상담</h1>
+         <h1><i class="fa fa-address-card-o"></i> 학생상태</h1>
         </div>
        
       </div>
@@ -55,7 +55,6 @@
 							<th>신청번호</th>
 							<th>신청내역</th>
 							<th>신청현황</th>
-							<th>담당자</th>
 							<th>상태</th>
 						</tr>
 					</thead>
@@ -77,85 +76,22 @@
 					<div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">휴학신청내역 상세조회</h4>
+						<h4 class="modal-title">휴학신청내역</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
 	               <!-- Modal Body -->
-	               <div class="modal-body">
-	                   <div class="form-group row">
-	                  <label class="control-label col-md-3">휴학구분</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="진로" readonly>
-	                  </div>
-	                </div>
+	               <div class="modal-body" id="sampleModalBody">
 	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">신청일자</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="2021/09/30" readonly>
-	                  </div>
-	                </div>
-	                
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">휴학학기수</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="1" readonly>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">휴학학기</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="2021-02" readonly>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">휴학사유</label>
-	                  <div class="col-md-8">
-	                    <textarea class="form-control" rows="4">몸과 마음이 지쳐서 휴학합니다.</textarea>
-	                  </div>
-	                </div>
-                
-	                <div class="form-group row">
-					     <table class="table table-bordered " id="consultStatus" style="margin-top:10px;">
-								<thead>
-									<tr>
-										<th>신청현황</th>
-										<th>기타</th>
-									</tr>
-								</thead>
-								
-								<tbody>
-								
-									<tr>
-										<td>교수 승인 대기중</td>
-										<td><button class="btn btn-danger btn-sm" type="button">신청취소</button></td>
-									</tr>
-									
-									<tr>
-										<td>관리자 승인 대기중</td>
-										<td></td>
-									</tr>
-									
-									<tr>
-										<td>승인 완료</td>
-										<td></td>
-									</tr>
-									
-								</tbody>
-							</table>
-						</div>
 	               </div>
+	               
 				  <!-- Modal footer -->
-						<div class="modal-footer">
+					<div class="modal-footer">
 							<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-						</div>								
+					</div>								
 											
-					</div>
 				</div>
+			</div>
 		</div>
 		
     	<!-- 자퇴 모달 -->
@@ -218,7 +154,6 @@
 									</tr>
 									
 									
-									
 								</tbody>
 							</table>
 						</div>
@@ -234,38 +169,24 @@
 	<script>    		
 			$(function(){
 				$.ajax({
-					url: "stuOffPro.stu",
+					url: "stuStsPro.stu",
 					dataType:"json",
 					success: function(list){
-						
+						console.log(list);
 						var str = '';
 						
 						if(list.length != 0){
-							
 							$.each(list, function(i){
-								if(list[i].)
 								str += '<tr>'+'<td>'+
-								stuOff[i].applicationNo + '</td><td>'+
-								"휴학" + '</td><td>'+
-								stuOff[i].stsProcess + '</td><td>'+
-								stuOff[i].stsAdm + '</td><td>'+
-								stuOff[i].stsComplete + '</td>'+
+								list[i].applicationNo + '</td><td>'+
+								list[i].stsCategory + '</td><td>'+
+								list[i].stsProcess + '</td><td>'+
+								list[i].stsComplete + '</td>'+
 	              				+ '</tr>'
 	       					});
 							
 						} 
 						
-						if(stuDo.length != 0){
-								$.each(stuDo, function(i){
-									str += '<tr>'+'<td>'+
-									stuDo[i].applicationNo + '</td><td>'+
-									"자퇴" + '</td><td>'+
-									stuDo[i].stsProcess + '</td><td>'+
-									stuDo[i].stsAdm + '</td><td>'+
-									stuDo[i].stsComplete + '</td>'+
-		              				+ '</tr>'
-		       					});
-						}
 						$("#statusTable").append(str); 
 					},
 					error:function(){
@@ -275,14 +196,73 @@
 			});
 			
 	
-    		$(document).on("click", "#consultTable >tbody > tr >td", function(event) {
+    		$(document).on("click", "#statusTable >tbody > tr >td", function(event) {
     			
-    			let cat = $(this).parent().children().eq(1).text(); //휴학인지 자퇴인지 카테고리를 가져온다. 
+    			let cat = $(this).parent().children().eq(1).text(); 
+    			let appNo = $(this).parent().children().eq(0).text();
+    			let stsPro =  $(this).parent().children().eq(2).text();
     			
     			if(cat == "휴학") {
-    				$("#sampleModalPopup1").modal(); 
+    				$(".modal-body").empty();
     				
-    			} else {
+    				
+    				$.ajax({
+    					url: "stuOff.stu",
+    					dataType:"json",
+    					data : { appNo :appNo },
+    					success: function(obj){
+    						
+    						var str1 = '';
+    						var str2 =	'<div class="form-group row">'
+    									+ '<table class="table table-bordered " id="doStsTable " style="margin-top:10px;">'
+										+ '<thead><tr><th>신청현황</th><th>기타</th></tr></thead>'
+									
+    									
+    					if(obj != null) {
+    					
+    								str1 +=  '<div class="form-group row">'+'<label class="control-label col-md-3"> 휴학구분 </label>'+'<div class="col-md-5">'
+    									+'<input class="form-control" type="text" value="'+ obj.offCategory  +'" readonly>'+'</div>'+'</div>'
+    									+'<div class="form-group row">' + '<label class="control-label col-md-3">신청일자</label>' + '<div class="col-md-5">'
+    									+'<input class="form-control" type="text" value="'+ obj.offDate  +'" readonly>'+'</div>'+'</div>'
+    									+'<div class="form-group row">' + '<label class="control-label col-md-3">휴학학기수</label>' + '<div class="col-md-5">'
+    									+'<input class="form-control" type="text" value="'+ obj.offSem  +'" readonly>'+'</div>'+'</div>'
+    									+ '<div class="form-group row">' + '<label class="control-label col-md-3">휴학사유</label>' + '<div class="col-md-8">'
+    									+ '<textarea class="form-control" rows="4" readonly>'+obj.offReason+'</textarea>'+'</div>'+'</div>'
+    							
+    								
+    								if(stsPro == '교수승인대기'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+"교수 승인 대기중" + '</td><td>'
+    									+'<button class="btn btn-danger btn-sm" type="button">신청취소</button>' + '</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    		              				
+    								} else if(stsPro == '관리자승인대기'){
+    									str2 += '<tbody> <tr>'+'<td>'+
+    										+ "관리자 승인 대기중" + '</td><td>'
+    										+ '</td>'
+    		              					+ '</tr>'+'</tbody> </table> </div>'
+    		    						
+    								} else if(stsPro == '승인완료'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+ "승인 완료" + '</td><td>'
+    									+ '</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    								}
+    								
+    					}
+										
+							$('#sampleModalBody').append(str1+str2);
+    						//$('#sampleModalBody').html(str2);
+    				
+    					},
+    					error:function(){
+    						console.log("Ajax 통신 실패");
+    					}
+    				});
+    				$("#sampleModalPopup1").modal();
+    				
+    				
+    			} else { //자퇴 모달 띄우기
     				$("#sampleModalPopup2").modal(); 
     			}
     			

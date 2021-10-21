@@ -16,7 +16,9 @@ import lombok.ToString;
 public class StudentStatus {
 	private String stsNo; //번호
 	private String stsProcess; // 신청단계
-	private String stsAdm; //담당자
+	private String stsCategory; //휴학, 자퇴
 	private String stsComplete; //완료여부
+	private String status;
 	private int applicationNo; //신청번호
+	
 }

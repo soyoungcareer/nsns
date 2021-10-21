@@ -5,24 +5,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="studentStatusMapper">
 
 	<resultMap id="studentStatusResultMap" type="StudentStatus">
-		<id property="stsNo" column="STS_NO"/>
 		<result property="stsProcess" column="STS_PROCESS"/>
-		<result property="stsAdm" column="STS_ADM"/>
+		<result property="stsCategory" column="STS_CATEGORY"/>
 		<result property="stsComplete" column="STS_COMPLETE"/>
+		<result property="status" column="STATUS"/>
 		<result property="applicationNo" column="APPLICATION_NO"/>
 	</resultMap>
-
+	
 	<resultMap id="studentOffResultMap" type="StudentOff">
-		<id property="applicationNo" column=""/>
-		<result property="offCategory" column=""/>
-		<result property="offDate" column=""/>
-		<result property="offSem" column=""/>
-		<result property="offReason" column=""/>
-		<result property="status" column=""/>
+		<result property="applicationNo" column="APPLICATION_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="offCategory" column="OFF_CATEGORY"/>
+		<result property="offDate" column="OFF_DATE" javaType="java.sql.Date"/>
+		<result property="offSemCnt" column="OFF_SEM_CNT"/>
+		<result property="offSem" column="OFF_SEM"/>
+		<result property="offReason" column="OFF_REASON"/>
+		<result property="status" column="STATUS"/>
 	</resultMap>
 	
-	<select id="" resultMap="studentStatusResultMap">
-		
+	
+	<select id="studentProList" resultMap="studentStatusResultMap">
+		SELECT * 
+		FROM STU_STATUS_PRO
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<select id="studentOff" resultMap="studentOffResultMap">
+		SELECT * 
+		FROM STU_OFF
+		WHERE STATUS = 'Y'
 	</select>
 	
 	
