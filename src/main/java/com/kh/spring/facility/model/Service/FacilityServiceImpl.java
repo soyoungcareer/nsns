@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.facility.model.dao.FacilityDao;
+import com.kh.spring.facility.model.vo.PageInfoo;
 import com.kh.spring.facility.model.vo.facility;
-import com.kh.spring.notice.vo.PageInfo;
 
 @Service
 public class FacilityServiceImpl implements FacilityService  {
@@ -29,7 +29,7 @@ public class FacilityServiceImpl implements FacilityService  {
 
 
 	@Override
-	public ArrayList<facility> selectList(PageInfo pi) {
+	public ArrayList<facility> selectList(PageInfoo pi) {
 		return fd.selectList(sqlSession, pi);
 	}
 

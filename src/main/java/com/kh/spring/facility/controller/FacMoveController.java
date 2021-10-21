@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.Pagination;
 import com.kh.spring.facility.model.Service.FacilityService;
+import com.kh.spring.facility.model.vo.PageInfoo;
 import com.kh.spring.facility.model.vo.facility;
-import com.kh.spring.notice.vo.PageInfo;
 
 @Controller
 public class FacMoveController {
@@ -34,7 +34,7 @@ public class FacMoveController {
 
 		int listCount = fs.selectListCount();
 		System.out.println("리스트확인 테스트 " + listCount);
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfoo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 
 		ArrayList<facility> list = fs.selectList(pi);
 		System.out.println(list);
@@ -100,7 +100,7 @@ public class FacMoveController {
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + f);
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + file);
-		
+
 		if (!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
 
@@ -108,7 +108,6 @@ public class FacMoveController {
 				f.setFileBName(file.getOriginalFilename());
 				f.setFileFName(changeName);
 			}
-			
 
 		}
 
