@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.studentStatus.model.dao.StudentStatusDao;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
+import com.kh.spring.studentStatus.model.vo.StudentStatus;
 @Service
 public class StudentStatusServiceImpl implements StudentStatusService {
 
@@ -17,17 +18,22 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 	
 	@Autowired
 	private StudentStatusDao studentStatusDao;
+
+	@Override
+	public ArrayList<StudentStatus> studentProList() {
+		
+		ArrayList<StudentStatus> list = studentStatusDao.studentProList(sqlSession);
+				
+		return list;
+	}
+
+	@Override
+	public StudentOff studentOff(int appNo) {
 	
-	@Override
-	public ArrayList<StudentOff> studentOffProList() {
+		StudentOff stuOff = studentStatusDao.studentOff(sqlSession, appNo);
 		
-		return studentStatusDao.studentOffProList(sqlSession);
+		return stuOff;
 	}
-
-	@Override
-	public ArrayList<StudentDo> studentDoProList() {
-		
-		return null;
-	}
-
+	
+	
 }

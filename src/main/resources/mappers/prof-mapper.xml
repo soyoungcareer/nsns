@@ -71,4 +71,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET PROF_EMAIL=#{profEmail}, PROF_PHONE=#{profPhone}, PROF_ADDRESS=#{profAddress}
 		WHERE PROF_ID=#{profId}
 	</update>
+	
+	
+	<!-- 교수 강의목록 -->
+	<select id="profLectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM SUBJECT
+		WEHRE PROF_ID=#{profId}
+	</select>
+	
+	<select id="selectSubList" resultMap="Subject">
+		SELECT SUB_DIVS, SUB_CODE, SUB_TITLE, SUB_CREDIT, PROF_NAME, SUB_TIME, SUB_CLASS
+		FROM SUBJECT
+		JOIN PROFESSOR USING(PROF_ID)
+		WHERE PROF_ID=#{profId}
+	</select>
 </mapper>

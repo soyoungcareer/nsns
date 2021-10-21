@@ -10,6 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="ntcTitle" column="NTC_TITLE"/>
 		<result property="ntcContent" column="NTC_CONTENT"/>
 		<result property="ntcWriter" column="NTC_WRITER"/>
+		<result property="originName" column="ORIGIN_NAME"/>
+		<result property="changeName" column="CHANGE_NAME"/>
 		<result property="count" column="COUNT"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="status" column="STATUS"/>
@@ -21,11 +23,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE STATUS = 'Y'
 	</select>
 	
-	<select id="selectNList" resultMap="boardResultSet">
+	<select id="selectNList" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE STATUS = 'Y'
 		ORDER BY NTC_NO DESC
 	</select>
+	
+	<update id="increaseCount" parameterType="_int">
+		UPDATE NOTICE
+		SET COUNT = COUNT+1
+		WHERE NTC_NO= #{bno} AND STATUS= 'Y'	
+	</update>
+	
+	<select id="selectNBoard" resultType="_int" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE NTC_NO= #{bno} AND STATUS= 'Y'
+	</select>
+	
+	<insert id="insertNBoard" parameterType="Notice">
+		INSERT INTO NOTICE
+		VALUES (SEQ_NTC_NO.NEXTVAL, #{ntcCategory}, #{ntcTitle}, #{ntcContent}, 'admin', #{originName}, #{changeName}, default, sysdate, default)
+	</insert>
+	<!-- WHERE ID=ADMIN -->
+	
+	<update id="updateNBoard" parameterType="Notice">
+		UPDATE NOTICE
+		SET NTC_CATEGORY = #{ntcCategory}, NTC_TITLE = #{ntcTitle}, NTC_CONTENT = #{ntcContent}, ORIGIN_NAME = #{originName}, CHANGE_NAME = #{changeName}
+		WHERE NTC_NO = #{ntcNo}
+	</update>
+	
+	<update id="deleteNBoard" parameterType="_int">
+		UPDATE NOTICE
+		SET STATUS = 'N'
+		WHERE NTC_NO = #{bno} AND STATUS = 'Y'
+	</update>
 
 </mapper>

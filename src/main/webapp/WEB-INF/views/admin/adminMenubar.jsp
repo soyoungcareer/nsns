@@ -113,8 +113,8 @@
         
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">교수 관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 교수 계정 등록</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 교수 계정 조회</a></li>
+            <li><a class="treeview-item" href="addProf.adm"><i class="icon fa fa-circle-o"></i> 교수 계정 등록</a></li>
+            <li><a class="treeview-item" href="udProf.adm"><i class="icon fa fa-circle-o"></i> 교수 계정 조회</a></li>
             <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Notifications</a></li> -->
           </ul>
@@ -122,17 +122,17 @@
         
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생 관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학생 계정 등록</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학생 계정 조회</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
+            <li><a class="treeview-item" href="addStu.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 등록</a></li>
+            <li><a class="treeview-item" href="udStu.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 조회</a></li>
+            <li><a class="treeview-item" href="sttStu.adm"><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
           </ul>
         </li>
         
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">강의 관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의 평가 등록</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의 평가 결과</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의 평가 공개</a></li>
+            <li><a class="treeview-item" href="addLec.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 등록</a></li>
+            <li><a class="treeview-item" href="rstLec.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 결과</a></li>
+            <li><a class="treeview-item" href="subject.anc"><i class="icon fa fa-circle-o"></i> 강의 평가 공개</a></li>
             <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> User Page</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
@@ -141,7 +141,7 @@
           </ul>
         </li>
         
-        <li><a class="app-menu__item" href=""><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">공지사항</span></a></li>
+        <li><a class="app-menu__item" href="list.ntc"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">공지사항</span></a></li>
       </ul>
     </aside>
    
