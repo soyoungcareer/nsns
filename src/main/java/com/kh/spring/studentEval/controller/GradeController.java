@@ -14,9 +14,9 @@ import com.kh.spring.notice.vo.PageInfo;
 import com.kh.spring.studentEval.service.GradeService;
 import com.kh.spring.studentEval.vo.Grade;
 
-@Controller
+//@Controller
 public class GradeController {
-
+/*
 	@Autowired
 	private GradeService gradeService;
 	
@@ -65,5 +65,5 @@ public class GradeController {
 	@RequestMapping("profGradeObjDetail.pr")
 	public String profGradeObjDetail() {
 		return "professor/profGradeObjDetail";
-	}
+	}*/
 }

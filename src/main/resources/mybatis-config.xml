@@ -7,25 +7,27 @@
 	</settings>
 
 	<typeAliases>
-
-	 <typeAlias type="com.kh.spring.facility.model.vo.facility" alias="Facility"/>	
-	     <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
-		 <typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
-		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentDo" alias="StudentDo"/>
-		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/>
-		 	 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentStatus" alias="StudentStatus"/>
-	         <typeAlias type="com.kh.spring.lectRegister.vo.LectRegister" alias="LectRegister"/>
-			 <typeAlias type="com.kh.spring.major.vo.Subject" alias="Subject"/>
-			 <typeAlias type="com.kh.spring.major.vo.Department" alias="Department"/>
-			 <typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
-			 <typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
-			 <typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
+	
+		<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.spring.facility.model.vo.facility" alias="Facility"/>	
+		<typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
+		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
+		<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentDo" alias="StudentDo"/>
+		<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/>
+		<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentStatus" alias="StudentStatus"/>
+		<typeAlias type="com.kh.spring.lectRegister.vo.LectRegister" alias="LectRegister"/>
+		<typeAlias type="com.kh.spring.major.vo.Subject" alias="Subject"/>
+		<typeAlias type="com.kh.spring.major.vo.Department" alias="Department"/>
+		<typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
+		<typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
+		<typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
 
 	</typeAliases>
 
 
 	<mappers>
 
+		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/facility-mapper.xml"/>
 		<mapper resource="/mappers/calendar-mapper.xml"/> 
 		<mapper resource="/mappers/student-mapper.xml"/> 

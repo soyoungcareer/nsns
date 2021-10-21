@@ -2,25 +2,25 @@ package com.kh.spring.major.vo;
 
 public class Subject {
 	
-	private String subCode;
-	private String subTitle;
-	private int deptCode;
-	private int subDivs;
-	private String profId;
-	private int subCredit;
-	private int subClass;
-	private int subTime;
-	private int subType;
-	private int subYear;
-	private int subSmst;
-	private String status;
+	private String subCode; //과목코드
+	private String subTitle; //과목이름
+	private int deptCode; //학과코드
+	private int subDivs; //과목분류 (1:전공/2:교양)
+	private String profId; //교번
+	private int subCredit; //학점
+	private int subClass; //강의실
+	private String subTime; //강의시간
+	private int subType; //강의형태(1:집체/2:온라인)
+	private int subYear; //학년도
+	private int subSmst; //학기
+	private String status; //상태값
 	
 	public Subject() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Subject(String subCode, String subTitle, int deptCode, int subDivs, String profId, int subCredit,
-			int subClass, int subTime, int subType, int subYear, int subSmst, String status) {
+			int subClass, String subTime, int subType, int subYear, int subSmst, String status) {
 		super();
 		this.subCode = subCode;
 		this.subTitle = subTitle;
@@ -92,11 +92,11 @@ public class Subject {
 		this.subClass = subClass;
 	}
 
-	public int getSubTime() {
+	public String getSubTime() {
 		return subTime;
 	}
 
-	public void setSubTime(int subTime) {
+	public void setSubTime(String subTime) {
 		this.subTime = subTime;
 	}
 
@@ -139,5 +139,7 @@ public class Subject {
 				+ subTime + ", subType=" + subType + ", subYear=" + subYear + ", subSmst=" + subSmst + ", status="
 				+ status + "]";
 	}
-
+	
+	
+	
 }
