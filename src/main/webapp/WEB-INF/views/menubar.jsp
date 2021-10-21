@@ -30,6 +30,10 @@
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
+      	<!-- 공지사항 -->
+      	<li class="noticeTest">
+      		<a href="list.ntc" style="color:white;">공지사항</a>
+      	</li>
       	<!-- -----------------------------------
       		소영 교수페이지 확인용 임시 생성 메뉴 		시작 
       	------------------------------------- -->
