@@ -8,11 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="Grade" id="gradeResultSet">
 		<id property="gradeNo" column="GRADE_NO"/>
 		<result property="studentId" column="STU_ID"/>
+		<result property="studentName" column="STU_NAME"/>
 		<result property="subCode" column="SUB_CODE"/>
 		<result property="gradeYear" column="GRADE_YEAR"/>
 		<result property="gradeSemester" column="GRADE_SEMESTER"/>
 		<result property="gradeResult" column="GRADE_RESULT"/>
 		<result property="gradeCredit" column="GRADE_CREDIT"/>
+		<result property="deptName" column="DEPT_TITLE"/>
+		<result property="studentStatus" column="STU_STATUS"/>
 		<result property="attendance" column="ATTENDANCE"/>
 		<result property="assignment" column="ASSIGNMENT"/>
 		<result property="midExam" column="MIDEXAM"/>
@@ -20,15 +23,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
-	<select id="selectListCount" parameterType="Grade" resultMap="gradeResultSet">
+	<select id="selectListCount" parameterType="_int" resultMap="gradeResultSet">
 		SELECT COUNT(*)
 		FROM GRADE
-		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
+		<!-- JOIN LECT_REGISTER USING(SUB_CODE)
+		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester} -->
 	</select>
 	
 	<select id="selectList" parameterType="Grade" resultMap="gradeResultSet">
-		SELECT * FROM GRADE
-		WHERE STU_ID=#{studentId} AND SUB_CODE=#{subCode}
+		SELECT D.DEPT_TITLE, A.STU_ID, C.STU_STATUS, A.ATTENDANCE, A.ASSIGNMENT, A.MIDEXAM, 
+				A.FINEXAM, A.GRADE_RESULT, A.GRADE_CREDIT
+		FROM GRADE A 
+		JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
+		JOIN STUDENT C ON A.STU_ID=C.STU_ID
+		JOIN DEPARTMENT D ON C.DEPT_CODE=D.DEPT_CODE
+		JOIN SUBJECT E ON A.SUB_CODE=E.SUB_CODE
+		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
 	</select>
 	
 	<update id="increaseCount" parameterType="_int">

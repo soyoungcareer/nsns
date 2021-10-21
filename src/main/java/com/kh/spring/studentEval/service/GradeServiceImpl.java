@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.notice.vo.PageInfo;
 import com.kh.spring.studentEval.dao.GradeDao;
 import com.kh.spring.studentEval.vo.Grade;
 
+@Service
 public class GradeServiceImpl implements GradeService {
 
 	@Autowired
@@ -24,8 +26,8 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public ArrayList<Grade> selectList(PageInfo pi) {
-		return gradeDao.selectList(sqlSession, pi);
+	public ArrayList<Grade> selectList(PageInfo pi, String subCode, int gradeYear, int gradeSemester) {
+		return gradeDao.selectList(sqlSession, pi, subCode, gradeYear, gradeSemester);
 	}
 
 	@Override
@@ -40,5 +42,7 @@ public class GradeServiceImpl implements GradeService {
 		
 		return g;
 	}
+
+
  
 }

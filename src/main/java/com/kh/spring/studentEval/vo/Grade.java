@@ -28,7 +28,7 @@ public class Grade {
 	private int assignment;			// 과제
 	private int midExam;			// 중간
 	private int finExam;			// 기말
-	private int total;				// 점수(총점)
+	//private int total;				// 점수(총점)
 	
 	// 학년, 평가방법?
 }

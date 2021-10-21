@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
 		<typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
 
+
 	</typeAliases>
 
 
@@ -36,6 +37,8 @@
 		<mapper resource="/mappers/student-mapper.xml"/> 
 		<mapper resource="/mappers/studentStatus-mapper.xml"/> 
 		<mapper resource="mappers/lectRegister-mapper.xml"/>
+		<mapper resource="mappers/prof-mapper.xml"/>
+		<mapper resource="mappers/grade-mapper.xml"/>
 	</mappers>
 	
  
