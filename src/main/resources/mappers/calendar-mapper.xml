@@ -39,10 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<select id="deleteCalendar"  parameterType="string">
+	<delete id="deleteCalendar"  parameterType="string">
 		DELETE  
 		FROM ACADEMIC_CALENDAR 
 		WHERE AC_ID = #{acId}
-	</select>
+	</delete>
 	
 </mapper>
