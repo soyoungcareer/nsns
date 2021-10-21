@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수강신청</title>
+<title>수강신청 관리자</title>
 </head>
 <body>
- <jsp:include page="lectRegisterMenubar.jsp"/> 
- <!-- 추가 -->
+ <jsp:include page="lectRegisterMenubarAdmin.jsp"/> 
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
@@ -87,7 +86,6 @@
 											<th>이수구분</th>
 											<th>강의시간</th>
 											<th>교수명</th>
-											<th>수강신청</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -106,9 +104,6 @@
 						                        </c:if>
 						                        <td>${ Sub.subject.subTime }</td>
 						                        <td>${ Sub.professor.profName }</td>
-						                        <th style="padding: 0px; padding-top: 5px">
-						                         <button class="btn btn-primary addRegister" type="button"
-														style="margin-left: 10px;" id="addRegister">수강신청</button></th>
 						                         <%-- <c:forEach items="${ arlist }" var="ar">
 						                       		<c:if test="${ar.subject.subCode eq Sub.subject.subCode}">
 						                        	  <script type="text/javascript">
@@ -246,306 +241,18 @@
 					</div>
 				</div>
 			</div>
-			<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
-			<h2 class="" id="buttons">
-							<img class="menu-bar-2"
-								src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
-								style="margin-right: 10px;"></img>담긴 시간표
-			</h2>
-		</div>
-		<div class="tile mb-4">
-			<div class="page-header">
-				<div class="row">
-				</div>
-
-				<div id="sampleTable_wrapper"
-					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-					<div class="row">
-						<div class="col-sm-12 col-md-6">
-							<div class="dataTables_length" id="sampleTable_length">
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div id="sampleTable_filter" class="dataTables_filter">
-							</div>
-						</div>
-
-						<div class="col-sm-12" style="margin-top: 10px">
-							<div class="table-responsive" id="registerTable">
-								<table class="table table-hover table-bordered">
-									<thead>
-										<tr>
-											<th>강의코드</th>
-											<th>교과목명</th>
-											<th>계열</th>
-											<th>학점</th>
-											<th>이수구분</th>
-											<th>강의시간</th>
-											<th>교수명</th>
-											<th>삭제</th>
-										</tr>
-									</thead>
-									<tbody>
-
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</main>
-	<div class="modal fade" id="registerDe">
-		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table;">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h2 class="modal-title" id="buttons">
-						<img class="menu-bar-2"
-							src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
-							style="margin-right: 10px;"></img>강의 설명
-					</h2>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
 
-				<form action="gradeObjNewPop.obj" method="post">
-					<!-- Modal Body -->
-					<div class="modal-body">
-						
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 
-	  <script type="text/javascript">
-	  function selectRegList(){
-			$.ajax({
-				url:"selectReg.reg",
-				type:"get",
-				dataType: 'json',
-				success:function(reglist){
-					var value="";
-					$.each(reglist, function(i, obj){
-						
-							value += "<tr>"+
-									 "<td>" + obj.subject.subCode + "</td>" + 
-									 "<td>" + obj.subject.subTitle + "</td>" + 
-									 "<td>" + obj.department.deptTitle + "</td>" +
-									 "<td>" + obj.subject.subCredit + "</td>"
-									 
-									if(obj.subject.subDivs==1){
-							value +="<td>전공필수</td>" 
-				                      }else{
-				            value +="<td>교양필수</td>"
-				                        }
-									 
-							value +="<td>" + obj.subject.subTime + "</td>" +
-									 "<td>" + obj.professor.profName + "</td>" +
-									 "<th style='padding: 0px; padding-top: 5px'>"+"<button" +
-										" class='btn btn-danger' type='button'"+
-											"style='margin-left: 10px;'>수강취소</button>"+"</th>"+
-									 
-							 		"</tr>";
-							 		
-						
-					});
-					$("#registerTable tbody").html(value);
-				},
-			     error:function(){
-			         alert("수강신청한 과목 로딩 실패"); 
-			        }
-			});
-	  }
-	</script> 
+
 	<script type="text/javascript">
 		$("#sampleTable1 tbody tr td").click(function() {
 			var subCode = $(this).parent().children().eq(0).text();
-			$.ajax({
-				url:"registerDe.reg",
-				type:"post",
-				data:{subCode:subCode},
-				success:function(reDetail){
-					$(".modal-body").html("");
-					$("#registerDe").modal('show');
-					var value="";
-					value +='<div class="form-group row">' +
-							'<label class="control-label col-md-2">교과목명</label>'+
-							'<div class="col-md-4">'+
-								'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subTitle+'">'+
-							'</div>'+
-							'<label class="control-label col-md-2">강의코드</label>'+
-							'<div class="col-md-4">'+
-								'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subCode+'">'+
-							'</div>'+
-							'</div>'+
-							'<div class="form-group row">' +
-							'<label class="control-label col-md-2">교수명</label>'+
-							'<div class="col-md-4">'+
-							'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.professor.profName+'">'+
-							'</div>'+
-							'<label class="control-label col-md-2">이수구분</label>'+
-							'<div class="col-md-4">'
-					
-									if(reDetail.subject.subDivs==1){
-					value +='<input class="form-control col-md-12" type="text" disabled value="전공필수">'
-			                      }else{
-			        value +='<input class="form-control col-md-12" type="text" disabled value="교양필수">'
-			              }
-					value +='</div>'+
-							'</div>'+
-							'<div class="form-group row">' +
-							'<label class="control-label col-md-2">강의실</label>'+
-							'<div class="col-md-4">'+
-								'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subClass+'">'+
-							'</div>'+
-							'<label class="control-label col-md-2">강의 시간</label>'+
-							'<div class="col-md-4">'+
-								'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subTime+'">'+
-							'</div>'+
-							'</div>'+
-							'<div class="form-group row">' +
-							'<label class="control-label col-md-2">강의 형태</label>'+
-							'<div class="col-md-4">'
-								if(reDetail.subject.subType==1){
-						value +='<input class="form-control col-md-12" type="text" disabled value="현장 강의">'
-				                      }else{
-				        value +='<input class="form-control col-md-12" type="text" disabled value="온라인 강의">'
-				              }
-						value +='</div>'+
-							'<label class="control-label col-md-2">학점</label>'+
-							'<div class="col-md-4">'+
-							'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subCredit+'">'+
-							'</div>'+
-							'</div>'+
-							'<div class="form-group row">' +
-							'<label class="control-label col-md-2">강의 상세 계획서</label>'+
-							'<div class="col-md-10">'+
-								'<input class="form-control col-md-12" type="text" disabled value="나중에 파일 연결 필요" style="color:red;">'+
-							'</div>'+
-							'</div>'
-							/*나중에 파일 연결 필요!! a 태그로 다운로드 되도록 설정 필요*/
-					$(".modal-body").html(value);
-				},
-			     error:function(){
-			         alert("수강신청 상세 화면 모달 로딩 실패"); 
-			        }
-			});
+			location.href="lectRegAdmin.reg?subCode="+subCode;
 		});
 		
-		function checkRegister(subCode) {
-			var check=true;
-			  $.ajax({
-					url:"reCheck.reg",
-					type:"post",
-					async: false,
-					data:{subCode:subCode},
-					success:function(lect){
-						if(lect!=null){
-							check=false;
-						}
-					},error:function(){
-						console.log("수강신청 과목체크 ajax 통신 실패");
-						check=false;
-					}
-				});
-			  return check;
-		}
-		function checkCredit(subCredit) {
-			var check=true;
-			  $.ajax({
-					url:"checkCredit.reg",
-					type:"post",
-					async: false,
-					data:{},
-					success:function(countCredit){
-						
-						if(subCredit==2){
-							if(countCredit>18){
-								check=false;
-							}
-						}else if(subCredit==3){
-							if(countCredit>17){
-								check=false;
-							}
-						}
-					},error:function(){
-						console.log("수강신청 과목체크 ajax 통신 실패");
-						check=false;
-					}
-				});
-			  return check;
-		}
 	</script>
 	
-	<script>
-	$(function(){
-		selectRegList();
-	});
-	$("#sampleTable1 tbody tr button").click(function() { //수강신청 추가
-		var subCode = $(this).parent().parent().children().eq(0).text();
-		var title = $(this).parent().parent().children().eq(1).text();
-		var subCredit = $(this).parent().parent().children().eq(3).text();
-		if(confirm('수강 신청하시겠습니까?')){
-			if(checkRegister(subCode)){
-				if(checkCredit(subCredit)){
-				$.ajax({
-					url:"reInsert.reg",
-					type:"post",
-					async: false, //이렇게 안해주면 무조건 실행... 시바... 
-					data:{subCode:subCode},
-					success:function(result){
-						if(result > 0){
-							$("#registerTable tbody").val("");
-							alert(title+"가 수강신청 되었습니다.");
-							selectRegList();
-						}else{
-							alert("수강신청 실패");
-						}
-					},error:function(){
-						console.log("수강신청 ajax 통신 실패");
-					}
-				});
-				}else{
-					alert("수강 신청한 과목의 학점이 20학점 초과입니다. 다시한번 확인해 주세요");
-				}
-			}else{
-				alert("이미 수강신청한 과목입니다.");
-			}
-					
-		}else{
-			alert("수강신청 취소되었습니다.");
-		}
-	});
-	
-	</script>
-	<script type="text/javascript">
-	$(document).on("click","#registerTable tbody tr button",function(){//수강신청 삭제- 동적테이블 부분이라 클릭이벤트 이렇게 걸음
-		selectRegList();
-		var subCode = $(this).parent().parent().children().eq(0).text();
-			$.ajax({
-				url:"reDelete.reg",
-				type:"post",
-				data:{subCode:subCode},
-				success:function(result){
-					if(result > 0){
-						$("#registerTable tbody").val("");
-						selectRegList();
-						
-					}else{
-						alert("수강신청 삭제 실패");
-					}
-				},error:function(){
-					console.log("수강신청 삭제 ajax 통신 실패");
-				}
-			}); 
-	});
-	
-	</script>
+
 </body>
 </html>
