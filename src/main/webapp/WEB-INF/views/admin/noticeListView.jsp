@@ -46,21 +46,26 @@
             <div class="tile-body">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
-                  <thead>
+                  <thead align="center">
                     <tr>
                       <th>번호</th>
                       <th>분류</th>
                       <th>제목</th>
+                      <th>조회수</th>
                       <th>날짜</th>
-                      <th>조회수</th> 
                     </tr>
                   </thead>
-                  <tbody>
-                    <c:forEach items="${ list }" var="b">
+                  <tbody align="center">
+                  	<c:if test="${ empty list }">
+                  		<tr>
+                  			<td colspan=5>공지사항이 존재하지 않습니다.</td>
+                  		</tr>
+                  	</c:if>
+                    <c:forEach items="${ list }" var="n">
 	                    <tr>
-	                        <td>${ n.noticeNo }</td>
-	                        <td>${ n.noticeCategory }</td><!-- // -->
-	                        <td>${ n.noticeTitle }</td>
+	                        <td>${ n.ntcNo }</td>
+	                        <td>${ n.ntcCategory }</td><!-- // -->
+	                        <td>${ n.ntcTitle }</td>
 	                        <td>${ n.count }</td>
 	                        <td>${ n.createDate }</td> 
 	                    </tr>
@@ -72,6 +77,12 @@
             </div>
           </div>
         </div>
+        
+        <!-- admin 등록<button> -->
+        <div>
+        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록</button>
+        </div>
+        
       </div>
       
       		<!-- 페이징 - div 위치 수정 -->
@@ -79,7 +90,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -89,7 +100,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -100,10 +111,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="list.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>
@@ -111,6 +122,14 @@
             
             
     </main>
+    <script>
+    	$(function(){
+    		$("#sampleTable tbody tr").click(function(){
+    			location.href="detail.ntc?bno=" + $(this).children().eq(0).text();
+    		});
+    	});
+    </script>
+    
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>

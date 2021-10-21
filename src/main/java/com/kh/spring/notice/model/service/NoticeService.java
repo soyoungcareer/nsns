@@ -11,4 +11,12 @@ public interface NoticeService {
 
 	ArrayList<Notice> selectNList(PageInfo pi);
 
+	Notice selectNBoard(int bno);
+
+	void insertNBoard(Notice n);
+
+	void updateNBoard(Notice n);
+
+	void deleteNBoard(int bno);
+
 }
