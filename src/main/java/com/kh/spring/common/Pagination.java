@@ -1,10 +1,11 @@
 package com.kh.spring.common;
 
+import com.kh.spring.facility.model.vo.PageInfoo;
 import com.kh.spring.notice.model.vo.PageInfo;
 
 public class Pagination {
 	
-	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
+	public static PageInfoo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		
 		// * maxPage : 총 페이지 수
 		
@@ -20,7 +21,7 @@ public class Pagination {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo( currentPage,listCount, startPage, endPage, maxPage, pageLimit, boardLimit);
+		PageInfoo pi = new PageInfoo( currentPage,listCount, startPage, endPage, maxPage, pageLimit, boardLimit);
 		return pi;
 		
 	}

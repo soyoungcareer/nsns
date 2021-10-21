@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.service.ProfService;
-import com.kh.spring.notice.vo.PageInfo;
+import com.kh.spring.notice.model.vo.PageInfo;
 
+/*
 @Controller 
 public class ProfController {
 	
@@ -101,3 +102,4 @@ public class ProfController {
 	}
 	
 }
+*/
