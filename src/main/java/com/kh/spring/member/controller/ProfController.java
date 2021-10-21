@@ -1,10 +1,23 @@
 package com.kh.spring.member.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.spring.common.Pagination;
+import com.kh.spring.major.vo.Subject;
+import com.kh.spring.member.service.ProfService;
+import com.kh.spring.notice.vo.PageInfo;
 
 @Controller 
 public class ProfController {
+	
+	@Autowired
+	private ProfService profService;
 	
 	// 교수메뉴바
 	@RequestMapping("profMenu.pr")
@@ -27,7 +40,20 @@ public class ProfController {
 
 	// 강의목록 조회
 	@RequestMapping("profLectureDetail.pr")
-	public String profLectureDetail() {
+	public String profLectureDetail(@RequestParam(value="currentPage", required=false, defaultValue="1")
+									int currentPage, Model model) {
+		
+		int listCount = profService.profLectListCount();
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		String profId = "EC1901";
+		
+		ArrayList<Subject> subList = profService.selectSubList(profId);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("subList", subList);
+		
+		
 		return "professor/profLectureView";
 	}
 	

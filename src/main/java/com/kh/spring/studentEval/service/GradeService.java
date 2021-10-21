@@ -9,7 +9,7 @@ public interface GradeService {
 
 	int selectListCount();
 
-	ArrayList<Grade> selectList(PageInfo pi);
+	ArrayList<Grade> selectList(PageInfo pi, String subCode, int gradeYear, int gradeSemester);
 
 	Grade selectGrade(int gno);
  
