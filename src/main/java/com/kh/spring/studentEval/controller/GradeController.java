@@ -16,7 +16,7 @@ import com.kh.spring.studentEval.vo.Grade;
 
 @Controller
 public class GradeController {
-
+/*
 	@Autowired
 	private GradeService gradeService;
 	
@@ -25,7 +25,7 @@ public class GradeController {
 	public String profGradeMain() {
 		return "professor/profGradeMain";
 	}
-	
+	/*
 	// 성적 조회
 	@RequestMapping()
 	public String selectList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
@@ -39,8 +39,9 @@ public class GradeController {
 		
 		return "professor/profGradeMain";
 	}
-	
-	 
+	*/
+	/*
+	 *
 
 	@RequestMapping()
 	public ModelAndView selectGrade(int gno, ModelAndView mv) {
@@ -49,8 +50,8 @@ public class GradeController {
 		mv.addObject("g", g).setViewName("professor/profGradeMain");
 		return mv;
 	}
-	
-	
+	*/
+	/*
 	// 성적 등록s
 	@RequestMapping()
 	public String insertGrade(Grade g, HttpServletRequest request, Model model,
@@ -70,5 +71,5 @@ public class GradeController {
 		return "professor/profGradeObjDetail";
 	}
 	
-	
+	*/
 }
