@@ -10,8 +10,9 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
-import com.kh.spring.major.vo.Subject;
-import com.kh.spring.notice.vo.PageInfo;
+import com.kh.spring.notice.model.vo.PageInfo;
+
+
 
 @Repository
 public class LectRegisterDao {
@@ -34,7 +35,7 @@ public class LectRegisterDao {
 		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectRegisterList", stuId);
 	}
 
-	public LecRegPro lectReDetail(SqlSessionTemplate sqlSession, int subCode) {
+	public LecRegPro lectReDetail(SqlSessionTemplate sqlSession, String subCode) {
 		return sqlSession.selectOne("lectRegisterMapper.lectReDetail",subCode);
 	}
 
@@ -54,6 +55,30 @@ public class LectRegisterDao {
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("lectRegisterMapper.searchLectReList", sr , rowBounds);
+	}
+
+	public LectRegister checkRegister(SqlSessionTemplate sqlSession, LectRegister re) {
+		return sqlSession.selectOne("lectRegisterMapper.checkRegister", re);
+	}
+
+	public int checkCredit(SqlSessionTemplate sqlSession, LectRegister re) {
+		return sqlSession.selectOne("lectRegisterMapper.checkCredit", re);
+	}
+
+	public ArrayList<LecRegPro> selectRegiCartsterList(SqlSessionTemplate sqlSession, int stuId) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectRegiCartsterList", stuId);
+	}
+
+	public int regiInsertCart(SqlSessionTemplate sqlSession, LectRegister re) {
+		return sqlSession.insert("lectRegisterMapper.regiInsertCart", re);
+	}
+
+	public LectRegister checkRegisterCart(SqlSessionTemplate sqlSession, LectRegister re) {
+		return sqlSession.selectOne("lectRegisterMapper.checkRegisterCart", re);
+	}
+
+	public int registerDeleteCart(SqlSessionTemplate sqlSession, LectRegister re) {
+		return sqlSession.update("lectRegisterMapper.registerDeleteCart", re);
 	}
 
 

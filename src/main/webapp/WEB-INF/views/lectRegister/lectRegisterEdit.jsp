@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,7 @@
 <title>강의 설명 수정 페이지</title>
 </head>
 <body>
-<jsp:include page="lectRegisterMenubar.jsp"/> 
-<!-- 추가 -->
+<jsp:include page="lectRegisterMenubarAdmin.jsp"/> 
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
@@ -36,44 +36,49 @@
                 <div class="form-group row">
 	                  <label class="control-label col-md-2">교과목명</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text">
+	                    <input class="form-control col-md-12" type="text" value="${reDetail.subject.subTitle}">
 	                  </div>
 	                  <label class="control-label col-md-2">강의코드</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text">
+	                    <input class="form-control col-md-12" type="text"  value="${reDetail.subject.subCode}">
                     </div>
                 </div>
                 <div class="form-group row">
 	                   <label class="control-label col-md-2">교수명</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text">
+	                    <input class="form-control col-md-12" type="text"  value="${reDetail.professor.profName}">
 	                  </div>
 	                  <label class="control-label col-md-2">이수구분</label>
 	                  <div class="col-md-4">
-	                      <select class="form-control" id="exampleSelect1">
-		                      <option>전공필수</option>
-		                      <option>전공선택</option>
-		                      <option>교양필수</option>
-		                      <option>교양선택</option>
+	                      <select class="form-control" id="exampleSelect1" >
+		                       <option value=1 <c:if test="${reDetail.subject.subDivs eq 1}">selected</c:if>>전공필수</option>
+		                       <option value=2 <c:if test="${reDetail.subject.subDivs eq 2}">selected</c:if>>교양필수</option>
+	                      </select>
+                    	</div>
+                    </div>
+                <div class="form-group row">
+	                   <label class="control-label col-md-2">계열</label>
+	                  <div class="col-md-4">
+	                    <input class="form-control col-md-12" type="text"  value="${reDetail.department.deptTitle}">
+	                  </div>
+	                  <label class="control-label col-md-2">강의 형태</label>
+	                  <div class="col-md-4">
+	                      <select class="form-control" id="exampleSelect1" >
+		                      <option value="1" <c:if test="${ reDetail.subject.subType eq 1 }"> selected</c:if> >현장 강의</option>
+		                      <option value="2" <c:if test="${ reDetail.subject.subType eq 2 }"> selected</c:if> >온라인 강의</option>
 	                      </select>
                     	</div>
                     </div>
                 <div class="form-group row">
                     <label class="control-label col-md-2">강의실</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text">
+	                    <input class="form-control col-md-12" type="text" value="${reDetail.subject.subClass}">
 	                  </div>
 	                  <label class="control-label col-md-2">강의시간</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text">
+	                    <input class="form-control col-md-12" type="text" value="${reDetail.subject.subTime}">
                     	</div>
                     </div>
-                <div class="form-group row">
-                  <label class="control-label col-md-2">강의 설명</label>
-                  <div class="col-md-10">
-                    <textarea class="form-control" rows="4" placeholder=""></textarea>
-                  </div>
-                </div>
                 <div class="form-group row">
                   <label class="control-label col-md-2">강의 계획서</label>
                   <div class="col-md-7">
@@ -85,11 +90,11 @@
                 <div class="form-group row">
                     <label class="control-label col-md-2">강의 평점</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text" readonly value="3.56 / 5.0">
+	                    <input class="form-control col-md-12" type="text" readonly value="0"><!-- 수정필요 -->
 	                  </div>
 	                  <label class="control-label col-md-2">학점</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text">
+	                    <input class="form-control col-md-12" type="text" value="${reDetail.subject.subCredit}">
                     	</div>
                    </div>
                 <div class="form-group row">

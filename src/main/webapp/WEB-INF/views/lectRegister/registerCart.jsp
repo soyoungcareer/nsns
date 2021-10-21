@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,75 +8,65 @@
 <title>장바구니</title>
 </head>
 <body>
-	<jsp:include page="lectRegisterMenubar.jsp" />
-	<!-- 추가 -->
+ <jsp:include page="lectRegisterMenubar.jsp"/> 
+ <!-- 추가 -->
 	<main class="app-content">
 		<div class="app-title">
 			<div class="div">
-				<h1>
-					<i class="fa fa-pencil fa-lg" aria-hidden="true"
-						style="margin-right: 10px;"></i>수강신청
-				</h1>
+			<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i
-						class="fa fa-sign-out fa-4x" aria-hidden="true"></i>
-					<div>나가기</div></a></li>
+				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
 			</ul>
 		</div>
-		<div class="app-title"
-			style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
+		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
 			<h2 class="" id="buttons">
-				<img class="menu-bar-2"
-					src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
-					style="margin-right: 10px;"></img>장바구니
+							<img class="menu-bar-2"
+								src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
+								style="margin-right: 10px;"></img>장바구니
 			</h2>
 		</div>
-		<div class="tile mb-4">
+		<div class="tile mb-4" >
 			<div class="page-header">
-				<div class="row"></div>
+				<div class="row">
+				</div>
 
 				<div id="sampleTable_wrapper"
 					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 					<form action="searchReg.reg" class="row">
 						<div class="col-sm-12 col-md-6">
-							<div class="dataTables_length" id="sampleTable_length"
-								style="padding-left: 15px">
-								<label>이수구분 : &nbsp;&nbsp;&nbsp; <select
-									name="condition1" aria-controls="sampleTable"
-									class="form-control form-control-sm" style="width: 100px"
-									id="condition1">
-										<option value="0">전체</option>
-										<option value="1">전공필수</option>
-										<option value="2">교양필수</option>
-								</select>
-								</label> <label style="margin-left: 30px">학과 :
-									&nbsp;&nbsp;&nbsp; <select name="condition2"
-									aria-controls="sampleTable"
-									class="form-control form-control-sm" style="width: 120px"
-									id="condition2">
-										<option value="0">전체</option>
+							<div class="dataTables_length" id="sampleTable_length" style="padding-left: 15px">
+								<label>이수구분 : &nbsp;&nbsp;&nbsp;
+									<select name="condition1" aria-controls="sampleTable"
+										class="form-control form-control-sm" style="width: 100px" id="condition1">
+											<option value="0" >전체</option>
+											<option value="1" >전공필수</option>
+											<option value="2" >교양필수</option>
+									</select>
+								</label> 
+								<label style="margin-left: 30px">학과 : &nbsp;&nbsp;&nbsp;
+									<select name="condition2" aria-controls="sampleTable"
+										class="form-control form-control-sm" style="width: 120px" id="condition2">
+											<option value="0">전체</option>
 										<c:forEach items="${ departList }" var="depart">
-											<option value="${depart.deptCode}"
-												<c:if test="${ condition2 eq depart.deptCode }">selected</c:if>>${depart.deptTitle}</option>
+											<option value="${depart.deptCode}" <c:if test="${ condition2 eq depart.deptCode }">selected</c:if>>${depart.deptTitle}</option>
 										</c:forEach>
-								</select>
+									</select>
 								</label>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
-							<div id="sampleTable_filter" class="dataTables_filter"
-								style="padding-right: 15px">
-								<label>강의 명 : <input type="search"
-									class="form-control form-control-sm"
-									aria-controls="sampleTable" name="search" value="${ search }">
+							<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
+								<label>강의 명 : 
+									<input type="search" class="form-control form-control-sm"
+										aria-controls="sampleTable" name="search" value="${ search }">
 								</label>
-								<button class="btn btn-primary btn-sm" type="submit"
+									<button class="btn btn-primary btn-sm" type="submit"
 									style="margin-left: 10px;">조 회</button>
 							</div>
 						</div>
-					</form>
-					<script>
+						</form>
+				<script>
 					$(function(){
 						switch('${condition1}'){
 						case "0" : $("#condition1 option").eq(0).attr("selected", true); break;
@@ -85,158 +75,142 @@
 						}
 					})
 				</script>
-					<div class="col-sm-12" style="margin-top: 10px">
-						<div class="table-responsive">
-							<table class="table table-hover table-bordered" id="sampleTable1">
-								<thead>
-									<tr>
-										<th>강의코드</th>
-										<th>교과목명</th>
-										<th>계열</th>
-										<th>학점</th>
-										<th>이수구분</th>
-										<th>강의시간</th>
-										<th>교수명</th>
-										<th>수강신청</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${ sublist }" var="Sub">
+						<div class="col-sm-12" style="margin-top: 10px">
+							<div class="table-responsive">
+								<table class="table table-hover table-bordered" id="sampleTable1">
+									<thead>
 										<tr>
-											<td>${ Sub.subject.subCode }</td>
-											<td>${ Sub.subject.subTitle }</td>
-
-											<td>${ Sub.department.deptTitle }</td>
-											<td>${ Sub.subject.subCredit }</td>
-											<c:if test="${ Sub.subject.subDivs eq 1 }">
-												<td>전공필수</td>
-											</c:if>
-											<c:if test="${ Sub.subject.subDivs eq 2 }">
-												<td>교양필수</td>
-											</c:if>
-											<td>${ Sub.subject.subTime }</td>
-											<td>${ Sub.professor.profName }</td>
-											<th style="padding: 0px; padding-top: 5px"><c:forEach
-													items="${ arlist }" var="ar">
-													<c:if test="${ar.subject.subCode ne Sub.subject.subCode}">
-														<button class="btn btn-primary addRegister" type="button"
-															style="margin-left: 10px;" id="addRegister">수강신청</button>
-													</c:if>
-													<c:if test="${ar.subject.subCode eq Sub.subject.subCode}">
-														<button class="btn btn-secondary addRegister"
-															type="button" style="margin-left: 10px;" id="addRegister"
-															disabled>신청완료</button>
-													</c:if>
-												</c:forEach>
+											<th>강의코드</th>
+											<th>교과목명</th>
+											<th>계열</th>
+											<th>학점</th>
+											<th>이수구분</th>
+											<th>강의시간</th>
+											<th>교수명</th>
+											<th>장바구니</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-						<!-- 페이징바! -->
-						<div class="row" style="justify-content: center;">
-							<div class="col-lg-6" style="justify-content: center;">
-								<div>
-									<ul class="pagination" style="justify-content: center;">
-										<c:choose>
-											<c:when test="${ pi.currentPage ne 1 }">
-												<c:if test="${ empty search }">
-													<li class="page-item"><a class="page-link"
-														href="register.reg?currentPage=${ pi.currentPage-1 }">«</a></li>
+									</thead>
+									<tbody>
+										<c:forEach items="${ sublist }" var="Sub">
+						                    <tr>
+						                        <td>${ Sub.subject.subCode }</td>
+						                        <td>${ Sub.subject.subTitle }</td>
+						                        
+						                        <td>${ Sub.department.deptTitle }</td>
+						                        <td>${ Sub.subject.subCredit }</td>
+						                        <c:if test="${ Sub.subject.subDivs eq 1 }">
+					                        	<td>전공필수</td>
+						                        </c:if>
+						                        <c:if test="${ Sub.subject.subDivs eq 2 }">
+						                        <td>교양필수</td>
+						                        </c:if>
+						                        <td>${ Sub.subject.subTime }</td>
+						                        <td>${ Sub.professor.profName }</td>
+						                        <th style="padding: 0px; padding-top: 5px">
+						                         <button class="btn btn-primary addRegister" type="button"
+														style="margin-left: 10px;" id="addRegister">수강담기</button></th>
+						                    </tr>
+					                    </c:forEach>
+					                    
+									</tbody>
+								</table>
+							</div>
+							<!-- 페이징바! -->
+							<div class="row" style="justify-content: center;">
+								<div class="col-lg-6" style="justify-content: center;">
+									<div>
+										<ul class="pagination" style="justify-content: center;">
+											<c:choose>
+					                		<c:when test="${ pi.currentPage ne 1 }">
+						                		<c:if test="${ empty search }">
+													<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ pi.currentPage-1 }">«</a></li>
 												</c:if>
 												<c:if test="${ !empty search }">
 													<c:url var="searchUrl" value="searchReg.reg">
-														<c:param name="currentPage" value="${pi.currentPage-1 }" />
-														<c:param name="condition1" value="${ condition1 }" />
-														<c:param name="condition2" value="${ condition2 }" />
-														<c:param name="search" value="${ search }" />
+														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
+														<c:param name="condition1" value="${ condition1 }"/>
+														<c:param name="condition2" value="${ condition2 }"/>
+														<c:param name="search" value="${ search }"/>
 													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${ searchUrl }">«</a></li>
+													<li class="page-item"><a class="page-link" href="${ searchUrl }">«</a></li>
 												</c:if>
-											</c:when>
-											<c:otherwise>
-												<li class="page-item disabled"><a class="page-link"
-													href="">«</a></li>
-											</c:otherwise>
-										</c:choose>
-
-										<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }"
-											var="p">
-											<c:choose>
-												<c:when test="${ pi.currentPage ne p }">
-													<c:if test="${ empty search }">
-														<li class="page-item"><a class="page-link"
-															href="register.reg?currentPage=${ p }">${ p }</a></li>
+					                		</c:when>
+					                		<c:otherwise>
+					                			<li class="page-item disabled"><a class="page-link" href="">«</a></li>
+					                		</c:otherwise>
+					                	</c:choose>
+					                	
+					                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+					                    	<c:choose>
+						                		<c:when test="${ pi.currentPage ne p }">
+					                    			<c:if test="${ empty search }">
+														<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ p }">${ p }</a></li>
 													</c:if>
 													<c:if test="${ !empty search }">
 														<c:url var="searchUrl" value="searchReg.reg">
-															<c:param name="currentPage" value="${ p }" />
-															<c:param name="condition1" value="${ condition1 }" />
-															<c:param name="condition2" value="${ condition2 }" />
-															<c:param name="search" value="${ search }" />
+															<c:param name="currentPage" value="${ p }"/>
+															<c:param name="condition1" value="${ condition1 }"/>
+															<c:param name="condition2" value="${ condition2 }"/>
+															<c:param name="search" value="${ search }"/>
 														</c:url>
-														<li class="page-item"><a class="page-link"
-															href="${ searchUrl }">${ p }</a></li>
+														<li class="page-item"><a class="page-link" href="${ searchUrl }">${ p }</a></li>
 													</c:if>
-												</c:when>
-												<c:otherwise>
-													<li class="page-item active"><a class="page-link"
-														href="register.reg?currentPage=${ p }">${ p }</a></li>
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-										<c:choose>
-											<c:when test="${ pi.currentPage ne pi.maxPage }">
-												<c:if test="${ empty search }">
-													<li class="page-item"><a class="page-link"
-														href="register.reg?currentPage=${ pi.currentPage+1 }">»</a></li>
+						                		</c:when>
+						                		<c:otherwise>
+						                			<li class="page-item active"><a class="page-link" href="register.reg?currentPage=${ p }">${ p }</a></li>
+						                		</c:otherwise>
+						                	</c:choose>
+					                    </c:forEach>
+					                    <c:choose>
+					                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+					                			<c:if test="${ empty search }">
+													<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ pi.currentPage+1 }">»</a></li>
 												</c:if>
 												<c:if test="${ !empty search }">
 													<c:url var="searchUrl" value="searchReg.reg">
-														<c:param name="currentPage" value="${pi.currentPage+1  }" />
-														<c:param name="condition1" value="${ condition1 }" />
-														<c:param name="condition2" value="${ condition2 }" />
-														<c:param name="search" value="${ search }" />
+														<c:param name="currentPage" value="${pi.currentPage+1  }"/>
+														<c:param name="condition1" value="${ condition1 }"/>
+														<c:param name="condition2" value="${ condition2 }"/>
+														<c:param name="search" value="${ search }"/>
 													</c:url>
-													<li class="page-item"><a class="page-link"
-														href="${ searchUrl }">»</a></li>
+													<li class="page-item"><a class="page-link" href="${ searchUrl }">»</a></li>
 												</c:if>
-											</c:when>
-											<c:otherwise>
-												<li class="page-item disabled"><a class="page-link"
-													href="">»</a></li>
-											</c:otherwise>
-										</c:choose>
-									</ul>
+					                		</c:when>
+					                		<c:otherwise>
+					                			<li class="page-item disabled"><a class="page-link" href="">»</a></li>
+					                		</c:otherwise>
+					                	</c:choose>
+										</ul>
+									</div>
 								</div>
 							</div>
+							<!-- 페이징바! -->
 						</div>
-						<!-- 페이징바! -->
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="app-title"
-			style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
+			<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
 			<h2 class="" id="buttons">
-				<img class="menu-bar-2"
-					src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
-					style="margin-right: 10px;"></img>담긴 시간표
+							<img class="menu-bar-2"
+								src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
+								style="margin-right: 10px;"></img>담긴 시간표
 			</h2>
 		</div>
 		<div class="tile mb-4">
 			<div class="page-header">
-				<div class="row"></div>
+				<div class="row">
+				</div>
 
 				<div id="sampleTable_wrapper"
 					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
-							<div class="dataTables_length" id="sampleTable_length"></div>
+							<div class="dataTables_length" id="sampleTable_length">
+							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
-							<div id="sampleTable_filter" class="dataTables_filter"></div>
+							<div id="sampleTable_filter" class="dataTables_filter">
+							</div>
 						</div>
 
 						<div class="col-sm-12" style="margin-top: 10px">
@@ -251,6 +225,7 @@
 											<th>이수구분</th>
 											<th>강의시간</th>
 											<th>교수명</th>
+											<th>수강신청</th>
 											<th>삭제</th>
 										</tr>
 									</thead>
@@ -266,8 +241,7 @@
 		</div>
 	</main>
 	<div class="modal fade" id="registerDe">
-		<div class="modal-dialog "
-			style="max-width: 100%; width: auto; display: table;">
+		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table;">
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
@@ -281,7 +255,9 @@
 
 				<form action="gradeObjNewPop.obj" method="post">
 					<!-- Modal Body -->
-					<div class="modal-body"></div>
+					<div class="modal-body">
+						
+					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
@@ -291,15 +267,15 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-	  function selectRegList(){ // 여기서부터 장바구니에 맞게 변경해야함..
+	  <script type="text/javascript">
+	  function selectCartRegList(){ //장바구니 리스트 보여주기
 			$.ajax({
-				url:"selectReg.reg",
+				url:"selectCartReg.reg",
 				type:"get",
 				dataType: 'json',
-				success:function(reglist){
+				success:function(cartlist){
 					var value="";
-					$.each(reglist, function(i, obj){
+					$.each(cartlist, function(i, obj){
 						
 							value += "<tr>"+
 									 "<td>" + obj.subject.subCode + "</td>" + 
@@ -316,10 +292,13 @@
 							value +="<td>" + obj.subject.subTime + "</td>" +
 									 "<td>" + obj.professor.profName + "</td>" +
 									 "<th style='padding: 0px; padding-top: 5px'>"+"<button" +
-										" class='btn btn-danger' type='button'"+
-											"style='margin-left: 10px;'>수강취소</button>"+"</th>"+
-									 
-							 		"</tr>";
+										" class='btn btn-primary' type='button'"+
+											"style='margin-left: 10px;'>수강신청</button>"+"</th>"+
+							 		"<th style='padding: 0px; padding-top: 5px'>"+"<button" +
+									" class='btn btn-danger' type='button'"+
+										"style='margin-left: 10px;'>삭제하기</button>"+"</th>"+
+								 
+						 		"</tr>";
 							 		
 						
 					});
@@ -330,9 +309,9 @@
 			        }
 			});
 	  }
-	</script>
+	</script> 
 	<script type="text/javascript">
-		$("#sampleTable1 tbody tr td").click(function() {
+		$("#sampleTable1 tbody tr td").click(function() {//장바구니 상세보기
 			var subCode = $(this).parent().children().eq(0).text();
 			$.ajax({
 				url:"registerDe.reg",
@@ -406,52 +385,117 @@
 			});
 		});
 		
+		function checkRegisterCart(subCode) {//장바구니 체크
+			var check=true;
+			  $.ajax({
+					url:"reCheckCart.reg",
+					type:"post",
+					async: false,
+					data:{subCode:subCode},
+					success:function(lect){
+						if(lect!=null){
+							check=false;
+						}
+					},error:function(){
+						console.log("수강신청 ajax 통신 실패");
+						check=false;
+					}
+				});
+			  return check;
+		}
+		function checkRegister(subCode) {//수강신청 체크
+			var check=true;
+			  $.ajax({
+					url:"reCheck.reg",
+					type:"post",
+					async: false,
+					data:{subCode:subCode},
+					success:function(lect){
+						if(lect!=null){
+							check=false;
+						}
+					},error:function(){
+						console.log("수강신청 과목체크 ajax 통신 실패");
+						check=false;
+					}
+				});
+			  return check;
+		}
+		function checkCredit(subCredit) {//수강신청 학점 체크
+			var check=true;
+			  $.ajax({
+					url:"checkCredit.reg",
+					type:"post",
+					async: false,
+					data:{},
+					success:function(countCredit){
+						
+						if(subCredit==2){
+							if(countCredit>18){
+								check=false;
+							}
+						}else if(subCredit==3){
+							if(countCredit>17){
+								check=false;
+							}
+						}
+					},error:function(){
+						console.log("수강신청 과목체크 ajax 통신 실패");
+						check=false;
+					}
+				});
+			  return check;
+		}
 	</script>
-
+	
 	<script>
 	$(function(){
-		selectRegList();
-	$("#sampleTable1 tbody tr button").click(function() { //수강신청 추가
+		selectCartRegList();
+	});
+	$("#sampleTable1 tbody tr button").click(function() { //장바구니 추가
 		var subCode = $(this).parent().parent().children().eq(0).text();
 		var title = $(this).parent().parent().children().eq(1).text();
-		if(confirm('정말 신청하시겠습니까?')){
-			$.ajax({
-				url:"reInsert.reg",
-				type:"post",
-				data:{subCode:subCode},
-				success:function(result){
-					if(result > 0){
-						$("#registerTable tbody").val("");
-						alert(title+"이 수강신청 되었습니다.");
-						selectRegList();
-						
-					}else{
-						alert("수강신청 실패");
+		if(confirm('장바구니에 추가하겠습니까?')){
+			if(checkRegisterCart(subCode)){
+				$.ajax({
+					url:"reInsertCart.reg",
+					type:"post",
+					async: false, //이렇게 안해주면 무조건 실행... 시바... 
+					data:{subCode:subCode},
+					success:function(result){
+						if(result > 0){
+							$("#registerTable tbody").val("");
+							alert(title+"가 수강신청 되었습니다.");
+							selectCartRegList();
+						}else{
+							alert("수강신청 실패");
+						}
+					},error:function(){
+						console.log("수강신청 ajax 통신 실패");
 					}
-				},error:function(){
-					console.log("수강신청 ajax 통신 실패");
-				}
-			});
-			
+				});
+			}else{
+				alert("이미 장바구니에 담긴 과목입니다.");
+			}
+					
 		}else{
 			alert("수강신청 취소되었습니다.");
 		}
 	});
-	});
-	
 	
 	</script>
 	<script type="text/javascript">
-	$(document).on("click","#registerTable tbody tr button",function(){//수강신청 삭제- 동적테이블 부분이라 클릭이벤트 이렇게 걸음
+	$(document).on("click","#registerTable tbody tr th:nth-last-child(1) button",function(){//수강신청 삭제- 동적테이블 부분이라 클릭이벤트 이렇게 걸음
 		var subCode = $(this).parent().parent().children().eq(0).text();
+		 selectCartRegList();
 			$.ajax({
-				url:"reDelete.reg",
+				url:"reDeleteCart.reg",
 				type:"post",
 				data:{subCode:subCode},
 				success:function(result){
 					if(result > 0){
 						$("#registerTable tbody").val("");
-						selectRegList();
+						selectCartRegList();
 						
 					}else{
 						alert("수강신청 삭제 실패");
@@ -460,6 +504,43 @@
 					console.log("수강신청 삭제 ajax 통신 실패");
 				}
 			}); 
+	});
+	
+	$(document).on("click","#registerTable tbody tr th:nth-last-child(2) button",function(){//장바구니에서 수강신청 추가
+		var subCode = $(this).parent().parent().children().eq(0).text();
+		var title = $(this).parent().parent().children().eq(1).text();
+		var subCredit = $(this).parent().parent().children().eq(3).text();
+		selectCartRegList();
+		if(confirm('수강 신청하시겠습니까?')){
+			if(checkRegister(subCode)){
+				if(checkCredit(subCredit)){
+				$.ajax({
+					url:"reInsert.reg",
+					type:"post",
+					async: false, //이렇게 안해주면 무조건 실행
+					data:{subCode:subCode},
+					success:function(result){
+						if(result > 0){
+							$("#registerTable tbody").val("");
+							alert(title+"가 수강신청 되었습니다.");
+							selectRegList();
+						}else{
+							alert("수강신청 실패");
+						}
+					},error:function(){
+						console.log("수강신청 ajax 통신 실패");
+					}
+				});
+				}else{
+					alert("수강 신청한 과목의 학점이 20학점 초과입니다. 다시한번 확인해 주세요");
+				}
+			}else{
+				alert("이미 수강신청한 과목입니다.");
+			}
+					
+		}else{
+			alert("수강신청 취소되었습니다.");
+		}
 	});
 	
 	</script>

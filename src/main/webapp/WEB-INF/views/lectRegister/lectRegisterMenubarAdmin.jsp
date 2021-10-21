@@ -21,7 +21,7 @@
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
       <li class="registerAdmin">
-         <a class="register-link" href="registerAdmin.reg" style="color: white;">수강신청 관리자</a>
+         <a class="register-link" href="register.reg" style="color: white;">수강신청 학생</a>
 
         </li>
         <!-- User Menu-->
@@ -39,15 +39,12 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
         <div style="margin-left: 10px">
-          <p class="app-sidebar__user-name">John Doe</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+          <p class="app-sidebar__user-name">관리자</p>
+          <p class="app-sidebar__user-designation">관리자 번호?</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="register.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">수강신청</span></a></li>
-        <li><a class="app-menu__item" href="cart.reg" ><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">장바구니</span></a>
-        </li>
-        <li><a class="app-menu__item" href="timeBoard.reg"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">시간표</span></a></li>
+        <li><a class="app-menu__item" href="register.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">과목 관리</span></a></li>
       </ul>
     </aside>
    

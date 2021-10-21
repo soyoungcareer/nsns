@@ -76,6 +76,8 @@ public class GradeController {
 	public String profGradeObjDetail() {
 		return "professor/profGradeObjDetail";
 
+
 	}*/
+
 
 }

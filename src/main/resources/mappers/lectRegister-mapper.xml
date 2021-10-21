@@ -87,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
 		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
 	</select>
-	<select id="lectReDetail"  parameterType="_int" resultMap="LecRegProListSet">
+	<select id="lectReDetail"  parameterType="string" resultMap="LecRegProListSet">
 		SELECT *
 		FROM SUBJECT A
 		JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
@@ -177,4 +177,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 		ORDER BY A.SUB_CODE DESC
 	</select>
+	<select id="checkRegister" parameterType="LectRegister" resultMap="RegisterResultSet">
+		SELECT *
+		FROM LECT_REGISTER
+		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester} AND STATUS='Y'
+	</select>
+	<select id="checkCredit" parameterType="LectRegister" resultType="_int">
+		SELECT SUM(B.SUB_CREDIT)
+		FROM LECT_REGISTER A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		WHERE A.STU_ID=#{stuId} AND A.YEAR=#{year} AND A.SEMESTER=#{semester} AND A.STATUS='Y'
+	</select>
+	<select id="selectRegiCartsterList" parameterType="_int" resultMap="LecRegProListSet2">
+		SELECT B.SUB_CODE, B.SUB_TITLE, D.DEPT_TITLE, B.SUB_DIVS, B.SUB_CREDIT, B.SUB_TIME, C.PROF_NAME
+		FROM LECT_CART A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
+	</select>
+	<insert id="regiInsertCart" parameterType="LectRegister">
+		INSERT INTO LECT_CART
+		values(SEQ_LECT_CART_NO.NEXTVAL, #{subCode}, #{stuId}, #{year}, #{semester}, default)
+	</insert>
+	<select id="checkRegisterCart" parameterType="LectRegister" resultMap="RegisterResultSet">
+		SELECT *
+		FROM LECT_CART
+		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester} AND STATUS='Y'
+	</select>
+	<update id="registerDeleteCart" parameterType="LectRegister">
+		UPDATE LECT_CART
+		SET STATUS='N'
+		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester}
+	</update>
 </mapper>

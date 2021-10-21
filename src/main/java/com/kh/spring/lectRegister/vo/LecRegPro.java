@@ -20,5 +20,6 @@ public class LecRegPro {
 	private Professor professor;
 	private LectRegister lectRegister;
 	private Department department;
+	private int button;// 1: 수강신청 됨, 0: 수강신청 안됨
 	
 }

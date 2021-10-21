@@ -6,8 +6,8 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
-import com.kh.spring.major.vo.Subject;
-import com.kh.spring.notice.vo.PageInfo;
+import com.kh.spring.notice.model.vo.PageInfo;
+
 
 public interface LectRegisterService {
 
@@ -19,7 +19,7 @@ public interface LectRegisterService {
 
 	ArrayList<LecRegPro> selectRegisterList(int stuId);
 
-	LecRegPro lectReDetail(int subCode);
+	LecRegPro lectReDetail(String subCode);
 
 	int regiInsert(String subCode, int stuId);
 
@@ -28,5 +28,18 @@ public interface LectRegisterService {
 	int searchListCount(SearchReg sr);
 
 	ArrayList<LecRegPro> searchLectReList(SearchReg sr, PageInfo pi);
+
+	LectRegister checkRegister(int stuId, String subCode);
+
+	int checkCredit(int stuId);
+
+	ArrayList<LecRegPro> selectRegiCartsterList(int stuId);
+
+	int regiInsertCart(String subCode, int stuId);
+
+	LectRegister checkRegisterCart(int stuId, String subCode);
+
+	int registerDeleteCart(String subCode, int stuId);
+
 
 }
