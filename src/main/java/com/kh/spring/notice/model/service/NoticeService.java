@@ -2,8 +2,8 @@ package com.kh.spring.notice.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.notice.model.vo.Notice;
-import com.kh.spring.notice.model.vo.PageInfo;
 
 public interface NoticeService {
 

@@ -6,10 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.notice.model.dao.NoticeDao;
 import com.kh.spring.notice.model.vo.Notice;
-import com.kh.spring.notice.model.vo.PageInfo;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {

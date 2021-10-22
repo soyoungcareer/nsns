@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.facility.model.dao.FacilityDao;
-import com.kh.spring.facility.model.vo.PageInfoo;
 import com.kh.spring.facility.model.vo.facility;
 
 @Service
@@ -29,7 +29,7 @@ public class FacilityServiceImpl implements FacilityService  {
 
 
 	@Override
-	public ArrayList<facility> selectList(PageInfoo pi) {
+	public ArrayList<facility> selectList(PageInfo pi) {
 		return fd.selectList(sqlSession, pi);
 	}
 

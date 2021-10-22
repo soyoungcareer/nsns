@@ -6,9 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spring.facility.model.vo.PageInfoo;
 import com.kh.spring.facility.model.vo.facility;
-import com.kh.spring.notice.vo.PageInfo;
 
 @Repository
 public class FacilityDao {
@@ -16,9 +14,9 @@ public class FacilityDao {
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		System.out.println("중간지점 2");
 		return sqlSession.selectOne("facilityMapper.selectListCount");
-	}
+		}
 
-	public ArrayList<facility> selectList(SqlSessionTemplate sqlSession, PageInfoo pi) {
+	public ArrayList<facility> selectList(SqlSessionTemplate sqlSession, com.kh.spring.common.PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
