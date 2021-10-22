@@ -6,11 +6,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
-import com.kh.spring.notice.model.vo.PageInfo;
 
 
 

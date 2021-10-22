@@ -1,4 +1,4 @@
-package com.kh.spring.notice.model.vo;
+package com.kh.spring.common;
 
 public class PageInfo {
 	

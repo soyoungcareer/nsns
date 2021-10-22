@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spring.common.PageInfo;
 //import com.kh.spring.attachment.vo.Attachment;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.notice.model.service.NoticeService;
 import com.kh.spring.notice.model.vo.Notice;
-import com.kh.spring.notice.model.vo.PageInfo;
 
 @Controller 
 public class NoticeController {

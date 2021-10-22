@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.GsonBuilder;
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.lectRegister.service.LectRegisterService;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
-import com.kh.spring.notice.model.vo.PageInfo;
 
 
 @Controller

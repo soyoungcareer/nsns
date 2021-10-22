@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.dao.ProfessorDao;
 
+@Service
 public class ProfServiceImpl implements ProfService {
 
 	@Autowired
