@@ -16,7 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profStatus" column="PROF_STATUS" />
 		<result property="profEmpdate" column="PROF_EMPDATE" />
 	</resultMap>
-	
+	<resultMap id="LectAttachmentSet" type="LectAttachment">
+		<id property="subCode" column="SUB_CODE" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
+	</resultMap>
 	<resultMap id="subjectListSet" type="Subject">
 		<id property="subCode" column="SUB_CODE" />
 		<result property="subTitle" column="SUB_TITLE" />
@@ -33,9 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<resultMap id="LecRegProListSet" type="LecRegPro">
+		<id property="evaluation" column="SCORE" />
 		<collection property="subject" resultMap="subjectListSet"/>
 		<collection property="professor" resultMap="professorSet"/>
 		<collection property="department" resultMap="departListSet"/>
+		<collection property="attachment" resultMap="LectAttachmentSet"/>
 	</resultMap>
 	
 	<resultMap id="LecRegProListSet2" type="LecRegPro">
@@ -80,18 +86,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY DEPT_CODE
 	</select>
 	<select id="selectRegisterList" parameterType="_int" resultMap="LecRegProListSet2">
-		SELECT B.SUB_CODE, B.SUB_TITLE, D.DEPT_TITLE, B.SUB_DIVS, B.SUB_CREDIT, B.SUB_TIME, C.PROF_NAME
+		SELECT *
 		FROM LECT_REGISTER A
-		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
-		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
-		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		LEFT JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		LEFT JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		LEFT JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
 		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
 	</select>
 	<select id="lectReDetail"  parameterType="string" resultMap="LecRegProListSet">
-		SELECT *
+		SELECT A.*, B.PROF_ID, B.PROF_NAME, C.DEPT_CODE, C.DEPT_TITLE, D.ORIGIN_NAME, D.CHANGE_NAME, Q.*
 		FROM SUBJECT A
-		JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
-		JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
+		LEFT JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
+		LEFT JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
+		LEFT JOIN LECT_ATTACHMENT D ON A.SUB_CODE=D.SUB_CODE
+		left join (SELECT s.SUB_CODE, avg(le.SCORE) as "SCORE"
+                FROM SUBJECT s
+                JOIN LECT_REGISTER lr ON s.SUB_CODE=lr.SUB_CODE
+                JOIN LECT_EVALUATE le ON lr.LECT_REG_NO=le.LECT_REG_NO
+                group by s.SUB_CODE)Q on A.SUB_CODE=Q.SUB_CODE
 		WHERE A.SUB_CODE=#{subCode} AND A.STATUS = 'Y'
 	</select>
 	<insert id="regiInsert" parameterType="LectRegister">
@@ -182,7 +194,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM LECT_REGISTER
 		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester} AND STATUS='Y'
 	</select>
-	<select id="checkCredit" parameterType="LectRegister" resultType="_int">
+	<select id="checkCredit" parameterType="LectRegister" resultType="Integer">
 		SELECT SUM(B.SUB_CREDIT)
 		FROM LECT_REGISTER A
 		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
@@ -210,4 +222,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET STATUS='N'
 		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester}
 	</update>
+	<select id="timeBoardList" parameterType="LectRegister" resultMap="LecRegProListSet">
+		SELECT *
+		FROM LECT_REGISTER A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		WHERE A.STU_ID=#{stuId} AND A.YEAR=#{year} AND A.SEMESTER=#{semester} AND A.STATUS='Y'
+	</select>
+	<update id="InsertCredit" parameterType="LectRegister">
+		UPDATE STUDENT C
+		SET C.STU_CREDIT=C.STU_CREDIT+(SELECT a.SUB_CREDIT
+									FROM SUBJECT a
+									JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
+									WHERE b.SUB_CODE=#{subCode} AND b.STU_ID=#{stuId} AND b.YEAR=#{year} AND b.SEMESTER=#{semester})
+		WHERE C.STU_ID=#{stuId}
+	</update>
+	<update id="deleteCredit" parameterType="LectRegister">
+		UPDATE STUDENT C
+		SET C.STU_CREDIT=C.STU_CREDIT-(SELECT a.SUB_CREDIT
+									FROM SUBJECT a
+									JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
+									WHERE b.SUB_CODE=#{subCode} AND b.STU_ID=#{stuId} AND b.YEAR=#{year} AND b.SEMESTER=#{semester})
+		WHERE C.STU_ID=#{stuId}
+	</update>
+	<select id="proList" resultMap="professorSet">
+		SELECT PROF_NAME, PROF_ID
+		FROM PROFESSOR
+		WHERE PROF_STATUS='Y'
+		ORDER BY PROF_NAME
+	</select>
 </mapper>

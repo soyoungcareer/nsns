@@ -16,13 +16,13 @@
   <body class="app sidebar-mini">
   <!-- 추가 -->
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">낙성대학교</a>
+    <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
       <li class="registerAdmin">
-         <a class="register-link" href="registerAdmin.reg" style="color: white;">수강신청 관리자</a>
-
+         <a class="register-link" href="registerAdmin.reg" style="color: white;">수강신청 관리자</a> &nbsp;&nbsp;&nbsp;
+			<a class="register-link" href="grade.gra" style="color: white;">학생 페이지-성적조회</a>
         </li>
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>

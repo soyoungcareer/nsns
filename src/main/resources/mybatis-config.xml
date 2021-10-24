@@ -20,7 +20,7 @@
 			 <typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
 			 <typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
 			 <typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
-
+			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
 	</typeAliases>
 
 
