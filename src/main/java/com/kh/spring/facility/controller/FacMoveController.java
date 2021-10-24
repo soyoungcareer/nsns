@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.facility.model.Service.FacilityService;
 import com.kh.spring.facility.model.vo.facility;
+import com.kh.spring.facility.model.vo.facilitycheck;
+import com.kh.spring.facility.model.vo.searchFac;
 
 @Controller
 public class FacMoveController {
@@ -43,6 +46,28 @@ public class FacMoveController {
 		model.addAttribute("pi", pi);
 
 		return "facility/fac_main";
+	}
+
+	@RequestMapping("facMovessss.me")
+	public String facadminMain(
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
+			@RequestParam(value = "msg", required = false) String msg) {
+
+		int listCount = fs.selectListCount();
+		System.out.println("리스트확인 테스트 " + listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+		ArrayList<facility> list = fs.selectList(pi);
+		System.out.println(list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+
+		if (msg != null) {
+			model.addAttribute("msg", msg);
+		}
+
+		return "facility/fac_admin_main";
 	}
 
 	@RequestMapping("facMovess.me")
@@ -90,16 +115,27 @@ public class FacMoveController {
 	}
 
 	@RequestMapping("facMovesss.me")
-	public String facCheck() {
+	public String facCheck(@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+			Model model) {
+
+		int listCount = fs.selectListAppCount();
+		System.out.println("리스트확인 테스트 " + listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+		ArrayList<facilitycheck> list = fs.selectAppList(pi);
+		System.out.println(list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		System.out.println("김경준 김경준 도배@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + list);
+
 		return "facility/fac_check";
 	}
 
 	@RequestMapping("facpl.me")
 	public String insertFacility(facility f, HttpServletRequest request, Model model,
 			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
-
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + f);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + file);
 
 		if (!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
@@ -112,6 +148,69 @@ public class FacMoveController {
 		}
 
 		fs.insertFacility(f);
+
+		return "redirect:facMove.me";
+
+	}
+
+	@RequestMapping("facMovecate.me")
+	public String selectCateList(
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
+			@RequestParam(name = "cate1", required = false) String cate1,
+			@RequestParam(name = "cate2", required = false) String cate2) {
+
+		searchFac sf = new searchFac();
+		sf.setCate1(cate1);
+		sf.setCate2(cate2);
+
+		System.out.println("!@!@$!@$!%$#^#%" + cate1 + cate2);
+		int listCount = fs.selectListCount(sf);
+		System.out.println("리스트확인 테스트 @@@@@" + listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+		ArrayList<facility> list = fs.selectList(sf, pi);
+		System.out.println("김경준의 체크링스트 @@@@@@@@@@@@@" + list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+
+		return "facility/fac_main";
+
+	}
+
+	@RequestMapping("facdel.me")
+	public String selectfacdel(Model model, String no, @RequestParam(value = "hiddenNO") int hiddenNo,
+			RedirectAttributes redirect) {
+
+		System.out.println(hiddenNo);
+
+		fs.selectfacdel(hiddenNo);
+
+		redirect.addAttribute("msg", "삭제되었습니다");
+
+		return "redirect:facMovessss.me";
+
+	}
+
+	@RequestMapping("facapp.me")
+	public String facApp(@RequestParam(value = "area") String area, @RequestParam(value = "userId") String userId,
+			@RequestParam(value = "hiddenNO") String hiddenNO, Model model) {
+
+		searchFac sf = new searchFac();
+		sf.setCate1(area);
+		sf.setCate2(userId);
+		sf.setCate3(hiddenNO);
+		sf.setCate4("예약중");
+
+		System.out.println(area);
+		System.out.println(userId);
+		System.out.println(hiddenNO);
+		int result = fs.facApp(sf);
+
+		if (result <= 0) {
+			model.addAttribute("msg", "예약대기중입니다.");
+			return "redirect:FacMove.me";
+		}
 
 		return "redirect:facMove.me";
 

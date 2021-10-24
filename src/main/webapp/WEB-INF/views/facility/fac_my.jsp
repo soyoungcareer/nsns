@@ -40,6 +40,8 @@
 					onclick="location.href='facMovess.me'">MY대여</button>
 				<button class="btn btn-primary" type="button"
 					onclick="location.href='facMovesss.me'">관리자 확인</button>
+			<button class="btn btn-primary" type="button"
+				onclick="location.href='facMovessss.me'">관리 목록</button>
 
 				<p></p>
 			</div>

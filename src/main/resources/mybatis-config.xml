@@ -12,7 +12,7 @@
 	     <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
 		 <typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
 		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentDo" alias="StudentDo"/>
-		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/>
+		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/> 
 	 	 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentStatus" alias="StudentStatus"/>
          <typeAlias type="com.kh.spring.lectRegister.vo.LectRegister" alias="LectRegister"/>
 		 <typeAlias type="com.kh.spring.major.vo.Subject" alias="Subject"/>
@@ -24,6 +24,9 @@
      			 <typeAlias type="com.kh.spring.consult.model.vo.Consult" alias="Consult"/>
     		 	 <typeAlias type="com.kh.spring.consult.model.vo.ConsultStatus" alias="ConsultStatus"/>
     			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
+    			 <typeAlias type="com.kh.spring.facility.model.vo.searchFac" alias="SearchFac"/>
+			 <typeAlias type="com.kh.spring.facility.model.vo.facilitycheck" alias="FacilityCheck"/>
+
 
 	</typeAliases>
 

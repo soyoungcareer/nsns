@@ -15,9 +15,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="facDate" column="FAC_DATE" />
 		<result property="fileBName" column="ORIGIN_NAME" />
 		<result property="fileFName" column="CHANGE_NAME" />
+		<result property="fac_cat" column="CATEGORY" />
+	</resultMap>
 
+
+	<resultMap id="facilityCheckResultSet" type="facilitycheck">
+		<id property="facNo" column="FAC_NO" />
+		<result property="stuId" column="STU_ID" />
+		<result property="facName" column="FAC_NAME" />
+		<result property="facContent" column="FAC_REASON" />
+		<result property="stuName" column="STU_NAME" />
+		<result property="stuTitle" column="DEPT_TITLE" />
 
 	</resultMap>
+
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT (*)
 		FROM
@@ -35,7 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-	<select id="selectFacility" parameterType="_int" resultMap="facilityResultSet">
+	<select id="selectFacility" parameterType="_int"
+		resultMap="facilityResultSet">
 		SELECT * FROM FACILITY
 		WHERE FAC_NO = #{no}
 
@@ -44,9 +56,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="inserFacility" parameterType="facility">
 		INSERT INTO FACILITY
 		VALUES(SEQ_FAC_NO.NEXTVAL,NULL, #{facName}, DEFAULT,
-		NULL,NULL, DEFAULT,#{fileBName},#{fileFName}
+		NULL,NULL,
+		DEFAULT,#{fileBName},#{fileFName},#{fac_cat}
 		)
 	</insert>
+
+
+	<select id="selectListCountse" resultType="_int"
+		parameterType="SearchFac">
+		SELECT COUNT(*)
+		FROM FACILITY
+		<choose>
+			<when test='cate1.equals("선택") and cate2.equals("선택") '>
+			</when>
+			<when test='!cate1.equals("선택")  and cate2.equals("선택") '>
+				WHERE CATEGORY=#{cate1}
+			</when>
+			<when test='cate1.equals("선택")  and !cate2.equals("선택") '>
+				WHERE FAC_STATUS=#{cate2}
+			</when>
+			<when test='!cate1.equals("선택")  and !cate2.equals("선택") '>
+				WHERE CATEGORY=#{cate1}
+				AND FAC_STATUS=#{cate2}
+			</when>
+		</choose>
+	</select>
+
+
+	<select id="selectListse" parameterType="SearchFac"
+		resultMap="facilityResultSet">
+		SELECT *
+		FROM FACILITY
+		<choose>
+			<when test='cate1.equals("선택") and cate2.equals("선택") '>
+			</when>
+			<when test='!cate1.equals("선택")  and cate2.equals("선택") '>
+				WHERE CATEGORY=#{cate1}
+			</when>
+			<when test='cate1.equals("선택")  and !cate2.equals("선택") '>
+				WHERE FAC_STATUS=#{cate2}
+			</when>
+			<when test='!cate1.equals("선택")  and !cate2.equals("선택") '>
+				WHERE CATEGORY=#{cate1}
+				AND FAC_STATUS=#{cate2}
+			</when>
+		</choose>
+	</select>
+
+
+
+	<delete id="deleteFac" parameterType="_int">
+		DELETE FROM FACILITY WHERE
+		FAC_NO=#{hidden}
+
+
+
+
+	</delete>
+
+	<update id="facApp" parameterType="SearchFac">
+		UPDATE FACILITY SET
+		FAC_REASON=#{cate1}, STU_ID=#{cate2}, FAC_STATUS=#{cate4} WHERE
+		FAC_NO=#{cate3}
+
+
+	</update>
+
+
+	<select id="selectListAppCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM
+		FACILITY
+		WHERE FAC_STATUS='예약중'
+	</select>
+
+
+	<select id="selectAppList" resultMap="facilityCheckResultSet">
+	SELECT A.FAC_NO,A.STU_ID, A.FAC_NAME, A.FAC_REASON,B.STU_NAME, C.DEPT_TITLE
+FROM FACILITY A
+JOIN STUDENT B ON A.STU_ID = B.STU_ID
+JOIN DEPARTMENT C ON B.DEPT_CODE = C.DEPT_CODE
+WHERE FAC_STATUS =  '예약중'
+	</select>
+
+
 
 
 </mapper>

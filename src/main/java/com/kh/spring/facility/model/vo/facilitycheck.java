@@ -13,17 +13,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class facility {
+public class facilitycheck {
 	
 	private int facNo;
 	private String stuId;
 	private String facName;
-	private String facStatus;
-	private String facReason;
-	private Date facPeriod;
-	private Date facDate;
-	private String fileBName;
-	private String fileFName;
-	private String fac_cat;
+	private String facContent;
+	private String stuName;
+	private String stuTitle;
+	
 
+	
 }
