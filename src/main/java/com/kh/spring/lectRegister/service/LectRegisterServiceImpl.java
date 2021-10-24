@@ -14,6 +14,7 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.member.vo.Professor;
 
 
 
@@ -73,7 +74,7 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 			re.setSemester(2);
 		}
 		int result= lectRegisterDao.regiInsert(sqlSession,re);// 등록
-		
+		lectRegisterDao.InsertCredit(sqlSession,re);// 학생 학점 추가
 		return result;
 	}
 
@@ -99,7 +100,7 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 			re.setSemester(2);
 		}
 		int result= lectRegisterDao.registerDelete(sqlSession,re);// 삭제
-		
+		lectRegisterDao.deleteCredit(sqlSession,re);// 학생 학점 삭제
 		return result;
 	}
 
@@ -138,7 +139,7 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 	}
 
 	@Override
-	public int checkCredit(int stuId) {
+	public Integer checkCredit(int stuId) {
 		LectRegister re = new LectRegister();
 		re.setStuId(stuId);
 		SimpleDateFormat format = new SimpleDateFormat ( "yyyy");
@@ -238,6 +239,34 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 		int result= lectRegisterDao.registerDeleteCart(sqlSession,re);// 장바구니삭제
 		
 		return result;
+	}
+
+	@Override
+	public ArrayList<LecRegPro> timeBoardList(int stuId) {
+		LectRegister re = new LectRegister();
+		re.setStuId(stuId);
+		
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy");
+		Date date = new Date ( );
+		String year = format.format (date);
+		int neyear = Integer.parseInt(year);
+		re.setYear(neyear);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat ( "MM");
+		Date date2 = new Date ( );
+		String mon = format2.format (date2);
+		int nemon = Integer.parseInt(mon);
+		if(nemon<9&&nemon>2) {
+			re.setSemester(1);
+		}else {
+			re.setSemester(2);
+		}
+		return lectRegisterDao.timeBoardList(sqlSession, re);
+	}
+
+	@Override
+	public ArrayList<Professor> proList() {
+		return lectRegisterDao.proList(sqlSession);
 	}
 
 }

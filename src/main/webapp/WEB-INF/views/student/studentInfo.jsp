@@ -39,7 +39,7 @@
           <div class="tab-content">
               <div class="tile user-settings">
                 <h4 class="line-head" style="color:gray;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 학생의 개인정보 수정은 이메일, 전화번호, 주소만  가능합니다.</i></h4>
-                <form action="updateStudent.stu" method="post">
+                <form action="updateStudent.stu" method="post" id="studentInfoForm">
                   <div class="row mb-4">
                     <div class="col-md-3">
                       <label>이름</label>
@@ -114,4 +114,11 @@
    
 
   </body>
+  <script>
+	//전화번호 자동 (-) 추가
+	$("#studentInfoForm input[name=phone]").on("keyup", function() { 
+	    $(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-")); 
+	 });
+  
+  </script>
 </html>

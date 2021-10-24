@@ -16,7 +16,7 @@
   <body class="app sidebar-mini">
   <!-- 추가 -->
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">낙성대학교</a>
+    <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -44,7 +44,7 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="register.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">과목 관리</span></a></li>
+        <li><a class="app-menu__item" href="registerAdmin.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">과목 관리</span></a></li>
       </ul>
     </aside>
    

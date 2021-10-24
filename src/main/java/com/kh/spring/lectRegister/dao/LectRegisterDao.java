@@ -11,6 +11,7 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.member.vo.Professor;
 
 
 
@@ -61,7 +62,7 @@ public class LectRegisterDao {
 		return sqlSession.selectOne("lectRegisterMapper.checkRegister", re);
 	}
 
-	public int checkCredit(SqlSessionTemplate sqlSession, LectRegister re) {
+	public Integer checkCredit(SqlSessionTemplate sqlSession, LectRegister re) {
 		return sqlSession.selectOne("lectRegisterMapper.checkCredit", re);
 	}
 
@@ -79,6 +80,24 @@ public class LectRegisterDao {
 
 	public int registerDeleteCart(SqlSessionTemplate sqlSession, LectRegister re) {
 		return sqlSession.update("lectRegisterMapper.registerDeleteCart", re);
+	}
+
+	public ArrayList<LecRegPro> timeBoardList(SqlSessionTemplate sqlSession, LectRegister re) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.timeBoardList", re);
+	}
+
+	public void InsertCredit(SqlSessionTemplate sqlSession, LectRegister re) {
+		sqlSession.update("lectRegisterMapper.InsertCredit", re);
+		
+	}
+
+	public void deleteCredit(SqlSessionTemplate sqlSession, LectRegister re) {
+		sqlSession.update("lectRegisterMapper.deleteCredit", re);
+		
+	}
+
+	public ArrayList<Professor> proList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.proList");
 	}
 
 

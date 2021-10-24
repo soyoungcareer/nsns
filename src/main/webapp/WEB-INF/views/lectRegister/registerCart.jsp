@@ -16,7 +16,7 @@
 			<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
+				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
 			</ul>
 		</div>
 		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
@@ -338,7 +338,6 @@
 							'</div>'+
 							'<label class="control-label col-md-2">이수구분</label>'+
 							'<div class="col-md-4">'
-					
 									if(reDetail.subject.subDivs==1){
 					value +='<input class="form-control col-md-12" type="text" disabled value="전공필수">'
 			                      }else{
@@ -365,18 +364,38 @@
 				        value +='<input class="form-control col-md-12" type="text" disabled value="온라인 강의">'
 				              }
 						value +='</div>'+
-							'<label class="control-label col-md-2">학점</label>'+
+							'<label class="control-label col-md-2">학과</label>'+
 							'<div class="col-md-4">'+
-							'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subCredit+'">'+
+							'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.department.deptTitle+'">'+
 							'</div>'+
 							'</div>'+
 							'<div class="form-group row">' +
-							'<label class="control-label col-md-2">강의 상세 계획서</label>'+
-							'<div class="col-md-10">'+
-								'<input class="form-control col-md-12" type="text" disabled value="나중에 파일 연결 필요" style="color:red;">'+
+							'<label class="control-label col-md-2">평점</label>'+
+							'<div class="col-md-4">'
+								if(reDetail.evaluation==0){
+								value +='<input class="form-control col-md-12" type="text" disabled value="평가 점수가 없습니다." style="color:red;">'
+						                      }else{
+						        value +='<input class="form-control col-md-12" type="text" disabled value="'+reDetail.evaluation+' / 5.0" style="color:red;">'
+						              }
+								value +='</div>'+
+							'<label class="control-label col-md-2">학점</label>'+
+							'<div class="col-md-4">'+
+							'<input class="form-control col-md-12" type="text" disabled value="'+reDetail.subject.subCredit+'  학점">'+
 							'</div>'+
+							'</div>'+
+							
+							'<div class="form-group row">' +
+							'<label class="control-label col-md-2">계획서</label>'+
+							'<div class="col-md-10">'
+								
+								 if(reDetail.attachment.originName!=""&&typeof reDetail.attachment.originName != "undefined" ){
+						value += '<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/'+reDetail.attachment.originName+'"'+
+		                        												'download='+reDetail.attachment.originName+'>'+reDetail.attachment.originName+'</a>'
+								 }else{
+							value +='<input class="form-control col-md-12" type="text" disabled value="첨부파일이 없습니다." style="color:red;">'
+								 } 
+							value +='</div>'+
 							'</div>'
-							/*나중에 파일 연결 필요!! a 태그로 다운로드 되도록 설정 필요*/
 					$(".modal-body").html(value);
 				},
 			     error:function(){
@@ -465,7 +484,7 @@
 					success:function(result){
 						if(result > 0){
 							$("#registerTable tbody").val("");
-							alert(title+"가 수강신청 되었습니다.");
+							alert(title+"가 장바구니에 추가 되었습니다.");
 							selectCartRegList();
 						}else{
 							alert("수강신청 실패");
