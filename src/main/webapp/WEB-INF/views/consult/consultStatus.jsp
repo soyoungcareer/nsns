@@ -54,19 +54,13 @@
 				<thead>
 						<tr>
 							<th>상담번호</th>
-							<th>신청내역</th>
 							<th>신청현황</th>
 							<th>상담현황</th>
 						</tr>
 					</thead>
 					
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>일반상담</td>
-							<td>교수 승인 대기중</td>
-							<td>진행중</td>
-						</tr>
+						
 					</tbody>
 			</table>
 				
@@ -76,7 +70,7 @@
         </div>
     </main>
     
-    <div class="modal fade" id="layerpop">
+     <div class="modal fade" id="sampleModalPopup" role="dialog" tabindex="-1">
 			<div class="modal-dialog modal-md">
 					<div class="modal-content">
 					<!-- Modal Header -->
@@ -86,56 +80,9 @@
 					</div>
 
 	               <!-- Modal Body -->
-	               <div class="modal-body">
-	                   <div class="form-group row">
-	                  <label class="control-label col-md-3">상담구분</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="진로" readonly>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">희망날짜</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="2021/09/30" readonly>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">상담사유</label>
-	                  <div class="col-md-8">
-	                    <textarea class="form-control" rows="4">현재상태로 취업이 가능한지 궁금합니다.</textarea>
-	                  </div>
-	                </div>
-                
-	                <div class="form-group row">
-					     <table class="table table-bordered " id="consultStatus" style="margin-top:10px;">
-								<thead>
-									<tr>
-										<th>신청현황</th>
-										<th>기타</th>
-									</tr>
-								</thead>
+	               <div class="modal-body" id="sampleModalBody">
+	              
 								
-								<tbody>
-								
-									<tr>
-										<td>반려</td>
-										<td>교수님 바빠서 시간안된다.</td>
-									</tr>
-									
-									<tr>
-										<td>승인</td>
-										<td></td>
-									</tr>
-									
-									<tr>
-										<td>교수 승인 대기중</td>
-										<td><button class="btn btn-danger btn-sm" type="button">신청취소</button></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
 	               </div>
 				  <!-- Modal footer -->
 						<div class="modal-footer">
@@ -147,9 +94,104 @@
 		</div>
     
          
-	<script>    		
+	<script>
+			$(function(){
+				$.ajax({
+					url: "conStsPro.con",
+					dataType:"json",
+					success: function(list){
+						console.log(list);
+						var str = '';
+						
+						if(list.length != 0){
+							$.each(list, function(i){
+								str += '<tr>'+'<td>'+
+								list[i].conNo + '</td><td>'+
+								list[i].conProcess + '</td><td>'+
+								list[i].conCompleted + '</td>'
+								 + '</tr>'
+		          				
+		   					});
+							
+						} 
+						
+						$("#consultTable tbody").append(str); 
+					},
+					error:function(){
+						console.log("Ajax 통신 실패");
+					}
+				});
+			});
+	
+	
+	
     		$(document).on("click", "#consultTable >tbody > tr >td", function(event) {
-    			$('div.modal').modal();
+    			
+    			let conNo = $(this).parent().children().eq(0).text(); 
+    			let conPro = $(this).parent().children().eq(1).text(); 
+    			
+    		
+    				
+    				$.ajax({
+    					url: "selectCon.con",
+    					dataType:"json",
+    					data : { conNo :conNo },
+    					
+    					success: function(obj){
+    						
+    						var str1 = '';
+    						
+    						var str2 =	'<div class="form-group row">'
+    									+ '<table class="table table-bordered " id="consultStatus" style="margin-top:10px;">'
+										+ '<thead><tr><th>신청현황</th><th>기타</th></tr></thead>'
+									
+    									
+    					if(obj != null) {
+    						
+							str1 +=  '<div class="form-group row"> <label class="control-label col-md-3">상담구분</label>'+'<div class="col-md-5">'
+								+ '<input class="form-control" type="text" value="'+ obj.conCategory  +'" readonly>'+'</div>'+'</div>'
+								+ '<div class="form-group row">  <label class="control-label col-md-3">희망날짜</label>' + '<div class="col-md-5">'
+								+ '<input class="form-control" type="text" value="'+ obj.conDate  +'" readonly>'+'</div>'+'</div>'
+								+ '<div class="form-group row">' + '<label class="control-label col-md-3">상담사유</label>' + '<div class="col-md-8">'
+								+ '<textarea class="form-control" rows="4" readonly>'+obj.conReason+'</textarea>'+'</div>'+'</div>'
+    								
+    							
+    								if(conPro == '교수승인대기중'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+"교수 승인 대기중" + '</td><td>'
+    									+'<button class="btn btn-danger btn-sm" type="button">신청취소</button>' + '</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    		              				
+    								} else if(stsPro == '승인완료'){
+    									str2 += '<tbody> <tr>'+'<td>'+
+    										+ "승인 완료" + '</td><td>'
+    										+ '</td>'
+    		              					+ '</tr>'+'</tbody> </table> </div>'
+    		    						
+    								} else if(stsPro == '반려'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+ "반려" + '</td><td>'+obj.rejectReason
+    									+ '</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    								}
+    								
+    					} else {
+							
+							str += '<tr>'
+								+  '<th colspan="3" style="text-align:center">' + "조회되는 신청 내역이 없습니다." +'</th></tr>'
+									
+										
+						}
+										
+							$('#sampleModalBody').html(str1+str2);
+    				
+    					},
+    					error:function(){
+    						console.log("Ajax 통신 실패");
+    					}
+    				});
+    				$("#sampleModalPopup").modal();
+    				
     		});
     </script>
     

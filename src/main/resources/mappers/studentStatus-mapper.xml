@@ -9,7 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="stsCategory" column="STS_CATEGORY"/>
 		<result property="stsComplete" column="STS_COMPLETE"/>
 		<result property="status" column="STATUS"/>
-		<result property="applicationNo" column="APPLICATION_NO"/>
+		<result property="applicationNo" column="APPLICATION_NO_OFF"/>
+		<result property="applicationNo" column="APPLICATION_NO_DO"/>
 	</resultMap>
 	
 	<resultMap id="studentOffResultMap" type="StudentOff">
@@ -23,19 +24,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 	</resultMap>
 	
+	<resultMap id="studentDoResultMap" type="StudentDo">
+		<result property="applicationNo" column="APPLICATION_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="doDate" column="DO_DATE" javaType="java.sql.Date"/>
+		<result property="doReason" column="DO_REASON"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
 	
-	<select id="studentProList" resultMap="studentStatusResultMap">
-		SELECT * 
+	
+	<select id="studentProList" resultMap="studentStatusResultMap" parameterType="string">
+		SELECT STU_STATUS_PRO.STS_PROCESS, STU_STATUS_PRO.STS_CATEGORY, STU_STATUS_PRO.STS_COMPLETE, STU_STATUS_PRO.STATUS, APPLICATION_NO_OFF,APPLICATION_NO_DO
 		FROM STU_STATUS_PRO
-		WHERE STATUS = 'Y'
+		LEFT JOIN STU_OFF ON STU_STATUS_PRO.APPLICATION_NO_OFF = STU_OFF.APPLICATION_NO
+		LEFT JOIN STU_DO ON STU_STATUS_PRO.APPLICATION_NO_DO = STU_DO.APPLICATION_NO
+		WHERE  STU_STATUS_PRO.STATUS = 'Y'
+		AND (STU_OFF.STU_ID = #{stuId} OR STU_DO.STU_ID = #{stuId})
 	</select>
 	
-	<select id="studentOff" resultMap="studentOffResultMap">
+	<select id="selectStuOff" resultMap="studentOffResultMap" parameterType="_int">
 		SELECT * 
 		FROM STU_OFF
 		WHERE STATUS = 'Y'
+		AND APPLICATION_NO=#{appNo}
 	</select>
 	
+	<select id="selectStuDo" resultMap="studentDoResultMap" parameterType="_int">
+		SELECT * 
+		FROM STU_DO
+		WHERE STATUS = 'Y'
+		AND APPLICATION_NO=#{appNo}
+	</select>
+	
+	<insert id="insertStuOff" parameterType="StudentOff">
+		INSERT INTO STU_OFF 
+		VALUES(SEQ_APPLICATION_NO.NEXTVAL, #{stuId}, #{offCategory}, SYSDATE, #{offSemCnt},  #{offSem},  #{offReason}, DEFAULT)
+	</insert>
+	
+	<insert id="insertStsOff">
+		INSERT INTO STU_STATUS_PRO 
+		(STS_NO, STS_PROCESS, STS_COMPLETE, STS_CATEGORY, STATUS, APPLICATION_NO_OFF)
+		VALUES(SEQ_STS_NO.NEXTVAL, DEFAULT, DEFAULT, '휴학', DEFAULT, SEQ_APPLICATION_NO.CURRVAL)
+	</insert>
+	
+	<insert id="insertStuDo"  parameterType="StudentDo">
+		INSERT INTO STU_DO 
+		VALUES(SEQ_APPLICATION_NO.NEXTVAL, #{stuId}, SYSDATE, #{doReason}, DEFAULT)
+	</insert>
+	
+	<insert id="insertStsDo">
+		INSERT INTO STU_STATUS_PRO
+		(STS_NO, STS_PROCESS, STS_COMPLETE, STS_CATEGORY, STATUS, APPLICATION_NO_DO)
+		VALUES(SEQ_STS_NO.NEXTVAL, DEFAULT, DEFAULT,'자퇴', DEFAULT, SEQ_APPLICATION_NO.CURRVAL)
+	</insert>
+	
+	<select id="selectOffCount" resultType="_int"  parameterType="string">
+		SELECT COUNT(*)
+		FROM STU_STATUS_PRO
+        LEFT JOIN STU_OFF ON STU_STATUS_PRO.APPLICATION_NO_OFF = STU_OFF.APPLICATION_NO
+		WHERE  STU_STATUS_PRO.STATUS = 'Y'
+		AND STU_OFF.STU_ID = #{stuId} 
+		AND STS_COMPLETE LIKE '처리중'
+	</select>
+	
+	<select id="selectDoCount" resultType="_int"  parameterType="string">
+		SELECT COUNT(*)
+		FROM STU_STATUS_PRO
+        LEFT JOIN STU_DO ON STU_STATUS_PRO.APPLICATION_NO_DO = STU_DO.APPLICATION_NO
+		WHERE  STU_STATUS_PRO.STATUS = 'Y'
+		AND STU_DO.STU_ID = #{stuId}  
+		AND STS_COMPLETE LIKE '처리중'
+	</select>
+	
+	<update id="deleteOff"  parameterType="_int">
+		UPDATE STU_OFF
+		SET STATUS= 'N'
+		WHERE APPLICATION_NO =  #{appNo}
+	</update>
+	
+	<update id="deleteStsOff"  parameterType="_int">
+		UPDATE STU_STATUS_PRO
+		SET STATUS= 'N'
+		WHERE APPLICATION_NO_OFF =  #{appNo}
+	</update>
+	
+	<update id="deleteDo"  parameterType="_int">
+		UPDATE STU_DO
+		SET STATUS= 'N'
+		WHERE APPLICATION_NO =  #{appNo}
+	</update>
+	
+	<update id="deleteStsDo"  parameterType="_int">
+		UPDATE STU_STATUS_PRO
+		SET STATUS= 'N'
+		WHERE APPLICATION_NO_DO =  #{appNo}
+	</update>
 	
 	
 </mapper>
