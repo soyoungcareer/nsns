@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.facility.model.dao.FacilityDao;
 import com.kh.spring.facility.model.vo.facility;
+import com.kh.spring.facility.model.vo.facilitycheck;
+import com.kh.spring.facility.model.vo.searchFac;
 
 @Service
 public class FacilityServiceImpl implements FacilityService  {
@@ -44,13 +46,62 @@ public class FacilityServiceImpl implements FacilityService  {
 
 	@Override
 	public void insertFacility(facility f) {
-		System.out.println("ASDASDASDAGdfgjffiejgiewjfiwjfwiewgheuirfejewohfeowlk");
 		
 		int result = fd.insertFacility(sqlSession,f);
 		
 		
 		
 	}
+
+
+	@Override
+	public int selectListCount(searchFac sf) {
+
+		return fd.selectListCount(sqlSession,sf);
+	}
+
+
+	@Override
+	public ArrayList<facility> selectList(searchFac sf, PageInfo pi) {
+		// TODO Auto-generated method stub
+		
+		return fd.selectList(sqlSession,sf,pi);
+	}
+
+
+	@Override
+	public void selectfacdel(int hiddenNo) {
+		
+		
+		int result = fd.selectfacdel(sqlSession, hiddenNo);
+	}
+
+
+	@Override
+	public int facApp(searchFac sf) {
+		
+		
+		int result = fd.facApp(sqlSession, sf);
+		
+		return result;
+		
+	}
+
+
+	@Override
+	public int selectListAppCount() {
+		// TODO Auto-generated method stub
+		return fd.selectListAppCount(sqlSession);
+
+	}
+
+
+	@Override
+	public ArrayList<facilitycheck> selectAppList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return fd.selectAppList(sqlSession, pi);
+	}
+
 
 
 

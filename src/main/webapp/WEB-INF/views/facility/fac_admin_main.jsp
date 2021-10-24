@@ -31,6 +31,7 @@
 
 <jsp:include page="../../views/menubar.jsp" />
 
+
 <main class="app-content">
 	<div class="app-title">
 
@@ -83,6 +84,7 @@
 
 			<c:remove var="msg" scope="session" />
 		</c:if>
+
 
 		<div class="col-md-12">
 			<div class="tile">
@@ -155,6 +157,7 @@
 							</c:choose>
 						</ul>
 
+						<a data-toggle="modal" data-target="#loginModal"><button>추가</button></a>
 
 
 					</div>
@@ -185,7 +188,9 @@
 											console.log("배열에 담긴 값 : " + tdArr);
 											// td.eq(index)를 통해 값을 가져올 수도 있다.
 											var no = td.eq(0).text();
+
 											$('#hiddenNo').attr('value', no);
+
 											console.log(no);
 											$
 													.ajax({
@@ -233,31 +238,28 @@
 							<div class="modal-content">
 								<!-- Modal Header -->
 								<div class="modal-header">
-									<h4 class="modal-title">조회</h4>
+									<h4 class="modal-title">상세 조회</h4>
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
 								</div>
-								<form action="facapp.me" method="post">
+								<form action="facdel.me" method="post">
 									<!-- Modal Body -->
 									<div class="modal-body">
 										<label for="userId" class="mr-sm-2"> 신청사유 : </label> <input
 											type="text" class="form-control mb-2 mr-sm-2"
-											placeholder="신청 사유 작성" id="area" name="area" width="300"
-											height="500"> <br>
+											placeholder="Enter ID" id="userId" name="userId" width="300"
+											height="300"> <br>
 									</div>
-									<input type="hidden" value="20193019" id="userId" name="userId">
-
-									<input id="hiddenNo" type="hidden" display:none name="hiddenNO"
-										enabled>
-
-
 									<div>
 										<img src="" width="300" height="300" id="datatoin">
 									</div>
 
+									<input id="hiddenNo" type="hidden" display:none
+										name="hiddenNO" enabled>
+
 									<!-- Modal footer -->
 
 									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary">예약 신청</button>
+										<button type="submit" class="btn btn-primary">삭제</button>
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal">취소</button>
 									</div>
@@ -267,9 +269,69 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="modal fade" id="loginModal">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title">시설물 등록</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<form id="enrollForm" method="post" action="facpl.me"
+									enctype="multipart/form-data">
+									<br> <br>
+									<div class="form-group row">
+										<label class="control-label col-md-3">시설물 이름 : </label>
+										<div class="col-md-8">
+											<input class="form-control" type="text" placeholder=""
+												name="facName" required>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="control-label col-md-3">Identity Proof</label>
+										<div class="col-md-8">
+											<input class="form-control" type="file" name="uploadFile">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label">카테고리</label>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="fac_cat"
+												value="전자">전자
+											</label>
+										</div>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="fac_cat"
+												value="사무">사무
+											</label>
+										</div>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="fac_cat"
+												value="현수막">현수막
+											</label>
+
+
+										</div>
+									</div>
+									</table>
+									<br>
+
+									<div align="center">
+										<button type="submit" class="btn btn-primary">등록하기</button>
+										<button type="reset" class="btn btn-danger">취소하기</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
 					<script>
 						setTimeout(function() {
-							$("#msg").attr("type", "hidden");
+							$("#msg").attr("type","hidden");
 						}, 3000);
 					</script>
 
