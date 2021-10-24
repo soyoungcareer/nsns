@@ -7,6 +7,7 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.member.vo.Professor;
 
 
 public interface LectRegisterService {
@@ -31,7 +32,7 @@ public interface LectRegisterService {
 
 	LectRegister checkRegister(int stuId, String subCode);
 
-	int checkCredit(int stuId);
+	Integer checkCredit(int stuId);
 
 	ArrayList<LecRegPro> selectRegiCartsterList(int stuId);
 
@@ -40,6 +41,10 @@ public interface LectRegisterService {
 	LectRegister checkRegisterCart(int stuId, String subCode);
 
 	int registerDeleteCart(String subCode, int stuId);
+
+	ArrayList<LecRegPro> timeBoardList(int stuId);
+
+	ArrayList<Professor> proList();
 
 
 }

@@ -32,7 +32,7 @@
 
 				<div id="sampleTable_wrapper"
 					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-					<form action="searchReg.reg" class="row">
+					<form action="searchRegAdmin.reg" class="row">
 						<div class="col-sm-12 col-md-6">
 							<div class="dataTables_length" id="sampleTable_length" style="padding-left: 15px">
 								<label>이수구분 : &nbsp;&nbsp;&nbsp;
@@ -175,10 +175,10 @@
 											<c:choose>
 					                		<c:when test="${ pi.currentPage ne 1 }">
 						                		<c:if test="${ empty search }">
-													<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ pi.currentPage-1 }">«</a></li>
+													<li class="page-item"><a class="page-link" href="registerAdmin.reg?currentPage=${ pi.currentPage-1 }">«</a></li>
 												</c:if>
 												<c:if test="${ !empty search }">
-													<c:url var="searchUrl" value="searchReg.reg">
+													<c:url var="searchUrl" value="searchRegAdmin.reg">
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
 														<c:param name="condition1" value="${ condition1 }"/>
 														<c:param name="condition2" value="${ condition2 }"/>
@@ -196,10 +196,10 @@
 					                    	<c:choose>
 						                		<c:when test="${ pi.currentPage ne p }">
 					                    			<c:if test="${ empty search }">
-														<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ p }">${ p }</a></li>
+														<li class="page-item"><a class="page-link" href="registerAdmin.reg?currentPage=${ p }">${ p }</a></li>
 													</c:if>
 													<c:if test="${ !empty search }">
-														<c:url var="searchUrl" value="searchReg.reg">
+														<c:url var="searchUrl" value="searchRegAdmin.reg">
 															<c:param name="currentPage" value="${ p }"/>
 															<c:param name="condition1" value="${ condition1 }"/>
 															<c:param name="condition2" value="${ condition2 }"/>
@@ -209,17 +209,17 @@
 													</c:if>
 						                		</c:when>
 						                		<c:otherwise>
-						                			<li class="page-item active"><a class="page-link" href="register.reg?currentPage=${ p }">${ p }</a></li>
+						                			<li class="page-item active"><a class="page-link" href="registerAdmin.reg?currentPage=${ p }">${ p }</a></li>
 						                		</c:otherwise>
 						                	</c:choose>
 					                    </c:forEach>
 					                    <c:choose>
 					                		<c:when test="${ pi.currentPage ne pi.maxPage }">
 					                			<c:if test="${ empty search }">
-													<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ pi.currentPage+1 }">»</a></li>
+													<li class="page-item"><a class="page-link" href="registerAdmin.reg?currentPage=${ pi.currentPage+1 }">»</a></li>
 												</c:if>
 												<c:if test="${ !empty search }">
-													<c:url var="searchUrl" value="searchReg.reg">
+													<c:url var="searchUrl" value="searchRegAdmin.reg">
 														<c:param name="currentPage" value="${pi.currentPage+1  }"/>
 														<c:param name="condition1" value="${ condition1 }"/>
 														<c:param name="condition2" value="${ condition2 }"/>

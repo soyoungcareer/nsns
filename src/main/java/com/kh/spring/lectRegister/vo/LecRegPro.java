@@ -1,5 +1,6 @@
 package com.kh.spring.lectRegister.vo;
 
+import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.Department;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
@@ -20,6 +21,6 @@ public class LecRegPro {
 	private Professor professor;
 	private LectRegister lectRegister;
 	private Department department;
-	private int button;// 1: 수강신청 됨, 0: 수강신청 안됨
-	
+	private Attachment attachment;
+	private float evaluation;
 }

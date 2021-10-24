@@ -30,19 +30,19 @@
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
 							<div class="dataTables_length" id="sampleTable_length">
-								<label>년도 : &nbsp;&nbsp;&nbsp;<select name="sampleTable_length"
+								<label>년도 : &nbsp;&nbsp;&nbsp;<select name="condition1"
 									aria-controls="sampleTable"
-									class="form-control form-control-sm" style="width: 100px">
-										<option value="all">전체</option>
+									class="form-control form-control-sm" style="width: 100px" id="condition1">
+										<option value="0">전체</option>
 										<option value="2021">2021</option>
 										<option value="2021">2020</option>
 								</select>
 								</label> <label style="margin-left: 10px">학기 : &nbsp;&nbsp;&nbsp;<select
-									name="sampleTable_length" aria-controls="sampleTable"
-									class="form-control form-control-sm">
-										<option value="all">전체</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
+									name="condition2" aria-controls="sampleTable"
+									class="form-control form-control-sm" id="condition2">
+										<option value="0">전체</option>
+										<option value="1">1 학기</option>
+										<option value="2">2 학기</option>
 								</select>
 								</label>
 								<button class="btn btn-primary btn-sm" type="button"
@@ -68,7 +68,6 @@
 										</tr>
 									</thead>
 									<tbody>
-
 										<tr>
 											<td rowspan="5"><a
 												href="lectRegisterEdit.reg">FA831</a></td>

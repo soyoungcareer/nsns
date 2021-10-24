@@ -23,6 +23,7 @@
 		 <typeAlias type="com.kh.spring.major.vo.RequestedSubject" alias="RequestedSubject"/>
      			 <typeAlias type="com.kh.spring.consult.model.vo.Consult" alias="Consult"/>
     		 	 <typeAlias type="com.kh.spring.consult.model.vo.ConsultStatus" alias="ConsultStatus"/>
+    			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
 
 	</typeAliases>
 

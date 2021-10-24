@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,16 +34,16 @@
 								<label>년도 : &nbsp;&nbsp;&nbsp;<select name="sampleTable_length"
 									aria-controls="sampleTable"
 									class="form-control form-control-sm" style="width: 100px">
-										<option value="all">전체</option>
+										<option value="0">전체</option>
 										<option value="2021">2021</option>
 										<option value="2021">2020</option>
 								</select>
 								</label> <label style="margin-left: 10px">학기 : &nbsp;&nbsp;&nbsp;<select
 									name="sampleTable_length" aria-controls="sampleTable"
 									class="form-control form-control-sm">
-										<option value="all">전체</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
+										<option value="0">전체</option>
+										<option value="1">1 학기</option>
+										<option value="2">2 학기</option>
 								</select>
 								</label>
 								<button class="btn btn-primary btn-sm" type="button"
@@ -67,7 +68,26 @@
 										</tr>
 									</thead>
 									<tbody>
-
+										<c:forEach items="${ arlist }" var="ar">
+						                    <tr>
+						                        <td>${ ar.lectRegister.year } 년도  ${ ar.lectRegister.semester } 학기</td>
+						                        <td>${ Sub.subject.subTitle }</td>
+						                        
+						                        <td>${ Sub.department.deptTitle }</td>
+						                        <td>${ Sub.subject.subCredit }</td>
+						                        <c:if test="${ Sub.subject.subDivs eq 1 }">
+					                        	<td>전공필수</td>
+						                        </c:if>
+						                        <c:if test="${ Sub.subject.subDivs eq 2 }">
+						                        <td>교양필수</td>
+						                        </c:if>
+						                        <td>${ Sub.subject.subTime }</td>
+						                        <td>${ Sub.professor.profName }</td>
+						                        <th style="padding: 0px; padding-top: 5px">
+						                         <button class="btn btn-primary addRegister" type="button"
+														style="margin-left: 10px;" id="addRegister">수강신청</button></th>
+						                    </tr>
+					                    </c:forEach>
 										<tr>
 											<td rowspan="5"><a
 												href="lectRegisterEdit.reg">FA831</a></td>
@@ -78,39 +98,7 @@
 											<td>전공필수</td>
 											<td>월123</td>
 										</tr>
-										<tr>
-											<td>FD801</td>
-											<td>프로그래밍의 응용</td>
-											<td>기계공학</td>
-											<td>3</td>
-											<td>전공필수</td>
-											<td>월123</td>
-										</tr>
-										<tr>
-											<td>FD801</td>
-											<td>프로그래밍의 응용</td>
-											<td>기계공학</td>
-											<td>3</td>
-											<td>전공필수</td>
-											<td>월123</td>
-										</tr>
-										<tr>
-											<td>FD801</td>
-											<td>프로그래밍의 응용</td>
-											<td>기계공학</td>
-											<td>3</td>
-											<td>전공필수</td>
-											<td>월123</td>
-										</tr>
-										<tr>
-											<td>FD801</td>
-											<td>프로그래밍의 응용</td>
-											<td>기계공학</td>
-											<td>3</td>
-											<td>전공필수</td>
-											<td>월123</td>
-										</tr>
-										<tr>
+										
 									</tbody>
 								</table>
 							</div>
