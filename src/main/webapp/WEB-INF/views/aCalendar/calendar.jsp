@@ -28,7 +28,6 @@
       </div>
       
       <div class="row">
-       <a href="/stuinfo.st">학생페이지 확인용 링크</a>
          <div class="col-md-12">
           <div class="tile row">
             <div class="col-md-12">
@@ -49,7 +48,7 @@
     
     <script type="text/javascript">
     
-    $(document).ready(function() {
+    $(function() {
 		fn_get_events();
 	});
     

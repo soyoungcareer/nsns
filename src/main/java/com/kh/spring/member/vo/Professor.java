@@ -18,8 +18,8 @@ public class Professor {
 	private String profId;		//  "PROF_ID"		VARCHAR2(20)		NOT NULL,
 	private String profPwd;		//  "PROF_PWD"		VARCHAR2(30)		NOT NULL,
 	private String profName;	//  "PROF_NAME"		VARCHAR2(20)		NOT NULL,
-	private String profDept; 	// 	"DEPT_CODE"		NUMBER		NOT NULL, 
-								//   --> 학과코드(Number)로 받아와서 학과명(String)으로 변환해야함
+	private int profDept; 	// 	"DEPT_CODE"		NUMBER		NOT NULL, 
+	private String profDeptTitle; 	// 	"DEPT_TITLE"	VARCHAR2(100)		NOT NULL,
 	private String profRrn;		//	"PROF_RRN"		VARCHAR2(30)		NOT NULL,
 	private String profEmail;	//	"PROF_EMAIL"	VARCHAR2(100)		NOT NULL,
 	private String profPhone;	//	"PROF_PHONE"	VARCHAR2(30)		NOT NULL,

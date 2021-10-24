@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profPwd" column="PROF_PWD"/>
 		<result property="profName" column="PROF_NAME"/>
 		<result property="profDept" column="DEPT_CODE"/>
+		<result property="profDeptTitle" column="DEPT_TITLE"/>
 		<result property="profRrn" column="PROF_RRN"/>
 		<result property="profEmail" column="PROF_EMAIL"/>
 		<result property="profPhone" column="PROF_PHONE"/>
@@ -35,55 +36,85 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 학생 -->
-	<resultMap type="Student" id="profStudResultSet">
+	<resultMap type="Student" id="profStuResultSet">
 		<id property="stuId" column="STU_ID"/>
-		<result property="deptCode" column="DEPT_CODE"/>	
+		<result property="deptTitle" column="DEPT_TITLE"/>	
 		<result property="profId" column="PROF_ID"/>	
-		<result property="stuPwd" column="STU_PWD"/>	
-		<result property="ssn" column="STU_NAME"/>	
+		<result property="stuName" column="STU_NAME"/>	
 		<result property="email" column="EMAIL"/>	
 		<result property="phone" column="PHONE"/>	
-		<result property="address" column="ADDRESS"/>	
-		<result property="stuCredit" column="STU_CREDIT"/>	
-		<result property="graduationDate" column="GRADUATION_DATE"/>	
-		<result property="addmissionDate" column="ADDMISSION_DATE"/>	
 		<result property="stuStatus" column="STU_STATUS"/>	
+		<result property="year" column="YEAR"/>
+		<result property="semester" column="SEMESTER"/>
 	</resultMap>
 	
 	
 	<!-- 로그인 교수 -->
-	<select id="loginProf" parameterType="Professor" resultMap="profResultSet">
+	<select id="loginProfessor" parameterType="Professor" resultMap="profResultSet">
 		SELECT * FROM PROFESSOR
 		WHERE PROF_ID=#{profId} AND STATUS='Y'
 	</select>
 	
 	<!-- 교수 마이페이지 개인정보 조회 -->
-	<select id="selectProf" parameterType="Professor" resultMap="profResultSet">
+	<select id="selectMypage" parameterType="Professor" resultMap="profResultSet">
 		SELECT PROF_ID, PROF_NAME, DEPT_TITLE, PROF_EMAIL, PROF_PHONE, PROF_ADDRESS
 		FROM PROFESSOR
 		JOIN DEPARTMENT USING (DEPT_CODE)
-		WHERE PROF_ID=#{profId} AND STATUS='Y'
+		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</select>
 	
 	<!-- 교수 마이페이지 개인정보 업데이트 -->
-	<update id="updateProf" parameterType="Professor">
+	<update id="editMypage" parameterType="Professor">
 		UPDATE PROFESSOR
-		SET PROF_EMAIL=#{profEmail}, PROF_PHONE=#{profPhone}, PROF_ADDRESS=#{profAddress}
-		WHERE PROF_ID=#{profId}
+		SET PROF_PWD=#{profPwd}, PROF_EMAIL=#{profEmail}, PROF_PHONE=#{profPhone}, PROF_ADDRESS=#{profAddress}
+		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</update>
 	
+	<!-- 강의 개설 신청 학과명, 교수명 끌어오기 -->
+	<select id="profInfoLoad" parameterType="Professor" resultMap="profResultSet">
+		SELECT DEPT_TITLE, PROF_NAME
+		FROM PROFESSOR
+		JOIN DEPARTMENT USING(DEPT_CODE)
+		WHERE PROF_ID=#{profId}
+	</select>
 	
-	<!-- 교수 강의목록 -->
+	<!-- 강의개설 신청 -->
+	<insert id="profCreateLecture" parameterType="RequestedSubject">
+		INSERT INTO REQ_SUBJECT
+		VALUES (SEQ_REQSUB_NO.NEXTVAL, #{deptCode}, #{subDivs}, #{subType}, #{subTitle}, #{profId},
+				#{subCredit}, #{subTime}, DEFAULT)
+	</insert>
+	
+	<!-- 강의 수정시 과목정보 불러오기 -->
+	<select id="subInfoLoad" parameterType="Subject" resultMap="profSubResultSet">
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
+	</select>
+	
+	<!-- 교수 강의목록 개수 -->
 	<select id="profLectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM SUBJECT
 		WEHRE PROF_ID=#{profId}
 	</select>
 	
-	<select id="selectSubList" resultMap="Subject">
-		SELECT SUB_DIVS, SUB_CODE, SUB_TITLE, SUB_CREDIT, PROF_NAME, SUB_TIME, SUB_CLASS
+	<!-- 교수 강의목록 불러오기 -->
+	<select id="selectSubList" resultMap="profSubResultSet">
+		SELECT SUB_CODE, SUB_TITLE, SUB_DIVS, SUB_CREDIT, SUB_CLASS, SUB_TIME, SUB_TYPE
 		FROM SUBJECT
 		JOIN PROFESSOR USING(PROF_ID)
 		WHERE PROF_ID=#{profId}
 	</select>
+	
+	<!-- 강의별 학생목록 불러오기 -->
+	<select id="profStudentDetail" resultMap="profStuResultSet">
+		SELECT B.DEPT_TITLE, A.STU_ID, A.STU_NAME, A.STU_STATUS, A.EMAIL, A.PHONE
+		FROM STUDENT A
+		JOIN DEPARTMENT B USING(DEPT_CODE)
+		JOIN LECT_REGISTER C USING(STU_ID)
+		JOIN SUBJECT D USING(SUB_CODE)
+		WHERE C.SUB_CODE=#{subCode} AND C.YEAR=#{year} AND C.SEMESTER=#{semester} AND D.PROF_ID=#{profId}
+	</select>
+	
 </mapper>
