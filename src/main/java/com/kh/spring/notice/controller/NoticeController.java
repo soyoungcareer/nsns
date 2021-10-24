@@ -169,7 +169,7 @@ public class NoticeController {
 		return changeName;
 	}*/
 	
-	@RequestMapping("updateForm.ntc")
+	@RequestMapping("updateForm.ntc") //게시글 수정 페이지로 이동
 	public ModelAndView updateForm(int bno, ModelAndView mv) {
 		
 		Notice n = noticeService.selectNBoard(bno);
@@ -181,8 +181,6 @@ public class NoticeController {
 	@RequestMapping("update.ntc")
 	public ModelAndView updateNBoard(Notice n, ModelAndView mv, HttpServletRequest request,
 									@RequestParam(value="reUploadFile", required=false) MultipartFile file) {
-		
-		//reUploadFile
 		
 		if(!file.getOriginalFilename().equals("")) {
 			
@@ -199,10 +197,10 @@ public class NoticeController {
 		noticeService.updateNBoard(n);
 		mv.addObject("bno", n.getNtcNo()).setViewName("redirect:detail.ntc");
 		
-		return null;
+		return mv;
 	}
 
-	private void deleteFile(String fileName, HttpServletRequest request) {
+	private void deleteFile(String fileName, HttpServletRequest request) { //게시글 첨부파일 삭제
 		//String fileName, changeName
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources + "\\upload_files\\";
@@ -214,7 +212,7 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping("delete.ntc")
+	@RequestMapping("delete.ntc") //게시글 삭제
 	public String deleteNBoard(int bno, String fileName, HttpServletRequest request) {
 		//String fileName, changeName
 		noticeService.deleteNBoard(bno);

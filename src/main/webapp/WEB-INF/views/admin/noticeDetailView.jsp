@@ -68,7 +68,7 @@
                   <!-- form all -->
                   <div class="form-group">
 	                <label class="control-label">제목</label>
-	                <input class="form-control" type="text" value="${ n.ntcTitle }">
+	                <input class="form-control" type="text" value="${ n.ntcTitle }" readonly>
                   </div>
 
                   <div class="form-group">
@@ -90,13 +90,14 @@
                   </div>
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
-                    <textarea class="form-control" id="ntcContent" rows="3">${n.ntcContent }</textarea>
+                    <textarea class="form-control" id="ntcContent" rows="3" style="resize:none" readonly>${n.ntcContent }</textarea>
+                    <img src="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}">
                   </div>
                   
                   <div class="form-group"> 
                     	
                     	<!-- 위치1 -->
-                    	<input type="hidden" name="bno" value="${ n.ntcNo }">
+                    	<input type="hidden" name="bno" id="bno" value="${ n.ntcNo }">
                     	<input type="hidden" name="fileName" value="${ n.changeName }">
                     	
                   		<c:if test="${ !empty n.originName }">
@@ -112,10 +113,31 @@
               </div>
               
             </div>
-            <div class="tile-footer">
-              <button class="btn btn-primary" type="submit" onclick="location.href='updateForm.ntc'">수정</button><!-- onclick="location.href='updateForm.ntc'" -->
-              <button class="btn btn-primary" type="button" onclick="location.href='delete.ntc'">삭제</button>
-            </div>
+            
+            <!-- <c:if test="${ loginUser.userId eq b.boardWriter }"> -->
+	            <div align="center">
+	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
+	                <button class="btn btn-secondary" onclick="postFormSubmit(2);">삭제하기</button>
+	            </div>
+	            
+	            <form id="postForm" action="" method="post">
+					<input type="hidden" name="bno" value="${n.ntcNo }">
+					<input type="hidden" name="fileName" value="${ n.changeName }"> 
+				</form>
+				<script>
+					function postFormSubmit(num){
+						var postForm = $("#postForm");
+						
+						if(num == 1){
+							postForm.attr("action", "updateForm.ntc");
+						}else{
+							postForm.attr("action", "delete.ntc");
+						}
+						postForm.submit();
+					}
+				</script>
+            <!-- </c:if> -->
+            
           </div>
         </div>
       </div>
