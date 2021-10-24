@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="consultMapper">
+
+	<resultMap id="consultStatusResultMap" type="ConsultStatus">
+		<id property="conStsNo" column="CON_STS_NO"/>
+		<result property="conProcess" column="CON_PROCESS"/>
+		<result property="conCompleted" column="CON_COMPLETED"/>
+		<result property="status" column="STATUS"/>
+		<result property="conNo" column="CON_NO"/>
+	</resultMap>
+	
+	
+	<resultMap id="consultResultMap" type="Consult">
+		<id property="conNo" column="CON_NO"/>
+		<result property="conCategory" column="CON_CATEGORY"/>
+		<result property="conDate" column="CON_DATE" javaType="java.sql.Date"/>
+		<result property="conReason" column="CON_REASON"/>
+		<result property="rejectReason" column="REJECT_REASON"/>
+		<result property="status" column="STATUS"/>
+		<result property="stuId" column="STU_ID"/>
+	</resultMap>
+	
+	
+	<select id="conProList" resultMap="consultStatusResultMap" parameterType="string">
+		SELECT CONSULT_STATUS_PRO.CON_STS_NO, CONSULT_STATUS_PRO.CON_PROCESS, CONSULT_STATUS_PRO.CON_COMPLETED, CONSULT_STATUS_PRO.STATUS, CON_NO
+		FROM CONSULT_STATUS_PRO
+		LEFT JOIN CONSULT USING (CON_NO)
+		WHERE  CONSULT_STATUS_PRO.STATUS = 'Y'
+		AND STU_ID = #{stuId}
+	</select>
+	
+	<select id="selectConsult" resultMap="consultResultMap" parameterType="_int">
+		SELECT * 
+		FROM CONSULT
+		WHERE STATUS = 'Y'
+		AND CON_NO=#{conNo}
+	</select>
+	
+	<select id="selectConsultCount" resultType="_int"  parameterType="string">
+	 	SELECT COUNT(*)
+		FROM CONSULT_STATUS_PRO
+        LEFT JOIN CONSULT USING (CON_NO)
+		WHERE  CONSULT_STATUS_PRO.STATUS = 'Y'
+		AND CONSULT.STU_ID =  #{stuId} 
+		AND CON_COMPLETED LIKE '처리중'
+	</select>
+
+	<insert id="insertConsult" parameterType="Consult">
+		INSERT INTO CONSULT
+		(CON_NO, CON_CATEGORY, CON_DATE, CON_REASON, STATUS, STU_ID) 
+		VALUES(SEQ_CON_NO.NEXTVAL, #{conCategory}, #{conDate}, #{conReason}, DEFAULT, #{stuId})
+	</insert>
+	
+	<insert id="insertStsCon">
+		INSERT INTO CONSULT_STATUS_PRO
+		VALUES(SEQ_CON_STS_NO.NEXTVAL, DEFAULT, DEFAULT, DEFAULT, SEQ_CON_NO.CURRVAL);
+	</insert>
+</mapper>

@@ -81,7 +81,7 @@
 					</div>
 
 	               <!-- Modal Body -->
-	               <div class="modal-body" id="sampleModalBody">
+	               <div class="modal-body" id="sampleModalBody1">
 	                
 	               </div>
 	               
@@ -105,58 +105,8 @@
 					</div>
 
 	               <!-- Modal Body -->
-	               <div class="modal-body">
-	                   <div class="form-group row">
-	                  <label class="control-label col-md-3">담당교수</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="유재석" readonly>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">신청일자</label>
-	                  <div class="col-md-5">
-	                    <input class="form-control" type="text" value="2021/09/30" readonly>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group row">
-	                  <label class="control-label col-md-3">자퇴사유</label>
-	                  <div class="col-md-8">
-	                    <textarea class="form-control" rows="4">학교 너무 싫어서</textarea>
-	                  </div>
-	                </div>
-                
-	                <div class="form-group row">
-					     <table class="table table-bordered " id="consultStatus" style="margin-top:10px;">
-								<thead>
-									<tr>
-										<th>신청현황</th>
-										<th>기타</th>
-									</tr>
-								</thead>
-								
-								<tbody>
-									<tr>
-										<td>교수 승인 대기중</td>
-										<td><button class="btn btn-danger btn-sm" type="button">신청취소</button></td>
-									</tr>
-									
-									<tr>
-										<td>관리자 승인 대기중</td>
-										<td></td>
-									</tr>
-									
-									
-									<tr>
-										<td>승인</td>
-										<td></td>
-									</tr>
-									
-									
-								</tbody>
-							</table>
-						</div>
+	               <div class="modal-body"  id="sampleModalBody2">
+	                  
 	               </div>
 				  <!-- Modal footer -->
 						<div class="modal-footer">
@@ -181,13 +131,19 @@
 								list[i].applicationNo + '</td><td>'+
 								list[i].stsCategory + '</td><td>'+
 								list[i].stsProcess + '</td><td>'+
-								list[i].stsComplete + '</td>'+
+								list[i].stsComplete + '</td>'
 	              				+ '</tr>'
 	       					});
 							
-						} 
+						}  else {
+							
+							str += '<tr>'
+								+  '<th colspan="4" style="text-align:center">' + "조회되는 신청 내역이 없습니다." +'</th></tr>'
+									
+										
+						}
 						
-						$("#statusTable").append(str); 
+						$("#statusTable tbody").append(str); 
 					},
 					error:function(){
 						console.log("Ajax 통신 실패");
@@ -214,26 +170,26 @@
     						
     						var str1 = '';
     						var str2 =	'<div class="form-group row">'
-    									+ '<table class="table table-bordered " id="doStsTable " style="margin-top:10px;">'
+    									+ '<table class="table table-bordered " id="offStsTable " style="margin-top:10px;">'
 										+ '<thead><tr><th>신청현황</th><th>기타</th></tr></thead>'
 									
     									
     					if(obj != null) {
-    					
-    								str1 +=  '<div class="form-group row">'+'<label class="control-label col-md-3"> 휴학구분 </label>'+'<div class="col-md-5">'
-    									+'<input class="form-control" type="text" value="'+ obj.offCategory  +'" readonly>'+'</div>'+'</div>'
-    									+'<div class="form-group row">' + '<label class="control-label col-md-3">신청일자</label>' + '<div class="col-md-5">'
-    									+'<input class="form-control" type="text" value="'+ obj.offDate  +'" readonly>'+'</div>'+'</div>'
-    									+'<div class="form-group row">' + '<label class="control-label col-md-3">휴학학기수</label>' + '<div class="col-md-5">'
-    									+'<input class="form-control" type="text" value="'+ obj.offSem  +'" readonly>'+'</div>'+'</div>'
-    									+ '<div class="form-group row">' + '<label class="control-label col-md-3">휴학사유</label>' + '<div class="col-md-8">'
-    									+ '<textarea class="form-control" rows="4" readonly>'+obj.offReason+'</textarea>'+'</div>'+'</div>'
-    							
+
+							str1 +=  '<div class="form-group row">'+'<label class="control-label col-md-3"> 휴학구분 </label>'+'<div class="col-md-5">'
+								+'<input class="form-control" type="text" value="'+ obj.offCategory  +'" readonly>'+'</div>'+'</div>'
+								+'<div class="form-group row">' + '<label class="control-label col-md-3">신청일자</label>' + '<div class="col-md-5">'
+								+'<input class="form-control" type="text" value="'+ obj.offDate  +'" readonly>'+'</div>'+'</div>'
+								+'<div class="form-group row">' + '<label class="control-label col-md-3">휴학학기수</label>' + '<div class="col-md-5">'
+								+'<input class="form-control" type="text" value="'+ obj.offSem  +'" readonly>'+'</div>'+'</div>'
+								+ '<div class="form-group row">' + '<label class="control-label col-md-3">휴학사유</label>' + '<div class="col-md-8">'
+								+ '<textarea class="form-control" rows="4" readonly>'+obj.offReason+'</textarea>'+'</div>'+'</div>'
     								
+    							
     								if(stsPro == '교수승인대기'){
     									str2 += '<tbody> <tr>'+'<td>'
     									+"교수 승인 대기중" + '</td><td>'
-    									+'<button class="btn btn-danger btn-sm" type="button">신청취소</button>' + '</td>'
+    									+'<button class="btn btn-danger btn-sm" type="button" onclick="deleteOff('+obj.applicationNo+')">신청취소</button>' + '</td>'
     		              				+ '</tr>'+'</tbody> </table> </div>'
     		              				
     								} else if(stsPro == '관리자승인대기'){
@@ -251,7 +207,7 @@
     								
     					}
 										
-							$('#sampleModalBody').append(str1+str2);
+							$('#sampleModalBody1').append(str1+str2);
     						//$('#sampleModalBody').html(str2);
     				
     					},
@@ -263,11 +219,71 @@
     				
     				
     			} else { //자퇴 모달 띄우기
+					$(".modal-body").empty();
+    				
+    				$.ajax({
+    					url: "stuDo.stu",
+    					dataType:"json",
+    					data : { appNo :appNo },
+    					success: function(obj){
+    						
+    						var str1 = '';
+    						var str2 =	'<div class="form-group row">'
+    									+ '<table class="table table-bordered " id="doStsTable " style="margin-top:10px;">'
+										+ '<thead><tr><th>신청현황</th><th>기타</th></tr></thead>'
+    									
+    					if(obj != null) {
+    						str1 +=  '<div class="form-group row">' + '<label class="control-label col-md-3">신청일자</label>' + '<div class="col-md-5">'
+							+'<input class="form-control" type="text" value="'+ obj.doDate  +'" readonly>'+'</div>'+'</div>'
+							+ '<div class="form-group row">' + '<label class="control-label col-md-3">자퇴사유</label>' + '<div class="col-md-8">'
+							+ '<textarea class="form-control" rows="4" readonly>'+obj.doReason+'</textarea>'+'</div>'+'</div>'
+    					
+    								
+    								if(stsPro == '교수승인대기'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+"교수 승인 대기중" + '</td><td>'
+    									+'<button class="btn btn-danger btn-sm" type="button" onclick="deleteDo('+obj.applicationNo+')">신청취소</button>' + '</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    		              				
+    								} else if(stsPro == '관리자승인대기'){
+    									str2 += '<tbody> <tr>'+'<td>'+
+    										+ "관리자 승인 대기중" + '</td><td>'
+    										+ "해당 신청은 취소가 불가합니다. 관리자에게 문의해주세요"+'</td>'
+    		              					+ '</tr>'+'</tbody> </table> </div>'
+    		    						
+    								} else if(stsPro == '승인완료'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+ "승인 완료" + '</td><td>'
+    									+ "이미 신청이 완료된 건입니다. 관리자에게 문의해주세요" +'</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    								}
+    								
+    					}
+										
+							$('#sampleModalBody2').append(str1+str2);
+    						
+    				
+    					},
+    					error:function(){
+    						console.log("Ajax 통신 실패");
+    					}
+    				});
     				$("#sampleModalPopup2").modal(); 
     			}
     			
     		});
+    		
+    		function deleteOff(appNo){
+    			
+    			location.href="/deleteOff.stu?appNo="+appNo;
+    			
+    		}
 			
+    		function deleteDo(appNo){
+    			
+    			location.href="/deleteDo.stu?appNo="+appNo;
+    			
+    		}
 			
 			
     </script>
