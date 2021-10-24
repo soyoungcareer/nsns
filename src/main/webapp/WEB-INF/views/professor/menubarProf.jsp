@@ -78,7 +78,7 @@
         <li><a class="app-menu__item active" href="profMenu.pr"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="profCreateLec.pr"><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
+            <li><a class="treeview-item" href="profLectInfoLoad.pr"><i class="icon fa fa-circle-o"></i> 강의개설</a></li>
             <li><a class="treeview-item" href="profLectureDetail.pr"><i class="icon fa fa-circle-o"></i> 강의목록 조회/수정/삭제</a></li>
 <!--             <li><a class="treeview-item" href="profLectureDetail.pr" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> 강의목록 조회</a></li> -->
           </ul>

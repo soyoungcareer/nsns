@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>낙성대학교(교수) - 강의수정</title>
+<title>낙성대학교(교수) - 강의정보 수정</title>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -20,37 +20,40 @@
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">강의 관리</li>
-				<li class="breadcrumb-item"><a href="profEditLec.pr">강의정보 수정</a></li>
+				<li class="breadcrumb-item"><a href="lectEditInfoLoad.pr">강의정보 수정</a></li>
 			</ul>
 		</div>
-        <!-- ------------------------------------
-      		선택된 강의의 값으로 value 넣기 
-      	-------------------------------------->
+		
 		<div class="container-fluid">
 	          <div class="tile">
 	            <h3 class="tile-title">강의정보 수정</h3>
 	            <div class="tile-body">
-	              <form>
+	              <form id="createForm" method="get" action="profEditLec.pr" enctype="multipart/form-data">
 	              	<div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학과명</label>
-		                  <input class="form-control" type="text" value="" readonly>
+		                  <input class="form-control" type="text" value="${ prof.profDeptTitle }" readonly>
+		                  <!-- ------------------------------------
+		                  		로그인한 교수 학과명으로 value 넣기 
+		                  		-------------------------------------->
 		                </div>
 						<div class="form-group col-md-3">
 							<div class="form-group">
-							  <label class="control-label" for="subDiv">이수구분</label>
-							  <select class="form-control" id="subDiv">
-							    <option>전공</option>
-							    <option>교양</option>
+							  <label class="control-label" for="subDivs">이수구분</label>
+							  <select class="form-control" id="subDivs" name="subDivs" required>
+							  	<option value="${ sub.subDivs }" selected hidden>${ sub.subDivs }</option>
+							    <option value="1">전공</option>
+							    <option value="2">교양</option>
 							  </select>
 							</div>
 						</div>
 						<div class="form-group col-md-3">
 							<div class="form-group">
 							  <label class="control-label" for="subType">강의형태</label>
-							  <select class="form-control" id="subType">
-							    <option>집체</option>
-							    <option>온라인</option>
+							  <select class="form-control" id="subType" name="subType" required>
+							  	<option value="${ sub.subType }" selected hidden>${ sub.subType }</option>
+							    <option value="1">집체</option>
+							    <option value="2">온라인</option>
 							  </select>
 							</div>
 		                </div>
@@ -58,11 +61,12 @@
 		            <div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교과목명</label>
-		                  <input class="form-control" type="text" placeholder="교과목명 입력">
+		                  <input class="form-control" type="text" placeholder="교과목명 입력" name="subTitle" required>
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교수명</label>
-		                  <input class="form-control" type="text" value="">
+		                  <input class="form-control" type="text" value="${ prof.profName }" readonly>
+		                  <input type="hidden" name="profId" value="${ prof.profId }">
 		                  <!-- ------------------------------------
 		                  		로그인한 교수명으로 value 넣기 
 		                  		-------------------------------------->
@@ -70,9 +74,10 @@
 		                <div class="form-group col-md-3">
 							<div class="form-group">
 							  <label class="control-label" for="credit">학점</label>
-							  <select class="form-control" id="credit">
-							    <option>3.0</option>
-							    <option>2.0</option>
+							  <select class="form-control" id="credit" name="subCredit" required>
+							  	<option value="${ sub.subCredit }" selected hidden>${ sub.subCredit }</option>
+							    <option>3</option>
+							    <option>2</option>
 							  </select>
 							</div>
 		                </div>
@@ -81,7 +86,8 @@
 		                <div class="form-group col-md-3">
 		                  	<div class="form-group">
 							  <label class="control-label" for="subDay">강의요일</label>
-							  <select class="form-control" id="subDay">
+							  <select class="form-control" id="subDay" name="subDay" required>
+							  	<option value="${ sub.subTime }" selected hidden>${ sub.subTime }</option>
 							    <option>월</option>
 							    <option>화</option>
 							    <option>수</option>
@@ -89,26 +95,26 @@
 							    <option>금</option>
 							  </select>
 							  <label class="control-label" for="subStartTime">강의시작시간</label>
-							  <select class="form-control" id="subStartTime">
-							    <option>1교시</option>
-							    <option>2교시</option>
-							    <option>3교시</option>
-							    <option>4교시</option>
-							    <option>5교시</option>
-							    <option>6교시</option>
-							    <option>7교시</option>
-							    <option>8교시</option>
+							  <select class="form-control" id="subStartTime" name="subStartTime" required>
+							    <option>1</option>
+							    <option>2</option>
+							    <option>3</option>
+							    <option>4</option>
+							    <option>5</option>
+							    <option>6</option>
+							    <option>7</option>
+							    <option>8</option>
 							  </select>
 							  <label class="control-label" for="subEndTime">강의종료시간</label>
-							  <select class="form-control" id="subEndTime">
-							    <option>1교시</option>
-							    <option>2교시</option>
-							    <option>3교시</option>
-							    <option>4교시</option>
-							    <option>5교시</option>
-							    <option>6교시</option>
-							    <option>7교시</option>
-							    <option>8교시</option>
+							  <select class="form-control" id="subEndTime" name="subEndTime" required>
+							    <option>1</option>
+							    <option>2</option>
+							    <option>3</option>
+							    <option>4</option>
+							    <option>5</option>
+							    <option>6</option>
+							    <option>7</option>
+							    <option>8</option>
 							  </select>
 							</div>
 		                </div>
@@ -123,7 +129,7 @@
 		            </div>
 		            <div class="row">
 		                <div class="form-group col-md-4 align-self-end">
-		                  <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>수정 신청</button>
+		                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>수정 신청</button>
 		                </div>
 	                </div>
 	              </form>
