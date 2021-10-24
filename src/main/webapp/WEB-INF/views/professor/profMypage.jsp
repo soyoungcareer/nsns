@@ -32,27 +32,27 @@
 					<form>
 						<div class="form-group">
 							<label class="control-label">교수번호</label> 
-							<input class="form-control" type="text" value="<%-- <%= loginUser.getProfId() %> --%>" readonly>
+							<input class="form-control" type="text" name="profId" value="${prof.profId}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">비밀번호</label> 
-							<input class="form-control" type="password" placeholder="비밀번호 입력">
+							<input class="form-control" type="password" name="profPwd" placeholder="비밀번호 입력">
 						</div>
 						<div class="form-group">
 							<label class="control-label">교수명</label> 
-							<input class="form-control" type="text" value="<%-- <%= loginUser.getProfName() %> --%>" readonly>
+							<input class="form-control" type="text" name="profName" value="${prof.profName}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">담당학과</label> 
-							<input class="form-control" type="text" value="<%-- <%= loginUser.getProfDept() %> --%>" readonly>
+							<input class="form-control" type="text" name="deptTitle" value="${prof.profDeptTitle}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">이메일</label> 
-							<input class="form-control" type="email" value="<%-- <%= loginUser.getProfEmail() %> --%>">
+							<input class="form-control" type="email" name="profEmail" value="${prof.profEmail}">
 						</div>
 						<div class="form-group">
 							<label class="control-label">전화번호</label> 
-							<input class="form-control" type="tel" value="<%-- <%= loginUser.getProfPhone() %> --%>"
+							<input class="form-control" type="tel" name="profPhone" value="${prof.profPhone}"
 								pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13">
 						</div>
 						<!-- -------------------------------------------------------------------------- -->
@@ -60,11 +60,11 @@
 						<!-- -------------------------------------------------------------------------- -->
 						<div class="form-group">
 							<label class="control-label">주소</label>
-							<textarea class="form-control" rows="4" value="<%-- <%= loginUser.getProfAddress() %> --%>"></textarea>
+							<input class="form-control" type="text" name="profAddress" value="${prof.profAddress}">
 						</div>
 						
 						<div class="tile-footer">
-							<button class="btn btn-primary" type="button">
+							<button class="btn btn-primary" type="submit">
 								<i class="fa fa-fw fa-lg fa-check-circle"></i>정보수정
 							</button>
 		<!-- 					&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i
