@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	ArrayList<Subject> list = (ArrayList<Subject>)request.getAttribute("list");
 	int count = 1;
 	String contextPath = request.getContextPath();
 %>
@@ -38,25 +38,6 @@
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 							<div class="row">
 								<h3 class="tile-title">강의목록</h3>
-<!-- 								<div class="col-sm-12 col-md-6">
-									<div class="dataTables_length" id="sampleTable_length">
-										<label>Show <select name="sampleTable_length"
-											aria-controls="sampleTable"
-											class="form-control form-control-sm"><option
-													value="10">10</option>
-												<option value="25">25</option>
-												<option value="50">50</option>
-												<option value="100">100</option></select> entries
-										</label>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-6">
-									<div id="sampleTable_filter" class="dataTables_filter">
-										<label>Search:<input type="search"
-											class="form-control form-control-sm" placeholder=""
-											aria-controls="sampleTable"></label>
-									</div>
-								</div> -->
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
@@ -83,11 +64,6 @@
 													rowspan="1" colspan="1"
 													aria-label="Position: activate to sort column ascending"
 													style="width: 130.762px;">이수구분</th>
-<!-- 교수 본인의 담당과목만 조회가능하므로 교수명은 삭제..?
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">교수명</th> -->
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
@@ -111,112 +87,31 @@
 											</tr>
 										</thead>
 										<tbody>
-			
-<!-- ---------------------------------------------------------
-	반복문으로 list 넣기
-------------------------------------------------------------- -->
-<%-- 										<% if(list.isEmpty()) { %>
-											<tr>
-												<td colspan="4">개설된 강의가 없습니다.</td>
-											</tr>
-										<% } else { %>
-											<% for(Subject a : list) { %>
-												<tr role="row">
-													<td class="sorting_1"><%= count++ %></td>
-													<td><%= a.getSubCode() %></td>
-													<td><%= a.getSubTitle() %></td>
-													<td><%= a.getSubDivs() %></td>
-													<td><%= a.getSubCredit() %></td>
-													<td><%= a.getSubClass() %></td>
-													<td><%= a.getSubTime() %>v</td>
-													<td><%= a.getSubType() %>v</td>
+											<c:choose>
+												<c:when test="${empty subList}">
+													<tr><td colspan="8">개설된 강의가 없습니다.</td></tr>
+												</c:when>
+												<c:when test="${!empty subList}">
+													<c:forEach var="list" items="${subList}">
+														<tr role="row">
+															<td class="sorting_1"><%=count++ %></td>
+															<td><c:out value="${subList.subCode}"/></td>
+															<td><c:out value="${subList.subTitle}"/></td>
+															<td><c:out value="${subList.subDivs}"/></td>
+															<td><c:out value="${subList.subCredit}"/></td>
+															<td><c:out value="${subList.subClass}"/></td>
+															<td><c:out value="${subList.subTime}"/></td>
+															<td><c:out value="${subList.subType}"/></td>
+														</tr>
+													</c:forEach>
+												</c:when>
+											</c:choose>
+											
+										
 													<!-- -------------------------------------------
 														강의계획서 넣기...? 
 													--------------------------------------------- -->
-												</tr>
-											<% } %>
-										<% } %> --%>
 											
-<!-- 											<tr role="row" class="odd">
-												<td class="sorting_1">Airi Satou</td>
-												<td>Accountant</td>
-												<td>Tokyo</td>
-												<td>33</td>
-												<td>2008/11/28</td>
-												<td>$162,700</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">Angelica Ramos</td>
-												<td>Chief Executive Officer (CEO)</td>
-												<td>London</td>
-												<td>47</td>
-												<td>2009/10/09</td>
-												<td>$1,200,000</td>
-											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">Ashton Cox</td>
-												<td>Junior Technical Author</td>
-												<td>San Francisco</td>
-												<td>66</td>
-												<td>2009/01/12</td>
-												<td>$86,000</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">Bradley Greer</td>
-												<td>Software Engineer</td>
-												<td>London</td>
-												<td>41</td>
-												<td>2012/10/13</td>
-												<td>$132,000</td>
-											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">Brenden Wagner</td>
-												<td>Software Engineer</td>
-												<td>San Francisco</td>
-												<td>28</td>
-												<td>2011/06/07</td>
-												<td>$206,850</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">Brielle Williamson</td>
-												<td>Integration Specialist</td>
-												<td>New York</td>
-												<td>61</td>
-												<td>2012/12/02</td>
-												<td>$372,000</td>
-											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">Bruno Nash</td>
-												<td>Software Engineer</td>
-												<td>London</td>
-												<td>38</td>
-												<td>2011/05/03</td>
-												<td>$163,500</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">Caesar Vance</td>
-												<td>Pre-Sales Support</td>
-												<td>New York</td>
-												<td>21</td>
-												<td>2011/12/12</td>
-												<td>$106,450</td>
-											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">Cara Stevens</td>
-												<td>Sales Assistant</td>
-												<td>New York</td>
-												<td>46</td>
-												<td>2011/12/06</td>
-												<td>$145,600</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">Cedric Kelly</td>
-												<td>Senior Javascript Developer</td>
-												<td>Edinburgh</td>
-												<td>22</td>
-												<td>2012/03/29</td>
-												<td>$433,060</td>
-											</tr> -->
 										</tbody>
 									</table>
 								</div>

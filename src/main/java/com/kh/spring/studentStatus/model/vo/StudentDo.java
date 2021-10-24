@@ -15,10 +15,6 @@ import lombok.ToString;
 @ToString 
 public class StudentDo { //자퇴
 
-	private String stsNo; //번호
-	private String stsProcess; // 신청단계
-	private String stsAdm; //담당자
-	private String stsComplete; //완료여부
 	private int applicationNo; //신청번호
 	private int stuId; //학번
 	private Date doDate; //신청일자

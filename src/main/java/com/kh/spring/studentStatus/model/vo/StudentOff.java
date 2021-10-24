@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString 
 public class StudentOff {
 	private int applicationNo; //신청번호
-	private String stuId;
+	private int stuId;
 	private String offCategory; //휴학구분 (일반, 군)
 	private Date offDate; // 휴학신청일 (sysdate)
 	private int offSemCnt; // 휴학학기수

@@ -74,7 +74,7 @@
             <li><a class="treeview-item" href="stuStatusPage.stu"><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
             <li><a class="treeview-item" href="stuOffPage.stu"><i class="icon fa fa-circle-o"></i> 휴학신청</a></li>
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 복학신청</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 자퇴신청</a></li>
+            <li><a class="treeview-item" href="stuDoPage.stu"><i class="icon fa fa-circle-o"></i> 자퇴신청</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-certificate"></i><span class="app-menu__label">증명서</span><i class="treeview-indicator fa fa-angle-right"></i></a>

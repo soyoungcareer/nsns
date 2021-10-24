@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
@@ -12,15 +13,76 @@ import com.kh.spring.studentStatus.model.vo.StudentStatus;
 public class StudentStatusDao {
 
 
-	public ArrayList<StudentStatus> studentProList(SqlSessionTemplate sqlSession) {
+	public ArrayList<StudentStatus> studentProList(SqlSessionTemplate sqlSession, String userId) {
 		
-		return (ArrayList)sqlSession.selectList("studentStatusMapper.studentProList");
+		return (ArrayList)sqlSession.selectList("studentStatusMapper.studentProList", userId);
 		
 	}
 
-	public StudentOff studentOff(SqlSessionTemplate sqlSession, int appNo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("studentStatusMapper.studentOff", appNo);
+	public StudentOff selectStuOff(SqlSessionTemplate sqlSession, int appNo) {
+
+		return sqlSession.selectOne("studentStatusMapper.selectStuOff", appNo);
 	}
+	
+
+	public StudentDo selectStuDo(SqlSessionTemplate sqlSession, int appNo) {
+
+		return sqlSession.selectOne("studentStatusMapper.selectStuDo", appNo);
+	}
+
+	public int insertStuOff(SqlSessionTemplate sqlSession, StudentOff stuOff) {
+		
+		return sqlSession.insert("studentStatusMapper.insertStuOff", stuOff);
+	}
+	
+	public int insertStsOff(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("studentStatusMapper.insertStsOff");
+	}
+
+	public int insertStuDo(SqlSessionTemplate sqlSession, StudentDo stuDo) {
+		
+		return sqlSession.insert("studentStatusMapper.insertStuDo", stuDo);
+	}
+
+
+	public int insertStsDo(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.insert("studentStatusMapper.insertStsDo");
+	}
+
+	public int selectOffCount(SqlSessionTemplate sqlSession, String stuId) {
+		
+		return sqlSession.selectOne("studentStatusMapper.selectOffCount", stuId);
+	}
+
+	public int selectDoCount(SqlSessionTemplate sqlSession, String stuId) {
+	
+		return sqlSession.selectOne("studentStatusMapper.selectDoCount", stuId);
+	}
+
+	public int deleteOff(SqlSessionTemplate sqlSession, int appNo) {
+	
+		return sqlSession.update("studentStatusMapper.deleteOff", appNo);
+	}
+
+	public int deleteStsOff(SqlSessionTemplate sqlSession, int appNo) {
+		
+		return sqlSession.update("studentStatusMapper.deleteStsOff", appNo);
+		
+	}
+
+	public int deleteDo(SqlSessionTemplate sqlSession, int appNo) {
+		
+		return sqlSession.update("studentStatusMapper.deleteDo", appNo);
+	}
+
+	public int deleteStsDo(SqlSessionTemplate sqlSession, int appNo) {
+		
+		return sqlSession.update("studentStatusMapper.deleteStsDo", appNo);
+	}
+
+
+	
 
 }
