@@ -29,14 +29,14 @@
 			<div class="tile">
 				<h3 class="tile-title">개인정보관리</h3>
 				<div class="tile-body">
-					<form>
+					<form action="profEditMypage.pr" method="post">
 						<div class="form-group">
 							<label class="control-label">교수번호</label> 
 							<input class="form-control" type="text" name="profId" value="${prof.profId}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">비밀번호</label> 
-							<input class="form-control" type="password" name="profPwd" placeholder="비밀번호 입력">
+							<input class="form-control" type="password" name="profPwd" placeholder="비밀번호 입력" required>
 						</div>
 						<div class="form-group">
 							<label class="control-label">교수명</label> 
