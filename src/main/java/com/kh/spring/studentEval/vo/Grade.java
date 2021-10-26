@@ -20,7 +20,7 @@ public class Grade {
 	private int gradeYear; 		// 	"GRADE_YEAR"		NUMBER		NOT NULL,
 	private int gradeSemester; 	//	"GRADE_SEMESTER"	NUMBER		NOT NULL,
 	private String gradeResult; // 	"GRADE_RESULT"		VARCHAR2(5)		NOT NULL,
-	private int gradeCredit; 	// 	"GRADE_CREDIT"		NUMBER		NOT NULL
+	private double gradeCredit; 	// 	"GRADE_CREDIT"		NUMBER		NOT NULL
 	
 	private String deptName;	  	// 학과(전공)
 	private String studentStatus; 	// 학적상태

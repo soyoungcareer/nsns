@@ -470,7 +470,7 @@
 							check=false;
 						}
 					},error:function(){
-						console.log("수강신청 과목체크 ajax 통신 실패");
+						console.log("수강신청 과목체크1 ajax 통신 실패");
 						check=false;
 					}
 				});
@@ -495,7 +495,27 @@
 							}
 						}
 					},error:function(){
-						console.log("수강신청 과목체크 ajax 통신 실패");
+						console.log("수강신청 과목체크2 ajax 통신 실패");
+						check=false;
+					}
+				});
+			  return check;
+		}
+		function checkDate(subCode) {
+			var check=true;
+			  $.ajax({
+					url:"checkDate.reg",
+					type:"post",
+					async: false,
+					data:{subCode:subCode},
+					success:function(result){
+						if(result==-1){
+							
+						}else{
+							check=false;
+						}
+					},error:function(){
+						console.log("수강신청 과목체크3 ajax 통신 실패");
 						check=false;
 					}
 				});
@@ -514,6 +534,7 @@
 		if(confirm('수강 신청하시겠습니까?')){
 			if(checkRegister(subCode)){
 				if(checkCredit(subCredit)){
+					if(checkDate(subCode)){
 				$.ajax({
 					url:"reInsert.reg",
 					type:"post",
@@ -531,6 +552,9 @@
 						console.log("수강신청 ajax 통신 실패");
 					}
 				});
+					}else{
+						alert("이미 수강 신청한 과목과 시간이 일치합니다. 다시한번 확인해 주세요");
+					}
 				}else{
 					alert("수강 신청한 과목의 학점이 20학점 초과입니다. 다시한번 확인해 주세요");
 				}

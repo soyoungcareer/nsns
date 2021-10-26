@@ -26,8 +26,11 @@
     			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
     			 <typeAlias type="com.kh.spring.facility.model.vo.searchFac" alias="SearchFac"/>
 			 <typeAlias type="com.kh.spring.facility.model.vo.facilitycheck" alias="FacilityCheck"/>
-
-
+		<typeAlias type="com.kh.spring.studentEval.vo.Grade" alias="Grade"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.CountCredit" alias="CountCredit"/>
+		<typeAlias type="com.kh.spring.gradeObject.vo.GradeObject" alias="GradeObject"/>
+		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
+		<typeAlias type="com.kh.spring.evaluation.vo.EvaluationScore" alias="EvaluationScore"/>
 	</typeAliases>
 
 
@@ -39,6 +42,7 @@
 		<mapper resource="/mappers/lectRegister-mapper.xml"/>
 		<mapper resource="/mappers/consult-mapper.xml"/>
 		<mapper resource="/mappers/prof-mapper.xml"/>
+		<mapper resource="/mappers/gradeStu-mapper.xml"/>
 	</mappers>
 	
  

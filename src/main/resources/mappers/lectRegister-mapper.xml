@@ -64,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="semester" column="SEMESTER" />
 		<result property="status" column="STATUS" />
 	</resultMap>
+
 	
 
 
@@ -233,7 +234,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET C.STU_CREDIT=C.STU_CREDIT+(SELECT a.SUB_CREDIT
 									FROM SUBJECT a
 									JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
-									WHERE b.SUB_CODE=#{subCode} AND b.STU_ID=#{stuId} AND b.YEAR=#{year} AND b.SEMESTER=#{semester})
+									WHERE b.SUB_CODE=#{subCode} AND b.STU_ID=#{stuId} AND b.YEAR=#{year} AND b.SEMESTER=#{semester} AND b.STATUS='Y')
 		WHERE C.STU_ID=#{stuId}
 	</update>
 	<update id="deleteCredit" parameterType="LectRegister">
@@ -241,7 +242,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET C.STU_CREDIT=C.STU_CREDIT-(SELECT a.SUB_CREDIT
 									FROM SUBJECT a
 									JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
-									WHERE b.SUB_CODE=#{subCode} AND b.STU_ID=#{stuId} AND b.YEAR=#{year} AND b.SEMESTER=#{semester})
+									WHERE b.SUB_CODE=#{subCode} AND b.STU_ID=#{stuId} AND b.YEAR=#{year} AND b.SEMESTER=#{semester} AND b.STATUS='Y')
 		WHERE C.STU_ID=#{stuId}
 	</update>
 	<select id="proList" resultMap="professorSet">
@@ -249,5 +250,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM PROFESSOR
 		WHERE PROF_STATUS='Y'
 		ORDER BY PROF_NAME
+	</select>
+	<select id="sDate" parameterType="string" resultMap="subjectListSet">
+		SELECT SUB_TIME
+		FROM SUBJECT
+		WHERE SUB_CODE=#{subCode} AND STATUS='Y'
 	</select>
 </mapper>

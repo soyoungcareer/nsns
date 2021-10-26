@@ -33,7 +33,7 @@
 
 				<div id="sampleTable_wrapper"
 					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-					<form action="searchReg.reg" class="row">
+					<form action="searchCart.reg" class="row">
 						<div class="col-sm-12 col-md-6">
 							<div class="dataTables_length" id="sampleTable_length" style="padding-left: 15px">
 								<label>이수구분 : &nbsp;&nbsp;&nbsp;
@@ -123,10 +123,10 @@
 											<c:choose>
 					                		<c:when test="${ pi.currentPage ne 1 }">
 						                		<c:if test="${ empty search }">
-													<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ pi.currentPage-1 }">«</a></li>
+													<li class="page-item"><a class="page-link" href="cart.reg?currentPage=${ pi.currentPage-1 }">«</a></li>
 												</c:if>
 												<c:if test="${ !empty search }">
-													<c:url var="searchUrl" value="searchReg.reg">
+													<c:url var="searchUrl" value="searchCart.reg">
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
 														<c:param name="condition1" value="${ condition1 }"/>
 														<c:param name="condition2" value="${ condition2 }"/>
@@ -144,10 +144,10 @@
 					                    	<c:choose>
 						                		<c:when test="${ pi.currentPage ne p }">
 					                    			<c:if test="${ empty search }">
-														<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ p }">${ p }</a></li>
+														<li class="page-item"><a class="page-link" href="cart.reg?currentPage=${ p }">${ p }</a></li>
 													</c:if>
 													<c:if test="${ !empty search }">
-														<c:url var="searchUrl" value="searchReg.reg">
+														<c:url var="searchUrl" value="searchCart.reg">
 															<c:param name="currentPage" value="${ p }"/>
 															<c:param name="condition1" value="${ condition1 }"/>
 															<c:param name="condition2" value="${ condition2 }"/>
@@ -157,17 +157,17 @@
 													</c:if>
 						                		</c:when>
 						                		<c:otherwise>
-						                			<li class="page-item active"><a class="page-link" href="register.reg?currentPage=${ p }">${ p }</a></li>
+						                			<li class="page-item active"><a class="page-link" href="cart.reg?currentPage=${ p }">${ p }</a></li>
 						                		</c:otherwise>
 						                	</c:choose>
 					                    </c:forEach>
 					                    <c:choose>
 					                		<c:when test="${ pi.currentPage ne pi.maxPage }">
 					                			<c:if test="${ empty search }">
-													<li class="page-item"><a class="page-link" href="register.reg?currentPage=${ pi.currentPage+1 }">»</a></li>
+													<li class="page-item"><a class="page-link" href="cart.reg?currentPage=${ pi.currentPage+1 }">»</a></li>
 												</c:if>
 												<c:if test="${ !empty search }">
-													<c:url var="searchUrl" value="searchReg.reg">
+													<c:url var="searchUrl" value="searchCart.reg">
 														<c:param name="currentPage" value="${pi.currentPage+1  }"/>
 														<c:param name="condition1" value="${ condition1 }"/>
 														<c:param name="condition2" value="${ condition2 }"/>
@@ -465,6 +465,26 @@
 				});
 			  return check;
 		}
+		function checkDate(subCode) {
+			var check=true;
+			  $.ajax({
+					url:"checkDate.reg",
+					type:"post",
+					async: false,
+					data:{subCode:subCode},
+					success:function(result){
+						if(result==-1){
+							
+						}else{
+							check=false;
+						}
+					},error:function(){
+						console.log("수강신청 과목체크3 ajax 통신 실패");
+						check=false;
+					}
+				});
+			  return check;
+		}
 	</script>
 	
 	<script>
@@ -533,6 +553,7 @@
 		if(confirm('수강 신청하시겠습니까?')){
 			if(checkRegister(subCode)){
 				if(checkCredit(subCredit)){
+					if(checkDate(subCode)){
 				$.ajax({
 					url:"reInsert.reg",
 					type:"post",
@@ -550,6 +571,9 @@
 						console.log("수강신청 ajax 통신 실패");
 					}
 				});
+					}else{
+						alert("이미 수강 신청한 과목과 시간이 일치합니다. 다시한번 확인해 주세요");
+					}
 				}else{
 					alert("수강 신청한 과목의 학점이 20학점 초과입니다. 다시한번 확인해 주세요");
 				}

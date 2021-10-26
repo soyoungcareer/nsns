@@ -1,9 +1,10 @@
 package com.kh.spring.lectRegister.vo;
 
-import com.kh.spring.evaluation.vo.Evaluation;
+import com.kh.spring.gradeObject.vo.GradeObject;
 import com.kh.spring.major.vo.Department;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
+import com.kh.spring.studentEval.vo.Grade;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,5 +23,7 @@ public class LecRegPro {
 	private LectRegister lectRegister;
 	private Department department;
 	private Attachment attachment;
+	private Grade grade;
+	private GradeObject gradeObject;
 	private float evaluation;
 }
