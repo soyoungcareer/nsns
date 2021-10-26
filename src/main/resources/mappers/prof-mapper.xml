@@ -48,13 +48,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="semester" column="SEMESTER"/>
 	</resultMap>
 	
+	<!-- 상담 -->
+	<resultMap type="Consult" id="consultResultSet">
+		<id property="conNo" column="CON_NO"/>
+		<result property="conCategory" column="CON_CATEGORY"/>	
+		<result property="conDate" column="CON_DATE"/>	
+		<result property="conReason" column="CON_REASON"/>	
+		<result property="rejectReason" column="REJECT_REASON"/>	
+		<result property="status" column="STATUS"/>	
+		<result property="stuId" column="STU_ID"/>
+		<!-- 학생이름, 제목, 내용 상담 객체에 추가 -->	
+	</resultMap>
+	
+	<!-- 강의평가 -->
+	<resultMap type="Evaluation" id="evalResultSet">
+		<id property="lectEvaNo" column="LECT_EVA_NO"/>
+		<result property="question" column="QUESTION"/>
+		<result property="score" column="SCORE"/>
+		<!-- <result property="year" column="YEAR"/>
+		<result property="semester" column="SEMESTER"/> -->
+	</resultMap>
+	
+	<!-- 학적변동 -->
+	<resultMap type="StudentStatus" id="studentStatusResultSet">
+		<id property="stsNo" column="STS_NO"/>
+		<result property="stsProcess" column="STS_PROCESS"/>
+		<result property="stsComplete" column="STS_COMPLETE"/>
+		<result property="stsCategory" column="STS_CATEGORY"/>
+		<result property="status" column="STATUS"/>
+		<result property="applicationNoOff" column="APPLICATION_NO_OFF"/>
+		<result property="applicationNoDo" column="APPLICATION_NO_DO"/>
+	</resultMap>
+	
+	
+	
 	
 	<!-- 로그인 교수 -->
 	<select id="loginProfessor" parameterType="Professor" resultMap="profResultSet">
 		SELECT * FROM PROFESSOR
-		WHERE PROF_ID=#{profId} AND STATUS='Y'
+		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</select>
 	
+	
+	
+	<!-- 마이페이지 -->
 	<!-- 교수 마이페이지 개인정보 조회 -->
 	<select id="selectMypage" parameterType="Professor" resultMap="profResultSet">
 		SELECT PROF_ID, PROF_NAME, DEPT_TITLE, PROF_EMAIL, PROF_PHONE, PROF_ADDRESS
@@ -63,14 +100,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</select>
 	
-	<!-- 교수 마이페이지 개인정보 업데이트 -->
+	<!-- 교수 마이페이지 개인정보 수정 -->
 	<update id="editMypage" parameterType="Professor">
 		UPDATE PROFESSOR
 		SET PROF_PWD=#{profPwd}, PROF_EMAIL=#{profEmail}, PROF_PHONE=#{profPhone}, PROF_ADDRESS=#{profAddress}
 		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</update>
 	
-	<!-- 강의 개설 신청 학과명, 교수명 끌어오기 -->
+	
+	
+	<!-- 강의관리 -->
+	<!-- 강의개설 -->
+	<!-- 강의개설 신청시 학과명, 교수명 불러오기 -->
 	<select id="profInfoLoad" parameterType="Professor" resultMap="profResultSet">
 		SELECT DEPT_TITLE, PROF_NAME
 		FROM PROFESSOR
@@ -85,13 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{subCredit}, #{subTime}, DEFAULT)
 	</insert>
 	
-	<!-- 강의 수정시 과목정보 불러오기 -->
-	<select id="subInfoLoad" parameterType="Subject" resultMap="profSubResultSet">
-		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
-		FROM SUBJECT
-		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
-	</select>
-	
+	<!-- 강의목록 조회 -->
 	<!-- 교수 강의목록 개수 -->
 	<select id="profLectListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -107,14 +142,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE PROF_ID=#{profId}
 	</select>
 	
+	<!-- 강의수정 -->
+	<!-- 강의 수정시 과목정보 불러오기 -->
+	<select id="subInfoLoad" parameterType="Subject" resultMap="profSubResultSet">
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
+	</select>
+	
+	<!-- 강의정보 수정 -->
+
+	
+	<!-- 강의삭제 -->
+	
+	
+	
+	<!-- 학생관리 -->
+	<!-- 학생목록조회 -->
 	<!-- 강의별 학생목록 불러오기 -->
 	<select id="profStudentDetail" resultMap="profStuResultSet">
 		SELECT B.DEPT_TITLE, A.STU_ID, A.STU_NAME, A.STU_STATUS, A.EMAIL, A.PHONE
 		FROM STUDENT A
-		JOIN DEPARTMENT B USING(DEPT_CODE)
-		JOIN LECT_REGISTER C USING(STU_ID)
-		JOIN SUBJECT D USING(SUB_CODE)
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
+		JOIN LECT_REGISTER C ON A.STU_ID=C.STU_ID
+		JOIN SUBJECT D ON C.SUB_CODE=D.SUB_CODE
 		WHERE C.SUB_CODE=#{subCode} AND C.YEAR=#{year} AND C.SEMESTER=#{semester} AND D.PROF_ID=#{profId}
 	</select>
+	
+	<!-- 학생상담관리 -->
+	<select id="loadConsultList" resultMap="consultResultSet">
+		SELECT CON_NO, CON_CATEGORY, CON_DATE, CON_REASON, REJECT_REASON, STATUS, STU_ID
+		FROM CONSULT
+		JOIN STUDENT USING(STU_ID)
+		WHERE PROF_ID=#{profId}
+	</select>
+	
+	<!-- 학생출결관리 -->
+	
+	<!-- 강의평가조회 -->
+	<select id="loadEvalList" resultMap="evalResultSet">
+		SELECT QUESTION, SCORE
+		FROM LECT_EVALUATE A
+		JOIN LECT_REGISTER B USING(LECT_REG_NO)
+		WHERE B.SUB_CODE=#{subCode} AND B.YEAR=#{subYear} AND B.SEMESTER=#{subSmst}
+	</select>
+	
+	<!-- 학적변동승인 -->
+	<!-- 자퇴 -->
+<!-- 	<select id="loadDoList" resultMap="doStatusResultSet">
+		SELECT C.STU_NAME, B.DO_DATE, C.STU_STATUS, B.DO_REASON, A.STS_PROCESS
+		FROM STU_STATUS_PRO A
+		JOIN STU_DO B ON A.APPLICATION_NO_DO=B.APPLICATION_NO
+		JOIN STUDENT C ON C.STU_ID=B.STU_ID
+		WHERE A.STATUS='Y'
+	</select>
+	
+	휴학
+	<select id="loadOffList" resultMap="offStatusResultSet">
+		SELECT C.STU_NAME, B.OFF_DATE, C.STU_STATUS, B.OFF_CATEGORY, B.OFF_SEM_CNT, B.OFF_SEM, B.OFF_REASON, A.STS_PROCESS
+		FROM STU_STATUS_PRO A
+		JOIN STU_OFF B ON A.APPLICATION_NO_OFF=B.APPLICATION_NO
+		JOIN STUDENT C ON C.STU_ID=B.STU_ID
+		WHERE A.STATUS='Y'
+	</select> -->
+	
+<!-- 	<select id="studentProList" resultMap="studentStatusResultMap" parameterType="string">
+		SELECT STU_STATUS_PRO.STS_PROCESS, STU_STATUS_PRO.STS_CATEGORY, STU_STATUS_PRO.STS_COMPLETE, STU_STATUS_PRO.STATUS, APPLICATION_NO_OFF,APPLICATION_NO_DO
+		FROM STU_STATUS_PRO
+		LEFT JOIN STU_OFF ON STU_STATUS_PRO.APPLICATION_NO_OFF = STU_OFF.APPLICATION_NO
+		LEFT JOIN STU_DO ON STU_STATUS_PRO.APPLICATION_NO_DO = STU_DO.APPLICATION_NO
+		WHERE  STU_STATUS_PRO.STATUS = 'Y'
+		AND (STU_OFF.STU_ID = #{stuId} OR STU_DO.STU_ID = #{stuId})
+	</select> -->
+	
 	
 </mapper>

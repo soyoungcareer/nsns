@@ -9,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.consult.model.vo.Consult;
+import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.service.ProfService;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 
 @Controller 
@@ -45,7 +49,7 @@ public class ProfController {
 	}
 	
 	// 교수 개인정보 수정
-	@RequestMapping("profEditMypage.pr")
+	@RequestMapping(value="profEditMypage.pr", method=RequestMethod.POST)
 	public String profEditMypage(String profPwd, String profEmail, String profPhone, String profAddress,
 								Model model, HttpSession session) {
 		
@@ -65,12 +69,11 @@ public class ProfController {
 		
 		profService.editMypage(prof);
 		
-		/////////////////////////////////////////
-		// 정보 수정 안됨. 화면이 기존 데이터로 다시 로딩됨.
-		/////////////////////////////////////////
-		
-		return "redirect:/profMypage";
+		System.out.println("============prof Controller : " + prof);
+
+		return "redirect:profMypage.pr";
 	}
+	
 	
 	// ============= 강의 관리 ==============
 	// 강의 개설시 뷰에 읽기전용 데이터 로드
@@ -124,7 +127,6 @@ public class ProfController {
 		
 		////////////////////////////////////////////////////
 		// 1022 - 강의개설신청 테이블(REQ_SUBJECT) 추가. 
-		// 강의개설 신청시 NullPointerException 발생.
 		////////////////////////////////////////////////////
 		
 		
@@ -196,38 +198,80 @@ public class ProfController {
 		// 임시 데이터
 		String profId = "EC1901";
 		String subCode = "2101001";
-		int year = 1;
+		int year = 2021;
 		int semester = 1;
 		
 		ArrayList<Subject> subList = profService.selectSubList(profId);
-		ArrayList<Student> stuList = profService.profStudentDetail(subCode);
+		ArrayList<Student> stuList = profService.profStudentDetail(subCode); // 학년도, 학기 반영해야함
 		
-		model.addAttribute(stuList);
+		model.addAttribute("subList", subList);
+		model.addAttribute("stuList", stuList);
 		
 		return "professor/profStudentDetail";
 	}
 	
 	// 상담 관리
 	@RequestMapping("profConsult.pr")
-	public String profConsult() {
+	public String profConsult(Model model) {
+		// 임시 데이터
+		String profId = "HI1301";
+		
+		ArrayList<Consult> conList = profService.loadConsultList(profId);
+		
+		System.out.println("============ conList Controller : " + conList);
+		
+		model.addAttribute("conList", conList);
+		
 		return "professor/profConsult";
 	}
 	
 	// 상담 관리 상세
 	@RequestMapping("profConsultDetail.pr")
 	public String profConsultDetail() {
+		
+		
 		return "professor/profConsultDetail";
 	}
 	
 	// 강의평가 조회
 	@RequestMapping("profEvaluation.pr")
-	public String profEvaluation() {
+	public String profEvaluation(Model model, String subYear, String subSmst) {
+		// 임시 데이터
+		String profId = "EC1901";
+		String subCode = "2101001";
+		
+//		int intYear = Integer.parseInt(subYear);
+//		int intSemester = Integer.parseInt(subSmst);
+		
+		int intYear = 2021;
+		int intSemester = 1;
+		
+		Subject sub = new Subject();
+		sub.setSubYear(intYear);
+		sub.setSubSmst(intSemester);
+		sub.setSubCode(subCode);
+		sub.setProfId(profId);
+		
+		//========== 교수별 강의목록 먼저 조회 후, 강의별 강의평가 조회하기.
+		ArrayList<Subject> subList = profService.selectSubList(profId);
+		ArrayList<Evaluation> evalList = profService.loadEvalList(sub);
+		
+		model.addAttribute("subList", subList);
+		model.addAttribute("evalList", evalList);
+		
 		return "professor/profEvaluation";
 	}
 	
 	// 학적변동 승인
 	@RequestMapping("profStudentStatus.pr")
-	public String profStudentStatus() {
+	public String profStudentStatus(Model model) {
+		// 임시 데이터
+		String profId = "EC1901";
+		
+		ArrayList<StudentStatus> statusList = profService.loadStatusList(profId);
+		
+		model.addAttribute("statusList", statusList);
+		
 		return "professor/profStudentStatus";
 	}
 	

@@ -59,7 +59,7 @@
 						<div class="row">
 							<div class="form-group col-md-3">
 	                    		<label for="detailTxtArea">내용</label>
-	                    		<textarea class="form-control" id="detailTxtArea" rows="3"></textarea>
+	                    		<textarea class="form-control" type="text" value="" readonly></textarea>
 	                  		</div>
 	                  	</div>
                   		
