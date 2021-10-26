@@ -25,10 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (SEQ_AC_ID.NEXTVAL, #{title}, #{start}, #{end}, #{backgroundColor})
 	</insert>
 	
-	<select id="calendarList" parameterType="string" resultMap="calendarResultMap">
-		SELECT*
+	<select id="calendarList" parameterType="SearchCondition" resultMap="calendarResultMap">
+		SELECT *
 		FROM ACADEMIC_CALENDAR 
-		WHERE EXTRACT (MONTH FROM "START") LIKE #{op}
+		WHERE  EXTRACT (YEAR FROM "START") LIKE #{selectYear}
+		AND EXTRACT (MONTH FROM "START") LIKE #{selectMonth}
 		ORDER BY "START"
 	</select>
 	
@@ -44,5 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM ACADEMIC_CALENDAR 
 		WHERE AC_ID = #{acId}
 	</delete>
+	
+	<select id="selectYear" resultType="string">
+		SELECT DISTINCT EXTRACT(YEAR FROM "START")
+		FROM ACADEMIC_CALENDAR
+	</select>
 	
 </mapper>

@@ -136,42 +136,34 @@
     	
     	function check(){
 	    	var stuId = $("#stuId").val();
-	  		  
+	    	var flag = true; 
+	    	
 		   	$.ajax({
 				url: "offCount.stu",
 				dataType:"json",
 				data : { stuId :stuId },
+				async : false,
 				success: function(count){
-					return checkCount(count);
+					console.log(count);
+					 if(count != 0) {
+						  var str = ' <div class="alert alert-dismissible alert-danger">' 
+				        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+				        		+ ' <strong>확인!</strong> 휴학 신청 중인 내역이 있습니다. '
+				        		+ ' </div> '
+				        				
+				        		$('.bs-component').empty();
+				        		$('.bs-component').append(str);
+				        	flag = false;
+				  		}
 							
 				},
 				error:function(){
 					console.log("Ajax 통신 실패");
 				}
 			});
-		   	
-		    return true;
+		   	return flag;
     	}
     	
-    	function checkCount(count){
-    		
-        		if(count != 0) {
-        			
-        			var str = ' <div class="alert alert-dismissible alert-danger">' 
-    					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
-    					+ ' <strong>확인!</strong> 현재 휴학 신청중인 내역이 있습니다! '
-    					+ ' </div> '
-    				$('.bs-component').empty();
-    			    $('.bs-component').append(str);
-    					
-    				return false;
-        		} 
-        		
-        		return true;
-    	}
-    	
-		
-	
 	</script>
 
   </body>

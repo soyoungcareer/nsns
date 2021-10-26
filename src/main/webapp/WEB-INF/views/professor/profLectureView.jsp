@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	int count = 1;
@@ -47,6 +46,13 @@
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
+												<th>
+													<div class="animated-checkbox">
+								                        <label>
+								                          <input type="checkbox"><span class="label-text"></span>
+								                        </label>
+								                    </div>
+												</th>
 												<th class="sorting_asc" tabindex="0"
 													aria-controls="sampleTable" rowspan="1" colspan="1"
 													aria-sort="ascending"
@@ -92,8 +98,15 @@
 													<tr><td colspan="8">개설된 강의가 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty subList}">
-													<c:forEach var="list" items="${subList}">
+													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
+															<td>
+																<div class="animated-checkbox">
+											                        <label>
+											                          <input type="checkbox"><span class="label-text"> </span>
+											                        </label>
+											                    </div>
+															</td>
 															<td class="sorting_1"><%=count++ %></td>
 															<td><c:out value="${subList.subCode}"/></td>
 															<td><c:out value="${subList.subTitle}"/></td>

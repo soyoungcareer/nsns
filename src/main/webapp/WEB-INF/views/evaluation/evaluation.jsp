@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,95 +42,39 @@
                </div>
 				<div id="sampleTable_wrapper"
 					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-					<div class="row">
-						
+						<form id="evaluationList" action="insertEval.ev"  method="post">
 						<div class="col-sm-12" style="margin-top: 10px">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="sampleTable">
 									<thead>
 										<tr style="background: #222d32; color: white;">
-											<th>번호</th>
-											<th style="width: 70%">질문항목</th>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
-											<th>5</th>
+											<th style="width: 7%">번호</th>
+											<th >질문항목</th>
+											<th style="width: 5%">1점</th>
+											<th style="width: 5%">2점</th>
+											<th style="width: 5%">3점</th>
+											<th style="width: 5%">4점</th>
+											<th style="width: 5%">5점</th>
 										</tr>
 									</thead>
 									<tbody>
-
-										<tr>
-											<td>1</td>
-											<td>이 강좌는 관련 지식을 습득하는데 도움이 된다고 생각한다.</td>
-											<td><input type="radio" value="1" name="grade1" id="grade11">
-												<label for="grade11">1점</label> </td>
-											<td><input type="radio" value="2" name="grade1" id="grade12">
-												<label for="grade12">2점</label></td>
-											<td><input type="radio" value="2" name="grade1" id="grade13">
-												<label for="grade13">3점</label></td>
-											<td><input type="radio" value="4" name="grade1" id="grade14">
-												<label for="grade14">4점</label></td>
-											<td><input type="radio" value="5" name="grade1" id="grade15">
-												<label for="grade15">5점</label></td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>이 강좌는 관련 지식을 습득하는데 도움이 된다고 생각한다.</td>
-											<td><input type="radio" value="1" name="grade2" id="grade21">
-												<label for="grade21">1 점</label> </td>
-											<td><input type="radio" value="2" name="grade2" id="grade22">
-												<label for="grade22">2 점</label></td>
-											<td><input type="radio" value="2" name="grade2" id="grade23">
-												<label for="grade23">3 점</label></td>
-											<td><input type="radio" value="4" name="grade2" id="grade24">
-												<label for="grade24">4 점</label></td>
-											<td><input type="radio" value="5" name="grade2" id="grade25">
-												<label for="grade25">5 점</label></td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>이 강좌는 관련 지식을 습득하는데 도움이 된다고 생각한다.</td>
-											<td><input type="radio" value="1" name="grade3" id="grade31">
-												<label for="grade31">1 점</label> </td>
-											<td><input type="radio" value="2" name="grade3" id="grade32">
-												<label for="grade32">2 점</label></td>
-											<td><input type="radio" value="2" name="grade3" id="grade33">
-												<label for="grade33">3 점</label></td>
-											<td><input type="radio" value="4" name="grade3" id="grade34">
-												<label for="grade34">4 점</label></td>
-											<td><input type="radio" value="5" name="grade3" id="grade35">
-												<label for="grade35">5 점</label></td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>이 강좌는 관련 지식을 습득하는데 도움이 된다고 생각한다.</td>
-											<td><input type="radio" value="1" name="grade4" id="grade41">
-												<label for="grade41">1 점</label> </td>
-											<td><input type="radio" value="2" name="grade4" id="grade42">
-												<label for="grade42">2 점</label></td>
-											<td><input type="radio" value="2" name="grade4" id="grade43">
-												<label for="grade43">3 점</label></td>
-											<td><input type="radio" value="4" name="grade4" id="grade44">
-												<label for="grade44">4 점</label></td>
-											<td><input type="radio" value="5" name="grade4" id="grade45">
-												<label for="grade45">5 점</label></td>
-										</tr>
-										<tr>
-											<td>5</td>
-											<td>이 강좌는 관련 지식을 습득하는데 도움이 된다고 생각한다.</td>
-											<td><input type="radio" value="1" name="grade5" id="grade51">
-												<label for="grade51">1 점</label> </td>
-											<td><input type="radio" value="2" name="grade5" id="grade52">
-												<label for="grade52">2 점</label></td>
-											<td><input type="radio" value="2" name="grade5" id="grade53">
-												<label for="grade53">3 점</label></td>
-											<td><input type="radio" value="4" name="grade5" id="grade54">
-												<label for="grade54">4 점</label></td>
-											<td><input type="radio" value="5" name="grade5" id="grade55">
-												<label for="grade55">5 점</label></td>
-										</tr>
-										<tr>
+										<c:forEach items="${ evalList }" var="eval" varStatus="eNum">
+						                    <tr>
+						                    	<td>${ eNum.index+1 }</td>
+						                        <td>${ eval.question }</td>
+											    <td><input type="radio" value="1" name="grade${ eNum.index+1 }" id="grade${ eNum.index+1 }1">
+												<label for="grade${ eNum.index+1 }1">1</label> </td>
+												<td><input type="radio" value="2" name="grade${ eNum.index+1 }" id="grade${ eNum.index+1 }2">
+													<label for="grade${ eNum.index+1 }2">2</label></td>
+												<td><input type="radio" value="2" name="grade${ eNum.index+1 }" id="grade${ eNum.index+1 }3">
+													<label for="grade${ eNum.index+1 }3">3</label></td>
+												<td><input type="radio" value="4" name="grade${ eNum.index+1 }" id="grade${ eNum.index+1 }4">
+													<label for="grade${ eNum.index+1 }4">4</label></td>
+												<td><input type="radio" value="5" name="grade${ eNum.index+1 }" id="grade${ eNum.index+1 }5">
+													<label for="grade${ eNum.index+1 }5">5</label></td>
+						                    </tr>
+						                    <input type="hidden" name="lectNum" value="${ eval.lectRegNo }">
+					                    </c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -137,13 +83,13 @@
 						<div >
 		                <div class="col-md-12">
 		                <a class="btn btn-secondary" href="#" onclick="history.go(-1)"><i class="fa fa-fw fa-lg fa-times-circle"></i>뒤로가기</a>&nbsp;&nbsp;&nbsp;
-		                  <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>저장하기</button>&nbsp;&nbsp;&nbsp;
+		                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>저장하기</button>&nbsp;&nbsp;&nbsp;
 		                </div>
 		            </div>
+		            </form>
 					</div>
 				</div>
 			</div>
-		</div>
 	</main>
 </body>
 </html>

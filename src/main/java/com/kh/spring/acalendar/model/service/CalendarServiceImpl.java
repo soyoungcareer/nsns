@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.acalendar.model.dao.CalendarDao;
 import com.kh.spring.acalendar.model.vo.Acalendar;
+import com.kh.spring.acalendar.model.vo.SearchCondition;
 import com.kh.spring.common.exception.CommException;
 
 @Service
@@ -38,9 +39,14 @@ public class CalendarServiceImpl implements CalendarService {
 
 	//학사일정 리스트 가져오기
 	@Override
-	public ArrayList<Acalendar> calendarList(String op) {
-		return calendarDao.calendarList(sqlsession, op);
+	public ArrayList<Acalendar> calendarList(SearchCondition sc) {
+		
+		ArrayList<Acalendar> list = calendarDao.calendarList(sqlsession, sc);
+		
+		return list;
 	}
+
+	
 
 	//학사일정 삭제
 	@Override
@@ -51,6 +57,14 @@ public class CalendarServiceImpl implements CalendarService {
 		if(result < 0) {
 			throw new CommException("일정 등록 실패");
 		}
+		
+	}
+
+	@Override
+	public ArrayList<String> selectYear() {
+		
+		return calendarDao.selectYear(sqlsession);
+				 
 		
 	}
 

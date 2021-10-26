@@ -11,6 +11,7 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 
 
@@ -99,6 +100,15 @@ public class LectRegisterDao {
 	public ArrayList<Professor> proList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("lectRegisterMapper.proList");
 	}
+
+	public Subject sDate(SqlSessionTemplate sqlSession, String subCode) {
+		return sqlSession.selectOne("lectRegisterMapper.sDate", subCode);
+	}
+
+	public ArrayList<LectRegister> selectReDateList(SqlSessionTemplate sqlSession, int stuId) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectReDateList", stuId);
+	}
+
 
 
 }

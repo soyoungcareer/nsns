@@ -96,7 +96,18 @@ public class LectRegisterController {
 			return new GsonBuilder().create().toJson(countCredit);
 		 
 	}
-
+	@ResponseBody 
+	@RequestMapping(value="checkDate.reg", produces="applicatoin/json; charset=utf-8")// 수강신청하는데 중복된 시간인가
+	public String checkDate(String subCode) {
+		//int stuId = 20188503;//임시 아이디 
+		  int stuId = 20193019;//임시 아이디 
+		  ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId);//수강신청한 과목
+		  System.out.println("arlist"+arlist);
+		  int result =lectRegisterService.checkDate(arlist, subCode);//수강과목
+		  System.out.println("result"+result);
+			return new GsonBuilder().create().toJson(result);
+		 
+	}
 	@RequestMapping("searchReg.reg")// 수강신청 검색
 	public String searchRegister(@RequestParam(value="currentPage", required= false, defaultValue = "1") int currentPage,
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
@@ -142,6 +153,35 @@ public class LectRegisterController {
 			model.addAttribute("arlist",arlist);
 			model.addAttribute("departList",departList);
 					return "lectRegister/registerCart";
+	}
+	@RequestMapping("searchCart.reg")// 장바구니 검색
+	public String searchCart(@RequestParam(value="currentPage", required= false, defaultValue = "1") int currentPage,
+			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
+			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2,
+			@RequestParam(value="search", required= false, defaultValue = "%") String search, Model model) {
+		  
+			SearchReg sr = new SearchReg();
+			sr.setCondition1(condition1);
+			sr.setCondition2(condition2);
+			sr.setSearch(search);
+		  	int listCount = lectRegisterService.searchListCount(sr);// 검색후 list 갯수
+		  	PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		  	int stuId = 20193019;//
+		  	ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId); 
+		  	ArrayList<LecRegPro> sublist = lectRegisterService.searchLectReList(sr, pi);
+		  	ArrayList<Department> departList = lectRegisterService.departList();
+		  	model.addAttribute("pi",pi); 
+			model.addAttribute("sublist",sublist);
+			model.addAttribute("arlist",arlist);
+			model.addAttribute("departList",departList);
+			model.addAttribute("condition1",condition1);
+			model.addAttribute("condition2",condition2);
+			if(search.equals("%")) {
+				search="";
+			}
+			model.addAttribute("search",search);
+			return "lectRegister/registerCart";
+		 
 	}
 	@ResponseBody 
 	@RequestMapping(value="selectCartReg.reg", produces="applicatoin/json; charset=utf-8")//장바구니한 과목 리스트
@@ -238,18 +278,6 @@ public class LectRegisterController {
 			model.addAttribute("search",search);
 			return "lectRegister/lectRegisterAdmin";
 		 
-	}
-	@RequestMapping("grade.gra") // 성적 조회 페이지
-	public String gradeSearchPage(Model model) {
-		return "studentEval/gradeSearchPage";
-	}
-
-	@RequestMapping("credit.reg") // 학점 조회 페이지
-	public String creditSearchPage(Model model) {
-		int stuId = 20193019;//임시 아이디 
-		ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId);
-		model.addAttribute("arlist",arlist);//수강신청한 과목
-		return "studentEval/creditSearchPage";
 	}
 }
 

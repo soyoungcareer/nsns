@@ -20,15 +20,15 @@ public class Grade {
 	private int gradeYear; 		// 	"GRADE_YEAR"		NUMBER		NOT NULL,
 	private int gradeSemester; 	//	"GRADE_SEMESTER"	NUMBER		NOT NULL,
 	private String gradeResult; // 	"GRADE_RESULT"		VARCHAR2(5)		NOT NULL,
-	private int gradeCredit; 	// 	"GRADE_CREDIT"		NUMBER		NOT NULL
+	private double gradeCredit; 	// 	"GRADE_CREDIT"		NUMBER		NOT NULL
 	
-	private String deptName;	  	// 학과(전공)
+	private String deptTitle;	  	// 학과(전공)
 	private String studentStatus; 	// 학적상태
 	private int attendance;			// 출석
 	private int assignment;			// 과제
 	private int midExam;			// 중간
 	private int finExam;			// 기말
-	//private int total;				// 점수(총점)
+	private int gradeTotal;				// 점수(총점)
 	
 	// 학년, 평가방법?
 }
