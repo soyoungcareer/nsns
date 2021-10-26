@@ -45,7 +45,7 @@
           <div class="tile">
             <div class="row">
               <div class="col-lg-6">
-                <form>
+                <form id="noticeUpdateForm" method="post" action="update.ntc" enctype="multipart/form-data">
                 	<!-- <table style="width:300px">
                 		<tr>
                 			<td><label class="control-label">제목</label></td>
@@ -68,7 +68,7 @@
                   <!-- form all -->
                   <div class="form-group">
 	                <label class="control-label">제목</label>
-	                <input class="form-control" type="text" placeholder="글자 수 제한 255byte" value="" maxlength="255">
+	                <input class="form-control" type="text" placeholder="글자 수 제한 255byte" value="${ n.ntcTitle }" maxlength="255" required>
                   </div>
 
                   <div class="form-group">
@@ -90,21 +90,30 @@
                   </div>
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
-                    <textarea class="form-control" id="ntcContent" rows="3" placeholder="글자수 제한 3500byte" style="resize:none"></textarea>
+                    <textarea class="form-control" id="ntcContent" rows="3" placeholder="글자수 제한 3500byte" style="resize:none">${n.ntcContent }</textarea>
                   </div>
                   
                   <div class="form-group"> 
-                    <input class="form-control-file" id="exampleInputFile" type="file" aria-describedby="fileHelp">
+                    
+                    <input class="form-control-file" type="file" id="attachment" name="reUploadFile" aria-describedby="fileHelp">
+                            <c:if test="${ !empty n.originName }">
+	                                                               현재 파일 : ${ n.originName } <br>
+	                            <input type="hidden" name="changeName" value="${ n.changeName }">
+	                            <input type="hidden" name="originName" value="${ n.originName }">
+                            </c:if>
+                            
                   </div>
+                  
+                  <div class="tile-footer">
+		            <!-- admin button -->
+		              <button class="btn btn-primary" type="submit">수정하기</button>
+		            </div>
                   
                 </form>
               </div>
               
             </div>
-            <div class="tile-footer">
-            <!-- admin button -->
-              <button class="btn btn-primary" type="submit" onclick="update.ntc">수정하기</button>
-            </div>
+            
           </div>
         </div>
       </div>

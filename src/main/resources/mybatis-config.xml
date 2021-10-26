@@ -8,6 +8,12 @@
 
 	<typeAliases>
 
+		<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.spring.member.vo.Admin" alias="Admin"/>
+		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
+		<typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
+		
+		
 	 <typeAlias type="com.kh.spring.facility.model.vo.facility" alias="Facility"/>	
 	     <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
 		 <typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
@@ -43,6 +49,9 @@
 
 
 	<mappers>
+
+		<mapper resource="/mappers/admin-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/facility-mapper.xml"/>
 		<mapper resource="/mappers/calendar-mapper.xml"/> 
 		<mapper resource="/mappers/student-mapper.xml"/> 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+
+	<resultMap id="adminResultSet" type="Admin">
+		<id property="admId" column="ADM_ID"/>
+		<result property="admPwd" column="ADM_PWD"/>	
+	</resultMap>
+	
+	<resultMap id="studentResultSet" type="Student">
+		<id property="stuId" column="STU_ID"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="stuPwd" column="STU_PWD"/>
+		<result property="stuName" column="STU_NAME"/>
+		<result property="ssn" column="SSN"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="stuCredit" column="STU_CREDIT"/>
+		<result property="graduationDate" column="GRADUATION_DATE"/>
+		<result property="addmissionDate" column="ADDMISSION_DATE"/>
+		<result property="stuStatus" column="STU_STATUS"/>	
+	</resultMap>
+	
+	<resultMap id="professorResultSet" type="Professor">
+		<id property="profId" column="PROF_ID"/>
+		<result property="profPwd" column="PROF_PWD"/>
+		<result property="profName" column="PROF_NAME"/>
+		<result property="profDept" column="DEPT_CODE"/>
+		<result property="profRrn" column="PROF_RRN"/>
+		<result property="profEmail" column="PROF_EMAIL"/>
+		<result property="profPhone" column="PROF_PHONE"/>
+		<result property="profAddress" column="PROF_ADDRESS"/>
+		<result property="profStatus" column="PROF_STATUS"/>
+		<result property="profEmpdate" column="PROF_EMPDATE"/>
+	</resultMap>
+	
+	<!-- 암호화 -->
+	<select id="loginAdmin" parameterType="Admin" resultMap="adminResultSet">
+		SELECT * FROM ADMIN
+		WHERE ADM_ID = #{admId}	
+	</select>
+	
+	<select id="loginStudent" parameterType="Student" resultMap="studentResultSet">
+		SELECT * FROM STUDENT
+		WHERE STU_ID = #{stuId}
+	</select>
+	
+	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
+		SELECT * FROM PROFESSOR
+		WHERE PROF_ID = #{profId}
+	</select>
+
+
+</mapper>
