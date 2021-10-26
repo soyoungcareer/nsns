@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lectureMapper">
+
+
+
+	<resultMap id="lectureList" type="lecture">
+		<id property="lecNo" column="LECT_REG_NO" />
+		<result property="lecTitle" column="SUB_TITLE" />
+		<result property="lecYear" column="Year" />
+		<result property="lecTer" column="SEMESTER" />
+		<result property="deptTitle" column="DEPT_TITLE" />
+		<result property="proName" column="PROF_NAME" />
+
+	</resultMap>
+
+
+
+	<resultMap id="lectureListse" type="lectureList">
+		<id property="listNo" column="LISTNO" />
+		<result property="regNo" column="LECT_REG_NO" />
+		<result property="subTitle" column="SUB_TITLE" />
+		<result property="listContent" column="LIST_CONTENT" />
+		<result property="listDate" column="LIST_DATE 	" />
+		<result property="listWeek" column="LIST_WEEK" />
+		<result property="changeName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
+		<result property="time" column="TIME" />
+		<result property="totalTime" column="TOALTIME" />
+		
+
+	</resultMap>
+
+
+	<resultMap id="lecReply" type="Reply">
+		<id property="replyNo" column="REPLY_NO" />
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="refbNo" column="REF_BNO" />
+		<result property="replyWriter" column="REPLY_WRITER" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="status" column="STATUS" />
+
+	</resultMap>
+
+
+	<select id="selectList" resultMap="lectureList"
+		parameterType="_int">
+		SELECT A.LECT_REG_NO, B.SUB_TITLE , A.YEAR , A.SEMESTER,
+		C.DEPT_TITLE, D.PROF_NAME
+		FROM LECT_REGISTER A
+		JOIN SUBJECT B ON
+		A.SUB_CODE = B.SUB_CODE
+		JOIN DEPARTMENT C ON B.DEPT_CODE = C.DEPT_CODE
+		JOIN PROFESSOR D ON B.PROF_ID = D.PROF_ID
+		WHERE STU_ID=#{id}
+		AND
+		A.STATUS='Y'
+
+	</select>
+
+
+
+
+
+	<select id="selectlegPageSub" resultMap="lectureListse"
+		parameterType="_int">
+		SELECT A.LISTNO , B.LECT_REG_NO , C.SUB_TITLE 
+		,A.LIST_CONTENT,
+		A.LIST_DATE, A.LIST_WEEK,
+		A.CHANGE_NAME, A.TIME, A.TOALTIME
+		FROM LECT_LIST A
+		JOIN
+		LECT_REGISTER B ON A.LECT_REG_NO =
+		B.LECT_REG_NO
+		JOIN SUBJECT C ON
+		B.SUB_CODE = C.SUB_CODE
+		WHERE
+		A.LECT_REG_NO = #{no}
+
+
+	</select>
+
+	<select id="selectlecPageFinal" resultMap="lectureListse"
+		parameterType="_int">
+		SELECT *
+		FROM LECT_LIST
+		WHERE LISTNO = #{no}
+
+
+	</select>
+
+	<insert id="lecinsert" parameterType="lectureList">
+		INSERT INTO LECT_LIST
+		VALUES(SEQ_LISTNO.NEXTVAL,#{regNo}, #{listContent}, DEFAULT,
+		#{listWeek},#{originName} , #{changeName}
+		)
+	</insert>
+
+	<select id="selectReplyList" parameterType="_int"
+		resultMap="lecReply">
+		SELECT REPLY_NO, REPLY_CONTENT, REPLY_WRITER, CREATE_DATE
+		FROM REPLY
+		WHERE
+		REF_BNO=#{bno} AND STATUS='Y'
+		ORDER BY REPLY_NO DESC
+
+	</select>
+	<insert id="insertReply" parameterType="Reply">
+		insert into reply
+		values(seq_rno.nextval, #{replyContent}, #{refbNo},
+		#{replyWriter},
+		sysdate, default)
+	</insert>
+
+
+	<update id="insertTime" parameterType="SearchFac">
+		UPDATE LECT_LIST SET
+		TIME=#{cate5}, TOALTIME=#{cate6}
+		WHERE LISTNO=#{cate7}
+
+
+	</update>
+</mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <head>
 <meta name="description"
 	content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
@@ -37,11 +39,12 @@
 				<button class="btn btn-primary" type="button"
 					onclick="location.href='facMove.me'">대여목록</button>
 				<button class="btn btn-primary" type="button"
-					onclick="location.href='facMovess.me'">MY대여</button>
+					onclick="location.href='facMovess.me?id=20193019'">MY대여</button>
 				<button class="btn btn-primary" type="button"
 					onclick="location.href='facMovesss.me'">관리자 확인</button>
-			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMovessss.me'">관리 목록</button>
+				<button class="btn btn-primary" type="button"
+					onclick="location.href='facMovessss.me'">관리 목록</button>
+
 
 				<p></p>
 			</div>
@@ -63,25 +66,90 @@
 								<thead>
 									<tr>
 										<th>No</th>
-										<th>이름</th>
-										<th>남은 기간</th>
+										<th>시설물이름</th>
+										<th>반납</th>
 
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>벽결이 TV</td>
-										<td>5일</td>
-									</tr>
+									<c:forEach items="${ list }" var="f">
+										<c:choose>
+											<c:when test="${f.facbancheck eq '반납'}">
+												<tr bgcolor="red">
+											</c:when>
+
+											<c:otherwise>
+												<tr>
+											</c:otherwise>
+
+
+										</c:choose>
+
+
+										<td>${ f.facNo}</td>
+										<td>${ f.facName }</td>
+										<td>${ f.facban }일남음</td>
+
+
+
+
+										</tr>
+									</c:forEach>
 
 
 								</tbody>
 							</table>
 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="pagingArea">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${ pi.currentPage ne 1 }">
+						<li class="page-item"><a class="page-link"
+							href="facMove.me?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+					</c:otherwise>
+				</c:choose>
+
+				<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+					<c:choose>
+						<c:when test="${ pi.currentPage ne p }">
+							<li class="page-item"><a class="page-link"
+								href="facMove.me?currentPage=${ p }">${ p }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 
 
-							<script>
-								</body>
-								</html>
-							
+				<c:choose>
+					<c:when test="${ pi.currentPage ne pi.maxPage }">
+						<li class="page-item"><a class="page-link"
+							href="facMove.me?currentPage=${ pi.currentPage+1 }">Next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item disabled"><a class="page-link"
+							href="facMove.me?currentPage=${ pi.currentPage+1 }">Next</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+
+
+
+		</div>
+
+
+
+
+		<script>
+			</body>
+			</html>
+		

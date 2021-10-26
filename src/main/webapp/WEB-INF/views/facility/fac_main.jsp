@@ -29,7 +29,15 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<style>
+#images{
+	margin-left : 30px;
+}
+</style>
+
 <jsp:include page="../../views/menubar.jsp" />
+
+
 
 <main class="app-content">
 	<div class="app-title">
@@ -38,7 +46,7 @@
 			<button class="btn btn-primary" type="button"
 				onclick="location.href='facMove.me'">대여목록</button>
 			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMovess.me'">MY대여</button>
+				onclick="location.href='facMovess.me?id=20193019'">MY대여</button>
 			<button class="btn btn-primary" type="button"
 				onclick="location.href='facMovesss.me'">관리자 확인</button>
 			<button class="btn btn-primary" type="button"
@@ -71,7 +79,11 @@
 					<option value="예약중">예약중</option>
 					<option value="대여중">대여중</option>
 			</select>
-			</label>
+			</label> 
+			<input class="app-search__input" type="search" placeholder="Search" name="search" id="search">
+		
+			</button>
+
 			<button class="btn btn-primary btn-sm" type="submit"
 				style="margin-left: 10px;">조 회</button>
 
@@ -185,6 +197,14 @@
 											console.log("배열에 담긴 값 : " + tdArr);
 											// td.eq(index)를 통해 값을 가져올 수도 있다.
 											var no = td.eq(0).text();
+											var check = td.eq(2).text();
+											console.log(check);
+											if(check == '신청가능'){
+												$("#btn").show();
+											}else{
+												$("#btn").hide();
+											}
+											
 											$('#hiddenNo').attr('value', no);
 											console.log(no);
 											$
@@ -250,14 +270,16 @@
 										enabled>
 
 
-									<div>
-										<img src="" width="300" height="300" id="datatoin">
+									<div id ="images">
+										<img src="..." width="700" height="370" class="img-responsive" id="datatoin" alt="Responsive image">
 									</div>
 
 									<!-- Modal footer -->
 
 									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary">예약 신청</button>
+										
+										<button type="submit" class="btn btn-primary" id="btn">예약 신청</button>
+									
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal">취소</button>
 									</div>
@@ -272,6 +294,10 @@
 							$("#msg").attr("type", "hidden");
 						}, 3000);
 					</script>
+
+					
+
+
 
 					</body>
 					</html>

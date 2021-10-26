@@ -29,6 +29,17 @@ public interface FacilityService {
 
 		ArrayList<facilitycheck> selectAppList(PageInfo pi);
 
+		void facOk(int no);
+
+		void facNo(int no);
+
+		ArrayList<facility> facMyPage(int id, PageInfo pi);
+
+		int selectMyListCount(int id);
+
+		void facHome(int no);
+
+
 	
 
 

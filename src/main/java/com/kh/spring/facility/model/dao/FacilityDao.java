@@ -72,4 +72,32 @@ public class FacilityDao {
 		return (ArrayList) sqlSession.selectList("facilityMapper.selectAppList", null, rowBounds);
 	}
 
+	public int facOk(SqlSessionTemplate sqlSession, int no) {
+		return sqlSession.update("facilityMapper.facOk",no);
+	}
+
+	public int facNo(SqlSessionTemplate sqlSession, int no) {
+		return sqlSession.update("facilityMapper.facNo",no);	
+	}
+
+	public ArrayList<facility> facMyPage(SqlSessionTemplate sqlSession, int id, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList) sqlSession.selectList("facilityMapper.facMyPage", id, rowBounds);
+	
+	}
+
+	public int selectMyListCount(SqlSessionTemplate sqlSession, int id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("facilityMapper.selectMyListCount",id);
+	}
+
+	public int facHome(SqlSessionTemplate sqlSession, int no) {
+		return sqlSession.update("facilityMapper.facHome",no);	
+
+	}
+
+	
+
 }
