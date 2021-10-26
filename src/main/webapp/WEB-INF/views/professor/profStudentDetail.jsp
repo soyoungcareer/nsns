@@ -3,7 +3,7 @@
     import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	int count = 0;
+	int count = 1;
 %>
 <!DOCTYPE html>
 <html>
@@ -100,7 +100,7 @@
 													<tr><td colspan="8">개설된 강의가 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty subList}">
-													<c:forEach var="list" items="${subList}">
+													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
 															<td class="sorting_1"><%=count++ %></td>
 															<td><c:out value="${subList.subCode}"/></td>
@@ -161,10 +161,10 @@
 										<tbody>
 											<c:choose>
 												<c:when test="${empty stuList}">
-													<tr><td colspan="8">개설된 강의가 없습니다.</td></tr>
+													<tr><td colspan="8">수강중인 학생이 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty stuList}">
-													<c:forEach var="list" items="${stuList}">
+													<c:forEach var="stuList" items="${stuList}">
 														<tr role="row">
 															<td class="sorting_1"><%=count++ %></td>
 															<td><c:out value="${stuList.subCode}"/></td>
