@@ -58,9 +58,9 @@
                    <label class="control-label col-md-5" style="margin-left:50px;">배경색</label>
 	                   <div class="col-md-5"> 
 	                    <select class="form-control" id="backgroundColor" name ="backgroundColor">
-							<option value="#9775fa" style="color:#9775fa;">보라색</option>
-							<option value="#ffa94d" style="color:#ffa94d;">주황색</option>
-							<option value="#74c0fc" style="color:#74c0fc;">파란색</option>
+							<option value="#c4dbdb" style="color:#c4dbdb;">#c4dbdb</option>
+							<option value="#63e6be" style="color:#63e6be;">#63e6be</option>
+							<option value="#74c0fc" style="color:#9775fa;">#74c0fc</option>
 	                    </select>
 	                  </div>
                   </div>
@@ -83,9 +83,17 @@
             <div class="tile-title-w-btn" style="margin-top:20px;">
               <h4 class="title"><i class="fa fa-file-text-o" aria-hidden="true"></i> 학사일정 리스트 </h4>
             </div>
+            <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
             	<div class="col-sm-12 col-md-6">
-	                <div style="margin-top:50px;">
-	                    <select name="sampleTable_length" aria-controls="sampleTable" class="form-control form-control-sm" style="width: 70px">
+	                <div class="dataTables_length" >
+	               
+						<select name="selectYear" id="selectYear" aria-controls="sampleTable" class="form-control form-control-sm" style="width: 100px">
+							<c:forEach items="${ yearList }" var="year">
+								<option value="${year}">${year}년</option>
+							</c:forEach>
+						</select>
+						
+						<select name="selectMonth" id="selectMonth" aria-controls="sampleTable" class="form-control form-control-sm" style="width: 90px" id="selectMonth">
 								<option value="%">전체</option>
 								<option value="1">1월</option>
 								<option value="2">2월</option>
@@ -102,6 +110,7 @@
 						</select>
 					</div>
 				</div>
+			</div>
            <table class="table table-hover table-bordered" id="calendarTable" style="margin-top:10px;">
 				<thead>
 						<tr>
@@ -118,7 +127,6 @@
 			</table>
           </div>
         </div>
-          
         </div>
         
     </main>
@@ -156,6 +164,11 @@
       		autoclose: true,
       		todayHighlight: true
       });
+      
+      //항상 올해가 seleted 되도록 설정하기
+      $(function(){
+    	
+      })
         
       //유효성 체크 - 시작날짜보다  마지막날짜가 앞설 수 없다 !! 
       function chekcDate() {
@@ -170,24 +183,30 @@
       }
       
        $(function(){
-    	   	var op = $("select[name=sampleTable_length]").val();
-    	   	console.log(op);
-    	   	
-    	   	callEvents(op);
-    	   
-    		$("select[name=sampleTable_length]").change(function(){
-    		   op = $(this).val(); //값이 바뀔 때 마다 변수 op의 값도 바뀌어야한다.
-    		   console.log(op); 
-    		   callEvents(op);
-    		 });
-    	   
+    	  var year = new Date().getFullYear();
+     	  $("#selectYear").val(year).prop("selected", true); //올해가 기본적으로 셋팅
+     	  
+     		 var sYear = $("select[name=selectYear]").val();
+     	 	 var sMonth = $("select[name=selectMonth]").val();
+     	 
+    		$("select").change(function(){
+    			var sYear =   $("select[name=selectYear]").val();
+    			var sMonth =  $("select[name=selectMonth]").val();
+    			
+    			callEvents(sYear, sMonth);
+    		})
+    		
+    		callEvents(sYear, sMonth);
  		});
 
   
-       function callEvents(op) {
+       function callEvents(sYear, sMonth) {
     	   $.ajax({
 				url: "calendar.li",
-				data: {op: op},
+				data: {
+					sYear: sYear,
+					sMonth : sMonth
+				},
 				dataType:"json",
 				success: function(list){
 					console.log(list);
@@ -224,6 +243,7 @@
 				}
 			});
        }
+       
        
        function deleteEvents(){
     	   for(let i = 1; i<calendarTable.rows.length; i++){

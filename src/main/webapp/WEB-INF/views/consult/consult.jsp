@@ -31,10 +31,10 @@
              <hr style="boder: 1px solid black">
       
              
-              <form class="form-horizontal"  action="insert.con" method="post" onsubmit="return check();">
+              <form class="form-horizontal" id="consultForm" action="insert.con" method="post" onsubmit="return check()">
              	 <div style="margin-left:300px;">
-		             <label for="stuId"><b>학번 :</b> 20143309 </label> &nbsp;&nbsp;
-		             <input type="hidden" id="stuId" name="stuId" value="20143309">
+		             <label for="stuId"><b>학번 :</b> 20190321 </label> &nbsp;&nbsp;
+		             <input type="hidden" id="stuId" name="stuId" value="20190321">
 		             
 		             <label for="stuName"><b>이름 :</b> 유재석  </label>&nbsp;&nbsp;
 		             <input type="hidden" id="stuName" name="stuName" value="유재석">
@@ -100,60 +100,52 @@
       });
       
       //유효성 체크 
-      function check(){
+  	function check() {
     	  var stuId = $("#stuId").val();
-		  
+    	  var flag = true;
     	  $.ajax({
 				url: "consultCount.con",
 				dataType:"json",
 				data : { stuId :stuId },
+				async : false,
 				success: function(count){
-					return checkCount(count);
+					console.log(count);
+					  if(count != 0) {
+						  var str = ' <div class="alert alert-dismissible alert-danger">' 
+				        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+				        		+ ' <strong>확인!</strong> 상담신청 중인 내역이 있습니다. '
+				        		+ ' </div> '
+				        				
+				        		$('.bs-component').empty();
+				        		$('.bs-component').append(str);
+				        		flag = false;
+				        		
+				  		} else {
+				  		  var today = getTimeStamp();
+						    
+					    	if (today >  $('#conD').val()) {
+						        		
+						               var str = ' <div class="alert alert-dismissible alert-danger">' 
+						        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+						        		+ ' <strong>확인!</strong> 신청일 이전의 날짜에는 상담을 신청할 수 없습니다. '
+						        		+ ' </div> '
+						        				
+						        		$('.bs-component').empty();
+						        		$('.bs-component').append(str);
+						        		
+						        flag = false;
+					    	}
+				  			
+				  		}
+					  
 				},
 				error:function(){
 					console.log("Ajax 통신 실패");
 				}
 			});
-		  
-    	 return checkDate();
-      }
-      
-      
-      function checkCount(count){
-    	  if(count != 0) {
-	  			
-	  			var str = ' <div class="alert alert-dismissible alert-danger">' 
-						+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
-						+ ' <strong>확인!</strong> 현재 상담 신청중인 내역이 있습니다! '
-						+ ' </div> '
-					$('.bs-component').empty();
-				    $('.bs-component').append(str);
-						
-					return false;
-	  		} 
-  	  return true;
     	  
-      }
-      
-   
-      function checkDate(){
-    	  var today = getTimeStamp();
-		
-    		if (today >  $('#conD').val()) {
-        		
-                  var str = ' <div class="alert alert-dismissible alert-danger">' 
-        				+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
-        				+ ' <strong>확인!</strong> 신청일 이전의 날짜에는 상담을 신청할 수 없습니다. '
-        				+ ' </div> '
-        				
-        				$('.bs-component').empty();
-        		    	$('.bs-component').append(str);
-                  
-                  
-                  return false;
-    		}
-    		return true;
-      }
+    	  return flag;
+   	}
       
       
       function getTimeStamp() {

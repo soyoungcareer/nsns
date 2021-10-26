@@ -21,6 +21,9 @@
 		 <typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
 		 <typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
 		 <typeAlias type="com.kh.spring.major.vo.RequestedSubject" alias="RequestedSubject"/>
+
+		
+
      			 <typeAlias type="com.kh.spring.consult.model.vo.Consult" alias="Consult"/>
     		 	 <typeAlias type="com.kh.spring.consult.model.vo.ConsultStatus" alias="ConsultStatus"/>
     			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
@@ -29,6 +32,9 @@
 		<typeAlias type="com.kh.spring.studentEval.vo.Grade" alias="Grade"/>
 		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
 		<typeAlias type="com.kh.spring.gradeObject.vo.GradeObject" alias="GradeObject"/>
+     <typeAlias type="com.kh.spring.acalendar.model.vo.SearchCondition" alias="SearchCondition"/>
+		 <typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
+
 
 
 	</typeAliases>
@@ -42,7 +48,9 @@
 		<mapper resource="/mappers/lectRegister-mapper.xml"/>
 		<mapper resource="/mappers/consult-mapper.xml"/>
 		<mapper resource="/mappers/prof-mapper.xml"/>
+		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/grade-mapper.xml"/>
+
 	</mappers>
 	
  
