@@ -32,7 +32,7 @@ public class StudentStatusController {
 	@RequestMapping(value="stuStsPro.stu", produces="application/json; charset=utf-8")
 	public String studentProList () { 
 		
-		String userId = "20193019"; //로그인한 세션의 학생 학번 가져오기
+		String userId = "20213309"; //로그인한 세션의 학생 학번 가져오기
 				
 		ArrayList<StudentStatus> list = studentStatusService.studentProList(userId);
 		

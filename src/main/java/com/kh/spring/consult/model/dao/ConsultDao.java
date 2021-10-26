@@ -37,4 +37,14 @@ public class ConsultDao {
 		return sqlSession.insert("consultMapper.insertStsCon");
 	}
 
+	public int deleteCon(SqlSessionTemplate sqlSession, int conNo) {
+		
+		return sqlSession.update("consultMapper.deleteCon", conNo);
+	}
+
+	public int deleteStsCon(SqlSessionTemplate sqlSession, int conNo) {
+		
+		return sqlSession.update("consultMapper.deleteStsCon", conNo);
+	}
+
 }

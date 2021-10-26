@@ -15,4 +15,6 @@ public interface ConsultService {
 
 	void insertConsult(Consult con);
 
+	void deleteCon(int conNo);
+
 }

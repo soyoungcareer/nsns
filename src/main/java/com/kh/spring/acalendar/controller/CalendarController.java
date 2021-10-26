@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.acalendar.model.service.CalendarService;
 import com.kh.spring.acalendar.model.vo.Acalendar;
+import com.kh.spring.acalendar.model.vo.SearchCondition;
 
 @Controller
 public class CalendarController {
@@ -38,9 +39,13 @@ public class CalendarController {
 		return new GsonBuilder().create().toJson(list);
 	}
 	
-	//학사일정 업로드 페이지
+	//학사일정 업로드 페이지 (year 받아오기)
 	@RequestMapping("/upload.ca")
-	public String uploadCalnendar() { 
+	public String uploadCalnendar(Model model) { 
+		
+		ArrayList<String> yearList = calendarService.selectYear();
+		
+		model.addAttribute("yearList", yearList);
 		
 		return "aCalendar/uploadCalendar";
 	}
@@ -69,11 +74,13 @@ public class CalendarController {
 	//학사일정 관리 리스트 띄우기
 	@ResponseBody
 	@RequestMapping(value="calendar.li", produces="application/json; charset=utf-8")
-	public String calendarList(String op) { 
+	public String calendarList(String sYear, String sMonth) { 
 		
-		ArrayList<Acalendar> list = calendarService.calendarList(op);
+		SearchCondition sc = new SearchCondition(sYear, sMonth);
 		
-		System.out.println(list);
+		System.out.println(sc);
+		
+		ArrayList<Acalendar> list = calendarService.calendarList(sc);
 		
 		return new GsonBuilder().create().toJson(list);
 	}

@@ -31,7 +31,7 @@
              
              <hr style="boder: 1px solid black">
              
-              <form class="form-horizontal" action="insertStuDo.stu" method="post" onsubmit="check(count);">
+              <form class="form-horizontal" action="insertStuDo.stu" method="post" onsubmit="return check();">
               	 	<div style="margin-left:300px;">
 			             <label for="stuId"><b>학번 :</b> 20213309 </label> &nbsp;&nbsp;
 			             <input type="hidden" id="stuId" name="stuId" value="20213309">
@@ -100,43 +100,39 @@
 		//신청일에 현재 날짜 고정시키기!
 		var day = new Date().toISOString().substring(0, 10);
 	    $('#offDay').val(day);
-	  
-	    
+	     
+	})
+	
+	 function check() {
 	    var stuId = $("#stuId").val();
-		  console.log(stuId);
-		  
-  	  	$.ajax({
+		var flag = true; 
+  	  	
+		$.ajax({
 				url: "DoCount.stu",
 				dataType:"json",
 				data : { stuId :stuId },
+				async : false,
 				success: function(count){
-					check(count);
+					console.log(count);
+					 if(count != 0) {
+						  var str = ' <div class="alert alert-dismissible alert-danger">' 
+				        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+				        		+ ' <strong>확인!</strong> 자퇴 신청 중인 내역이 있습니다. '
+				        		+ ' </div> '
+				        				
+				        		$('.bs-component').empty();
+				        		$('.bs-component').append(str);
+				        		
+				        	flag = false;
+				  		}
 				},
 				error:function(){
 					console.log("Ajax 통신 실패");
 				}
 			});
-	  
-	     
-	})
-	
-	function check(count){
-    	
-    		if(count != 0) {
-    			
-    			var str = ' <div class="alert alert-dismissible alert-danger">' 
-					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
-					+ ' <strong>확인!</strong> 현재 자퇴 신청중인 내역이 있습니다! '
-					+ ' </div> '
-				$('.bs-component').empty();
-			    $('.bs-component').append(str);
-					
-				return false;
-    		} 
-    		
-    		return true;
-    	}
-    
+		
+	   	return flag;
+	 } 
 	</script>
 
   </body>
