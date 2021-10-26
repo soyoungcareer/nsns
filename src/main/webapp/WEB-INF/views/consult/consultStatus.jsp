@@ -113,7 +113,12 @@
 		          				
 		   					});
 							
-						} 
+						} else {
+							
+							str += '<tr>'
+								+  '<th colspan="3" style="text-align:center">' + "조회되는 신청 내역이 없습니다." +'</th></tr>'
+									
+						}
 						
 						$("#consultTable tbody").append(str); 
 					},
@@ -159,13 +164,13 @@
     								if(conPro == '교수승인대기중'){
     									str2 += '<tbody> <tr>'+'<td>'
     									+"교수 승인 대기중" + '</td><td>'
-    									+'<button class="btn btn-danger btn-sm" type="button">신청취소</button>' + '</td>'
+    									+'<button class="btn btn-danger btn-sm" type="button" onclick="deleteCon('+obj.conNo+')">신청취소</button>' + '</td>'
     		              				+ '</tr>'+'</tbody> </table> </div>'
     		              				
     								} else if(stsPro == '승인완료'){
     									str2 += '<tbody> <tr>'+'<td>'+
     										+ "승인 완료" + '</td><td>'
-    										+ '</td>'
+    										+ "승인 완료된 신청은 취소가 불가합니다."+'</td>'
     		              					+ '</tr>'+'</tbody> </table> </div>'
     		    						
     								} else if(stsPro == '반려'){
@@ -175,16 +180,9 @@
     		              				+ '</tr>'+'</tbody> </table> </div>'
     								}
     								
-    					} else {
-							
-							str += '<tr>'
-								+  '<th colspan="3" style="text-align:center">' + "조회되는 신청 내역이 없습니다." +'</th></tr>'
-									
+    					} 
 										
-						}
-										
-							$('#sampleModalBody').html(str1+str2);
-    				
+							$('#sampleModalBody').append(str1+str2);
     					},
     					error:function(){
     						console.log("Ajax 통신 실패");
@@ -193,6 +191,11 @@
     				$("#sampleModalPopup").modal();
     				
     		});
+    		
+    		function deleteCon(conNo){
+    			location.href="/deleteCon.con?conNo="+conNo;
+    		}
+    		
     </script>
     
     <!-- The javascript plugin to display page loading on top-->

@@ -65,5 +65,26 @@ public class ConsultServiceImpl implements ConsultService {
 		}
 	}
 
+	@Override
+	public void deleteCon(int conNo) {
+		
+		int result1 = consultDao.deleteCon(sqlSession, conNo);
+		
+		if(result1 < 0) {
+			
+			throw new CommException("상담신청 취소 실패");
+			
+		} else {
+			
+			int result2 = consultDao.deleteStsCon(sqlSession, conNo);
+			
+			if(result2 < 0) {
+				throw new CommException("상담신청 취소 실패");
+			}
+		}
+		
+		
+	}
+
 
 }

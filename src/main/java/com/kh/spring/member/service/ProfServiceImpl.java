@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.common.exception.CommException;
+import com.kh.spring.consult.model.vo.Consult;
+import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.dao.ProfessorDao;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 @Service
 public class ProfServiceImpl implements ProfService {
@@ -73,6 +76,21 @@ public class ProfServiceImpl implements ProfService {
 	@Override
 	public ArrayList<Student> profStudentDetail(String subCode) {
 		return professorDao.profStudentDetail(sqlSession, subCode);
+	}
+
+	@Override
+	public ArrayList<Consult> loadConsultList(String profId) {
+		return professorDao.loadConsultList(sqlSession, profId);
+	}
+
+	@Override
+	public ArrayList<StudentStatus> loadStatusList(String profId) {
+		return professorDao.loadStatusList(sqlSession, profId);
+	}
+
+	@Override
+	public ArrayList<Evaluation> loadEvalList(Subject sub) {
+		return professorDao.loadEvalList(sqlSession, sub);
 	}
 
 }

@@ -57,9 +57,7 @@ public class ConsultController {
 			 
 		con.setConDate(ConDate);
 		
-		System.out.println(con.getConCategory());
-			
-		//consultService.insertConsult(con);
+		consultService.insertConsult(con);
 		
 		redirectAttributes.addFlashAttribute("message", "성공적으로 상담신청이 완료되었습니다.");
 			
@@ -90,6 +88,17 @@ public class ConsultController {
 		Consult con = consultService.selectConsult(conNo);
 				
 		return new GsonBuilder().create().toJson(con);
+	}
+	
+	//학생 상담 신청 취소
+	@RequestMapping("deleteCon.con")
+	public String deleteCon(int conNo, RedirectAttributes redirectAttributes) { 
+			
+		consultService.deleteCon(conNo);
+			
+		redirectAttributes.addFlashAttribute("message", "해당 휴학 신청이 취소되었습니다.");
+			
+		return  "redirect:stuStatusPage.stu";
 	}
 		
 }

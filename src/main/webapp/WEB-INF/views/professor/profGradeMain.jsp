@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.spring.major.vo.Subject, com.kh.spring.studentEval.vo.Grade"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	ArrayList<Subject> subList = (ArrayList<Subject>)request.getAttribute("subList");
-	ArrayList<Grade> gradeList = (ArrayList<Grade>)request.getAttribute("gradeList");
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
@@ -21,7 +19,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 성적 관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -96,26 +93,32 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">강의형태</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">교수명</th>
 											</tr>
 										</thead>
 										<tbody>
-										<% if(subList.isEmpty()) { %>
-											<tr>
-												<td colspan="5">개설된 강의가 없습니다.</td>
-											</tr>
-										<% } else { %>
-											<% for(Subject a : subList) { %>
-												<tr role="row">
-													<td class="sorting_1"><%= a.getSubCode() %></td>
-													<td><%-- <%= a.getDeptName() %> --%></td>
-													<td><%= a.getSubDivs() %></td>
-													<td><%= a.getSubTitle() %></td>
-													<td><%= a.getSubCredit() %></td>
-												</tr>
-											<% } %>
-										<% } %>
-											
+											<c:choose>
+												<c:when test="${empty subList}">
+													<tr><td colspan="7">개설된 강의가 없습니다.</td></tr>
+												</c:when>
+												<c:when test="${!empty subList}">
+													<c:forEach var="list" items="${subList}">
+														<tr role="row">
+															<td class="sorting_1"><c:out value="${subList.subCode}"/></td>
+															<td><c:out value="${subList.deptCode}"/></td>
+															<td><c:out value="${subList.subDivs}"/></td>
+															<td><c:out value="${subList.subTitle}"/></td>
+															<td><c:out value="${subList.subCredit}"/></td>
+															<td><c:out value="${subList.subType}"/></td>
+															<td><c:out value="${subList.profId}"/></td>
+														</tr>
+													</c:forEach>
+												</c:when>
+											</c:choose>
 										</tbody>
 									</table>
 								</div>
@@ -153,10 +156,10 @@
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">성명</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">수강구분</th>
+													style="width: 52.9125px;">수강구분</th> -->
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
@@ -192,27 +195,28 @@
 											</tr>
 										</thead>
 										<tbody>
-										<% if(gradeList.isEmpty()) { %>
-											<tr>
-												<td colspan="4">수강중인 학생이 없습니다.</td>
-											</tr>
-										<% } else { %>
-											<% for(Grade a : gradeList) { %>
-												<tr role="row">
-													<td class="sorting_1"><%= a.getDeptName() %></td>
-													<td><%= a.getStudentId() %></td>
-													<td><%= a.getStudentName() %></td>
-													<td><%= a.getStudentStatus() %></td>
-													<td><%= a.getAttendance() %></td>
-													<td><%= a.getAssignment() %></td>
-													<td><%= a.getMidExam() %></td>
-													<td><%= a.getFinExam() %></td>
-													<td><%= a.getTotal() %></td>
-													<td><%= a.getGradeResult() %></td>
-													<td><%= a.getGradeCredit() %></td>
-												</tr>
-											<% } %>
-										<% } %>
+											<c:choose>
+												<c:when test="${empty gradeList}">
+													<tr><td colspan="11">수강중인 학생이 없습니다.</td></tr>
+												</c:when>
+												<c:when test="${!empty gradeList}">
+													<c:forEach var="list" items="${gradeList}">
+														<tr role="row">
+															<td class="sorting_1"><c:out value="${gradeList.deptTitle}"/></td>
+															<td><c:out value="${gradeList.studentId}"/></td>
+															<td><c:out value="${gradeList.studentName}"/></td>
+															<td><c:out value="${gradeList.studentStatus}"/></td>
+															<td><c:out value="${gradeList.attendance}"/></td>
+															<td><c:out value="${gradeList.assignment}"/></td>
+															<td><c:out value="${gradeList.midExam}"/></td>
+															<td><c:out value="${gradeList.finExam}"/></td>
+															<td><c:out value="${gradeList.gradeTotal}"/></td>
+															<td><c:out value="${gradeList.gradeResult}"/></td>
+															<td><c:out value="${gradeList.gradeCredit}"/></td>
+														</tr>
+													</c:forEach>
+												</c:when>
+											</c:choose>
 										</tbody>
 									</table>
 								</div>

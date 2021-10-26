@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         LEFT JOIN CONSULT USING (CON_NO)
 		WHERE  CONSULT_STATUS_PRO.STATUS = 'Y'
 		AND CONSULT.STU_ID =  #{stuId} 
-		AND CON_COMPLETED LIKE '처리중'
+		AND CON_COMPLETED LIKE '진행중'
 	</select>
 
 	<insert id="insertConsult" parameterType="Consult">
@@ -53,9 +53,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(CON_NO, CON_CATEGORY, CON_DATE, CON_REASON, STATUS, STU_ID) 
 		VALUES(SEQ_CON_NO.NEXTVAL, #{conCategory}, #{conDate}, #{conReason}, DEFAULT, #{stuId})
 	</insert>
-	
+
 	<insert id="insertStsCon">
 		INSERT INTO CONSULT_STATUS_PRO
-		VALUES(SEQ_CON_STS_NO.NEXTVAL, DEFAULT, DEFAULT, DEFAULT, SEQ_CON_NO.CURRVAL);
+		(CON_STS_NO, CON_PROCESS, CON_COMPLETED, STATUS, CON_NO)
+		VALUES(SEQ_CON_STS_NO.NEXTVAL, DEFAULT, DEFAULT, DEFAULT, SEQ_CON_NO.CURRVAL)
 	</insert>
+	
+	
+	<update id="deleteCon"  parameterType="_int">
+		UPDATE CONSULT
+		SET STATUS= 'N'
+		WHERE CON_NO =  #{conNo}
+	</update>
+	
+	<update id="deleteStsCon"  parameterType="_int">
+		UPDATE CONSULT_STATUS_PRO
+		SET STATUS= 'N'
+		WHERE CON_NO = #{conNo}
+	</update>
+	
 </mapper>
