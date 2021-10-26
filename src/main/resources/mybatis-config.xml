@@ -26,6 +26,9 @@
     			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
     			 <typeAlias type="com.kh.spring.facility.model.vo.searchFac" alias="SearchFac"/>
 			 <typeAlias type="com.kh.spring.facility.model.vo.facilitycheck" alias="FacilityCheck"/>
+			 <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
+			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
+			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
 
 
 	</typeAliases>
@@ -39,6 +42,8 @@
 		<mapper resource="/mappers/lectRegister-mapper.xml"/>
 		<mapper resource="/mappers/consult-mapper.xml"/>
 		<mapper resource="/mappers/prof-mapper.xml"/>
+		<mapper resource="/mappers/lecture-mapper.xml"/>
+		
 	</mappers>
 	
  

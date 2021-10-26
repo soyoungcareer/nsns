@@ -88,19 +88,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM FACILITY
 		<choose>
-			<when test='cate1.equals("선택") and cate2.equals("선택") '>
+			<when
+				test='cate1.equals("선택") and cate2.equals("선택") and cate3.equals("선택")'>
 			</when>
-			<when test='!cate1.equals("선택")  and cate2.equals("선택") '>
+			<when
+				test='!cate1.equals("선택")  and cate2.equals("선택")  and cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
 			</when>
-			<when test='cate1.equals("선택")  and !cate2.equals("선택") '>
+			<when
+				test='cate1.equals("선택")  and !cate2.equals("선택") and cate3.equals("선택")'>
 				WHERE FAC_STATUS=#{cate2}
 			</when>
-			<when test='!cate1.equals("선택")  and !cate2.equals("선택") '>
+			<when
+				test='cate1.equals("선택")  and cate2.equals("선택") and !cate3.equals("선택")'>
+				WHERE FAC_NAME=#{cate3}
+			</when>
+
+			<when
+				test='!cate1.equals("선택")  and !cate2.equals("선택") and cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
 				AND FAC_STATUS=#{cate2}
 			</when>
+
+			<when
+				test='!cate1.equals("선택")  and cate2.equals("선택") and !cate3.equals("선택")'>
+				WHERE CATEGORY=#{cate1}
+				AND FAC_NAME=#{cate3}
+			</when>
+			<when
+				test='cate1.equals("선택")  and !cate2.equals("선택") and !cate3.equals("선택")'>
+				WHERE FAC_STATUS=#{cate2}
+				AND FAC_NAME=#{cate3}
+			</when>
+
+			<when
+				test='!cate1.equals("선택")  and !cate2.equals("선택") and !cate3.equals("선택")'>
+				WHERE CATEGORY=#{cate1}
+				AND FAC_STATUS=#{cate2}
+				AND
+				FAC_NAME=#{cate3}
+			</when>
+
+
+
 		</choose>
+		ORDER BY
+		FAC_NO DESC
 	</select>
 
 
@@ -132,14 +165,65 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="selectAppList" resultMap="facilityCheckResultSet">
-	SELECT A.FAC_NO,A.STU_ID, A.FAC_NAME, A.FAC_REASON,B.STU_NAME, C.DEPT_TITLE
-FROM FACILITY A
-JOIN STUDENT B ON A.STU_ID = B.STU_ID
-JOIN DEPARTMENT C ON B.DEPT_CODE = C.DEPT_CODE
-WHERE FAC_STATUS =  '예약중'
+		SELECT A.FAC_NO,A.STU_ID,
+		A.FAC_NAME, A.FAC_REASON,B.STU_NAME, C.DEPT_TITLE
+		FROM FACILITY A
+		JOIN
+		STUDENT B ON A.STU_ID = B.STU_ID
+		JOIN DEPARTMENT C ON B.DEPT_CODE =
+		C.DEPT_CODE
+		WHERE FAC_STATUS = '예약중'
 	</select>
 
 
 
+	<update id="facOk" parameterType="_int">
+		UPDATE FACILITY SET
+		FAC_STATUS='대여중' , FAC_PERIOD=SYSDATE+7
+		WHERE
+		FAC_NO=#{no}
 
+
+	</update>
+
+
+	<update id="facNo" parameterType="_int">
+		UPDATE FACILITY SET
+		FAC_STATUS='신청가능' , FAC_REASON=NULL , STU_ID=NULL
+		WHERE
+		FAC_NO=#{no}
+
+
+	</update>
+
+
+	<select id="facMyPage" resultMap="facilityResultSet">
+		SELECT *
+		FROM FACILITY
+		WHERE
+		STU_ID=#{id}
+		ORDER BY
+		FAC_NO DESC
+	</select>
+
+	<select id="selectMyListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM
+		FACILITY
+		WHERE STU_ID=#{id}
+	</select>
+
+
+
+	<update id="facHome" parameterType="_int">
+		UPDATE FACILITY SET
+		FAC_STATUS='신청가능' , FAC_REASON=NULL , STU_ID=NULL
+		WHERE
+		FAC_NO=#{no}
+
+
+	</update>
+
+
+	
 </mapper>

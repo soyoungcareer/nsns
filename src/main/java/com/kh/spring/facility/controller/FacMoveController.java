@@ -2,6 +2,7 @@ package com.kh.spring.facility.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import com.kh.spring.facility.model.Service.FacilityService;
 import com.kh.spring.facility.model.vo.facility;
 import com.kh.spring.facility.model.vo.facilitycheck;
 import com.kh.spring.facility.model.vo.searchFac;
+import com.kh.spring.lecture.model.vo.Reply;
 
 @Controller
 public class FacMoveController {
@@ -71,7 +73,49 @@ public class FacMoveController {
 	}
 
 	@RequestMapping("facMovess.me")
-	public String facMy() {
+	public String facMy(@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+			Model model, @RequestParam(value = "id") int id) {
+
+		System.out.println(id);
+
+		int listCount = fs.selectMyListCount(id);
+		System.out.println("리스트확인 테스트 " + listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<facility> list = fs.facMyPage(id, pi);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+
+		Date from = new Date();
+
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String date = transFormat.format(from);
+
+		for (facility a : list) {
+
+			String to = transFormat.format(a.getFacPeriod());
+
+			try {
+				Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+				Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(to);
+				System.out.println(format1);
+				System.out.println(format2);
+
+				long diffDays = (format2.getTime() - format1.getTime()) / (24 * 60 * 60 * 1000);
+				System.out.println(diffDays);
+				if (diffDays <= 0) {
+					a.setFacbancheck("반납");
+					System.out.println(a.getFacbancheck());
+				}
+
+				a.setFacban(diffDays);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
 		return "facility/fac_my";
 	}
 
@@ -127,7 +171,7 @@ public class FacMoveController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
-		
+
 		System.out.println("김경준 김경준 도배@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + list);
 
 		return "facility/fac_check";
@@ -157,13 +201,19 @@ public class FacMoveController {
 	public String selectCateList(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
 			@RequestParam(name = "cate1", required = false) String cate1,
-			@RequestParam(name = "cate2", required = false) String cate2) {
+			@RequestParam(name = "cate2", required = false) String cate2,
+			@RequestParam(name = "search", required = false) String cate3) {
+
+		if (cate3.isEmpty()) {
+			cate3 = "선택";
+		}
 
 		searchFac sf = new searchFac();
 		sf.setCate1(cate1);
 		sf.setCate2(cate2);
+		sf.setCate3(cate3);
 
-		System.out.println("!@!@$!@$!%$#^#%" + cate1 + cate2);
+		System.out.println("!@!@$!@$!%$#^#%" + cate1 + cate2 + cate3);
 		int listCount = fs.selectListCount(sf);
 		System.out.println("리스트확인 테스트 @@@@@" + listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -175,6 +225,37 @@ public class FacMoveController {
 		model.addAttribute("pi", pi);
 
 		return "facility/fac_main";
+
+	}
+
+	@RequestMapping("facMovecate2.me")
+	public String selectCateList2(
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
+			@RequestParam(name = "cate1", required = false) String cate1,
+			@RequestParam(name = "cate2", required = false) String cate2,
+			@RequestParam(name = "search", required = false) String cate3) {
+
+		if (cate3.isEmpty()) {
+			cate3 = "선택";
+		}
+
+		searchFac sf = new searchFac();
+		sf.setCate1(cate1);
+		sf.setCate2(cate2);
+		sf.setCate3(cate3);
+
+		System.out.println("!@!@$!@$!%$#^#%" + cate1 + cate2 + cate3);
+		int listCount = fs.selectListCount(sf);
+		System.out.println("리스트확인 테스트 @@@@@" + listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+		ArrayList<facility> list = fs.selectList(sf, pi);
+		System.out.println("김경준의 체크링스트 @@@@@@@@@@@@@" + list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+
+		return "facility/fac_admin_main";
 
 	}
 
@@ -215,5 +296,40 @@ public class FacMoveController {
 		return "redirect:facMove.me";
 
 	}
+
+	@RequestMapping("facok.me")
+	public String facOk(@RequestParam(value = "no") int no, @RequestParam(value = "id") int id) {
+
+		System.out.println("10/25 chkeck" + no + id);
+
+		fs.facOk(no);
+
+		return "redirect:facMovesss.me";
+
+	}
+
+	@RequestMapping("facno.me")
+	public String facNo(@RequestParam(value = "no") int no) {
+
+		System.out.println("10/25 chkeck" + no);
+
+		fs.facNo(no);
+
+		return "redirect:facMovesss.me";
+
+	}
+
+	@RequestMapping("fachome.me")
+	public String facHome(@RequestParam(value = "no") int no) {
+
+		System.out.println("10/25 chkeck" + no);
+
+		fs.facHome(no);
+
+		return "redirect:facMovessss.me";
+
+	}
+
+
 
 }

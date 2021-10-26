@@ -25,5 +25,7 @@ public class facility {
 	private String fileBName;
 	private String fileFName;
 	private String fac_cat;
+	private long facban;
+	private String facbancheck;
 
 }

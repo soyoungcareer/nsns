@@ -15,7 +15,18 @@
 	href="resources/bootstrap/docs/assets/favicon.ico" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="resources/bootstrap/docs/css/styles.css" rel="stylesheet" />
+<style>
+ .col-md-6{
+ 	margin : 0 auto;
+ }
+ input{
+ 	margin-top : 20px;
+ }
+ h3{
+ 	margin-top : 60px;
+ }
 
+</style>
 </head>
 <body>
 	<!-- Responsive navbar-->
@@ -48,46 +59,44 @@
 			</div>
 		</div>
 	</nav>
-	<!-- Page content-->
-	<div class="container">
-		<div class="text-center mt-5">
-			<h1>Network security practice.</h1>
-			<p class="lead"></p>
-			<p>학습중인 과정</p>
-		</div>
-	</div>
-	
-
-	<div class="container">
-		<button  class="btn btn-outline-info" type="button" onclick="location.href='lecpl.me?no=${list.get(0).regNo}'">추가
-	</button>
-	<br><br>
-		<c:forEach items="${ list }" var="l">
-			<table class="table table-hover table-bordered" id="sampleTable">
-				<thead>
-					<tr>
-						<th>${l.listWeek}주차</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr onclick="location.href='lecMovess.me?no=${l.listNo}'">
-						<td width="20%">${l.subTitle}</td>
-						<td width="40%">${l.listContent}<${l.listWeek}강></td>
- 						<td width="40%">	<progress value="${l.time }" max="${l.totalTime }" id="jb"></progress></td>
-		
- 
-           
-             
-		
-</div>
-						</tr>
-
-				</tbody>
-			</table>
-		</c:forEach>
-
-	</div>
-
+  <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">강의 입력</h3>
+            <div class="tile-body">
+              <form class="form-horizontal" action="lecinsert.me"  method="post" enctype="multipart/form-data">
+                <div class="form-group row">
+                  <label class="control-label col-md-3">LECTURE_NAME</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="LECTURE_NAME" id="name" name="name">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="control-label col-md-3">WEEK</label>
+                  <div class="col-md-8">
+                    <input class="form-control col-md-8" type="text" placeholder="WEEK" id="week" name="week">
+                  </div>
+                </div>
+               
+               <input type="hidden" id="no" name="no" value="${no }">
+               
+                <div class="form-group row">
+                  <label class="control-label col-md-3">INSERT LECTURE</label>
+                  <div class="col-md-8">
+                    <input class="form-control" type="file"  name="uploadFile" id="uploadFile">
+                  </div>
+                </div>
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Insert</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+              
+              </form>
+            </div>
+            <div class="tile-footer">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-3">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 	<!-- Essential javascripts for application to work-->
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/popper.min.js"></script>

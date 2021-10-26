@@ -29,6 +29,12 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<style>
+#images,  {
+	margin-left: 30px;
+	
+}
+</style>
 <jsp:include page="../../views/menubar.jsp" />
 
 
@@ -39,7 +45,7 @@
 			<button class="btn btn-primary" type="button"
 				onclick="location.href='facMove.me'">대여목록</button>
 			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMovess.me'">MY대여</button>
+				onclick="location.href='facMovess.me?id=20193019'">MY대여</button>
 			<button class="btn btn-primary" type="button"
 				onclick="location.href='facMovesss.me'">관리자 확인</button>
 			<button class="btn btn-primary" type="button"
@@ -55,7 +61,7 @@
 		</ul>
 	</div>
 	<div class="row">
-		<form action="facMovecate.me">
+		<form action="facMovecate2.me">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label> 카테고리 선택 <select
 				name="cate1" aria-controls="
 				sampleTable"
@@ -72,15 +78,16 @@
 					<option value="예약중">예약중</option>
 					<option value="대여중">대여중</option>
 			</select>
-			</label>
+			</label> <input class="app-search__input" type="search" placeholder="Search"
+				name="search" id="search">
+
 			<button class="btn btn-primary btn-sm" type="submit"
 				style="margin-left: 10px;">조 회</button>
 
 		</form>
 
 		<c:if test="${ !empty msg }">
-			<input type="text" value="${msg}" id="msg" enabled>
-
+			<a id="msg"> ${msg}</a>
 
 			<c:remove var="msg" scope="session" />
 		</c:if>
@@ -99,6 +106,8 @@
 									<th>이름</th>
 									<th>상태</th>
 									<td>날짜</td>
+									<td>반납</td>
+
 								</tr>
 
 							</thead>
@@ -110,6 +119,20 @@
 										<td>${ f.facStatus }</td>
 										<td>${ f.facDate }</td>
 
+										<c:choose>
+
+
+
+											<c:when test="${f.facStatus eq '대여중'}">
+												<td>
+													<button class="btn btn-success" type="button"
+														onclick="location.href='fachome.me?no=${f.facNo}'">반납확인</button>
+												</td>
+											</c:when>
+											<c:otherwise>
+												<td></td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -157,7 +180,8 @@
 							</c:choose>
 						</ul>
 
-						<a data-toggle="modal" data-target="#loginModal"><button>추가</button></a>
+						<button data-toggle="modal" class="btn btn-primary"
+							data-target="#loginModal">추가</button>
 
 
 					</div>
@@ -250,11 +274,11 @@
 											height="300"> <br>
 									</div>
 									<div>
-										<img src="" width="300" height="300" id="datatoin">
+										<img src="..." width="700" height="370" class="img-responsive" id="datatoin" alt="Responsive image">
 									</div>
 
-									<input id="hiddenNo" type="hidden" display:none
-										name="hiddenNO" enabled>
+									<input id="hiddenNo" type="hidden" display:none name="hiddenNO"
+										enabled>
 
 									<!-- Modal footer -->
 
@@ -331,7 +355,7 @@
 
 					<script>
 						setTimeout(function() {
-							$("#msg").attr("type","hidden");
+							$("#msg").hide();
 						}, 3000);
 					</script>
 

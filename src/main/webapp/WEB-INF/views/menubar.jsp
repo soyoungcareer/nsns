@@ -48,7 +48,7 @@
          <a class="calendar-link" href="calendar.ca" style="color: white;">학사일정</a>
 
       	<li class="calendar">
-         <a class="calendar-link" href="javascript:void(window.open('lecMove.me'))" style="color: white;">온라인강의</a>
+         <a class="calendar-link" href="javascript:void(window.open('lecMove.me?id=20193019'))" style="color: white;">온라인강의</a>
 
 
       	<li class="calendar">

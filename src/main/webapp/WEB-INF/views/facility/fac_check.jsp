@@ -38,7 +38,7 @@
 				<button class="btn btn-primary" type="button"
 					onclick="location.href='facMove.me'">대여목록</button>
 				<button class="btn btn-primary" type="button"
-					onclick="location.href='facMovess.me'">MY대여</button>
+					onclick="location.href='facMovess.me?id=20193019'">MY대여</button>
 				<button class="btn btn-primary" type="button"
 					onclick="location.href='facMovesss.me'">관리자 확인</button>
 				<button class="btn btn-primary" type="button"
@@ -69,6 +69,7 @@
 										<th>학과</th>
 										<th>시설물이름</th>
 										<th>신청사유</th>
+										<th>수락/거절</th>
 
 									</tr>
 								</thead>
@@ -85,8 +86,10 @@
 
 
 										<td>
-											<button class="btn btn-success" type="button">수락</button>
-											<button class="btn btn-info" type="button">거절</button>
+											<button class="btn btn-success" type="button"
+												onclick="location.href='facok.me?no=${f.facNo}'">수락</button>
+											<button class="btn btn-info" type="button"
+												onclick="location.href='facno.me?no=${f.facNo}'">거절</button>
 										</td>
 									</tr>
 								</c:forEach>

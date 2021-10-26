@@ -18,6 +18,10 @@ public class searchFac {
 	private String cate2;
 	private String cate3;
 	private String cate4;
+	private int cate5;
+	private int cate6;
+	private int cate7;
+	
 	
 	
 }
