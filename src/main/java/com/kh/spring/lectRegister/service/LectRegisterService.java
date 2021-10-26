@@ -46,5 +46,8 @@ public interface LectRegisterService {
 
 	ArrayList<Professor> proList();
 
+	int checkDate(ArrayList<LecRegPro> arlist, String subCode);
+
+
 
 }

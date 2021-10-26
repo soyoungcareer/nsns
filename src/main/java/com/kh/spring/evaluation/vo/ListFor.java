@@ -1,4 +1,4 @@
-package com.kh.spring.lectRegister.vo;
+package com.kh.spring.evaluation.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,9 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class SearchReg {
-
-	private int condition1;
-	private int condition2;
-	private String search;
+public class ListFor {
+	private int lectNum;
+	private int count;
 	private int stuId;
+	private int grade;
 }

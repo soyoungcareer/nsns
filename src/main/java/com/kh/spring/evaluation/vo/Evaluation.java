@@ -21,5 +21,5 @@ public class Evaluation {
 	private int year;
 	private int semester;
 	private String status;
-	
+	private int count;
 }

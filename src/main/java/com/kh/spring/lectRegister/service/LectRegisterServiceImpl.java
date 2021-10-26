@@ -14,6 +14,7 @@ import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 
 
@@ -99,8 +100,8 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 		}else {
 			re.setSemester(2);
 		}
-		int result= lectRegisterDao.registerDelete(sqlSession,re);// 삭제
 		lectRegisterDao.deleteCredit(sqlSession,re);// 학생 학점 삭제
+		int result= lectRegisterDao.registerDelete(sqlSession,re);// 삭제
 		return result;
 	}
 
@@ -268,5 +269,26 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 	public ArrayList<Professor> proList() {
 		return lectRegisterDao.proList(sqlSession);
 	}
+
+	@Override
+	public int checkDate(ArrayList<LecRegPro> arlist, String subCode) {
+		Subject sDate =  lectRegisterDao.sDate(sqlSession, subCode);// 과목의 날짜 
+		int result=-1;
+		for(int i=0; i<arlist.size();i++) {
+			if(sDate.getSubTime().charAt(0)==arlist.get(i).getSubject().getSubTime().charAt(0)) {
+				int j=0;
+				while(j<sDate.getSubTime().length()-1) {
+					result = arlist.get(i).getSubject().getSubTime().substring(1).indexOf(sDate.getSubTime().charAt(j+1));
+					j++;
+					if(result!=-1) {
+						break;
+					}
+				}
+			}
+		}
+		
+		return result;
+	}
+
 
 }
