@@ -126,19 +126,33 @@
 											      </c:choose>
 											      <c:choose>
 											         <c:when test = "${sysYear==ar.lectRegister.year and  seme==ar.lectRegister.semester}">
+											         <c:if test = "${ ar.countObj eq 0}">
 											          	<th style="padding: 0px; padding-top: 5px"><button
 														class="btn btn-primary" type="button"
 														style="margin-left: 10px;" id="addObejct"
 														class="addObejct">신청하기</button></th>
+														</c:if>
+														<c:if test = "${ar.countObj!=0 }">
+														<th style="padding: 0px; padding-top: 5px"><button
+														class="btn btn-secondary" type="button"
+														style="margin-left: 10px;" id="addObejct" disabled
+														class="addObejct">신청완료</button></th>
+														</c:if>
+									
+														<c:if test = "${ar.countEval!=0}">
 														<th style="padding: 0px; padding-top: 5px" id="evaluation"><button
 														class="btn btn-primary" type="button"
 														style="margin-left: 10px;">신청하기</button></th>
+														</c:if>
+														<c:if test = "${ar.countEval eq 0}">
+														<th ></th>
+														</c:if>
 											         </c:when>
 											         <c:otherwise>
 											         	 <td></td>
 											             <td></td>
 											         </c:otherwise>
-											      </c:choose>  
+											      </c:choose>   
 						                    </tr>
 					                    </c:forEach>
 											<!-- <tr>
@@ -176,7 +190,7 @@
 											            <td >미정</td>
 											         </c:when>
 											         <c:otherwise>
-											             <td>${ cCredit.avgCredit}</td>
+											             <td><fmt:formatNumber type="number"  pattern="0.00"  value= "${ cCredit.avgCredit} " /></td>
 											         </c:otherwise>
 											</c:choose>
 										</tr>

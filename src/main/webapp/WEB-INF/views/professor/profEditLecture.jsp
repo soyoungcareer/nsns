@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,8 @@
 							<div class="form-group">
 							  <label class="control-label" for="subDivs">이수구분</label>
 							  <select class="form-control" id="subDivs" name="subDivs" required>
-							  	<option value="${ sub.subDivs }" selected hidden>${ sub.subDivs }</option>
+							  	<c:if test="${ sub.subDivs eq 1 }"><option value="${ sub.subDivs }" selected hidden>전공</option></c:if>
+							  	<c:if test="${ sub.subDivs eq 2 }"><option value="${ sub.subDivs }" selected hidden>교양</option></c:if>
 							    <option value="1">전공</option>
 							    <option value="2">교양</option>
 							  </select>
@@ -51,7 +53,8 @@
 							<div class="form-group">
 							  <label class="control-label" for="subType">강의형태</label>
 							  <select class="form-control" id="subType" name="subType" required>
-							  	<option value="${ sub.subType }" selected hidden>${ sub.subType }</option>
+							  	<c:if test="${ sub.subType eq 1 }"><option value="${ sub.subType }" selected hidden>집체</option></c:if>
+							  	<c:if test="${ sub.subType eq 2 }"><option value="${ sub.subType }" selected hidden>온라인</option></c:if>
 							    <option value="1">집체</option>
 							    <option value="2">온라인</option>
 							  </select>
@@ -61,7 +64,7 @@
 		            <div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교과목명</label>
-		                  <input class="form-control" type="text" placeholder="교과목명 입력" name="subTitle" required>
+		                  <input class="form-control" type="text" name="subTitle" value="${ sub.subTitle }" required>
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교수명</label>

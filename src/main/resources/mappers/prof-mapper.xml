@@ -69,19 +69,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="semester" column="SEMESTER"/> -->
 	</resultMap>
 	
-	<!-- 학적변동 -->
-	<resultMap type="StudentStatus" id="studentStatusResultSet">
-		<id property="stsNo" column="STS_NO"/>
-		<result property="stsProcess" column="STS_PROCESS"/>
-		<result property="stsComplete" column="STS_COMPLETE"/>
-		<result property="stsCategory" column="STS_CATEGORY"/>
+	<!-- 자퇴 -->
+	<resultMap type="StudentDo" id="doStatusResultSet">
+		<id property="applicationNo" column="APPLICATION_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="doDate" column="DO_DATE"/>
+		<result property="doReason" column="DO_REASON"/>
 		<result property="status" column="STATUS"/>
-		<result property="applicationNoOff" column="APPLICATION_NO_OFF"/>
-		<result property="applicationNoDo" column="APPLICATION_NO_DO"/>
+		<result property="stuName" column="STU_NAME"/>
+		<result property="stuStatus" column="STU_STATUS"/>
 	</resultMap>
 	
+	<!-- 휴학 -->
+	<resultMap type="StudentOff" id="offStatusResultSet">
+		<id property="applicationNo" column="APPLICATION_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="offCategory" column="OFF_CATEGORY"/>
+		<result property="offDate" column="OFF_DATE"/>
+		<result property="offSemCnt" column="OFF_SEM_CNT"/>
+		<result property="offSem" column="OFF_SEM"/>
+		<result property="offReason" column="OFF_REASON"/>
+		<result property="status" column="STATUS"/>
+		<result property="stuName" column="STU_NAME"/>
+		<result property="stuStatus" column="STU_STATUS"/>
+	</resultMap>
 	
-	
+	<!-- 강의 신청 -->
+	<resultMap type="RequestedSubject" id="reqSubResultSet">
+		<id property="reqSubNo" column="REQSUB_NO"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="subDivs" column="SUB_DIVS"/>
+		<result property="subType" column="SUB_TYPE"/>
+		<result property="subTitle" column="SUB_TITLE"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="subCredit" column="SUB_CREDIT"/>
+		<result property="subTime" column="SUB_TIME"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
 	
 	<!-- 로그인 교수 -->
 	<select id="loginProfessor" parameterType="Professor" resultMap="profResultSet">
@@ -111,12 +135,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 강의관리 -->
 	<!-- 강의개설 -->
-	<!-- 강의개설 신청시 학과명, 교수명 불러오기 -->
+	<!-- 학과명, 교수명 불러오기 -->
 	<select id="profInfoLoad" parameterType="Professor" resultMap="profResultSet">
 		SELECT DEPT_TITLE, PROF_NAME
 		FROM PROFESSOR
 		JOIN DEPARTMENT USING(DEPT_CODE)
 		WHERE PROF_ID=#{profId}
+	</select>
+	<!-- 과목정보 불러오기 -->
+	<select id="subInfoLoad" parameterType="Map" resultMap="profSubResultSet">
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
 	</select>
 	
 	<!-- 강의개설 신청 -->
@@ -128,10 +158,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 강의목록 조회 -->
 	<!-- 교수 강의목록 개수 -->
-	<select id="profLectListCount" resultType="_int">
+	<select id="subListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM SUBJECT
-		WEHRE PROF_ID=#{profId}
+		WHERE PROF_ID=#{profId}
 	</select>
 	
 	<!-- 교수 강의목록 불러오기 -->
@@ -140,22 +170,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM SUBJECT
 		JOIN PROFESSOR USING(PROF_ID)
 		WHERE PROF_ID=#{profId}
+		ORDER BY SUB_YEAR DESC, SUB_SMST DESC
 	</select>
 	
 	<!-- 강의수정 -->
-	<!-- 강의 수정시 과목정보 불러오기 -->
-	<select id="subInfoLoad" parameterType="Subject" resultMap="profSubResultSet">
-		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
-		FROM SUBJECT
-		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
-	</select>
+	
 	
 	<!-- 강의정보 수정 -->
 
 	
 	<!-- 강의삭제 -->
 	
-	
+	<!-- 강의개설/수정/삭제 목록 -->
+	<select id="reqSubListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM REQ_SUBJECT
+		WHERE PROF_ID=#{profId}
+	</select>
+	<select id="selectReqSubList" resultMap="reqSubResultSet">
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, STATUS
+		FROM REQ_SUBJECT
+		WHERE PROF_ID=#{profId}
+		ORDER BY REQSUB_NO DESC
+	</select>
 	
 	<!-- 학생관리 -->
 	<!-- 학생목록조회 -->
@@ -167,6 +204,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN LECT_REGISTER C ON A.STU_ID=C.STU_ID
 		JOIN SUBJECT D ON C.SUB_CODE=D.SUB_CODE
 		WHERE C.SUB_CODE=#{subCode} AND C.YEAR=#{year} AND C.SEMESTER=#{semester} AND D.PROF_ID=#{profId}
+		ORDER BY A.DEPT_CODE
 	</select>
 	
 	<!-- 학생상담관리 -->
@@ -175,6 +213,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM CONSULT
 		JOIN STUDENT USING(STU_ID)
 		WHERE PROF_ID=#{profId}
+		ORDER BY CON_NO DESC
 	</select>
 	
 	<!-- 학생출결관리 -->
@@ -185,26 +224,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM LECT_EVALUATE A
 		JOIN LECT_REGISTER B USING(LECT_REG_NO)
 		WHERE B.SUB_CODE=#{subCode} AND B.YEAR=#{subYear} AND B.SEMESTER=#{subSmst}
+		ORDER BY A.LECT_EVA_NO DESC
 	</select>
 	
 	<!-- 학적변동승인 -->
 	<!-- 자퇴 -->
-<!-- 	<select id="loadDoList" resultMap="doStatusResultSet">
+	<select id="doListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM STU_DO
+		JOIN STUDENT USING(STU_ID)
+		WHERE PROF_ID=#{profId}
+	</select>
+	<select id="loadDoList" resultMap="doStatusResultSet" parameterType="StudentDo">
 		SELECT C.STU_NAME, B.DO_DATE, C.STU_STATUS, B.DO_REASON, A.STS_PROCESS
 		FROM STU_STATUS_PRO A
 		JOIN STU_DO B ON A.APPLICATION_NO_DO=B.APPLICATION_NO
 		JOIN STUDENT C ON C.STU_ID=B.STU_ID
-		WHERE A.STATUS='Y'
+		WHERE C.PROF_ID=#{profId}
+		ORDER BY B.APPLICATION_NO DESC
 	</select>
 	
-	휴학
+	<!-- 휴학 -->
+	<select id="offListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM STU_OFF
+		JOIN STUDENT USING(STU_ID)
+		WHERE PROF_ID=#{profId}
+	</select>
 	<select id="loadOffList" resultMap="offStatusResultSet">
 		SELECT C.STU_NAME, B.OFF_DATE, C.STU_STATUS, B.OFF_CATEGORY, B.OFF_SEM_CNT, B.OFF_SEM, B.OFF_REASON, A.STS_PROCESS
 		FROM STU_STATUS_PRO A
 		JOIN STU_OFF B ON A.APPLICATION_NO_OFF=B.APPLICATION_NO
 		JOIN STUDENT C ON C.STU_ID=B.STU_ID
-		WHERE A.STATUS='Y'
-	</select> -->
+		WHERE C.PROF_ID=#{profId}
+		ORDER BY B.APPLICATION_NO DESC
+	</select>
 	
 <!-- 	<select id="studentProList" resultMap="studentStatusResultMap" parameterType="string">
 		SELECT STU_STATUS_PRO.STS_PROCESS, STU_STATUS_PRO.STS_CATEGORY, STU_STATUS_PRO.STS_COMPLETE, STU_STATUS_PRO.STATUS, APPLICATION_NO_OFF,APPLICATION_NO_DO

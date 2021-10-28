@@ -41,7 +41,8 @@
 	                  </div>
 	                  <label class="control-label col-md-2">강의코드</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text"  value="${reDetail.subject.subCode}" id="subCode" name="subCode" disabled>
+	                    <input class="form-control col-md-12" type="text"  value="${reDetail.subject.subCode}" disabled>
+	                    <input type="hidden"  value="${reDetail.subject.subCode}"  id="subCode" name="subCode">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -138,13 +139,16 @@
                   <label class="control-label col-md-2">강의 계획서</label>
                   <div class="col-md-8">
                     <input class="form-control" type="file" id="upfile" name="reUploadFile">
-                     <c:if test="${!empty reDetail.attachment.originName}">
-	                                         <div style="margin-top: 10px">현재 파일 : ${ reDetail.attachment.originName } </div>
-	                            <input type="hidden" name="changeName" value="${ reDetail.attachment.changeName }">
-	                            <input type="hidden" name="originName" value="${ reDetail.attachment.originName }">
+                     <c:if test="${!empty reDetail.subject.originName}">
+	                                         <div style="margin-top: 10px" class="attch">현재 파일 : ${ reDetail.subject.originName } </div>
+	                            <input type="hidden" name="changeName" value="${ reDetail.subject.changeName }">
+	                            <input type="hidden" name="originName" value="${ reDetail.subject.originName }">
+                            </c:if>
+                            <c:if test="${empty reDetail.subject.originName}">
+	                                         <div style="margin-top: 10px" class="attch"></div>
                             </c:if>
                   </div>
-                  <div ><a class="btn btn-danger" href="#" style="margin-right: 10px"><i class="fa fa-fw fa-lg fa-times-circle"></i>삭제하기</a>
+                  <div ><a class="btn btn-danger" href="#" style="margin-right: 10px" id="deleteAtt"><i class="fa fa-fw fa-lg fa-times-circle"></i>삭제하기</a>
                 </div>
                 </div>
                 <div class="form-group row">
@@ -177,12 +181,58 @@
 			var postForm = $("#updateForm");
 						
 			if(num == 1){
-					postForm.attr("action", "updateFormAd.reg");
+					postForm.attr("action", "updateAdmin.reg");
 				}else{
 					postForm.attr("action", "deleteAd.reg");
-						}
-					postForm.submit();
 				}
+			postForm.submit(); 
+		}
+			/* $("#start").on("change", function() {
+					if($(this).val()>$("#end").val()){
+						alert("시작교시가 끝교시보다 커서 설정할수 없습니다.");
+						$(this).val("${ fn:substring(reDetail.subject.subTime,1,2)}");
+						if(${fn:length(reDetail.subject.subTime)}>3){
+							$("#end").val("${ fn:substring(reDetail.subject.subTime,3,4)}");
+						}else{
+							$("#end").val("${ fn:substring(reDetail.subject.subTime,2,3)}");
+						}
+					}
+					})
+			$("#end").on("change", function() {
+					if($(this).val()<$("#start").val()){
+						alert("끝교시가 시작교시보다 작아 설정할수 없습니다.");
+						$("#start").val("${ fn:substring(reDetail.subject.subTime,1,2)}");
+						if(${fn:length(reDetail.subject.subTime)}>3){
+							$(this).val("${ fn:substring(reDetail.subject.subTime,3,4)}");
+						}else{
+							$(this).val("${ fn:substring(reDetail.subject.subTime,2,3)}");
+						}
+						}
+					})
+					 */
+					
+					
+		 $("#deleteAtt").on("click", function() {
+			var origin=$("input[name='originName']").val();
+			var subCode=$("#subCode").val();
+			 $.ajax({
+				url:"deleteAtt.reg",
+				type:"post",
+				async: false, 
+				data:{subCode:subCode, 
+					origin:origin},
+				success:function(result){
+					if(result>0){
+						$(".attch").text("");
+					}else{
+						alert("삭제할 파일이 존재하지 않습니다.")
+					}
+					
+				},error:function(){
+					console.log("수강신청 ajax 통신 실패");
+				}
+			});   
+		});		
 		</script>
 </body>
 </html>

@@ -8,12 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<resultMap id="profSubList" type="Subject">
 		<id property="subCode" column="SUB_CODE"/>
-		<result property="subTitle" column="SUB_TITLE"/>
-		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptTitle" column="DEPT_TITLE"/>
 		<result property="subDivs" column="SUB_DIVS"/>
-		<result property="profId" column="PROF_ID"/>
+		<result property="subTitle" column="SUB_TITLE"/>
 		<result property="subCredit" column="SUB_CREDIT"/>
 		<result property="subType" column="SUB_TYPE"/>
+		<result property="profName" column="PROF_NAME"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="deptCode" column="DEPT_CODE"/>
 		<result property="subYear" column="SUB_YEAR"/>
 		<result property="subSmst" column="SUB_SMST"/>
 		<result property="status" column="STATUS"/>
@@ -49,6 +51,84 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="reason" column="REASON"/>
 	</resultMap>
 	
+	<!-- 과목 조건 검색 개수 -->
+	<select id="selectSubListCount" resultType="_int" parameterType="SearchSubject">
+		SELECT COUNT(*)
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId}
+		<choose>
+			<when test='con1 == 0 and con2 == 0 and keyword == "%"'>
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 == 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
+	<!-- 과목 조건 검색 리스트 -->
+	<select id="selectFilteredSubList" parameterType="SearchSubject" resultMap="profSubList">
+		SELECT A.SUB_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TITLE, A.SUB_CREDIT, A.SUB_TYPE, C.PROF_NAME
+		FROM SUBJECT A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE 
+		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
+		WHERE A.PROF_ID=#{profId}
+		<choose>
+			<when test='con1 == 0 and con2 == 0 and keyword == "%"'>
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 == 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+		</choose>
+		ORDER BY SUB_YEAR DESC, SUB_SMST DESC
+	</select>
+	
 	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<!-- 교수, 학년도, 학기별 과목 조회 -->
 	<select id="loadSubList" parameterType="Subject" resultMap="profSubList">
@@ -61,7 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 과목, 학년도, 학기별 성적 조회 -->
-	<select id="selectList" parameterType="Grade" resultMap="gradeResultSet">
+	<select id="selectFilteredGrade" parameterType="SearchGrade" resultMap="gradeResultSet">
 		SELECT D.DEPT_TITLE, A.STU_ID, C.STU_NAME, C.STU_STATUS, A.ATTENDANCE, A.ASSIGNMENT, A.MIDEXAM, 
 				A.FINEXAM, (A.ATTENDANCE + A.ASSIGNMENT + A.MIDEXAM + A.FINEXAM) AS GRADE_TOTAL,
 				A.GRADE_RESULT, A.GRADE_CREDIT
@@ -70,7 +150,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN STUDENT C ON A.STU_ID=C.STU_ID
 		JOIN DEPARTMENT D ON C.DEPT_CODE=D.DEPT_CODE
 		JOIN SUBJECT E ON A.SUB_CODE=E.SUB_CODE
-		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
+		WHERE SUB_CODE=#{subCode} 
+		<choose>
+			<when test='gradeYear == 0 and gradeSemester == 0'>
+			</when>
+			<when test='gradeYear != 0 and gradeSemester == 0'>
+				AND GRADE_YEAR=#{gradeYear}
+			</when>
+			<when test='gradeYear == 0 and gradeSemester != 0'>
+				AND GRADE_SEMESTER=${gradeSemester}
+			</when>
+			<when test='gradeYear != 0 and gradeSemester != 0'>
+				AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
+			</when>
+		</choose>
+		ORDER BY STU_ID DESC
 	</select>
 	
 	<select id="selectListCount" parameterType="_int" resultMap="gradeResultSet">
@@ -102,6 +196,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN GRADE C ON A.GRADE_NO=C.GRADE_NO
 		JOIN SUBJECT D ON D.SUB_CODE=C.SUB_CODE
 		WHERE D.PROF_ID=#{profId}
+		ORDER BY GRA_OBJ_NO DESC
 	</select>
 
 </mapper>
