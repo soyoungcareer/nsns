@@ -3,6 +3,7 @@ package com.kh.spring.facility.model.Service;
 import java.util.ArrayList;
 
 import com.kh.spring.common.PageInfo;
+import com.kh.spring.facility.model.vo.allam;
 import com.kh.spring.facility.model.vo.facility;
 import com.kh.spring.facility.model.vo.facilitycheck;
 import com.kh.spring.facility.model.vo.searchFac;
@@ -31,13 +32,17 @@ public interface FacilityService {
 
 		void facOk(int no);
 
-		void facNo(int no);
+		void facNo(int no, searchFac sf);
 
 		ArrayList<facility> facMyPage(int id, PageInfo pi);
 
 		int selectMyListCount(int id);
 
 		void facHome(int no);
+
+		ArrayList<allam> selectallam(int id);
+
+		void delallam(int test);
 
 
 	

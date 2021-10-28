@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.facility.model.dao.FacilityDao;
+import com.kh.spring.facility.model.vo.allam;
 import com.kh.spring.facility.model.vo.facility;
 import com.kh.spring.facility.model.vo.facilitycheck;
 import com.kh.spring.facility.model.vo.searchFac;
@@ -92,18 +93,18 @@ public class FacilityServiceImpl implements FacilityService {
 	public void facOk(int no) {
 
 		int result = fd.facOk(sqlSession, no);
-		
-		if(result > 0) {
-			
-		}
+	
 
 	}
 
 	@Override
-	public void facNo(int no) {
+	public void facNo(int no, searchFac sf) {
 
 		int result = fd.facNo(sqlSession, no);
-
+		int result2;
+		if(result > 0) {
+			result2 = fd.allam(sqlSession,sf);
+		}
 	}
 
 
@@ -129,6 +130,18 @@ public class FacilityServiceImpl implements FacilityService {
 	public void facHome(int no) {
 		
 		int result =  fd.facHome(sqlSession,no);
+	}
+
+	@Override
+	public ArrayList<allam> selectallam(int id) {
+		// TODO Auto-generated method stub
+		return (ArrayList)fd.selectallam(sqlSession,id);
+	}
+
+	@Override
+	public void delallam(int test) {
+		
+		int result = fd.delallam(sqlSession,test);
 	}
 
 

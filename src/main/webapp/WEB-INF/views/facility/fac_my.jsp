@@ -100,7 +100,9 @@
 								</tbody>
 							</table>
 
+
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -145,11 +147,57 @@
 
 
 		</div>
+		<br> <br> <br> <br> <br> <br>
+		<div class="col-md-6">
+			<div class="tile">
+				<h3 class="title">알람</h3>
+				<button class="btn btn-primary" type="button" id="delallam"
+					onclick="tests()">내역삭제</button>
 
+				<c:choose>
+					<c:when test="${listt}.isEmpty()">
+						<h1>알람이 없습니다.</h1>
+					</c:when>
 
+					<c:otherwise>
 
+						<c:forEach items="${ listt }" var="f">
+							<button type="hidden" id="aaa" value="${f.stuId }"></button>
+								
+								<button class="btn btn-primary btn-lg btn-block" type="button"
+									id="delbtn">${f.name}이${f.status}되었습니다.</button>
+						</c:forEach>
 
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 		<script>
-			</body>
-			</html>
-		
+			function tests() {
+				console.log("!@#!@#");
+				var test = $("#aaa").val();
+				console.log(test);
+				$("#delbtn").attr("type", "hidden");
+				$.ajax({
+					url : "delallam.me",
+					type : "post",
+					data : {
+						test : test
+
+					},
+					success : function(data) {
+						alert("제거완료");
+						console.log(data);
+						
+
+					},
+					error : function(request, status, error) {
+
+					}
+
+				});
+
+			}
+		</script>
+</body>
+</html>

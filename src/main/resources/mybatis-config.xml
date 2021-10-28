@@ -36,6 +36,7 @@
      <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
+			 <typeAlias type="com.kh.spring.facility.model.vo.allam" alias="Allam"/>
 
 
 
@@ -53,7 +54,7 @@
 		<mapper resource="/mappers/lecture-mapper.xml"/>
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/grade-mapper.xml"/>
-		<mapper resource="/mappers/gradeStu-mapper.xml"/>
+	<!--  	<mapper resource="/mappers/gradeStu-mapper.xml"/>-->
 	</mappers>
 	
  

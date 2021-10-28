@@ -1,12 +1,14 @@
 package com.kh.spring.facility.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.common.PageInfo;
+import com.kh.spring.facility.model.vo.allam;
 import com.kh.spring.facility.model.vo.facility;
 import com.kh.spring.facility.model.vo.facilitycheck;
 import com.kh.spring.facility.model.vo.searchFac;
@@ -96,6 +98,22 @@ public class FacilityDao {
 	public int facHome(SqlSessionTemplate sqlSession, int no) {
 		return sqlSession.update("facilityMapper.facHome",no);	
 
+	}
+
+	public int allam(SqlSessionTemplate sqlSession, searchFac sf) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("facilityMapper.allam" ,sf);
+	}
+
+	public List<allam> selectallam(SqlSessionTemplate sqlSession, int id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("facilityMapper.selectallam" ,id);
+	}
+
+	public int delallam(SqlSessionTemplate sqlSession, int test) {
+	
+		return sqlSession.delete("facilityMapper.delallam",test);
+			
 	}
 
 	

@@ -48,4 +48,6 @@ public class LecDao {
 		return sqlSession.update("lectureMapper.insertTime",sf);
 	}
 
+	
+
 }
