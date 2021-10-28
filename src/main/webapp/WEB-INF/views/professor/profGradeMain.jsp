@@ -1,14 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	String contextPath = request.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 성적 관리</title>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 성적 관리</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).on("click", "#subTable>tbody>tr", function(){
+			var tr = $(this);
+			var td = tr.children();
+			var subCode = td.eq(0).text();
+			var gradeYear = $("#con1 option:selected").val();
+			var gradeSemester = $("#con2 option:selected").val();
+			/* var gradeYear = $("#con1").val().prop("selected", true);
+			var gradeSemester = $("#con2").val().prop("selected", true); */
+			
+			console.log(subCode);
+			console.log(gradeYear);
+			console.log(gradeSemester);
+			
+			$.ajax({
+				url: "filteredGrade.pr",
+				type:"GET",
+				data:{
+					subCode:subCode, 
+					gradeYear:gradeYear, 
+					gradeSemester:gradeSemester
+				},
+				dataType:"json",
+				success:function(gList){
+					var result = "<tr role='row'>";
+					
+					$.each(gList, function(index, item) {
+						result += "<td class='sorting_1'>" + item.deptTitle + "</td>"
+							   + "<td>" + item.studentId + "</td>"
+							   + "<td>" + item.studentName + "</td>"
+							   + "<td>" + item.studentStatus + "</td>"
+							   + "<td>" + item.attendance + "</td>"
+							   + "<td>" + item.assignment + "</td>"
+							   + "<td>" + item.midExam + "</td>"
+							   + "<td>" + item.finExam + "</td>"
+							   + "<td>" + item.gradeTotal + "</td>"
+							   + "<td>" + item.gradeResult + "</td>"
+							   + "<td>" + item.gradeCredit + "</td></tr>"
+					});
+					$('#gradeTable tbody').html(result);
+				},
+				error:function() {
+					alert("로딩 실패");
+				}
+			});
+		});
+	</script>
+
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -37,6 +83,8 @@
 							<div class="row">
 								<h3 class="tile-title">성적 등록/조회/수정</h3>
 							</div>
+							
+							<form action="filteredSubject.pr" class="row">
 							<div class="row">
 								<div class="form-group col-md-5">
 									<!-- <div class="form-group col-md-5">
@@ -47,26 +95,45 @@
 									  </select>
 									</div> -->
 									<div class="form-group col-md-5">
-									  <label class="control-label" for="subYear">학년도</label>
-									  <select class="form-control" id="subYear">
-									    <option>2021</option>
-									    <option>2020</option>
+									  <label class="control-label" for="con1">학년도 </label>
+									  <select class="form-control" id="con1" name="con1">
+									  	<option value="0">전체</option>
+									  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+									    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
+<%-- 									  	<c:forEach items="${ subList }" var="subList">
+									  		<option value="${ subList.subYear }" <c:if test="${ subYear eq subList.subYear }">selected</c:if>>
+									  			${ subList.subYear }
+									  		</option>
+									  	</c:forEach> --%>
 									  </select>
 									</div>
 									<div class="form-group col-md-5">
-									  <label class="control-label" for="subSeme">학기</label>
-									  <select class="form-control" id="subSeme">
-									    <option>1</option>
-									    <option>2</option>
+									  <label class="control-label" for="con2">학기 </label>
+									  <select class="form-control" id="con2" name="con2">
+									  	<option value="0">전체</option>
+									    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+									    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
 									  </select>
 									</div>
 								</div>
 							</div>
+							<div class="col-sm-12 col-md-6">
+								<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
+									<label>강의명 
+										<input type="search" class="form-control form-control-sm"
+											aria-controls="sampleTable" name="keyword" value="${ keyword }">
+									</label>
+										<button class="btn btn-primary btn-sm" type="submit"
+										style="margin-left: 10px;" id="readList">조 회</button>
+								</div>
+							</div>
+							</form>
+							
 							<div class="row">
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
-										id="sampleTable" role="grid"
+										id="subTable" role="grid"
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
@@ -106,15 +173,15 @@
 													<tr><td colspan="7">개설된 강의가 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty subList}">
-													<c:forEach var="list" items="${subList}">
+													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
-															<td class="sorting_1"><c:out value="${subList.subCode}"/></td>
-															<td><c:out value="${subList.deptCode}"/></td>
+															<td class="sorting_1" id="tdSubCode"><c:out value="${subList.subCode}"/></td>
+															<td><c:out value="${subList.deptTitle}"/></td>
 															<td><c:out value="${subList.subDivs}"/></td>
 															<td><c:out value="${subList.subTitle}"/></td>
 															<td><c:out value="${subList.subCredit}"/></td>
 															<td><c:out value="${subList.subType}"/></td>
-															<td><c:out value="${subList.profId}"/></td>
+															<td><c:out value="${subList.profName}"/></td>
 														</tr>
 													</c:forEach>
 												</c:when>
@@ -136,7 +203,7 @@
 								
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
-										id="sampleTable" role="grid"
+										id="gradeTable" role="grid"
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
@@ -148,10 +215,10 @@
 													rowspan="1" colspan="1"
 													aria-label="Position: activate to sort column ascending"
 													style="width: 130.762px;">학번</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">학년</th>
+													style="width: 52.9125px;">학년</th> -->
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
@@ -195,7 +262,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:choose>
+											<%-- <c:choose>
 												<c:when test="${empty gradeList}">
 													<tr><td colspan="11">수강중인 학생이 없습니다.</td></tr>
 												</c:when>
@@ -216,63 +283,51 @@
 														</tr>
 													</c:forEach>
 												</c:when>
-											</c:choose>
+											</c:choose> --%>
 										</tbody>
 									</table>
 								</div>
 							</div>
 							
-							<!-- -----------------------------------
-								페이징 처리하기
-							------------------------------------ -->
-							
-							<div class="row">
-								<div class="col-sm-12 col-md-5">
-									<div class="dataTables_info" id="sampleTable_info"
-										role="status" aria-live="polite">Showing 1 to 10 of 57
-										entries</div>
-								</div>
-								<div class="col-sm-12 col-md-7">
-									<div class="dataTables_paginate paging_simple_numbers"
-										id="sampleTable_paginate">
-										<ul class="pagination">
-											<li class="paginate_button page-item previous disabled"
-												id="sampleTable_previous"><a href="#"
-												aria-controls="sampleTable" data-dt-idx="0" tabindex="0"
-												class="page-link">Previous</a></li>
-											<li class="paginate_button page-item active"><a href="#"
-												aria-controls="sampleTable" data-dt-idx="1" tabindex="0"
-												class="page-link">1</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="2" tabindex="0"
-												class="page-link">2</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="3" tabindex="0"
-												class="page-link">3</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="4" tabindex="0"
-												class="page-link">4</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="5" tabindex="0"
-												class="page-link">5</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="6" tabindex="0"
-												class="page-link">6</a></li>
-											<li class="paginate_button page-item next"
-												id="sampleTable_next"><a href="#"
-												aria-controls="sampleTable" data-dt-idx="7" tabindex="0"
-												class="page-link">Next</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
+							<!-- 페이징 처리 -->
+							<div id="pagingArea">
+				                <ul class="pagination">
+				                	<c:choose>
+				                		<c:when test="${ pi.currentPage ne 1 }">
+				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                	
+				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+				                    	<c:choose>
+					                		<c:when test="${ pi.currentPage ne p }">
+				                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+					                		</c:when>
+					                		<c:otherwise>
+					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+					                		</c:otherwise>
+					                	</c:choose>
+				                    </c:forEach>
+				                    
+				                    <c:choose>
+				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                </ul>
+				            </div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
 	</main>
+	
 </body>
 </html>

@@ -22,6 +22,9 @@ public class StudentOff {
 	private String offSem; //휴학학기
 	private String offReason; //휴학사유
 	private String status; // 상태값
+	
+	private String stuName;
+	private String stuStatus;
 }
 
 

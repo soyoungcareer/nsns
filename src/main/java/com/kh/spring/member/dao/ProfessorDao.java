@@ -1,16 +1,21 @@
 package com.kh.spring.member.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.consult.model.vo.Consult;
 import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentStatus.model.vo.StudentDo;
+import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 @Repository
@@ -20,8 +25,10 @@ public class ProfessorDao {
 		return sqlSession.selectOne("profMapper.profLectListCount");
 	}
 
-	public ArrayList<Subject> selectSubList(SqlSessionTemplate sqlSession, String profId) {
-		return (ArrayList)sqlSession.selectList("profMapper.selectSubList", profId);
+	public ArrayList<Subject> selectSubList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("profMapper.selectSubList", profId , rowBounds);
 	}
 
 	public Professor selectMypage(SqlSessionTemplate sqlSession, String profId) {
@@ -29,6 +36,7 @@ public class ProfessorDao {
 	}
 
 	public Professor profInfoLoad(SqlSessionTemplate sqlSession, String profId) {
+		System.out.println("======================profId Dao : " + profId);
 		return sqlSession.selectOne("profMapper.profInfoLoad", profId);
 	}
 
@@ -38,8 +46,8 @@ public class ProfessorDao {
 		return sqlSession.insert("profMapper.profCreateLecture", reqSubject);
 	}
 
-	public Subject subInfoLoad(SqlSessionTemplate sqlSession, String subCode) {
-		return sqlSession.selectOne("profMapper.subInfoLoad", subCode);
+	public Subject subInfoLoad(SqlSessionTemplate sqlSession, Map map) {
+		return sqlSession.selectOne("profMapper.subInfoLoad", map);
 	}
 
 	public int editMypage(SqlSessionTemplate sqlSession, Professor prof) {
@@ -60,12 +68,42 @@ public class ProfessorDao {
 		return (ArrayList)sqlSession.selectList("profMapper.loadConsultList", profId);
 	}
 
-	public ArrayList<StudentStatus> loadStatusList(SqlSessionTemplate sqlSession, String profId) {
-		return (ArrayList)sqlSession.selectList("profMapper.loadStatusList", profId);
-	}
-
 	public ArrayList<Evaluation> loadEvalList(SqlSessionTemplate sqlSession, Subject sub) {
 		return (ArrayList)sqlSession.selectList("profMapper.loadEvalList", sub);
+	}
+
+	public ArrayList<StudentDo> loadDoList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("profMapper.loadDoList", profId, rowBounds);
+	}
+
+	public ArrayList<StudentOff> loadOffList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("profMapper.loadOffList", profId, rowBounds);
+	}
+
+	public ArrayList<RequestedSubject> selectReqSubList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("profMapper.selectReqSubList", profId , rowBounds);
+	}
+
+	public int subListCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("profMapper.subListCount", profId);
+	}
+
+	public int reqSubListCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("profMapper.reqSubListCount", profId);
+	}
+
+	public int offListCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("profMapper.offListCount", profId);
+	}
+
+	public int doListCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("profMapper.doListCount", profId);
 	}
 
 }

@@ -36,6 +36,8 @@
      <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.SearchSubject" alias="SearchSubject"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.SearchGrade" alias="SearchGrade"/>
 			<typeAlias type="com.kh.spring.certificate.vo.Graduation" alias="Graduation"/>
 			<typeAlias type="com.kh.spring.certificate.vo.Certificate" alias="Certificate"/>
 

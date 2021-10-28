@@ -14,8 +14,11 @@ public class Subject {
 	private int subYear; //학년도
 	private int subSmst; //학기
 	private String status; //상태값
+	private String deptTitle; // 학과명
+	private String profName; // 교수명
 	private String originName;
 	private String changeName;
+
 	
 	public Subject() {
 		// TODO Auto-generated constructor stub
@@ -23,6 +26,7 @@ public class Subject {
 
 	public Subject(String subCode, String subTitle, int deptCode, int subDivs, String profId, int subCredit,
 			int subClass, String subTime, int subType, int subYear, int subSmst, String status, String originName, String changeName) {
+
 		super();
 		this.subCode = subCode;
 		this.subTitle = subTitle;
@@ -39,7 +43,27 @@ public class Subject {
 		this.originName = originName;
 		this.changeName = changeName;
 	}
+	
+	
+	
+	public String getProfName() {
+		return profName;
 
+
+	}
+  
+  public String getDeptTitle() {
+		return deptTitle;
+	}
+
+	public void setDeptTitle(String deptTitle) {
+		this.deptTitle = deptTitle;
+	}
+  
+	public void setProfName(String profName) {
+		this.profName = profName;
+	}
+	
 	public String getSubCode() {
 		return subCode;
 	}

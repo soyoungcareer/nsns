@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	int count = 1;
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>낙성대학교(교수) - 학적변동 승인</title>
+<title>낙성대학교(교수) - 강의개설/수정/삭제 신청내역</title>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -18,13 +18,13 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 학생 관리
+					<i class="fa fa-edit"></i> 강의 관리
 				</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profStudentOff.pr">학적변동 승인</a></li>
+				<li class="breadcrumb-item">강의 관리</li>
+				<li class="breadcrumb-item"><a href="profLectureDetail.pr">강의개설/수정/삭제 신청내역</a></li>
 			</ul>
 		</div>
 		
@@ -35,7 +35,7 @@
 						<div id="sampleTable_wrapper"
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 							<div class="row">
-								<h3 class="tile-title">휴학신청 목록</h3>
+								<h3 class="tile-title">강의개설/수정/삭제 신청목록</h3>
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
@@ -53,58 +53,58 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">학생이름</th>
+													style="width: 57.475px;">이수구분</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">신청일자</th>
+													style="width: 60.375px;">강의형태</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Position: activate to sort column ascending"
-													style="width: 130.762px;">학적상태</th>
+													style="width: 130.762px;">교과목명</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학구분</th>
+													style="width: 52.9125px;">학점</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학학기수</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학학기</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학사유</th>
+													style="width: 52.9125px;">강의시간</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">승인상태</th>
+<!-- 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">강의계획서</th> -->
 											</tr>
 										</thead>
 										<tbody>
 											<c:choose>
-												<c:when test="${empty doList}">
-													<tr><td colspan="9">휴학신청 내역이 없습니다.</td></tr>
+												<c:when test="${empty reqSub}">
+													<tr><td colspan="7">개설된 강의가 없습니다.</td></tr>
 												</c:when>
-												<c:when test="${!empty doList}">
-													<c:forEach var="doList" items="${doList}">
+												<c:when test="${!empty reqSub}">
+													<c:forEach var="reqSub" items="${reqSub}">
 														<tr role="row">
-															<td class="sorting_1"><%= count++ %></td>
-															<td><c:out value="${doList.stuName}"/></td>
-															<td><c:out value="${doList.offDate}"/></td>
-															<td><c:out value="${doList.stuStatus}"/></td>
-															<td><c:out value="${doList.offCategory}"/></td>
-															<td><c:out value="${doList.offSemCnt}"/></td>
-															<td><c:out value="${doList.offSem}"/></td>
-															<td><c:out value="${doList.offReason}"/></td>
-															<td><c:out value="${doList.status}"/></td>
+															<td class="sorting_1"><%=count++ %></td>
+															<td><c:out value="${reqSub.subDivs}"/></td>
+															<td><c:out value="${reqSub.subType}"/></td>
+															<td><c:out value="${reqSub.subTitle}"/></td>
+															<td><c:out value="${reqSub.subCredit}"/></td>
+															<td><c:out value="${reqSub.subTime}"/></td>
+															<td><c:out value="${reqSub.status}"/></td>
 														</tr>
 													</c:forEach>
 												</c:when>
 											</c:choose>
+											
+										
+													<!-- -------------------------------------------
+														강의계획서 넣기...? 
+													--------------------------------------------- -->
+											
 										</tbody>
 									</table>
 								</div>
@@ -143,25 +143,6 @@
 				                	</c:choose>
 				                </ul>
 				            </div>
-							
-							
-							<div class="row">
-								<label class="control-label col-md-3">
-					              <input type="checkbox"><span class="label-text">승인</span>
-					            </label>
-					            <label class="control-label col-md-3">
-					              <input type="checkbox"><span class="label-text">반려</span>
-					            </label>
-								<div class="form-group row">
-				                  <label class="control-label col-md-3">반려사유</label>
-				                  <div class="col-md-8">
-				                    <input class="form-control" type="text" placeholder="반려사유 입력">
-				                  </div>
-				                </div>
-				                <div class="form-group col-md-4 align-self-end">
-				                  <input type="button" class="btn btn-primary" type="button" onclick="" value="저장"/>
-				                </div>
-			                </div>
 							
 						</div>
 					</div>
