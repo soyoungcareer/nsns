@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,21 +18,21 @@
 			</div>
 			<!-- 추가 -->
 			<ul class="app-breadcrumb breadcrumb">
-				<li class=""><a href="#" style="color: #222d32;"><i
-						class="fa fa-headphones fa-3x" aria-hidden="true"></i>
-					<div>강의페이지</div></a></li>
-				<li class=""><a href="#" style="color: #222d32;"><i
-						class="fa fa-pencil-square-o fa-3x" aria-hidden="true"></i>
-					<div>수강신청</div></a></li>
-				<li class=""><a href="#" style="color: #222d32;"><i
-						class="fa fa-archive fa-3x" aria-hidden="true"></i>
-					<div>시설문 대여</div></a></li>
-				<li class=""><a href="#" style="color: #222d32;"><i
-						class="fa fa-calendar-o fa-3x" aria-hidden="true"></i>
-					<div>학사일정</div></a></li>
-				<li class=""><a href="#" style="color: #222d32;"><i
-						class="fa fa-calculator fa-3x" aria-hidden="true"></i>
-					<div>학비관리</div></a></li>
+				<li class="" style="text-align: center"><a href="#" style="color: #222d32;margin-left: 10px"><i
+						class="fa fa-headphones fa-2x" aria-hidden="true"></i>
+					<div style="margin-top: 5px; margin-left: 5px">강의페이지</div></a></li>
+				<li class="" style="text-align: center"><a href="register.reg" style="color: #222d32;margin-left: 10px"><i
+						class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+					<div style="margin-top: 5px; margin-left: 10px">수강신청</div></a></li>
+				<li class="" style="text-align: center"><a href="#" style="color: #222d32;margin-left: 10px"><i
+						class="fa fa-archive fa-2x" aria-hidden="true"></i>
+					<div style="margin-top: 5px; margin-left: 10px">시설문 대여</div></a></li>
+				<li class="" style="text-align: center"><a href="#" style="color: #222d32;margin-left: 10px"><i
+						class="fa fa-calendar-o fa-2x" aria-hidden="true"></i>
+					<div style="margin-top: 5px; margin-left: 10px">학사일정</div></a></li>
+				<li class="" style="text-align: center;"><a href="#" style="color: #222d32;margin-left: 10px"><i
+						class="fa fa-calculator fa-2x" aria-hidden="true"></i>
+					<div style="margin-top: 5px; margin-left: 10px">학비관리</div></a></li>
 			</ul>
 		</div>
 		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
@@ -71,7 +73,16 @@
 												</tr>
 											</thead>
 											<tbody>
+											<c:forEach items="${ certificate }" var="cer">
 												<tr>
+													<td>${ cer.category }</td>
+													<td>${ cer.title }</td>
+													<td>${ cer.agency }</td>
+													<td>${ cer.getDate }</td>
+												</tr>
+											
+											</c:forEach>
+												<!-- <tr>
 													<td style="padding: 0px;">
 								                      <select class="form-control" id="exampleSelect1" style="border: none;">
 									                      <option>자격증</option>
@@ -83,7 +94,7 @@
 													<td  style="padding: 0px;"> <input class="form-control" id="demoDate" type="date" placeholder="Select Date" style="border: none;"></td>
 													<td style="padding: 0px;"><button class="btn btn-danger" type="button"
 												style="margin-left: 10px;"><i class="fa fa-plus-circle" aria-hidden="true"></i>수정하기</button></td>
-												</tr>
+												</tr> -->
 											</tbody>
 										</table>
 									</div>

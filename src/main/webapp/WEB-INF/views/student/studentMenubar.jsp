@@ -72,7 +72,7 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="stuStatusPage.stu"><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
             <li><a class="treeview-item" href="stuOffPage.stu"><i class="icon fa fa-circle-o"></i> 휴학신청</a></li>
-            <li><a class="treeview-item" href="/detail.ntc?bno=13"><i class="icon fa fa-circle-o"></i> 복학신청</a></li>
+            <li><a class="treeview-item" href="detail.ntc?bno=13"><i class="icon fa fa-circle-o"></i> 복학신청</a></li>
             <li><a class="treeview-item" href="stuDoPage.stu"><i class="icon fa fa-circle-o"></i> 자퇴신청</a></li>
           </ul>
         </li>

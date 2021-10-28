@@ -1,11 +1,13 @@
 package com.kh.spring.member.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.consult.model.vo.Consult;
 import com.kh.spring.evaluation.vo.Evaluation;
@@ -14,7 +16,8 @@ import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.dao.ProfessorDao;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
-import com.kh.spring.studentStatus.model.vo.StudentStatus;
+import com.kh.spring.studentStatus.model.vo.StudentDo;
+import com.kh.spring.studentStatus.model.vo.StudentOff;
 
 @Service
 public class ProfServiceImpl implements ProfService {
@@ -26,13 +29,8 @@ public class ProfServiceImpl implements ProfService {
 	private ProfessorDao professorDao;
 	
 	@Override
-	public int profLectListCount() {
-		return professorDao.profLectListCount(sqlSession);
-	}
-
-	@Override
-	public ArrayList<Subject> selectSubList(String profId) {
-		return professorDao.selectSubList(sqlSession, profId);
+	public ArrayList<Subject> selectSubList(String profId, PageInfo pi) {
+		return professorDao.selectSubList(sqlSession, profId, pi);
 	}
 
 	@Override
@@ -55,8 +53,8 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public Subject subInfoLoad(String subCode) {
-		return professorDao.subInfoLoad(sqlSession, subCode);
+	public Subject subInfoLoad(Map map) {
+		return professorDao.subInfoLoad(sqlSession, map);
 	}
 
 	@Override
@@ -84,13 +82,43 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public ArrayList<StudentStatus> loadStatusList(String profId) {
-		return professorDao.loadStatusList(sqlSession, profId);
+	public ArrayList<Evaluation> loadEvalList(Subject sub) {
+		return professorDao.loadEvalList(sqlSession, sub);
 	}
 
 	@Override
-	public ArrayList<Evaluation> loadEvalList(Subject sub) {
-		return professorDao.loadEvalList(sqlSession, sub);
+	public ArrayList<StudentDo> loadDoList(String profId, PageInfo pi) {
+		return professorDao.loadDoList(sqlSession, profId, pi);
+	}
+
+	@Override
+	public ArrayList<StudentOff> loadOffList(String profId, PageInfo pi) {
+		return professorDao.loadOffList(sqlSession, profId, pi);
+	}
+
+	@Override
+	public ArrayList<RequestedSubject> selectReqSubList(String profId, PageInfo pi) {
+		return professorDao.selectReqSubList(sqlSession, profId, pi);
+	}
+
+	@Override
+	public int subListCount(String profId) {
+		return professorDao.subListCount(sqlSession, profId);
+	}
+
+	@Override
+	public int reqSubListCount(String profId) {
+		return professorDao.reqSubListCount(sqlSession, profId);
+	}
+
+	@Override
+	public int offListCount(String profId) {
+		return professorDao.offListCount(sqlSession, profId);
+	}
+
+	@Override
+	public int doListCount(String profId) {
+		return professorDao.doListCount(sqlSession, profId);
 	}
 
 }

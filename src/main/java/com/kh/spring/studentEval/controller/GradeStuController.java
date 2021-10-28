@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.GsonBuilder;
-import com.kh.spring.gradeObject.vo.GradeObject;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
@@ -30,12 +29,13 @@ public class GradeStuController {
 		ArrayList<LectRegister> seList =gradeStuService.selectReSemeList(stuId);
 		ArrayList<LecRegPro> arlist =gradeStuService.selectGradeList(stuId);
 		CountCredit cCredit = gradeStuService.cCredit(stuId);
-		ArrayList<GradeObject> objectList = gradeStuService.objectList(stuId);
+		for(int i=0; i<arlist.size();i++) {
+			System.out.println("controller"+arlist.get(i).getCountEval());
+		}
 		model.addAttribute("arlist",arlist);//수강신청한 과목
 		model.addAttribute("yearList",yearList);//수강신청한 년도
 		model.addAttribute("seList",seList);//수강신청한 날짜 학기 리스트
 		model.addAttribute("cCredit",cCredit);//전체 학점 점수
-		model.addAttribute("objectList",objectList);//이의 신청리스트
 		return "studentEval/gradeSearchPage";
 	}
 	@RequestMapping("gradeSearch.eval") // 성적 조회 검색창
@@ -51,12 +51,10 @@ public class GradeStuController {
 		ArrayList<LectRegister> seList =gradeStuService.selectReSemeList(stuId);
 		ArrayList<LecRegPro> arlist =gradeStuService.selectGradeSearchList(sr);
 		CountCredit cCredit = gradeStuService.cSearchCredit(sr);
-		ArrayList<GradeObject> objectList = gradeStuService.objectList(stuId);
 		model.addAttribute("arlist",arlist);//수강신청한 과목 중 해당 년도, 학기
 		model.addAttribute("yearList",yearList);//수강신청한 년도
 		model.addAttribute("seList",seList);//수강신청한 날짜 학기 리스트
 		model.addAttribute("cCredit",cCredit);//전체 학점 점수
-		model.addAttribute("objectList",objectList);//이의 신청리스트
 		model.addAttribute("condition1",condition1);
 		model.addAttribute("condition2",condition2);
 		return "studentEval/gradeSearchPage";

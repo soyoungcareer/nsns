@@ -34,7 +34,7 @@ public class GradeObjectController {
 		int stuId = 20193019;//임시 아이디 
 		LecRegPro detail =gradeObjectService.gradeDetailList(stuId, subCode, date);
 		gradeObjectService.insertGradeObj(detail, title, content);
-		return "gradeObject.obj";
+		return "redirect:gradeObject.obj";
 	}
 	@ResponseBody
 	@RequestMapping(value="obDetail.ob", produces="applicatoin/json; charset=utf-8;")// 이의 신청 상세 팝업창

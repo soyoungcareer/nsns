@@ -45,7 +45,6 @@
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/moment.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/jquery-ui.custom.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.3/dist/fullcalendar.min.js"></script>
-    
     <script type="text/javascript">
     
     $(function() {
@@ -62,7 +61,7 @@
     
     function fn_get_events(){
 		$.ajax({
-			url: '/calendarEvent.ca', 
+			url: 'calendarEvent.ca', 
 			dataType: 'json', 
 			success: function(list) {
 				console.log(list);

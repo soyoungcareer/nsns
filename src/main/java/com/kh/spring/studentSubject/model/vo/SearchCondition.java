@@ -5,20 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 @ToString 
-public class StudentSubject {
-	
-	private String subCode;
-	private String subTitle;
-	private String deptTitle;
-	private int subDivs;
-	private int subCredit;
-	private String subTime;
-	private String profName;
-	private Double gradeCredit;
-	 
+public class SearchCondition {
+	private String stuId;
+	private String selectYear;
+	private String selectSemester;
+	private String search;
 }

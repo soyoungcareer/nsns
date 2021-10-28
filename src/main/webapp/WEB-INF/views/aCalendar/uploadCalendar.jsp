@@ -165,11 +165,7 @@
       		todayHighlight: true
       });
       
-      //항상 올해가 seleted 되도록 설정하기
-      $(function(){
-    	
-      })
-        
+     
       //유효성 체크 - 시작날짜보다  마지막날짜가 앞설 수 없다 !! 
       function chekcDate() {
     	  
@@ -243,6 +239,8 @@
 				}
 			});
        }
+       
+   
        
        
        function deleteEvents(){

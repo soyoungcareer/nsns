@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.spring.evaluation.service.EvaluationService;
 import com.kh.spring.evaluation.vo.Evaluation;
-import com.kh.spring.evaluation.vo.EvaluationScore;
+import com.kh.spring.evaluation.vo.evalList;
 
 @Controller
 public class EvaluationController {
@@ -25,11 +26,10 @@ public class EvaluationController {
 		model.addAttribute("evalList", evalList);
 		return "evaluation/evaluation";
 	}
-	@RequestMapping("insertEval.ev") // 강의 평가 insert
-	public String insertEvaluation(EvaluationScore eval) {
+	@RequestMapping("insertEval.ev" ) // 강의 평가 insert
+	public String insertEvaluation( @ModelAttribute(value="evalList") evalList eval ) {
 		int stuId = 20193019;//임시 아이디 
-		int count = evaluationService.countEval(eval, stuId);
-		eval.setCount(count);
+		
 		evaluationService.insertEvaluation(eval);
 		return "redirect:grade.gra";
 	}

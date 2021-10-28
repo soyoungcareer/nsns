@@ -2,6 +2,9 @@ package com.kh.spring.certificate.vo;
 
 import java.util.Date;
 
+import com.kh.spring.major.vo.Department;
+import com.kh.spring.member.vo.Student;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,4 +22,5 @@ public class Graduation {
 	private String stuName;
 	private String ssn;
 	private Date gradDate;
+	private String deptTitle;
 }

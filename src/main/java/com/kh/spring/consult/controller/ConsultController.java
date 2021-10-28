@@ -96,9 +96,9 @@ public class ConsultController {
 			
 		consultService.deleteCon(conNo);
 			
-		redirectAttributes.addFlashAttribute("message", "해당 휴학 신청이 취소되었습니다.");
+		redirectAttributes.addFlashAttribute("message", "해당 상담 신청이 취소되었습니다.");
 			
-		return  "redirect:stuStatusPage.stu";
+		return  "redirect:consultStatusPage.con";
 	}
 		
 }
