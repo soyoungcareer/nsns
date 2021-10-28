@@ -7,6 +7,11 @@
 	</settings>
 
 	<typeAliases>
+	
+		<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.spring.member.vo.Admin" alias="Admin"/>
+		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
+		<typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
 
 	 <typeAlias type="com.kh.spring.facility.model.vo.facility" alias="Facility"/>	
 	     <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
@@ -27,6 +32,7 @@
     			 <typeAlias type="com.kh.spring.facility.model.vo.searchFac" alias="SearchFac"/>
 			 <typeAlias type="com.kh.spring.facility.model.vo.facilitycheck" alias="FacilityCheck"/>
 		<typeAlias type="com.kh.spring.studentEval.vo.Grade" alias="Grade"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.CountCredit" alias="CountCredit"/>
 		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
 		<typeAlias type="com.kh.spring.gradeObject.vo.GradeObject" alias="GradeObject"/>
      <typeAlias type="com.kh.spring.acalendar.model.vo.SearchCondition" alias="SearchCondition"/>
@@ -43,6 +49,10 @@
 
 
 	<mappers>
+	
+		<mapper resource="/mappers/admin-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
+	
 		<mapper resource="/mappers/facility-mapper.xml"/>
 		<mapper resource="/mappers/calendar-mapper.xml"/> 
 		<mapper resource="/mappers/student-mapper.xml"/> 

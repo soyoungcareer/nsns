@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +15,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 공지사항</title>
+    <title>낙성대학교 학생 등록</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,57 +25,52 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="app sidebar-mini">
-    <jsp:include page="adminMenubar.jsp" />
-    
+    <jsp:include page="../admin/adminMenubar.jsp" />
+      
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 공지사항</h1>
-          
+          <h1><i class="fa fa-edit"></i> 학생 관리</h1>
+          <p>학생 계정 등록</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">공지사항</li>
-          <li class="breadcrumb-item"><a href="#">공지사항 수정</a></li>
+          <li class="breadcrumb-item">학생관리</li>
+          <li class="breadcrumb-item"><a href="#">학생 계정 등록</a></li>
         </ul>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="tile">
-            <div class="row">
-              <div class="col-lg-6">
-                <form id="noticeUpdateForm" method="post" action="update.ntc" enctype="multipart/form-data">
-                	<!-- <table style="width:300px">
-                		<tr>
-                			<td><label class="control-label">제목</label></td>
-                			<td class="form-control">${ n.ntcTitle }</td>
-                			<!-- <td><input class="form-control" type="text" placeholder="글자 수 제한 255Byte" value="${ n.ntcTitle }" maxlength="255" readonly></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td>수정날짜(작성날짜 외)</td>
-                		</tr>
-                	</table> -->
-                  <!-- form all -->
-                  <div class="form-group">
-	                <label class="control-label">제목</label>
-	                <input class="form-control" type="text" placeholder="글자 수 제한 255byte" value="${ n.ntcTitle }" maxlength="255" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="ntcCategory">분류</label>
-                    <select class="form-control" id="ntcCategory">
-                      <option value=91>전체</option>
-                      <option value=92>학사</option>
-                      <option value=93>학생</option>
+            <h3 class="tile-title">학생 계정 등록</h3>
+            <div class="tile-body">
+              
+              <form id="studentEnrollForm" action="insertStu.adm" method="post">
+                <div class="form-group">
+                  <label class="control-label">이름</label>
+                  <input class="form-control" type="text" id="stuName" name="stuName" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">비밀번호</label>
+                  <input class="form-control" type="text" id="stuPwd" name="stuPwd" required placeholder="주민번호 뒷자리">
+                </div>
+                
+                <div class="form-group">
+                  <label class="control-label">주민번호</label>
+                  <input class="form-control" type="text" id="ssn" name="ssn" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">이메일</label>
+                  <input class="form-control" type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">연락처</label>
+                  <input class="form-control" type="text" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stuName">학과</label>
+                    <select class="form-control" id="deptCode" name="deptCode" required>
                       <option value=1>경제학</option>
                       <option value=2>국어국문</option>
                       <option value=3>철학</option>
@@ -85,39 +79,36 @@
                       <option value=6>역사학</option>
                       <option value=7>정보통신</option>
                       <option value=8>연극영화</option>
-                      <option value=99>교양</option>
                     </select>
                   </div>
+                  
                   <div class="form-group">
-                    <label for="ntcContent">내용</label>
-                    <textarea class="form-control" id="ntcContent" rows="3" placeholder="글자수 제한 3500byte" style="resize:none">${n.ntcContent }</textarea>
-                  </div>
-                  
-                  <div class="form-group"> 
-                    
-                    <input class="form-control-file" type="file" id="attachment" name="reUploadFile" aria-describedby="fileHelp">
-                            <c:if test="${ !empty n.originName }">
-	                                                               현재 파일 : ${ n.originName } <br>
-	                            <input type="hidden" name="changeName" value="${ n.changeName }">
-	                            <input type="hidden" name="originName" value="${ n.originName }">
-                            </c:if>
-                            
-                  </div>
-                  
-                  <div class="tile-footer">
-		            <!-- admin button -->
-		              <button class="btn btn-primary" type="submit">수정하기</button>
-		            </div>
-                  
-                </form>
-              </div>
-              
+                  <label class="control-label">학번 생성</label>
+                  <input class="form-control" type="text" id="stuId" name="stuId" required placeholder="입학년도+랜덤값">
+                  <!-- <input class="form-control" type="text" id="CreatestuId" name="CreatestuId" required readonly> -->
+                </div>
+                
+                
+                <div class="form-group">
+                  <label class="control-label">담당교수</label>
+                  <input class="form-control" type="text" id="profId" name="profId" required>
+                </div>
+                
+                
+                <div class="tile-footer">
+              		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>&nbsp;&nbsp;&nbsp;
+              		<a class="btn btn-secondary" type="reset"><i class="fa fa-fw fa-lg fa-times-circle"></i>취소</a>
+            	</div>
+                
+              </form>
             </div>
             
           </div>
-        </div>
+        </div>   
+      
       </div>
     </main>
+    
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
