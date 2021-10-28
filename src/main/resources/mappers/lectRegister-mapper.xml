@@ -17,9 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profEmpdate" column="PROF_EMPDATE" />
 	</resultMap>
 	<resultMap id="LectAttachmentSet" type="LectAttachment">
-		<id property="subCode" column="SUB_CODE" />
+		<id property="lectAtNum" column="LECT_AT_NO" />
+		<result property="subCode" column="SUB_CODE" />
 		<result property="originName" column="ORIGIN_NAME" />
 		<result property="changeName" column="CHANGE_NAME" />
+		<result property="status" column="STATUS" />
 	</resultMap>
 	<resultMap id="subjectListSet" type="Subject">
 		<id property="subCode" column="SUB_CODE" />
@@ -34,6 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="subYear" column="SUB_YEAR" />
 		<result property="subSmst" column="SUB_SMST" />
 		<result property="status" column="STATUS" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
 	</resultMap>
 	
 	<resultMap id="LecRegProListSet" type="LecRegPro">
@@ -41,7 +45,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="subject" resultMap="subjectListSet"/>
 		<collection property="professor" resultMap="professorSet"/>
 		<collection property="department" resultMap="departListSet"/>
-		<collection property="attachment" resultMap="LectAttachmentSet"/>
 	</resultMap>
 	
 	<resultMap id="LecRegProListSet2" type="LecRegPro">
@@ -86,20 +89,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM DEPARTMENT
 		ORDER BY DEPT_CODE
 	</select>
-	<select id="selectRegisterList" parameterType="_int" resultMap="LecRegProListSet2">
+	<select id="selectRegisterList" parameterType="LectRegister" resultMap="LecRegProListSet2">
 		SELECT *
 		FROM LECT_REGISTER A
 		LEFT JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
 		LEFT JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
 		LEFT JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
-		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
+		WHERE A.STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester} AND A.STATUS='Y'
 	</select>
 	<select id="lectReDetail"  parameterType="string" resultMap="LecRegProListSet">
-		SELECT A.*, B.PROF_ID, B.PROF_NAME, C.DEPT_CODE, C.DEPT_TITLE, D.ORIGIN_NAME, D.CHANGE_NAME, Q.*
+		SELECT A.*, B.PROF_ID, B.PROF_NAME, C.DEPT_CODE, C.DEPT_TITLE, Q.*
 		FROM SUBJECT A
 		LEFT JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
 		LEFT JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
-		LEFT JOIN LECT_ATTACHMENT D ON A.SUB_CODE=D.SUB_CODE
 		left join (SELECT s.SUB_CODE, avg(le.SCORE) as "SCORE"
                 FROM SUBJECT s
                 JOIN LECT_REGISTER lr ON s.SUB_CODE=lr.SUB_CODE
@@ -207,7 +209,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
 		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
 		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
-		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
+		WHERE A.STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester} AND A.STATUS='Y'
 	</select>
 	<insert id="regiInsertCart" parameterType="LectRegister">
 		INSERT INTO LECT_CART
@@ -256,4 +258,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM SUBJECT
 		WHERE SUB_CODE=#{subCode} AND STATUS='Y'
 	</select>
+	<update id="deleteAttachment" parameterType="string">
+		UPDATE SUBJECT
+		SET ORIGIN_NAME='', CHANGE_NAME=''
+		WHERE SUB_CODE=#{subCode} AND STATUS='Y'
+	</update>
+	<update id="lectDeleteAdmin" parameterType="string">
+		UPDATE SUBJECT
+		SET STATUS='N'
+		WHERE SUB_CODE=#{subCode} AND STATUS='Y'
+	</update>
+	<update id="lectUpdateAdmin" parameterType="Subject">
+		UPDATE SUBJECT 
+		SET SUB_TITLE=#{subTitle}, DEPT_CODE=#{deptCode}, SUB_DIVS=#{subDivs}, PROF_ID=#{profId},SUB_CREDIT=#{subCredit},
+		SUB_CLASS=#{subClass},SUB_TIME=#{subTime},SUB_TYPE=#{subType},ORIGIN_NAME=#{originName},CHANGE_NAME=#{changeName}
+		WHERE SUB_CODE=#{subCode} AND STATUS='Y'
+	</update>
 </mapper>

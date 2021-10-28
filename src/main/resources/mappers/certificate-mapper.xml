@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="certificateMapper">
+
+
+<resultMap id="graduationResultSet" type="Graduation">
+		<id property="gradNo" column="GRADUATION_NO" />
+		<result property="stuId" column="STU_ID" />
+		<result property="stuName" column="STU_NAME" />
+		<result property="ssn" column="SSN" />
+		<result property="gradDate" column="GRADUATE_DATE" />
+		<result property="deptTitle" column="DEPT_TITLE" />
+</resultMap>
+<resultMap id="certificateResultSet" type="Certificate">
+		<id property="cerNo" column="CER_NO" />
+		<result property="stuId" column="STU_ID" />
+		<result property="category" column="CER_CATEGORY" />
+		<result property="title" column="CER_TITLE" />
+		<result property="agency" column="AGENCY" />
+		<result property="getDate" column="GET_DATE" />
+		<result property="status" column="STATUS" />
+</resultMap>
+
+<resultMap id="studentSet" type="Student">
+		<id property="stuId" column="STU_ID" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="profId" column="PROF_ID" />
+	</resultMap>
+<resultMap id="departListSet" type="Department">
+		<id property="deptCode" column="DEPT_CODE" />
+		<result property="deptTitle" column="DEPT_TITLE" />
+</resultMap>
+<select id="gradeAbout" parameterType="_int" resultMap="graduationResultSet">
+		SELECT A.*, c.DEPT_TITLE
+		FROM GRADUATION A
+		LEFT JOIN STUDENT B ON A.STU_ID=B.STU_ID
+		LEFT JOIN DEPARTMENT c ON B.DEPT_CODE=c.DEPT_CODE
+		WHERE A.STU_ID=#{stuId}
+</select>
+<select id="certificateList" parameterType="_int" resultMap="certificateResultSet">
+		SELECT *
+		FROM CERTIFUCATE
+		WHERE STU_ID=#{stuId} AND STATUS='Y'
+</select>
+
+</mapper>

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.common.PageInfo;
+import com.kh.spring.lectRegister.vo.Attachment;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
@@ -33,8 +34,8 @@ public class LectRegisterDao {
 		return (ArrayList)sqlSession.selectList("lectRegisterMapper.departList");
 	}
 
-	public ArrayList<LecRegPro> selectRegisterList(SqlSessionTemplate sqlSession, int stuId) {
-		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectRegisterList", stuId);
+	public ArrayList<LecRegPro> selectRegisterList(SqlSessionTemplate sqlSession,LectRegister re) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectRegisterList", re);
 	}
 
 	public LecRegPro lectReDetail(SqlSessionTemplate sqlSession, String subCode) {
@@ -67,8 +68,8 @@ public class LectRegisterDao {
 		return sqlSession.selectOne("lectRegisterMapper.checkCredit", re);
 	}
 
-	public ArrayList<LecRegPro> selectRegiCartsterList(SqlSessionTemplate sqlSession, int stuId) {
-		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectRegiCartsterList", stuId);
+	public ArrayList<LecRegPro> selectRegiCartsterList(SqlSessionTemplate sqlSession, LectRegister re ) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectRegiCartsterList", re);
 	}
 
 	public int regiInsertCart(SqlSessionTemplate sqlSession, LectRegister re) {
@@ -108,6 +109,19 @@ public class LectRegisterDao {
 	public ArrayList<LectRegister> selectReDateList(SqlSessionTemplate sqlSession, int stuId) {
 		return (ArrayList)sqlSession.selectList("lectRegisterMapper.selectReDateList", stuId);
 	}
+
+	public int deleteAttachment(SqlSessionTemplate sqlSession, String subCode) {
+		return sqlSession.update("lectRegisterMapper.deleteAttachment", subCode);
+	}
+
+	public void lectDeleteAdmin(SqlSessionTemplate sqlSession, String subCode) {
+		sqlSession.update("lectRegisterMapper.lectDeleteAdmin", subCode);
+	}
+
+	public void lectUpdateAdmin(SqlSessionTemplate sqlSession, Subject subject) {
+		sqlSession.update("lectRegisterMapper.lectUpdateAdmin", subject);
+	}
+
 
 
 

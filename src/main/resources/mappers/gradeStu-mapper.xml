@@ -42,6 +42,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="grade" resultMap="gradeListSet"/>
 		<collection property="gradeObject" resultMap="GradeObjectSet"/>
 </resultMap>
+<resultMap id="LecRegGraListSetCount" type="LecRegPro">
+		<id property="id" column="LECT_REG_NO" />
+		<result property="countEval" column="COUNTEVAL" />
+		<result property="countObj" column="COUNTOBJ" />
+		<collection property="subject" resultMap="subjectSet"/>
+		<collection property="professor" resultMap="professorSet"/>
+		<collection property="lectRegister" resultMap="RegisterResultSet"/>
+		<collection property="department" resultMap="departListSet"/>
+		<collection property="grade" resultMap="gradeListSet"/>
+		<collection property="gradeObject" resultMap="GradeObjectSet"/>
+</resultMap>
 <resultMap id="subjectSet" type="Subject">
 		<id property="subCode" column="SUB_CODE" />
 		<result property="subTitle" column="SUB_TITLE" />
@@ -55,6 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="subYear" column="SUB_YEAR" />
 		<result property="subSmst" column="SUB_SMST" />
 		<result property="status" column="STATUS" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
 </resultMap>
 <resultMap id="gradeListSet" type="Grade">
 		<id property="gradeNo" column="GRADE_NO" />
@@ -119,13 +132,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY SEMESTER
 		ORDER BY SEMESTER
 </select>
-<select id="selectGradeList" parameterType="_int" resultMap="LecRegGraListSet"><!-- 성적이 포함된 수강신청 목록 -->
-		SELECT *
+<select id="selectGradeList" parameterType="_int" resultMap="LecRegGraListSetCount"><!-- 성적이 포함된 수강신청 목록 -->
+        SELECT *
 		FROM LECT_REGISTER A
 		LEFT JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
 		LEFT JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
 		LEFT JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
 		LEFT JOIN GRADE E ON A.STU_ID=E.STU_ID AND B.SUB_CODE=E.SUB_CODE
+        LEFT JOIN (SELECT DISTINCT lo.GRADE_NO, COUNT(DISTINCT lo.GRA_OBJ_NO) as "COUNTOBJ"
+                  FROM GRA_OBJECT lo
+                 WHERE lo.STU_ID=#{stuId}
+                 GROUP BY GRADE_NO) G ON G.GRADE_NO=E.GRADE_NO 
+        LEFT JOIN (SELECT DISTINCT le.LECT_REG_NO , COUNT(DISTINCT le.LECT_REG_NO) as "COUNTEVAL"
+                  FROM LECT_EVALUATE le
+                 WHERE le.STU_ID=#{stuId} AND le.STATUS='N'
+                 GROUP BY le.LECT_REG_NO) F ON A.LECT_REG_NO=F.LECT_REG_NO
 		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
 		ORDER BY A.YEAR DESC, A.SEMESTER DESC
 </select>
@@ -142,13 +163,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN GRADE E ON A.STU_ID=E.STU_ID AND B.SUB_CODE=E.SUB_CODE
 		WHERE A.STU_ID=#{stuId} AND A.STATUS='Y'
 </select>
-<select id="selectGradeSearchList" parameterType="SearchReg" resultMap="LecRegGraListSet"><!-- 성적이 포함된 수강신청 목록 -->
+<select id="selectGradeSearchList" parameterType="SearchReg" resultMap="LecRegGraListSetCount"><!-- 성적이 포함된 수강신청 목록 -->
 		SELECT *
 		FROM LECT_REGISTER A
 		LEFT JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
 		LEFT JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
 		LEFT JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
 		LEFT JOIN GRADE E ON A.STU_ID=E.STU_ID AND B.SUB_CODE=E.SUB_CODE
+		LEFT JOIN (SELECT DISTINCT lo.GRADE_NO, COUNT(DISTINCT lo.GRA_OBJ_NO) as "COUNTOBJ"
+                  FROM GRA_OBJECT lo
+                 WHERE lo.STU_ID=#{stuId}
+                 GROUP BY GRADE_NO) G ON G.GRADE_NO=E.GRADE_NO 
+        LEFT JOIN (SELECT DISTINCT le.LECT_REG_NO , COUNT(DISTINCT le.LECT_REG_NO) as "COUNTEVAL"
+                  FROM LECT_EVALUATE le
+                 WHERE le.STU_ID=#{stuId} AND le.STATUS='N'
+                 GROUP BY le.LECT_REG_NO) F ON A.LECT_REG_NO=F.LECT_REG_NO
 		WHERE A.STU_ID=#{stuId} 
 		<choose>
 			<when test='condition1 != 0 and condition2 != 0'>
@@ -236,66 +265,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE A.STU_ID=#{stuId} AND B.STU_ID=#{stuId} AND B.SUB_CODE=#{subCode} AND A.STATUS='N' AND A.YEAR=#{year} AND A.SEMESTER=#{semester}
 		ORDER BY A.LECT_EVA_NO
 </select>
-<select id="countEval" parameterType="EvaluationScore" resultType="_int">
-		SELECT COUNT(LECT_REG_NO)
-		FROM LECT_EVALUATE 
-		WHERE STU_ID=#{stuId} AND LECT_REG_NO=#{lectNum} AND STATUS='N'
-</select>
-<insert id="insertEvaluation" parameterType="EvaluationScore" >
-		<foreach collection="param.historyList" item="item" index="index" separator="UNION ALL">
-		INSERT ALL
-		<if test="grade1 != null">
-		INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values (#{grade1},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  	</if>
-	  	<if test="grade2 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade2},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  	</if>
-	  	<if test="grade3 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade3},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  	</if>
-	  	<if test="grade4 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade4},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  	</if>
-	  	<if test="grade5 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade5},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  		</if>
-	  		<if test="grade6 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade6},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  		</if>
-	  		<if test="grade7 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade7},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  		</if>
-	  		<if test="grade8 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade8},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  		</if>
-	  		<if test="grade9 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade9},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  		</if> 
-	  		<if test="grade10 != null">
-	  	INSERT INTO LECT_EVALUATE(SCORE, STATUS )
-		values(#{grade10},'Y')
-		WHERE LECT_REG_NO=#{lectNum}
-	  		</if> 
-	  	SELECT * FROM DUAL
-	  	</foreach>
-</insert>	
+<update id="insertEvaluation" parameterType="java.util.List" ><!-- 리스트로 다중 업데이트 -->
+	    <foreach item="item" index="index" collection="evalList" separator=";" open="DECLARE BEGIN" close="; END;">
+		UPDATE LECT_EVALUATE
+		SET SCORE=#{item.grade},STATUS='Y'
+		WHERE LECT_EVA_NO=#{item.evalNum} AND LECT_REG_NO=#{item.lectNum} AND STU_ID=#{item.stuId}
+		</foreach>
+</update>	
 </mapper>
 	

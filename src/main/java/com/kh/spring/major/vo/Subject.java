@@ -16,14 +16,17 @@ public class Subject {
 	private String status; //상태값
 	private String deptTitle; // 학과명
 	private String profName; // 교수명
+	private String originName;
+	private String changeName;
+
 	
 	public Subject() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Subject(String subCode, String subTitle, int deptCode, int subDivs, String profId, int subCredit,
-			int subClass, String subTime, int subType, int subYear, int subSmst, String status,
-			String deptTitle, String profName) {
+			int subClass, String subTime, int subType, int subYear, int subSmst, String status, String originName, String changeName) {
+
 		super();
 		this.subCode = subCode;
 		this.subTitle = subTitle;
@@ -37,22 +40,26 @@ public class Subject {
 		this.subYear = subYear;
 		this.subSmst = subSmst;
 		this.status = status;
-		this.deptTitle = deptTitle;
-		this.profName = profName;
+		this.originName = originName;
+		this.changeName = changeName;
 	}
 	
-	public String getDeptTitle() {
+	
+	
+	public String getProfName() {
+		return profName;
+
+
+	}
+  
+  public String getDeptTitle() {
 		return deptTitle;
 	}
 
 	public void setDeptTitle(String deptTitle) {
 		this.deptTitle = deptTitle;
 	}
-	
-	public String getProfName() {
-		return profName;
-	}
-
+  
 	public void setProfName(String profName) {
 		this.profName = profName;
 	}
@@ -152,13 +159,28 @@ public class Subject {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getOriginName() {
+		return originName;
+	}
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Subject [subCode=" + subCode + ", subTitle=" + subTitle + ", deptCode=" + deptCode + ", subDivs="
 				+ subDivs + ", profId=" + profId + ", subCredit=" + subCredit + ", subClass=" + subClass + ", subTime="
 				+ subTime + ", subType=" + subType + ", subYear=" + subYear + ", subSmst=" + subSmst + ", status="
-				+ status + "]";
+				+ status +", originName="+ originName +", changeName="+ changeName + "]";
 	}
 	
 	

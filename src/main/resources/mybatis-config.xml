@@ -33,13 +33,13 @@
      <typeAlias type="com.kh.spring.acalendar.model.vo.SearchCondition" alias="SearchCondition"/>
 		 <typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
     		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
-		<typeAlias type="com.kh.spring.evaluation.vo.EvaluationScore" alias="EvaluationScore"/>
      <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.studentEval.vo.SearchSubject" alias="SearchSubject"/>
 		<typeAlias type="com.kh.spring.studentEval.vo.SearchGrade" alias="SearchGrade"/>
-
+			<typeAlias type="com.kh.spring.certificate.vo.Graduation" alias="Graduation"/>
+			<typeAlias type="com.kh.spring.certificate.vo.Certificate" alias="Certificate"/>
 
 	</typeAliases>
 
@@ -56,6 +56,7 @@
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/grade-mapper.xml"/>
 		<mapper resource="/mappers/gradeStu-mapper.xml"/>
+		<mapper resource="/mappers/certificate-mapper.xml"/>
 	</mappers>
 	
  
