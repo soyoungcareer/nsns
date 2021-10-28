@@ -22,8 +22,11 @@ public class LecRegPro {
 	private Professor professor;
 	private LectRegister lectRegister;
 	private Department department;
-	private Attachment attachment;
 	private Grade grade;
 	private GradeObject gradeObject;
 	private float evaluation;
+	private int countEval;
+	private int countObj;
+	private int id;
+	
 }

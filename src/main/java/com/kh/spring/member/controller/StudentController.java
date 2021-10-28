@@ -40,11 +40,6 @@ public class StudentController {
 		return "redirect:stuinfo.st";
 	}
 	
-	//수강과목 
-	@RequestMapping("subject.li")
-	public String selectStuSubject() { 
-		
-		return "student/studentSubject";
-	}
+	
 
 }

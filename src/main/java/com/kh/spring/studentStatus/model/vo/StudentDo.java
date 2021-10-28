@@ -20,4 +20,7 @@ public class StudentDo { //자퇴
 	private Date doDate; //신청일자
 	private String doReason; //자퇴사유
 	private String status; //상태값
+	
+	private String stuName;
+	private String stuStatus;
 }

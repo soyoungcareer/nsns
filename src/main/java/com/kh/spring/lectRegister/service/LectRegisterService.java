@@ -3,10 +3,12 @@ package com.kh.spring.lectRegister.service;
 import java.util.ArrayList;
 
 import com.kh.spring.common.PageInfo;
+import com.kh.spring.lectRegister.vo.Attachment;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 
 
@@ -47,6 +49,12 @@ public interface LectRegisterService {
 	ArrayList<Professor> proList();
 
 	int checkDate(ArrayList<LecRegPro> arlist, String subCode);
+
+	int deleteAttachment(String subCode);
+
+	void lectDeleteAdmin(String subCode);
+
+	void lectUpdateAdmin(Subject subject, String day, int start, int end);
 
 
 

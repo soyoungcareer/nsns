@@ -1,20 +1,17 @@
 package com.kh.spring.studentEval.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.spring.common.exception.CommException;
 import com.kh.spring.gradeObject.vo.GradeObject;
-import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.major.vo.Subject;
-import com.kh.spring.notice.vo.PageInfo;
 import com.kh.spring.studentEval.dao.GradeDao;
 import com.kh.spring.studentEval.vo.Grade;
+import com.kh.spring.studentEval.vo.SearchGrade;
+import com.kh.spring.studentEval.vo.SearchSubject;
 
 @Service
 public class GradeServiceImpl implements GradeService {
@@ -53,7 +50,39 @@ public class GradeServiceImpl implements GradeService {
 		return gradeDao.loadObjList(sqlSession, profId);
 	}
 
+	@Override
+	public int selectSubListCount(SearchSubject searchSubject) {
+		return gradeDao.selectSubListCount(sqlSession, searchSubject);
+	}
+
+	@Override
+	public ArrayList<Subject> selectFilteredSubList(SearchSubject searchSubject, com.kh.spring.common.PageInfo pi) {
+		return gradeDao.selectFilteredSubList(sqlSession, searchSubject, pi);
+	}
+
+	@Override
+	public ArrayList<Grade> selectFilteredGrade(SearchGrade searchGrade) {
+		return gradeDao.selectFilteredGrade(sqlSession, searchGrade);
+		
+	}
+
+	
+	
 	/*
+	@Override
+	public ArrayList<Grade> selectFilteredGrade(String subCode, int subYear, int subSmst) {
+		
+		Grade grade = new Grade();
+		grade.setSubCode(subCode);
+		grade.setGradeYear(subYear);
+		grade.setGradeSemester(subSmst);
+		
+		ArrayList<Grade> result = gradeDao.selectFilteredGrade(sqlSession, grade);
+		
+		return result;
+	}
+	
+	
 	@Override
 	public Grade selectGrade(int gno) {
 		Grade g = null;

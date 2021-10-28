@@ -47,7 +47,7 @@
 										
 											<c:forEach items="${ objList }" var="obj">
 						                    <tr>
-						                        <td>${ obj.subject.subYear } 년 ${ obj.subject.subSmst } 학기</td>
+						                        <td>${ obj.lectRegister.year } 년 ${ obj.lectRegister.semester } 학기</td>
 						                        <td>${ obj.subject.subCode }</td>
 						                        <td>${ obj.subject.subTitle }</td>
 						                        <td>${ obj.department.deptTitle }</td>
@@ -196,7 +196,7 @@ var date;
 							'</div>'+
 						'</div>'+
 						'<div class="form-group row">'+
-							'<label class="control-label col-md-2">상세 내용</label>'+
+							'<label class="control-label col-md-2">이의 내용</label>'+
 							'<div class="col-md-10">'+
 								'<textarea class="form-control" rows="6" placeholder="" disabled name="objContent" id="objContent" style="resize: none;">'+objDe.gradeObject.content+'</textarea>'+
 								'</div>'+
@@ -208,7 +208,7 @@ var date;
 								'</div>'+
 							'</div>'+
 							'<div class="form-group row">'+
-								'<label class="control-label col-md-2">사유</label>'+
+								'<label class="control-label col-md-2">답변 사유</label>'+
 								'<div class="col-md-10">'
 								if(typeof objDe.gradeObject.reason =='undefined'){
 							value+=		'<input class="form-control col-md-12" type="text" disabled value="">'
