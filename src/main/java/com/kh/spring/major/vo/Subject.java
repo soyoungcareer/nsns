@@ -1,5 +1,16 @@
 package com.kh.spring.major.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
 public class Subject {
 	
 	private String subCode; //과목코드
@@ -14,10 +25,11 @@ public class Subject {
 	private int subYear; //학년도
 	private int subSmst; //학기
 	private String status; //상태값
+	private String originName; //파일원본명
+	private String changeName; //파일수정명
 	private String deptTitle; // 학과명
 	private String profName; // 교수명
-	private String originName;
-	private String changeName;
+
 
 	
 	public Subject() {
@@ -183,6 +195,6 @@ public class Subject {
 				+ status +", originName="+ originName +", changeName="+ changeName + "]";
 	}
 	
-	
+
 	
 }

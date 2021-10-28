@@ -44,13 +44,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertNBoard" parameterType="Notice">
 		INSERT INTO NOTICE
-		VALUES (SEQ_NTC_NO.NEXTVAL, #{ntcCategory}, #{ntcTitle}, #{ntcContent}, 'admin', #{originName}, #{changeName}, default, sysdate, default)
+		VALUES (SEQ_NTC_NO.NEXTVAL, #{ntcCategory}, #{ntcTitle}, #{ntcContent}, #{ntcWriter}, #{originName}, #{changeName}, default, sysdate, default)
 	</insert>
-	<!-- WHERE ID=ADMIN -->
 	
 	<update id="updateNBoard" parameterType="Notice">
 		UPDATE NOTICE
-		SET NTC_CATEGORY = #{ntcCategory}, NTC_TITLE = #{ntcTitle}, NTC_CONTENT = #{ntcContent}, ORIGIN_NAME = #{originName}, CHANGE_NAME = #{changeName}
+		SET NTC_CATEGORY=#{ntcCategory}, NTC_TITLE=#{ntcTitle}, NTC_CONTENT=#{ntcContent}, ORIGIN_NAME=#{originName}, CHANGE_NAME=#{changeName}
 		WHERE NTC_NO = #{ntcNo}
 	</update>
 	
