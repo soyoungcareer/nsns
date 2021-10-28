@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="studentSubjectMapper">
+
+	<resultMap id="stuSubResultMap" type="StudentSubject">
+		<id property="subCode" column="SUB_CODE" />
+		<result property="subTitle" column="Title" />
+		<result property="deptTitle" column="DEPT_TITLE" />
+		<result property="subDivs" column="SUB_DIVS" />
+		<result property="subCredit" column="SUB_CREDIT" />
+		<result property="subTime" column="SUB_TIME" />
+		<result property="profName" column="PROF_NAME" />
+		<result property="gradeCredit" column="GRADE_CREDIT" />
+	</resultMap>
+	
+	
+	<select id="selectYear" parameterType="string" resultType="_int">
+		SELECT DISTINCT GRADE_YEAR
+		FROM GRADE
+		WHERE STU_ID = #{stuId}
+	</select>
+	
+	<select id="selectSemester" parameterType="string" resultType="_int">
+		SELECT DISTINCT GRADE_SEMESTER
+		FROM GRADE
+		WHERE STU_ID = #{stuId}
+	</select>
+	
+	<select id="selectListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM GRADE A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		JOIN LECT_REGISTER E ON A.SUB_CODE= E.SUB_CODE
+		WHERE E.STU_ID = #{stuId} AND E.STATUS='Y'
+	</select>
+	
+	<select id="selectListCountSC" parameterType="SearchCondition2" resultType="_int">
+		SELECT COUNT(*)
+		FROM GRADE A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		JOIN LECT_REGISTER E ON A.SUB_CODE= E.SUB_CODE
+		WHERE E.STU_ID = #{stuId} AND E.STATUS='Y'
+		AND A.GRADE_YEAR LIKE #{selectYear} AND A.GRADE_SEMESTER LIKE #{selectSemester}
+		AND B.SUB_TITLE LIKE '%'|| #{search} || '%'
+	</select>
+	
+	<select id="selectStuSubjectList" parameterType="string" resultMap="stuSubResultMap">
+		SELECT A.SUB_CODE, B.SUB_TITLE as "Title", D.DEPT_TITLE, B.SUB_DIVS, B.SUB_CREDIT, B.SUB_TIME, C.PROF_NAME, E.GRADE_CREDIT
+		FROM LECT_REGISTER A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		JOIN GRADE E ON A.SUB_CODE = E.SUB_CODE 
+		WHERE A.STU_ID = #{stuId} AND A.STATUS='Y'
+	</select>
+	
+	<select id="searchSubject" parameterType="SearchCondition2" resultMap="stuSubResultMap">
+		SELECT A.SUB_CODE, B.SUB_TITLE as "Title", D.DEPT_TITLE, B.SUB_DIVS, B.SUB_CREDIT, B.SUB_TIME, C.PROF_NAME, E.GRADE_CREDIT
+		FROM LECT_REGISTER A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
+		JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
+		JOIN GRADE E ON A.SUB_CODE = E.SUB_CODE 
+		WHERE A.STU_ID = #{stuId} AND A.STATUS='Y'
+		AND E.GRADE_YEAR LIKE #{selectYear} AND E.GRADE_SEMESTER LIKE #{selectSemester}
+		AND B.SUB_TITLE LIKE '%'|| #{search} || '%'
+	</select>
+
+
+</mapper>

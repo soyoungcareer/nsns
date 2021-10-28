@@ -57,8 +57,8 @@
         </div>
       </div>
    	<ul class="app-menu">
-   	    <li><a class="app-menu__item" href="/calendar.ca" ><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">학사일정</span></a></li>
-        <li><a class="app-menu__item" href="/upload.ca"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">학사일정 관리</span></a></li>
+   	    <li><a class="app-menu__item" href="calendar.ca" ><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">학사일정</span></a></li>
+        <li><a class="app-menu__item" href="upload.ca"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">학사일정 관리</span></a></li>
       </ul>
     </aside>
 </body>

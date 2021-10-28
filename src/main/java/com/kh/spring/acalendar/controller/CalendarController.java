@@ -23,16 +23,16 @@ public class CalendarController {
 	@Autowired
 	private CalendarService calendarService;
 	
-	@RequestMapping("/calendar.ca")
-	public String toCalendar(Model model) throws ParseException { //캘린더 조회페이지
+	@RequestMapping("calendar.ca")
+	public String toCalendar()  { //캘린더 조회페이지
 		
 		return "aCalendar/calendar";
 	}
 	
 	// 이벤트 불러오기
 	@ResponseBody
-	@RequestMapping(value="/calendarEvent.ca", produces="application/json; charset=utf-8")
-	public String calendarEvents() throws ParseException {
+	@RequestMapping(value="calendarEvent.ca", produces="application/json; charset=utf-8")
+	public String calendarEvents() {
 		
 		ArrayList<Acalendar> list = calendarService.calendarEvents();
 		
@@ -40,7 +40,7 @@ public class CalendarController {
 	}
 	
 	//학사일정 업로드 페이지 (year 받아오기)
-	@RequestMapping("/upload.ca")
+	@RequestMapping("upload.ca")
 	public String uploadCalnendar(Model model) { 
 		
 		ArrayList<String> yearList = calendarService.selectYear();
@@ -51,7 +51,7 @@ public class CalendarController {
 	}
 	
 	//학사일정 이벤트에 insert
-	@RequestMapping("/insert.ca") 
+	@RequestMapping("insert.ca") 
 	public String insertCalendar(String title, String start, String end, String backgroundColor, RedirectAttributes redirectAttributes) throws ParseException { // 일정 db에 업로드
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
