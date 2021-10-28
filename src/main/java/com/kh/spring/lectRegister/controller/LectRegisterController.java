@@ -1,6 +1,12 @@
 package com.kh.spring.lectRegister.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,15 +14,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
+import com.kh.spring.common.exception.CommException;
 import com.kh.spring.lectRegister.service.LectRegisterService;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
+import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 
 
@@ -238,11 +249,12 @@ public class LectRegisterController {
 		return "lectRegister/lectRegisterAdmin";
 	}
 
-	@RequestMapping("lectRegAdmin.reg") // 관리자용 과목 설명 수정페이지
+	@RequestMapping("lectRegAdmin.reg") // 관리자용 과목 설명 수정페이지 띄우기
 	public String lectRegisterEditPage(String subCode, Model model) {
 		LecRegPro reDetail = lectRegisterService.lectReDetail(subCode);
 		ArrayList<Department> departList = lectRegisterService.departList();
 		ArrayList<Professor> proList = lectRegisterService.proList();
+		System.out.println(reDetail.getSubject());
 		model.addAttribute("departList",departList);
 		model.addAttribute("proList",proList);
 		model.addAttribute("reDetail",reDetail);
@@ -250,6 +262,15 @@ public class LectRegisterController {
 		return "lectRegister/lectRegisterEdit";
 	}
 
+	@ResponseBody 
+	@RequestMapping(value="deleteAtt.reg", produces="applicatoin/json; charset=utf-8")// 첨부파일 지우기
+	public String deleteAttachment(String subCode, String origin, HttpServletRequest request) {
+		  deleteFile(origin, request);
+		  int result = lectRegisterService.deleteAttachment(subCode);
+		  return new GsonBuilder().create().toJson(result);
+		 
+	}
+	
 	@RequestMapping("searchRegAdmin.reg")// 수강신청 관리자 검색
 	public String searchRegisterAdmin(@RequestParam(value="currentPage", required= false, defaultValue = "1") int currentPage,
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
@@ -278,6 +299,67 @@ public class LectRegisterController {
 			model.addAttribute("search",search);
 			return "lectRegister/lectRegisterAdmin";
 		 
+	}
+	
+		@RequestMapping("updateAdmin.reg") // 관리자용 과목 설명 수정페이지 update
+	public ModelAndView lectUpdateAdminPage(ModelAndView mv, @RequestParam(name="day") String day,@RequestParam(name="start") int start
+			,@RequestParam(name="end") int end, Subject subject, @RequestParam(name="reUploadFile", required= false) MultipartFile file
+			, HttpServletRequest request) {
+			
+			
+			if (!file.getOriginalFilename().equals("")) {
+				if (subject.getChangeName() != null) {
+					deleteFile(subject.getOriginName(), request);
+				}
+				String changeName = saveFile(file, request);
+
+				subject.setOriginName(file.getOriginalFilename());
+				subject.setChangeName(changeName);
+			}
+			
+			lectRegisterService.lectUpdateAdmin(subject,day,start,end);
+
+			mv.addObject("subCode", subject.getSubCode()).setViewName("redirect:lectRegAdmin.reg");
+			return mv;
+	}
+	@RequestMapping("deleteAd.reg") // 관리자용 과목 삭제 페이지
+	public String lectDeleteAdminPage(String subCode, @RequestParam(name="changeName", required= false) String changeName, 
+			HttpServletRequest request) {
+		
+		if (!changeName.equals("")) {
+			deleteFile(changeName, request);
+			int result = lectRegisterService.deleteAttachment(subCode);
+		}
+		 
+			lectRegisterService.lectDeleteAdmin(subCode);
+		return "redirect:registerAdmin.reg";
+	}
+	private String saveFile(MultipartFile file, HttpServletRequest request) { //공통으로 사용하기 위해 따로 뺌
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources +"\\upload_files\\";
+		
+		String originName = file.getOriginalFilename();//원본 파일명
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		
+		String ext = originName.substring(originName.lastIndexOf("."));
+		String changeName = currentTime + ext;
+		try {
+			file.transferTo(new File(savePath+changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			throw new CommException("file upload추가");
+		}
+		return changeName;
+	}
+	private void deleteFile(String fileName, HttpServletRequest request) {  //공통으로 사용하기 위해 따로 뺌
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources +"\\upload_files\\";
+		
+		System.out.println("savePath"+savePath);
+		
+		File deleteFile = new File(savePath+fileName);
+		deleteFile.delete();// 파일 삭제
+		
 	}
 }
 

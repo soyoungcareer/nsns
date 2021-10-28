@@ -1,10 +1,13 @@
 package com.kh.spring.member.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.common.PageInfo;
+import com.kh.spring.common.Pagination;
 import com.kh.spring.consult.model.vo.Consult;
 import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
@@ -20,7 +25,8 @@ import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.service.ProfService;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
-import com.kh.spring.studentStatus.model.vo.StudentStatus;
+import com.kh.spring.studentStatus.model.vo.StudentDo;
+import com.kh.spring.studentStatus.model.vo.StudentOff;
 
 
 @Controller 
@@ -139,20 +145,21 @@ public class ProfController {
 
 	// 강의목록 조회
 	@RequestMapping("profLectureDetail.pr")
-	public String profLectureDetail(Model model) {
+	public String profLectureDetail(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+									Model model) {
 		
+		// 임시데이터
 		String profId = "EC1901";
-		ArrayList<Subject> subList = profService.selectSubList(profId);
+		
+		int listCount = profService.subListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Subject> subList = profService.selectSubList(profId, pi);
 		
 		System.out.println("================= subList Controller : " + subList);
 		
+		model.addAttribute("pi", pi);
 		model.addAttribute("subList", subList);
-		
-		////////////////////////////////////////////////////
-		// subList 데이터 정상적으로 넘어감. 반복문 불러오기에서 실패.
-		// NumberFormatException: For input string: "subCode"
-		////////////////////////////////////////////////////
-		
 		
 		return "professor/profLectureView";
 	}
@@ -161,17 +168,16 @@ public class ProfController {
 	// 강의 수정시 뷰에 데이터 로드
 	@RequestMapping("lectEditInfoLoad.pr")
 	public String lectEditInfoLoad(HttpServletRequest httpServletRequest, Model model) {
+		// 임시데이터
 		String profId = "EC1901";
 		String subCode = "2101001";
 		
-		Professor prof = profService.profInfoLoad(profId);
-		Subject sub = profService.subInfoLoad(subCode);
+		Map map = new HashMap();
+		map.put("profId", profId);
+		map.put("subCode", subCode);
 		
-		System.out.println("=================== prof controller : " + prof);
-		System.out.println("=================== sub controller : " + sub);
-		/////////////////////////////////////
-		// sub 값이 안넘어옴 - null
-		/////////////////////////////////////
+		Professor prof = profService.profInfoLoad(profId);
+		Subject sub = profService.subInfoLoad(map);
 		
 		model.addAttribute("prof", prof);
 		model.addAttribute("sub", sub);
@@ -179,10 +185,31 @@ public class ProfController {
 		return "professor/profEditLecture";
 	}
 	
-	
+	// 강의 수정
 	@RequestMapping("profEditLec.pr")
 	public String profEditLecture() {
 		return "professor/profEditLecture";
+	}
+	
+	// 강의 삭제
+	// 강의 수정시 뷰에 데이터 로드
+	@RequestMapping("lectDelInfoLoad.pr")
+	public String lectDelInfoLoad(HttpServletRequest httpServletRequest, Model model) {
+		// 임시데이터
+		String profId = "EC1901";
+		String subCode = "2101001";
+		
+		Map map = new HashMap();
+		map.put("profId", profId);
+		map.put("subCode", subCode);
+		
+		Professor prof = profService.profInfoLoad(profId);
+		Subject sub = profService.subInfoLoad(map);
+
+		model.addAttribute("prof", prof);
+		model.addAttribute("sub", sub);
+		
+		return "professor/profDeleteLecture";
 	}
 	
 	// 강의 삭제
@@ -191,19 +218,42 @@ public class ProfController {
 		return "professor/profDeleteLecture";
 	}
 	
+	// 강의 개설/수정/삭제 신청내역 조회
+	@RequestMapping("profLectureReq.pr")
+	public String profLectureReq(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								 Model model) {
+		// 임시 데이터
+		String profId = "EC1901";
+		
+		int listCount = profService.reqSubListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<RequestedSubject> reqSub = profService.selectReqSubList(profId, pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("reqSub", reqSub);
+		
+		return "professor/profLectureReq";
+	}
+	
 	// ============= 학생 관리 =============
 	// 학생목록 조회
 	@RequestMapping("profStudentDetail.pr")
-	public String profStudentDetail(Model model) {
+	public String profStudentDetail(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+									Model model) {
 		// 임시 데이터
 		String profId = "EC1901";
 		String subCode = "2101001";
 		int year = 2021;
 		int semester = 1;
 		
-		ArrayList<Subject> subList = profService.selectSubList(profId);
+		int listCount = profService.subListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Subject> subList = profService.selectSubList(profId, pi);
 		ArrayList<Student> stuList = profService.profStudentDetail(subCode); // 학년도, 학기 반영해야함
 		
+		model.addAttribute("pi", pi);
 		model.addAttribute("subList", subList);
 		model.addAttribute("stuList", stuList);
 		
@@ -235,7 +285,8 @@ public class ProfController {
 	
 	// 강의평가 조회
 	@RequestMapping("profEvaluation.pr")
-	public String profEvaluation(Model model, String subYear, String subSmst) {
+	public String profEvaluation(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								 Model model, String subYear, String subSmst) {
 		// 임시 데이터
 		String profId = "EC1901";
 		String subCode = "2101001";
@@ -246,6 +297,9 @@ public class ProfController {
 		int intYear = 2021;
 		int intSemester = 1;
 		
+		int listCount = profService.subListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
 		Subject sub = new Subject();
 		sub.setSubYear(intYear);
 		sub.setSubSmst(intSemester);
@@ -253,27 +307,53 @@ public class ProfController {
 		sub.setProfId(profId);
 		
 		//========== 교수별 강의목록 먼저 조회 후, 강의별 강의평가 조회하기.
-		ArrayList<Subject> subList = profService.selectSubList(profId);
+		ArrayList<Subject> subList = profService.selectSubList(profId, pi);
 		ArrayList<Evaluation> evalList = profService.loadEvalList(sub);
 		
+		model.addAttribute("pi", pi);
 		model.addAttribute("subList", subList);
 		model.addAttribute("evalList", evalList);
 		
 		return "professor/profEvaluation";
 	}
 	
-	// 학적변동 승인
-	@RequestMapping("profStudentStatus.pr")
-	public String profStudentStatus(Model model) {
+	// 학적변동 - 휴학 승인
+	@RequestMapping("profStudentOff.pr")
+	public String profStudentOff(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								 Model model) {
 		// 임시 데이터
 		String profId = "EC1901";
 		
-		ArrayList<StudentStatus> statusList = profService.loadStatusList(profId);
+		int listCount = profService.offListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		model.addAttribute("statusList", statusList);
+		ArrayList<StudentOff> offList = profService.loadOffList(profId, pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("offList", offList);
 		
 		return "professor/profStudentStatus";
 	}
 	
+	
+	// 학적변동 - 자퇴 승인
+	@RequestMapping("profStudentDo.pr")
+	public String profStudentDo(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								Model model) {
+		// 임시 데이터
+		String profId = "EC1901";
+		
+		int listCount = profService.doListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<StudentDo> doList = profService.loadDoList(profId, pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("doList", doList);
+		
+		return "professor/profStudentDo";
+	}
+	
+
 }
 

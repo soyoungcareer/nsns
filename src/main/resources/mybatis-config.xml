@@ -8,35 +8,49 @@
 
 	<typeAliases>
 
-	 <typeAlias type="com.kh.spring.facility.model.vo.facility" alias="Facility"/>	
-	     <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
-		 <typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
-		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentDo" alias="StudentDo"/>
-		 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/> 
-	 	 <typeAlias type="com.kh.spring.studentStatus.model.vo.StudentStatus" alias="StudentStatus"/>
-         <typeAlias type="com.kh.spring.lectRegister.vo.LectRegister" alias="LectRegister"/>
-		 <typeAlias type="com.kh.spring.major.vo.Subject" alias="Subject"/>
-		 <typeAlias type="com.kh.spring.major.vo.Department" alias="Department"/>
-		 <typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
-		 <typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
-		 <typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
-		 <typeAlias type="com.kh.spring.major.vo.RequestedSubject" alias="RequestedSubject"/>
-     			 <typeAlias type="com.kh.spring.consult.model.vo.Consult" alias="Consult"/>
-    		 	 <typeAlias type="com.kh.spring.consult.model.vo.ConsultStatus" alias="ConsultStatus"/>
-    			 <typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
-    			 <typeAlias type="com.kh.spring.facility.model.vo.searchFac" alias="SearchFac"/>
-			 <typeAlias type="com.kh.spring.facility.model.vo.facilitycheck" alias="FacilityCheck"/>
+	
+		<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.spring.member.vo.Admin" alias="Admin"/>
+		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
+		<typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
+		<typeAlias type="com.kh.spring.facility.model.vo.facility" alias="Facility"/>	
+	    <typeAlias type="com.kh.spring.acalendar.model.vo.Acalendar" alias="Acalendar"/>
+		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
+		<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentDo" alias="StudentDo"/>
+		<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentOff" alias="StudentOff"/> 
+	 	<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentStatus" alias="StudentStatus"/>
+        <typeAlias type="com.kh.spring.lectRegister.vo.LectRegister" alias="LectRegister"/>
+		<typeAlias type="com.kh.spring.major.vo.Subject" alias="Subject"/>
+		<typeAlias type="com.kh.spring.major.vo.Department" alias="Department"/>
+		<typeAlias type="com.kh.spring.member.vo.Professor" alias="Professor"/>
+		<typeAlias type="com.kh.spring.lectRegister.vo.LecRegPro" alias="LecRegPro"/>
+		<typeAlias type="com.kh.spring.lectRegister.vo.SearchReg" alias="SearchReg"/>
+		<typeAlias type="com.kh.spring.major.vo.RequestedSubject" alias="RequestedSubject"/>
+     	<typeAlias type="com.kh.spring.consult.model.vo.Consult" alias="Consult"/>
+    	<typeAlias type="com.kh.spring.consult.model.vo.ConsultStatus" alias="ConsultStatus"/>
+    	<typeAlias type="com.kh.spring.lectRegister.vo.Attachment" alias="LectAttachment"/>
+    	<typeAlias type="com.kh.spring.facility.model.vo.searchFac" alias="SearchFac"/>
+		<typeAlias type="com.kh.spring.facility.model.vo.facilitycheck" alias="FacilityCheck"/>
+
 		<typeAlias type="com.kh.spring.studentEval.vo.Grade" alias="Grade"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.CountCredit" alias="CountCredit"/>
 		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
 		<typeAlias type="com.kh.spring.gradeObject.vo.GradeObject" alias="GradeObject"/>
      <typeAlias type="com.kh.spring.acalendar.model.vo.SearchCondition" alias="SearchCondition"/>
+          <typeAlias type="com.kh.spring.studentSubject.model.vo.SearchCondition" alias="SearchCondition2"/>
 		 <typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
     		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
-		<typeAlias type="com.kh.spring.evaluation.vo.EvaluationScore" alias="EvaluationScore"/>
+    		<typeAlias type="com.kh.spring.evaluation.vo.EvaluationScore" alias="EvaluationScore"/>
      <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
-			 <typeAlias type="com.kh.spring.facility.model.vo.allam" alias="Allam"/>
+
+    	<typeAlias type="com.kh.spring.studentSubject.model.vo.StudentSubject" alias="StudentSubject"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.SearchSubject" alias="SearchSubject"/>
+		<typeAlias type="com.kh.spring.studentEval.vo.SearchGrade" alias="SearchGrade"/>
+			<typeAlias type="com.kh.spring.certificate.vo.Graduation" alias="Graduation"/>
+			<typeAlias type="com.kh.spring.certificate.vo.Certificate" alias="Certificate"/>
+    			 <typeAlias type="com.kh.spring.facility.model.vo.allam" alias="Allam"/>
 
 
 
@@ -44,6 +58,10 @@
 
 
 	<mappers>
+	
+		<mapper resource="/mappers/admin-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
+	
 		<mapper resource="/mappers/facility-mapper.xml"/>
 		<mapper resource="/mappers/calendar-mapper.xml"/> 
 		<mapper resource="/mappers/student-mapper.xml"/> 
@@ -54,7 +72,11 @@
 		<mapper resource="/mappers/lecture-mapper.xml"/>
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/grade-mapper.xml"/>
-	<!--  	<mapper resource="/mappers/gradeStu-mapper.xml"/>-->
+		<mapper resource="/mappers/gradeStu-mapper.xml"/>
+		<mapper resource="/mappers/gradeStu-mapper.xml"/>
+		<mapper resource="/mappers/studentSubject-mapper.xml"/>
+		<mapper resource="/mappers/certificate-mapper.xml"/>
+
 	</mappers>
 	
  

@@ -1,5 +1,7 @@
 package com.kh.spring.evaluation.vo;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +13,9 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class ListFor {
+public class ListFor implements Serializable{
+	private int evalNum;
 	private int lectNum;
-	private int count;
 	private int stuId;
 	private int grade;
 }

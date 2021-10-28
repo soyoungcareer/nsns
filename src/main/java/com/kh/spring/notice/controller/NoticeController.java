@@ -90,7 +90,7 @@ public class NoticeController {
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources + "\\upload_files\\";
 		
-		System.out.println("savePath" + savePath);//확인용
+		System.out.println("savePath" + savePath);
 		
 		String originName = file.getOriginalFilename();
 		String saveTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -113,63 +113,9 @@ public class NoticeController {
 		return changeName;
 	}
 	
-	/*
-	@RequestMapping("insert.ntc")
-	public String insertNBoard(Notice n, Attachment a, HttpServletRequest request, Model model
-							, @RequestParam(name="ntcAttachment", required=false) MultipartFile file) {
-		
-		//originName, changeName, savePath 생성 / fileNo db 시퀀스, refNo 참조, uploadDate db sysdate, status db y
-		
-		//확인용
-		System.out.println(n);
-		System.out.println(file.getOriginalFilename());
-		
-		if(!file.getOriginalFilename().equals("")) {
-			String changeName = saveFile(file, request);
-			
-			if(changeName != null) {
-				a.setOriginName(file.getOriginalFilename());
-				a.setChangeName(changeName);
-			}
-		}
-		
-		//noticeService.insertNBoard(n);
-		
-		return "redirect:list.ntc"; // 작성한 글 상세 페이지
-	}
 	
-	private String saveFile(MultipartFile file, HttpServletRequest request) {
-		
-		String resources = request.getSession().getServletContext().getRealPath("resources");//필요한가?
-		String savePath = resources + "\\upload_files\\";
-		
-		System.out.println("savePath" + savePath);//확인용
-		
-		Attachment a = new Attachment();
-		a.setSavePath(savePath);
-		
-		String originName = file.getOriginalFilename();
-		String saveTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		String ext = originName.substring(originName.lastIndexOf("."));
-		
-		String changeName = savePath + ext;
-		
-		try {
-			file.transferTo(new File(savePath + changeName));
-		} catch (IllegalStateException e) { //change project compliance and jre to 1.7
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new CommException("파일 첨부 오류가 발생하였습니다.");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new CommException("파일 첨부 오류가 발생하였습니다.");
-		}
-		
-		return changeName;
-	}*/
 	
-	@RequestMapping("updateForm.ntc")
+	@RequestMapping("updateForm.ntc") //게시글 수정 페이지로 이동
 	public ModelAndView updateForm(int bno, ModelAndView mv) {
 		
 		Notice n = noticeService.selectNBoard(bno);
@@ -181,8 +127,6 @@ public class NoticeController {
 	@RequestMapping("update.ntc")
 	public ModelAndView updateNBoard(Notice n, ModelAndView mv, HttpServletRequest request,
 									@RequestParam(value="reUploadFile", required=false) MultipartFile file) {
-		
-		//reUploadFile
 		
 		if(!file.getOriginalFilename().equals("")) {
 			
@@ -199,10 +143,10 @@ public class NoticeController {
 		noticeService.updateNBoard(n);
 		mv.addObject("bno", n.getNtcNo()).setViewName("redirect:detail.ntc");
 		
-		return null;
+		return mv;
 	}
 
-	private void deleteFile(String fileName, HttpServletRequest request) {
+	private void deleteFile(String fileName, HttpServletRequest request) { //게시글 첨부파일 삭제
 		//String fileName, changeName
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources + "\\upload_files\\";
@@ -214,9 +158,9 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping("delete.ntc")
+	@RequestMapping("delete.ntc") //게시글 삭제
 	public String deleteNBoard(int bno, String fileName, HttpServletRequest request) {
-		//String fileName, changeName
+		
 		noticeService.deleteNBoard(bno);
 		
 		if(!fileName.equals("")) {
