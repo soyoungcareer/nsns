@@ -388,9 +388,9 @@
 							'<label class="control-label col-md-2">계획서</label>'+
 							'<div class="col-md-10">'
 								
-								 if(reDetail.attachment.originName!=""&&typeof reDetail.attachment.originName != "undefined" ){
-						value += '<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/'+reDetail.attachment.originName+'"'+
-		                        												'download='+reDetail.attachment.originName+'>'+reDetail.attachment.originName+'</a>'
+								 if(reDetail.subject.originName!=""&&typeof reDetail.subject.originName != "undefined" ){
+						value += '<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/'+reDetail.subject.changeName+'"'+
+		                        												'download='+reDetail.subject.originName+'>'+reDetail.subject.originName+'</a>'
 								 }else{
 							value +='<input class="form-control col-md-12" type="text" disabled value="첨부파일이 없습니다." style="color:red;">'
 								 } 

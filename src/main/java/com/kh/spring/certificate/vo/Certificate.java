@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Certificate {
 	private int cerNo;
 	private int stuId;
-	private String Category;
+	private String category;
 	private String title;
 	private String agency;
 	private Date getDate;
