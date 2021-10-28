@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.lectRegister.dao.LectRegisterDao;
+import com.kh.spring.lectRegister.vo.Attachment;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
@@ -45,7 +46,25 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 
 	@Override
 	public ArrayList<LecRegPro> selectRegisterList(int stuId) {
-		return lectRegisterDao.selectRegisterList(sqlSession, stuId);
+		LectRegister re = new LectRegister();
+		re.setStuId(stuId);
+		
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy");
+		Date date = new Date ( );
+		String year = format.format (date);
+		int neyear = Integer.parseInt(year);
+		re.setYear(neyear);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat ( "MM");
+		Date date2 = new Date ( );
+		String mon = format2.format (date2);
+		int nemon = Integer.parseInt(mon);
+		if(nemon<9&&nemon>2) {
+			re.setSemester(1);
+		}else {
+			re.setSemester(2);
+		}
+		return lectRegisterDao.selectRegisterList(sqlSession, re);
 	}
 
 	@Override
@@ -163,7 +182,25 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 
 	@Override
 	public ArrayList<LecRegPro> selectRegiCartsterList(int stuId) {
-		return lectRegisterDao.selectRegiCartsterList(sqlSession, stuId);
+		LectRegister re = new LectRegister();
+		re.setStuId(stuId);
+		
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy");
+		Date date = new Date ( );
+		String year = format.format (date);
+		int neyear = Integer.parseInt(year);
+		re.setYear(neyear);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat ( "MM");
+		Date date2 = new Date ( );
+		String mon = format2.format (date2);
+		int nemon = Integer.parseInt(mon);
+		if(nemon<9&&nemon>2) {
+			re.setSemester(1);
+		}else {
+			re.setSemester(2);
+		}
+		return lectRegisterDao.selectRegiCartsterList(sqlSession, re);
 	}
 
 	@Override
@@ -288,6 +325,25 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public int deleteAttachment(String subCode) {
+		return lectRegisterDao.deleteAttachment(sqlSession, subCode);
+	}
+
+	@Override
+	public void lectDeleteAdmin(String subCode) {
+		lectRegisterDao.lectDeleteAdmin(sqlSession, subCode);
+	}
+
+	@Override
+	public void lectUpdateAdmin(Subject subject, String day, int start, int end) {
+		for(int i=start; i<=end;i++) {
+			day=day+String.valueOf(i);
+		}
+		subject.setSubTime(day);
+		lectRegisterDao.lectUpdateAdmin(sqlSession, subject);
 	}
 
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,7 +164,7 @@
 											            <td style=" width: 16%">미정</td>
 											         </c:when>
 											         <c:otherwise>
-											             <td style=" width: 16%">${ cCredit.avgCredit}</td>
+											             <td style=" width: 16%"><fmt:formatNumber type="number"  pattern="0.00"  value= "${ cCredit.avgCredit} " /></td>
 											         </c:otherwise>
 											</c:choose>
 											<th style="background: #222d32; color: white; width: 16%">등급</th>

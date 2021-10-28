@@ -12,7 +12,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Attachment {
+	private int lectAtNum;
 	private String subCode;
 	private String originName;
 	private String changeName;
+	private String status;
 }
