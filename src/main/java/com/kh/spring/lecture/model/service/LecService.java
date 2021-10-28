@@ -23,4 +23,5 @@ public interface LecService {
 
 	void insertTime(searchFac sf);
 
+
 }

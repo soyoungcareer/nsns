@@ -22,10 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.facility.model.Service.FacilityService;
+import com.kh.spring.facility.model.vo.allam;
 import com.kh.spring.facility.model.vo.facility;
 import com.kh.spring.facility.model.vo.facilitycheck;
 import com.kh.spring.facility.model.vo.searchFac;
-import com.kh.spring.lecture.model.vo.Reply;
 
 @Controller
 public class FacMoveController {
@@ -83,7 +83,11 @@ public class FacMoveController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		ArrayList<facility> list = fs.facMyPage(id, pi);
 
+		ArrayList<allam> listt = fs.selectallam(id);
+
 		model.addAttribute("list", list);
+		model.addAttribute("listt", listt);
+
 		model.addAttribute("pi", pi);
 
 		Date from = new Date();
@@ -298,9 +302,9 @@ public class FacMoveController {
 	}
 
 	@RequestMapping("facok.me")
-	public String facOk(@RequestParam(value = "no") int no, @RequestParam(value = "id") int id) {
+	public String facOk(@RequestParam(value = "no") int no) {
 
-		System.out.println("10/25 chkeck" + no + id);
+		System.out.println("10/25 chkeck" + no);
 
 		fs.facOk(no);
 
@@ -309,11 +313,17 @@ public class FacMoveController {
 	}
 
 	@RequestMapping("facno.me")
-	public String facNo(@RequestParam(value = "no") int no) {
+	public String facNo(@RequestParam(value = "no") int no, @RequestParam(value = "stuid") int id,
+			@RequestParam(value = "name") String name) {
 
-		System.out.println("10/25 chkeck" + no);
+		System.out.println("10/25 chkeck" + no + id + name);
 
-		fs.facNo(no);
+		searchFac sf = new searchFac();
+
+		sf.setCate5(id);
+		sf.setCate4(name);
+
+		fs.facNo(no, sf);
 
 		return "redirect:facMovesss.me";
 
@@ -330,6 +340,15 @@ public class FacMoveController {
 
 	}
 
+	@RequestMapping("delallam.me")
+	public String delallam(@RequestParam(value = "test") String test1) {
+		int test = Integer.parseInt(test1);
+System.out.println("전");
+		fs.delallam(test);
+System.out.println("후");
+	String data = "data";
+	return data;
 
+	}
 
 }

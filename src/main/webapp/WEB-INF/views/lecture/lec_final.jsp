@@ -68,6 +68,7 @@
 
 
 			</video>
+<span class="glyphicon glyphicon-menu-left"></span>
 
 		</div>
 	</div>

@@ -71,4 +71,7 @@ public class LecServiceImpl implements LecService {
 		int result = ld.insertTime(sqlSession, sf);
 	}
 
+
+	
+
 }

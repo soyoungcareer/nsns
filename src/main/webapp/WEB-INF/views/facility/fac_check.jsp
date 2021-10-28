@@ -89,7 +89,7 @@
 											<button class="btn btn-success" type="button"
 												onclick="location.href='facok.me?no=${f.facNo}'">수락</button>
 											<button class="btn btn-info" type="button"
-												onclick="location.href='facno.me?no=${f.facNo}'">거절</button>
+												onclick="location.href='facno.me?no=${f.facNo}&stuid=${f.stuId }&name=${f.facName}'">거절</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -147,5 +147,11 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+			
+		
+		
+		</script>
 </body>
 </html>

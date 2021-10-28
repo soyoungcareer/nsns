@@ -56,12 +56,18 @@
 			<p>학습중인 과정</p>
 		</div>
 	</div>
-	
+
 
 	<div class="container">
-		<button  class="btn btn-outline-info" type="button" onclick="location.href='lecpl.me?no=${list.get(0).regNo}'">추가
-	</button>
-	<br><br>
+
+
+			<button class="btn btn-outline-info" type="button"
+				onclick="location.href='lecpl.me?no=${no}'">추가
+			</button>
+
+	
+
+		<br> <br>
 		<c:forEach items="${ list }" var="l">
 			<table class="table table-hover table-bordered" id="sampleTable">
 				<thead>
@@ -73,32 +79,25 @@
 					<tr onclick="location.href='lecMovess.me?no=${l.listNo}'">
 						<td width="20%">${l.subTitle}</td>
 						<td width="40%">${l.listContent}<${l.listWeek}강></td>
- 						<td width="40%">	<progress value="${l.time }" max="${l.totalTime }" id="jb"></progress></td>
-		
- 
-           
-             
-		
-</div>
-						</tr>
+						<td width="40%"><progress value="${l.time }"
+								max="${l.totalTime }" id="jb"></progress></td>
+
+
+
+
+
+
+					</tr>
 
 				</tbody>
 			</table>
 		</c:forEach>
 
+
+
 	</div>
 
-	<!-- Essential javascripts for application to work-->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-	<!-- The javascript plugin to display page loading on top-->
-	<script src="js/plugins/pace.min.js"></script>
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="resources/bootstrap/docs/js/scripts.js"></script>
+
+
 </body>
 </html>

@@ -44,11 +44,15 @@ public class LecMoveController {
 	@RequestMapping("lecMoves.me")
 	public String lecPageSub(@RequestParam(value = "no") int no, Model model) {
 
+	
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		model.addAttribute("no",no);
+		
 		ArrayList<lectureList> list = ls.lecPageSub(no);
-		System.out.println(list);
-
-		model.addAttribute("list", list);
-
+		
+		model.addAttribute("list",list);
+		model.addAttribute("no",no);
+		System.out.println("!@#!@#!@#!@#!@@@@@@@@@@@@@@@@@@@@@@@@@@2" + list);
 		return "lecture/lec_sub";
 	}
 
@@ -167,4 +171,6 @@ public class LecMoveController {
 		return "10";
 
 	}
+	
+
 }
