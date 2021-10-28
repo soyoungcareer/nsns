@@ -20,7 +20,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 강의 관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -130,56 +129,44 @@
 								</div>
 							</div>
 							
-							<!-- -----------------------------------
-								페이징 처리하기
-							------------------------------------ -->
-							
-							<div class="row">
-								<div class="col-sm-12 col-md-5">
-									<div class="dataTables_info" id="sampleTable_info"
-										role="status" aria-live="polite">Showing 1 to 10 of 57
-										entries</div>
-								</div>
-								<div class="col-sm-12 col-md-7">
-									<div class="dataTables_paginate paging_simple_numbers"
-										id="sampleTable_paginate">
-										<ul class="pagination">
-											<li class="paginate_button page-item previous disabled"
-												id="sampleTable_previous"><a href="#"
-												aria-controls="sampleTable" data-dt-idx="0" tabindex="0"
-												class="page-link">Previous</a></li>
-											<li class="paginate_button page-item active"><a href="#"
-												aria-controls="sampleTable" data-dt-idx="1" tabindex="0"
-												class="page-link">1</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="2" tabindex="0"
-												class="page-link">2</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="3" tabindex="0"
-												class="page-link">3</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="4" tabindex="0"
-												class="page-link">4</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="5" tabindex="0"
-												class="page-link">5</a></li>
-											<li class="paginate_button page-item "><a href="#"
-												aria-controls="sampleTable" data-dt-idx="6" tabindex="0"
-												class="page-link">6</a></li>
-											<li class="paginate_button page-item next"
-												id="sampleTable_next"><a href="#"
-												aria-controls="sampleTable" data-dt-idx="7" tabindex="0"
-												class="page-link">Next</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
+							<!-- 페이징 처리 -->
+							<div id="pagingArea">
+				                <ul class="pagination">
+				                	<c:choose>
+				                		<c:when test="${ pi.currentPage ne 1 }">
+				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                	
+				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+				                    	<c:choose>
+					                		<c:when test="${ pi.currentPage ne p }">
+				                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+					                		</c:when>
+					                		<c:otherwise>
+					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+					                		</c:otherwise>
+					                	</c:choose>
+				                    </c:forEach>
+				                    
+				                    <c:choose>
+				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                		</c:when>
+				                		<c:otherwise>
+				                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                		</c:otherwise>
+				                	</c:choose>
+				                </ul>
+				            </div>
 							
 							<div class="row">
 				                <div class="form-group col-md-4 align-self-end">
-				                  <input type="button" class="btn btn-warning" type="button" onclick="location.href='<%=contextPath%>/profEditLec.pr'" value="강의수정"/>
-				                  <input type="button" class="btn btn-danger" type="button" onclick="location.href='<%=contextPath%>/profDeleteLec.pr'" value="강의삭제"/>
+				                  <input type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/lectEditInfoLoad.pr'" value="강의수정"/>
+				                  <input type="button" class="btn btn-danger" onclick="location.href='<%=contextPath%>/lectDelInfoLoad.pr'" value="강의삭제"/>
 				                </div>
 			                </div>
 							

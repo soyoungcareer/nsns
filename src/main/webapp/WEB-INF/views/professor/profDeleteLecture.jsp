@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,35 +35,37 @@
 	              	<div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학과명</label>
-		                  <input class="form-control" type="text" value="" readonly>
+		                  <input class="form-control" type="text" value="${ prof.profDeptTitle }" readonly>
 		                </div>
 						<div class="form-group col-md-3">
 						  <label class="control-label">이수구분</label>
-						  <input class="form-control" type="text" value="" readonly>
+						  <c:if test="${ sub.subDivs eq 1 }"><input class="form-control" type="text" value="전공" readonly></c:if>
+						  <c:if test="${ sub.subDivs eq 2 }"><input class="form-control" type="text" value="교양" readonly></c:if>
 						</div>
 						<div class="form-group col-md-3">
 						  <label class="control-label">강의형태</label>
-						  <input class="form-control" type="text" value="" readonly>
+						  <c:if test="${ sub.subType eq 1 }"><input class="form-control" type="text" value="집체" readonly></c:if>
+						  <c:if test="${ sub.subType eq 2 }"><input class="form-control" type="text" value="온라인" readonly></c:if>
 		                </div>
 		            </div>
 		            <div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교과목명</label>
-						  <input class="form-control" type="text" value="" readonly>
+						  <input class="form-control" type="text" value="${ sub.subTitle }" readonly>
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교수명</label>
-		                  <input class="form-control" type="text" value="" readonly>
+		                  <input class="form-control" type="text" value="${ prof.profName }" readonly>
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학점</label>
-		                  <input class="form-control" type="text" value="" readonly>
+		                  <input class="form-control" type="text" value="${ sub.subCredit }" readonly>
 		                </div>
 		            </div>
 		            <div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">강의시간</label>
-		                  <input class="form-control" type="text" value="" readonly>
+		                  <input class="form-control" type="text" value="${ sub.subTime }" readonly>
 		                  <!-- -------------------------------------
 		                  	강의요일, 시간 한번에 끌어오기
 		                  --------------------------------------- -->

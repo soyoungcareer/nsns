@@ -24,7 +24,7 @@
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profStudentOff.pr">학적변동 승인</a></li>
+				<li class="breadcrumb-item"><a href="profStudentDo.pr">학적변동 승인</a></li>
 			</ul>
 		</div>
 		
@@ -35,7 +35,7 @@
 						<div id="sampleTable_wrapper"
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 							<div class="row">
-								<h3 class="tile-title">휴학신청 목록</h3>
+								<h3 class="tile-title">자퇴신청 목록</h3>
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
@@ -65,19 +65,7 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학구분</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학학기수</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학학기</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학사유</th>
+													style="width: 52.9125px;">자퇴사유</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
@@ -87,19 +75,16 @@
 										<tbody>
 											<c:choose>
 												<c:when test="${empty doList}">
-													<tr><td colspan="9">휴학신청 내역이 없습니다.</td></tr>
+													<tr><td colspan="6">자퇴신청 내역이 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty doList}">
 													<c:forEach var="doList" items="${doList}">
 														<tr role="row">
 															<td class="sorting_1"><%= count++ %></td>
 															<td><c:out value="${doList.stuName}"/></td>
-															<td><c:out value="${doList.offDate}"/></td>
+															<td><c:out value="${doList.doDate}"/></td>
 															<td><c:out value="${doList.stuStatus}"/></td>
-															<td><c:out value="${doList.offCategory}"/></td>
-															<td><c:out value="${doList.offSemCnt}"/></td>
-															<td><c:out value="${doList.offSem}"/></td>
-															<td><c:out value="${doList.offReason}"/></td>
+															<td><c:out value="${doList.doReason}"/></td>
 															<td><c:out value="${doList.status}"/></td>
 														</tr>
 													</c:forEach>
