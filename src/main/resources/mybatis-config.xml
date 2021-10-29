@@ -39,6 +39,7 @@
           <typeAlias type="com.kh.spring.studentSubject.model.vo.SearchCondition" alias="SearchCondition2"/>
 		 <typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
     		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
+
      <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
@@ -48,6 +49,7 @@
 			<typeAlias type="com.kh.spring.certificate.vo.Graduation" alias="Graduation"/>
 			<typeAlias type="com.kh.spring.certificate.vo.Certificate" alias="Certificate"/>
     			 <typeAlias type="com.kh.spring.facility.model.vo.allam" alias="Allam"/>
+			<typeAlias type="com.kh.spring.certificate.vo.Volunteer" alias="Volunteer"/>
 			<typeAlias type="com.kh.spring.studentSubject.model.vo.StuGradeAndCredit" alias="StuGradeAndCredit"/>
 			<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentBack" alias="StudentBack"/>
 

@@ -342,6 +342,9 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 		for(int i=start; i<=end;i++) {
 			day=day+String.valueOf(i);
 		}
+		if(start==end) {
+			day=day+end;
+		}
 		subject.setSubTime(day);
 		lectRegisterDao.lectUpdateAdmin(sqlSession, subject);
 	}
