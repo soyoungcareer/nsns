@@ -14,7 +14,6 @@ import com.kh.spring.member.vo.Student;
 @Repository
 public class MemberDao {
 
-	//---------로그인-----------
 	public Admin loginAdmin(SqlSessionTemplate sqlSession, Admin a) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("memberMapper.loginAdmin", a);
@@ -76,7 +75,15 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("memberMapper.deleteProfessor", profId);
 	}
+//
+	public int studentStatusFormCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("memberMapper.studentStatusFormCount");
+	}
 
-	
+	public int studentStatusUpdate(SqlSessionTemplate sqlSession, int stuId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.studentStatusUpdate", stuId);
+	}
 
 }

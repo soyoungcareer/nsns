@@ -147,8 +147,28 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public int studentStatusFormCount() {
+		// TODO Auto-generated method stub
+		return memberDao.studentStatusFormCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Student> studentStatusForm(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	
+	@Override
+	public void studentStatusUpdate(int stuId) {
+		
+		int result = memberDao.studentStatusUpdate(sqlSession, stuId);
+		
+		if(result < 0) {
+			throw new CommException("해당 학생 학적을 변경하는 도중 에러가 발생하였습니다.");
+		}
+		
+	}
 	
 
 }

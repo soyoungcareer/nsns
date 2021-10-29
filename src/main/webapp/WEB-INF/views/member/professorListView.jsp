@@ -54,6 +54,7 @@
                       <th>이메일</th>
                       <th>연락처</th>
                       <th>상태</th>
+                      <th>계약종료</th>
                     </tr>
                   </thead>
                   <tbody align="center">
@@ -66,7 +67,7 @@
 	                    <tr>
 	                        <td>${ p.profId }</td>
 	                        <td>${ p.profName }</td>
-	                        <td>${ p.profDept }</td>
+	                        <td>${ p.profDeptTitle }</td>
 	                        <td>${ p.profEmail }</td>
 	                        <td>${ p.profPhone }</td>
 	                        <td>${ p.profStatus }</td>
