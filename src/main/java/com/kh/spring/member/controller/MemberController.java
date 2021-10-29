@@ -41,7 +41,7 @@ public class MemberController {
 
 	//-------------- 로그인 --------------	
 	@RequestMapping("login.ber")
-	public String loginMember(Admin a, Student s, Professor p, Model model
+	public String loginMember(Admin a, Student s, Professor p, Model model, HttpSession session
 							, @RequestParam("position") String position
 							, @RequestParam("userId") String userId
 							, @RequestParam("userPwd") String userPwd) {
@@ -55,7 +55,11 @@ public class MemberController {
 			
 			Admin loginAdm = memberService.loginAdmin(a); //bCPwdEncoder, 
 			System.out.println("loginAdm : " + loginAdm);
+			
 			model.addAttribute("loginAdm", loginAdm);
+			
+			session.setAttribute("loginAdm", loginAdm);
+			System.out.println("session 저장 : " + session.getAttribute("loginAdm"));
 			
 			return "member/professorEnrollForm";
 			
@@ -68,7 +72,10 @@ public class MemberController {
 			System.out.println("loginStu : " + loginStu);
 			model.addAttribute("loginStu", loginStu);
 			
-			return "student/studentInfo";
+			session.setAttribute("loginStu", loginStu);
+			System.out.println("session 저장 : " + session.getAttribute("loginStu"));
+			
+			return "redirect:stuinfo.st";
 			
 		}else if(position.equals("professor")){
 			
@@ -78,6 +85,9 @@ public class MemberController {
 			Professor loginPrf = memberService.loginProfessor(p); //(bCPwdEncoder, p);
 			System.out.println("loginPrf : " + loginPrf);
 			model.addAttribute("loginPrf", loginPrf);
+			
+			session.setAttribute("loginPrf", loginPrf);
+			System.out.println("session 저장 : " + session.getAttribute("loginPrf"));
 			
 			return "professor/profMypage";
 			
@@ -96,10 +106,6 @@ public class MemberController {
 	public String logoutAdmin(HttpSession session) {
 		
 		session.invalidate();
-		
-		System.out.println("session 삭제? : " + session.getAttribute("admId"));
-		//로그아웃 확인 - 에러 발생: java.lang.IllegalStateException: getAttribute: 세션이 이미 무효화되었습니다.
-		
 		System.out.println("로그아웃되었습니다.");
 		
 		return "redirect:/"; //로그아웃 세션 종료 후 페이지
@@ -130,7 +136,7 @@ public class MemberController {
 		return "member/professorEnrollForm";
 	}
 	
-	//-------------- 계정 목록 조회 --------------	
+	//-------------- 계정 등록 --------------	
 	@RequestMapping("insertStu.adm") //학생관리-학생 등록
 	public String insertStudent(@ModelAttribute Student s, HttpSession session) {
 		
@@ -142,7 +148,7 @@ public class MemberController {
 		//s.setStuPwd(encPwd);
 		
 		memberService.insertStudent(s);
-		session.setAttribute("msg", "학생 등록 성공");//
+		session.setAttribute("msg", "학생 등록 성공");
 		
 		return "redirect:/";
 	}
@@ -153,9 +159,9 @@ public class MemberController {
 		System.out.println("professor : " + p);	
 		System.out.println("기존 비밀번호 : " + p.getProfPwd());
 		
-		//String encPwd = bCPwdEncoder.encode(s.getStuPwd());
+		//String encPwd = bCPwdEncoder.encode(p.getStuPwd());
 		//System.out.println("암호화 비밀번호 : " + encPwd);	
-		//s.setStuPwd(encPwd);
+		//p.setStuPwd(encPwd);
 		
 		memberService.insertProfessor(p);
 		session.setAttribute("msg", "교수 등록 성공");
@@ -205,7 +211,7 @@ public class MemberController {
 		return "redirect:stuList.adm";
 	}
 	
-	//교수관리-교수 삭제
+	//교수관리-교수 삭제 - 계약 종료
 	@RequestMapping("prfDelete.adm")
 	public String deleteProfessor(int profId) {
 	
@@ -214,6 +220,31 @@ public class MemberController {
 		return "redirect:stuList.adm";
 	}
 	
+	//-------------- 학생 학적 변경 --------------
+	//학적변경 리스트
+	@RequestMapping("stuStaUpdateList.adm")
+	public String studentStatusForm(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
+		
+		int listCount = memberService.studentStatusFormCount();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Student> staList = memberService.studentStatusForm(pi);
+		System.out.println("staList : " + staList);
+		model.addAttribute("staList", staList);
+		model.addAttribute("pi", pi);
+		
+		return "member/studentStatusUpdate";
+	}
 	
+	//학적변경 승인
+	@RequestMapping("stuStaUpdate.adm")
+	public String studentStatusUpdate(int stuId, HttpServletRequest request) {
+		
+		memberService.studentStatusUpdate(stuId);
+		System.out.println("MC stuId : " + stuId);
+		
+		return "redirect:stuStaUpdateList.adm";
+	}
 	
 }

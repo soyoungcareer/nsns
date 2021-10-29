@@ -68,10 +68,10 @@
 	                    <tr>
 	                        <td id="stuId" name="stuId">${ s.stuId }</td>
 	                        <td>${ s.stuName }</td>
-	                        <td>${ s.deptCode }</td><!-- deptTitle -->
+	                        <td>${ s.deptName }</td>
 	                        <td>${ s.email }</td>
 	                        <td>${ s.phone }</td>
-	                        <td>${ s.profId }</td><!-- profName -->
+	                        <td>${ s.proName }</td>
 	                        <td>${ s.stuStatus }</td>
 	                        <td>
 	                        	<button class="btn btn-primary" type="button" onclick="location.href='stuDelete.adm'">삭제</button>

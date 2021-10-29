@@ -42,7 +42,7 @@
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li>
             <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i> Profile</a></li> -->
-            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            <li><a class="dropdown-item" href="logout.adm"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -85,7 +85,7 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="stuEnrollForm.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 등록</a></li>
             <li><a class="treeview-item" href="stuList.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 조회</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
+            <li><a class="treeview-item" href="stuStaUpdateList.adm"><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
           </ul>
         </li>
         
