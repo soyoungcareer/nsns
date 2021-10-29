@@ -9,6 +9,7 @@ import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
+import com.kh.spring.member.vo.SearchStudent;
 import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
@@ -48,6 +49,8 @@ public interface ProfService {
 	int offListCount(String profId);
 
 	int doListCount(String profId);
+
+	ArrayList<Student> selectFilteredStu(SearchStudent searchStudent);
 
 
 

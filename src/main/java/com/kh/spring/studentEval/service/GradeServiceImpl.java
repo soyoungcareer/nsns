@@ -1,11 +1,14 @@
 package com.kh.spring.studentEval.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.common.PageInfo;
+import com.kh.spring.common.exception.CommException;
 import com.kh.spring.gradeObject.vo.GradeObject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.studentEval.dao.GradeDao;
@@ -46,8 +49,8 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public ArrayList<GradeObject> loadObjList(String profId) {
-		return gradeDao.loadObjList(sqlSession, profId);
+	public ArrayList<GradeObject> loadObjList(String profId, PageInfo pi) {
+		return gradeDao.loadObjList(sqlSession, profId, pi);
 	}
 
 	@Override
@@ -64,6 +67,16 @@ public class GradeServiceImpl implements GradeService {
 	public ArrayList<Grade> selectFilteredGrade(SearchGrade searchGrade) {
 		return gradeDao.selectFilteredGrade(sqlSession, searchGrade);
 		
+	}
+
+	@Override
+	public int updateGrade(Map map) {
+		return gradeDao.updateGrade(sqlSession, map);
+	}
+
+	@Override
+	public int objListCount(String profId) {
+		return gradeDao.objListCount(sqlSession, profId);
 	}
 
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,26 +35,26 @@
 						<div class="row">
 							<div class="form-group col-md-3">
 			                  <label class="control-label">이의신청일자</label>
-			                  <input class="form-control" type="text" value="" readonly>
+			                  <input class="form-control" type="text" value="<fmt:formatDate pattern="yyyy년MM월dd일 HH:mm" value="${ objList.objDate }"/>" readonly>
 			                </div>
 		                </div>
 		                <div class="row">
 							<div class="form-group col-md-3">
 			                  <label class="control-label">학생이름</label>
-			                  <input class="form-control" type="text" value="" readonly>
+			                  <input class="form-control" type="text" value="${ objList.stuName }" readonly>
 			                </div>
 		                </div>
 		                <div class="row">
 							<div class="form-group col-md-3">
 			                  <label class="control-label">제목</label>
-			                  <input class="form-control" type="text" value="" readonly>
+			                  <input class="form-control" type="text" value="${ objList.title }" readonly>
 			                </div>
 		                </div>
 		                
 						<div class="row">
 							<div class="form-group col-md-3">
 	                    		<label for="detailTxtArea">내용</label>
-	                    		<textarea class="form-control" id="detailTxtArea" rows="3"></textarea>
+	                    		<input class="form-control" type="text" value="${ objList.content }" readonly>
 	                  		</div>
 	                  	</div>
                   		
