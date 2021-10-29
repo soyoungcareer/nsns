@@ -1,30 +1,39 @@
 package com.kh.spring.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
+import com.kh.spring.common.exception.CommException;
 import com.kh.spring.consult.model.vo.Consult;
 import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.service.ProfService;
 import com.kh.spring.member.vo.Professor;
+import com.kh.spring.member.vo.SearchStudent;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentEval.service.GradeService;
+import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 
@@ -34,6 +43,9 @@ public class ProfController {
 	
 	@Autowired
 	private ProfService profService;
+	
+	@Autowired
+	private GradeService gradeService;
 	
 	// ============= 교수메뉴바 =============
 	@RequestMapping("profMenu.pr")
@@ -95,9 +107,10 @@ public class ProfController {
 	
 	// 강의 개설 신청
 	@RequestMapping("profCreateLecture.pr")
-	public String profCreateLecture(int subDivs, int subType, String subTitle,
+	public String profCreateLecture(HttpServletRequest request, RequestedSubject reqSubject,
+									int subDivs, int subType, String subTitle,
 									int subCredit, String subDay, String subStartTime, String subEndTime, 
-									@RequestParam(name="uploadFile", required=false) MultipartFile file) {
+									@RequestParam(name="createLectFile", required=false) MultipartFile file) {
 		// 임시 데이터
 		String profId = "EC1901";
 		int deptCode = 1;
@@ -117,8 +130,21 @@ public class ProfController {
 		
 		String subTime = subDay + subStartTime + subEndTime;
 		
+		///////////////////////////////////////
+		// 파일 첨부 기능 넣은 이후로 오류남
+		///////////////////////////////////////
+		
+		// 파일명
+		if (!file.getOriginalFilename().equals("")) {
+			String changeName = saveFile(file, request);
+
+			if (changeName != null) {
+				reqSubject.setAttOrigin(file.getOriginalFilename());
+				reqSubject.setAttChange(changeName);
+			}
+		}
+		
 		// 강의 개설 데이터 뷰에서 받아오기
-		RequestedSubject reqSubject = new RequestedSubject();
 		reqSubject.setDeptCode(deptCode);
 		reqSubject.setSubDivs(subDivs);
 		reqSubject.setSubType(subType);
@@ -131,16 +157,33 @@ public class ProfController {
 		
 		profService.profCreateLecture(reqSubject);
 		
-		////////////////////////////////////////////////////
-		// 1022 - 강의개설신청 테이블(REQ_SUBJECT) 추가. 
-		////////////////////////////////////////////////////
-		
-		
-		////////////////////////////////////////////////////
-		// 강의계획서 첨부파일 처리하기
-		////////////////////////////////////////////////////
-		
 		return "professor/profCreateLecture";
+	}
+	
+	// 첨부파일
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources + "\\upload_files\\";
+		
+		System.out.println("savePath" + savePath);
+		
+		String originName = file.getOriginalFilename();
+		String saveTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = saveTime + ext;
+		
+		try {
+			file.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) { //change project compliance and jre to 1.7
+			e.printStackTrace();
+			throw new CommException("파일 첨부 오류가 발생하였습니다.");
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new CommException("파일 첨부 오류가 발생하였습니다.");
+		}
+		
+		return changeName;
 	}
 
 	// 강의목록 조회
@@ -237,27 +280,59 @@ public class ProfController {
 	}
 	
 	// ============= 학생 관리 =============
-	// 학생목록 조회
+	// 학생목록 조회 nothing
 	@RequestMapping("profStudentDetail.pr")
-	public String profStudentDetail(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
-									Model model) {
+	public String profStudentDetail() {
+		return "professor/profStudentDetail";
+	}
+	
+	// 학생목록 조회 > 과목 조회
+	@RequestMapping("filteredSub.pr")
+	public String filteredSub(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								    @RequestParam(name="con1", required=false, defaultValue="0") int con1,
+								    @RequestParam(name="con2", required=false, defaultValue="0") int con2,
+								    @RequestParam(name="keyword", required=false, defaultValue="%") String keyword,
+								    Model model) {
 		// 임시 데이터
 		String profId = "EC1901";
-		String subCode = "2101001";
-		int year = 2021;
-		int semester = 1;
+		// 조건별 과목 검색
+		SearchSubject searchSubject = new SearchSubject();
+		searchSubject.setCon1(con1);
+		searchSubject.setCon2(con2);
+		searchSubject.setKeyword(keyword);
+		searchSubject.setProfId(profId);
 		
-		int listCount = profService.subListCount(profId);
+		int listCount = gradeService.selectSubListCount(searchSubject);
+		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		ArrayList<Subject> subList = profService.selectSubList(profId, pi);
-		ArrayList<Student> stuList = profService.profStudentDetail(subCode); // 학년도, 학기 반영해야함
+		ArrayList<Subject> subList = gradeService.selectFilteredSubList(searchSubject, pi);
+		// ArrayList<Student> stuList = profService.profStudentDetail(subCode); // 학년도, 학기 반영해야함
 		
 		model.addAttribute("pi", pi);
+		model.addAttribute("con1", con1);
+		model.addAttribute("con2", con2);
 		model.addAttribute("subList", subList);
-		model.addAttribute("stuList", stuList);
 		
 		return "professor/profStudentDetail";
+	}
+	
+	// 과목별 학생목록 조회
+	@ResponseBody
+	@RequestMapping(value="filteredStudent.pr", produces="application/json; charset=utf-8")
+	public String filteredStudent(String subCode, String year, String semester) {
+		// 임시 데이터
+		String profId = "EC1901";
+		
+		SearchStudent searchStudent = new SearchStudent();
+		searchStudent.setSubCode(subCode);
+		searchStudent.setYear(year);
+		searchStudent.setSemester(semester);
+		searchStudent.setProfId(profId);
+		
+		ArrayList<Student> stuList = profService.selectFilteredStu(searchStudent);
+		
+		return new GsonBuilder().create().toJson(stuList);
+
 	}
 	
 	// 상담 관리

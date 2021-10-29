@@ -22,6 +22,7 @@ public class RequestedSubject {
 	private int subCredit;	// "SUB_CREDIT"	NUMBER		NULL,
 	private String subTime;	// "SUB_TIME"	VARCHAR2(100)		NOT NULL,
 	private String status;	// "STATUS"		VARCHAR2(1)	DEFAULT 'N'	CHECK(STATUS IN('Y','N'))		NOT NULL
-	
+	private String attOrigin;
+	private String attChange;
 	
 }

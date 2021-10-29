@@ -109,11 +109,17 @@
 															<td class="sorting_1"><%=count++ %></td>
 															<td><c:out value="${subList.subCode}"/></td>
 															<td><c:out value="${subList.subTitle}"/></td>
-															<td><c:out value="${subList.subDivs}"/></td>
+															<td>
+																<c:if test="${subList.subDivs eq '1'}"><c:out value="전공"/></c:if>
+																<c:if test="${subList.subDivs eq '2'}"><c:out value="교양"/></c:if>
+															</td>
 															<td><c:out value="${subList.subCredit}"/></td>
 															<td><c:out value="${subList.subClass}"/></td>
 															<td><c:out value="${subList.subTime}"/></td>
-															<td><c:out value="${subList.subType}"/></td>
+															<td>
+																<c:if test="${subList.subType eq '1'}"><c:out value="집체"/></c:if>
+																<c:if test="${subList.subType eq '2'}"><c:out value="온라인"/></c:if>
+															</td>
 														</tr>
 													</c:forEach>
 												</c:when>

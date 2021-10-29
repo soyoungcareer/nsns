@@ -1,11 +1,13 @@
 package com.kh.spring.studentEval.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.common.PageInfo;
 import com.kh.spring.gradeObject.vo.GradeObject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.studentEval.vo.Grade;
@@ -30,8 +32,10 @@ public class GradeDao {
 		return (ArrayList)sqlSession.selectList("gradeMapper.selectList", gradeList);
 	}
 
-	public ArrayList<GradeObject> loadObjList(SqlSessionTemplate sqlSession, String profId) {
-		return (ArrayList)sqlSession.selectList("gradeMapper.loadObjList", profId);
+	public ArrayList<GradeObject> loadObjList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("gradeMapper.loadObjList", profId, rowBounds);
 	}
 
 	public int selectSubListCount(SqlSessionTemplate sqlSession, SearchSubject searchSubject) {
@@ -47,6 +51,15 @@ public class GradeDao {
 
 	public ArrayList<Grade> selectFilteredGrade(SqlSessionTemplate sqlSession, SearchGrade searchGrade) {
 		return (ArrayList)sqlSession.selectList("gradeMapper.selectFilteredGrade", searchGrade);
+	}
+
+	public int updateGrade(SqlSessionTemplate sqlSession, Map map) {
+		System.out.println("============================map Dao : " + map);
+		return sqlSession.update("gradeMapper.updateGrade", map);
+	}
+
+	public int objListCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("gradeMapper.objListCount", profId);
 	}
 
 }
