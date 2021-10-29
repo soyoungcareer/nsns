@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap id="lectureList" type="lecture">
 		<id property="lecNo" column="LECT_REG_NO" />
+		<result property="stuId" column="STU_ID" />	
 		<result property="lecTitle" column="SUB_TITLE" />
 		<result property="lecYear" column="Year" />
 		<result property="lecTer" column="SEMESTER" />
@@ -47,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectList" resultMap="lectureList"
 		parameterType="_int">
-		SELECT A.LECT_REG_NO, B.SUB_TITLE , A.YEAR , A.SEMESTER,
+		SELECT A.LECT_REG_NO, A.STU_ID, B.SUB_TITLE , A.YEAR , A.SEMESTER,
 		C.DEPT_TITLE, D.PROF_NAME
 		FROM LECT_REGISTER A
 		JOIN SUBJECT B ON

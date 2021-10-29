@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.facility.model.vo.searchFac;
 import com.kh.spring.lecture.model.service.LecService;
+import com.kh.spring.lecture.model.vo.Coolsms;
 import com.kh.spring.lecture.model.vo.Reply;
 import com.kh.spring.lecture.model.vo.lecture;
 import com.kh.spring.lecture.model.vo.lectureList;
@@ -37,41 +41,51 @@ public class LecMoveController {
 		System.out.println(list);
 
 		model.addAttribute("list", list);
-
+		model.addAttribute("id", id);
 		return "lecture/lec_main";
 	}
 
 	@RequestMapping("lecMoves.me")
-	public String lecPageSub(@RequestParam(value = "no") int no, Model model) {
+	public String lecPageSub(@RequestParam(value = "no") int no, @RequestParam(value = "id", required = false) int id,
+			Model model) {
 
-	
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		model.addAttribute("no",no);
-		
+		model.addAttribute("no", no);
+
 		ArrayList<lectureList> list = ls.lecPageSub(no);
-		
-		model.addAttribute("list",list);
-		model.addAttribute("no",no);
+
+		model.addAttribute("list", list);
+		model.addAttribute("no", no);
+		if (id > 0) {
+			model.addAttribute("id", id);
+		}
 		System.out.println("!@#!@#!@#!@#!@@@@@@@@@@@@@@@@@@@@@@@@@@2" + list);
 		return "lecture/lec_sub";
 	}
 
 	@RequestMapping("lecMovess.me")
-	public String lecPageFinal(@RequestParam(value = "no") int no, Model model) {
+	public String lecPageFinal(@RequestParam(value = "no") int no, @RequestParam(value = "id", required = false) int id,
+			Model model) {
 
 		lectureList lec = ls.lecPageFinal(no);
 
 		model.addAttribute("l", lec);
-
+		if (id > 0) {
+			model.addAttribute("id", id);
+		}
 		return "lecture/lec_final";
 	}
 
 	@RequestMapping("lecpl.me")
-	public String lecPlusMove(@RequestParam(value = "no") int no, Model model) {
+	public String lecPlusMove(@RequestParam(value = "no") int no, @RequestParam(value = "id", required = false) int id,
+			Model model) {
 
 		System.out.println("************************" + no);
 
 		model.addAttribute("no", no);
+		if (id > 0) {
+			model.addAttribute("id", id);
+		}
 
 		return "lecture/lec_lecpl";
 
@@ -79,8 +93,9 @@ public class LecMoveController {
 
 	@RequestMapping("lecinsert.me")
 	public String lecinsert(@RequestParam(value = "name") String name, @RequestParam(value = "no") int no,
-			@RequestParam(value = "week") int week,
+			@RequestParam(value = "id", required = false) int id, @RequestParam(value = "week") int week,
 			@RequestParam(value = "uploadFile", required = false) MultipartFile file, HttpServletRequest request,
+
 			RedirectAttributes redirect, Model model) {
 		lectureList l = new lectureList();
 		System.out.println(name);
@@ -93,6 +108,10 @@ public class LecMoveController {
 				l.setChangeName(changeName);
 			}
 
+		}
+
+		if (id > 0) {
+			redirect.addAttribute("id", id);
 		}
 
 		l.setListContent(name);
@@ -150,11 +169,10 @@ public class LecMoveController {
 		int result = ls.insertReply(r);
 		return String.valueOf(result);
 	}
-	
+
 	@RequestMapping("lectime.me")
 	public String facTime(@RequestParam(value = "times") String times,
-			@RequestParam(value = "TotalTime") String TotalTime,
-			@RequestParam(value = "no") int bno) {
+			@RequestParam(value = "TotalTime") String TotalTime, @RequestParam(value = "no") int bno) {
 
 		System.out.println("무한으로즐겨요" + times + " " + TotalTime + " " + bno);
 
@@ -172,5 +190,45 @@ public class LecMoveController {
 
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="sendSms.me")
+	public String sendSms(HttpServletRequest request) throws Exception {
+		
+		String a = Integer.toString(ThreadLocalRandom.current().nextInt(100000, 1000000));
+		
+		String api_key = "NCSANPMH0N490VJV";
+		String api_secret = "A6B5EUT9RDND1MX7SJULZSSN145ENWZS";
+		Coolsms coolsms = new Coolsms(api_key, api_secret);
 
-}
+		HashMap<String, String> set = new HashMap<String, String>();
+		set.put("to", "01086297286"); // 수신번호
+
+			set.put("from", (String) request.getParameter("from")); // 발신번호
+			set.put("text", (String) a); // 문자내용
+			set.put("type", "sms"); // 문자 타입
+	
+			System.out.println(set);
+	
+			JSONObject result = coolsms.send(set); // 보내기&전송결과받기
+	
+			if ((boolean) result.get("status") == true) {
+				// 메시지 보내기 성공 및 전송결과 출력
+				System.out.println("성공");
+				System.out.println(result.get("group_id")); // 그룹아이디
+			System.out.println(result.get("result_code")); // 결과코드
+			System.out.println(result.get("result_message")); // 결과 메시지
+			System.out.println(result.get("success_count")); // 메시지아이디
+			System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+		} else {
+			// 메시지 보내기 실패
+			System.out.println("실패");
+			System.out.println(result.get("code")); // REST API 에러코드
+			System.out.println(result.get("message")); // 에러메시지
+		}
+
+		return new GsonBuilder().create().toJson(a);
+	}
+	
+	
+
+	}
