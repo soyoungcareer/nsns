@@ -13,6 +13,7 @@ import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
+import com.kh.spring.member.vo.SearchStudent;
 import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
@@ -104,6 +105,10 @@ public class ProfessorDao {
 
 	public int doListCount(SqlSessionTemplate sqlSession, String profId) {
 		return sqlSession.selectOne("profMapper.doListCount", profId);
+	}
+
+	public ArrayList<Student> selectFilteredStu(SqlSessionTemplate sqlSession, SearchStudent searchStudent) {
+		return (ArrayList)sqlSession.selectList("profMapper.selectFilteredStu", searchStudent);
 	}
 
 }

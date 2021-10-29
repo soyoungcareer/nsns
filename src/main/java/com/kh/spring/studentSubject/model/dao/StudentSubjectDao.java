@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.studentSubject.model.vo.SearchCondition;
+import com.kh.spring.studentSubject.model.vo.StuGradeAndCredit;
 import com.kh.spring.studentSubject.model.vo.StudentSubject;
 
 @Repository
@@ -51,6 +52,12 @@ public class StudentSubjectDao {
 
 		return (ArrayList)sqlsession.selectList("studentSubjectMapper.searchSubject", sc, rowBounds);
 	}
+
+	public ArrayList<StuGradeAndCredit> selectGradeList(SqlSessionTemplate sqlsession, String stuId) {
+		
+		return (ArrayList)sqlsession.selectList("studentSubjectMapper.selectGradeList", stuId);
+	}
+
 
 
 	

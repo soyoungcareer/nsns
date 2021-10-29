@@ -13,12 +13,15 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+
 public class Certificate {
 	private int cerNo;
 	private int stuId;
 	private String category;
 	private String title;
 	private String agency;
+	private String day;
 	private Date getDate;
 	private String status;
+	
 }

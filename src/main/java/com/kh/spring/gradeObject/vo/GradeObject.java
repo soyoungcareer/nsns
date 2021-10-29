@@ -23,4 +23,5 @@ public class GradeObject {
 	private String content;
 	private String status;
 	private String reason;
+	private String stuName;
 }

@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				<c:if test = "${ empty graduation}">
-				<h2 class="bs-component" style="text-align: center; line-height: 200px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 졸업 기준을 모두 충족하여야 졸업이 가능합니다.  </h2>
+				<h2 class="bs-component" style="text-align: center; line-height: 200px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 졸업 기준을 모두 충족하여야 졸업증명서 발급이 가능합니다.  </h2>
 			</c:if>
 			<div></div>
 				<c:if test = "${ !empty graduation}">

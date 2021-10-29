@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.certificate.dao.CertificateDao;
 import com.kh.spring.certificate.vo.Certificate;
 import com.kh.spring.certificate.vo.Graduation;
+import com.kh.spring.certificate.vo.Volunteer;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
@@ -28,5 +29,40 @@ public class CertificateServiceImpl implements CertificateService {
 	@Override
 	public ArrayList<Certificate> certificateList(int stuId) {
 		return certificateDao.certificateList(sqlSession, stuId);
+	}
+
+	@Override
+	public ArrayList<Volunteer> volunteerList(int stuId) {
+		return certificateDao.volunteerList(sqlSession, stuId);
+	}
+
+	@Override
+	public void certificateAdd(Certificate cer) {
+		certificateDao.certificateAdd(sqlSession, cer);
+	}
+
+	@Override
+	public void voluntterAdd(Volunteer vol) {
+		certificateDao.voluntterAdd(sqlSession, vol);
+	}
+
+	@Override
+	public void certificateDelete(int cerNo) {
+		certificateDao.certificateDelete(sqlSession, cerNo);
+	}
+
+	@Override
+	public void voluntterDelete(int volNo) {
+		certificateDao.voluntterDelete(sqlSession, volNo);
+	}
+
+	@Override
+	public Certificate certificateUpDetail(int cerNo) {
+		return certificateDao.certificateUpDetail(sqlSession, cerNo);
+	}
+
+	@Override
+	public Volunteer volunteerUpDetail(int volNo) {
+		return certificateDao.volunteerUpDetail(sqlSession, volNo);
 	}
 }

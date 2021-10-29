@@ -49,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="content" column="CONTENT"/>
 		<result property="status" column="STATUS"/>
 		<result property="reason" column="REASON"/>
+		<result property="stuName" column="STU_NAME"/>
 	</resultMap>
 	
 	<!-- 과목 조건 검색 개수 -->
@@ -91,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<!-- 과목 조건 검색 리스트 -->
 	<select id="selectFilteredSubList" parameterType="SearchSubject" resultMap="profSubList">
-		SELECT A.SUB_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TITLE, A.SUB_CREDIT, A.SUB_TYPE, C.PROF_NAME
+		SELECT A.SUB_YEAR, A.SUB_SMST, A.SUB_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TITLE, A.SUB_CREDIT, A.SUB_TYPE, C.PROF_NAME
 		FROM SUBJECT A
 		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE 
 		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
@@ -150,22 +151,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN STUDENT C ON A.STU_ID=C.STU_ID
 		JOIN DEPARTMENT D ON C.DEPT_CODE=D.DEPT_CODE
 		JOIN SUBJECT E ON A.SUB_CODE=E.SUB_CODE
-		WHERE SUB_CODE=#{subCode} 
-		<choose>
-			<when test='gradeYear == 0 and gradeSemester == 0'>
-			</when>
-			<when test='gradeYear != 0 and gradeSemester == 0'>
-				AND GRADE_YEAR=#{gradeYear}
-			</when>
-			<when test='gradeYear == 0 and gradeSemester != 0'>
-				AND GRADE_SEMESTER=${gradeSemester}
-			</when>
-			<when test='gradeYear != 0 and gradeSemester != 0'>
-				AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
-			</when>
-		</choose>
+		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
 		ORDER BY STU_ID DESC
 	</select>
+	
+	<!-- 성적 수정 -->
+	<update id="updateGrade" parameterType="Grade">
+		UPDATE GRADE 
+		SET ATTENDANCE=#{attend}, ASSIGNMENT=#{assign}, MIDEXAM=#{mid}, FINEXAM=#{fin}
+		WHERE STU_ID=#{stuId} AND SUB_CODE=#{subCode} 
+		AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
+	</update>
+	
 	
 	<select id="selectListCount" parameterType="_int" resultMap="gradeResultSet">
 		SELECT COUNT(*)
@@ -189,8 +186,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 이의신청 확인 -->
+	<select id="objListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM GRA_OBJECT A
+		JOIN STUDENT B ON A.STU_ID=B.STU_ID
+		JOIN GRADE C ON A.GRADE_NO=C.GRADE_NO
+		JOIN SUBJECT D ON D.SUB_CODE=C.SUB_CODE
+		WHERE D.PROF_ID=#{profId}
+		
+	</select>
 	<select id="loadObjList" parameterType="GradeObject" resultMap="objectionResultSet">
-		SELECT STU_NAME, TITLE, GRA_OBJ_DATE
+		SELECT B.STU_NAME, A.TITLE, A.GRA_OBJ_DATE, A.STATUS
 		FROM GRA_OBJECT A
 		JOIN STUDENT B ON A.STU_ID=B.STU_ID
 		JOIN GRADE C ON A.GRADE_NO=C.GRADE_NO

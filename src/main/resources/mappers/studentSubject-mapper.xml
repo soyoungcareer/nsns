@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="gradeCredit" column="GRADE_CREDIT" />
 	</resultMap>
 	
+	<resultMap id="stuGCResultMap" type="StuGradeAndCredit">
+		<result property="year" column="GRADE_YEAR" />
+		<result property="semester" column="GRADE_SEMESTER" />
+		<result property="gradeCredit" column="A" />
+		<result property="stuCredit" column="S" />
+	</resultMap>
 	
 	<select id="selectYear" parameterType="string" resultType="_int">
 		SELECT DISTINCT GRADE_YEAR
@@ -71,6 +77,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND E.GRADE_YEAR LIKE #{selectYear} AND E.GRADE_SEMESTER LIKE #{selectSemester}
 		AND B.SUB_TITLE LIKE '%'|| #{search} || '%'
 	</select>
+	
+	<select id="selectGradeList" parameterType="string" resultMap="stuGCResultMap">
+		SELECT GRADE_YEAR, GRADE_SEMESTER, 
+               ROUND(AVG(GRADE_CREDIT), 2) AS "A", SUM(C.SUB_CREDIT) AS "S"
+		FROM GRADE A
+		LEFT JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
+		LEFT JOIN SUBJECT C ON A.SUB_CODE=C.SUB_CODE
+        GROUP BY  A.STU_ID, GRADE_YEAR, GRADE_SEMESTER
+		HAVING A.STU_ID = #{stuId}
+		ORDER BY A.GRADE_YEAR, A.GRADE_SEMESTER
+	</select>
+	
 
 
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.studentStatus.model.dao.StudentStatusDao;
+import com.kh.spring.studentStatus.model.vo.StudentBack;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
@@ -145,6 +146,14 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 			}
 		}
 		
+	}
+
+	@Override
+	public StudentBack stuBackPage(int bno) {
+
+		StudentBack stuBack = studentStatusDao.stuBackPage(sqlSession, bno);
+		
+		return stuBack;
 	}
 
 	

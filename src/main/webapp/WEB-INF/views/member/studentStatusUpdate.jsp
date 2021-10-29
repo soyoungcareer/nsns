@@ -54,27 +54,27 @@
                       <th>이메일</th>
                       <th>연락처</th>
                       <th>담당교수</th>
-                      <th>학적</th>
                       <th>상태</th>
+                      <th>승인</th><!-- 학적변경승인 -->
                     </tr>
                   </thead>
                   <tbody align="center">
-                  	<c:if test="${ empty sList }">
+                  	<c:if test="${ empty staList }">
                   		<tr>
-                  			<td colspan=8>학생 계정이 존재하지 않습니다.</td>
+                  			<td colspan=8>학적 변경 신청이 없습니다.</td>
                   		</tr>
                   	</c:if>
-                    <c:forEach items="${ sList }" var="s">
+                    <c:forEach items="${ staList }" var="sta">
 	                    <tr>
-	                        <td id="stuId" name="stuId">${ s.stuId }</td>
-	                        <td>${ s.stuName }</td>
-	                        <td>${ s.deptCode }</td><!-- deptTitle -->
-	                        <td>${ s.email }</td>
-	                        <td>${ s.phone }</td>
-	                        <td>${ s.profId }</td><!-- profName -->
-	                        <td>${ s.stuStatus }</td>
+	                        <td id="stuId" name="stuId">${ sta.stuId }</td>
+	                        <td>${ sta.stuName }</td>
+	                        <td>${ sta.deptTitle }</td><!-- deptTitle -->
+	                        <td>${ sta.email }</td>
+	                        <td>${ sta.phone }</td>
+	                        <td>${ sta.profName }</td><!-- profName -->
+	                        <td>${ sta.stuStatus }</td>
 	                        <td>
-	                        	<button class="btn btn-primary" type="button" onclick="location.href='stuDelete.adm'">삭제</button>
+	                        	<button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button>
 	                        </td>
 	                    </tr>
                     </c:forEach>

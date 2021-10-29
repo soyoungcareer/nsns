@@ -16,7 +16,7 @@
 			<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
+				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
 			</ul>
 		</div>
 		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
@@ -138,19 +138,7 @@
 					                    </c:forEach>
 					                    
 					                    
-										<!-- <tr>
-											<td><a
-												href="lectRegisterEdit.reg">FA831</a></td>
-											<td>응용수학</td>
-											<td>기계공학</td>
-											<td>3</td>
-											<td>전공필수</td>
-											<td>월123</td>
-											<td>김교수</td>
-											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강신청</button></td>
-										</tr>
+										<!--
 										<tr>
 										테스트 연결 서버
 											우선 LectRegisterController로 연결 

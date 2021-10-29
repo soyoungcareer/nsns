@@ -1,13 +1,13 @@
 package com.kh.spring.studentEval.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -104,46 +104,64 @@ public class GradeController {
 
 	}
 	
-	
-	/*
-	@RequestMapping()
-	public ModelAndView selectGrade(int gno, ModelAndView mv) {
-		Grade g = gradeService.selectGrade(gno);
-		
-		mv.addObject("g", g).setViewName("professor/profGradeMain");
-		return mv;
-	}
-	
-	
 	// 성적 등록
-	@RequestMapping()
-	public String insertGrade(Grade g, HttpServletRequest request, Model model,
-								@RequestParam) {
+	@ResponseBody
+	@RequestMapping(value="updateGrade.pr", produces="application/json; charset=utf-8")
+	public String updateGrade(String attend, String assign, String mid, String fin, String stuId, 
+							  String subCode, String gradeYear, String gradeSemester) {
 		
+		int numAttend = Integer.parseInt(attend);
+		int numAssign = Integer.parseInt(assign);
+		int numMid = Integer.parseInt(mid);
+		int numFin = Integer.parseInt(fin);
+		int numStuId = Integer.parseInt(stuId);
+		
+		Map map = new HashMap();
+		map.put("attend", numAttend);
+		map.put("assign", numAssign);
+		map.put("mid", numMid);
+		map.put("fin", numFin);
+		map.put("stuId", numStuId);
+		map.put("subCode", subCode);
+		map.put("gradeYear", gradeYear);
+		map.put("gradeSemester", gradeSemester);
+
+		System.out.println("=================map Controller : " + map);
+		
+		int result = gradeService.updateGrade(map);
+		
+		return new GsonBuilder().create().toJson(result);
 	}
-	*/
+	
 	
 	// 교수 > 성적 관리 > 이의신청 확인
 	@RequestMapping("profGradeObj.pr")
-	public String profGradeObjection(Model model) {
+	public String profGradeObjection(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+									 Model model) {
 		// 임시 데이터
 		String profId = "EC1901";
 		
-		ArrayList<GradeObject> objList = gradeService.loadObjList(profId);
+		int listCount = gradeService.objListCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<GradeObject> objList = gradeService.loadObjList(profId, pi);
 		
 		System.out.println("===================objList Controller : " + objList);
 		
+		model.addAttribute("pi", pi);
 		model.addAttribute("objList", objList);
 		
 		return "professor/profGradeObjection";
 	}
 	
-	/*
+	
 	// 교수 > 성적 관리 > 이의신청 상세
 	@RequestMapping("profGradeObjDetail.pr")
 	public String profGradeObjDetail() {
+		
+		
 		return "professor/profGradeObjDetail";
 	}
-	*/
+	
 	
 }

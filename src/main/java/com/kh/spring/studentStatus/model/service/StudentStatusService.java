@@ -2,6 +2,7 @@ package com.kh.spring.studentStatus.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.spring.studentStatus.model.vo.StudentBack;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
@@ -25,5 +26,7 @@ public interface StudentStatusService {
 	void deleteOff(int appNo);
 
 	void deleteDo(int appNo);
+
+	StudentBack stuBackPage(int bno);
 	
 }

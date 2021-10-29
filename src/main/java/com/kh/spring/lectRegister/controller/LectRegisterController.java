@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
@@ -250,7 +249,7 @@ public class LectRegisterController {
 	}
 
 	@RequestMapping("lectRegAdmin.reg") // 관리자용 과목 설명 수정페이지 띄우기
-	public String lectRegisterEditPage(String subCode, Model model) {
+	public String lectRegisterEditPage(String subCode, Model model, @RequestParam(value="message", required= false) String message) {
 		LecRegPro reDetail = lectRegisterService.lectReDetail(subCode);
 		ArrayList<Department> departList = lectRegisterService.departList();
 		ArrayList<Professor> proList = lectRegisterService.proList();
@@ -258,7 +257,9 @@ public class LectRegisterController {
 		model.addAttribute("departList",departList);
 		model.addAttribute("proList",proList);
 		model.addAttribute("reDetail",reDetail);
-		
+		if(message!=null) {
+			model.addAttribute("message","과목 수정이 완료되었습니다.");
+		}
 		return "lectRegister/lectRegisterEdit";
 	}
 
@@ -319,7 +320,8 @@ public class LectRegisterController {
 			
 			lectRegisterService.lectUpdateAdmin(subject,day,start,end);
 
-			mv.addObject("subCode", subject.getSubCode()).setViewName("redirect:lectRegAdmin.reg");
+			mv.addObject("subCode", subject.getSubCode());
+			mv.addObject("message", "과목 수정이 완료되었습니다.").setViewName("redirect:lectRegAdmin.reg");
 			return mv;
 	}
 	@RequestMapping("deleteAd.reg") // 관리자용 과목 삭제 페이지
@@ -330,7 +332,6 @@ public class LectRegisterController {
 			deleteFile(changeName, request);
 			int result = lectRegisterService.deleteAttachment(subCode);
 		}
-		 
 			lectRegisterService.lectDeleteAdmin(subCode);
 		return "redirect:registerAdmin.reg";
 	}
@@ -343,12 +344,14 @@ public class LectRegisterController {
 		
 		String ext = originName.substring(originName.lastIndexOf("."));
 		String changeName = currentTime + ext;
-		try {
-			file.transferTo(new File(savePath+changeName));
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			throw new CommException("file upload추가");
-		}
+		
+			try {
+				file.transferTo(new File(savePath+changeName));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		return changeName;
 	}
 	private void deleteFile(String fileName, HttpServletRequest request) {  //공통으로 사용하기 위해 따로 뺌
