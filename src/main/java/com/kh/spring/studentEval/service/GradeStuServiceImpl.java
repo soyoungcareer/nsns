@@ -26,12 +26,7 @@ public class GradeStuServiceImpl implements GradeStuService {
 	
 	@Override
 	public ArrayList<LecRegPro> selectGradeList(int stuId) {
-		ArrayList<LecRegPro> arlist=gradeStuDao.selectGradeList(sqlSession, stuId);
-		
-		for(int i=0; i<arlist.size();i++) {
-			System.out.println("GradeStuServiceImpl"+arlist.get(i).getCountEval());
-		}
-		return arlist;
+		return gradeStuDao.selectGradeList(sqlSession, stuId);
 	}
 
 	@Override

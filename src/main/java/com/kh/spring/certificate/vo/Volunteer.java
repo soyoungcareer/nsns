@@ -19,6 +19,11 @@ public class Volunteer {
 	private String volTitle;
 	private Date startDate;
 	private Date endDate;
+	private String sDay;
+	private String eDay;
 	private int volTime;
+	private String originName;
+	private String changeName;
 	private String status;
+
 }
