@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 학생 -->
 	<resultMap type="Student" id="profStuResultSet">
 		<id property="stuId" column="STU_ID"/>
-		<result property="deptTitle" column="DEPT_TITLE"/>	
+		<result property="deptName" column="DEPT_TITLE"/>	
 		<result property="profId" column="PROF_ID"/>	
 		<result property="stuName" column="STU_NAME"/>	
 		<result property="email" column="EMAIL"/>	
@@ -105,6 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="subCredit" column="SUB_CREDIT"/>
 		<result property="subTime" column="SUB_TIME"/>
 		<result property="status" column="STATUS"/>
+		<result property="attOrigin" column="ATT_ORIGIN"/>
+		<result property="attChange" column="ATT_CHANGE"/>
 	</resultMap>
 	
 	<!-- 로그인 교수 -->
@@ -153,7 +155,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="profCreateLecture" parameterType="RequestedSubject">
 		INSERT INTO REQ_SUBJECT
 		VALUES (SEQ_REQSUB_NO.NEXTVAL, #{deptCode}, #{subDivs}, #{subType}, #{subTitle}, #{profId},
-				#{subCredit}, #{subTime}, DEFAULT)
+				#{subCredit}, #{subTime}, DEFAULT, #{attOrigin}, #{attChange})
 	</insert>
 	
 	<!-- 강의목록 조회 -->
@@ -197,7 +199,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 학생관리 -->
 	<!-- 학생목록조회 -->
 	<!-- 강의별 학생목록 불러오기 -->
-	<select id="profStudentDetail" resultMap="profStuResultSet">
+	<select id="selectFilteredStu" resultMap="profStuResultSet">
 		SELECT B.DEPT_TITLE, A.STU_ID, A.STU_NAME, A.STU_STATUS, A.EMAIL, A.PHONE
 		FROM STUDENT A
 		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE

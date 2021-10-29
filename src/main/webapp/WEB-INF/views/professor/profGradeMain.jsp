@@ -8,14 +8,17 @@
 	<title>낙성대학교(교수) - 성적 관리</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
+		/* 과목 선택시 성적 목록 출력 */
+		/* 같은행 4번씩 반복해서 출력됨.... */
 		$(document).on("click", "#subTable>tbody>tr", function(){
 			var tr = $(this);
 			var td = tr.children();
-			var subCode = td.eq(0).text();
-			var gradeYear = $("#con1 option:selected").val();
-			var gradeSemester = $("#con2 option:selected").val();
-			/* var gradeYear = $("#con1").val().prop("selected", true);
-			var gradeSemester = $("#con2").val().prop("selected", true); */
+			var subCode = td.eq(2).text();
+			var gradeYear = td.eq(0).text();
+			var gradeSemester = td.eq(1).text();
+			/* var gradeYear = $("#con1 option:selected").val();
+			var gradeSemester = $("#con2 option:selected").val(); */
+			var subTitle = td.eq(5).text();
 			
 			console.log(subCode);
 			console.log(gradeYear);
@@ -31,22 +34,86 @@
 				},
 				dataType:"json",
 				success:function(gList){
-					var result = "<tr role='row'>";
+					var title = '<h3 class="tile-title">'
+							  + gradeYear + '학년도 '
+							  + gradeSemester + '학기 '
+							  + subTitle + '</h3>';
+					$('#divTitle').html(title);
 					
+					
+					var result = "<tr role='row'>";
 					$.each(gList, function(index, item) {
 						result += "<td class='sorting_1'>" + item.deptTitle + "</td>"
 							   + "<td>" + item.studentId + "</td>"
 							   + "<td>" + item.studentName + "</td>"
 							   + "<td>" + item.studentStatus + "</td>"
-							   + "<td>" + item.attendance + "</td>"
-							   + "<td>" + item.assignment + "</td>"
-							   + "<td>" + item.midExam + "</td>"
-							   + "<td>" + item.finExam + "</td>"
+							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.attendance + "'></td>"
+							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.assignment + "'></td>"
+							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.midExam + "'></td>"
+							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.finExam + "'></td>"
 							   + "<td>" + item.gradeTotal + "</td>"
 							   + "<td>" + item.gradeResult + "</td>"
-							   + "<td>" + item.gradeCredit + "</td></tr>"
+							   + "<td>" + item.gradeCredit + "</td>"
+							   + "<td><input type='hidden' name='subCode' value='" + item.subCode + "'>"
+							   + "<input type='hidden' name='gradeYear' value='" + item.gradeYear + "'>"
+							   + "<input type='hidden' name='gradeSemester' value='" + item.gradeSemester + "'>"
+							   + "<button class='btn btn-primary btn-sm' type='submit'>저장</button></td></tr>"
 					});
 					$('#gradeTable tbody').html(result);
+				},
+				error:function() {
+					alert("로딩 실패");
+				}
+			});
+		});
+		
+		/* 성적 저장 */
+		/* 저장안됨.... 콘솔에 에러도 안뜸... */
+		$(document).on("click", "#subTable>tbody>tr>td>button", function(){
+			var td = $(this).parent();
+			var tr = td.parent();
+			var attend = tr.children().eq(4).text();
+			var assign = tr.children().eq(5).text();
+			var mid = tr.children().eq(6).text();
+			var fin = tr.children().eq(7).text();
+			var stuId = tr.children().eq(1).text();
+			var subCode = tr.children().$("input[name=subCode]").text();
+			var gradeYear = tr.children().$("input[name=gradeYear]").text();
+			var gradeSemester = tr.children().$("input[name=gradeSemester]").text();
+			
+			console.log(attend);
+			console.log(assign);
+			console.log(mid);
+			console.log(fin);
+			console.log(stuId);
+			console.log(subCode);
+			console.log(gradeYear);
+			console.log(gradeSemester);
+			
+			$.ajax({
+				url: "updateGrade.pr",
+				type:"POST",
+				async:false,
+				data:{
+					attend:attend,
+					assign:assign,
+					mid:mid,
+					fin:fin,
+					stuId:stuId,
+					subCode:subCode,
+					gradeYear:gradeYear, 
+					gradeSemester:gradeSemester
+				},
+				dataType:"json",
+				success:function(result){
+					
+					console.log("result : " + result);
+					
+					if (result > 0) {
+						alert("저장 성공");
+					} else {
+						alert("저장 실패");
+					}
 				},
 				error:function() {
 					alert("로딩 실패");
@@ -100,11 +167,6 @@
 									  	<option value="0">전체</option>
 									  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
 									    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
-<%-- 									  	<c:forEach items="${ subList }" var="subList">
-									  		<option value="${ subList.subYear }" <c:if test="${ subYear eq subList.subYear }">selected</c:if>>
-									  			${ subList.subYear }
-									  		</option>
-									  	</c:forEach> --%>
 									  </select>
 									</div>
 									<div class="form-group col-md-5">
@@ -140,6 +202,14 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">학년도</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">학기</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
 													style="width: 57.475px;">강의코드</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
@@ -170,17 +240,25 @@
 										<tbody>
 											<c:choose>
 												<c:when test="${empty subList}">
-													<tr><td colspan="7">개설된 강의가 없습니다.</td></tr>
+													<tr><td colspan="9">개설된 강의가 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty subList}">
 													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
-															<td class="sorting_1" id="tdSubCode"><c:out value="${subList.subCode}"/></td>
+															<td class="sorting_1"><c:out value="${subList.subYear}"/></td>
+															<td><c:out value="${subList.subSmst}"/></td>
+															<td><c:out value="${subList.subCode}"/></td>
 															<td><c:out value="${subList.deptTitle}"/></td>
-															<td><c:out value="${subList.subDivs}"/></td>
+															<td>
+																<c:if test="${subList.subDivs eq '1'}"><c:out value="전공"/></c:if>
+																<c:if test="${subList.subDivs eq '2'}"><c:out value="교양"/></c:if>
+															</td>
 															<td><c:out value="${subList.subTitle}"/></td>
 															<td><c:out value="${subList.subCredit}"/></td>
-															<td><c:out value="${subList.subType}"/></td>
+															<td>
+																<c:if test="${subList.subType eq '1'}"><c:out value="집체"/></c:if>
+																<c:if test="${subList.subType eq '2'}"><c:out value="온라인"/></c:if>
+															</td>
 															<td><c:out value="${subList.profName}"/></td>
 														</tr>
 													</c:forEach>
@@ -190,17 +268,24 @@
 									</table>
 								</div>
 							</div>
-							
-							<div class="row">
-								<div class="form-group col-md-5">
-									<button class="btn btn-primary btn-sm" type="button">저장</button>
-								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="tile">
+				<div class="tile-body">
+					<div class="table-responsive">
+						<div id="sampleTable_wrapper"
+							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+							<div class="row" id="divTitle">
 							</div>
-
-
+							
+							<form>
 							<div class="row">
 								<div class="col-sm-12">
-								
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
 										id="gradeTable" role="grid"
@@ -215,18 +300,10 @@
 													rowspan="1" colspan="1"
 													aria-label="Position: activate to sort column ascending"
 													style="width: 130.762px;">학번</th>
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">학년</th> -->
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">성명</th>
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">수강구분</th> -->
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
@@ -259,6 +336,10 @@
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">평점</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">저장</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -288,6 +369,7 @@
 									</table>
 								</div>
 							</div>
+							</form>
 							
 							<!-- 페이징 처리 -->
 							<div id="pagingArea">

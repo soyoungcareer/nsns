@@ -92,9 +92,9 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="profStudentDetail.pr"><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
-            <li><a class="treeview-item" href="profConsult.pr"><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
             <li><a class="treeview-item" href="profAttend.pr"><i class="icon fa fa-circle-o"></i> 출결 관리</a></li>
             <li><a class="treeview-item" href="profEvaluation.pr"><i class="icon fa fa-circle-o"></i> 강의평가 조회</a></li>
+            <li><a class="treeview-item" href="profConsult.pr"><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
             <li><a class="treeview-item" href="profStudentOff.pr"><i class="icon fa fa-circle-o"></i> 학적변동 - 휴학 승인</a></li>
             <li><a class="treeview-item" href="profStudentDo.pr"><i class="icon fa fa-circle-o"></i> 학적변동 - 자퇴 승인</a></li>
           </ul>

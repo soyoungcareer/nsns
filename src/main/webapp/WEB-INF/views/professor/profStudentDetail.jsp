@@ -2,14 +2,52 @@
     pageEncoding="UTF-8"
     import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	int count = 1;
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 학생목록 조회</title>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 학생목록 조회</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).on("click", "#subTable>tbody>tr", function(){
+			var tr = $(this);
+			var td = tr.children();
+			var subCode = td.eq(0).text();
+			var year = $("#con1 option:selected").val();
+			var semester = $("#con2 option:selected").val();
+			
+			console.log(subCode);
+			console.log(year);
+			console.log(semester);
+			
+			$.ajax({
+				url: "filteredStudent.pr",
+				type:"GET",
+				data:{
+					subCode:subCode, 
+					year:year, 
+					semester:semester
+				},
+				dataType:"json",
+				success:function(stuList){
+					var result = "<tr role='row'>";
+					
+					$.each(stuList, function(index, item) {
+						result += "<td class='sorting_1'>" + item.deptName + "</td>"
+							   + "<td>" + item.stuId + "</td>"
+							   + "<td>" + item.stuName + "</td>"
+							   + "<td>" + item.email + "</td>"
+							   + "<td>" + item.phone + "</td>"
+							   + "<td>" + item.stuStatus + "</td></tr>"
+					});
+					$('#stuListTable tbody').html(result);
+				},
+				error:function() {
+					alert("로딩 실패");
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -20,7 +58,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 학생 관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -40,23 +77,32 @@
 								<h3 class="tile-title">학생목록 조회</h3>
 							</div>
 							
-							<form action="" class="row">
+							<form action="filteredSub.pr" class="row">
 							<div class="row">
 								<div class="form-group col-md-5">
+									<!-- <div class="form-group col-md-5">
+									  <label class="control-label" for="evalType">평가방법</label>
+									  <select class="form-control" id="evalType">
+									    <option>상대평가</option>
+									    <option>절대평가</option>
+									  </select>
+									</div> -->
+									<div class="form-group col-md-5">
 									  <label class="control-label" for="con1">학년도 </label>
 									  <select class="form-control" id="con1" name="con1">
 									  	<option value="0">전체</option>
-									  	<option value="2021">2021</option>
-									    <option value="2020">2020</option>
+									  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+									    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
 									  </select>
-								</div>
-								<div class="form-group col-md-5">
-								  <label class="control-label" for="con2">학기 </label>
-								  <select class="form-control" id="con2" name="con2">
-								  	<option value="0">전체</option>
-								    <option value="1">1</option>
-								    <option value="2">2</option>
-								  </select>
+									</div>
+									<div class="form-group col-md-5">
+									  <label class="control-label" for="con2">학기 </label>
+									  <select class="form-control" id="con2" name="con2">
+									  	<option value="0">전체</option>
+									    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+									    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
+									  </select>
+									</div>
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6">
@@ -72,6 +118,75 @@
 							</form>
 							
 							<div class="row">
+								<div class="col-sm-12">
+									<table
+										class="table table-hover table-bordered dataTable no-footer"
+										id="subTable" role="grid"
+										aria-describedby="sampleTable_info">
+										<thead>
+											<tr role="row">
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">강의코드</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Start date: activate to sort column ascending"
+													style="width: 60.375px;">학과(전공)</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Position: activate to sort column ascending"
+													style="width: 130.762px;">이수구분</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">교과목명</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">학점</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">강의형태</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">교수명</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:choose>
+												<c:when test="${empty subList}">
+													<tr><td colspan="7">개설된 강의가 없습니다.</td></tr>
+												</c:when>
+												<c:when test="${!empty subList}">
+													<c:forEach var="subList" items="${subList}">
+														<tr role="row">
+															<td class="sorting_1" id="tdSubCode"><c:out value="${subList.subCode}"/></td>
+															<td><c:out value="${subList.deptTitle}"/></td>
+															<td>
+																<c:if test="${subList.subDivs eq '1'}"><c:out value="전공"/></c:if>
+																<c:if test="${subList.subDivs eq '2'}"><c:out value="교양"/></c:if>
+															</td>
+															<td><c:out value="${subList.subTitle}"/></td>
+															<td><c:out value="${subList.subCredit}"/></td>
+															<td>
+																<c:if test="${subList.subType eq '1'}"><c:out value="집체"/></c:if>
+																<c:if test="${subList.subType eq '2'}"><c:out value="온라인"/></c:if>
+															</td>
+															<td><c:out value="${subList.profName}"/></td>
+														</tr>
+													</c:forEach>
+												</c:when>
+											</c:choose>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+							
+							<%-- <div class="row">
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
@@ -147,21 +262,21 @@
 										</tbody>
 									</table>
 								</div>
-							</div>
+							</div> --%>
 
 							<div class="row">
 								<div class="col-sm-12">
 								
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
-										id="sampleTable" role="grid"
+										id="stuListTable" role="grid"
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">NO</th>
+													style="width: 57.475px;">NO</th> -->
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Start date: activate to sort column ascending"
@@ -173,15 +288,15 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">학년</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">성명</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">수강구분</th>
+													style="width: 52.9125px;">이메일</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">전화번호</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
@@ -189,7 +304,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:choose>
+											<%-- <c:choose>
 												<c:when test="${empty stuList}">
 													<tr><td colspan="8">수강중인 학생이 없습니다.</td></tr>
 												</c:when>
@@ -207,7 +322,7 @@
 														</tr>
 													</c:forEach>
 												</c:when>
-											</c:choose>
+											</c:choose> --%>
 										</tbody>
 									</table>
 								</div>
