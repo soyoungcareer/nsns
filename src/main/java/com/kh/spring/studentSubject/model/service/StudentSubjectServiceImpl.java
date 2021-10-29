@@ -10,6 +10,7 @@ import com.kh.spring.acalendar.model.vo.Acalendar;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.studentSubject.model.dao.StudentSubjectDao;
 import com.kh.spring.studentSubject.model.vo.SearchCondition;
+import com.kh.spring.studentSubject.model.vo.StuGradeAndCredit;
 import com.kh.spring.studentSubject.model.vo.StudentSubject;
 
 @Service
@@ -70,7 +71,12 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
 		return list;
 	}
 
-
-
+	@Override
+	public ArrayList<StuGradeAndCredit> selectGradeList(String stuId) {
+		
+		ArrayList<StuGradeAndCredit> list = studentSubjectDao.selectGradeList(sqlsession, stuId);
+		
+		return list;
+	}
 
 }

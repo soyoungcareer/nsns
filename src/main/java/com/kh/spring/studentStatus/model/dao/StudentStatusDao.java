@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.studentStatus.model.vo.StudentBack;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
@@ -80,6 +81,11 @@ public class StudentStatusDao {
 	public int deleteStsDo(SqlSessionTemplate sqlSession, int appNo) {
 		
 		return sqlSession.update("studentStatusMapper.deleteStsDo", appNo);
+	}
+
+	public StudentBack stuBackPage(SqlSessionTemplate sqlSession, int bno) {
+		
+		return sqlSession.selectOne("studentStatusMapper.stuBackPage", bno);
 	}
 
 
