@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.spring.acalendar.model.vo.Acalendar;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.studentSubject.model.vo.SearchCondition;
+import com.kh.spring.studentSubject.model.vo.StuGradeAndCredit;
 import com.kh.spring.studentSubject.model.vo.StudentSubject;
 
 public interface StudentSubjectService {
@@ -20,5 +21,7 @@ public interface StudentSubjectService {
 	int selectListCount(String stuId);
 
 	int selectListCount(SearchCondition sc);
+
+	ArrayList<StuGradeAndCredit> selectGradeList(String stuId);
 
 }

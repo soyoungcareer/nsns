@@ -1,15 +1,25 @@
 package com.kh.spring.studentStatus.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
+import com.kh.spring.common.exception.CommException;
 import com.kh.spring.studentStatus.model.service.StudentStatusService;
+import com.kh.spring.studentStatus.model.vo.StudentBack;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
@@ -161,5 +171,23 @@ public class StudentStatusController {
 			
 		return  "redirect:stuStatusPage.stu";
 	}
+	
+	// 복학 신청페이지
+	@RequestMapping("stuBackPage.stu")
+	public String stuBackPage(Model model) { 
+		
+	    int bno = 13;
+		
+	    StudentBack stuBack =  studentStatusService.stuBackPage(bno);
+		
+		model.addAttribute("stuBack", stuBack);
+		
+		return "studentStatus/studentBack";
+	}
+	
+	
+
+	
+	
 
 }
