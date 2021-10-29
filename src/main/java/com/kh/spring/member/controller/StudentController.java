@@ -24,6 +24,8 @@ public class StudentController {
 		
 		Student student = studentService.studentInfo(stuId);
 		
+		System.out.println(" student : " + student);
+		
 		model.addAttribute("student", student);
 		
 		return "student/studentInfo";

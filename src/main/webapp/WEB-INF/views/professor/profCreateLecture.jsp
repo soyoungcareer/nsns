@@ -122,11 +122,12 @@
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">강의계획서</label>
-		                  <input class="form-control" type="text" value="">
-		                  <!-- -----------------------------
+		                  <input class="form-control-file" id="exampleInputFile" type="file" aria-describedby="fileHelp">
+		                  <!-- <input class="form-control" type="text" value="">
+		                  -----------------------------
 		                  	파일 첨부 후 value에 첨부파일명 들어가도록
-		                  ------------------------------- -->
-		                  <button class="btn btn-primary" type="button">파일첨부</button>
+		                  -------------------------------
+		                  <button class="btn btn-primary" type="button">파일첨부</button> -->
 		                </div>
 		            </div>
 		            <div class="row">

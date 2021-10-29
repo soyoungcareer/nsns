@@ -33,6 +33,11 @@ public interface MemberService {
 
 	void deleteProfessor(int profId);
 
+	int studentStatusFormCount();
+
+	ArrayList<Student> studentStatusForm(PageInfo pi);
+
+	void studentStatusUpdate(int stuId);
 	
 
 	

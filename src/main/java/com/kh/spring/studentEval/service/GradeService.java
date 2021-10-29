@@ -1,6 +1,7 @@
 package com.kh.spring.studentEval.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.gradeObject.vo.GradeObject;
@@ -15,7 +16,7 @@ public interface GradeService {
 	
 	ArrayList<Grade> selectList(String subCode, int gradeYear, int gradeSemester);
 
-	ArrayList<GradeObject> loadObjList(String profId);
+	ArrayList<GradeObject> loadObjList(String profId, PageInfo pi);
 
 	int selectSubListCount(SearchSubject searchSubject);
 
@@ -24,6 +25,10 @@ public interface GradeService {
 	//ArrayList<Grade> selectFilteredGrade(String subCode, int subYear, int subSmst);
 
 	ArrayList<Grade> selectFilteredGrade(SearchGrade searchGrade);
+
+	int updateGrade(Map map);
+
+	int objListCount(String profId);
 
 
 }

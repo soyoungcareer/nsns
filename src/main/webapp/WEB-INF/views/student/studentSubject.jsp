@@ -36,7 +36,7 @@
       	</div>
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<div class="tile">
 					<div class="tile-body">
 						<div class="table-responsive">
@@ -49,11 +49,12 @@
 												aria-controls="sampleTable"
 												class="form-control form-control-sm">
 													<option value="%">전체</option>
-													<c:forEach items="${ yearList }" var="year">
-														<option value="${year}">${year}</option>
+													<c:forEach items="${ yearList }" var="yearList">
+														<option value="${yearList}">${yearList}</option>
 													</c:forEach>
-													</select> 
-													<select name="selectMonth" id="selectMonth" aria-controls="sampleTable" 	class="form-control form-control-sm">
+											</select> <select name="selectMonth" id="selectMonth"
+												aria-controls="sampleTable"
+												class="form-control form-control-sm">
 													<option value="%">전체</option>
 													<c:forEach items="${ semesterList }" var="semester">
 														<option value="${semester}">${semester}학기</option>
@@ -67,19 +68,22 @@
 											<label>교과목명: <input type="search"
 												class="form-control form-control-sm" name="search"
 												id="search" aria-controls="sampleTable"></label>
-											<button class="btn btn-primary btn-sm" type="button" id="searchBtn" style="margin-left: 10px; margin-right:10px">검색</button>
-											<button class="btn btn-info btn-sm" type="button" style="margin-right:15px;">전체 조회</button>
+											<button class="btn btn-primary btn-sm" type="button"
+												id="searchBtn" style="margin-left: 10px; margin-right: 10px">검색</button>
+											<button class="btn btn-info btn-sm" type="button"
+												style="margin-right: 15px;" onclick="selectAll();">전체
+												조회</button>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-12">
 										<table
-											class="table table-hover table-bordered dataTable no-footer"
+											class="table table-bordered dataTable no-footer"
 											id="sampleTable" role="grid"
 											aria-describedby="sampleTable_info">
 											<thead>
-												<tr>
+												<tr class="table-info">
 													<th>강의코드</th>
 													<th>교과목명</th>
 													<th>학과명</th>
@@ -87,7 +91,6 @@
 													<th>이수구분</th>
 													<th>학점</th>
 													<th>교수명</th>
-													<th>성적</th>
 												</tr>
 											</thead>
 
@@ -107,111 +110,81 @@
 															</c:if>
 															<td>${ list.subCredit }</td>
 															<td>${ list.profName }</td>
-															<c:choose>
-																<c:when test="${ list.gradeCredit eq 4.5 }">
-																	<td>A+</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 4.0 }">
-																	<td>A</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 3.5 }">
-																	<td>B+</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 3.0 }">
-																	<td>B</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 2.5 }">
-																	<td>C+</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 2.0 }">
-																	<td>C</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 1.5 }">
-																	<td>D+</td>
-																</c:when>
-
-																<c:when test="${ list.gradeCredit eq 1.0 }">
-																	<td>D</td>
-																</c:when>
-
-																<c:otherwise>
-																	<td>F, 자네가 인간인가..</td>
-																</c:otherwise>
-															</c:choose>
+														</tr>
 													</c:forEach>
 												</c:if>
 												<c:if test="${ empty list }">
 													<tr>
-														<td colspan="6" style="text-align: center;">조회된 리스트가 없습니다.</td>
+														<td colspan="7" style="text-align: center;">조회된 리스트가
+															없습니다.</td>
 													</tr>
 												</c:if>
 											</tbody>
 										</table>
 									</div>
-									
-							 		 <div id="pagingArea" style="width:fit-content;margin:auto; margin-top : 10px">
-              							  <ul class="pagination">
-						                	<c:choose>
-						                		<c:when test="${ pi.currentPage ne 1 }">
-						                			<li class="page-item"><a class="page-link" href="subject.li?currentPage=${ pi.currentPage-1 }">«</a></li>
-						                		</c:when>
-						                		<c:otherwise>
-						                			<li class="page-item disabled"><a class="page-link" href="">«</a></li>
-						                		</c:otherwise>
-						                	</c:choose>
-						                	
-						                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-						                    	<c:choose>
-							                		<c:when test="${ pi.currentPage ne p }">
-						                    			<li class="page-item"><a class="page-link" href="subject.li?currentPage=${ p }">${ p }</a></li>
-							                		</c:when>
-							                		<c:otherwise>
-							                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-							                		</c:otherwise>
-							                	</c:choose>
-						                    </c:forEach>
-						                    
-						                    
-						                    <c:choose>
-						                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-						                			<li class="page-item"><a class="page-link" href="subject.li?currentPage=${ pi.currentPage+1 }">»</a></li>
-						                		</c:when>
-						                		<c:otherwise>
-						                			<li class="page-item disabled"><a class="page-link" href="subject.li?currentPage=${ pi.currentPage+1 }">»</a></li>
-						                		</c:otherwise>
-						                	</c:choose>
-						                </ul>
-						            </div>
-						            </div>
-						            </div>
+
+									<div id="pagingArea"
+										style="width: fit-content; margin: auto; margin-top: 10px">
+										<ul class="pagination">
+											<c:choose>
+												<c:when test="${ pi.currentPage ne 1 }">
+													<li class="page-item"><a class="page-link"
+														href="subject.li?currentPage=${ pi.currentPage-1 }">«</a></li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item disabled"><a class="page-link"
+														href="">«</a></li>
+												</c:otherwise>
+											</c:choose>
+
+											<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }"
+												var="p">
+												<c:choose>
+													<c:when test="${ pi.currentPage ne p }">
+														<li class="page-item"><a class="page-link"
+															href="subject.li?currentPage=${ p }">${ p }</a></li>
+													</c:when>
+													<c:otherwise>
+														<li class="page-item disabled"><a class="page-link"
+															href="">${ p }</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+
+
+											<c:choose>
+												<c:when test="${ pi.currentPage ne pi.maxPage }">
+													<li class="page-item"><a class="page-link"
+														href="subject.li?currentPage=${ pi.currentPage+1 }">»</a></li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item disabled"><a class="page-link"
+														href="subject.li?currentPage=${ pi.currentPage+1 }">»</a></li>
+												</c:otherwise>
+											</c:choose>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 
-
-		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-4">
 				<div class="tile">
 					<div class="tile-body">
+						<h3 style="margin: 30px">학기별 성적과 수강학점</h3>
 						<div class="table-responsive">
 							<div id="sampleTable_wrapper"
 								class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 								<div class="row">
 									<div class="col-sm-12">
-										<table
-											class="table table-hover table-bordered dataTable no-footer"
-											id="sampleTable" role="grid"
+										<table class="table table-bordered dataTable no-footer"
+											id="gradeTable" role="grid"
 											aria-describedby="sampleTable_info">
 											<thead>
-												<tr>
+												<tr class="table-info">
 													<th>연도</th>
 													<th>학기</th>
 													<th>평균성적</th>
@@ -220,8 +193,15 @@
 											</thead>
 
 											<tbody>
-												
-											</tbody>	
+												<c:forEach items="${ gradeList }" var="gradeList">
+													<tr>
+														<td>${ gradeList.year }</td>
+														<td>${ gradeList.semester }</td>
+														<td>${ gradeList.gradeCredit }</td>
+														<td>${ gradeList.stuCredit }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
 										</table>
 									</div>
 								</div>
@@ -241,105 +221,115 @@
 		var sMonth =  $("select[name=selectMonth]").val();
 		var search =  $('#search').val();
 		var str1 = "";
-		var str2 = "";
 
-	  $.ajax({
-		  url: 'searchList.su', 
-		  type : 'GET',
-		  datatype : 'json',
-	      data : {
-	    	  sYear : sYear,
-	    	  sMonth : sMonth,
-	    	  search : search
-	     },    
-	      success : function(result) {  
-	    	  
-	    	  
-	    		$('#sampleTable tbody').empty();
-	    		$('#pagingArea').empty();
-	    	
-	    		
-	    		for(var i = 0; i < result.list.length; i++){
-	    			str1 += '<tr>'+'<td>'+
-	    				result.list[i].subCode + '</td><td>'+
-	    				result.list[i].subTitle + '</td><td>'+
-	    				result.list[i].deptTitle + '</td><td>'+
-	    				result.list[i].subTime + '</td>';
-	    			
-	    			
-	    			if(result.list[i].subDivs == 1 ) {
-	    				str1 += '<td>'+ "전공필수" + '</td>';
-	    			} else {
-	    				str1 += '<td>'+ "교양필수" + '</td>';
-	    			}
-					
-	    			str1 += '<td>'+ result.list[i].subCredit + '</td><td>'+
-					 	result.list[i].profName + '</td>';
-					 	
-					 if(result.list[i].gradeCredit == 4.5) {
-						 str1  += '<td>'+ "A+" + '</td>'; 
-					 } else if(result.list[i].gradeCredit == 4.0){
-						 str1 += '<td>'+ "A" + '</td>';
-					 } else if(result.list[i].gradeCredit == 3.5){
-						 str1 += '<td>'+ "B+" + '</td>';
-					 } else if(result.list[i].gradeCredit == 3.0) {
-						 str1 += '<td>'+ "B" + '</td>';
-					 } else if(result.list[i].gradeCredit == 2.5) {
-						 str1 += '<td>'+ "C+" + '</td>';
-					 } else if(result.list[i].gradeCredit == 2.0) {
-						 str1 += '<td>'+ "C" + '</td>';
-					 } else if(result.list[i].gradeCredit == 1.5) {
-						 str1 += '<td>'+ "D+" + '</td>';
-					 }  else if(result.list[i].gradeCredit == 1.0) {
-						 str1 += '<td>'+ "D" + '</td>';
-					 } else {
-						 str1 += '<td>'+ "F" + '</td>';
-					 }
-						 
-					 str1 += '</tr>';				
-      					
-					
-	    		}
-	    		
-	    		str2 += '<ul class="pagination">'
-	    		
-	    		if(result.pi.currentPage != 1){
-	    			str2 += '<li class="page-item"><a class="page-link" href="subject.li?currentPage="' + result.pi.currentPage-1  + '">«</a></li>'
-	    				 
-	    		} else {
-	    			str2 += '<li class="page-item disabled"><a class="page-link" href="">«</a></li>'
-	    		}
-	    		
-	    		for(var i = result.pi.startPage; i <= result.pi.endPage; i++){
-	    			
-	    			if(result.pi.currentPage != i) {
-	    				str2 += '<li class="page-item"><a class="page-link" href="subject.li?currentPage=' + i + '">' + i + '</a></li>'
-	    			} else {
-	    				str2 += '<li class="page-item disabled"><a class="page-link" href="">'+ i +'</a></li>'
-	    			}
-	    		}
-	    		
-	    		if(result.pi.currentPage != result.pi.maxPage){
-	    			str2 += '<li class="page-item"><a class="page-link" href="subject.li?currentPage="' + result.pi.currentPage+1 +'">»</a></li>'
-	    		} else {
-	    			str2 += '<li class="page-item disabled"><a class="page-link" href="subject.li?currentPage="'+ result.pi.currentPage+1 +'">»</a></li>'
-	    		}
-	    			
-	    			
-	    			
-	    			
-	    		  $('#sampleTable tbody').append(str1);
-	    		  $('#pagingArea').append(str2);
-	      },
-	      error:function(e){   
-	      	console.log("ajax 통신 실패")
-	      } 
+			var str2 = "";
 
-	     });
+		
+			$.ajax({
+				url : 'searchList.su',
+				type : 'GET',
+				datatype : 'json',
+				data : {
+					sYear : sYear,
+					sMonth : sMonth,
+					search : search
+				},
+				success : function(result) {
+					
+					$('#sampleTable tbody').empty();
+					$('#pagingArea').empty();
+
+					if (result.list.length != 0) {
+
+							for (var i = 0; i < result.list.length; i++) {
+								str1 += '<tr>'
+										+ '<td>'
+										+ result.list[i].subCode
+										+ '</td><td>'
+										+ result.list[i].subTitle
+										+ '</td><td>'
+										+ result.list[i].deptTitle
+										+ '</td><td>'
+										+ result.list[i].subTime
+										+ '</td>';
 	
-	 });
-  
- 	
-  
-  </script>
+								if (result.list[i].subDivs == 1) {
+									str1 += '<td>'
+											+ "전공필수"
+											+ '</td>';
+								} else {
+									str1 += '<td>'
+											+ "교양필수"
+											+ '</td>';
+								}
+	
+								str1 += '<td>'
+										+ result.list[i].subCredit
+										+ '</td><td>'
+										+ result.list[i].profName
+										+ '</td></tr>';
+	
+							}
+	
+							str2 += '<ul class="pagination">'
+	
+							if (result.pi.currentPage != 1) {
+								str2 += '<li class="page-item"><a class="page-link" href="subject.li?currentPage="'
+										+ result.pi.currentPage
+										- 1
+										+ '">«</a></li>'
+	
+							} else {
+								str2 += '<li class="page-item disabled"><a class="page-link" href="">«</a></li>'
+							}
+	
+							for (var i = result.pi.startPage; i <= result.pi.endPage; i++) {
+	
+								if (result.pi.currentPage != i) {
+									str2 += '<li class="page-item"><a class="page-link" href="subject.li?currentPage='
+											+ i
+											+ '">'
+											+ i
+											+ '</a></li>'
+								} else {
+									str2 += '<li class="page-item disabled"><a class="page-link" href="">'
+											+ i
+											+ '</a></li>'
+								}
+							}
+	
+							if (result.pi.currentPage != result.pi.maxPage) {
+								str2 += '<li class="page-item"><a class="page-link" href="subject.li?currentPage="'
+										+ result.pi.currentPage
+										+ 1
+										+ '">»</a></li>'
+							} else {
+								str2 += '<li class="page-item disabled"><a class="page-link" href="subject.li?currentPage="'
+										+ result.pi.currentPage
+										+ 1
+										+ '">»</a></li>'
+							}
+
+					} else {
+						
+						str1 += '<tr><td colspan="7" style="text-align:center;"> 조회된 검색 결과가 없습니다. </tr>'
+						console.log("Test");
+					}
+
+					$('#sampleTable tbody').append(str1);
+					$('#pagingArea').append(str2);
+				},
+				error : function(e) {
+					console.log("ajax 통신 실패")
+				}
+
+			});
+
+});
+									
+
+			function selectAll() {
+				location.href = "subject.li";
+			}
+		</script>
 </html>

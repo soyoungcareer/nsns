@@ -16,6 +16,7 @@ import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.studentSubject.model.service.StudentSubjectService;
 import com.kh.spring.studentSubject.model.vo.SearchCondition;
+import com.kh.spring.studentSubject.model.vo.StuGradeAndCredit;
 import com.kh.spring.studentSubject.model.vo.StudentSubject;
 
 @Controller
@@ -36,9 +37,12 @@ public class StudentSubjectController {
 		
 		int listCount = studentSubjectService.selectListCount(stuId);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 7);
 		
 		ArrayList<StudentSubject> list = studentSubjectService.selectStuSubjectList(stuId, pi);
+		
+		ArrayList<StuGradeAndCredit> gradeList = studentSubjectService.selectGradeList(stuId);
+		
 		
 		model.addAttribute("yearList", yearList);
 		
@@ -47,7 +51,8 @@ public class StudentSubjectController {
 		model.addAttribute("pi", pi);
 		
 		model.addAttribute("list", list);
-	
+		
+		model.addAttribute("gradeList", gradeList);
 			
 		return "student/studentSubject";
 	}

@@ -1,16 +1,5 @@
 package com.kh.spring.major.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-@ToString
 public class Subject {
 	
 	private String subCode; //과목코드
@@ -29,16 +18,14 @@ public class Subject {
 	private String changeName; //파일수정명
 	private String deptTitle; // 학과명
 	private String profName; // 교수명
-
-
 	
 	public Subject() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Subject(String subCode, String subTitle, int deptCode, int subDivs, String profId, int subCredit,
-			int subClass, String subTime, int subType, int subYear, int subSmst, String status, String originName, String changeName) {
-
+			int subClass, String subTime, int subType, int subYear, int subSmst, String status, String originName, String changeName,
+			String deptTitle, String profName) {
 		super();
 		this.subCode = subCode;
 		this.subTitle = subTitle;
@@ -54,24 +41,22 @@ public class Subject {
 		this.status = status;
 		this.originName = originName;
 		this.changeName = changeName;
+		this.deptTitle = deptTitle;
+		this.profName = profName;
 	}
 	
-	
-	
-	public String getProfName() {
-		return profName;
-
-
-	}
-  
-  public String getDeptTitle() {
+	public String getDeptTitle() {
 		return deptTitle;
 	}
 
 	public void setDeptTitle(String deptTitle) {
 		this.deptTitle = deptTitle;
 	}
-  
+	
+	public String getProfName() {
+		return profName;
+	}
+
 	public void setProfName(String profName) {
 		this.profName = profName;
 	}
@@ -171,6 +156,7 @@ public class Subject {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getOriginName() {
 		return originName;
 	}
@@ -178,6 +164,7 @@ public class Subject {
 	public void setOriginName(String originName) {
 		this.originName = originName;
 	}
+	
 	public String getChangeName() {
 		return changeName;
 	}
@@ -185,8 +172,7 @@ public class Subject {
 	public void setChangeName(String changeName) {
 		this.changeName = changeName;
 	}
-
-
+	
 	@Override
 	public String toString() {
 		return "Subject [subCode=" + subCode + ", subTitle=" + subTitle + ", deptCode=" + deptCode + ", subDivs="
@@ -195,6 +181,6 @@ public class Subject {
 				+ status +", originName="+ originName +", changeName="+ changeName + "]";
 	}
 	
-
+	
 	
 }
