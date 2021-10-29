@@ -50,6 +50,9 @@
 	</nav>
 	<!-- Page content-->
 	<div class="container">
+		<button type="button" class="btn btn-default btn-lg" onclick="location.href='lecMove.me?id=${id}'">
+  <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 뒤로
+</button>
 		<div class="text-center mt-5">
 			<h1>Network security practice.</h1>
 			<p class="lead"></p>
@@ -62,7 +65,7 @@
 
 
 			<button class="btn btn-outline-info" type="button"
-				onclick="location.href='lecpl.me?no=${no}'">추가
+				onclick="location.href='lecpl.me?no=${no}&id=${id }'">추가
 			</button>
 
 	
@@ -76,7 +79,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr onclick="location.href='lecMovess.me?no=${l.listNo}'">
+					<tr onclick="location.href='lecMovess.me?no=${l.listNo}&id=${id}'">
 						<td width="20%">${l.subTitle}</td>
 						<td width="40%">${l.listContent}<${l.listWeek}강></td>
 						<td width="40%"><progress value="${l.time }"

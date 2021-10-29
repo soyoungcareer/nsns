@@ -62,6 +62,9 @@
 	</nav>
 	<!-- Page content-->
 	<div class="container">
+		<button type="button" class="btn btn-default btn-lg" onclick="location.href='lecMoves.me?no=${l.regNo}&id=${id}'">
+  <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 뒤로
+</button>
 		<div class="text-center mt-5">
 			<video width="1280" height="720" controls  src="resources/upload_files/${l.changeName}"
 					type="video/mp4" id="video">
@@ -80,6 +83,9 @@
 
 
 	<div class="container">
+	<button class="btn btn-outline-info" type="button"
+				onclick="location.href='lecpl.me?no=${no}'">뒤로
+			</button>
 		<div class="text-center mt-5">
 			<h4>댓글</h4>
 			<table id="replyArea" class="table" align="center">
@@ -215,19 +221,7 @@
 
 
 
-	<!-- Essential javascripts for application to work-->
-	<script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
-	<script src="resources/bootstrap/docs/js/popper.min.js"></script>
-	<script src="resources/bootstrap/docs/js/bootstrap.min.js"></script>
-	<script src="resources/bootstrap/docs/js/main.js"></script>
-	<!-- The javascript plugin to display page loading on top-->
-	<script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="resources/bootstrap/docs/js/scripts.js"></script>
-	<script src="//timgs.acs.wecandeo.com/player/utils/iframeAPI.js"></script>
+	
 
 </body>
 </html>

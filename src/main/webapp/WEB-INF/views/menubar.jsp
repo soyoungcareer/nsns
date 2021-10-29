@@ -1,65 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <!-- Twitter meta-->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:site" content="@pratikborsadiya">
-    <meta property="twitter:creator" content="@pratikborsadiya">
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Vali Admin - Free Bootstrap 4 Admin Template</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="resources/bootstrap/docs/css/main.css">
-    <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
-  <body class="app sidebar-mini">
-    <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">Vali</a>
-      <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-      <!-- Navbar Right Menu-->
-      <ul class="app-nav">
-      	<!-- 로그인 -->
-      	<li class="loginTest">
-      		<a href="login.mem" style="color:white;">로그인</a>
-      	</li>
-      	<!-- 관리자 -->
-      	<li class="adminTest">
-      		<a href="prfEnrollForm.adm" style="color:white;">관리자</a>
-      	</li>
-      	
-      	<!-- -----------------------------------
+<head>
+<meta name="description"
+	content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+<!-- Twitter meta-->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:site" content="@pratikborsadiya">
+<meta property="twitter:creator" content="@pratikborsadiya">
+<!-- Open Graph Meta-->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vali Admin">
+<meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+<meta property="og:url"
+	content="http://pratikborsadiya.in/blog/vali-admin">
+<meta property="og:image"
+	content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+<meta property="og:description"
+	content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+<title>Vali Admin - Free Bootstrap 4 Admin Template</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Main CSS-->
+<link rel="stylesheet" type="text/css"
+	href="resources/bootstrap/docs/css/main.css">
+<!-- Font-icon css-->
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="app sidebar-mini">
+	<!-- Navbar-->
+	<header class="app-header">
+		<a class="app-header__logo" href="">Vali</a>
+		<!-- Sidebar toggle button-->
+		<a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+			aria-label="Hide Sidebar"></a>
+		<!-- Navbar Right Menu-->
+		<ul class="app-nav">
+			<!-- 로그인 -->
+			<li class="loginTest"><a href="login.mem" style="color: white;">로그인</a>
+			</li>
+			<!-- 관리자 -->
+			<li class="adminTest"><a href="prfEnrollForm.adm"
+				style="color: white;">관리자</a></li>
+
+			<!-- -----------------------------------
       		소영 교수페이지 확인용 임시 생성 메뉴 		시작 
       	------------------------------------- -->
-      	<li>
-      		<a href="profMenu.pr" style="color: white;">교수메뉴  </a>
-      	</li>
-      	<!-- -----------------------------------
+			<li><a href="profMenu.pr" style="color: white;">교수메뉴 </a></li>
+			<!-- -----------------------------------
       		소영 교수페이지 확인용 임시 생성 메뉴 		끝
-      	------------------------------------- -->
-<!-- 
-      	<li class="calendar">
-         <a class="calendar-link" href="calendar.ca" style="color: white;">학사일정</a>
+      	------------------------------------- --
+  
 
-      	<li class="calendar">
-         <a class="calendar-link" href="javascript:void(window.open('lecMove.me?id=20193019'))" style="color: white;">온라인강의</a>
-
-
-      	<li class="calendar">
-         <a class="calendar-link" href="facMove.me" style="color: white;">시설물대여</a>
-
-
+		
       수강신청 페이지 확인용
        <li class="register">
          <a class="register-link" href="register.reg" style="color: white;">수강신청</a> -->
@@ -68,7 +64,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item"  href="javascript:void(window.open('lecMove.me?id=20193019'))"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
+            <li><a class="dropdown-item" data-toggle="modal" data-target="#loginModal"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
           </ul>
         </li>
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
@@ -217,5 +213,89 @@
       	ga('send', 'pageview');
       }
     </script>
+<!-- 로그인 클릭 시 뜨는 모달  -->
+	<div class="modal fade" id="loginModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">강의 인증</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+		
+					
+						<a id="aa" name="aa"> 보낼사람</a> <input type="text" name="from" id="from" />
+						<input type="button" onclick="sendSMS()" value="전송하기" id="check" name="check"/> 
+						<input type="hidden" id="ch" name="ch">
+						  
+						 <input type="hidden" name="fromm" id="fromm" /></li>
+						<input type="hidden" id="checkk" name="checkk" onclick="sendSMSCheck()"/> 
+						<form method="post" id="smsForm" action="lecMove.me">
+						<input type="hidden" id="id" name="id" value="20193019"/>
+				 
+						  </form>
+						
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sendSMS() {
+			var from = $("#from").val();
+			console.log(from);
+			$.ajax({
+				url:"sendSms.me",
+				type:"post",
+				data:{from : from},
+				success:function(result){
+					$("#ch").val(result);
+					console.log(result);
+					$("#check").attr("type","hidden");
+					$("#from").attr("type","hidden");
+					$("aa").html("확인");
+					
+					$("#checkk").attr("type","button");
+					$("#fromm").attr("type","text");
+					
+					
+					
+					
+				},error:function(){
+					console.log("통신 실패");
+				}
+			});
+			
+	
+		}
+		
+		function sendSMSCheck() {
+			var from = $("#fromm").val();
+			var test = from;
+			console.log(from);
+			console.log("지금");
+			var check = $("#ch").val();
+	
+			var dd = check.indexOf(from);
+
+
+			console.log(dd);
+			
+			console.log(check);
+			if(dd == 1){
+			
+					$("#smsForm").submit();
+				
+			}else{
+				alert("일치하지 않습니다");
+			}
+			
+	
+		}
+	</script>
+
+
+
+
   </body>
+
 </html>

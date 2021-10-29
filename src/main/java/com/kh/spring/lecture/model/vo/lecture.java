@@ -16,6 +16,7 @@ import lombok.ToString;
 public class lecture {
 
 	private int lecNo;
+	private int stuId;
 	private String lecTitle;
 	private int lecYear;
 	private int lecTer;

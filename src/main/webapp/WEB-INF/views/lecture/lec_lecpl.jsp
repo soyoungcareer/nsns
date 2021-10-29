@@ -78,12 +78,14 @@
                 </div>
                
                <input type="hidden" id="no" name="no" value="${no }">
+                 <input type="hidden" id="id" name="id" value="${id }">
                
                 <div class="form-group row">
                   <label class="control-label col-md-3">INSERT LECTURE</label>
                   <div class="col-md-8">
                     <input class="form-control" type="file"  name="uploadFile" id="uploadFile">
                   </div>
+                
                 </div>
                   <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Insert</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
               
@@ -97,17 +99,7 @@
             </div>
           </div>
         </div>
-	<!-- Essential javascripts for application to work-->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-	<!-- The javascript plugin to display page loading on top-->
-	<script src="js/plugins/pace.min.js"></script>
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="resources/bootstrap/docs/js/scripts.js"></script>
+	
+
 </body>
 </html>
