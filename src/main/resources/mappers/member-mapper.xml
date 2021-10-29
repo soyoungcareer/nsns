@@ -12,7 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="studentResultSet" type="Student">
 		<id property="stuId" column="STU_ID"/>
 		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptName" column="DEPT_TITLE"/><!--  -->
 		<result property="profId" column="PROF_ID"/>
+		<result property="proName" column="PROF_NAME"/><!--  -->
 		<result property="stuPwd" column="STU_PWD"/>
 		<result property="stuName" column="STU_NAME"/>
 		<result property="ssn" column="SSN"/>
@@ -30,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profPwd" column="PROF_PWD"/>
 		<result property="profName" column="PROF_NAME"/>
 		<result property="profDept" column="DEPT_CODE"/>
+		<result property="profDeptTitle" column="DEPT_TITLE"/><!--  -->
 		<result property="profRrn" column="PROF_RRN"/>
 		<result property="profEmail" column="PROF_EMAIL"/>
 		<result property="profPhone" column="PROF_PHONE"/>
@@ -86,8 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="studentList" resultMap="studentResultSet">
-		SELECT *
-		FROM STUDENT
+		SELECT A.STU_ID, B.DEPT_TITLE, C.PROF_NAME, A.STU_NAME, A.EMAIL, A.PHONE, A.STU_STATUS
+		FROM STUDENT A
+		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
+		LEFT JOIN PROFESSOR C USING (PROF_ID)
 		ORDER BY STU_ID DESC
 	</select>
 	
@@ -97,8 +102,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="professorList" resultMap="professorResultSet">
-		SELECT *
-		FROM PROFESSOR
+		SELECT A.PROF_ID, A.PROF_NAME, B.DEPT_TITLE, A.PROF_EMAIL, A.PROF_PHONE, A.PROF_STATUS, A.PROF_EMPDATE
+		FROM PROFESSOR A
+		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
 		ORDER BY PROF_ID DESC
 	</select>
 	
@@ -112,6 +118,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE PROFESSOR
 		SET PROF_STATUS = 'N'
 		WHERE PROF_ID = #{profId}
+	</update>
+	
+	<update id="studentStatusUpdate" parameterType="_int">
+		UPDATE STUDENT
+		SET STU_STATUS = '휴학'
+		WHERE STU_ID = #{stuId}
 	</update>
 	
 
