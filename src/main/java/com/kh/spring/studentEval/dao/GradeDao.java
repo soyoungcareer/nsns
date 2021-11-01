@@ -62,5 +62,13 @@ public class GradeDao {
 		return sqlSession.selectOne("gradeMapper.objListCount", profId);
 	}
 
+	public GradeObject detailObjection(SqlSessionTemplate sqlSession, String objNo) {
+		return sqlSession.selectOne("gradeMapper.detailObjection", objNo);
+	}
+
+	public int profObjCheck(SqlSessionTemplate sqlSession, String objNo) {
+		return sqlSession.update("gradeMapper.profObjCheck", objNo);
+	}
+
 }
  

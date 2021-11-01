@@ -2,6 +2,8 @@ package com.kh.spring.gradeObject.vo;
 
 import java.util.Date;
 
+import com.kh.spring.member.vo.Student;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +26,5 @@ public class GradeObject {
 	private String status;
 	private String reason;
 	private String stuName;
+	private Student student;
 }

@@ -2,6 +2,8 @@ package com.kh.spring.member.vo;
 
 import java.sql.Date;
 
+import com.kh.spring.major.vo.Department;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,4 +28,5 @@ public class Professor {
 	private String profAddress;	//	"PROF_ADDRESS"	VARCHAR2(200)		NOT NULL,
 	private String profStatus;	//	"PROF_STATUS"	VARCHAR2(1)	DEFAULT 'Y' CHECK(PROF_STATUS IN('Y','N'))	NOT NULL,
 	private Date profEmpdate;	//	"PROF_EMPDATE"	DATE		NOT NULL
+	private Department department;
 }

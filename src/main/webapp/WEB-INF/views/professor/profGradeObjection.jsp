@@ -2,11 +2,87 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	int count = 1;
+ %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 성적관리</title>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 성적관리</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script>
+		/* 이의신청 상세내역 조회 */
+		$(document).on("click", "#objTable>tbody>tr", function(){
+			var tr = $(this);
+			var td = tr.children();
+			var objNo = td.eq(0).text();
+			
+			console.log(objNo);
+			
+			$.ajax({
+				url: "profGradeObjDetail.pr",
+				type: "GET",
+				data: {
+					objNo:objNo
+				},
+				dataType:"json",
+				success:function(detailObj){
+					$("#myModal").modal();
+					
+					
+					var result ='<div class="form-group row"><label class="col-form-label" for="objDate">이의신청일자</label>'
+	                			+ '<input class="form-control" id="objDate" type="text" value="' + moment(detailObj.objDate).format("YYYY년MM월DD일 HH:mm") + '" readonly></div>'
+	              				+ '<div class="form-group row"><label class="col-form-label" for="stuId">학번</label>'
+	                			+ '<input class="form-control" id="stuId" type="text" value="' + detailObj.stuId + '" readonly></div>'
+	              				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
+	                			+ '<input class="form-control" id="stuName" type="text" value="' + detailObj.student.stuName + '" readonly></div>'
+	              				+ '<div class="form-group row"><label class="col-form-label" for="title">제목</label>'
+	                			+ '<input class="form-control" id="title" type="text" value="' + detailObj.title + '" readonly></div>'
+	              				+ '<div class="form-group row"><label class="col-form-label" for="content">내용</label>'
+	                			+ '<input class="form-control" id="content" type="text" value="' + detailObj.content + '" readonly></div>'
+	              				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
+	              				+ '<div class="w-100"></div>'
+	                  			+ '<div class="form-check"><label class="form-check-label">'
+	                      		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
+	                  			+ '<div class="form-check"><label class="form-check-label">'
+	                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
+	              				+ '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>'
+	                			+ '<input class="form-control" id="reason" type="text" placeholder="반려사유 입력"></div>'
+					$("#modalBody").html(result);
+					
+				},
+				error:function() {
+					alert("ajax 로딩 실패");
+				}
+			});
+		});
+		
+	</script>
+	<script>
+		/* 이의신청 승인/반려 체크 후 저장 */
+		$(document).on("click", "#saveObjCheck", function(){
+			var status = $('input[name="answer"]:checked').val();
+			var reason = $("#reason").val();
+			
+			$.ajax({
+				url: "profObjCheck.pr",
+				type: "POST",
+				data:{
+					status:status,
+					reason:reason
+				},
+				dataType:"json",
+				success:function(checkObj) {
+					alert("저장 성공");
+				},
+				error:function() {
+					alert("ajax 로딩 실패");
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -31,11 +107,11 @@
 			<div class="tile-body">
 				<div class="tile">
             <div class="mailbox-controls">
-              <div class="animated-checkbox">
+              <!-- <div class="animated-checkbox">
                 <label>
                   <input type="checkbox"><span class="label-text"></span>
                 </label>
-              </div>
+              </div> -->
               <div class="btn-group">
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-trash-o"></i></button>
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-reply"></i></button>
@@ -44,7 +120,15 @@
               </div>
             </div>
             <div class="table-responsive mailbox-messages">
-              <table class="table table-hover">
+              <table class="table table-hover" id="objTable">
+              	<thead>
+              		<tr>
+	              		<th>이의신청번호</th>
+	              		<th>학생이름</th>
+	              		<th>제목</th>
+	              		<th>신청일자</th>
+              		</tr>
+              	</thead>
                 <tbody>
                 	<c:choose>
 						<c:when test="${empty objList}">
@@ -53,15 +137,16 @@
 						<c:when test="${!empty objList}">
 							<c:forEach var="objList" items="${objList}">
 								<tr>
-				                    <td>
+				                    <!-- <td>
 				                      <div class="animated-checkbox">
 				                        <label>
 				                          <input type="checkbox"><span class="label-text"> </span>
 				                        </label>
 				                      </div>
-				                    </td>
-				                    <td>${ objList.stuName }</td>
-				                    <td class="mail-subject"><b><a href="profGradeObjDetail.pr">${ objList.title }</a></b></td>
+				                    </td> -->
+				                    <td>${ objList.objNo }</td>
+				                    <td>${ objList.student.stuName }</td>
+				                    <td class="mail-subject"><b>${ objList.title }</b></td>
 				                    <td><fmt:formatDate pattern="yyyy년MM월dd일 HH:mm" value="${ objList.objDate }"/></td>
 			                	</tr>
 							</c:forEach>
@@ -70,6 +155,36 @@
                 </tbody>
               </table>
             </div>
+            
+            
+          <!-- The Modal -->
+		  <div class="modal fade" id="myModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      <form action="profObjCheck.pr">
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">이의신청 상세조회</h4>
+		          <button type="button" class="close" data-dismiss="modal">×</button>
+		        </div>
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body" id="modalBody">
+		        	
+		        </div>
+		        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button class="btn btn-primary" type="submit" id="saveObjCheck">저장</button>
+		          <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
+		        </div>
+		       </form>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  
+			            
             
             <!-- <div class="text-right"><span class="text-muted mr-2">Showing 1-15 out of 60</span>
               <div class="btn-group">

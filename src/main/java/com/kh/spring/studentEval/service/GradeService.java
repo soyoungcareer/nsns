@@ -30,5 +30,9 @@ public interface GradeService {
 
 	int objListCount(String profId);
 
+	GradeObject detailObjection(String objNo);
+
+	int profObjCheck(String objNo);
+
 
 }

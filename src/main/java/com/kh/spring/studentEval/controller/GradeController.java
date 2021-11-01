@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.gradeObject.vo.GradeObject;
 import com.kh.spring.major.vo.Subject;
+import com.kh.spring.member.vo.Professor;
 import com.kh.spring.studentEval.service.GradeService;
 import com.kh.spring.studentEval.vo.Grade;
 import com.kh.spring.studentEval.vo.SearchGrade;
@@ -29,7 +32,6 @@ public class GradeController {
 	
 	// 교수 > 성적 관리 > 성적 등록/조회/수정
 	// 전체 데이터 조회
-	
 	@RequestMapping("profGradeMain.pr")
 	public String selectList(Model model) {
 		// 임시 데이터
@@ -56,9 +58,11 @@ public class GradeController {
 							   @RequestParam(name="con1", required=false, defaultValue="0") int con1,
 							   @RequestParam(name="con2", required=false, defaultValue="0") int con2,
 							   @RequestParam(name="keyword", required=false, defaultValue="%") String keyword,
-							   Model model) {
+							   Model model, HttpSession session) {
 		// 임시 데이터
-		String profId = "EC1901";
+		//String profId = "EC1901";
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
 		
 		// 조건별 과목 검색
 		SearchSubject searchSubject = new SearchSubject();
@@ -80,12 +84,15 @@ public class GradeController {
 		return "professor/profGradeMain";
 	}
 	
-	
+	// 성적 조회
 	@ResponseBody
 	@RequestMapping(value="filteredGrade.pr", produces="application/json; charset=utf-8")
-	public String filteredGrade(String subCode, String gradeYear, String gradeSemester) {
+	public String filteredGrade(String subCode, String gradeYear, String gradeSemester, HttpSession session) {
 		// 임시 데이터
-		String profId = "EC1901";
+		//String profId = "EC1901";
+		
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
 		
 		SearchGrade searchGrade = new SearchGrade();
 		searchGrade.setSubCode(subCode);
@@ -137,9 +144,12 @@ public class GradeController {
 	// 교수 > 성적 관리 > 이의신청 확인
 	@RequestMapping("profGradeObj.pr")
 	public String profGradeObjection(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
-									 Model model) {
+									 Model model, HttpSession session) {
 		// 임시 데이터
-		String profId = "EC1901";
+		//String profId = "EC1901";
+		
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
 		
 		int listCount = gradeService.objListCount(profId);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -156,11 +166,23 @@ public class GradeController {
 	
 	
 	// 교수 > 성적 관리 > 이의신청 상세
-	@RequestMapping("profGradeObjDetail.pr")
-	public String profGradeObjDetail() {
+	@ResponseBody
+	@RequestMapping(value="profGradeObjDetail.pr", produces="applicatoin/json; charset=utf-8;")
+	public String profGradeObjDetail(String objNo) {
 		
+		GradeObject detailObj = gradeService.detailObjection(objNo);
 		
-		return "professor/profGradeObjDetail";
+		return new GsonBuilder().create().toJson(detailObj);
+	}
+	
+	// 이의신청 승인
+	@ResponseBody
+	@RequestMapping(value="profObjCheck.pr", produces="applicatoin/json; charset=utf-8;")
+	public String profObjCheck(String objNo) {
+	
+		int checkObj = gradeService.profObjCheck(objNo);
+		
+		return new GsonBuilder().create().toJson(checkObj);
 	}
 	
 	

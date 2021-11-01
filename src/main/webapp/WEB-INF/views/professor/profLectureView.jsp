@@ -8,8 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 강의목록 조회</title>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 강의목록 조회</title>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -85,10 +85,10 @@
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">강의형태</th>
-<!-- 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의계획서</th> -->
+													style="width: 52.9125px;">강의계획서</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -120,6 +120,15 @@
 																<c:if test="${subList.subType eq '1'}"><c:out value="집체"/></c:if>
 																<c:if test="${subList.subType eq '2'}"><c:out value="온라인"/></c:if>
 															</td>
+															<td>
+											                  	<c:if test="${ empty subList.originName }">
+																	첨부파일 없음
+																</c:if>
+																<c:if test="${ !empty subList.originName }">
+																	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${ subList.changeName }" 
+																		download="${ subList.originName }"><button class="btn badge badge-pill badge-primary" type="button">${ subList.originName }</button></a>
+																</c:if>
+											                </td>
 														</tr>
 													</c:forEach>
 												</c:when>

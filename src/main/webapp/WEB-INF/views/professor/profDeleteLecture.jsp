@@ -16,7 +16,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 강의관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -31,7 +30,7 @@
 	          <div class="tile">
 	            <h3 class="tile-title">강의 삭제</h3>
 	            <div class="tile-body">
-	              <form>
+	              <form action="profDeleteLec.pr">
 	              	<div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학과명</label>
@@ -51,7 +50,8 @@
 		            <div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교과목명</label>
-						  <input class="form-control" type="text" value="${ sub.subTitle }" readonly>
+						  <input class="form-control" type="text" name="subTitle" value="${ sub.subTitle }" readonly>
+						  <input type="hidden" name="subCode" value="${ sub.subCode }">
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교수명</label>
@@ -73,7 +73,7 @@
 		            </div>
 		            <div class="row">
 		                <div class="form-group col-md-4 align-self-end">
-		                  <button class="btn btn-danger" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>삭제 신청</button>
+		                  <button class="btn btn-danger" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>삭제 신청</button>
 		                </div>
 	                </div>
 	              </form>

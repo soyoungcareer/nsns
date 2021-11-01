@@ -10,13 +10,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profPwd" column="PROF_PWD"/>
 		<result property="profName" column="PROF_NAME"/>
 		<result property="profDept" column="DEPT_CODE"/>
-		<result property="profDeptTitle" column="DEPT_TITLE"/>
 		<result property="profRrn" column="PROF_RRN"/>
 		<result property="profEmail" column="PROF_EMAIL"/>
 		<result property="profPhone" column="PROF_PHONE"/>
 		<result property="profAddress" column="PROF_ADDRESS"/>
 		<result property="profStatus" column="PROF_STATUS"/>
 		<result property="profEmpdate" column="PROF_EMPDATE"/>
+		<!-- <result property="profDeptTitle" column="DEPT_TITLE"/> -->
+		<collection property="department" resultMap="DepartmentSet"/>
+	</resultMap>
+	
+	<resultMap id="DepartmentSet" type="Department">
+		<id property="deptCode" column="DEPT_CODE"/>
+		<result property="deptTitle" column="DEPT_TITLE"/>
 	</resultMap>
 	
 	<!-- 강의 -->
@@ -57,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="rejectReason" column="REJECT_REASON"/>	
 		<result property="status" column="STATUS"/>	
 		<result property="stuId" column="STU_ID"/>
-		<!-- 학생이름, 제목, 내용 상담 객체에 추가 -->	
+		<collection property="student" resultMap="Student"/>
 	</resultMap>
 	
 	<!-- 강의평가 -->
@@ -78,6 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 		<result property="stuName" column="STU_NAME"/>
 		<result property="stuStatus" column="STU_STATUS"/>
+		<collection property="student" resultMap="Student"/>
+		<collection property="studentStatus" resultMap="StudentStatus"/>
 	</resultMap>
 	
 	<!-- 휴학 -->
@@ -92,6 +100,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 		<result property="stuName" column="STU_NAME"/>
 		<result property="stuStatus" column="STU_STATUS"/>
+		<collection property="student" resultMap="Student"/>
+		<collection property="studentStatus" resultMap="StudentStatus"/>
+	</resultMap>
+	
+	<resultMap type="StudentStatus" id="studentStatus">
+		<id property="stsNo" column="STS_NO"/>
+		<result property="stsProcess" column="STS_PROCESS"/>
+		<result property="stsComplete" column="STS_COMPLETE"/>
+		<result property="stsCategory" column="STS_CATEGORY"/>
+		<result property="status" column="STATUS"/>
 	</resultMap>
 	
 	<!-- 강의 신청 -->
@@ -107,6 +125,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 		<result property="attOrigin" column="ATT_ORIGIN"/>
 		<result property="attChange" column="ATT_CHANGE"/>
+		<result property="reqDate" column="REQ_DATE"/>
+		<result property="subCode" column="SUB_CODE"/>
+		<result property="reqType" column="REQ_TYPE"/>
 	</resultMap>
 	
 	<!-- 로그인 교수 -->
@@ -155,7 +176,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="profCreateLecture" parameterType="RequestedSubject">
 		INSERT INTO REQ_SUBJECT
 		VALUES (SEQ_REQSUB_NO.NEXTVAL, #{deptCode}, #{subDivs}, #{subType}, #{subTitle}, #{profId},
-				#{subCredit}, #{subTime}, DEFAULT, #{attOrigin}, #{attChange})
+				#{subCredit}, #{subTime}, 'C', DEFAULT, #{attOrigin, jdbcType=VARCHAR}, #{attChange, jdbcType=VARCHAR}, 
+				DEFAULT, NULL)
 	</insert>
 	
 	<!-- 강의목록 조회 -->
@@ -175,13 +197,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY SUB_YEAR DESC, SUB_SMST DESC
 	</select>
 	
-	<!-- 강의수정 -->
-	
-	
 	<!-- 강의정보 수정 -->
-
+	<insert id="editLectReq" parameterType="RequestedSubject">
+		INSERT INTO REQ_SUBJECT
+		VALUES (SEQ_REQSUB_NO.NEXTVAL, #{deptCode}, #{subDivs}, #{subType}, #{subTitle}, #{profId},
+				#{subCredit}, #{subTime}, 'E', DEFAULT, #{attOrigin, jdbcType=VARCHAR}, #{attChange, jdbcType=VARCHAR}, 
+				DEFAULT, #{subCode})
+	</insert>
 	
 	<!-- 강의삭제 -->
+	<select id="delSubInfo" parameterType="Map" resultMap="profSubResultSet">
+		SELECT SUB_CODE, SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
+	</select>
+	<insert id="delLectReq" parameterType="RequestedSubject">
+		INSERT INTO REQ_SUBJECT(REQSUB_NO, PROF_ID, REQ_TYPE, STATUS, SUB_CODE, SUB_DIVS, SUB_TITLE, SUB_CREDIT, SUB_TYPE, SUB_TIME)
+		VALUES(SEQ_REQSUB_NO.NEXTVAL, #{profId}, 'D', DEFAULT, #{subCode}, #{subDivs}, #{subTitle}, #{subCredit}, #{subType}, #{subTime})
+	</insert>
 	
 	<!-- 강의개설/수정/삭제 목록 -->
 	<select id="reqSubListCount" resultType="_int">
@@ -190,7 +223,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE PROF_ID=#{profId}
 	</select>
 	<select id="selectReqSubList" resultMap="reqSubResultSet">
-		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, STATUS
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, ATT_ORIGIN, ATT_CHANGE, STATUS, REQ_DATE, REQ_TYPE
 		FROM REQ_SUBJECT
 		WHERE PROF_ID=#{profId}
 		ORDER BY REQSUB_NO DESC
@@ -211,11 +244,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 학생상담관리 -->
 	<select id="loadConsultList" resultMap="consultResultSet">
-		SELECT CON_NO, CON_CATEGORY, CON_DATE, CON_REASON, REJECT_REASON, STATUS, STU_ID
-		FROM CONSULT
-		JOIN STUDENT USING(STU_ID)
-		WHERE PROF_ID=#{profId}
-		ORDER BY CON_NO DESC
+		SELECT A.CON_NO, A.CON_CATEGORY, A.CON_DATE, B.STU_NAME
+		FROM CONSULT A
+		JOIN STUDENT B ON A.STU_ID=B.STU_ID
+		JOIN CONSULT_STATUS_PRO C ON A.CON_NO=C.CON_NO
+		WHERE B.PROF_ID=#{profId} AND C.CON_PROCESS='교수승인대기중'
+		ORDER BY A.CON_NO DESC
 	</select>
 	
 	<!-- 학생출결관리 -->
@@ -245,6 +279,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE C.PROF_ID=#{profId}
 		ORDER BY B.APPLICATION_NO DESC
 	</select>
+	<select id="detailDo" resultType="StudentDo" resultMap="doStatusResultSet">
+		SELECT B.STU_ID, B.STU_NAME, A.DO_DATE, B.STU_STATUS, A.DO_REASON
+		FROM STU_DO A 
+		JOIN STUDENT B ON A.STU_ID=B.STU_ID
+		WHERE B.PROF_ID=#{profId} AND APPLICATION_NO=#{doNo}
+	</select>
+	<update id="profOffCheck" parameterType="StudentStatus">
+		UPDATE STU_STATUS_PRO
+		SET STS_PROCESS='관리자승인대기'
+		WHERE APPLICATION_NO_OFF=#{offNo}
+	</update>
 	
 	<!-- 휴학 -->
 	<select id="offListCount" resultType="_int">
@@ -261,6 +306,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE C.PROF_ID=#{profId}
 		ORDER BY B.APPLICATION_NO DESC
 	</select>
+	<select id="detailOff" resultType="StudentOff" resultMap="offStatusResultSet">
+		SELECT B.STU_ID, B.STU_NAME, B.STU_STATUS, A.OFF_DATE, A.OFF_CATEGORY, A.OFF_SEM_CNT, A.OFF_SEM, A.OFF_REASON
+		FROM STU_OFF A
+		JOIN STUDENT B ON A.STU_ID=B.STU_ID
+		WHERE B.PROF_ID=#{profId} AND APPLICATION_NO=#{offNo}
+	</select>
+	<update id="profDoCheck" parameterType="StudentStatus">
+		UPDATE STU_STATUS_PRO
+		SET STS_PROCESS='관리자승인대기'
+		WHERE APPLICATION_NO_DO=#{doNo}
+	</update>
+	
 	
 <!-- 	<select id="studentProList" resultMap="studentStatusResultMap" parameterType="string">
 		SELECT STU_STATUS_PRO.STS_PROCESS, STU_STATUS_PRO.STS_CATEGORY, STU_STATUS_PRO.STS_COMPLETE, STU_STATUS_PRO.STATUS, APPLICATION_NO_OFF,APPLICATION_NO_DO

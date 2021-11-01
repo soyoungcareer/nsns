@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.spring.member.vo.Professor"%>
-<%-- <%
-	Professor loginUser = (Professor)session.getAttribute("loginUser");
-%> --%>
+<%
+	Professor loginUser = (Professor)session.getAttribute("loginPrf");
+%>
 <!DOCTYPE html>
 <html lang="en"> 
   <head>
@@ -58,7 +58,7 @@
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
             <li><a class="dropdown-item" href="profMypage.pr"><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
-            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i>로그아웃</a></li>
+            <li><a class="dropdown-item" href="logout.prf"><i class="fa fa-sign-out fa-lg"></i>로그아웃</a></li>
           </ul>
         </li>
       </ul>
@@ -69,8 +69,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><!-- <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image"> -->
         <div>
-          <p class="app-sidebar__user-name"><span><%-- <%= loginUser.getProfName() %> --%>교수</span></p>
-          <p class="app-sidebar__user-designation"><%-- <%= loginUser.getProfDept() %> --%>과</p>
+          <p class="app-sidebar__user-name"><span><%= loginUser.getProfName() %>교수</span></p>
+          <p class="app-sidebar__user-designation"><%= loginUser.getProfDeptTitle() %>과</p>
         </div>
       </div>
       <ul class="app-menu">

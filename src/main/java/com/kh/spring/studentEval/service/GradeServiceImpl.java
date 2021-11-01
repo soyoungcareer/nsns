@@ -79,6 +79,16 @@ public class GradeServiceImpl implements GradeService {
 		return gradeDao.objListCount(sqlSession, profId);
 	}
 
+	@Override
+	public GradeObject detailObjection(String objNo) {
+		return gradeDao.detailObjection(sqlSession, objNo);
+	}
+
+	@Override
+	public int profObjCheck(String objNo) {
+		return gradeDao.profObjCheck(sqlSession, objNo);
+	}
+
 	
 	
 	/*
