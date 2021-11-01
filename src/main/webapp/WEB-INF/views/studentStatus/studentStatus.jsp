@@ -19,7 +19,7 @@
         </div>
        
       </div>
-      <a href="stuBackPage.stu">복학페이지</a>
+      
       <div class="row">
 	        <div class="col-md-8">
 	           

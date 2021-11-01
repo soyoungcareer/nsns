@@ -22,9 +22,9 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 	private StudentStatusDao studentStatusDao;
 
 	@Override
-	public ArrayList<StudentStatus> studentProList(String userId) {
+	public ArrayList<StudentStatus> studentProList(int stuId) {
 		
-		ArrayList<StudentStatus> list = studentStatusDao.studentProList(sqlSession, userId);
+		ArrayList<StudentStatus> list = studentStatusDao.studentProList(sqlSession, stuId);
 				
 		return list;
 	}
@@ -93,7 +93,7 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 	}
 
 	@Override
-	public int selectOffCount(String stuId) {
+	public int selectOffCount(int stuId) {
 		
 		int count = studentStatusDao.selectOffCount(sqlSession, stuId);
 		
@@ -101,7 +101,7 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 	}
 
 	@Override
-	public int selectDoCount(String stuId) {
+	public int selectDoCount(int stuId) {
 		
 		int count = studentStatusDao.selectDoCount(sqlSession, stuId);
 		

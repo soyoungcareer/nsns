@@ -151,44 +151,43 @@
 								<h3 class="tile-title">성적 등록/조회/수정</h3>
 							</div>
 							
-							<form action="filteredSubject.pr" class="row">
+							<form action="filteredSubject.pr">
 							<div class="row">
-								<div class="form-group col-md-5">
-									<!-- <div class="form-group col-md-5">
-									  <label class="control-label" for="evalType">평가방법</label>
-									  <select class="form-control" id="evalType">
-									    <option>상대평가</option>
-									    <option>절대평가</option>
-									  </select>
-									</div> -->
-									<div class="form-group col-md-5">
-									  <label class="control-label" for="con1">학년도 </label>
-									  <select class="form-control" id="con1" name="con1">
-									  	<option value="0">전체</option>
-									  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
-									    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
-									  </select>
-									</div>
-									<div class="form-group col-md-5">
-									  <label class="control-label" for="con2">학기 </label>
-									  <select class="form-control" id="con2" name="con2">
-									  	<option value="0">전체</option>
-									    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
-									    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
-									  </select>
-									</div>
+								<!-- <div class="form-group col-md-5">
+								  <label class="control-label" for="evalType">평가방법</label>
+								  <select class="form-control" id="evalType">
+								    <option>상대평가</option>
+								    <option>절대평가</option>
+								  </select>
+								</div> -->
+								<div class="form-group col-md-3">
+								  <label class="control-label" for="con1">학년도 </label>
+								  <select class="form-control" id="con1" name="con1">
+								  	<option value="0">전체</option>
+								  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+								    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
+								  </select>
 								</div>
-							</div>
-							<div class="col-sm-12 col-md-6">
-								<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
-									<label>강의명 
-										<input type="search" class="form-control form-control-sm"
-											aria-controls="sampleTable" name="keyword" value="${ keyword }">
-									</label>
+								<div class="form-group col-md-3">
+								  <label class="control-label" for="con2">학기 </label>
+								  <select class="form-control" id="con2" name="con2">
+								  	<option value="0">전체</option>
+								    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+								    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
+								  </select>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
+										<label>강의명 
+											<input type="search" class="form-control form-control-sm"
+												aria-controls="sampleTable" name="keyword" value="${ keyword }">
+										</label>
 										<button class="btn btn-primary btn-sm" type="submit"
 										style="margin-left: 10px;" id="readList">조 회</button>
+									</div>
 								</div>
 							</div>
+							
 							</form>
 							
 							<div class="row">

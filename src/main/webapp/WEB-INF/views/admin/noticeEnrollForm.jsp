@@ -46,29 +46,11 @@
             <div class="row">
               <div class="col-lg-6">
                 <form id="NoticeEnrollForm" method="post" action="insert.ntc" enctype="multipart/form-data">
-                	<!-- <table style="width:300px">
-                		<tr>
-                			<td><label class="control-label">제목</label></td>
-                			<td class="form-control">${ n.ntcTitle }</td>
-                			<!-- <td><input class="form-control" type="text" placeholder="글자 수 제한 255Byte" value="${ n.ntcTitle }" maxlength="255" readonly></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                	</table> -->
-                  <!-- form all -->
+                	
                   <div class="form-group">
 	                <label for=title class="control-label">제목</label>
 	                <input class="form-control" id="title" name="ntcTitle" type="text" placeholder="제목 글자 수 제한 255Byte" required>
+	                 <input class="form-control" id="writer" name="ntcWriter" type="hidden" value="admin" required>
                   </div>
 
                   <div class="form-group">

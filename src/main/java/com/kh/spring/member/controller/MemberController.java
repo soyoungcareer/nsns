@@ -89,7 +89,7 @@ public class MemberController {
 			session.setAttribute("loginPrf", loginPrf);
 			System.out.println("session 저장 : " + session.getAttribute("loginPrf"));
 			
-			return "professor/profMypage";
+			return "redirect:profMypage.pr";
 			
 		}else {
 			//throw new CommException("로그인 실패");
@@ -213,7 +213,7 @@ public class MemberController {
 	
 	//교수관리-교수 삭제 - 계약 종료
 	@RequestMapping("prfDelete.adm")
-	public String deleteProfessor(int profId) {
+	public String deleteProfessor(String profId) {
 	
 		memberService.deleteProfessor(profId);
 			

@@ -15,7 +15,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 개인정보관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -44,7 +43,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label">담당학과</label> 
-							<input class="form-control" type="text" name="deptTitle" value="${prof.profDeptTitle}" readonly>
+							<input class="form-control" type="text" name="deptTitle" value="${prof.department.deptTitle}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">이메일</label> 

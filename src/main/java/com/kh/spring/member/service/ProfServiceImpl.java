@@ -127,4 +127,49 @@ public class ProfServiceImpl implements ProfService {
 		return professorDao.selectFilteredStu(sqlSession, searchStudent);
 	}
 
+	@Override
+	public void editLectReq(RequestedSubject reqSubject) {
+		int result = professorDao.editLectReq(sqlSession, reqSubject);
+		
+		if (result < 0) {
+			throw new CommException("강의정보수정 실패");
+		} 
+		
+	}
+
+	@Override
+	public void delLectReq(RequestedSubject reqSubject) {
+		int result = professorDao.delLectReq(sqlSession, reqSubject);
+		
+		if (result < 0) {
+			throw new CommException("강의삭제 실패");
+		}
+		
+	}
+
+	@Override
+	public Subject delSubInfo(Map map) {
+		return professorDao.delSubInfo(sqlSession, map);
+	}
+
+	@Override
+	public StudentOff detailOff(String offNo) {
+		return professorDao.detailOff(sqlSession, offNo);
+	}
+
+	@Override
+	public StudentDo detailDo(String doNo) {
+		return professorDao.detailDo(sqlSession, doNo);
+	}
+
+	@Override
+	public int profOffCheck(String offNo) {
+		return professorDao.profOffCheck(sqlSession, offNo);
+	}
+
+	@Override
+	public int profDoCheck(String doNo) {
+		return professorDao.profDoCheck(sqlSession, doNo);
+	}
+
 }

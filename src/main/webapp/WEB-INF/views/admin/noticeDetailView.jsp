@@ -84,9 +84,6 @@
                   
                   <div class="form-group"> 
                     	
-                    	<!-- 위치1 -->
-                    	<input type="hidden" name="bno" id="bno" value="${n.ntcNo}">
-                    	<input type="hidden" name="fileName" value="${n.changeName}">
                     	
                   		<c:if test="${ !empty n.originName }">
                         	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}" download="${ n.originName }">${ n.originName }</a>
@@ -109,7 +106,7 @@
 	            </div>
 	            
 	            <form id="postForm" action="" method="post">
-					<input type="hidden" name="bno" value="${n.ntcNo }">
+					<input type="hidden" name="bno" id="bno" value="${n.ntcNo }">
 					<input type="hidden" name="fileName" value="${ n.changeName }"> 
 				</form>
 				<script>

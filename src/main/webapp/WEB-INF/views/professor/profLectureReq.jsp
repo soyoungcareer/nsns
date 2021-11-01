@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	int count = 1;
 	String contextPath = request.getContextPath();
@@ -53,11 +54,15 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">이수구분</th>
+													style="width: 57.475px;">신청일자</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
-													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">강의형태</th>
+													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">신청형태</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">이수구분</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Position: activate to sort column ascending"
@@ -68,43 +73,64 @@
 													style="width: 52.9125px;">학점</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
+													aria-label="Start date: activate to sort column ascending"
+													style="width: 60.375px;">강의형태</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">강의시간</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">승인상태</th>
-<!-- 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													style="width: 52.9125px;">강의계획서</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의계획서</th> -->
+													style="width: 52.9125px;">승인상태</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:choose>
 												<c:when test="${empty reqSub}">
-													<tr><td colspan="7">개설된 강의가 없습니다.</td></tr>
+													<tr><td colspan="10">신청내역이 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty reqSub}">
 													<c:forEach var="reqSub" items="${reqSub}">
 														<tr role="row">
 															<td class="sorting_1"><%=count++ %></td>
-															<td><c:out value="${reqSub.subDivs}"/></td>
-															<td><c:out value="${reqSub.subType}"/></td>
-															<td><c:out value="${reqSub.subTitle}"/></td>
-															<td><c:out value="${reqSub.subCredit}"/></td>
-															<td><c:out value="${reqSub.subTime}"/></td>
-															<td><c:out value="${reqSub.status}"/></td>
+															<td><fmt:formatDate pattern="yyyy년MM월dd일" value="${reqSub.reqDate}"/></td>
+															<td>
+																<c:if test="${reqSub.reqType eq 'C' }"><c:out value="개설"/></c:if>
+																<c:if test="${reqSub.reqType eq 'E' }"><c:out value="수정"/></c:if>
+																<c:if test="${reqSub.reqType eq 'D' }"><c:out value="삭제"/></c:if>
+															</td>
+															<td>
+																<c:if test="${reqSub.subDivs eq '1'}"><c:out value="전공"/></c:if>
+																<c:if test="${reqSub.subDivs eq '2'}"><c:out value="교양"/></c:if>
+															</td>
+															<td>${reqSub.subTitle}</td>
+															<td>${reqSub.subCredit}학점<td>
+																<c:if test="${reqSub.subType eq '1'}"><c:out value="집체"/></c:if>
+																<c:if test="${reqSub.subType eq '2'}"><c:out value="온라인"/></c:if>
+															</td>
+															<td>${reqSub.subTime}</td>
+															<td>
+																<c:if test="${ empty reqSub.attOrigin }">
+																	첨부파일 없음
+																</c:if>
+																<c:if test="${ !empty reqSub.attOrigin }">
+																	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${ reqSub.attChange }" 
+																		download="${ reqSub.attOrigin }"><button class="btn badge badge-pill badge-warning" type="button">${ reqSub.attOrigin }</button></a>
+																</c:if>
+															</td>
+															<td>
+																<c:if test="${reqSub.status eq 'Y'}"><c:out value="승인완료"/></c:if>
+																<c:if test="${reqSub.status eq 'N'}"><c:out value="승인대기중"/></c:if>
+															</td>
 														</tr>
 													</c:forEach>
 												</c:when>
 											</c:choose>
-											
-										
-													<!-- -------------------------------------------
-														강의계획서 넣기...? 
-													--------------------------------------------- -->
-											
 										</tbody>
 									</table>
 								</div>

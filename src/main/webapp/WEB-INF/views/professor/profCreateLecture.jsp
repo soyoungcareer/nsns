@@ -15,7 +15,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 강의 관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -28,14 +27,11 @@
 	          <div class="tile">
 	            <h3 class="tile-title">강의개설 신청</h3>
 	            <div class="tile-body">
-	              <form id="createForm" method="get" action="profCreateLecture.pr" enctype="multipart/form-data">
+	              <form id="createForm" method="post" action="profCreateLecture.pr" enctype="multipart/form-data">
 	              	<div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학과명</label>
-		                  <input class="form-control" type="text" value="${ prof.profDeptTitle }" readonly>
-		                  <!-- ------------------------------------
-		                  		로그인한 교수 학과명으로 value 넣기 
-		                  		-------------------------------------->
+		                  <input class="form-control" type="text" value="${ prof.department.deptTitle }" readonly>
 		                </div>
 						<div class="form-group col-md-3">
 							<div class="form-group">
@@ -67,9 +63,6 @@
 		                  <label class="control-label">교수명</label>
 		                  <input class="form-control" type="text" value="${ prof.profName }" readonly>
 		                  <input type="hidden" name="profId" value="${ prof.profId }">
-		                  <!-- ------------------------------------
-		                  		로그인한 교수명으로 value 넣기 
-		                  		-------------------------------------->
 		                </div>
 		                <div class="form-group col-md-3">
 							<div class="form-group">
@@ -118,16 +111,14 @@
 							    <option>7</option>
 							    <option>8</option>
 							  </select>
+							  <!-- -----------------------------------
+							  	강의시작시작 시간 이전 강의종료시간 안뜨게 하기 
+							  	--------------------------------------->
 							</div>
 		                </div>
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">강의계획서</label>
-		                  <input class="form-control-file" id="exampleInputFile" type="file" aria-describedby="fileHelp">
-		                  <!-- <input class="form-control" type="text" value="">
-		                  -----------------------------
-		                  	파일 첨부 후 value에 첨부파일명 들어가도록
-		                  -------------------------------
-		                  <button class="btn btn-primary" type="button">파일첨부</button> -->
+		                  <input class="form-control-file" id="createLectFile" type="file" name="createLectFile" aria-describedby="fileHelp">
 		                </div>
 		            </div>
 		            <div class="row">

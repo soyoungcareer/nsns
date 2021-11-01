@@ -1,15 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    import="java.util.ArrayList, com.kh.spring.major.vo.Subject"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	int count = 1;
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 학적변동 승인</title>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 학적변동 승인</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).on("click", "#offTable>tbody>tr", function(){
+			var tr = $(this);
+			var td = tr.children();
+			var offNo = td.eq(0).text();
+			
+			console.log(offNo);
+			
+			$.ajax({
+				url:"detailOff.pr",
+				type:"GET",
+				data:{
+					offNo:offNo
+				},
+				dataType:"json",
+				success:function(detailOff){
+					$("#myModal").modal();
+					
+					var result = '<div class="form-group row"><label class="col-form-label" for="stuId">학번</label>'
+            			+ '<input class="form-control" id="stuId" type="text" value="' + detailOff.stuId + '" readonly></div>'
+          				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
+            			+ '<input class="form-control" id="stuName" type="text" value="' + detailOff.student.stuName + '" readonly></div>'
+          				+ '<div class="form-group row"><label class="col-form-label" for="title">학적상태</label>'
+            			+ '<input class="form-control" id="title" type="text" value="' + detailOff.student.stuStatus + '" readonly></div>'
+            			+ '<div class="form-group row"><label class="col-form-label" for="offDate">휴학신청일자</label>'
+            			+ '<input class="form-control" id="offDate" type="text" value="' + moment(detailOff.offDate).format("YYYY년MM월DD일 HH:mm") + '" readonly></div>'
+          				+ '<div class="form-group row"><label class="col-form-label" for="offCate">휴학구분</label>'
+            			+ '<input class="form-control" id="offCate" type="text" value="' + detailOff.offCategory + '" readonly></div>'
+            			+ '<div class="form-group row"><label class="col-form-label" for="offSemCnt">휴학학기수</label>'
+            			+ '<input class="form-control" id="offSemCnt" type="text" value="' + detailOff.offSemCnt + '" readonly></div>'
+            			+ '<div class="form-group row"><label class="col-form-label" for="offSem">휴학학기</label>'
+            			+ '<input class="form-control" id="offSem" type="text" value="' + detailOff.offSem + '" readonly></div>'
+            			+ '<div class="form-group row"><label class="col-form-label" for="offReason">휴학사유</label>'
+            			+ '<input class="form-control" id="offReason" type="text" value="' + detailOff.offReason + '" readonly></div>'
+          				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
+          				+ '<div class="w-100"></div>'
+              			+ '<div class="form-check"><label class="form-check-label">'
+                  		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
+              			+ '<div class="form-check"><label class="form-check-label">'
+                  		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
+          				+ '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>'
+            			+ '<input class="form-control" id="reason" type="text" placeholder="반려사유 입력"></div>'
+					$("#modalBody").html(result);
+				},
+				error:function() {
+					alert("ajax 로딩 실패");
+				}
+			});
+		});
+	</script>
+	<script>
+		/* 승인/반려 체크 후 저장 */
+		$(document).on("click", "#saveOffCheck", function(){
+			var status = $('input[name="answer"]:checked').val();
+			var reason = $("#reason").val();
+			
+			$.ajax({
+				url: "profOffCheck.pr",
+				type: "POST",
+				data:{
+					status:status,
+					reason:reason
+				},
+				dataType:"json",
+				success:function(checkOff) {
+					alert("저장 성공");
+				},
+				error:function() {
+					alert("ajax 로딩 실패");
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -41,7 +111,7 @@
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
-										id="sampleTable" role="grid"
+										id="offTable" role="grid"
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
@@ -86,21 +156,21 @@
 										</thead>
 										<tbody>
 											<c:choose>
-												<c:when test="${empty doList}">
+												<c:when test="${empty offList}">
 													<tr><td colspan="9">휴학신청 내역이 없습니다.</td></tr>
 												</c:when>
-												<c:when test="${!empty doList}">
-													<c:forEach var="doList" items="${doList}">
+												<c:when test="${!empty offList}">
+													<c:forEach var="offList" items="${offList}">
 														<tr role="row">
-															<td class="sorting_1"><%= count++ %></td>
-															<td><c:out value="${doList.stuName}"/></td>
-															<td><c:out value="${doList.offDate}"/></td>
-															<td><c:out value="${doList.stuStatus}"/></td>
-															<td><c:out value="${doList.offCategory}"/></td>
-															<td><c:out value="${doList.offSemCnt}"/></td>
-															<td><c:out value="${doList.offSem}"/></td>
-															<td><c:out value="${doList.offReason}"/></td>
-															<td><c:out value="${doList.status}"/></td>
+															<td class="sorting_1">${offList.applicationNo}</td>
+															<td><c:out value="${offList.student.stuName}"/></td>
+															<td><c:out value="${offList.offDate}"/></td>
+															<td><c:out value="${offList.student.stuStatus}"/></td>
+															<td><c:out value="${offList.offCategory}"/></td>
+															<td><c:out value="${offList.offSemCnt}"/></td>
+															<td><c:out value="${offList.offSem}"/></td>
+															<td><c:out value="${offList.offReason}"/></td>
+															<td><c:out value="${offList.studentStatus.stsProcess}"/></td>
 														</tr>
 													</c:forEach>
 												</c:when>
@@ -109,6 +179,34 @@
 									</table>
 								</div>
 							</div>
+							
+							
+							<!-- The Modal -->
+							  <div class="modal fade" id="myModal">
+							    <div class="modal-dialog">
+							      <div class="modal-content">
+							      <form action="profObjCheck.pr">
+							        <!-- Modal Header -->
+							        <div class="modal-header">
+							          <h4 class="modal-title">휴학신청 상세조회</h4>
+							          <button type="button" class="close" data-dismiss="modal">×</button>
+							        </div>
+							        
+							        <!-- Modal body -->
+							        <div class="modal-body" id="modalBody">
+							        	
+							        </div>
+							        
+							        <!-- Modal footer -->
+							        <div class="modal-footer">
+							          <button class="btn btn-primary" type="submit" id="saveOffCheck">저장</button>
+							          <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
+							        </div>
+							       </form>
+							      </div>
+							    </div>
+							  </div>
+							
 							
 							<!-- 페이징 처리 -->
 							<div id="pagingArea">
@@ -145,7 +243,7 @@
 				            </div>
 							
 							
-							<div class="row">
+<!-- 							<div class="row">
 								<label class="control-label col-md-3">
 					              <input type="checkbox"><span class="label-text">승인</span>
 					            </label>
@@ -161,7 +259,7 @@
 				                <div class="form-group col-md-4 align-self-end">
 				                  <input type="button" class="btn btn-primary" type="button" onclick="" value="저장"/>
 				                </div>
-			                </div>
+			                </div> -->
 							
 						</div>
 					</div>

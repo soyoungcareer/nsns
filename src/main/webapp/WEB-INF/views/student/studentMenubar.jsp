@@ -41,6 +41,9 @@
         </li>
          -->
 
+		<li class="register">
+         <a class="register-link" href="chat.do" style="color: white;">채팅</a>
+        </li>
         
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
@@ -70,7 +73,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i>내 정보 확인</a></li>
-            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> 로그아웃</a></li>
+            <li><a class="dropdown-item" href="logout.stu"><i class="fa fa-sign-out fa-lg"></i> 로그아웃</a></li>
           </ul>
         </li>
       </ul>
@@ -97,7 +100,7 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="stuStatusPage.stu"><i class="icon fa fa-circle-o"></i> 신청내역</a></li>
             <li><a class="treeview-item" href="stuOffPage.stu"><i class="icon fa fa-circle-o"></i> 휴학신청</a></li>
-            <li><a class="treeview-item" href="detail.ntc?bno=13"><i class="icon fa fa-circle-o"></i> 복학신청</a></li>
+            <li><a class="treeview-item" href="stuBackPage.stu"><i class="icon fa fa-circle-o"></i> 복학신청</a></li>
             <li><a class="treeview-item" href="stuDoPage.stu"><i class="icon fa fa-circle-o"></i> 자퇴신청</a></li>
           </ul>
         </li>
