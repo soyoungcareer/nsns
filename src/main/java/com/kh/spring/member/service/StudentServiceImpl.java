@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService{
 	private StudentDao studentDao;
 
 	@Override
-	public Student studentInfo(String stuId) {
+	public Student studentInfo(int stuId) {
 		
 		Student student = studentDao.studentInfo(sqlSession, stuId);
 		
@@ -33,6 +33,19 @@ public class StudentServiceImpl implements StudentService{
 		if(result < 0) {
 			throw new CommException("학생정보 수정 실패");
 		}
+		
+	}
+
+	@Override
+	public int ChangePW(Student student) {
+		
+		int result = studentDao.ChangePW(sqlSession, student);
+		
+		if(result < 0) {
+			throw new CommException("비밀번호 변경 실패");
+		}
+		
+		return result;
 		
 	}
 
