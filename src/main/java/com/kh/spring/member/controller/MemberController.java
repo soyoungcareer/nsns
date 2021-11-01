@@ -89,7 +89,7 @@ public class MemberController {
 			session.setAttribute("loginPrf", loginPrf);
 			System.out.println("session 저장 : " + session.getAttribute("loginPrf"));
 			
-			return "professor/profMypage";
+			return "redirect:profMypage.pr";
 			
 		}else {
 			//throw new CommException("로그인 실패");

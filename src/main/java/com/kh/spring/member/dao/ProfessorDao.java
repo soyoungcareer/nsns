@@ -111,4 +111,32 @@ public class ProfessorDao {
 		return (ArrayList)sqlSession.selectList("profMapper.selectFilteredStu", searchStudent);
 	}
 
+	public int editLectReq(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
+		return sqlSession.insert("profMapper.editLectReq", reqSubject);
+	}
+
+	public int delLectReq(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
+		return sqlSession.insert("profMapper.delLectReq", reqSubject);
+	}
+
+	public Subject delSubInfo(SqlSessionTemplate sqlSession, Map map) {
+		return sqlSession.selectOne("profMapper.delSubInfo", map);
+	}
+
+	public StudentOff detailOff(SqlSessionTemplate sqlSession, String offNo) {
+		return sqlSession.selectOne("profMapper.detailOff", offNo);
+	}
+
+	public StudentDo detailDo(SqlSessionTemplate sqlSession, String doNo) {
+		return sqlSession.selectOne("profMapper.detailDo", doNo);
+	}
+
+	public int profOffCheck(SqlSessionTemplate sqlSession, String offNo) {
+		return sqlSession.selectOne("profMapper.profOffCheck", offNo);
+	}
+
+	public int profDoCheck(SqlSessionTemplate sqlSession, String doNo) {
+		return sqlSession.selectOne("profMapper.profDoCheck", doNo);
+	}
+
 }

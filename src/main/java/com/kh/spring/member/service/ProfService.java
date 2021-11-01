@@ -52,6 +52,20 @@ public interface ProfService {
 
 	ArrayList<Student> selectFilteredStu(SearchStudent searchStudent);
 
+	void editLectReq(RequestedSubject reqSubject);
+
+	void delLectReq(RequestedSubject reqSubject);
+
+	Subject delSubInfo(Map map);
+
+	StudentOff detailOff(String offNo);
+
+	StudentDo detailDo(String doNo);
+
+	int profOffCheck(String offNo);
+
+	int profDoCheck(String doNo);
+
 
 
 
