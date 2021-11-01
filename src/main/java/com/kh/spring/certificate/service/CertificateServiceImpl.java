@@ -10,6 +10,7 @@ import com.kh.spring.certificate.dao.CertificateDao;
 import com.kh.spring.certificate.vo.Certificate;
 import com.kh.spring.certificate.vo.Graduation;
 import com.kh.spring.certificate.vo.Volunteer;
+import com.kh.spring.member.vo.Student;
 
 @Service
 public class CertificateServiceImpl implements CertificateService {
@@ -64,5 +65,21 @@ public class CertificateServiceImpl implements CertificateService {
 	@Override
 	public Volunteer volunteerUpDetail(int volNo) {
 		return certificateDao.volunteerUpDetail(sqlSession, volNo);
+	}
+
+	@Override
+	public void certificateUpdate(Certificate cer) {
+		certificateDao.certificateUpdate(sqlSession, cer);
+	}
+
+	@Override
+	public void volunteerUpdate(Volunteer vol) {
+		certificateDao.volunteerUpdate(sqlSession, vol);
+		
+	}
+
+	@Override
+	public Student studentDepartment(int stuId) {
+		return certificateDao.studentDepartment(sqlSession, stuId);
 	}
 }

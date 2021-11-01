@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="changeName" column="CHANGE_NAME"/>
 	</resultMap>
 
-	<select id="studentProList" resultMap="studentStatusResultMap" parameterType="string">
+	<select id="studentProList" resultMap="studentStatusResultMap" parameterType="_int">
 		SELECT STU_STATUS_PRO.STS_PROCESS, STU_STATUS_PRO.STS_CATEGORY, STU_STATUS_PRO.STS_COMPLETE, STU_STATUS_PRO.STATUS, APPLICATION_NO_OFF,APPLICATION_NO_DO
 		FROM STU_STATUS_PRO
 		LEFT JOIN STU_OFF ON STU_STATUS_PRO.APPLICATION_NO_OFF = STU_OFF.APPLICATION_NO
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(SEQ_STS_NO.NEXTVAL, DEFAULT, DEFAULT,'자퇴', DEFAULT, SEQ_APPLICATION_NO.CURRVAL)
 	</insert>
 	
-	<select id="selectOffCount" resultType="_int"  parameterType="string">
+	<select id="selectOffCount" resultType="_int"  parameterType="_int">
 		SELECT COUNT(*)
 		FROM STU_STATUS_PRO
         LEFT JOIN STU_OFF ON STU_STATUS_PRO.APPLICATION_NO_OFF = STU_OFF.APPLICATION_NO
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND STS_COMPLETE LIKE '처리중'
 	</select>
 	
-	<select id="selectDoCount" resultType="_int"  parameterType="string">
+	<select id="selectDoCount" resultType="_int"  parameterType="_int">
 		SELECT COUNT(*)
 		FROM STU_STATUS_PRO
         LEFT JOIN STU_DO ON STU_STATUS_PRO.APPLICATION_NO_DO = STU_DO.APPLICATION_NO

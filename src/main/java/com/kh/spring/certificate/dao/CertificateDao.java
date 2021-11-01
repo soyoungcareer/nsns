@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring.certificate.vo.Certificate;
 import com.kh.spring.certificate.vo.Graduation;
 import com.kh.spring.certificate.vo.Volunteer;
+import com.kh.spring.member.vo.Student;
 
 @Repository
 public class CertificateDao {
@@ -48,6 +49,19 @@ public class CertificateDao {
 
 	public Volunteer volunteerUpDetail(SqlSessionTemplate sqlSession, int volNo) {
 		return sqlSession.selectOne("certificateMapper.volunteerUpDetail", volNo);
+	}
+
+	public void certificateUpdate(SqlSessionTemplate sqlSession, Certificate cer) {
+		sqlSession.update("certificateMapper.certificateUpdate", cer);
+		
+	}
+
+	public void volunteerUpdate(SqlSessionTemplate sqlSession, Volunteer vol) {
+		sqlSession.update("certificateMapper.volunteerUpdate", vol);
+	}
+
+	public Student studentDepartment(SqlSessionTemplate sqlSession, int stuId) {
+		return sqlSession.selectOne("certificateMapper.studentDepartment", stuId);
 	}
 
 

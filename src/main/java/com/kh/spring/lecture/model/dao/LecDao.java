@@ -9,6 +9,7 @@ import com.kh.spring.facility.model.vo.searchFac;
 import com.kh.spring.lecture.model.vo.Reply;
 import com.kh.spring.lecture.model.vo.lecture;
 import com.kh.spring.lecture.model.vo.lectureList;
+import com.kh.spring.lecture.model.vo.lectureListwo;
 
 @Repository
 public class LecDao {
@@ -18,7 +19,7 @@ public class LecDao {
 		return (ArrayList)sqlSession.selectList("lectureMapper.selectList", id);
 	}
 
-	public ArrayList<lectureList> lecPageSub(SqlSessionTemplate sqlSession, int no) {
+	public ArrayList<lectureListwo> lecPageSub(SqlSessionTemplate sqlSession, int no) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("lectureMapper.selectlegPageSub", no);
 	}
@@ -46,6 +47,11 @@ public class LecDao {
 	public int insertTime(SqlSessionTemplate sqlSession, searchFac sf) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("lectureMapper.insertTime",sf);
+	}
+
+	public ArrayList<lectureListwo> selectProfList(SqlSessionTemplate sqlSession, searchFac sf) {
+		// TODO Auto-generated method stub
+		return (ArrayList) sqlSession.selectList("lectureMapper.selectProfList",sf);
 	}
 
 	

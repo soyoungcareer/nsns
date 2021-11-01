@@ -66,14 +66,15 @@
                 		</tr>
                 	</table> -->
                   <!-- form all -->
+                  <input type="hidden" name="ntcNo" value="${ n.ntcNo }">
                   <div class="form-group">
 	                <label class="control-label">제목</label>
-	                <input class="form-control" type="text" placeholder="글자 수 제한 255byte" value="${ n.ntcTitle }" maxlength="255" required>
+	                <input class="form-control" type="text" id="ntcTitle" name="ntcTitle" placeholder="글자 수 제한 255byte" value="${ n.ntcTitle }" maxlength="255" required>
                   </div>
-
+					<!-- 에러 시 name -->
                   <div class="form-group">
                     <label for="ntcCategory">분류</label>
-                    <select class="form-control" id="ntcCategory">
+                    <select class="form-control" id="ntcCategory" name="ntcCategory">
                       <option value=91>전체</option>
                       <option value=92>학사</option>
                       <option value=93>학생</option>
@@ -90,7 +91,7 @@
                   </div>
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
-                    <textarea class="form-control" id="ntcContent" rows="3" placeholder="글자수 제한 3500byte" style="resize:none">${n.ntcContent }</textarea>
+                    <textarea class="form-control" id="ntcContent" name="ntcContent" rows="3" placeholder="글자수 제한 3500byte" style="resize:none">${n.ntcContent }</textarea>
                   </div>
                   
                   <div class="form-group"> 
@@ -107,6 +108,7 @@
                   <div class="tile-footer">
 		            <!-- admin button -->
 		              <button class="btn btn-primary" type="submit">수정하기</button>
+		              <button type="button" class="btn btn-secondary" onclick="javascript:history.go(-1);">취소하기</button>
 		            </div>
                   
                 </form>

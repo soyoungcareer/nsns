@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.spring.certificate.vo.Certificate;
 import com.kh.spring.certificate.vo.Graduation;
 import com.kh.spring.certificate.vo.Volunteer;
+import com.kh.spring.member.vo.Student;
 
 public interface CertificateService {
 
@@ -25,5 +26,11 @@ public interface CertificateService {
 	Certificate certificateUpDetail(int cerNo);
 
 	Volunteer volunteerUpDetail(int volNo);
+
+	void certificateUpdate(Certificate cer);
+
+	void volunteerUpdate(Volunteer vol);
+
+	Student studentDepartment(int stuId);
 
 }

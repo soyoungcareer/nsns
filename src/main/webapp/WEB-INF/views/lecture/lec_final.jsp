@@ -43,11 +43,11 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">김경준</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">정보통신공학과</a></li>
+						aria-current="page" href="#"></a></li>
+					<li class="nav-item"><a class="nav-link" href="#"></a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
 						<ul class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Action</a></li>
@@ -62,7 +62,7 @@
 	</nav>
 	<!-- Page content-->
 	<div class="container">
-		<button type="button" class="btn btn-default btn-lg" onclick="location.href='lecMoves.me?no=${l.regNo}&id=${id}'">
+		<button type="button" class="btn btn-default btn-lg" onclick="location.href='lecMoves.me?no=${l.regNo}'">
   <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 뒤로
 </button>
 		<div class="text-center mt-5">
@@ -83,8 +83,7 @@
 
 
 	<div class="container">
-	<button class="btn btn-outline-info" type="button"
-				onclick="location.href='lecpl.me?no=${no}'">뒤로
+
 			</button>
 		<div class="text-center mt-5">
 			<h4>댓글</h4>
@@ -130,7 +129,7 @@
 			
 			$("#addReply").click(function(){
 	    		var bno = ${l.listNo};
-				var a = 20193019;
+				var a = ${id};
 				if($("#replyContent").val().trim().length != 0){
 					
 					$.ajax({

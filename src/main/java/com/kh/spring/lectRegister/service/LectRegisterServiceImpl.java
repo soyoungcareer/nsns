@@ -349,5 +349,28 @@ public class LectRegisterServiceImpl implements LectRegisterService {
 		lectRegisterDao.lectUpdateAdmin(sqlSession, subject);
 	}
 
+	@Override
+	public ArrayList<LecRegPro> timeBoardCartList(int stuId) {
+		LectRegister re = new LectRegister();
+		re.setStuId(stuId);
+		
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy");
+		Date date = new Date ( );
+		String year = format.format (date);
+		int neyear = Integer.parseInt(year);
+		re.setYear(neyear);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat ( "MM");
+		Date date2 = new Date ( );
+		String mon = format2.format (date2);
+		int nemon = Integer.parseInt(mon);
+		if(nemon<9&&nemon>2) {
+			re.setSemester(1);
+		}else {
+			re.setSemester(2);
+		}
+		return lectRegisterDao.timeBoardCartList(sqlSession, re);
+	}
+
 
 }

@@ -30,4 +30,9 @@ public class RequestedSubject {
 	private String subCode;
 	private String reqType;
 	
+	//관리자 강의 생성 임시
+	private String reqType;
+	private String deptTitle;
+	private String profName;
+	
 }

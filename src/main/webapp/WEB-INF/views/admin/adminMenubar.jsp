@@ -29,6 +29,40 @@
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="" style="font-size:17px;">낙성학사행정시스템</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+   
+     <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" data-toggle="modal" data-target="#loginModal"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="register.reg"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>수강신청</a></li>
+          </ul>
+        </li>
+          <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-archive fa-lg"  aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="facMove.me"> <i class="fa fa-archive fa-lg" aria-hidden="true"></i>시설물대여</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-calendar-o fa-lg"  aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="calendar.ca"> <i class="fa fa-calendar-o fa-lg" aria-hidden="true"></i>학사일정</a></li>
+          </ul>
+        </li>
+        <!-- User Menu-->
+       <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i>내 정보 확인</a></li>
+            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> 로그아웃</a></li>
+          </ul>
+        </li>
+      </ul>
+   
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
         <li class="app-search">
@@ -63,7 +97,7 @@
         
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">수강 신청</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의 신청 내역</a></li>
+            <li><a class="treeview-item" href="subModifyList.adm"><i class="icon fa fa-circle-o"></i> 강의 신청 내역</a></li>
             <!-- <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li> -->
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 전체 강의 조회</a></li>
             <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Widgets</a></li> -->

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
@@ -80,7 +80,7 @@
 	                    <div class="col-md-5 mb-4">
 	                      <label>이메일</label>
 	                      <input class="form-control" type="email"  id="email" name="email" value="${student.email}">
-	                    </div>
+	                    </div> 
                     </div>
                     
                      <div class="row mb-4">
@@ -99,14 +99,20 @@
 	                    </div>
                     </div>
                     
-                    
-                  <div class="row mb-4">
-                     <div class="col-md-3 mb-4">
-                      <button class="btn btn-primary" type="submit">수정하기 </button>
-                  </div>
+                  <div class="row mb-8">
+                     <div class="col-md-3 mb-5">
+                      <button class="btn btn-primary" type="submit">정보수정</button> 
+	                  </div>
                    </div>
-                   
                 </form>
+                <hr style="border: 0.5px solid gray; margin-bottom:30px">
+                <div class="row mb-4">
+	                    <div class="clearfix"></div>
+	                    <div class="col-md-8 mb-4">
+	                      <label><b>비밀번호 변경을 위해서는 이메일 인증이 필요합니다.</b></label>&nbsp;&nbsp;
+	                      <button class="btn btn-warning btn-sm" type="button" id="chgBtn">이메일 인증</button>
+	                    </div>
+                 </div>
         </div>
       </div>
       </div>
@@ -119,6 +125,69 @@
 	$("#studentInfoForm input[name=phone]").on("keyup", function() { 
 	    $(this).val($(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-")); 
 	 });
+	
+	$("#chgBtn").click(function(){
+		
+		//인증할 메일 전송하고 
+		var email = $("#email").val();
+		
+		  $.ajax({
+		        type:"GET",
+		        
+		        url:"mailCheck?email=" + email,
+		        		
+		        success: function(data){
+		        	
+		        	console.log(data);
+		        	
+		        	var windowUrl = 'email.em';
+
+		        	var windowName = '이메일 인증' ;
+
+		        	var popupWindow = window.open(windowUrl, windowName, "top=200px, left=300px, height=350px, width=450px, resizable=no")
+
+		        			출처: https://jinstale.tistory.com/111 [HINARI]");
+		        	
+		        	
+					var popupForm = document.popupForm;
+		        	
+		        	popupForm = document.createElement("form");
+
+		        	popupForm.setAttribute("name", "popupForm");
+
+		        	popupForm.setAttribute("method", "post");
+
+		        	popupForm.setAttribute("action", "email.em");
+
+		        	var input = document.createElement('input');
+
+		        	input.setAttribute("type", "hidden");
+
+		        	input.setAttribute("name", "data");
+
+		        	input.setAttribute("value", data);
+
+		            popupForm.appendChild(input);
+
+		            popupForm.target = windowName;
+
+		        	document.body.appendChild(popupForm);
+
+		        	popupForm.data.value = data;
+
+		        	popupForm.submit();
+
+		        },
+				error:function(e){
+					alert("이메일 전송이 실패했습니다.");
+				}
+		    });
+		
+	})
+	
+
+
+
   
   </script>
 </html>

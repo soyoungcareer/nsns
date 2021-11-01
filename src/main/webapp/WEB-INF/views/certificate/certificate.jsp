@@ -45,7 +45,7 @@
 										<table class="table table-hover table-bordered"
 											id="cerTable">
 											<thead>
-												<tr>
+												<tr style="background: #222d32; color: white;">
 													<th>번호</th>
 													<th>자격증 구분</th>
 													<th>자격증명</th>
@@ -127,9 +127,9 @@
 								<div class="col-sm-12" style="margin-top: 10px">
 									<div class="table-responsive">
 										<table class="table table-hover table-bordered"
-											id="volTable">
+											id="volTable" >
 											<thead>
-												<tr>
+												<tr style="background: #222d32; color: white;">
 													<th>번호</th>
 													<th>봉사활동명</th>
 													<th>봉사기간</th>
@@ -179,17 +179,18 @@
 							</div>
 						</div>
 					</div>
+					
 	</main>
 	<div class="modal fade" id="certifi">
-		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table;">
+		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table; margin-top:100px">
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h2 class="modal-title" id="buttons">
+					<h3 class="modal-title" id="buttons">
 						<img class="menu-bar-2"
 							src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
 							style="margin-right: 10px;"></img>자격증 추가
-					</h2>
+					</h3>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
@@ -232,15 +233,15 @@
 	</div>
 	
 	<div class="modal fade" id="certifiUpdate">
-		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table;">
+		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table; margin-top:100px">
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h2 class="modal-title" id="buttons">
+					<h3 class="modal-title" id="buttons">
 						<img class="menu-bar-2"
 							src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
 							style="margin-right: 10px;"></img>자격증 수정
-					</h2>
+					</h3>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
@@ -263,15 +264,15 @@
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h2 class="modal-title" id="buttons">
+					<h3 class="modal-title" id="buttons">
 						<img class="menu-bar-2"
 							src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
 							style="margin-right: 10px;"></img>봉사활동 수정
-					</h2>
+					</h3>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
-				<form action="volUpd.cer" method="post">
+				<form action="volUpd.cer" method="post"  enctype="multipart/form-data">
 					<!-- Modal Body -->
 					<div class="modal-body volUpModal">
 					</div>
@@ -286,15 +287,15 @@
 	</div>
 	
 	<div class="modal fade" id="volunt">
-		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table;">
+		<div class="modal-dialog " style="max-width: 100%; width: auto; display: table; margin-top:50px">
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h2 class="modal-title" id="buttons">
+					<h3 class="modal-title" id="buttons">
 						<img class="menu-bar-2"
 							src="${ pageContext.servletContext.contextPath }/resources/images/bar.png"
-							style="margin-right: 10px;"></img>봉사활동
-					</h2>
+							style="margin-right: 10px;"></img>봉사활동 추가
+					</h3>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
@@ -321,7 +322,7 @@
 						<div class="form-group row">
 							<label class="control-label col-md-2">봉사시간</label>
 							<div class="col-md-10">
-								<input class="form-control col-md-12" type="text" value="" name="volTime" id="volTime">
+								<input class="form-control col-md-12" type="text" value="" name="volTime" id="volTime" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -379,6 +380,7 @@
 					'<label class="control-label col-md-2">자격증명</label>'+
 					'<div class="col-md-4">'+
 						'<input class="form-control col-md-12" type="text" value="'+cer.title+'" name="title" id="title">'+
+						'<input class="form-control col-md-12"  name="cerNo" id="cerNo" type="hidden" value="'+ cer.cerNo +'"/>'+
 					'</div>'+ 
 				'</div>'+
 				'<div class="form-group row">'+
@@ -411,6 +413,7 @@
 					'<label class="control-label col-md-2">봉사명</label>'+
 					'<div class="col-md-10">'+
 					'<input class="form-control col-md-12" type="text" value="'+vol.volTitle+'" name="volTitle" id="volTitle">'+
+					'<input class="" name="volNo" id="volNo" type="hidden"  value="'+vol.volNo+'">'+
 					'</div>'+
 				'</div>'  +
 				'<div class="form-group row">'+
@@ -426,7 +429,7 @@
 				'<div class="form-group row">'+
 					'<label class="control-label col-md-2">봉사시간</label>'+
 					'<div class="col-md-10">'+
-						'<input class="form-control col-md-12" type="text" value="'+vol.volTime+'" name="volTime" id="volTime">'+
+						'<input class="form-control col-md-12" type="text" value="'+vol.volTime+'" name="volTime" id="volTime" >'+
 					'</div>'+
 				'</div>'+
 				'<div class="form-group row">'+
@@ -440,7 +443,9 @@
 						'<div class="col-md-10">'
 						 if(vol.originName!=""&&typeof vol.originName != "undefined"){
 								value += '<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/'+vol.changeName+'"'+
-				                        												'download='+vol.originName+'>'+vol.originName+'</a>'
+				                        												'download='+vol.originName+'>'+vol.originName+'</a>'+
+				                        												'<input class="form-control col-md-12" name="changeName" id="changeName" type="hidden" value="'+vol.changeName+'">'+
+				                        												'<input class="form-control col-md-12" name="originName" id="originName" type="hidden"  value="'+vol.originName+'">'
 										 }else{
 									value +='<input class="form-control col-md-12" type="text" disabled value="첨부파일이 없습니다." style="color:red;">'
 										 } 
@@ -453,6 +458,13 @@
 		}); 
 	});
 	
+	
+	$(".volUpModal").on("keydown"," #volTime",function() {
+		if((event.keyCode<48 || event.keyCode>57 )&& event.keyCode !== 8){
+	           event.returnValue=false;
+	           alert("숫자만 입력 가능합니다.");
+	        }
+	})
 	</script>
 </body>
 </html>

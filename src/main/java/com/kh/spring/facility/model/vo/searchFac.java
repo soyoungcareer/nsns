@@ -15,7 +15,7 @@ public class searchFac {
 
 	
 	private String cate1;
-	private String cate2;
+	private int cate2;
 	private String cate3;
 	private String cate4;
 	private int cate5;

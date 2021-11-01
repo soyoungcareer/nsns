@@ -224,8 +224,8 @@
 				</div>
 		
 					
-						<a id="aa" name="aa"> 보낼사람</a> <input type="text" name="from" id="from" />
-						<input type="button" onclick="sendSMS()" value="전송하기" id="check" name="check"/> 
+						<a id="aa" name="aa"></a> <input type="text" name="from" id="from" />
+						<input type="button" onclick="sendSMS()" value="인증번호 받기" id="check" name="check"/> 
 						<input type="hidden" id="ch" name="ch">
 						  
 						 <input type="hidden" name="fromm" id="fromm" /></li>

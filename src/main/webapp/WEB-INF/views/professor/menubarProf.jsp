@@ -40,6 +40,9 @@
   </head>
 
   <body class="app sidebar-mini">
+   
+   
+   
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }">
     <i class="fa fa-briefcase mr-2" aria-hidden="true"></i>낙성학사행정시스템</a>
@@ -52,6 +55,31 @@
           <input class="app-search__input" type="search" placeholder="Search">
           <button class="app-search__button"><i class="fa fa-search"></i></button>
         </li> -->
+         
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" data-toggle="modal" data-target="#loginModal"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="register.reg"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>수강신청</a></li>
+          </ul>
+        </li>
+          <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-archive fa-lg"  aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="facMove.me"> <i class="fa fa-archive fa-lg" aria-hidden="true"></i>시설물대여</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-calendar-o fa-lg"  aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="calendar.ca"> <i class="fa fa-calendar-o fa-lg" aria-hidden="true"></i>학사일정</a></li>
+          </ul>
+        </li>
         
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
@@ -114,5 +142,89 @@
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/chart.js"></script>
     <script type="text/javascript">
     </script>
+    
+    <!-- 로그인 클릭 시 뜨는 모달  -->
+	<div class="modal fade" id="loginModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">강의 인증</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+		
+					
+						<a id="aa" name="aa"> 보낼사람</a> <input type="text" name="from" id="from" />
+						<input type="button" onclick="sendSMS()" value="전송하기" id="check" name="check"/> 
+						<input type="hidden" id="ch" name="ch">
+						  
+						 <input type="hidden" name="fromm" id="fromm" /></li>
+						<input type="hidden" id="checkk" name="checkk" onclick="sendSMSCheck()"/> 
+						<form method="post" id="smsForm" action="lecMove.me">
+						<input type="hidden" id="id" name="id" value="123"/>
+				 
+						  </form>
+						
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function sendSMS() {
+			var from = $("#from").val();
+			console.log(from);
+			$.ajax({
+				url:"sendSms.me",
+				type:"post",
+				data:{from : from},
+				success:function(result){
+					$("#ch").val(result);
+					console.log(result);
+					$("#check").attr("type","hidden");
+					$("#from").attr("type","hidden");
+					$("aa").html("확인");
+					
+					$("#checkk").attr("type","button");
+					$("#fromm").attr("type","text");
+					
+					
+					
+					
+				},error:function(){
+					console.log("통신 실패");
+				}
+			});
+			
+	
+		}
+		
+		function sendSMSCheck() {
+			var from = $("#fromm").val();
+			var test = from;
+			console.log(from);
+			console.log("지금");
+			var check = $("#ch").val();
+	
+			var dd = check.indexOf(from);
+
+
+			console.log(dd);
+			
+			console.log(check);
+			if(dd == 1){
+			
+					$("#smsForm").submit();
+				
+			}else{
+				alert("일치하지 않습니다");
+			}
+			
+	
+		}
+	</script>
+
+
+
+    
   </body>
 </html>

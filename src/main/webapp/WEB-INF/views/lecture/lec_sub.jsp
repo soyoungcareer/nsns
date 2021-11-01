@@ -31,11 +31,11 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">김경준</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">정보통신공학과</a></li>
+						aria-current="page" href="#"></a></li>
+					<li class="nav-item"><a class="nav-link" href="#"></a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
 						<ul class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Action</a></li>
@@ -65,7 +65,7 @@
 
 
 			<button class="btn btn-outline-info" type="button"
-				onclick="location.href='lecpl.me?no=${no}&id=${id }'">추가
+				onclick="location.href='lecpl.me?no=${no}'">추가
 			</button>
 
 	
@@ -80,7 +80,7 @@
 				</thead>
 				<tbody>
 					<tr onclick="location.href='lecMovess.me?no=${l.listNo}&id=${id}'">
-						<td width="20%">${l.subTitle}</td>
+						<td width="20%">${l.listDate}</td>
 						<td width="40%">${l.listContent}<${l.listWeek}강></td>
 						<td width="40%"><progress value="${l.time }"
 								max="${l.totalTime }" id="jb"></progress></td>

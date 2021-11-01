@@ -75,17 +75,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*)
 		FROM FACILITY
 		<choose>
-			<when test='cate1.equals("선택") and cate2.equals("선택") '>
+			<when test='cate1.equals("선택") and cate4.equals("선택") '>
 			</when>
-			<when test='!cate1.equals("선택")  and cate2.equals("선택") '>
+			<when test='!cate1.equals("선택")  and cate4.equals("선택") '>
 				WHERE CATEGORY=#{cate1}
 			</when>
-			<when test='cate1.equals("선택")  and !cate2.equals("선택") '>
-				WHERE FAC_STATUS=#{cate2}
+			<when test='cate1.equals("선택")  and !cate4.equals("선택") '>
+				WHERE FAC_STATUS=#{cate4}
 			</when>
-			<when test='!cate1.equals("선택")  and !cate2.equals("선택") '>
+			<when test='!cate1.equals("선택")  and !cate4.equals("선택") '>
 				WHERE CATEGORY=#{cate1}
-				AND FAC_STATUS=#{cate2}
+				AND FAC_STATUS=#{cate4}
 			</when>
 		</choose>
 	</select>
@@ -97,25 +97,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FACILITY
 		<choose>
 			<when
-				test='cate1.equals("선택") and cate2.equals("선택") and cate3.equals("선택")'>
+				test='cate1.equals("선택") and cate4.equals("선택") and cate3.equals("선택")'>
 			</when>
 			<when
-				test='!cate1.equals("선택")  and cate2.equals("선택")  and cate3.equals("선택")'>
+				test='!cate1.equals("선택")  and cate4.equals("선택")  and cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
 			</when>
 			<when
-				test='cate1.equals("선택")  and !cate2.equals("선택") and cate3.equals("선택")'>
-				WHERE FAC_STATUS=#{cate2}
+				test='cate1.equals("선택")  and !cate4.equals("선택") and cate3.equals("선택")'>
+				WHERE FAC_STATUS=#{cate4}
 			</when>
 			<when
-				test='cate1.equals("선택")  and cate2.equals("선택") and !cate3.equals("선택")'>
+				test='cate1.equals("선택")  and cate4.equals("선택") and !cate3.equals("선택")'>
 				WHERE FAC_NAME=#{cate3}
 			</when>
 
 			<when
 				test='!cate1.equals("선택")  and !cate2.equals("선택") and cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
-				AND FAC_STATUS=#{cate2}
+				AND FAC_STATUS=#{cate4}
 			</when>
 
 			<when
@@ -125,14 +125,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			<when
 				test='cate1.equals("선택")  and !cate2.equals("선택") and !cate3.equals("선택")'>
-				WHERE FAC_STATUS=#{cate2}
+				WHERE FAC_STATUS=#{cate4}
 				AND FAC_NAME=#{cate3}
 			</when>
 
 			<when
 				test='!cate1.equals("선택")  and !cate2.equals("선택") and !cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
-				AND FAC_STATUS=#{cate2}
+				AND FAC_STATUS=#{cate4}
 				AND
 				FAC_NAME=#{cate3}
 			</when>
@@ -209,7 +209,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM FACILITY
 		WHERE
-		STU_ID=#{id}
+		STU_ID=#{id} AND FAC_STATUS='대여중'
 		ORDER BY
 		FAC_NO DESC
 	</select>

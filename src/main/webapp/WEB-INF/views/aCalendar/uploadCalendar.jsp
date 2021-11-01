@@ -20,13 +20,15 @@
           <h1><i class="fa fa-edit"></i> 학사일정 관리</h1>
         </div>
        <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
+           <li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
         </ul>
       </div>
       
       <div class="row">
       
         <div class="col-md-4">
+        	<div class="bs-component">
+            </div>
           <div class="tile">
             <div class="tile-title-w-btn" style="margin-top:20px;" >
               <h4 class="title" style="margin-left:50px"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> 학사일정 등록 </h4>
@@ -170,7 +172,14 @@
       function chekcDate() {
     	  
     	  if ($('#start').val() >  $('#end').val()) {
-              alert('마지막 일자가 앞설 수 없습니다.');
+    		  var str = ' <div class="alert alert-dismissible alert-danger">' 
+	        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+	        		+ ' <strong>확인!</strong> 마지막 일자가 앞설 수 없습니다. '
+	        		+ ' </div> '
+	        				
+	        		$('.bs-component').empty();
+	        		$('.bs-component').append(str);
+	        		
               $('#end').select();
               return false;
           }

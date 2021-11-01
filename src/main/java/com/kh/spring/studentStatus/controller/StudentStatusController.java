@@ -1,23 +1,18 @@
 package com.kh.spring.studentStatus.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
-import com.kh.spring.common.exception.CommException;
+import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentStatus.model.service.StudentStatusService;
 import com.kh.spring.studentStatus.model.vo.StudentBack;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
@@ -40,11 +35,11 @@ public class StudentStatusController {
 	//학생들의 휴복학 신청 현황
 	@ResponseBody
 	@RequestMapping(value="stuStsPro.stu", produces="application/json; charset=utf-8")
-	public String studentProList () { 
+	public String studentProList(HttpSession session) { 
 		
-		String userId = "20213309"; //로그인한 세션의 학생 학번 가져오기
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId(); //로그인한 세션의 학생 학번 가져오기
 				
-		ArrayList<StudentStatus> list = studentStatusService.studentProList(userId);
+		ArrayList<StudentStatus> list = studentStatusService.studentProList(stuId);
 		
 		System.out.println("list : " + list);
 		
@@ -68,8 +63,6 @@ public class StudentStatusController {
 	@RequestMapping(value="stuDo.stu", produces="application/json; charset=utf-8")
 	public String selectStuDo (int appNo) { 
 		
-		System.out.println("appNo : " + appNo);
-		
 		StudentDo stuDo = studentStatusService.selectStuDo(appNo);
 			
 		return new GsonBuilder().create().toJson(stuDo);
@@ -85,7 +78,9 @@ public class StudentStatusController {
 	//해당학생이 현재 휴학 신청 중인지 확인
 	@ResponseBody 
 	@RequestMapping(value="offCount.stu", produces="application/json; charset=utf-8")
-	public String selectOffCount (String stuId) { 
+	public String selectOffCount (HttpSession session) { 
+		
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
 		
 		int count = studentStatusService.selectOffCount(stuId);
 			
@@ -95,9 +90,13 @@ public class StudentStatusController {
 	
 	//학생 휴학신청 insert 
 	@RequestMapping("insertStuOff.stu")
-	public String insertStuOff(StudentOff stuOff, RedirectAttributes redirectAttributes) { 
+	public String insertStuOff(StudentOff stuOff, RedirectAttributes redirectAttributes, HttpSession session) { 
 		
-		String stuStatus = "재학"; //세션 로그인 학생정보에서 stuStatus를 가져온다. 
+		String stuStatus = ((Student)session.getAttribute("loginStu")).getStuStatus();//세션 로그인 학생정보에서 stuStatus를 가져온다. 
+		
+		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();
+		
+		stuOff.setStuId(stuId);
 		
 		if(stuStatus.equals("재학")) {
 			
@@ -122,8 +121,10 @@ public class StudentStatusController {
 	//해당학생이 현재 자퇴 신청 중인지 확인
 	@ResponseBody 
 	@RequestMapping(value="DoCount.stu", produces="application/json; charset=utf-8")
-	public String selectDoCount (String stuId) { 
-			
+	public String selectDoCount (HttpSession session) { 
+		
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();	
+		
 		int count = studentStatusService.selectDoCount(stuId);
 				
 		return new GsonBuilder().create().toJson(count);
@@ -132,9 +133,13 @@ public class StudentStatusController {
 	
 	//학생 자퇴신청 insert 
 	@RequestMapping("insertStuDo.stu")
-	public String insertStuDo(StudentDo stuDo, RedirectAttributes redirectAttributes) { 
+	public String insertStuDo(StudentDo stuDo, RedirectAttributes redirectAttributes, HttpSession session) { 
 			
-		String stuStatus = "재학"; //세션 로그인 학생정보에서 stuStatus를 가져온다. 
+		String stuStatus = ((Student)session.getAttribute("loginStu")).getStuStatus();//세션 로그인 학생정보에서 stuStatus를 가져온다.
+		
+		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();
+		
+		stuDo.setStuId(stuId);
 		
 		if(stuStatus.equals("재학")) {
 			

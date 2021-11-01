@@ -47,7 +47,7 @@ public class MemberController {
 							, @RequestParam("userPwd") String userPwd) {
 		
 		System.out.println("position : " + position);	
-		
+		session.setAttribute("position", position);
 		if(position.equals("admin")) {
 			
 			a.setAdmId(userId);
@@ -213,7 +213,7 @@ public class MemberController {
 	
 	//교수관리-교수 삭제 - 계약 종료
 	@RequestMapping("prfDelete.adm")
-	public String deleteProfessor(int profId) {
+	public String deleteProfessor(String profId) {
 	
 		memberService.deleteProfessor(profId);
 			
