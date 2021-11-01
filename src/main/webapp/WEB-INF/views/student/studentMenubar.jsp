@@ -40,12 +40,18 @@
          <a class="register-link" href="register.reg" style="color: white;">수강신청</a>
         </li>
          -->
-
+  <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="board.me"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>임시 커뮤티니</a></li>
+          </ul>
+        </li>
         
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item"  href="javascript:void(window.open('lecMove.me?id=20193019'))"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
+    	   <li><a class="dropdown-item" data-toggle="modal" data-target="#loginModal"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
+         
           </ul>
         </li>
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
@@ -139,6 +145,87 @@
 		  	});
 		</script>
     </c:if>
+    
+    
+    <!-- 로그인 클릭 시 뜨는 모달  -->
+	<div class="modal fade" id="loginModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">강의 인증</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+		
+  
+						<a id="aa" name="aa"></a> <input type="text" name="from" id="from" />
+						<input type="button" onclick="sendSMS()" value="인증번호 받기" id="check" name="check"/> 
+						<input type="hidden" id="ch" name="ch">
+						  
+						 <input type="hidden" name="fromm" id="fromm" /></li>
+						<input type="hidden" id="checkk" name="checkk" onclick="sendSMSCheck()" value="확인하기"/> 
+						<form method="post" id="smsForm" action="lecMove.me" >
+						<input type="hidden" id="id" name="id" value="123"/>
+				 
+						  </form>
+						
+			</div>
+		</div>
+	</div>
+    
+	<script>
+		function sendSMS() {
+			var from = $("#from").val();
+			console.log(from);
+			$.ajax({
+				url:"sendSms.me",
+				type:"post",
+				data:{from : from},
+				success:function(result){
+					$("#ch").val(result);
+					console.log(result);
+					$("#check").attr("type","hidden");
+					$("#from").attr("type","hidden");
+					$("aa").html("확인");
+					
+					$("#checkk").attr("type","button");
+					$("#fromm").attr("type","text");
+					
+					
+					
+					
+				},error:function(){
+					console.log("통신 실패");
+				}
+			});
+			
+	
+		}
+		
+		function sendSMSCheck() {
+			var from = $("#fromm").val();
+			var test = from;
+			console.log(from);
+			console.log("지금");
+			var check = $("#ch").val();
+	
+			var dd = check.indexOf(from);
+
+
+			console.log(dd);
+			
+			console.log(check);
+			if(dd == 1){
+			
+					$("#smsForm").submit();
+				
+			}else{
+				alert("일치하지 않습니다");
+			}
+			
+	
+		}
+	</script>
 
   </body>
 </html>

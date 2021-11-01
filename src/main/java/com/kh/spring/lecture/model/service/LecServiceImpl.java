@@ -12,6 +12,7 @@ import com.kh.spring.lecture.model.dao.LecDao;
 import com.kh.spring.lecture.model.vo.Reply;
 import com.kh.spring.lecture.model.vo.lecture;
 import com.kh.spring.lecture.model.vo.lectureList;
+import com.kh.spring.lecture.model.vo.lectureListwo;
 
 @Service
 public class LecServiceImpl implements LecService {
@@ -31,7 +32,7 @@ public class LecServiceImpl implements LecService {
 	}
 
 	@Override
-	public ArrayList<lectureList> lecPageSub(int no) {
+	public ArrayList<lectureListwo> lecPageSub(int no) {
 		// TODO Auto-generated method stub
 		return ld.lecPageSub(sqlSession, no);
 	}
@@ -69,6 +70,12 @@ public class LecServiceImpl implements LecService {
 	public void insertTime(searchFac sf) {
 
 		int result = ld.insertTime(sqlSession, sf);
+	}
+
+	@Override
+	public ArrayList<lectureListwo> selectProfList(searchFac sf) {
+		// TODO Auto-generated method stub
+		return ld.selectProfList(sqlSession,sf);
 	}
 
 

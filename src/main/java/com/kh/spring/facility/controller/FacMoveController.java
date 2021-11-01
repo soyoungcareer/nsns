@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.facility.model.Service.FacilityService;
@@ -26,6 +28,8 @@ import com.kh.spring.facility.model.vo.allam;
 import com.kh.spring.facility.model.vo.facility;
 import com.kh.spring.facility.model.vo.facilitycheck;
 import com.kh.spring.facility.model.vo.searchFac;
+import com.kh.spring.member.vo.Admin;
+import com.kh.spring.member.vo.Student;
 
 @Controller
 public class FacMoveController {
@@ -35,8 +39,17 @@ public class FacMoveController {
 
 	@RequestMapping("facMove.me")
 	public String facMain(@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
-			Model model) {
+			HttpSession session, Model model) {
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
+	
+		if(position.equals("student")) {
+			Student st = (Student) session.getAttribute("loginStu");
+			int id = st.getStuId();
+		}
+		
 
+		System.out.println("@@@@@@@@@@@@@@@@@" + position);
 		int listCount = fs.selectListCount();
 		System.out.println("리스트확인 테스트 " + listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -53,7 +66,10 @@ public class FacMoveController {
 	@RequestMapping("facMovessss.me")
 	public String facadminMain(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
-			@RequestParam(value = "msg", required = false) String msg) {
+			HttpSession session, @RequestParam(value = "msg", required = false) String msg) {
+
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
 
 		int listCount = fs.selectListCount();
 		System.out.println("리스트확인 테스트 " + listCount);
@@ -74,9 +90,17 @@ public class FacMoveController {
 
 	@RequestMapping("facMovess.me")
 	public String facMy(@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
-			Model model, @RequestParam(value = "id") int id) {
+			HttpSession session, Model model) {
 
-		System.out.println(id);
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
+
+		int id = 0;
+		if(position.equals("student")) {
+			Student st = (Student) session.getAttribute("loginStu");
+			 id = st.getStuId();
+		}
+		
 
 		int listCount = fs.selectMyListCount(id);
 		System.out.println("리스트확인 테스트 " + listCount);
@@ -164,7 +188,10 @@ public class FacMoveController {
 
 	@RequestMapping("facMovesss.me")
 	public String facCheck(@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
-			Model model) {
+			HttpSession session, Model model) {
+
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
 
 		int listCount = fs.selectListAppCount();
 		System.out.println("리스트확인 테스트 " + listCount);
@@ -182,8 +209,11 @@ public class FacMoveController {
 	}
 
 	@RequestMapping("facpl.me")
-	public String insertFacility(facility f, HttpServletRequest request, Model model,
+	public String insertFacility(facility f, HttpServletRequest request, Model model, HttpSession session,
 			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
+
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
 
 		if (!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
@@ -204,17 +234,19 @@ public class FacMoveController {
 	@RequestMapping("facMovecate.me")
 	public String selectCateList(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
-			@RequestParam(name = "cate1", required = false) String cate1,
+			HttpSession session, @RequestParam(name = "cate1", required = false) String cate1,
 			@RequestParam(name = "cate2", required = false) String cate2,
 			@RequestParam(name = "search", required = false) String cate3) {
 
 		if (cate3.isEmpty()) {
 			cate3 = "선택";
 		}
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
 
 		searchFac sf = new searchFac();
 		sf.setCate1(cate1);
-		sf.setCate2(cate2);
+		sf.setCate4(cate2);
 		sf.setCate3(cate3);
 
 		System.out.println("!@!@$!@$!%$#^#%" + cate1 + cate2 + cate3);
@@ -235,7 +267,7 @@ public class FacMoveController {
 	@RequestMapping("facMovecate2.me")
 	public String selectCateList2(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model,
-			@RequestParam(name = "cate1", required = false) String cate1,
+			HttpSession session, @RequestParam(name = "cate1", required = false) String cate1,
 			@RequestParam(name = "cate2", required = false) String cate2,
 			@RequestParam(name = "search", required = false) String cate3) {
 
@@ -243,9 +275,12 @@ public class FacMoveController {
 			cate3 = "선택";
 		}
 
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
+
 		searchFac sf = new searchFac();
 		sf.setCate1(cate1);
-		sf.setCate2(cate2);
+		sf.setCate4(cate2);
 		sf.setCate3(cate3);
 
 		System.out.println("!@!@$!@$!%$#^#%" + cate1 + cate2 + cate3);
@@ -278,9 +313,16 @@ public class FacMoveController {
 	}
 
 	@RequestMapping("facapp.me")
-	public String facApp(@RequestParam(value = "area") String area, @RequestParam(value = "userId") String userId,
+	public String facApp(@RequestParam(value = "area") String area, HttpSession session,
 			@RequestParam(value = "hiddenNO") String hiddenNO, Model model) {
+		String position = (String) session.getAttribute("position");
+		model.addAttribute("position", position);
 
+		int userId = 0;
+		if(position.equals("student")) {
+			Student st = (Student) session.getAttribute("loginStu");
+			 userId = st.getStuId();
+		}
 		searchFac sf = new searchFac();
 		sf.setCate1(area);
 		sf.setCate2(userId);
@@ -339,15 +381,15 @@ public class FacMoveController {
 		return "redirect:facMovessss.me";
 
 	}
-
+	
+	@ResponseBody
 	@RequestMapping("delallam.me")
-	public String delallam(@RequestParam(value = "test") String test1) {
-		int test = Integer.parseInt(test1);
-System.out.println("전");
-		fs.delallam(test);
-System.out.println("후");
-	String data = "data";
-	return data;
+	public String delallam(HttpSession session,@RequestParam(value = "test") String test1) {
+		Student st = (Student) session.getAttribute("loginStu");
+		int id = st.getStuId();
+		fs.delallam(id);
+		String data = "data";
+		return new GsonBuilder().create().toJson(data);
 
 	}
 

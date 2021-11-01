@@ -23,34 +23,56 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Main CSS-->
-<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="resources/bootstrap/docs/css/main.css">
 <!-- Font-icon css-->
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style>
-#images{
-	margin-left : 30px;
+#images {
+	margin-left: 30px;
 }
 </style>
+<c:if test="${position eq 'student'}">
 
-<jsp:include page="../../views/menubar.jsp" />
+	<jsp:include page="../../views/student/studentMenubar.jsp" />
 
+</c:if>
+<c:if test="${position eq 'admin'}">
+
+	<jsp:include page="../../views/admin/adminMenubar.jsp" />
+
+</c:if>
 
 
 <main class="app-content">
 	<div class="app-title">
 
 		<div>
+
 			<button class="btn btn-primary" type="button"
 				onclick="location.href='facMove.me'">대여목록</button>
-			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMovess.me?id=20193019'">MY대여</button>
-			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMovesss.me'">관리자 확인</button>
-			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMovessss.me'">관리 목록</button>
+
+			<c:if test="${position eq 'student'}">
+				<button class="btn btn-primary" type="button"
+					onclick="location.href='facMovess.me'">MY대여</button>
+			</c:if>
+
+			<c:if test="${position eq 'admin'}">
+				<button class="btn btn-primary" type="button"
+					onclick="location.href='facMovesss.me'">관리자 확인</button>
+			</c:if>
+
+			<c:if test="${position eq 'admin'}">
+				<button class="btn btn-primary" type="button"
+					onclick="location.href='facMovessss.me'">관리 목록</button>
+			</c:if>
+
+
+
+
+
 
 			<p></p>
 		</div>
@@ -79,9 +101,9 @@
 					<option value="예약중">예약중</option>
 					<option value="대여중">대여중</option>
 			</select>
-			</label> 
-			<input class="app-search__input" type="search" placeholder="Search" name="search" id="search">
-		
+			</label> <input class="app-search__input" type="search" placeholder="Search"
+				name="search" id="search">
+
 			</button>
 
 			<button class="btn btn-primary btn-sm" type="submit"
@@ -199,12 +221,12 @@
 											var no = td.eq(0).text();
 											var check = td.eq(2).text();
 											console.log(check);
-											if(check == '신청가능'){
+											if (check == '신청가능') {
 												$("#btn").show();
-											}else{
+											} else {
 												$("#btn").hide();
 											}
-											
+
 											$('#hiddenNo').attr('value', no);
 											console.log(no);
 											$
@@ -226,7 +248,7 @@
 																	.attr(
 																			'src',
 																			a);
-															$('div.modal:first')
+															$('#layerpop')
 																	.modal();
 
 														},
@@ -264,22 +286,23 @@
 											placeholder="신청 사유 작성" id="area" name="area" width="300"
 											height="500"> <br>
 									</div>
-									<input type="hidden" value="20193019" id="userId" name="userId">
 
 									<input id="hiddenNo" type="hidden" display:none name="hiddenNO"
 										enabled>
 
 
-									<div id ="images">
-										<img src="..." width="700" height="370" class="img-responsive" id="datatoin" alt="Responsive image">
+									<div id="images">
+										<img src="..." width="700" height="370" class="img-responsive"
+											id="datatoin" alt="Responsive image">
 									</div>
 
 									<!-- Modal footer -->
 
 									<div class="modal-footer">
-										
-										<button type="submit" class="btn btn-primary" id="btn">예약 신청</button>
-									
+
+										<button type="submit" class="btn btn-primary" id="btn">예약
+											신청</button>
+
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal">취소</button>
 									</div>
@@ -295,7 +318,7 @@
 						}, 3000);
 					</script>
 
-					
+
 
 
 

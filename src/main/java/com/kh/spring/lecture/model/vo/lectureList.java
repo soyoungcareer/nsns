@@ -17,7 +17,6 @@ public class lectureList {
 
 	private int listNo;
 	private int regNo;
-	private String subTitle;
 	private String listContent;
 	private Date listDate;
 	private int listWeek;

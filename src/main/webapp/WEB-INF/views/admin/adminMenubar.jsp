@@ -29,6 +29,40 @@
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="" style="font-size:17px;">낙성학사행정시스템</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+   
+     <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" data-toggle="modal" data-target="#loginModal"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>온라인 강의실</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="register.reg"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>수강신청</a></li>
+          </ul>
+        </li>
+          <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-archive fa-lg"  aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="facMove.me"> <i class="fa fa-archive fa-lg" aria-hidden="true"></i>시설물대여</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-calendar-o fa-lg"  aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="calendar.ca"> <i class="fa fa-calendar-o fa-lg" aria-hidden="true"></i>학사일정</a></li>
+          </ul>
+        </li>
+        <!-- User Menu-->
+       <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i>내 정보 확인</a></li>
+            <li><a class="dropdown-item" href=""><i class="fa fa-sign-out fa-lg"></i> 로그아웃</a></li>
+          </ul>
+        </li>
+      </ul>
+   
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
         <li class="app-search">

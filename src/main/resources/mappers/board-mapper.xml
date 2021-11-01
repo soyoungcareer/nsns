@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+
+	<resultMap id="boardResultSet" type="board">
+		<id property="no" column="BDNO" />
+		<result property="stuId" column="STU_ID" />
+		<result property="title" column="BD_TITLE" />
+		<result property="content" column="BD_CONTENT" />
+		<result property="like" column="BD_LIKE" />
+		<result property="isee" column="BD_ISEE" />
+		<result property="date" column="BD_DATE" />
+
+	</resultMap>
+
+	<resultMap id="boardLikeResultSet" type="boardLike">
+		<id property="no" column="LIKE_NO" />
+		<result property="stuId" column="STU_ID" />
+		<result property="bno" column="BDNO" />
+
+
+	</resultMap>
+
+
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM
+		BOARD
+	</select>
+
+	<select id="selecMyListCount" resultType="_int"
+		parameterType="_int">
+		SELECT COUNT (*)
+		FROM
+		BOARD
+		WHERE STU_ID=#{id}
+	</select>
+
+
+	<select id="selectList" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD
+		ORDER BY
+		BDNO DESC
+	</select>
+
+
+	<select id="selectMyList" resultMap="boardResultSet"
+		parameterType="_int">
+		SELECT *
+		FROM BOARD
+		WHERE
+		STU_ID=#{id}
+		ORDER BY
+		BDNO DESC
+	</select>
+
+	<insert id="boardplus" parameterType="searchFac">
+		INSERT INTO BOARD
+		VALUES(SEQ_NO.NEXTVAL, #{cate2},#{cate3},#{cate4},0,0,SYSDATE
+		)
+	</insert>
+
+
+
+	<select id="boarddetailPage" parameterType="_int"
+		resultMap="boardResultSet">
+		SELECT * FROM BOARD
+		WHERE BDNO = #{no}
+
+	</select>
+
+	<update id="boardCount" parameterType="_int">
+		UPDATE BOARD SET
+		BD_ISEE =
+		BD_ISEE + 1 WHERE
+		BDNO=#{no}
+
+
+	</update>
+	<update id="boardLike" parameterType="_int">
+		UPDATE BOARD SET
+		BD_LIKE =
+		BD_LIKE + 1 WHERE
+		BDNO=#{cate2}
+
+
+	</update>
+
+	<insert id="boardLikeName" parameterType="_int">
+		INSERT INTO LIKEBOARD
+		VALUES(SEQ_LIKE_NO.NEXTVAL, #{cate5}, #{cate2}
+		)
+	</insert>
+
+
+	<select id="boardCheck" parameterType="searchFac"
+		resultMap="boardLikeResultSet">
+		SELECT *
+		FROM LIKEBOARD
+		WHERE BDNO = #{cate2} AND
+		LIKE_NAME=#{cate5}
+	</select>
+
+
+
+
+	<select id="boardLkeCount" parameterType="_int"
+		resultType="_int">
+		SELECT BD_LIKE
+		FROM BOARD
+		WHERE BDNO = #{no}
+	</select>
+
+	<update id="boardupdate" parameterType="SearchFac">
+		UPDATE BOARD SET
+		BD_TITLE
+		= #{cate3} , BD_CONTENT=#{cate4}
+		WHERE BDNO=#{cate2}
+
+
+	</update>
+
+	<delete id="boarddel" parameterType="_int">
+			DELETE FROM BOARD WHERE
+		BDNO=#{NO}
+		
+	</delete>
+
+
+</mapper>
