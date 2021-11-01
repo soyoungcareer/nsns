@@ -274,7 +274,7 @@
 										</tr>
 									</thead>
 									<tbody>
-
+								
 									</tbody>
 								</table>
 							</div>
@@ -340,7 +340,6 @@
 											"style='margin-left: 10px;'>수강취소</button>"+"</th>"+
 									 
 							 		"</tr>";
-							 		
 						
 					});
 					$("#registerTable tbody").html(value);

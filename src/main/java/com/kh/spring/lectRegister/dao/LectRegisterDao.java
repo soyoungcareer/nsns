@@ -122,6 +122,10 @@ public class LectRegisterDao {
 		sqlSession.update("lectRegisterMapper.lectUpdateAdmin", subject);
 	}
 
+	public ArrayList<LecRegPro> timeBoardCartList(SqlSessionTemplate sqlSession, LectRegister re) {
+		return (ArrayList)sqlSession.selectList("lectRegisterMapper.timeBoardCartList", re);
+	}
+
 
 
 

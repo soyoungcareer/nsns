@@ -292,6 +292,13 @@
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>springloaded</artifactId> 
 			<version>1.2.8.RELEASE</version> <scope>provided</scope> </dependency> -->
 
+	<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.12.2</version>
+        </dependency>
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -315,6 +322,7 @@
 	        <artifactId>jackson-databind</artifactId>
 	        <version>2.9.6</version>
         </dependency>
+
 
 
 	</dependencies>

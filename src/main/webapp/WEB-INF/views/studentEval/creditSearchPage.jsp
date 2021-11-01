@@ -73,6 +73,17 @@
 										</tr>
 									</thead>
 									<tbody>
+									<c:if test="${ empty arlist }">
+											<tr >
+											<td colspan="7">
+											<h2 class="bs-component" style="text-align: center; line-height: 100px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 해당 자료가 없습니다. </h2>
+											<script type="text/javascript">
+												$("#creditTable").removeClass("table-hover");
+											</script>
+											</td>
+												</tr>
+											</c:if>
+											<c:if test="${ !empty arlist }">
 										<c:forEach items="${ arlist }" var="ar">
 						                    <tr>
 						                        <td>${ ar.lectRegister.year } 년도  ${ ar.lectRegister.semester } 학기</td>
@@ -120,6 +131,7 @@
 						                        </c:if>
 						                    </tr>
 					                    </c:forEach>
+					                    </c:if>
 										<!-- <tr>
 											<td rowspan="5"><a
 												href="lectRegisterEdit.reg">FA831</a></td>
@@ -142,11 +154,26 @@
 									<thead>
 										<tr>
 											<th style="background: #222d32; color: white; width: 16%">전공 필수</th>
-											<td style=" width: 16%">${cCredit.majorC} / 50</td>
+												<c:if test="${ empty cCredit }">
+												<td style=" width: 16%">0 / 50</td>
+												</c:if>
+												<c:if test="${ !empty cCredit }">
+												<td style=" width: 16%">${cCredit.majorC} / 50</td>
+												</c:if>
 											<th style="background: #222d32; color: white; width: 16%">교양 필수</th>
-											<td style=" width: 16%">${cCredit.elseC} / 20</td>
+												<c:if test="${ empty cCredit }">
+												<td style=" width: 16%">0 / 20</td>
+												</c:if>
+												<c:if test="${ !empty cCredit }">
+												<td style=" width: 16%">${cCredit.elseC} / 20</td>
+												</c:if>
 											<th style="background: #222d32; color: white; width: 16%">취득 학점</th>
-											<td style="width: 16%">${cCredit.allC}</td>
+											<c:if test="${ empty cCredit }">
+												<td style=" width: 16%">0</td>
+												</c:if>
+												<c:if test="${ !empty cCredit }">
+												<td style="width: 16%">${cCredit.allC}</td>
+												</c:if>
 										</tr>
 									</thead>
 								</table>
@@ -217,6 +244,107 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+			 <div class="col-md-6">
+          <div class="tile">
+          <c:choose>
+					  <c:when test = "${condition1 eq 0 and condition2 eq 0}">
+							<h5 >전체년도  전체학기</h5>
+						 </c:when>
+						 <c:when test = "${condition1 eq 0}">
+							<h5 >전체년도  ${ condition2 }학기</h5>
+						 </c:when>
+						 <c:when test = "${condition2 eq 0}">
+							<h5 >${ condition1 }년도 전체학기</h5>
+						 </c:when>
+							 <c:otherwise>
+								 <h5 >${ condition1 }년  ${ condition2 }학기</h5>
+							 </c:otherwise>
+			</c:choose> 
+            <h3 class="tile-title">졸업 달성률</h3>
+             <div style="width:10px; height: 10px; background-color: rgba(220,220,220,1); display: inline-block;"></div><span>&nbsp;&nbsp;&nbsp;목표치</span>&nbsp;&nbsp;
+            	<div style="width:10px; height: 10px; background-color: rgba(151,187,205,1); display: inline-block;"></div><span>&nbsp;&nbsp;&nbsp;달성률</span>
+            <div class="embed-responsive embed-responsive-16by9">
+              <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
+            </div>
+          </div>
+        </div>
+			 <div class="col-md-6">
+          <div class="tile">
+          <c:choose>
+					  <c:when test = "${condition1 eq 0 and condition2 eq 0}">
+							<h5 >전체년도  전체학기</h5>
+						 </c:when>
+						 <c:when test = "${condition1 eq 0}">
+							<h5 >전체년도  ${ condition2 }학기</h5>
+						 </c:when>
+						 <c:when test = "${condition2 eq 0}">
+							<h5 >${ condition1 }년도 전체학기</h5>
+						 </c:when>
+							 <c:otherwise>
+								 <h5 >${ condition1 }년  ${ condition2 }학기</h5>
+							 </c:otherwise>
+			</c:choose> 
+            <h3 class="tile-title">전공 교양 비율</h3>
+            <div class="embed-responsive embed-responsive-16by9">
+              <canvas class="embed-responsive-item" id="pieChartDemo"> </canvas>
+               <div style="width:10px; height: 10px; background-color: #46BFBD; display: inline-block;"></div><span>&nbsp;&nbsp;&nbsp;전공</span>&nbsp;&nbsp;
+            	<div style="width:10px; height: 10px; background-color: #F7464A; display: inline-block;"></div><span>&nbsp;&nbsp;&nbsp;교양</span>
+            </div>
+          </div>
+        </div>
+        </div>
 	</main>
+	<script type="text/javascript" src="resources/bootstrap/docs/js/plugins/chart.js"></script>
+	    <script type="text/javascript">
+	    var data = {
+	          	labels: ["전공 비율", "교양 비율", "전체 비율", "성적(100점 만점)"],
+	          	datasets: [
+	          		{
+	          			label: "목표치",
+	          			fillColor: "rgba(220,220,220,0.2)",
+	          			strokeColor: "rgba(220,220,220,1)",
+	          			pointColor: "rgba(220,220,220,1)",
+	          			pointStrokeColor: "#fff",
+	          			pointHighlightFill: "#fff",
+	          			pointHighlightStroke: "rgba(220,220,220,1)",
+	          			data: [50, 20, 70, 100]
+	          		},
+	          		{
+	          			label: "달성률",
+	          			fillColor: "rgba(151,187,205,0.2)",
+	          			strokeColor: "rgba(151,187,205,1)",
+	          			pointColor: "rgba(151,187,205,1)",
+	          			pointStrokeColor: "#fff",
+	          			pointHighlightFill: "#fff",
+	          			pointHighlightStroke: "rgba(151,187,205,1)",
+	          			data: [${cCredit.majorC}, ${cCredit.elseC}, ${cCredit.allC},${cCredit.gradeRe}]
+	          		}
+	          	]
+	          };  
+	    
+	      var ctxb = $("#barChartDemo").get(0).getContext("2d");
+	      var barChart = new Chart(ctxb).Bar(data);
+	      
+	      var pdata = [
+	      	{
+	      		value: ${cCredit.majorC},
+	      		color: "#46BFBD",
+	      		highlight: "#5AD3D1",
+	      		label: "전공필수"
+	      	},
+	      	{
+	      		value: ${cCredit.elseC},
+	      		color:"#F7464A",
+	      		highlight: "#FF5A5E",
+	      		label: "교양필수"
+	      	}
+	      ]
+	      
+	      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+	      var pieChart = new Chart(ctxp).Pie(pdata);
+	      
+	</script>
+	
 </body>
 </html>

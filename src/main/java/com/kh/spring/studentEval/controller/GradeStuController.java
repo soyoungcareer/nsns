@@ -2,6 +2,8 @@ package com.kh.spring.studentEval.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.lectRegister.vo.SearchReg;
+import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentEval.service.GradeStuService;
 import com.kh.spring.studentEval.vo.CountCredit;
 
@@ -23,8 +26,9 @@ public class GradeStuController {
 	private GradeStuService gradeStuService;
 	
 	@RequestMapping("grade.gra") // 성적 조회 페이지
-	public String gradePage(Model model) {
-		int stuId = 20193019;//임시 아이디 
+	public String gradePage(Model model, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LectRegister> yearList =gradeStuService.selectReYearList(stuId);
 		ArrayList<LectRegister> seList =gradeStuService.selectReSemeList(stuId);
 		ArrayList<LecRegPro> arlist =gradeStuService.selectGradeList(stuId);
@@ -41,8 +45,10 @@ public class GradeStuController {
 	@RequestMapping("gradeSearch.eval") // 성적 조회 검색창
 	public String gradeSearchPage(
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
-			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2, Model model) {
-		int stuId = 20193019;//임시 아이디 
+			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2, Model model
+			, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		SearchReg sr = new SearchReg();
 		sr.setCondition1(condition1);
 		sr.setCondition2(condition2);
@@ -61,8 +67,9 @@ public class GradeStuController {
 	}
 
 	@RequestMapping("credit.reg") // 학점 조회 페이지
-	public String creditPage(Model model) {
-		int stuId = 20193019;//임시 아이디 
+	public String creditPage(Model model, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LectRegister> yearList =gradeStuService.selectReYearList(stuId);
 		ArrayList<LectRegister> seList =gradeStuService.selectReSemeList(stuId);
 		ArrayList<LecRegPro> arlist =gradeStuService.selectGradeList(stuId);
@@ -76,8 +83,10 @@ public class GradeStuController {
 	@RequestMapping("creditSearch.eval") // 학점 조회 페이지 검색창
 	public String creditSearchPage(
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
-			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2, Model model) {
-		int stuId = 20193019;//임시 아이디 
+			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2, Model model
+			, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		SearchReg sr = new SearchReg();
 		sr.setCondition1(condition1);
 		sr.setCondition2(condition2);
@@ -96,8 +105,9 @@ public class GradeStuController {
 	}
 	@ResponseBody 
 	@RequestMapping(value="gradeDe.ev", produces="applicatoin/json; charset=utf-8") // 성적 상세보기
-	public String gradeDetailPage(String subCode, String date) {
-		int stuId = 20193019;//임시 아이디 
+	public String gradeDetailPage(String subCode, String date, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		LecRegPro grDetail =gradeStuService.gradeDetailList(stuId, subCode, date);
 		return new GsonBuilder().create().toJson(grDetail);
 	}

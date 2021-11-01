@@ -33,7 +33,7 @@
 							<div class="table-responsive">
 								<table class="table table-hover table-bordered" id="gradeObjectList">
 									<thead>
-										<tr>
+										<tr style="background: #222d32; color: white;">
 											<th>년도 학기</th>
 											<th>강의코드</th>
 											<th>교과목명</th>
@@ -44,7 +44,17 @@
 										</tr>
 									</thead>
 									<tbody>
-										
+										<c:if test="${ empty objList }">
+											<tr >
+											<td colspan="7">
+											<h2 class="bs-component" style="text-align: center; line-height: 100px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 해당 자료가 없습니다. 입력해주세요 </h2>
+											<script type="text/javascript">
+												$("#gradeObjectList").removeClass("table-hover");
+											</script>
+											</td>
+												</tr>
+											</c:if>
+											<c:if test="${ !empty objList }">
 											<c:forEach items="${ objList }" var="obj">
 						                    <tr>
 						                        <td>${ obj.lectRegister.year } 년 ${ obj.lectRegister.semester } 학기</td>
@@ -90,6 +100,7 @@
 														class="addObejct">신청확인</button></th>
 						                    </tr>
 					                    </c:forEach>
+					                    </c:if>
 									</tbody>
 								</table>
 							</div>
