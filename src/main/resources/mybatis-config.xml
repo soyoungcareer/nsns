@@ -40,6 +40,8 @@
     		<typeAlias type="com.kh.spring.evaluation.vo.Evaluation" alias="Evaluation"/>
      <typeAlias type="com.kh.spring.lecture.model.vo.lecture" alias="Lecture"/>
 			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureList" alias="lectureList"/>
+			 <typeAlias type="com.kh.spring.lecture.model.vo.lectureListwo" alias="lectureListwo"/>
+			 
 			 <typeAlias type="com.kh.spring.lecture.model.vo.Reply" alias="Reply"/>
     	<typeAlias type="com.kh.spring.studentSubject.model.vo.StudentSubject" alias="StudentSubject"/>
 		<typeAlias type="com.kh.spring.studentEval.vo.SearchSubject" alias="SearchSubject"/>
@@ -50,6 +52,9 @@
 			<typeAlias type="com.kh.spring.certificate.vo.Volunteer" alias="Volunteer"/>
 			<typeAlias type="com.kh.spring.studentSubject.model.vo.StuGradeAndCredit" alias="StuGradeAndCredit"/>
 			<typeAlias type="com.kh.spring.studentStatus.model.vo.StudentBack" alias="StudentBack"/>
+			<typeAlias type="com.kh.spring.board.vo.Board" alias="Board"/>
+			<typeAlias type="com.kh.spring.board.vo.BoardLike" alias="BoardLike"/>
+			
 
 	</typeAliases>
 
@@ -73,6 +78,8 @@
 		<mapper resource="/mappers/gradeStu-mapper.xml"/>
 		<mapper resource="/mappers/studentSubject-mapper.xml"/>
 		<mapper resource="/mappers/certificate-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
+		
 
 	</mappers>
 	

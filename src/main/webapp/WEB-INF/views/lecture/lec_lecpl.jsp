@@ -78,7 +78,7 @@
                 </div>
                
                <input type="hidden" id="no" name="no" value="${no }">
-                 <input type="hidden" id="id" name="id" value="${id }">
+                 
                
                 <div class="form-group row">
                   <label class="control-label col-md-3">INSERT LECTURE</label>

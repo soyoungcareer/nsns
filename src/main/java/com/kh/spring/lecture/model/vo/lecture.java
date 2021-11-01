@@ -22,6 +22,8 @@ public class lecture {
 	private int lecTer;
 	private String deptTitle;
 	private String proName;
+	private String stuName;
+	
 	
 	
 }

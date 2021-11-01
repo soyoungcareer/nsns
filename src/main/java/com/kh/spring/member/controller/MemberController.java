@@ -47,7 +47,7 @@ public class MemberController {
 							, @RequestParam("userPwd") String userPwd) {
 		
 		System.out.println("position : " + position);	
-		
+		session.setAttribute("position", position);
 		if(position.equals("admin")) {
 			
 			a.setAdmId(userId);
