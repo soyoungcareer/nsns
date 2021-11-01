@@ -70,5 +70,9 @@ public class GradeDao {
 		return sqlSession.update("gradeMapper.profObjCheck", objNo);
 	}
 
+	public int selectGradeCount(SqlSessionTemplate sqlSession, SearchGrade searchGrade) {
+		return sqlSession.selectOne("gradeMapper.selectGradeCount", searchGrade);
+	}
+
 }
  

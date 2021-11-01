@@ -17,6 +17,7 @@
 			var subCode = td.eq(0).text();
 			var year = $("#con1 option:selected").val();
 			var semester = $("#con2 option:selected").val();
+			var subTitle = td.eq(5).text();
 			
 			console.log(subCode);
 			console.log(year);
@@ -32,6 +33,13 @@
 				},
 				dataType:"json",
 				success:function(stuList){
+					var title = '<h3 class="tile-title">'
+						  + year + '학년도 '
+						  + semester + '학기 '
+						  + subTitle + '</h3>';
+					$('#divTitle').html(title);
+					
+					
 					var result = "<tr role='row'>";
 					
 					$.each(stuList, function(index, item) {
@@ -81,33 +89,35 @@
 							
 							<form action="evalSubLoad.pr">
 							<div class="row">
-								<div class="form-group col-md-5">
-								  <label class="control-label" for="con1">학년도 </label>
-								  <select class="form-control" id="con1" name="con1">
-								  	<option value="0">전체</option>
-								  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
-								    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
-								  </select>
-								</div>
-								<div class="form-group col-md-5">
-								  <label class="control-label" for="con2">학기 </label>
-								  <select class="form-control" id="con2" name="con2">
-								  	<option value="0">전체</option>
-								    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
-								    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
-								  </select>
-								</div>
-								<div class="col-sm-12 col-md-6">
-									<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
-										<label>강의명 
-											<input type="search" class="form-control form-control-sm"
-												aria-controls="sampleTable" name="keyword" value="${ keyword }">
-										</label>
-										<button class="btn btn-primary btn-sm" type="submit"
-										style="margin-left: 10px;" id="readList">조 회</button>
+								<div class="form-group col-md-3">
+									  <label class="control-label" for="con1">학년도 
+										  <select class="form-control" id="con1" name="con1">
+										  	<option value="0">전체</option>
+										  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+										    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
+										  </select>
+									  </label>
+									</div>
+									<div class="form-group col-md-3">
+									  <label class="control-label" for="con2">학기 
+									 	  <select class="form-control" id="con2" name="con2">
+										  	<option value="0">전체</option>
+										    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+										    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
+										  </select>
+									  </label>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
+											<label>강의명 
+												<input type="search" class="form-control form-control-sm"
+													aria-controls="sampleTable" name="keyword" value="${ keyword }">
+											</label>
+											<button class="btn btn-primary btn-sm" type="submit"
+											style="margin-left: 10px;" id="readList">조 회</button>
+										</div>
 									</div>
 								</div>
-							</div>
 							</form>
 							
 							<div class="row">
@@ -187,6 +197,21 @@
 									</table>
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="tile">
+				<div class="tile-body">
+					<div class="table-responsive">
+						<div id="sampleTable_wrapper"
+							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+							<div class="row" id="divTitle">
+							</div>
+
 
 							<div class="row">
 								<div class="col-sm-12">

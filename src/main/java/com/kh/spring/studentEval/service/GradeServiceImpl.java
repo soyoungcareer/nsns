@@ -89,6 +89,11 @@ public class GradeServiceImpl implements GradeService {
 		return gradeDao.profObjCheck(sqlSession, objNo);
 	}
 
+	@Override
+	public int selectGradeCount(SearchGrade searchGrade) {
+		return gradeDao.selectGradeCount(sqlSession, searchGrade);
+	}
+
 	
 	
 	/*

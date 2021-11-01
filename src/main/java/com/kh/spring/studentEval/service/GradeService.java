@@ -34,5 +34,7 @@ public interface GradeService {
 
 	int profObjCheck(String objNo);
 
+	int selectGradeCount(SearchGrade searchGrade);
+
 
 }

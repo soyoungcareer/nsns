@@ -163,6 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 성적 수정 -->
 	<update id="updateGrade" parameterType="Grade">
+	<!-- 쿼리문 잘돌아감. -->
 		UPDATE GRADE 
 		SET ATTENDANCE=#{attend}, ASSIGNMENT=#{assign}, MIDEXAM=#{mid}, FINEXAM=#{fin}
 		WHERE STU_ID=#{stuId} AND SUB_CODE=#{subCode} 

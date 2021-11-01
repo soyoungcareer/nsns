@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	String contextPath = request.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +16,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 학생관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -39,26 +35,36 @@
 								<h3 class="tile-title">출결관리</h3>
 							</div>
 							<div class="row">
-								<div class="form-group col-md-5">
-									<div class="form-group col-md-5">
-									  <label class="control-label" for="subDiv">학년도</label>
-									  <select class="form-control" id="subDiv">
-									  	<!-- -------------------------------------
-									  		option 반복문으로 수정하기
-									  	-------------------------------------- -->
-									    <option>2021</option>
-									    <option>2020</option>
+								<div class="form-group col-md-3">
+								  <label class="control-label" for="con1">학년도 
+									  <select class="form-control form-control-sm" id="con1" name="con1">
+									  	<option value="0">전체</option>
+									  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+									    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
 									  </select>
-									</div>
-									<div class="form-group col-md-5">
-									  <label class="control-label" for="subDiv">학기</label>
-									  <select class="form-control" id="subDiv">
-									    <option>1</option>
-									    <option>2</option>
+								  </label>
+								</div>
+								<div class="form-group col-md-3">
+								  <label class="control-label" for="con2">학기 
+								 	  <select class="form-control form-control-sm" id="con2" name="con2">
+									  	<option value="0">전체</option>
+									    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+									    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
 									  </select>
+								  </label>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
+										<label>강의명 
+											<input type="search" class="form-control form-control-sm"
+												aria-controls="sampleTable" name="keyword" value="${ keyword }">
+										</label>
+										<button class="btn btn-primary btn-sm" type="submit"
+										style="margin-left: 10px;" id="readList">조 회</button>
 									</div>
 								</div>
 							</div>
+							
 							<div class="row">
 								<div class="col-sm-12">
 									<table
@@ -67,6 +73,14 @@
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">학년도</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
+													style="width: 57.475px;">학기</th>
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Office: activate to sort column ascending"
@@ -90,6 +104,10 @@
 												<th class="sorting" tabindex="0" aria-controls="sampleTable"
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">강의형태</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">교수명</th>
 											</tr>
 										</thead>
@@ -103,6 +121,23 @@
 								</div>
 							</div>
 
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+							
+
+			<div class="tile">
+				<div class="tile-body">
+					<div class="table-responsive">
+						<div id="sampleTable_wrapper"
+							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+							<div class="row" id="divTitle">
+							</div>
+							
 							<div class="row">
 								<div class="form-group col-md-5">
 									<div class="form-group col-md-5">
@@ -110,16 +145,15 @@
 									  <!-- ------------------------------------
 									  	현재일자로 value 넣기
 									  -------------------------------------- -->
-									  <input class="form-control" type="text" value="">
+									  <input class="form-control form-control-sm" type="date" value="">
 									  <label> ~ </label>
-									  <input class="form-control" type="text" value="">
+									  <input class="form-control form-control-sm" type="date" value="">
 									  <button class="btn btn-primary btn-sm" type="button">조회</button>
 									  <button class="btn btn-primary btn-sm" type="button">저장</button>
 									</div>
 								</div>
 							</div>
-
-
+							
 							<div class="row">
 								<div class="col-sm-12">
 									<table

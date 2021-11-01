@@ -87,7 +87,8 @@ public class GradeController {
 	// 성적 조회
 	@ResponseBody
 	@RequestMapping(value="filteredGrade.pr", produces="application/json; charset=utf-8")
-	public String filteredGrade(String subCode, String gradeYear, String gradeSemester, HttpSession session) {
+	public String filteredGrade(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								String subCode, String gradeYear, String gradeSemester, HttpSession session, Model model) {
 		// 임시 데이터
 		//String profId = "EC1901";
 		
@@ -117,18 +118,12 @@ public class GradeController {
 	public String updateGrade(String attend, String assign, String mid, String fin, String stuId, 
 							  String subCode, String gradeYear, String gradeSemester) {
 		
-		int numAttend = Integer.parseInt(attend);
-		int numAssign = Integer.parseInt(assign);
-		int numMid = Integer.parseInt(mid);
-		int numFin = Integer.parseInt(fin);
-		int numStuId = Integer.parseInt(stuId);
-		
 		Map map = new HashMap();
-		map.put("attend", numAttend);
-		map.put("assign", numAssign);
-		map.put("mid", numMid);
-		map.put("fin", numFin);
-		map.put("stuId", numStuId);
+		map.put("attend", attend);
+		map.put("assign", assign);
+		map.put("mid", mid);
+		map.put("fin", fin);
+		map.put("stuId", stuId);
 		map.put("subCode", subCode);
 		map.put("gradeYear", gradeYear);
 		map.put("gradeSemester", gradeSemester);
