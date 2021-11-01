@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
-import com.kh.spring.common.exception.CommException;
 import com.kh.spring.lectRegister.service.LectRegisterService;
 import com.kh.spring.lectRegister.vo.LecRegPro;
 import com.kh.spring.lectRegister.vo.LectRegister;
@@ -28,6 +28,7 @@ import com.kh.spring.lectRegister.vo.SearchReg;
 import com.kh.spring.major.vo.Department;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
+import com.kh.spring.member.vo.Student;
 
 
 @Controller
@@ -38,12 +39,12 @@ public class LectRegisterController {
 	
 	@RequestMapping("register.reg") // 수강신청 페이지-----------------
 	public String registerPage(@RequestParam(value="currentPage", required=false, defaultValue="1") 
-								int currentPage, Model model) {
+								int currentPage, Model model, HttpSession session) {
 		int listCount = lectRegisterService.lectReListCount();
 		ArrayList<Department> departList = lectRegisterService.departList();
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		int stuId = 20193019;//임시 아이디 
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId);
 		ArrayList<LecRegPro> sublist = lectRegisterService.lectReList(pi);
 		model.addAttribute("pi",pi);
@@ -56,8 +57,9 @@ public class LectRegisterController {
 	
 	@ResponseBody 
 	@RequestMapping(value="selectReg.reg", produces="applicatoin/json; charset=utf-8")//수강신청한 과목 리스트
-	public String selectRegisterList() {
-		int stuId = 20193019;//임시 아이디 
+	public String selectRegisterList(HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LecRegPro> reglist =lectRegisterService.selectRegisterList(stuId);
 		return new GsonBuilder().create().toJson(reglist);
 	}
@@ -72,26 +74,27 @@ public class LectRegisterController {
 	
 	@ResponseBody 
 	@RequestMapping(value="reInsert.reg", produces="applicatoin/json; charset=utf-8")// 수강신청 추가
-	public String registerInsert(String subCode) {
-			//int stuId = 20188503;//임시 아이디 
-		  int stuId = 20193019;//임시 아이디 
+	public String registerInsert(String subCode, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  //int stuId = 20193019;//임시 아이디 
 		  int result = lectRegisterService.regiInsert(subCode, stuId);
 		  return new GsonBuilder().create().toJson(result);
 		 
 	}
 	@ResponseBody 
 	@RequestMapping(value="reDelete.reg", produces="applicatoin/json; charset=utf-8")// 수강신청 삭제
-	public String registerDelete(String subCode) {
-		  int stuId = 20193019;//임시 아이디 
+	public String registerDelete(String subCode, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  //int stuId = 20193019;//임시 아이디 
 		  int result = lectRegisterService.registerDelete(subCode, stuId);
 		  return new GsonBuilder().create().toJson(result);
 		 
 	}
 	@ResponseBody 
 	@RequestMapping(value="reCheck.reg", produces="applicatoin/json; charset=utf-8")// 이미 수강된 과목인가
-	public String checkRegister(String subCode) {
-		//int stuId = 20188503;//임시 아이디 
-		  int stuId = 20193019;//임시 아이디 
+	public String checkRegister(String subCode, HttpSession session) {
+		  int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  //int stuId = 20193019;//임시 아이디 
 			LectRegister lect =lectRegisterService.checkRegister(stuId, subCode);//수강과목
 			
 			return new GsonBuilder().create().toJson(lect);
@@ -99,18 +102,18 @@ public class LectRegisterController {
 	}
 	@ResponseBody 
 	@RequestMapping(value="checkCredit.reg", produces="applicatoin/json; charset=utf-8")// 수강신청 학점 이상인가
-	public String checkCredit() {
-		//int stuId = 20188503;//임시 아이디 
-		  int stuId = 20193019;//임시 아이디 
+	public String checkCredit(HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  //int stuId = 20193019;//임시 아이디 
 			Integer countCredit =lectRegisterService.checkCredit(stuId);//수강과목
 			return new GsonBuilder().create().toJson(countCredit);
 		 
 	}
 	@ResponseBody 
 	@RequestMapping(value="checkDate.reg", produces="applicatoin/json; charset=utf-8")// 수강신청하는데 중복된 시간인가
-	public String checkDate(String subCode) {
-		//int stuId = 20188503;//임시 아이디 
-		  int stuId = 20193019;//임시 아이디 
+	public String checkDate(String subCode, HttpSession session) {
+		  int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  //int stuId = 20193019;//임시 아이디 
 		  ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId);//수강신청한 과목
 		  System.out.println("arlist"+arlist);
 		  int result =lectRegisterService.checkDate(arlist, subCode);//수강과목
@@ -122,7 +125,7 @@ public class LectRegisterController {
 	public String searchRegister(@RequestParam(value="currentPage", required= false, defaultValue = "1") int currentPage,
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
 			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2,
-			@RequestParam(value="search", required= false, defaultValue = "%") String search, Model model) {
+			@RequestParam(value="search", required= false, defaultValue = "%") String search, Model model, HttpSession session) {
 		  
 			SearchReg sr = new SearchReg();
 			sr.setCondition1(condition1);
@@ -130,7 +133,8 @@ public class LectRegisterController {
 			sr.setSearch(search);
 		  	int listCount = lectRegisterService.searchListCount(sr);// 검색후 list 갯수
 		  	PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		  	int stuId = 20193019;//
+		  	int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  	//int stuId = 20193019;//
 		  	ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId); 
 		  	ArrayList<LecRegPro> sublist = lectRegisterService.searchLectReList(sr, pi);
 		  	ArrayList<Department> departList = lectRegisterService.departList();
@@ -149,12 +153,12 @@ public class LectRegisterController {
 	}
 	@RequestMapping("cart.reg") // 장바구니 페이지-----------------
 	public String cartPage(@RequestParam(value="currentPage", required=false, defaultValue="1") 
-				int currentPage, Model model) {
+				int currentPage, Model model, HttpSession session) {
 			int listCount = lectRegisterService.lectReListCount();
 			ArrayList<Department> departList = lectRegisterService.departList();
 			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-			
-			int stuId = 20193019;//임시 아이디 
+			int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+			//int stuId = 20193019;//임시 아이디 
 			ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId);
 			ArrayList<LecRegPro> sublist = lectRegisterService.lectReList(pi);
 			
@@ -168,7 +172,7 @@ public class LectRegisterController {
 	public String searchCart(@RequestParam(value="currentPage", required= false, defaultValue = "1") int currentPage,
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
 			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2,
-			@RequestParam(value="search", required= false, defaultValue = "%") String search, Model model) {
+			@RequestParam(value="search", required= false, defaultValue = "%") String search, Model model, HttpSession session) {
 		  
 			SearchReg sr = new SearchReg();
 			sr.setCondition1(condition1);
@@ -176,7 +180,8 @@ public class LectRegisterController {
 			sr.setSearch(search);
 		  	int listCount = lectRegisterService.searchListCount(sr);// 검색후 list 갯수
 		  	PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		  	int stuId = 20193019;//
+		  	int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  	//int stuId = 20193019;//
 		  	ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId); 
 		  	ArrayList<LecRegPro> sublist = lectRegisterService.searchLectReList(sr, pi);
 		  	ArrayList<Department> departList = lectRegisterService.departList();
@@ -195,42 +200,57 @@ public class LectRegisterController {
 	}
 	@ResponseBody 
 	@RequestMapping(value="selectCartReg.reg", produces="applicatoin/json; charset=utf-8")//장바구니한 과목 리스트
-	public String selectRegiCartsterList() {
-		int stuId = 20193019;//임시 아이디 
+	public String selectRegiCartsterList(HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LecRegPro> cartlist =lectRegisterService.selectRegiCartsterList(stuId);
 		return new GsonBuilder().create().toJson(cartlist);
 	}
 	
 	@ResponseBody 
 	@RequestMapping(value="reInsertCart.reg", produces="applicatoin/json; charset=utf-8")// 장바구니 추가
-	public String registerInsertCart(String subCode) {
-		  int stuId = 20193019;//임시 아이디 
+	public String registerInsertCart(String subCode, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		  int result = lectRegisterService.regiInsertCart(subCode, stuId);
 		  return new GsonBuilder().create().toJson(result);
 		 
 	}
 	@ResponseBody 
 	@RequestMapping(value="reDeleteCart.reg", produces="applicatoin/json; charset=utf-8")// 장바구니 삭제
-	public String registerDeleteCart(String subCode) {
-		  int stuId = 20193019;//임시 아이디 
+	public String registerDeleteCart(String subCode, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		  int result = lectRegisterService.registerDeleteCart(subCode, stuId);
 		  return new GsonBuilder().create().toJson(result);
 		 
 	}
 	@ResponseBody 
 	@RequestMapping(value="reCheckCart.reg", produces="applicatoin/json; charset=utf-8")// 이미 장바구니에 추가된 과목인가
-	public String checkRegisterCart(String subCode) {
-			int stuId = 20193019;//임시 아이디 
+	public String checkRegisterCart(String subCode, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 			LectRegister lect =lectRegisterService.checkRegisterCart(stuId, subCode);//수강과목
 			
 			return new GsonBuilder().create().toJson(lect);
 		 
 	}
 	@RequestMapping("timeBoard.reg") // 시간표 페이지-----------------
-	public String timeBoardPage(Model model) {
-		int stuId = 20193019;//임시 아이디 
+	public String timeBoardPage(Model model, @RequestParam(value="timeTable", required= false, defaultValue = "1") int timeTable, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LecRegPro> timeList =lectRegisterService.timeBoardList(stuId);//수강과목 시간표 리스트
 		model.addAttribute("timeList",timeList);
+		model.addAttribute("timeTable",timeTable);
+		return "lectRegister/timeBoard";
+	}
+	@RequestMapping("timeBCart.reg") // 시간표 장바구니 페이지-----------------
+	public String timeBoardCartPage(Model model, @RequestParam(value="timeTable", required= false, defaultValue = "2") int timeTable, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
+		ArrayList<LecRegPro> timeList =lectRegisterService.timeBoardCartList(stuId);//장바구니 시간표 리스트
+		model.addAttribute("timeList",timeList);
+		model.addAttribute("timeTable",timeTable);
 		return "lectRegister/timeBoard";
 	}
 	@RequestMapping("registerAdmin.reg") // 관리자 페이지-----------------
@@ -272,7 +292,7 @@ public class LectRegisterController {
 		 
 	}
 	
-	@RequestMapping("searchRegAdmin.reg")// 수강신청 관리자 검색
+	@RequestMapping("searchRegAdmin.reg")// 수강신청 관리자 검색- 수정
 	public String searchRegisterAdmin(@RequestParam(value="currentPage", required= false, defaultValue = "1") int currentPage,
 			@RequestParam(value="condition1", required= false, defaultValue = "0") int condition1,
 			@RequestParam(value="condition2", required= false, defaultValue = "0") int condition2,
@@ -284,13 +304,10 @@ public class LectRegisterController {
 			sr.setSearch(search);
 		  	int listCount = lectRegisterService.searchListCount(sr);// 검색후 list 갯수
 		  	PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		  	int stuId = 20193019;//
-		  	ArrayList<LecRegPro> arlist =lectRegisterService.selectRegisterList(stuId); 
 		  	ArrayList<LecRegPro> sublist = lectRegisterService.searchLectReList(sr, pi);
 		  	ArrayList<Department> departList = lectRegisterService.departList();
 		  	model.addAttribute("pi",pi); 
 			model.addAttribute("sublist",sublist);
-			model.addAttribute("arlist",arlist);
 			model.addAttribute("departList",departList);
 			model.addAttribute("condition1",condition1);
 			model.addAttribute("condition2",condition2);

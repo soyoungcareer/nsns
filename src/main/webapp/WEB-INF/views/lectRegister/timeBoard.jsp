@@ -36,11 +36,11 @@
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
 							<div class="dataTables_length" id="sampleTable_length">
-								<label>이수구분 : &nbsp;&nbsp;&nbsp;<select
-									name="sampleTable_length" aria-controls="sampleTable"
+								<label>이수구분 : &nbsp;&nbsp;&nbsp;
+								<select id="timeTable" name="sampleTable_length" aria-controls="sampleTable"
 									class="form-control form-control-sm" style="width: 100px">
-										<option value="1">수강신청</option>
-										<option value="2">장바구니</option>
+										<option value="1" <c:if test="${ timeTable eq 1 }">selected</c:if>>수강신청</option>
+										<option value="2" <c:if test="${ timeTable eq 2 }">selected</c:if>>장바구니</option>
 								</select>
 								</label>
 							</div>
@@ -174,6 +174,15 @@ var list = new Array();
 			}
 		}
 	})
+})
+
+
+$("#timeTable").change(function() {
+	if($(this).val()==1){
+		location.href="timeBoard.reg"
+	}else{
+		location.href="timeBCart.reg"
+	}
 })
 
 </script>

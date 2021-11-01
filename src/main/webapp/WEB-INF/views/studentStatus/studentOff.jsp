@@ -33,11 +33,9 @@
              
               <form class="form-horizontal" action="insertStuOff.stu" method="post" onsubmit="return check();">
            			 <div style="margin-left:300px;">
-			             <label for="stuId"><b>학번 :</b> 20213309 </label> &nbsp;&nbsp;
-			             <input type="hidden" id="stuId" name="stuId" value="20213309">
+			             <label for="stuId"><b>학번 :</b> ${loginStu.stuId} </label> &nbsp;&nbsp;
 			             
-			             <label for="stuName"><b>이름 :</b> 유재석  </label>&nbsp;&nbsp;
-			             <input type="hidden" id="stuName" name="stuName" value="유재석">
+			             <label for="stuName"><b>이름 :</b> ${loginStu.stuName}  </label>&nbsp;&nbsp;
 		             
            		 	</div>
               
@@ -141,7 +139,6 @@
 		   	$.ajax({
 				url: "offCount.stu",
 				dataType:"json",
-				data : { stuId :stuId },
 				async : false,
 				success: function(count){
 					console.log(count);

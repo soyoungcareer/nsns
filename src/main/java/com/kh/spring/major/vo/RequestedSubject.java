@@ -1,5 +1,7 @@
 package com.kh.spring.major.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +26,13 @@ public class RequestedSubject {
 	private String status;	// "STATUS"		VARCHAR2(1)	DEFAULT 'N'	CHECK(STATUS IN('Y','N'))		NOT NULL
 	private String attOrigin;
 	private String attChange;
+	private Date reqDate;
+	private String subCode;
+	private String reqType;
+	
+	//관리자 강의 생성 임시
+	private String reqType;
+	private String deptTitle;
+	private String profName;
 	
 }

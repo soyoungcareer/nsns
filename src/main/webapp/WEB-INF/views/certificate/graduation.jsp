@@ -37,7 +37,10 @@
 		<div id="printthis">
 		<div class="tile mb-4" <c:if test = "${ empty graduation}"> style="height:300px " </c:if>>
 			<div class="page-header">
-			<h5 class="row col-sm-12 col-md-12" style="text-align: justify;">제 ${ graduation.gradNo } 회</h5>
+			
+				<c:if test="${ !empty graduation }">
+				<h5 class="row col-sm-12 col-md-12" style="text-align: justify;">제 ${ graduation.gradNo } 회</h5>
+				</c:if>
 				<div class="row">
 					<div class="col-lg-12" style="float: none; margin:0 auto;">
 						<div class="row d-print-none mt-2">

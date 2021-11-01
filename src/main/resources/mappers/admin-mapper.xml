@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertNBoard" parameterType="Notice">
 		INSERT INTO NOTICE
-		VALUES (SEQ_NTC_NO.NEXTVAL, #{ntcCategory}, #{ntcTitle}, #{ntcContent}, #{ntcWriter}, #{originName}, #{changeName}, default, sysdate, default)
+		VALUES (SEQ_NTC_NO.NEXTVAL, #{ntcCategory}, #{ntcTitle}, #{ntcContent}, #{ntcContent}, #{originName}, #{changeName}, default, sysdate, default)
 	</insert>
 	
 	<update id="updateNBoard" parameterType="Notice">

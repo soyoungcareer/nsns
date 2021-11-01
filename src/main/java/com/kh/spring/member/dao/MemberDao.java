@@ -71,7 +71,7 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteStudent", stuId);
 	}
 
-	public int deleteProfessor(SqlSessionTemplate sqlSession, int profId) {
+	public int deleteProfessor(SqlSessionTemplate sqlSession, String profId) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("memberMapper.deleteProfessor", profId);
 	}

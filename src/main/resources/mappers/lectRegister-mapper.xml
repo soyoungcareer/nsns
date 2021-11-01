@@ -274,4 +274,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SUB_CLASS=#{subClass},SUB_TIME=#{subTime},SUB_TYPE=#{subType},ORIGIN_NAME=#{originName},CHANGE_NAME=#{changeName}
 		WHERE SUB_CODE=#{subCode} AND STATUS='Y'
 	</update>
+	<select id="timeBoardCartList" parameterType="LectRegister" resultMap="LecRegProListSet">
+		SELECT *
+		FROM LECT_CART A
+		JOIN SUBJECT B ON A.SUB_CODE=B.SUB_CODE
+		WHERE A.STU_ID=#{stuId} AND A.YEAR=#{year} AND A.SEMESTER=#{semester} AND A.STATUS='Y'
+	</select>
 </mapper>

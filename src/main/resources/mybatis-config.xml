@@ -8,7 +8,6 @@
 
 	<typeAliases>
 
-	
 		<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.member.vo.Admin" alias="Admin"/>
 		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
@@ -64,7 +63,7 @@
 	
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
-	
+		<mapper resource="/mappers/major-mapper.xml"/>
 		<mapper resource="/mappers/facility-mapper.xml"/>
 		<mapper resource="/mappers/calendar-mapper.xml"/> 
 		<mapper resource="/mappers/student-mapper.xml"/> 

@@ -74,6 +74,17 @@
 										</tr>
 									</thead>
 									<tbody>
+									<c:if test="${ empty arlist }">
+											<tr >
+											<td colspan="8">
+											<h2 class="bs-component" style="text-align: center; line-height: 100px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 해당 자료가 없습니다. </h2>
+											<script type="text/javascript">
+												$("#gradeTable").removeClass("table-hover");
+											</script>
+											</td>
+												</tr>
+											</c:if>
+									<c:if test="${ !empty arlist }">
 										<c:forEach items="${ arlist }" var="ar">
 						                    <tr>
 						                        <td>${ ar.lectRegister.year } 년 ${ ar.lectRegister.semester } 학기</td>
@@ -155,6 +166,7 @@
 											      </c:choose>   
 						                    </tr>
 					                    </c:forEach>
+					                    </c:if>
 											<!-- <tr>
 											<td rowspan="5"><a
 											href="lectRegisterEdit.reg">FA831</a></td>
@@ -183,7 +195,12 @@
 									<thead>
 										<tr>
 											<th style="background: #222d32; color: white; width: 16%">취득 학점</th>
+											<c:if test="${ !empty cCredit }">
 											<td >${cCredit.allC}</td>
+											</c:if>
+											<c:if test="${ empty cCredit }">
+											<td >0</td>
+											</c:if>
 											<th style="background: #222d32; color: white; width: 16%">평균 학점</th>
 											<c:choose>
 											         <c:when test = "${ empty cCredit.avgCredit or cCredit.avgCredit==0.0}">
