@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="majorMapper">
+
+	<resultMap id="reqSubjectResultSet" type="RequestedSubject">
+		<id property="reqSubNo" column="REQSUB_NO"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptTitle" column="DEPT_TITLE"/><!--  -->
+		<result property="subDivs" column="SUB_DIVS"/>
+		<result property="subType" column="SUB_TYPE"/>
+		<result property="subTitle" column="SUB_TITLE"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="profName" column="PROF_NAME"/><!--  -->
+		<result property="subCredit" column="SUB_CREDIT"/>
+		<result property="subTime" column="SUB_TIME"/>
+		<result property="reqType" column="REQ_TYPE"/>
+		<result property="status" column="STATUS"/>
+   <!-- <result property="attOrigin" column="ATT_ORIGIN"/>
+		<result property="attChange" column="ATT_CHANGE"/>
+		<result property="subCode" column="SUB_CODE"/> -->
+	</resultMap>
+	
+	<resultMap id="subjectResultSet" type="Subject">
+		<id property="subCode" column="SUB_CODE"/>
+		<result property="subTitle" column="SUB_TITLE"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptTitle" column="DEPT_TITLE"/><!--  -->
+		<result property="subDivs" column="SUB_DIVS"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="profName" column="PROF_NAME"/><!--  -->
+		<result property="subCredit" column="SUB_CREDIT"/>
+		<result property="subClass" column="SUB_CLASS"/>
+		<result property="subTime" column="SUB_TIME"/>
+		<result property="subType" column="SUB_TYPE"/>
+		<result property="subYear" column="SUB_YEAR"/>
+		<result property="subSmst" column="SUB_SMST"/>
+		<result property="status" column="STATUS"/>
+		<result property="originName" column="ORIGIN_NAME"/>
+		<result property="changeName" column="CHANGE_NAME"/>
+	</resultMap>
+	
+	
+	<select id="subjectModifyListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM REQ_SUBJECT
+		WHERE STATUS = 'N'
+	</select>
+	
+	<select id="subjectModifyList" resultMap="reqSubjectResultSet">
+		SELECT A.REQSUB_NO, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, C.PROF_NAME, A.SUB_CREDIT, A.SUB_TIME, A.REQ_TYPE, A.STATUS
+		FROM REQ_SUBJECT A
+		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
+		LEFT JOIN PROFESSOR C USING (PROF_ID)
+		WHERE STATUS = 'N'
+		ORDER BY REQSUB_NO DESC
+	</select>
+		
+	<select id="selectSubjectModify" resultType="_int" resultMap="reqSubjectResultSet">
+		SELECT A.REQSUB_NO, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, C.PROF_NAME, A.SUB_CREDIT, A.SUB_TIME, A.REQ_TYPE, A.STATUS
+		FROM REQ_SUBJECT A
+		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
+		LEFT JOIN PROFESSOR C USING (PROF_ID)
+		WHERE REQSUB_NO= #{sno} AND STATUS= 'N'
+	</select>
+	
+	<insert id="createSubject" parameterType="Subject">
+		INSERT INTO SUBJECT
+		VALUES (#{subCode}, #{subTitle}, #{deptCode}, #{subDivs}, #{profId}, #{subCredit}, #{subClass}, #{subTime}, #{subType}, #{subYear}, #{subSmst}, default, #{attOrigin}, #{attChange})
+	</insert>
+	
+	<update id="createRequestSubject" parameterType="RequestedSubject">
+		UPDATE REQ_SUBJECT
+		SET REQSUB_NO = 'Y'
+	</update>
+	
+
+</mapper>

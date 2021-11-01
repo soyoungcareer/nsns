@@ -63,7 +63,7 @@
         
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">수강 신청</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 강의 신청 내역</a></li>
+            <li><a class="treeview-item" href="subModifyList.adm"><i class="icon fa fa-circle-o"></i> 강의 신청 내역</a></li>
             <!-- <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li> -->
             <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> 전체 강의 조회</a></li>
             <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Widgets</a></li> -->
