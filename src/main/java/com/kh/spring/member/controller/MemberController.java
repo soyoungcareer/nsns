@@ -213,7 +213,7 @@ public class MemberController {
 	
 	//교수관리-교수 삭제 - 계약 종료
 	@RequestMapping("prfDelete.adm")
-	public String deleteProfessor(int profId) {
+	public String deleteProfessor(String profId) {
 	
 		memberService.deleteProfessor(profId);
 			

@@ -31,7 +31,7 @@ public interface MemberService {
 
 	void deleteStudent(int stuId);
 
-	void deleteProfessor(int profId);
+	void deleteProfessor(String profId);
 
 	int studentStatusFormCount();
 
