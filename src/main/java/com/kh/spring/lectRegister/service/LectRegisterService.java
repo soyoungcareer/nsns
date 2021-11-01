@@ -56,6 +56,8 @@ public interface LectRegisterService {
 
 	void lectUpdateAdmin(Subject subject, String day, int start, int end);
 
+	ArrayList<LecRegPro> timeBoardCartList(int stuId);
+
 
 
 }

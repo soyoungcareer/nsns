@@ -38,6 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="deptCode" column="DEPT_CODE" />
 		<result property="profId" column="PROF_ID" />
 	</resultMap>
+<resultMap id="studentDepartSet" type="Student">
+		<id property="stuId" column="STU_ID" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="deptName" column="DEPT_TITLE"/>
+	</resultMap>
 <resultMap id="departListSet" type="Department">
 		<id property="deptCode" column="DEPT_CODE" />
 		<result property="deptTitle" column="DEPT_TITLE" />
@@ -88,5 +93,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM VOLUNTEER
 		WHERE VOL_NO=#{volNo} AND STATUS='Y'
+</select>
+<update id="certificateUpdate" parameterType="Certificate" >
+		UPDATE CERTIFUCATE<!-- 여기 아직 안함 -->
+		SET  CER_CATEGORY=#{category}, CER_TITLE=#{title}, AGENCY=#{agency}, GET_DATE=#{getDate}
+		WHERE CER_NO=#{cerNo} AND STU_ID=#{stuId} AND STATUS='Y'
+</update>
+<update id="volunteerUpdate" parameterType="Volunteer" >
+		UPDATE VOLUNTEER<!-- 여기 아직 안함 -->
+		SET  VOL_TITLE=#{volTitle}, START_DATE=#{startDate}, END_DATE=#{endDate}, VOL_TIME=#{volTime},ORIGIN_NAME=#{originName},CHANGE_NAME=#{changeName}
+		WHERE VOL_NO=#{volNo} AND STU_ID=#{stuId} AND STATUS='Y'
+</update>
+<select id="studentDepartment" parameterType="_int" resultMap="studentDepartSet">
+		SELECT A.STU_ID,B.DEPT_TITLE, B.DEPT_CODE
+		FROM STUDENT A
+		JOIN DEPARTMENT B on A.DEPT_CODE=B.DEPT_CODE
+		WHERE A.STU_ID = #{stuId}
 </select>
 </mapper>

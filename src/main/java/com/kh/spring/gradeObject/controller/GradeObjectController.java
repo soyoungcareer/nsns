@@ -2,6 +2,8 @@ package com.kh.spring.gradeObject.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.gradeObject.service.GradeObjectService;
 import com.kh.spring.lectRegister.vo.LecRegPro;
+import com.kh.spring.member.vo.Student;
 
 @Controller
 public class GradeObjectController {
@@ -22,24 +25,27 @@ public class GradeObjectController {
 	 
 	
 	@RequestMapping("gradeObject.obj") // 이의 신청 리스트 페이지
-	public String gradeObjectPage(Model model) {
-		int stuId = 20193019;//임시 아이디 
+	public String gradeObjectPage(Model model,HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		ArrayList<LecRegPro> objList = gradeObjectService.gradeObjectList(stuId);
 		model.addAttribute("objList",objList);
 		return "gradeObject/gradeObjectListPage";
 	}
 	@RequestMapping("gradeObjAddPop.obj") // 이의 신청 insert
 	public String gradeObjectPopPage( @RequestParam("title") String title, @RequestParam("content") String content, 
-			@RequestParam("subCode") String subCode, @RequestParam("date") String date) {
-		int stuId = 20193019;//임시 아이디 
+			@RequestParam("subCode") String subCode, @RequestParam("date") String date, HttpSession session) {
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		//int stuId = 20193019;//임시 아이디 
 		LecRegPro detail =gradeObjectService.gradeDetailList(stuId, subCode, date);
 		gradeObjectService.insertGradeObj(detail, title, content);
 		return "redirect:gradeObject.obj";
 	}
 	@ResponseBody
 	@RequestMapping(value="obDetail.ob", produces="applicatoin/json; charset=utf-8;")// 이의 신청 상세 팝업창
-	public String gradeObjectDetailPage(String subCode, String date)  {
-		  int stuId = 20193019;//임시 아이디 
+	public String gradeObjectDetailPage(String subCode, String date, HttpSession session)  {
+			int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
+		  //int stuId = 20193019;//임시 아이디 
 		  LecRegPro objDe =gradeObjectService.gradeObjectDetailPage(stuId, subCode, date);//이의 신청 상세
 		  return new GsonBuilder().create().toJson(objDe);
 	}
