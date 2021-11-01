@@ -14,9 +14,9 @@ import com.kh.spring.studentStatus.model.vo.StudentStatus;
 public class StudentStatusDao {
 
 
-	public ArrayList<StudentStatus> studentProList(SqlSessionTemplate sqlSession, String userId) {
+	public ArrayList<StudentStatus> studentProList(SqlSessionTemplate sqlSession, int stuId) {
 		
-		return (ArrayList)sqlSession.selectList("studentStatusMapper.studentProList", userId);
+		return (ArrayList)sqlSession.selectList("studentStatusMapper.studentProList", stuId);
 		
 	}
 
@@ -52,12 +52,12 @@ public class StudentStatusDao {
 		return sqlSession.insert("studentStatusMapper.insertStsDo");
 	}
 
-	public int selectOffCount(SqlSessionTemplate sqlSession, String stuId) {
+	public int selectOffCount(SqlSessionTemplate sqlSession, int stuId) {
 		
 		return sqlSession.selectOne("studentStatusMapper.selectOffCount", stuId);
 	}
 
-	public int selectDoCount(SqlSessionTemplate sqlSession, String stuId) {
+	public int selectDoCount(SqlSessionTemplate sqlSession, int stuId) {
 	
 		return sqlSession.selectOne("studentStatusMapper.selectDoCount", stuId);
 	}

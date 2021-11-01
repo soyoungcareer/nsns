@@ -9,7 +9,7 @@ import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 public interface StudentStatusService {
 
-	ArrayList<StudentStatus> studentProList(String userId);
+	ArrayList<StudentStatus> studentProList(int stuId);
 
 	StudentOff selectStuOff(int appNo);
 
@@ -19,9 +19,9 @@ public interface StudentStatusService {
 
 	StudentDo selectStuDo(int appNo);
 
-	int selectOffCount(String stuId);
+	int selectOffCount(int stuId);
 
-	int selectDoCount(String stuId);
+	int selectDoCount(int stuId);
 
 	void deleteOff(int appNo);
 
