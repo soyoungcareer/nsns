@@ -144,6 +144,8 @@ public class MemberController {
 	@RequestMapping("insertStu.adm") //학생관리-학생 등록
 	public String insertStudent(@ModelAttribute Student s, HttpSession session) {
 		
+		
+		
 		System.out.println("student : " + s);	
 		System.out.println("기존 비밀번호 : " + s.getStuPwd());
 		

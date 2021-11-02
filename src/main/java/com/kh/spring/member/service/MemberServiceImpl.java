@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
 		if(loginAdm == null) {
 			throw new CommException("관리자 로그인 중 오류가 발생하였습니다.");
 		}
-		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + bCPwdEncoder.encode(a.getAdmPwd()));
 		System.out.println(bCPwdEncoder.matches(a.getAdmPwd(), loginAdm.getAdmPwd()));
 		
 		if(!bCPwdEncoder.matches(a.getAdmPwd(), loginAdm.getAdmPwd())) {
@@ -52,6 +52,7 @@ public class MemberServiceImpl implements MemberService {
 			throw new CommException("학생 로그인 중 오류가 발생하였습니다.");
 		}
 		
+		System.out.println("");
 		System.out.println(bCPwdEncoder.matches(s.getStuPwd(), loginStu.getStuPwd()));
 		
 		if(!bCPwdEncoder.matches(s.getStuPwd(), loginStu.getStuPwd())) {
@@ -69,7 +70,9 @@ public class MemberServiceImpl implements MemberService {
 		if(loginPrf == null) {
 			throw new CommException("교수 로그인 중 오류가 발생하였습니다.");
 		}
-		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + bCPwdEncoder.encode(p.getProfPwd()));
+
+
 		System.out.println(bCPwdEncoder.matches(p.getProfPwd(), loginPrf.getProfPwd()));
 		
 		if(!bCPwdEncoder.matches(p.getProfPwd(), loginPrf.getProfPwd())) {

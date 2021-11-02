@@ -73,7 +73,7 @@
 					<li><a class="nav-link scrollto" href="boardMovesss.me">게시글</a></li>
 					<li><a class="nav-link scrollto" href="boardMovess.me">MY게시글</a></li>
 					<li><a class="nav-link scrollto " href="#portfolio"></a></li>
-					<li><a class="nav-link scrollto" href="#team"></a></li>
+									<li><a class="nav-link scrollto" href="chat.do">익명채팅</a></li>
 					<li><a class="nav-link scrollto" href="crawMain.cer">취업지원</a></li>
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
 							class="bi bi-chevron-down"></i></a>

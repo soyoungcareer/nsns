@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>낙성대학교 학사행정시스템</title>
   </head>
+  
   <body>
     <section class="material-half-bg">
       <div class="cover"></div>
