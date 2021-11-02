@@ -116,7 +116,6 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="graduation.cer"><i class="icon fa fa-circle-o"></i> 졸업증명서</a></li>
             <li><a class="treeview-item" href="certificate.cer"><i class="icon fa fa-circle-o"></i> 자격증/봉사활동</a></li>
-            <li><a class="treeview-item" href="crawMain.cer"><i class="icon fa fa-circle-o"></i> 취업</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments"></i><span class="app-menu__label">상담</span><i class="treeview-indicator fa fa-angle-right"></i></a>
