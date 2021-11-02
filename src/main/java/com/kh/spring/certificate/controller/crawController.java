@@ -53,7 +53,7 @@ public class crawController {
 	        model.addAttribute("top", top);
 	        model.addAttribute("depart", depart);
 	        model.addAttribute("categoryTable", categoryTable);
-	            return "certificate/crawList";
+	            return "board/crawBoard";
 	    }
 		@RequestMapping("crawSearch.cer")
 	    public String craw_Search(Model model, HttpSession session, @RequestParam(value="categoryTable", required= false, defaultValue = "1" ) int categoryTable)throws Exception {
@@ -84,6 +84,6 @@ public class crawController {
 	        model.addAttribute("top", top);
 	        model.addAttribute("depart", depart);
 	        model.addAttribute("categoryTable", categoryTable);
-	            return "certificate/crawList";
+	            return "board/crawBoard";
 	    }
 }

@@ -37,7 +37,7 @@
                 <div class="form-group row">
 	                  <label class="control-label col-md-2" >교과목명</label>
 	                  <div class="col-md-4">
-	                    <input class="form-control col-md-12" type="text" name="subTitle" value="${reDetail.subject.subTitle}">
+	                    <input class="form-control col-md-12" type="text" id="subTitle" name="subTitle" value="${reDetail.subject.subTitle}">
 	                  </div>
 	                  <label class="control-label col-md-2">강의코드</label>
 	                  <div class="col-md-4">
@@ -169,8 +169,7 @@
             <div class="tile-footer">
               <div class="row">
                 <div class="col-md-8 col-md-offset-3">
-                <a class="btn btn-secondary" href="#" onclick="history.go(-1)"><i class="fa fa-fw fa-lg fa-times-circle"></i>뒤로가기</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-primary" href="#" onclick="postFormSubmit(1);"><i class="fa fa-fw fa-lg fa-check-circle"></i>저장하기</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-primary" href="#"  onclick="postFormSubmit(1);" ><i class="fa fa-fw fa-lg fa-check-circle"></i>저장하기</a>&nbsp;&nbsp;&nbsp;
                   <a class="btn btn-danger" href="#" onclick="postFormSubmit(2);"><i class="fa fa-fw fa-lg fa-times-circle"></i>삭제하기</a>
                 </div>
               </div>
@@ -187,10 +186,11 @@
 						
 			if(num == 1){
 					postForm.attr("action", "updateAdmin.reg");
+					postForm.submit(); 
 				}else{
 					postForm.attr("action", "deleteAd.reg");
+					postForm.submit(); 
 				}
-			postForm.submit(); 
 		}
 			 $("#start").on("change", function() {
 					if($(this).val()>$("#end").val()){
