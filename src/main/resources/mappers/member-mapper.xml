@@ -68,7 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
-		SELECT * FROM PROFESSOR
+		SELECT * 
+		FROM PROFESSOR
 		WHERE PROF_ID=#{profId} AND PROF_PWD=#{profPwd}
 	</select>
 

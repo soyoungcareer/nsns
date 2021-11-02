@@ -53,7 +53,7 @@ public class MemberController {
 			a.setAdmId(userId);
 			a.setAdmPwd(userPwd);
 			
-			Admin loginAdm = memberService.loginAdmin(a); //bCPwdEncoder, 
+			Admin loginAdm = memberService.loginAdmin(bCPwdEncoder, a); //bCPwdEncoder, 
 			System.out.println("loginAdm : " + loginAdm);
 			
 			model.addAttribute("loginAdm", loginAdm);
@@ -68,7 +68,7 @@ public class MemberController {
 			s.setStuId(Integer.parseInt(userId));
 			s.setStuPwd(userPwd);
 			
-			Student loginStu = memberService.loginStudent(s); //bCPwdEncoder, 
+			Student loginStu = memberService.loginStudent(bCPwdEncoder, s); //bCPwdEncoder, 
 			System.out.println("loginStu : " + loginStu);
 			model.addAttribute("loginStu", loginStu);
 			
@@ -82,7 +82,7 @@ public class MemberController {
 			p.setProfId(userId);
 			p.setProfPwd(userPwd);
 			
-			Professor loginPrf = memberService.loginProfessor(p); //(bCPwdEncoder, p);
+			Professor loginPrf = memberService.loginProfessor(bCPwdEncoder, p); //(bCPwdEncoder, p);
 			System.out.println("loginPrf : " + loginPrf);
 			model.addAttribute("loginPrf", loginPrf);
 			
@@ -143,9 +143,9 @@ public class MemberController {
 		System.out.println("student : " + s);	
 		System.out.println("기존 비밀번호 : " + s.getStuPwd());
 		
-		//String encPwd = bCPwdEncoder.encode(s.getStuPwd());
-		//System.out.println("암호화 비밀번호 : " + encPwd);	
-		//s.setStuPwd(encPwd);
+		String encPwd = bCPwdEncoder.encode(s.getStuPwd());
+		System.out.println("암호화 비밀번호 : " + encPwd);	
+		s.setStuPwd(encPwd);
 		
 		memberService.insertStudent(s);
 		session.setAttribute("msg", "학생 등록 성공");
@@ -159,9 +159,9 @@ public class MemberController {
 		System.out.println("professor : " + p);	
 		System.out.println("기존 비밀번호 : " + p.getProfPwd());
 		
-		//String encPwd = bCPwdEncoder.encode(p.getStuPwd());
-		//System.out.println("암호화 비밀번호 : " + encPwd);	
-		//p.setStuPwd(encPwd);
+		String encPwd = bCPwdEncoder.encode(p.getProfPwd());
+		System.out.println("암호화 비밀번호 : " + encPwd);	
+		p.setProfPwd(encPwd);
 		
 		memberService.insertProfessor(p);
 		session.setAttribute("msg", "교수 등록 성공");

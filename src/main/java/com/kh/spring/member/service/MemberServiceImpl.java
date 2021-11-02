@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 
 	@Override
-	public Admin loginAdmin(Admin a) { //BCryptPasswordEncoder bCPwdEncoder, 
+	public Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a) { //BCryptPasswordEncoder bCPwdEncoder, 
 
 		Admin loginAdm = memberDao.loginAdmin(sqlSession, a);
 		
@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Student loginStudent(Student s) {
+	public Student loginStudent(BCryptPasswordEncoder bCPwdEncoder, Student s) {
 		
 		Student loginStu = memberDao.loginStudent(sqlSession, s);
 		
@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Professor loginProfessor(Professor p) {
+	public Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p) {
 
 		Professor loginPrf = memberDao.loginProfessor(sqlSession, p);
 		

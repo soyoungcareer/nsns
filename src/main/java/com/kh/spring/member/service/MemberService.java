@@ -11,11 +11,11 @@ import com.kh.spring.member.vo.Student;
 
 public interface MemberService {
 
-	Admin loginAdmin(Admin a); //BCryptPasswordEncoder bCPwdEncoder, 
+	Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a); //BCryptPasswordEncoder bCPwdEncoder, 
 
-	Student loginStudent(Student s);
+	Student loginStudent(BCryptPasswordEncoder bCPwdEncoder, Student s);
 
-	Professor loginProfessor(Professor p);
+	Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p);
 
 	void insertStudent(Student s);
 
