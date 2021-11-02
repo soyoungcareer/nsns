@@ -45,19 +45,66 @@ public class SubjectController {
 		RequestedSubject reqSub = subjectService.selectSubjectModify(sno);
 		mv.addObject("reqSub", reqSub).setViewName("major/subjectDetailView");
 		
+		System.out.println("=======================" + reqSub);
+		
 		return mv;
 	}
-	
+	///
 	@RequestMapping("createSub.adm") //강의 신청 승인 - 등록
-	public String createSubject(Subject sub, Model model, HttpServletRequest request
-								, @RequestParam(name="subAttachment", required=false) MultipartFile file
-								, RequestedSubject reqSub) {
+	public String createSubject(Model model, HttpServletRequest request
+								, @RequestParam(value="subAttachment", required=false) MultipartFile file
+								, @RequestParam(value="attOrigin", required=false) String attOrigin
+								, @RequestParam(value="attChange", required=false) String attChange
+								, Subject sub
+								) {
 		
-		System.out.println(sub);	
-		subjectService.createSubject(sub);
+		//3,4,7,10 SET //value="" ?
+		/*Subject sub, 
+		, @RequestParam("deptCode") int deptCode
+		, @RequestParam("profId") String profId
+		, @RequestParam("subClass") int subClass
+		, @RequestParam("subYear") int subYear
+		, @RequestParam("subSmst") int subSmst
+		attOrigin
 		
-		System.out.println(reqSub);
-		subjectService.createRequestSubject(reqSub);
+		, @RequestParam("subCode") String subCode
+								, @RequestParam("deptCode") int deptCode
+								, @RequestParam("profId") String profId
+								, @RequestParam("subClass") int subClass
+								, @RequestParam("subYear") int subYear
+								, @RequestParam("subSmst") int subSmst
+		*/
+		
+		//Subject sub = new Subject();
+		System.out.println(sub);
+//		System.out.println("=======subCode : " + subCode);
+//		System.out.println("=======deptCode : " + deptCode);
+//		System.out.println("=======profId : " + profId);
+//		System.out.println("=======subClass : " + subClass);
+//		System.out.println("=======subYear : " + subYear);
+//		System.out.println("=======subSmst : " + subSmst);
+		
+		//, RequestedSubject reqSub
+		//System.out.println(reqSub);
+		//System.out.println(sub);
+		
+//		sub.setSubCode(subCode);
+//		sub.setDeptCode(deptCode);
+//		sub.setProfId(profId);
+//		sub.setSubClass(subClass);
+//		sub.setSubYear(subYear);
+//		sub.setSubSmst(subSmst);
+		sub.setOriginName(attOrigin);
+		sub.setChangeName(attChange);
+		
+		
+		
+		
+	
+		//subjectService.createSubject(sub);
+		
+		
+		//subjectService.createRequestSubject(reqSub);
 		
 		return "redirect:subModifyList.adm";
 	}

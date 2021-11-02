@@ -73,8 +73,12 @@
 	                    <tr>
 	                        <td>${ sl.reqSubNo }</td>
 	                        <td>${ sl.subTitle }</td>
-	                        <td>${ sl.deptTitle }</td><!-- deptCode -->	                        
-	                        <td>${ sl.profName }</td><!-- profId -->
+	                        <td>${ sl.deptTitle }
+	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ sl.deptCode }">
+	                        </td><!-- deptCode -->	                        
+	                        <td>${ sl.profName }
+	                        	<input type="hidden" id="profId" name="profId" value="${ sl.profId }">
+	                        </td><!-- profId -->
 	                        <td>
 	                        	<c:choose>
 	                        		<c:when test="${ sl.subDivs == 1 }">
@@ -91,8 +95,8 @@
 	                        <td>${ sl.reqType }</td>
 	                        <td>${ sl.status }</td>
 	                        <td>강의실
-	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ reqSub.deptCode }">
-                				<input type="hidden" id="profId" name="profId" value="${ reqSub.profId }">
+	                        	<input type="hidden" id="attOrigin" name="attOrigin" value="${ sl.attOrigin }">
+                				<input type="hidden" id="attChange" name="attChange" value="${ sl.attChange }">
 	                        </td>
 	                        
 	                    </tr>

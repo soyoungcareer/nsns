@@ -58,13 +58,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 		
 	<select id="selectSubjectModify" resultType="_int" resultMap="reqSubjectResultSet">
-		SELECT A.REQSUB_NO, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, C.PROF_NAME, A.SUB_CREDIT, A.SUB_TIME, A.REQ_TYPE, A.STATUS
+		SELECT A.SUB_CODE, A.REQSUB_NO, A.DEPT_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, C.PROF_ID, C.PROF_NAME, A.SUB_CREDIT, A.SUB_TIME, A.REQ_TYPE, A.STATUS, A.ATT_ORIGIN, A.ATT_CHANGE
 		FROM REQ_SUBJECT A
-		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
-		LEFT JOIN PROFESSOR C USING (PROF_ID)
-		WHERE REQSUB_NO= #{sno} AND STATUS= 'N'
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
+		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
+		WHERE REQSUB_NO= #{sno}
+		AND STATUS= 'N'
 	</select>
-	
+	<!--  -->
 	<insert id="createSubject" parameterType="Subject">
 		INSERT INTO SUBJECT
 		VALUES (#{subCode}, #{subTitle}, #{deptCode}, #{subDivs}, #{profId}, #{subCredit}, #{subClass}, #{subTime}, #{subType}, #{subYear}, #{subSmst}, default, #{attOrigin}, #{attChange})

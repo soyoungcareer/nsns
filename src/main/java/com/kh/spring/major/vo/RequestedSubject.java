@@ -14,7 +14,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class RequestedSubject {
-
+//
 	private int reqSubNo;	// "REQSUB_NO"	NUMBER		NOT NULL,
 	private int deptCode;	// "DEPT_CODE"	NUMBER		NOT NULL,
 	private int subDivs;	// "SUB_DIVS"	NUMBER		NOT NULL,
@@ -31,7 +31,7 @@ public class RequestedSubject {
 	private String reqType;
 	
 	//관리자 강의 생성 임시
-	private String reqType;
+	//private String reqType;
 	private String deptTitle;
 	private String profName;
 	

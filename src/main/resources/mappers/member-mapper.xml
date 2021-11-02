@@ -68,7 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
-		SELECT * FROM PROFESSOR
+		SELECT * 
+		FROM PROFESSOR
 		WHERE PROF_ID=#{profId} AND PROF_PWD=#{profPwd}
 	</select>
 
@@ -76,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO STUDENT
 		VALUES (#{stuId}, #{deptCode}, #{profId}, #{stuPwd}, #{stuName}, #{ssn}, #{email}, #{phone}, #{address}, #{stuCredit}, #{graduationDate}, sysdate, '재학')
 	</insert>
-	
+	<!--  -->
 	<insert id="insertProfessor" parameterType="Professor">
 		INSERT INTO PROFESSOR
 		VALUES (#{profId}, #{profPwd}, #{profName}, #{profDept}, #{profRrn}, #{profEmail}, #{profPhone}, #{profAddress}, default, sysdate)

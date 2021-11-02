@@ -50,10 +50,12 @@
 	                <label class="">강의 신청번호</label>
 	                <input class="form-control" id="reqSubNo" name="reqSubNo" type="text" value="${ sl.reqSubNo }" readonly>
                   </div> -->
+                  <input type="hidden" name="reqSubNo" id="reqSubNo" value="${reqSub.reqSubNo }">
+				  <input type="button" name="attChange" value="${ reqSub.attChange }">
 
                   <div class="form-group">
                     <label for="ntcCategory">과목코드</label><!-- 입력 -->
-                    <input class="form-control" id="subCode" name="subCode" type="text" value="" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
+                    <input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
                   </div>
                   
                   <div class="form-group">
@@ -64,18 +66,18 @@
                   <div class="form-group">
                     <label for="ntcCategory">학과이름</label>
                     <input class="form-control" id="deptTitle" name="deptTitle" type="text" value="${ reqSub.deptTitle }">
-                    <input class="form-control" type="hidden" id="deptCode" name="deptCode" type="text">
-                  </div>
+                    <input class="form-control" type="hidden" id="deptCode" name="deptCode" value="${ reqSub.deptCode }">
+                  </div><!--  -->
                   
                   <div class="form-group">
                     <label for="ntcCategory">이수구분</label>
-                    <input class="form-control" id="subType" name="subType" type="text" value="${ reqSub.subType }">
+                    <input class="form-control" id="subDivs" name="subDivs" type="text" value="${ reqSub.subDivs }">
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">교수</label><!-- 교번 -->
+                    <label for="ntcCategory">교수</label><!-- 교번// -->
                     <input class="form-control" id="profName" name="profName" type="text" value="${ reqSub.profName }">
-                    <input class="form-control" type="hidden" id="profId" name="profId" type="text">
+                    <input class="form-control" type="hidden" id="profId" name="profId" value="${ reqSub.profId }">
                   </div>
                   
                   <div class="form-group">
@@ -85,7 +87,7 @@
                   
                   <div class="form-group">
                     <label for="ntcCategory">강의실</label><!-- 입력 -->
-                    <input class="form-control" id="subClass" type="text" value="">
+                    <input class="form-control" id="subClass" name="subClass" type="text">
                   </div>
                   
                   <div class="form-group">
@@ -110,7 +112,7 @@
                   
                   <div class="form-group">
                     <label for="ntcCategory">학년도</label><!-- 연도 입력 -->
-                    <input class="form-control" id="subYear" type="text" value="" placeholder="학년도 네자리 입력">
+                    <input class="form-control" id="subYear" name="subYear" type="text" placeholder="학년도 네자리 입력">
                   </div>
                   
                   <div class="form-group">
@@ -123,12 +125,13 @@
                   </div>
                   
                   <div class="form-group">
-                        	
-                  		<c:if test="${ !empty sl.attOrigin }">
-                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${sl.attChange}" download="${ sl.attOrigin }">${ sl.attOrigin }</a>
-                        					
+                        
+                        <input type="button" name="attOrigin" value="${ reqSub.attOrigin }">
+                  		<c:if test="${ !empty reqSub.attOrigin }">
+                        	<!-- <a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${reqSub.attChange}" download="${ reqSub.attOrigin }">${ reqSub.attOrigin }</a>
+                        				 -->	
                         </c:if>
-                        <c:if test="${ empty sl.attOrigin }">
+                        <c:if test="${ empty reqSub.attOrigin }">
                         	첨부파일이 없습니다.
                         </c:if>
                         
@@ -149,8 +152,8 @@
             
             <!-- <c:if test="${ loginUser.userId eq b.boardWriter }">
 	             <form id="subMod" action="" method="post"> -->
-					<input type="hidden" name="sno" id="sno" value="${sl.reqSubNo }">
-					<input type="hidden" name="fileName" value="${ sl.attChange }"> 
+					
+					
 				<!-- </form> -->
 				<script>
 					function subModSubmit(num){
