@@ -67,8 +67,7 @@ public class boardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-	
+
 		System.out.println("DAO");
 		return (ArrayList) sqlSession.selectList("boardMapper.selectMyList", id, rowBounds);
 	}
@@ -76,7 +75,7 @@ public class boardDao {
 	public int selectMyListCount(SqlSessionTemplate sqlSession, int id) {
 		// TODO Auto-generated method stub
 		System.out.println(id);
-		return sqlSession.selectOne("boardMapper.selecMyListCount",id);
+		return sqlSession.selectOne("boardMapper.selecMyListCount", id);
 	}
 
 	public void boardupdate(SqlSessionTemplate sqlSession, searchFac sf) {
@@ -89,6 +88,16 @@ public class boardDao {
 		// TODO Auto-generated method stub
 		sqlSession.delete("boardMapper.boarddel", no);
 
+	}
+
+	public ArrayList<Board> boardlikeranking(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList) sqlSession.selectList("boardMapper.baordlikeranking");
+	}
+
+	public ArrayList<Board> boardiseeranking(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList) sqlSession.selectList("boardMapper.baordiseeranking");
 	}
 
 }

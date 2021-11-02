@@ -110,4 +110,18 @@ public class boardServiceImpl implements boardService {
 		bvd.boarddel(sqlSession, no);
 	}
 
+	@Override
+	public ArrayList<Board> boardlikeranking() {
+		// TODO Auto-generated method stub
+		return bvd.boardlikeranking(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> boardiseeranking() {
+		// TODO Auto-generated method stub
+		return bvd.boardiseeranking(sqlSession);
+	}
+
+
+
 }
