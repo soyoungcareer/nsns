@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
@@ -54,6 +54,10 @@ public class MemberController {
 			a.setAdmPwd(userPwd);
 			
 			Admin loginAdm = memberService.loginAdmin(bCPwdEncoder, a); //bCPwdEncoder, 
+			
+			//a.setAdmId(userId);
+			//a.setAdmPwd(userPwd);
+			
 			System.out.println("loginAdm : " + loginAdm);
 			
 			model.addAttribute("loginAdm", loginAdm);

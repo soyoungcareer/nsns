@@ -31,12 +31,12 @@ public class MemberServiceImpl implements MemberService {
 		if(loginAdm == null) {
 			throw new CommException("관리자 로그인 중 오류가 발생하였습니다.");
 		}
-		/*
+		
 		System.out.println(bCPwdEncoder.matches(a.getAdmPwd(), loginAdm.getAdmPwd()));
 		
 		if(!bCPwdEncoder.matches(a.getAdmPwd(), loginAdm.getAdmPwd())) {
 			throw new CommException("비밀번호가 일치하지 않습니다. 확인하여 주세요.");
-		}*/
+		}
 		
 		
 		
@@ -51,13 +51,13 @@ public class MemberServiceImpl implements MemberService {
 		if(loginStu == null) {
 			throw new CommException("학생 로그인 중 오류가 발생하였습니다.");
 		}
-		/*
+		
 		System.out.println(bCPwdEncoder.matches(s.getStuPwd(), loginStu.getStuPwd()));
 		
 		if(!bCPwdEncoder.matches(s.getStuPwd(), loginStu.getStuPwd())) {
 			throw new CommException("비밀번호가 일치하지 않습니다. 확인하여 주세요.");
 		}
-		*/
+		
 		return loginStu;
 	}
 
@@ -69,13 +69,13 @@ public class MemberServiceImpl implements MemberService {
 		if(loginPrf == null) {
 			throw new CommException("교수 로그인 중 오류가 발생하였습니다.");
 		}
-		/*
+		
 		System.out.println(bCPwdEncoder.matches(p.getProfPwd(), loginPrf.getProfPwd()));
 		
 		if(!bCPwdEncoder.matches(p.getProfPwd(), loginPrf.getProfPwd())) {
 			throw new CommException("비밀번호가 일치하지 않습니다. 확인하여 주세요.");
 		}
-		*/
+		
 		return loginPrf;
 	}
 
