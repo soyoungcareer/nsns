@@ -139,4 +139,12 @@ public class ProfessorDao {
 		return sqlSession.selectOne("profMapper.profDoCheck", doNo);
 	}
 
+	public Consult detailConsult(SqlSessionTemplate sqlSession, String conNo) {
+		return sqlSession.selectOne("profMapper.detailConsult", conNo);
+	}
+
+	public int profConCheck(SqlSessionTemplate sqlSession, Consult consult) {
+		return sqlSession.selectOne("profMapper.profConCheck", consult);
+	}
+
 }

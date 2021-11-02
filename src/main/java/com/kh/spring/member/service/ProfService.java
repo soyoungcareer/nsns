@@ -66,6 +66,10 @@ public interface ProfService {
 
 	int profDoCheck(String doNo);
 
+	Consult detailConsult(String conNo);
+
+	int profConCheck(Consult consult);
+
 
 
 

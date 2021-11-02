@@ -10,6 +10,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 강의목록 조회</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		/* 수정할 강의코드 넘기기 */
+		$(document).on("click", "#subTable tbody tr td:nth-last-child(2) input", function(){
+			var subCode = $(this).parent().parent().children().eq(1).text();
+			location.href="lectEditInfoLoad.pr?subCode="+subCode;
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -41,17 +49,17 @@
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
-										id="sampleTable" role="grid"
+										id="subTable" role="grid"
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
-												<th>
+												<!-- <th>
 													<div class="animated-checkbox">
 								                        <label>
 								                          <input type="checkbox"><span class="label-text"></span>
 								                        </label>
 								                    </div>
-												</th>
+												</th> -->
 												<th class="sorting_asc" tabindex="0"
 													aria-controls="sampleTable" rowspan="1" colspan="1"
 													aria-sort="ascending"
@@ -89,23 +97,31 @@
 													rowspan="1" colspan="1"
 													aria-label="Salary: activate to sort column ascending"
 													style="width: 52.9125px;">강의계획서</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">수정</th>
+												<th class="sorting" tabindex="0" aria-controls="sampleTable"
+													rowspan="1" colspan="1"
+													aria-label="Salary: activate to sort column ascending"
+													style="width: 52.9125px;">삭제</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:choose>
 												<c:when test="${empty subList}">
-													<tr><td colspan="8">개설된 강의가 없습니다.</td></tr>
+													<tr><td colspan="11">개설된 강의가 없습니다.</td></tr>
 												</c:when>
 												<c:when test="${!empty subList}">
 													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
-															<td>
+															<!-- <td>
 																<div class="animated-checkbox">
 											                        <label>
 											                          <input type="checkbox"><span class="label-text"> </span>
 											                        </label>
 											                    </div>
-															</td>
+															</td> -->
 															<td class="sorting_1"><%=count++ %></td>
 															<td><c:out value="${subList.subCode}"/></td>
 															<td><c:out value="${subList.subTitle}"/></td>
@@ -129,16 +145,12 @@
 																		download="${ subList.originName }"><button class="btn badge badge-pill badge-primary" type="button">${ subList.originName }</button></a>
 																</c:if>
 											                </td>
+											                <td><input type="button" class="btn btn-warning" id="editBtn" onclick="location.href='<%=contextPath%>/lectEditInfoLoad.pr'" value="수정"/></td>
+											                <td><input type="button" class="btn btn-danger" id="delBtn" onclick="" value="삭제"/></td>
 														</tr>
 													</c:forEach>
 												</c:when>
 											</c:choose>
-											
-										
-													<!-- -------------------------------------------
-														강의계획서 넣기...? 
-													--------------------------------------------- -->
-											
 										</tbody>
 									</table>
 								</div>
@@ -149,7 +161,7 @@
 				                <ul class="pagination">
 				                	<c:choose>
 				                		<c:when test="${ pi.currentPage ne 1 }">
-				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+				                			<li class="page-item"><a class="page-link" href="profLectureDetail.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 				                		</c:when>
 				                		<c:otherwise>
 				                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -159,7 +171,7 @@
 				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 				                    	<c:choose>
 					                		<c:when test="${ pi.currentPage ne p }">
-				                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+				                    			<li class="page-item"><a class="page-link" href="profLectureDetail.pr?currentPage=${ p }">${ p }</a></li>
 					                		</c:when>
 					                		<c:otherwise>
 					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -169,21 +181,23 @@
 				                    
 				                    <c:choose>
 				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item"><a class="page-link" href="profLectureDetail.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href="profLectureDetail.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:otherwise>
 				                	</c:choose>
 				                </ul>
 				            </div>
 							
-							<div class="row">
+<%-- 							<div class="row">
 				                <div class="form-group col-md-4 align-self-end">
 				                  <input type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/lectEditInfoLoad.pr'" value="강의수정"/>
+				                  <input type="button" class="btn btn-warning" id="editBtn" onclick="" value="강의수정"/>
 				                  <input type="button" class="btn btn-danger" onclick="location.href='<%=contextPath%>/lectDelInfoLoad.pr'" value="강의삭제"/>
+				                  <input type="button" class="btn btn-danger" onclick="" value="강의삭제"/>
 				                </div>
-			                </div>
+			                </div> --%>
 							
 						</div>
 					</div>

@@ -60,14 +60,14 @@ public class ProfController {
 	public String profMypage(Model model, HttpSession session) {
 		// 임시 데이터
 		//String profId = "EC1901";
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
 		////////////////////////////////////////
 		// 로그인 세션값으로 수정한 이후로 갑자기 학과정보 안뜸
 		////////////////////////////////////////
 		
-		profService.selectMypage(profId);
+		Professor prof = profService.selectMypage(profId);
 		
 		model.addAttribute("prof", prof);
 		
@@ -108,14 +108,14 @@ public class ProfController {
 	@RequestMapping("profLectInfoLoad.pr")
 	public String profLectInfoLoad(HttpServletRequest httpServletRequest, Model model, HttpSession session) {
 		//String profId = "EC1901";
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
 		////////////////////////////////////////
 		// 로그인 세션값으로 수정한 이후로 갑자기 학과정보 안뜸
 		////////////////////////////////////////
 		
-		profService.profInfoLoad(profId);
+		Professor prof = profService.profInfoLoad(profId);
 		
 		model.addAttribute("prof", prof);
 		
@@ -230,20 +230,20 @@ public class ProfController {
 	// 강의정보 수정
 	// 강의 수정시 뷰에 데이터 로드
 	@RequestMapping("lectEditInfoLoad.pr")
-	public String lectEditInfoLoad(HttpSession session, Model model) {
+	public String lectEditInfoLoad(HttpSession session, Model model, String subCode) {
 		
 		// 임시데이터
 		//String profId = "EC1901";
-		String subCode = "2101002";
+		//String subCode = "2101002";
 		
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
 		Map map = new HashMap();
 		map.put("profId", profId);
 		map.put("subCode", subCode);
 		
-		profService.profInfoLoad(profId);
+		Professor prof = profService.profInfoLoad(profId);
 		Subject sub = profService.subInfoLoad(map);
 		
 		model.addAttribute("prof", prof);
@@ -322,14 +322,14 @@ public class ProfController {
 		//String profId = "EC1901";
 		String subCode = "2101002";
 		
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
 		Map map = new HashMap();
 		map.put("profId", profId);
 		map.put("subCode", subCode);
 		
-		profService.profInfoLoad(profId);
+		Professor prof = profService.profInfoLoad(profId);
 		Subject sub = profService.subInfoLoad(map);
 
 		model.addAttribute("prof", prof);
@@ -361,7 +361,7 @@ public class ProfController {
 		
 		RequestedSubject reqSubject = new RequestedSubject();
 		reqSubject.setProfId(profId);
-		reqSubject.setSubCode(sub.getSubCode());
+		reqSubject.setSubCode(sub.getSubCode()); // 얘만 못가져옴
 		reqSubject.setSubDivs(sub.getSubDivs());
 		reqSubject.setSubTitle(sub.getSubTitle());
 		reqSubject.setSubCredit(sub.getSubCredit());
@@ -476,11 +476,28 @@ public class ProfController {
 	}
 	
 	// 상담 관리 상세
-	@RequestMapping("profConsultDetail.pr")
-	public String profConsultDetail() {
+	@ResponseBody
+	@RequestMapping(value="profConsultDetail.pr", produces="applicatoin/json; charset=utf-8;")
+	public String profConsultDetail(String conNo) {
+		Consult detailCon = profService.detailConsult(conNo);
 		
+		return new GsonBuilder().create().toJson(detailCon);
+	}
+	
+	// 상담신청 승인
+	@ResponseBody
+	@RequestMapping(value="profConCheck.pr", produces="applicatoin/json; charset=utf-8;")
+	public String profConCheck(String status, String rejectReason,
+							   @RequestParam(value="conNo", defaultValue = "0") int conNo) {
+	
+		Consult consult = new Consult();
+		consult.setConNo(conNo);
+		consult.setStatus(status);
+		consult.setRejectReason(rejectReason);
 		
-		return "professor/profConsultDetail";
+		int checkCon = profService.profConCheck(consult);
+		
+		return new GsonBuilder().create().toJson(checkCon);
 	}
 	
 	// 강의평가 조회

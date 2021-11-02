@@ -70,8 +70,8 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public int updateGrade(Map map) {
-		return gradeDao.updateGrade(sqlSession, map);
+	public int updateGrade(Grade grade) {
+		return gradeDao.updateGrade(sqlSession, grade);
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public int profObjCheck(String objNo) {
-		return gradeDao.profObjCheck(sqlSession, objNo);
+	public int profObjCheck(GradeObject gradeObject) {
+		return gradeDao.profObjCheck(sqlSession, gradeObject);
 	}
 
 	@Override

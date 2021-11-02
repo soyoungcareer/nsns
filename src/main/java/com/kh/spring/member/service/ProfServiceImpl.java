@@ -172,4 +172,14 @@ public class ProfServiceImpl implements ProfService {
 		return professorDao.profDoCheck(sqlSession, doNo);
 	}
 
+	@Override
+	public Consult detailConsult(String conNo) {
+		return professorDao.detailConsult(sqlSession, conNo);
+	}
+
+	@Override
+	public int profConCheck(Consult consult) {
+		return professorDao.profConCheck(sqlSession, consult);
+	}
+
 }

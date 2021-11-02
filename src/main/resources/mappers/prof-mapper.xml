@@ -16,10 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profAddress" column="PROF_ADDRESS"/>
 		<result property="profStatus" column="PROF_STATUS"/>
 		<result property="profEmpdate" column="PROF_EMPDATE"/>
-		<!-- <result property="profDeptTitle" column="DEPT_TITLE"/> -->
-		<collection property="department" resultMap="DepartmentSet"/>
+		<result property="profDeptTitle" column="DEPT_TITLE"/>
+		<!-- <collection property="department" resultMap="DepartmentSet"/> -->
 	</resultMap>
-	
 	<resultMap id="DepartmentSet" type="Department">
 		<id property="deptCode" column="DEPT_CODE"/>
 		<result property="deptTitle" column="DEPT_TITLE"/>
@@ -63,8 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="rejectReason" column="REJECT_REASON"/>	
 		<result property="status" column="STATUS"/>	
 		<result property="stuId" column="STU_ID"/>
-		<collection property="student" resultMap="Student"/>
+		<collection property="student" resultMap="profStuResultSet"/>
 	</resultMap>
+	
 	
 	<!-- 강의평가 -->
 	<resultMap type="Evaluation" id="evalResultSet">
@@ -141,9 +141,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 마이페이지 -->
 	<!-- 교수 마이페이지 개인정보 조회 -->
 	<select id="selectMypage" parameterType="Professor" resultMap="profResultSet">
-		SELECT PROF_ID, PROF_NAME, DEPT_TITLE, PROF_EMAIL, PROF_PHONE, PROF_ADDRESS
-		FROM PROFESSOR
-		JOIN DEPARTMENT USING (DEPT_CODE)
+		SELECT A.PROF_ID, A.PROF_NAME, B.DEPT_TITLE, A.PROF_EMAIL, A.PROF_PHONE, A.PROF_ADDRESS
+		FROM PROFESSOR A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</select>
 	
@@ -167,7 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 과목정보 불러오기 -->
 	<select id="subInfoLoad" parameterType="Map" resultMap="profSubResultSet">
-		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, SUB_CODE
 		FROM SUBJECT
 		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
 	</select>
@@ -251,6 +251,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE B.PROF_ID=#{profId} AND C.CON_PROCESS='교수승인대기중'
 		ORDER BY A.CON_NO DESC
 	</select>
+	<select id="detailConsult"  resultType="Consult" resultMap="consultResultSet">
+		SELECT *
+		FROM CONSULT
+		JOIN STUDENT USING(STU_ID)
+		WHERE CON_NO=#{conNo}
+	</select>
+	<update id="profConCheck" parameterType="Consult">
+		UPDATE CONSULT
+		SET STATUS=#{status}, REJECT_REASON=#{rejectReason, jdbcType=VARCHAR}
+		WHERE CON_NO=#{conNo}
+	</update>
 	
 	<!-- 학생출결관리 -->
 	
