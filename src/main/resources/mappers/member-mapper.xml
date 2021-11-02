@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profEmpdate" column="PROF_EMPDATE"/>
 	</resultMap>
 	
-	<!-- 암호화 
+	
 	<select id="loginAdmin" parameterType="Admin" resultMap="adminResultSet">
 		SELECT * FROM ADMIN
 		WHERE ADM_ID = #{admId}
@@ -55,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
 		SELECT * FROM PROFESSOR
 		WHERE PROF_ID = #{profId}
-	</select>-->
-	
+	</select>
+	<!-- 암호화
 	<select id="loginAdmin" parameterType="Admin" resultMap="adminResultSet">
 		SELECT * FROM ADMIN
 		WHERE ADM_ID=#{admId} AND ADM_PWD=#{admPwd}
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * 
 		FROM PROFESSOR
 		WHERE PROF_ID=#{profId} AND PROF_PWD=#{profPwd}
-	</select>
+	</select>-->
 
 	<insert id="insertStudent" parameterType="Student">
 		INSERT INTO STUDENT
