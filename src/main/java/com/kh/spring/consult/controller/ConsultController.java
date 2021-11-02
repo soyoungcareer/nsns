@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.kh.spring.consult.model.service.ConsultService;
 import com.kh.spring.consult.model.vo.Consult;
 import com.kh.spring.consult.model.vo.ConsultStatus;
-import com.kh.spring.studentStatus.model.vo.StudentOff;
+import com.kh.spring.member.vo.Student;
 
 @Controller
 public class ConsultController {
@@ -41,8 +43,10 @@ public class ConsultController {
 	//해당학생이 현재 상담신청 중인지 확인
 	@ResponseBody 
 	@RequestMapping(value="consultCount.con", produces="application/json; charset=utf-8")
-	public String selectConsultCount (String stuId) { 
+	public String selectConsultCount(HttpSession session) { 
 			
+			int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
+		
 			int count = consultService.selectConsultCount(stuId);
 				
 			return new GsonBuilder().create().toJson(count);
@@ -50,12 +54,16 @@ public class ConsultController {
 	
 	//상담신청  insert
 	@RequestMapping(value="insert.con", method=RequestMethod.POST)
-	public String insertConsult(Consult con, String conD, RedirectAttributes redirectAttributes) throws ParseException{ 
+	public String insertConsult(Consult con, String conD, RedirectAttributes redirectAttributes, HttpSession session) throws ParseException{ 
 			
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		Date ConDate = format.parse(conD);
+		
+		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
 			 
 		con.setConDate(ConDate);
+		
+		con.setStuId(stuId);
 		
 		consultService.insertConsult(con);
 		
@@ -68,12 +76,12 @@ public class ConsultController {
 	//학생들의 상담 신청 현황
 	@ResponseBody
 	@RequestMapping(value="conStsPro.con", produces="application/json; charset=utf-8")
-	public String conProList () { 
+	public String conProList (HttpSession session) { 
 			
-		String userId = "20190321"; //로그인한 세션의 학생 학번 가져오기
+		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
 					
-		ArrayList<ConsultStatus> list = consultService.conProList(userId);
-			
+		ArrayList<ConsultStatus> list = consultService.conProList(stuId);
+		
 		System.out.println("list : " + list);
 			
 		return new GsonBuilder().create().toJson(list);
@@ -87,7 +95,7 @@ public class ConsultController {
 			
 		Consult con = consultService.selectConsult(conNo);
 				
-		return new GsonBuilder().create().toJson(con);
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(con);
 	}
 	
 	//학생 상담 신청 취소

@@ -115,8 +115,9 @@
 												</c:if>
 												<c:if test="${ empty list }">
 													<tr>
-														<td colspan="7" style="text-align: center;">조회된 리스트가
-															없습니다.</td>
+														<td colspan="7" style="text-align: center;">
+															조회되는 수강과목이 없습니다.
+														</td>
 													</tr>
 												</c:if>
 											</tbody>
@@ -193,14 +194,23 @@
 											</thead>
 
 											<tbody>
-												<c:forEach items="${ gradeList }" var="gradeList">
+												<c:if test="${ ! empty gradeList }" >
+													<c:forEach items="${ gradeList }" var="gradeList">
+														<tr>
+															<td>${ gradeList.year }</td>
+															<td>${ gradeList.semester }</td>
+															<td>${ gradeList.gradeCredit }</td>
+															<td>${ gradeList.stuCredit }</td>
+														</tr>
+													</c:forEach>
+												</c:if>
+												<c:if test="${ empty gradeList }">
 													<tr>
-														<td>${ gradeList.year }</td>
-														<td>${ gradeList.semester }</td>
-														<td>${ gradeList.gradeCredit }</td>
-														<td>${ gradeList.stuCredit }</td>
+														<td colspan="4" style="text-align: center;">
+														입력된 성적이 없습니다.
+														</td>
 													</tr>
-												</c:forEach>
+												</c:if>
 											</tbody>
 										</table>
 									</div>

@@ -52,8 +52,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
          <div style="margin-left:10px;">
-          <p class="app-sidebar__user-name">관리자</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+          <p class="app-sidebar__user-name">admin</p>
+          <p class="app-sidebar__user-designation">낙성대학교 관리자</p>
         </div>
       </div>
    	<ul class="app-menu">

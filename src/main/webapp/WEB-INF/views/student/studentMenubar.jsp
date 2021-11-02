@@ -41,16 +41,12 @@
         </li>
          -->
 
-  <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+  		<li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item"  href="board.me"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>임시 커뮤티니</a></li>
           </ul>
 
-		<li class="register">
-         <a class="register-link" href="chat.do" style="color: white;">채팅</a>
-
-        </li>
         
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
@@ -91,8 +87,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
         <div style="margin-left:10px;">
-          <p class="app-sidebar__user-name">John Doe</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+          <p class="app-sidebar__user-name">${loginStu.stuName }</p>
+          <p class="app-sidebar__user-designation">학번 : ${loginStu.stuId }</p>
         </div>
       </div>
       <ul class="app-menu"> 

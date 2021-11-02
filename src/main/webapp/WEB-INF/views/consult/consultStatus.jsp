@@ -135,7 +135,7 @@
     			let conNo = $(this).parent().children().eq(0).text(); 
     			let conPro = $(this).parent().children().eq(1).text(); 
     			
-    		
+    			$(".modal-body").empty();
     				
     				$.ajax({
     					url: "selectCon.con",

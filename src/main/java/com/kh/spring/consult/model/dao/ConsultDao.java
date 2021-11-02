@@ -12,7 +12,7 @@ import com.kh.spring.studentStatus.model.vo.StudentStatus;
 @Repository
 public class ConsultDao {
 
-	public ArrayList<ConsultStatus> conProList(SqlSessionTemplate sqlSession, String userId) {
+	public ArrayList<ConsultStatus> conProList(SqlSessionTemplate sqlSession, int userId) {
 		
 		return (ArrayList)sqlSession.selectList("consultMapper.conProList", userId);
 	}
@@ -22,7 +22,7 @@ public class ConsultDao {
 		return sqlSession.selectOne("consultMapper.selectConsult", conNo);
 	}
 
-	public int selectConsultCount(SqlSessionTemplate sqlSession, String stuId) {
+	public int selectConsultCount(SqlSessionTemplate sqlSession, int stuId) {
 		
 		return sqlSession.selectOne("consultMapper.selectConsultCount", stuId);
 	}

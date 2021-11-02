@@ -33,7 +33,6 @@
 
 
 
-
 	<!-- 등록된 bean 을 조회하는 범위 설정 -->
 	<context:component-scan
 		base-package="com.kh.spring" />

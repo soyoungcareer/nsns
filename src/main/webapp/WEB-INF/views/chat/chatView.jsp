@@ -64,7 +64,7 @@
           <div class="tile">
           
             <div class="tile-body">
-            <div style="width: 800px; height: 700px; padding: 10px; border: solid 1px #e1e3e9;">
+            <div style="overflow:auto; width: 800px; height: 700px; padding: 10px; border: solid 1px #e1e3e9;">
 				<div id="divChatData"></div>
 			</div>
             </div>

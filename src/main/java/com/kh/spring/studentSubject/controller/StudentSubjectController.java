@@ -4,6 +4,8 @@ package com.kh.spring.studentSubject.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
+import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentSubject.model.service.StudentSubjectService;
 import com.kh.spring.studentSubject.model.vo.SearchCondition;
 import com.kh.spring.studentSubject.model.vo.StuGradeAndCredit;
@@ -27,9 +30,9 @@ public class StudentSubjectController {
 	
 	//수강과목 전체 조회하기 (페이징 처리)
 	@RequestMapping("subject.li")
-	public String selectStuSubjectList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) { 
+	public String selectStuSubjectList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model, HttpSession session) { 
 			
-		String stuId = "20193019";
+		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
 			
 		ArrayList<String> yearList = studentSubjectService.selectYear(stuId);
 		
@@ -60,9 +63,9 @@ public class StudentSubjectController {
 	
 	 @ResponseBody
 	 @RequestMapping(value="searchList.su", produces="application/json; charset=utf-8;")
-	 public String searchSubject(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, String sYear, String sMonth, String search ) {
+	 public String searchSubject(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, String sYear, String sMonth, String search, HttpSession session ) {
 		 
-		 	String stuId = "20193019";
+		 	int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
 			
 			if(search.equals("")) {
 				search = "%";

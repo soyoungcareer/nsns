@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -179,7 +179,8 @@
 							str1 +=  '<div class="form-group row">'+'<label class="control-label col-md-3"> 휴학구분 </label>'+'<div class="col-md-5">'
 								+'<input class="form-control" type="text" value="'+ obj.offCategory  +'" readonly>'+'</div>'+'</div>'
 								+'<div class="form-group row">' + '<label class="control-label col-md-3">신청일자</label>' + '<div class="col-md-5">'
-								+'<input class="form-control" type="text" value="'+ obj.offDate  +'" readonly>'+'</div>'+'</div>'
+								+'<input class="form-control" type="text" value="'+ obj.offDate +'"readonly>'
+								+'</div>'+'</div>'
 								+'<div class="form-group row">' + '<label class="control-label col-md-3">휴학학기수</label>' + '<div class="col-md-5">'
 								+'<input class="form-control" type="text" value="'+ obj.offSem  +'" readonly>'+'</div>'+'</div>'
 								+ '<div class="form-group row">' + '<label class="control-label col-md-3">휴학사유</label>' + '<div class="col-md-8">'
