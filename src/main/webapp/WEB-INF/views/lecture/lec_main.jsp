@@ -71,7 +71,8 @@ margin-right : 80px;
 	
 	<!-- Page content-->
 	<div class="container">
-	<button type="button" class="btn btn-default btn-lg" onclick="location.href='lecMoveback.me'">
+		<button type="button" class="btn btn-default btn-lg" onclick="location.href='lecMoveback.me'">
+	
   <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 뒤로
 		<div class="text-center mt-5">
 			<h1>Online lecture at Nakseong University.</h1>

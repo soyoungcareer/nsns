@@ -28,15 +28,27 @@ public class BoardController {
 	@RequestMapping("board.me")
 	public String boardMove() {
 
-		return "board/portfolio-details";
+		return "board/index";
 
 	}
 
 	@RequestMapping("boardMoves.me")
-	public String mobardMoves() {
+	public String mobardMoves(Model model) {
 
+		ArrayList<Board> likeranking = bs.boardlikeranking();
+		System.out.println(likeranking);
+
+		ArrayList<Board> iseeranking = bs.boardiseeranking();
+		System.out.println(iseeranking);
+		
+		model.addAttribute("likeranking",likeranking);
+		model.addAttribute("iseeranking",iseeranking);
+
+		
+		
 		return "board/portfolio-details";
 
+		
 	}
 
 	@RequestMapping("boardMovesss.me")
@@ -167,7 +179,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("boardupdate.me")
-	public String boardupdate(@RequestParam(value = "no") int no,@RequestParam(value = "title") String title,
+	public String boardupdate(@RequestParam(value = "no") int no, @RequestParam(value = "title") String title,
 			@RequestParam(value = "content") String content, HttpSession session) {
 
 		searchFac sf = new searchFac();
@@ -186,7 +198,7 @@ public class BoardController {
 
 	@RequestMapping("boarddel.me")
 	public String mobarddel(@RequestParam(value = "no") int no) {
-		
+
 		bs.boarddel(no);
 
 		return "redirect:boardMovess.me";

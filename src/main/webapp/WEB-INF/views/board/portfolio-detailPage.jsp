@@ -70,7 +70,7 @@
 			class="container d-flex align-items-center justify-content-between">
 
 			<div class="logo">
-				<a href="index.html"><img
+				<a href="boardMoves.me"><img
 					src="resources/bootstrap/docs/images/logo.png" alt=""
 					class="img-fluid"></a>
 			</div>
@@ -80,8 +80,8 @@
 					<li><a class="nav-link scrollto " href="#hero"></a></li>
 					<li><a class="nav-link scrollto" href="boardMovesss.me">게시글</a></li>
 					<li><a class="nav-link scrollto" href="boardMovess.me">MY게시글</a></li>
-					<li><a class="nav-link scrollto " href="#portfolio"></a></li>
-					<li><a class="nav-link scrollto" href="#team"></a></li>
+					<li><a class="nav-link scrollto " href="#portfolio">채팅</a></li>
+					<li><a class="nav-link scrollto" href="#team">취업정보</a></li>
 					<li><a class="nav-link scrollto" href="#pricing"></a></li>
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
 							class="bi bi-chevron-down"></i></a>
