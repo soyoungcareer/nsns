@@ -23,4 +23,5 @@ public class Board {
 	private int like;
 	private int isee;
 	private Date date;
+	private int rowNo;
 }

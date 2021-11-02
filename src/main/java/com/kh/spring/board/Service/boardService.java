@@ -28,6 +28,10 @@ public interface boardService {
 
 	void boarddel(int no);
 
+	ArrayList<Board> boardlikeranking();
+
+	ArrayList<Board> boardiseeranking();
+
 
 
 

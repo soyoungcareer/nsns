@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="like" column="BD_LIKE" />
 		<result property="isee" column="BD_ISEE" />
 		<result property="date" column="BD_DATE" />
+		<result property="rowNo" column="ROWNUM" />
 
 	</resultMap>
 
@@ -125,10 +126,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<delete id="boarddel" parameterType="_int">
-			DELETE FROM BOARD WHERE
+		DELETE FROM BOARD WHERE
 		BDNO=#{NO}
-		
+
 	</delete>
 
+
+	<select id="baordlikeranking" resultMap="boardResultSet">
+		SELECT ROWNUM , A.*
+		FROM ( SELECT * FROM BOARD ORDER BY BD_LIKE DESC) A 
+	
+		
+
+	</select>
+
+
+	<select id="baordiseeranking" resultMap="boardResultSet">
+		SELECT ROWNUM , A.*
+		FROM ( SELECT * FROM BOARD ORDER BY BD_ISEE DESC) A
+	
+	</select>
 
 </mapper>
