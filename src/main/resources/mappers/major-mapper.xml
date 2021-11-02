@@ -62,9 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM REQ_SUBJECT A
 		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
-		WHERE REQSUB_NO= #{sno} AND STATUS= 'N'
+		WHERE REQSUB_NO= #{sno}
+		AND STATUS= 'N'
 	</select>
-	
+	<!--  -->
 	<insert id="createSubject" parameterType="Subject">
 		INSERT INTO SUBJECT
 		VALUES (#{subCode}, #{subTitle}, #{deptCode}, #{subDivs}, #{profId}, #{subCredit}, #{subClass}, #{subTime}, #{subType}, #{subYear}, #{subSmst}, default, #{attOrigin}, #{attChange})

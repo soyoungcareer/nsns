@@ -99,7 +99,7 @@ public class MemberServiceImpl implements MemberService {
 			throw new CommException("교수 등록 중 오류가 발생하였습니다.");
 		}
 		
-	}
+	}///
 	
 	@Override
 	public int studentListCount() {

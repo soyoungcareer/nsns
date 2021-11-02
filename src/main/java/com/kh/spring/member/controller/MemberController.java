@@ -24,7 +24,7 @@ import com.kh.spring.member.vo.Student;
 
 @Controller
 public class MemberController {
-	
+	///
 	@Autowired
 	private MemberService memberService;
 	

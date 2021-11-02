@@ -13,7 +13,7 @@ import com.kh.spring.member.vo.Student;
 
 @Repository
 public class MemberDao {
-
+///
 	public Admin loginAdmin(SqlSessionTemplate sqlSession, Admin a) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("memberMapper.loginAdmin", a);

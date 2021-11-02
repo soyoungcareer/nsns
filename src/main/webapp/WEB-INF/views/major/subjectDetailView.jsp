@@ -67,7 +67,7 @@
                     <label for="ntcCategory">학과이름</label>
                     <input class="form-control" id="deptTitle" name="deptTitle" type="text" value="${ reqSub.deptTitle }">
                     <input class="form-control" type="hidden" id="deptCode" name="deptCode" value="${ reqSub.deptCode }">
-                  </div>
+                  </div><!--  -->
                   
                   <div class="form-group">
                     <label for="ntcCategory">이수구분</label>
@@ -75,7 +75,7 @@
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">교수</label><!-- 교번 -->
+                    <label for="ntcCategory">교수</label><!-- 교번// -->
                     <input class="form-control" id="profName" name="profName" type="text" value="${ reqSub.profName }">
                     <input class="form-control" type="hidden" id="profId" name="profId" value="${ reqSub.profId }">
                   </div>

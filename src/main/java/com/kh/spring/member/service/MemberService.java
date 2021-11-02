@@ -10,7 +10,7 @@ import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
 
 public interface MemberService {
-
+///
 	Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a); //BCryptPasswordEncoder bCPwdEncoder, 
 
 	Student loginStudent(BCryptPasswordEncoder bCPwdEncoder, Student s);

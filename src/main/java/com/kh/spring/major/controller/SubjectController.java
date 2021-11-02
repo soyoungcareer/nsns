@@ -49,7 +49,7 @@ public class SubjectController {
 		
 		return mv;
 	}
-	
+	///
 	@RequestMapping("createSub.adm") //강의 신청 승인 - 등록
 	public String createSubject(Model model, HttpServletRequest request
 								, @RequestParam(value="subAttachment", required=false) MultipartFile file

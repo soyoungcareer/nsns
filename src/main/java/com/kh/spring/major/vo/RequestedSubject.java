@@ -14,7 +14,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class RequestedSubject {
-
+//
 	private int reqSubNo;	// "REQSUB_NO"	NUMBER		NOT NULL,
 	private int deptCode;	// "DEPT_CODE"	NUMBER		NOT NULL,
 	private int subDivs;	// "SUB_DIVS"	NUMBER		NOT NULL,
