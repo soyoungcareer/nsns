@@ -7,11 +7,11 @@ import com.kh.spring.consult.model.vo.ConsultStatus;
 
 public interface ConsultService {
 
-	ArrayList<ConsultStatus> conProList(String userId);
+	ArrayList<ConsultStatus> conProList(int userId);
 
 	Consult selectConsult(int conNo);
 
-	int selectConsultCount(String stuId);
+	int selectConsultCount(int stuId);
 
 	void insertConsult(Consult con);
 

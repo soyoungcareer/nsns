@@ -14,22 +14,22 @@ import com.kh.spring.studentSubject.model.vo.StudentSubject;
 @Repository
 public class StudentSubjectDao {
 
-	public ArrayList<String> selectYear(SqlSessionTemplate sqlsession, String stuId) {
+	public ArrayList<String> selectYear(SqlSessionTemplate sqlsession, int stuId) {
 		
 		return (ArrayList)sqlsession.selectList("studentSubjectMapper.selectYear", stuId);
 	}
 
-	public ArrayList<String> selectSemester(SqlSessionTemplate sqlsession, String stuId) {
+	public ArrayList<String> selectSemester(SqlSessionTemplate sqlsession, int stuId) {
 		
 		return (ArrayList)sqlsession.selectList("studentSubjectMapper.selectSemester", stuId);
 	}
 
-	public int selectListCount(SqlSessionTemplate sqlsession, String stuId) {
+	public int selectListCount(SqlSessionTemplate sqlsession, int stuId) {
 		
 		return sqlsession.selectOne("studentSubjectMapper.selectListCount", stuId);
 	}
 	
-	public ArrayList<StudentSubject> selectStuSubjectList(SqlSessionTemplate sqlsession,String stuId, PageInfo pi) {
+	public ArrayList<StudentSubject> selectStuSubjectList(SqlSessionTemplate sqlsession, int stuId, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		
@@ -53,7 +53,7 @@ public class StudentSubjectDao {
 		return (ArrayList)sqlsession.selectList("studentSubjectMapper.searchSubject", sc, rowBounds);
 	}
 
-	public ArrayList<StuGradeAndCredit> selectGradeList(SqlSessionTemplate sqlsession, String stuId) {
+	public ArrayList<StuGradeAndCredit> selectGradeList(SqlSessionTemplate sqlsession, int stuId) {
 		
 		return (ArrayList)sqlsession.selectList("studentSubjectMapper.selectGradeList", stuId);
 	}

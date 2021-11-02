@@ -10,18 +10,18 @@ import com.kh.spring.studentSubject.model.vo.StudentSubject;
 
 public interface StudentSubjectService {
 
-	ArrayList<String> selectYear(String stuId);
+	ArrayList<String> selectYear(int stuId);
 
-	ArrayList<String> selectSemester(String stuId);
+	ArrayList<String> selectSemester(int stuId);
 
-	ArrayList<StudentSubject> selectStuSubjectList(String stuId, PageInfo pi);
+	ArrayList<StudentSubject> selectStuSubjectList(int stuId, PageInfo pi);
 
 	ArrayList<StudentSubject> searchSubject(SearchCondition sc, PageInfo pi);
 
-	int selectListCount(String stuId);
+	int selectListCount(int stuId);
 
 	int selectListCount(SearchCondition sc);
 
-	ArrayList<StuGradeAndCredit> selectGradeList(String stuId);
+	ArrayList<StuGradeAndCredit> selectGradeList(int stuId);
 
 }

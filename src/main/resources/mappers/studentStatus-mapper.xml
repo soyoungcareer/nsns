@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="applicationNo" column="APPLICATION_NO"/>
 		<result property="stuId" column="STU_ID"/>
 		<result property="offCategory" column="OFF_CATEGORY"/>
-		<result property="offDate" column="OFF_DATE" javaType="java.sql.Date"/>
+		<result property="offDate" column="OFF_DATE"/>
 		<result property="offSemCnt" column="OFF_SEM_CNT"/>
 		<result property="offSem" column="OFF_SEM"/>
 		<result property="offReason" column="OFF_REASON"/>

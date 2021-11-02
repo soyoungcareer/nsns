@@ -31,14 +31,11 @@
              <hr style="boder: 1px solid black">
       
              
-              <form class="form-horizontal" id="consultForm" action="insert.con" method="post" onsubmit="return check()">
+              <form class="form-horizontal" id="consultForm" action="insert.con" method="post" onsubmit="return checkCon()">
              	 <div style="margin-left:300px;">
-		             <label for="stuId"><b>학번 :</b> 20190321 </label> &nbsp;&nbsp;
-		             <input type="hidden" id="stuId" name="stuId" value="20190321">
-		             
-		             <label for="stuName"><b>이름 :</b> 유재석  </label>&nbsp;&nbsp;
-		             <input type="hidden" id="stuName" name="stuName" value="유재석">
-		             
+		              <label for="stuId"><b>학번 :</b> ${loginStu.stuId} </label> &nbsp;&nbsp;
+			             
+			           <label for="stuName"><b>이름 :</b> ${loginStu.stuName}  </label>&nbsp;&nbsp;
            		 </div>
               
             	<div class="tile-body">
@@ -100,7 +97,7 @@
       });
       
       //유효성 체크 
-  	function check() {
+  	function checkCon() {
     	  var stuId = $("#stuId").val();
     	  var flag = true;
     	  $.ajax({
@@ -145,7 +142,7 @@
 			});
     	  
     	  return flag;
-   	}
+   		}
       
       
       function getTimeStamp() {

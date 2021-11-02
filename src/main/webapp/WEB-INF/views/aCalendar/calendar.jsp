@@ -9,12 +9,15 @@
    </head>
   <body class="app sidebar-mini">
 	
-	<!-- 일반 학생 로그인시 보이는 메뉴바 -->
-	<%--<jsp:include page="cSMenubar.jsp"/> --%> 
+	<!-- 학생 로그인시 보이는 메뉴바 -->
+	<c:if test="${not empty loginStu }">
+		<jsp:include page="cSMenubar.jsp"/> 
+	</c:if>
 	
 	<!-- 관리자 로그인시 보이는 메뉴바 -->
-	<jsp:include page="cAMenubar.jsp"/>  
-	
+	<c:if test="${not empty loginAdm }">
+		<jsp:include page="cAMenubar.jsp"/>  
+	</c:if>
 	
     <main class="app-content">
     
@@ -23,7 +26,7 @@
           <h1><i class="fa fa-calendar"></i> 학사일정</h1>
         </div>
        <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item"><a href="#" style="color: #222d32;"><i class="fa fa-sign-out fa-4x" aria-hidden="true"></i><div>나가기</div></a></li>
+           <li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
         </ul>
       </div>
       
@@ -45,6 +48,7 @@
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/moment.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/jquery-ui.custom.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.3/dist/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/ko.js"></script>
     <script type="text/javascript">
     
     $(function() {

@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
-	<select id="conProList" resultMap="consultStatusResultMap" parameterType="string">
+	<select id="conProList" resultMap="consultStatusResultMap" parameterType="_int">
 		SELECT CONSULT_STATUS_PRO.CON_STS_NO, CONSULT_STATUS_PRO.CON_PROCESS, CONSULT_STATUS_PRO.CON_COMPLETED, CONSULT_STATUS_PRO.STATUS, CON_NO
 		FROM CONSULT_STATUS_PRO
 		LEFT JOIN CONSULT USING (CON_NO)
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND CON_NO=#{conNo}
 	</select>
 	
-	<select id="selectConsultCount" resultType="_int"  parameterType="string">
+	<select id="selectConsultCount" resultType="_int"  parameterType="_int">
 	 	SELECT COUNT(*)
 		FROM CONSULT_STATUS_PRO
         LEFT JOIN CONSULT USING (CON_NO)

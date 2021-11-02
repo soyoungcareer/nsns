@@ -5,9 +5,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd">
 
-	<websocket:handlers allowed-origins="*" >
-        <websocket:mapping handler="handlerChat" path="/chat" />
-        <websocket:sockjs websocket-enabled="true" />
+	
+    <websocket:handlers allowed-origins="*">
+    	 <websocket:mapping handler="handlerChat" path="/chat" />
+    	 <websocket:handshake-interceptors>
+	       <bean class="com.kh.spring.chat.handler.HandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+    	<websocket:sockjs websocket-enabled="true" />
     </websocket:handlers>
     
     <bean id="handlerChat" class="com.kh.spring.chat.handler.HandlerChat" />

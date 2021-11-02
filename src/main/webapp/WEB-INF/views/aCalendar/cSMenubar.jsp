@@ -51,8 +51,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" >
          <div style="margin-left:10px;">
-          <p class="app-sidebar__user-name">학생</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+            <p class="app-sidebar__user-name">${loginStu.stuName }</p>
+          	<p class="app-sidebar__user-designation">학번 : ${loginStu.stuId }</p>
         </div>
       </div>
     </aside>

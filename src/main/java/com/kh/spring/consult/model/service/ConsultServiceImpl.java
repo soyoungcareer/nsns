@@ -21,7 +21,7 @@ public class ConsultServiceImpl implements ConsultService {
 	private ConsultDao consultDao;
 
 	@Override
-	public ArrayList<ConsultStatus> conProList(String userId) {
+	public ArrayList<ConsultStatus> conProList(int userId) {
 		
 		ArrayList<ConsultStatus> list = consultDao.conProList(sqlSession, userId);
 		
@@ -37,7 +37,7 @@ public class ConsultServiceImpl implements ConsultService {
 	}
 
 	@Override
-	public int selectConsultCount(String stuId) {
+	public int selectConsultCount(int stuId) {
 		
 		int count = consultDao.selectConsultCount(sqlSession, stuId);
 		

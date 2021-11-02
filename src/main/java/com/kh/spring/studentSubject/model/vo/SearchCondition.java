@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString 
 public class SearchCondition {
-	private String stuId;
+	private int stuId;
 	private String selectYear;
 	private String selectSemester;
 	private String search;

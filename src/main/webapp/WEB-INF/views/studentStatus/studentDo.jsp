@@ -31,7 +31,7 @@
              
              <hr style="boder: 1px solid black">
              
-              <form class="form-horizontal" action="insertStuDo.stu" method="post" onsubmit="return check();">
+              <form class="form-horizontal" action="insertStuDo.stu" method="post" onsubmit="return checkDo();">
               	 	<div style="margin-left:300px;">
 			             <label for="stuId"><b>학번 :</b> ${loginStu.stuId} </label> &nbsp;&nbsp;
 			             
@@ -101,7 +101,7 @@
 	     
 	})
 	
-	 function check() {
+	 function checkDo() {
 	    var stuId = $("#stuId").val();
 		var flag = true; 
   	  	

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.acalendar.model.vo.Acalendar;
 import com.kh.spring.common.PageInfo;
+import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentSubject.model.dao.StudentSubjectDao;
 import com.kh.spring.studentSubject.model.vo.SearchCondition;
 import com.kh.spring.studentSubject.model.vo.StuGradeAndCredit;
@@ -24,7 +25,7 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
 	private StudentSubjectDao studentSubjectDao;
 
 	@Override
-	public ArrayList<String> selectYear(String stuId) {
+	public ArrayList<String> selectYear(int stuId) {
 		
 		ArrayList<String> list = studentSubjectDao.selectYear(sqlsession, stuId);
 				
@@ -32,7 +33,7 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
 	}
 
 	@Override
-	public ArrayList<String> selectSemester(String stuId) {
+	public ArrayList<String> selectSemester(int stuId) {
 		
 		ArrayList<String> list = studentSubjectDao.selectSemester(sqlsession, stuId);
 		
@@ -40,14 +41,14 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
 	}
 
 	@Override
-	public int selectListCount(String stuId) {
+	public int selectListCount(int stuId) {
 		
 		return studentSubjectDao.selectListCount(sqlsession, stuId);
 	}	
 
 	
 	@Override
-	public ArrayList<StudentSubject> selectStuSubjectList(String stuId, PageInfo pi) {
+	public ArrayList<StudentSubject> selectStuSubjectList(int stuId, PageInfo pi) {
 		
 		 ArrayList<StudentSubject> list = studentSubjectDao.selectStuSubjectList(sqlsession, stuId, pi);
 		 
@@ -72,7 +73,8 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
 	}
 
 	@Override
-	public ArrayList<StuGradeAndCredit> selectGradeList(String stuId) {
+	public ArrayList<StuGradeAndCredit> selectGradeList(int stuId) {
+		
 		
 		ArrayList<StuGradeAndCredit> list = studentSubjectDao.selectGradeList(sqlsession, stuId);
 		

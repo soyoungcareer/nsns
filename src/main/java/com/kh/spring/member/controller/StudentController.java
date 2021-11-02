@@ -3,10 +3,12 @@ package com.kh.spring.member.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +28,16 @@ public class StudentController {
 
     @Autowired
     private JavaMailSender mailSender;
+    
+    @Autowired 
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	//학생 정보 페이지
 	@RequestMapping("stuinfo.st")
-	public String selectStuInfo(Model model) {  
+	public String selectStuInfo(Model model, HttpSession session) {  
 		
 		//로그인 세션의 학번을 가져와서 전달
-		int stuId = 20193019;
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId(); 
 		
 		Student student = studentService.studentInfo(stuId);
 		
@@ -115,15 +120,17 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping(value="changePW.stu", produces="application/json; charset=utf-8")
-	public String ChangePW(String stuPwd) { 
+	public String ChangePW(String stuPwd, HttpSession session) { 
 		
-		int stuId = 20193019; //세션에서 학번 조회해오기 (비밀번호를 바꾸기 위해)
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();  //세션에서 학번 조회해오기 (비밀번호를 바꾸기 위해)
 		
 		Student student = new Student();
 		
 		student.setStuId(stuId);
 		
-		student.setStuPwd(stuPwd);
+		String finalPwd = bCryptPasswordEncoder.encode(stuPwd); 
+		
+		student.setStuPwd(finalPwd);
 		
 		int result = studentService.ChangePW(student);
 		

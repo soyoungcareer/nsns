@@ -1,6 +1,9 @@
 package com.kh.spring.studentStatus.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,6 +44,7 @@ public class StudentStatusController {
 				
 		ArrayList<StudentStatus> list = studentStatusService.studentProList(stuId);
 		
+		
 		System.out.println("list : " + list);
 		
 		return new GsonBuilder().create().toJson(list);
@@ -49,13 +53,11 @@ public class StudentStatusController {
 	//학생들의 휴학 신청 상세 조회
 	@ResponseBody
 	@RequestMapping(value="stuOff.stu", produces="application/json; charset=utf-8")
-	public String selectStuOff (int appNo) { 
-		
-		System.out.println("appNo : " + appNo);
+	public String selectStuOff (int appNo) throws ParseException { 
 		
 		StudentOff stuOff = studentStatusService.selectStuOff(appNo);
-			
-		return new GsonBuilder().create().toJson(stuOff);
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(stuOff);
 	}
 	
 	// 학생들의 자퇴 신청 상세 조회
@@ -65,7 +67,7 @@ public class StudentStatusController {
 		
 		StudentDo stuDo = studentStatusService.selectStuDo(appNo);
 			
-		return new GsonBuilder().create().toJson(stuDo);
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(stuDo);
 	}
 	
 	//휴학 신청 페이지

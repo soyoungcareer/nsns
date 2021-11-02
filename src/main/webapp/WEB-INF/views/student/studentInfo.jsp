@@ -36,6 +36,9 @@
 
         
         <div class="col-md-8">
+        	<div class="bs-component">
+             
+            </div>
           <div class="tab-content">
               <div class="tile user-settings">
                 <h4 class="line-head" style="color:gray;"><i class="fa fa-pencil-square-o" aria-hidden="true"> 학생의 개인정보 수정은 이메일, 전화번호, 주소만  가능합니다.</i></h4>
@@ -131,57 +134,72 @@
 		//인증할 메일 전송하고 
 		var email = $("#email").val();
 		
-		  $.ajax({
-		        type:"GET",
-		        
-		        url:"mailCheck?email=" + email,
-		        		
-		        success: function(data){
-		        	
-		        	console.log(data);
-		        	
-		        	var windowUrl = 'email.em';
+		if(email.length == 0) {
+			
+			var str = ' <div class="alert alert-dismissible alert-danger">' 
+    			+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+    			+ ' <strong>확인!</strong> 이메일 주소를 업데이트 후 사용해주세요 '
+    			+ ' </div> '
+    			
+    			$('.bs-component').empty();
+    			$('.bs-component').append(str);
+    			$("#email").focus();
+			
+		} else {
+			
+			 $.ajax({
+			        type:"GET",
+			        
+			        url:"mailCheck?email=" + email,
+			        		
+			        success: function(data){
+			        	
+			        	console.log(data);
+			        	
+			        	var windowUrl = 'email.em';
 
-		        	var windowName = '이메일 인증' ;
+			        	var windowName = '이메일 인증' ;
 
-		        	var popupWindow = window.open(windowUrl, windowName, "top=200px, left=300px, height=350px, width=450px, resizable=no")
+			        	var popupWindow = window.open(windowUrl, windowName, "top=200px, left=300px, height=350px, width=450px, resizable=no")
 
-		        			출처: https://jinstale.tistory.com/111 [HINARI]");
-		        	
-		        	
-					var popupForm = document.popupForm;
-		        	
-		        	popupForm = document.createElement("form");
+			        			출처: https://jinstale.tistory.com/111 [HINARI]");
+			        	
+			        	
+						var popupForm = document.popupForm;
+			        	
+			        	popupForm = document.createElement("form");
 
-		        	popupForm.setAttribute("name", "popupForm");
+			        	popupForm.setAttribute("name", "popupForm");
 
-		        	popupForm.setAttribute("method", "post");
+			        	popupForm.setAttribute("method", "post");
 
-		        	popupForm.setAttribute("action", "email.em");
+			        	popupForm.setAttribute("action", "email.em");
 
-		        	var input = document.createElement('input');
+			        	var input = document.createElement('input');
 
-		        	input.setAttribute("type", "hidden");
+			        	input.setAttribute("type", "hidden");
 
-		        	input.setAttribute("name", "data");
+			        	input.setAttribute("name", "data");
 
-		        	input.setAttribute("value", data);
+			        	input.setAttribute("value", data);
 
-		            popupForm.appendChild(input);
+			            popupForm.appendChild(input);
 
-		            popupForm.target = windowName;
+			            popupForm.target = windowName;
 
-		        	document.body.appendChild(popupForm);
+			        	document.body.appendChild(popupForm);
 
-		        	popupForm.data.value = data;
+			        	popupForm.data.value = data;
 
-		        	popupForm.submit();
+			        	popupForm.submit();
 
-		        },
-				error:function(e){
-					alert("이메일 전송이 실패했습니다.");
-				}
-		    });
+			        },
+					error:function(e){
+						alert("이메일 전송이 실패했습니다.");
+					}
+			
+		});
+		}
 		
 	})
 	
