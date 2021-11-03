@@ -17,9 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="subTime" column="SUB_TIME"/>
 		<result property="reqType" column="REQ_TYPE"/>
 		<result property="status" column="STATUS"/>
-   <!-- <result property="attOrigin" column="ATT_ORIGIN"/>
+   		<result property="attOrigin" column="ATT_ORIGIN"/>
 		<result property="attChange" column="ATT_CHANGE"/>
-		<result property="subCode" column="SUB_CODE"/> -->
+		<result property="subCode" column="SUB_CODE"/>
 	</resultMap>
 	
 	<resultMap id="subjectResultSet" type="Subject">
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="subjectModifyList" resultMap="reqSubjectResultSet">
-		SELECT A.REQSUB_NO, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, C.PROF_NAME, A.SUB_CREDIT, A.SUB_TIME, A.REQ_TYPE, A.STATUS
+		SELECT A.REQSUB_NO, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, C.PROF_NAME, A.SUB_CREDIT, A.SUB_TIME, A.REQ_TYPE, A.STATUS, A.SUB_CODE
 		FROM REQ_SUBJECT A
 		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
 		LEFT JOIN PROFESSOR C USING (PROF_ID)
@@ -65,16 +65,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE REQSUB_NO= #{sno}
 		AND STATUS= 'N'
 	</select>
-	<!--  -->
+	
 	<insert id="createSubject" parameterType="Subject">
 		INSERT INTO SUBJECT
-		VALUES (#{subCode}, #{subTitle}, #{deptCode}, #{subDivs}, #{profId}, #{subCredit}, #{subClass}, #{subTime}, #{subType}, #{subYear}, #{subSmst}, default, #{attOrigin}, #{attChange})
+		VALUES (#{subCode}, #{subTitle}, #{deptCode}, #{subDivs}, #{profId}, #{subCredit}, #{subClass}, #{subTime}, #{subType}, #{subYear}, #{subSmst}, default, #{originName}, #{changeName})
 	</insert>
 	
 	<update id="createRequestSubject" parameterType="RequestedSubject">
 		UPDATE REQ_SUBJECT
-		SET REQSUB_NO = 'Y'
+		SET STATUS = 'Y'
+		WHERE REQSUB_NO= #{reqSubNo}
 	</update>
 	
+	<update id="modifySubject" parameterType="Subject">
+		UPDATE SUBJECT
+		SET SUB_TITLE=#{subTitle}, DEPT_CODE=#{deptCode}, SUB_DIVS=#{subDivs}, PROF_ID=#{profId}, SUB_CREDIT=#{subCredit},
+			SUB_CLASS=#{subClass}, SUB_TIME=#{subTime}, SUB_TYPE=#{subType}, SUB_YEAR=#{subYear}, SUB_SMST=#{subSmst}, 
+			ORIGIN_NAME=#{originName}, CHANGE_NAME=#{changeName}
+		WHERE SUB_CODE= #{subCode}
+	</update>
+	
+	<update id="modifyRequestedSubject" parameterType="RequestedSubject">
+		UPDATE REQ_SUBJECT
+		SET STATUS = 'Y'
+		WHERE SUB_CODE= #{subCode}
+	</update>
+	
+	<update id="deleteSubject" parameterType="Subject">
+		UPDATE SUBJECT
+		SET STATUS = 'N'
+		WHERE SUB_CODE= #{subCode}
+	</update>
+	
+	<update id="deleteRequestedSubject" parameterType="RequestedSubject">
+		UPDATE REQ_SUBJECT
+		SET STATUS = 'Y'
+		WHERE SUB_CODE= #{subCode}
+	</update>
+	
+	<select id="subAllListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM SUBJECT
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<select id="subAllList" resultMap="subjectResultSet">
+		SELECT A.SUB_CODE, A.DEPT_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TYPE, A.SUB_TITLE, A.PROF_ID, C.PROF_NAME, A.SUB_CREDIT, A.SUB_CLASS, A.SUB_TIME, A.SUB_YEAR, A.SUB_SMST, A.STATUS, A.ORIGIN_NAME
+		FROM SUBJECT A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
+		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
+		WHERE A.STATUS = 'Y'
+		ORDER BY A.SUB_CODE DESC
+	</select>
 
 </mapper>

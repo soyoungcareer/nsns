@@ -96,10 +96,10 @@ public class MemberController {
 			return "redirect:profMypage.pr";
 			
 		}else {
-			//throw new CommException("로그인 실패");
-			System.out.println("로그인 중 오류가 발생하였습니다.");
+			throw new CommException("로그인 실패");
+			//System.out.println("로그인 중 오류가 발생하였습니다.");
 			
-			return "redirect:/";
+			//return "redirect:/";
 		}
 		
 		
