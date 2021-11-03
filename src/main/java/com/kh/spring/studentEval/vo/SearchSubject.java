@@ -16,5 +16,5 @@ public class SearchSubject {
 	private int con1;
 	private int con2;
 	private String keyword;
-	private String profId;
+	private String profId; 
 }

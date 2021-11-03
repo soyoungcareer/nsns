@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>낙성대학교(교수) - 마이페이지</title>
 </head>
-<body>
+<body> 
 	<jsp:include page="menubarProf.jsp"/>
 	 
 	<main class="app-content">
@@ -43,7 +43,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label">담당학과</label> 
-							<input class="form-control" type="text" name="deptTitle" value="${prof.department.deptTitle}" readonly>
+							<input class="form-control" type="text" name="profDeptTitle" value="${prof.profDeptTitle}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">이메일</label> 

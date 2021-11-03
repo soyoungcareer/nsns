@@ -9,19 +9,21 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.consult.model.vo.Consult;
+import com.kh.spring.consult.model.vo.ConsultStatus;
 import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.SearchStudent;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 @Repository
 public class ProfessorDao {
-
+ 
 	public int profLectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("profMapper.profLectListCount");
 	}
@@ -112,6 +114,8 @@ public class ProfessorDao {
 	}
 
 	public int editLectReq(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
+		
+		System.out.println("=================reqSubject Dao : " + reqSubject);
 		return sqlSession.insert("profMapper.editLectReq", reqSubject);
 	}
 
@@ -123,20 +127,48 @@ public class ProfessorDao {
 		return sqlSession.selectOne("profMapper.delSubInfo", map);
 	}
 
-	public StudentOff detailOff(SqlSessionTemplate sqlSession, String offNo) {
-		return sqlSession.selectOne("profMapper.detailOff", offNo);
+	public StudentOff detailOff(SqlSessionTemplate sqlSession, int applicationNo) {
+		return sqlSession.selectOne("profMapper.detailOff", applicationNo);
 	}
 
-	public StudentDo detailDo(SqlSessionTemplate sqlSession, String doNo) {
-		return sqlSession.selectOne("profMapper.detailDo", doNo);
+	public StudentDo detailDo(SqlSessionTemplate sqlSession, int applicationNo) {
+		return sqlSession.selectOne("profMapper.detailDo", applicationNo);
 	}
 
-	public int profOffCheck(SqlSessionTemplate sqlSession, String offNo) {
-		return sqlSession.selectOne("profMapper.profOffCheck", offNo);
+	public int profOffCheck(SqlSessionTemplate sqlSession, StudentOff stuOff) {
+		return sqlSession.update("profMapper.profOffCheck", stuOff);
 	}
 
-	public int profDoCheck(SqlSessionTemplate sqlSession, String doNo) {
-		return sqlSession.selectOne("profMapper.profDoCheck", doNo);
+	public int profDoCheck(SqlSessionTemplate sqlSession, StudentDo stuDo) {
+		return sqlSession.update("profMapper.profDoCheck", stuDo);
+	}
+
+	public Consult detailConsult(SqlSessionTemplate sqlSession, String conNo) {
+		return sqlSession.selectOne("profMapper.detailConsult", conNo);
+	}
+
+	public int profConCheck(SqlSessionTemplate sqlSession, Consult consult) {
+		System.out.println("=================consult Dao : " + consult);
+		return sqlSession.update("profMapper.profConCheck", consult);
+	}
+
+	public int evalSubCount(SqlSessionTemplate sqlSession, SearchSubject searchSubject) {
+		return sqlSession.selectOne("profMapper.evalSubCount", searchSubject);
+	}
+
+	public ArrayList<Subject> evalSubList(SqlSessionTemplate sqlSession, SearchSubject searchSubject, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("profMapper.evalSubList", searchSubject , rowBounds);
+	}
+
+	public Evaluation selectFilteredEval(SqlSessionTemplate sqlSession, Map map) {
+		System.out.println("=================eval Dao : " + map);
+		return sqlSession.selectOne("profMapper.selectFilteredEval", map);
+	}
+
+	public int profConComplete(SqlSessionTemplate sqlSession, ConsultStatus conStatus) {
+		return sqlSession.update("profMapper.profConComplete", conStatus);
 	}
 
 }

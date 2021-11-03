@@ -7,6 +7,15 @@
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 강의정보 수정</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script> 
+		/* 수정할 강의코드 넘기기 */
+		/*
+		$(document).on("click", "#editBtn", function(){
+			var subCode = $(this).parent().parent().children().eq(1).text();
+			location.href="profEditLec.pr?subCode="+subCode;
+		});
+		*/
+	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -43,7 +52,9 @@
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">교과목명</label>
 		                  <input class="form-control" type="text" name="subTitle" value="${ sub.subTitle }" required>
+		                  <input type="hidden" name="subCode" value="${ sub.subCode }">
 		                </div>
+		                
 		            </div>
 		            <div class="row">
 		            	<div class="form-group col-md-3">
@@ -128,6 +139,8 @@
 								첨부파일 없음
 							</c:if>
 							<c:if test="${ !empty sub.originName }">
+								<input type="hidden" name="changeName" value="${ sub.changeName }">
+	                            <input type="hidden" name="originName" value="${ sub.originName }">
 								<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${ sub.changeName }" 
 									download="${ sub.originName }"><button class="btn badge badge-pill badge-warning" type="button">${ sub.originName }</button></a>
 							</c:if>
@@ -136,7 +149,7 @@
 		            </div>
 		            <div class="row">
 		                <div class="form-group col-md-4 align-self-end">
-		                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>수정 신청</button>
+		                  <button id="editBtn" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>수정 신청</button>
 		                </div>
 	                </div>
 	              </form>

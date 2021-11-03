@@ -5,9 +5,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 이의신청 상세</title>
-</head>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 이의신청 상세</title>
+	</head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script> 
+		/* 이의신청 승인/반려 체크 후 저장 */
+		$(document).on("click", "#saveObjCheck", function(){
+			var status = $('input[name="answer"]:checked').val();
+			var reason = $("#reason").val();
+			
+			$.ajax({
+				url: "profObjCheck.pr",
+				type: "POST",
+				data:{
+					status:status,
+					reason:reason
+				},
+				dataType:"json",
+				success:function(checkObj) {
+					alert("저장 성공");
+				},
+				error:function() {
+					alert("ajax 로딩 실패");
+				}
+			});
+		});
+	</script>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
  
@@ -17,7 +41,6 @@
 				<h1>
 					<i class="fa fa-edit"></i> 성적 관리
 				</h1>
-				<!-- <p>Sample forms</p> -->
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -72,7 +95,7 @@
 								</div>
 							</div>
 							<div class="form-group col-md-4 align-self-end">
-								<input type="button" class="btn btn-primary" type="button" onclick="" value="저장"/>
+								<input type="button" class="btn btn-primary" type="button" id="saveObjCheck" value="저장"/>
 							</div>
 						</div>
 					</form>

@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Setter
 @Getter
-@ToString
+@ToString 
 public class Professor { 
 
 	private String profId;		//  "PROF_ID"		VARCHAR2(20)		NOT NULL,

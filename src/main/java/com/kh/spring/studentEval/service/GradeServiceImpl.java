@@ -1,6 +1,8 @@
 package com.kh.spring.studentEval.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.gradeObject.vo.GradeObject;
+import com.kh.spring.lectRegister.vo.LectRegister;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.studentEval.dao.GradeDao;
 import com.kh.spring.studentEval.vo.Grade;
@@ -19,7 +22,7 @@ import com.kh.spring.studentEval.vo.SearchSubject;
 @Service
 public class GradeServiceImpl implements GradeService {
 
-	@Autowired
+	@Autowired 
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
@@ -70,8 +73,8 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public int updateGrade(Map map) {
-		return gradeDao.updateGrade(sqlSession, map);
+	public int updateGrade(Grade grade) {
+		return gradeDao.updateGrade(sqlSession, grade);
 	}
 
 	@Override
@@ -85,8 +88,63 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public int profObjCheck(String objNo) {
-		return gradeDao.profObjCheck(sqlSession, objNo);
+	public int profObjCheck(GradeObject gradeObject) {
+		return gradeDao.profObjCheck(sqlSession, gradeObject);
+	}
+
+	@Override
+	public int selectGradeCount(SearchGrade searchGrade) {
+		return gradeDao.selectGradeCount(sqlSession, searchGrade);
+	}
+
+	@Override
+	public int gradeInsert(String subCode, int stuId) {
+		Grade grade = new Grade();
+		grade.setStudentId(stuId);
+		grade.setSubCode(subCode);
+		  
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy");
+		Date date = new Date ( );
+		String year = format.format (date);
+		int neyear = Integer.parseInt(year);
+		grade.setGradeYear(neyear);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat ("MM");
+		Date date2 = new Date ( );
+		String mon = format2.format (date2);
+		int nemon = Integer.parseInt(mon);
+		if(nemon<9&&nemon>2) {
+			grade.setGradeSemester(1);
+		}else {
+			grade.setGradeSemester(2);
+		}
+		
+		return gradeDao.gradeInsert(sqlSession, grade);
+	}
+
+	@Override
+	public int gradeDelete(String subCode, int stuId) {
+		Grade grade = new Grade();
+		grade.setStudentId(stuId);
+		grade.setSubCode(subCode);
+		  
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy");
+		Date date = new Date ( );
+		String year = format.format (date);
+		int neyear = Integer.parseInt(year);
+		grade.setGradeYear(neyear);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat ("MM");
+		Date date2 = new Date ( );
+		String mon = format2.format (date2);
+		int nemon = Integer.parseInt(mon);
+		if(nemon<9&&nemon>2) {
+			grade.setGradeSemester(1);
+		}else {
+			grade.setGradeSemester(2);
+		}
+		
+		return gradeDao.gradeDelete(sqlSession, grade);
 	}
 
 	

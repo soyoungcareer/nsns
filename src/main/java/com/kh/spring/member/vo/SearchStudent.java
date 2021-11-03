@@ -16,5 +16,5 @@ public class SearchStudent {
 	private String subCode;
 	private String year;
 	private String semester;
-	private String profId;
+	private String profId; 
 }

@@ -10,7 +10,7 @@ import com.kh.spring.studentEval.vo.Grade;
 import com.kh.spring.studentEval.vo.SearchGrade;
 import com.kh.spring.studentEval.vo.SearchSubject;
 
-public interface GradeService {
+public interface GradeService { 
 
 	ArrayList<Subject> loadSubList(String profId, int gradeYear, int gradeSemester);
 	
@@ -26,13 +26,19 @@ public interface GradeService {
 
 	ArrayList<Grade> selectFilteredGrade(SearchGrade searchGrade);
 
-	int updateGrade(Map map);
+	int updateGrade(Grade grade);
 
 	int objListCount(String profId);
 
 	GradeObject detailObjection(String objNo);
 
-	int profObjCheck(String objNo);
+	int profObjCheck(GradeObject gradeObject);
+
+	int selectGradeCount(SearchGrade searchGrade);
+
+	int gradeInsert(String subCode, int stuId);
+
+	int gradeDelete(String subCode, int stuId);
 
 
 }

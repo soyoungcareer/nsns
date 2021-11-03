@@ -7,7 +7,7 @@
  %>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 성적관리</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -42,6 +42,7 @@
 	                			+ '<input class="form-control" id="title" type="text" value="' + detailObj.title + '" readonly></div>'
 	              				+ '<div class="form-group row"><label class="col-form-label" for="content">내용</label>'
 	                			+ '<input class="form-control" id="content" type="text" value="' + detailObj.content + '" readonly></div>'
+	                			+ '<div class="form-group row"><input class="form-control" id="objNo" type="hidden" value="' + detailObj.objNo + '" readonly></div>'
 	              				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
 	              				+ '<div class="w-100"></div>'
 	                  			+ '<div class="form-check"><label class="form-check-label">'
@@ -58,24 +59,34 @@
 				}
 			});
 		});
-		
 	</script>
 	<script>
 		/* 이의신청 승인/반려 체크 후 저장 */
 		$(document).on("click", "#saveObjCheck", function(){
 			var status = $('input[name="answer"]:checked').val();
 			var reason = $("#reason").val();
+			var objNo = $("#objNo").val();
+			
+			console.log("status : " + status);
+			console.log("reason : " + reason);
+			console.log("objNo : " + objNo)
 			
 			$.ajax({
 				url: "profObjCheck.pr",
 				type: "POST",
 				data:{
 					status:status,
-					reason:reason
+					reason:reason,
+					objNo:objNo
 				},
 				dataType:"json",
 				success:function(checkObj) {
-					alert("저장 성공");
+					
+					if (checkObj > 0) {
+						alert("저장 성공");
+					} else {
+						alert("저장 실패");
+					}
 				},
 				error:function() {
 					alert("ajax 로딩 실패");
@@ -161,7 +172,6 @@
 		  <div class="modal fade" id="myModal">
 		    <div class="modal-dialog">
 		      <div class="modal-content">
-		      <form action="profObjCheck.pr">
 		        <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h4 class="modal-title">이의신청 상세조회</h4>
@@ -178,7 +188,6 @@
 		          <button class="btn btn-primary" type="submit" id="saveObjCheck">저장</button>
 		          <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
 		        </div>
-		       </form>
 		      </div>
 		    </div>
 		  </div>

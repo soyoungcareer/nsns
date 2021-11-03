@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="profMapper">
 
-	<!-- 교수 -->
+	<!-- 교수 --> 
 	<resultMap id="profResultSet" type="Professor">
 		<id property="profId" column="PROF_ID"/>
 		<result property="profPwd" column="PROF_PWD"/>
@@ -16,10 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profAddress" column="PROF_ADDRESS"/>
 		<result property="profStatus" column="PROF_STATUS"/>
 		<result property="profEmpdate" column="PROF_EMPDATE"/>
-		<!-- <result property="profDeptTitle" column="DEPT_TITLE"/> -->
-		<collection property="department" resultMap="DepartmentSet"/>
+		<result property="profDeptTitle" column="DEPT_TITLE"/>
+		<!-- <collection property="department" resultMap="DepartmentSet"/> -->
 	</resultMap>
-	
 	<resultMap id="DepartmentSet" type="Department">
 		<id property="deptCode" column="DEPT_CODE"/>
 		<result property="deptTitle" column="DEPT_TITLE"/>
@@ -63,34 +62,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="rejectReason" column="REJECT_REASON"/>	
 		<result property="status" column="STATUS"/>	
 		<result property="stuId" column="STU_ID"/>
-		<collection property="student" resultMap="Student"/>
+		<collection property="student" resultMap="profStuResultSet"/>
 	</resultMap>
+	<resultMap type="ConsultStatus" id="consultStatusSet">
+		<id property="conStsNo" column="CON_STS_NO"/>
+		<result property="conProcess" column="CON_PROCESS"/>
+		<result property="conCompleted" column="CON_COMPLETED"/>
+		<result property="status" column="STATUS"/>
+		<result property="conNo" column="CON_NO"/>
+	</resultMap>
+	
+	
 	
 	<!-- 강의평가 -->
 	<resultMap type="Evaluation" id="evalResultSet">
 		<id property="lectEvaNo" column="LECT_EVA_NO"/>
 		<result property="question" column="QUESTION"/>
-		<result property="score" column="SCORE"/>
-		<!-- <result property="year" column="YEAR"/>
-		<result property="semester" column="SEMESTER"/> -->
+		<result property="dscore" column="SCORE"/>
+		<result property="year" column="YEAR"/>
+		<result property="semester" column="SEMESTER"/>
+		<collection property="subject" resultMap="profSubResultSet"/>
+		<collection property="professor" resultMap="profResultSet"/>
 	</resultMap>
+	<!-- <resultMap id="evalResultSet" type="LecRegPro">
+		<id property="evaluation" column="SCORE" />
+		<collection property="subject" resultMap="profSubResultSet"/>
+		<collection property="professor" resultMap="profResultSet"/>
+		<collection property="department" resultMap="DepartmentSet"/>
+	</resultMap> -->
 	
 	<!-- 자퇴 -->
 	<resultMap type="StudentDo" id="doStatusResultSet">
-		<id property="applicationNo" column="APPLICATION_NO"/>
+		<id property="applicationNo" column="APPLICATION_NO_DO"/>
 		<result property="stuId" column="STU_ID"/>
 		<result property="doDate" column="DO_DATE"/>
 		<result property="doReason" column="DO_REASON"/>
 		<result property="status" column="STATUS"/>
 		<result property="stuName" column="STU_NAME"/>
 		<result property="stuStatus" column="STU_STATUS"/>
-		<collection property="student" resultMap="Student"/>
-		<collection property="studentStatus" resultMap="StudentStatus"/>
+		<collection property="student" resultMap="profStuResultSet"/>
+		<collection property="studentStatus" resultMap="studentStatus"/>
 	</resultMap>
 	
 	<!-- 휴학 -->
 	<resultMap type="StudentOff" id="offStatusResultSet">
-		<id property="applicationNo" column="APPLICATION_NO"/>
+		<id property="applicationNo" column="APPLICATION_NO_OFF"/>
 		<result property="stuId" column="STU_ID"/>
 		<result property="offCategory" column="OFF_CATEGORY"/>
 		<result property="offDate" column="OFF_DATE"/>
@@ -98,10 +114,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="offSem" column="OFF_SEM"/>
 		<result property="offReason" column="OFF_REASON"/>
 		<result property="status" column="STATUS"/>
-		<result property="stuName" column="STU_NAME"/>
-		<result property="stuStatus" column="STU_STATUS"/>
-		<collection property="student" resultMap="Student"/>
-		<collection property="studentStatus" resultMap="StudentStatus"/>
+		<!-- <result property="stuName" column="STU_NAME"/>
+		<result property="stuStatus" column="STU_STATUS"/> -->
+		<collection property="student" resultMap="profStuResultSet"/>
+		<collection property="studentStatus" resultMap="studentStatus"/>
 	</resultMap>
 	
 	<resultMap type="StudentStatus" id="studentStatus">
@@ -137,13 +153,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	
 	<!-- 마이페이지 -->
 	<!-- 교수 마이페이지 개인정보 조회 -->
 	<select id="selectMypage" parameterType="Professor" resultMap="profResultSet">
-		SELECT PROF_ID, PROF_NAME, DEPT_TITLE, PROF_EMAIL, PROF_PHONE, PROF_ADDRESS
-		FROM PROFESSOR
-		JOIN DEPARTMENT USING (DEPT_CODE)
+		SELECT A.PROF_ID, A.PROF_NAME, B.DEPT_TITLE, A.PROF_EMAIL, A.PROF_PHONE, A.PROF_ADDRESS
+		FROM PROFESSOR A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		WHERE PROF_ID=#{profId} AND PROF_STATUS='Y'
 	</select>
 	
@@ -167,7 +182,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 과목정보 불러오기 -->
 	<select id="subInfoLoad" parameterType="Map" resultMap="profSubResultSet">
-		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, SUB_CODE
 		FROM SUBJECT
 		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
 	</select>
@@ -244,24 +259,131 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 학생상담관리 -->
 	<select id="loadConsultList" resultMap="consultResultSet">
-		SELECT A.CON_NO, A.CON_CATEGORY, A.CON_DATE, B.STU_NAME
+		SELECT A.CON_NO, A.CON_CATEGORY, A.CON_DATE, B.STU_NAME, C.CON_PROCESS
 		FROM CONSULT A
 		JOIN STUDENT B ON A.STU_ID=B.STU_ID
 		JOIN CONSULT_STATUS_PRO C ON A.CON_NO=C.CON_NO
-		WHERE B.PROF_ID=#{profId} AND C.CON_PROCESS='교수승인대기중'
+		WHERE B.PROF_ID=#{profId} AND A.STATUS='Y'
 		ORDER BY A.CON_NO DESC
 	</select>
+	<select id="detailConsult"  resultType="Consult" resultMap="consultResultSet">
+		SELECT *
+		FROM CONSULT
+		JOIN STUDENT USING(STU_ID)
+		WHERE CON_NO=#{conNo}
+	</select>
+	<update id="profConCheck" parameterType="Consult">
+		UPDATE CONSULT
+		SET REJECT_REASON=#{rejectReason, jdbcType=VARCHAR}
+		WHERE CON_NO=#{conNo}
+	</update>
+	<update id="profConComplete" parameterType="ConsultStatus">
+		UPDATE CONSULT_STATUS_PRO
+		SET CON_PROCESS=#{status}, CON_COMPLETED='완료'
+		WHERE CON_NO=#{conNo}
+	</update>
 	
 	<!-- 학생출결관리 -->
 	
 	<!-- 강의평가조회 -->
-	<select id="loadEvalList" resultMap="evalResultSet">
+	<!-- <select id="loadEvalList" resultMap="evalResultSet">
 		SELECT QUESTION, SCORE
 		FROM LECT_EVALUATE A
 		JOIN LECT_REGISTER B USING(LECT_REG_NO)
 		WHERE B.SUB_CODE=#{subCode} AND B.YEAR=#{subYear} AND B.SEMESTER=#{subSmst}
 		ORDER BY A.LECT_EVA_NO DESC
+	</select> -->
+	<select id="evalSubCount" resultType="_int" parameterType="SearchSubject">
+		SELECT COUNT(*)
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId}
+		<choose>
+			<when test='con1 == 0 and con2 == 0 and keyword == "%"'>
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 == 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+		</choose>
 	</select>
+	<select id="evalSubList" parameterType="SearchSubject" resultMap="profSubResultSet">
+		SELECT A.SUB_YEAR, A.SUB_SMST, A.SUB_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TITLE, A.SUB_CREDIT, A.SUB_TYPE, C.PROF_NAME
+		FROM SUBJECT A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE 
+		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
+		WHERE A.PROF_ID=#{profId}
+		<choose>
+			<when test='con1 == 0 and con2 == 0 and keyword == "%"'>
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 == 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword == "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+			</when>
+			<when test='con1 != 0 and con2 == 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 == 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test='con1 != 0 and con2 != 0 and keyword != "%"'>
+				AND SUB_YEAR=#{con1}
+				AND SUB_SMST=#{con2}
+				AND SUB_TITLE LIKE '%'||#{keyword}||'%'
+			</when>
+		</choose>
+		ORDER BY SUB_YEAR DESC, SUB_SMST DESC
+	</select>
+	
+	<select id="selectFilteredEval" resultMap="evalResultSet">
+		<!-- SELECT A.*, B.PROF_ID, B.PROF_NAME, C.DEPT_CODE, C.DEPT_TITLE, Q.* -->
+		SELECT Q.SCORE
+		FROM SUBJECT A
+		LEFT JOIN PROFESSOR B ON A.PROF_ID=B.PROF_ID
+		LEFT JOIN DEPARTMENT C ON A.DEPT_CODE=C.DEPT_CODE
+		LEFT JOIN (
+		    SELECT D.SUB_CODE, AVG(F.SCORE) AS "SCORE"
+		    FROM SUBJECT D
+		    JOIN LECT_REGISTER E ON D.SUB_CODE=E.SUB_CODE
+		    JOIN LECT_EVALUATE F ON E.LECT_REG_NO=F.LECT_REG_NO
+		    GROUP BY D.SUB_CODE
+		) Q ON A.SUB_CODE=Q.SUB_CODE
+		WHERE A.SUB_CODE=#{subCode} AND B.PROF_ID=#{profId} AND A.STATUS='Y'
+	</select>
+	
+	
 	
 	<!-- 학적변동승인 -->
 	<!-- 자퇴 -->
@@ -272,7 +394,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE PROF_ID=#{profId}
 	</select>
 	<select id="loadDoList" resultMap="doStatusResultSet" parameterType="StudentDo">
-		SELECT C.STU_NAME, B.DO_DATE, C.STU_STATUS, B.DO_REASON, A.STS_PROCESS
+	<!-- 쿼리 잘돌아감 -->
+		SELECT C.STU_NAME, B.DO_DATE, C.STU_STATUS, B.DO_REASON, A.STS_PROCESS, A.APPLICATION_NO_DO
 		FROM STU_STATUS_PRO A
 		JOIN STU_DO B ON A.APPLICATION_NO_DO=B.APPLICATION_NO
 		JOIN STUDENT C ON C.STU_ID=B.STU_ID
@@ -280,16 +403,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY B.APPLICATION_NO DESC
 	</select>
 	<select id="detailDo" resultType="StudentDo" resultMap="doStatusResultSet">
-		SELECT B.STU_ID, B.STU_NAME, A.DO_DATE, B.STU_STATUS, A.DO_REASON
+	<!-- 쿼리 잘돌아감 -->
+		SELECT B.STU_ID, B.STU_NAME, A.DO_DATE, B.STU_STATUS, A.DO_REASON, A.APPLICATION_NO
 		FROM STU_DO A 
 		JOIN STUDENT B ON A.STU_ID=B.STU_ID
-		WHERE B.PROF_ID=#{profId} AND APPLICATION_NO=#{doNo}
+		WHERE APPLICATION_NO=#{applicationNo}
 	</select>
-	<update id="profOffCheck" parameterType="StudentStatus">
+	<update id="profDoCheck" parameterType="StudentStatus">
 		UPDATE STU_STATUS_PRO
 		SET STS_PROCESS='관리자승인대기'
-		WHERE APPLICATION_NO_OFF=#{offNo}
+		WHERE APPLICATION_NO_DO=#{applicationNo}
 	</update>
+
 	
 	<!-- 휴학 -->
 	<select id="offListCount" resultType="_int">
@@ -299,7 +424,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE PROF_ID=#{profId}
 	</select>
 	<select id="loadOffList" resultMap="offStatusResultSet">
-		SELECT C.STU_NAME, B.OFF_DATE, C.STU_STATUS, B.OFF_CATEGORY, B.OFF_SEM_CNT, B.OFF_SEM, B.OFF_REASON, A.STS_PROCESS
+		SELECT C.STU_NAME, B.OFF_DATE, C.STU_STATUS, B.OFF_CATEGORY, B.OFF_SEM_CNT, 
+				B.OFF_SEM, B.OFF_REASON, A.STS_PROCESS, A.APPLICATION_NO_OFF
 		FROM STU_STATUS_PRO A
 		JOIN STU_OFF B ON A.APPLICATION_NO_OFF=B.APPLICATION_NO
 		JOIN STUDENT C ON C.STU_ID=B.STU_ID
@@ -307,15 +433,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY B.APPLICATION_NO DESC
 	</select>
 	<select id="detailOff" resultType="StudentOff" resultMap="offStatusResultSet">
-		SELECT B.STU_ID, B.STU_NAME, B.STU_STATUS, A.OFF_DATE, A.OFF_CATEGORY, A.OFF_SEM_CNT, A.OFF_SEM, A.OFF_REASON
+	<!-- 쿼리 잘돌아감 -->
+		SELECT B.STU_ID, B.STU_NAME, B.STU_STATUS, A.OFF_DATE, A.OFF_CATEGORY, A.OFF_SEM_CNT, A.OFF_SEM, A.OFF_REASON, A.APPLICATION_NO
 		FROM STU_OFF A
 		JOIN STUDENT B ON A.STU_ID=B.STU_ID
-		WHERE B.PROF_ID=#{profId} AND APPLICATION_NO=#{offNo}
+		WHERE APPLICATION_NO=#{applicationNo}
 	</select>
-	<update id="profDoCheck" parameterType="StudentStatus">
+	<update id="profOffCheck" parameterType="StudentStatus">
 		UPDATE STU_STATUS_PRO
 		SET STS_PROCESS='관리자승인대기'
-		WHERE APPLICATION_NO_DO=#{doNo}
+		WHERE APPLICATION_NO_OFF=#{applicationNo}
 	</update>
 	
 	

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>낙성대학교(교수) - 강의개설</title>
-</head>
+</head> 
 <body>
 	<jsp:include page="menubarProf.jsp"/>
 	
@@ -31,7 +31,7 @@
 	              	<div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학과명</label>
-		                  <input class="form-control" type="text" value="${ prof.department.deptTitle }" readonly>
+		                  <input class="form-control" type="text" value="${ prof.profDeptTitle }" readonly>
 		                </div>
 						<div class="form-group col-md-3">
 							<div class="form-group">

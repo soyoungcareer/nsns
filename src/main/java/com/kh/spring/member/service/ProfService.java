@@ -5,16 +5,18 @@ import java.util.Map;
 
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.consult.model.vo.Consult;
+import com.kh.spring.consult.model.vo.ConsultStatus;
 import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.SearchStudent;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 
-public interface ProfService {
+public interface ProfService { 
 
 	ArrayList<Subject> selectSubList(String profId, PageInfo pi);
 
@@ -58,13 +60,25 @@ public interface ProfService {
 
 	Subject delSubInfo(Map map);
 
-	StudentOff detailOff(String offNo);
+	StudentOff detailOff(int applicationNo);
 
-	StudentDo detailDo(String doNo);
+	StudentDo detailDo(int applicationNo);
 
-	int profOffCheck(String offNo);
+	int profOffCheck(StudentOff stuOff);
 
-	int profDoCheck(String doNo);
+	int profDoCheck(StudentDo stuDo);
+
+	Consult detailConsult(String conNo);
+
+	int profConCheck(Consult consult);
+
+	int evalSubCount(SearchSubject searchSubject);
+
+	ArrayList<Subject> evalSubList(SearchSubject searchSubject, PageInfo pi);
+
+	Evaluation selectFilteredEval(Map map);
+
+	int profConComplete(ConsultStatus conStatus);
 
 
 
