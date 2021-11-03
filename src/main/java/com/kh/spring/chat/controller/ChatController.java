@@ -16,6 +16,6 @@ public class ChatController {
 	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
 	public String view_chat(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
-		return "chat/chatView";
+		return "board/chatView";
 	}
 }

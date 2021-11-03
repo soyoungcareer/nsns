@@ -20,7 +20,7 @@
           <h1><i class="fa fa-edit"></i> 학사일정 관리</h1>
         </div>
        <ul class="app-breadcrumb breadcrumb">
-           <li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+           <li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/subModifyList.adm" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
         </ul>
       </div>
       

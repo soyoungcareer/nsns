@@ -49,6 +49,13 @@
 	
   
     <!-- 시작페이지 설정 -->
+    
+    <filter>
+	    <filter-name>HiddenHttpMethodFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	    <async-supported>true</async-supported>
+	</filter>
+	
   
 </web-app>
 

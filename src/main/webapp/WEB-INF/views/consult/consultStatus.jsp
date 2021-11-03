@@ -193,7 +193,7 @@
     		});
     		
     		function deleteCon(conNo){
-    			location.href="/deleteCon.con?conNo="+conNo;
+    			location.href="deleteCon.con?conNo="+conNo;
     		}
     		
     </script>

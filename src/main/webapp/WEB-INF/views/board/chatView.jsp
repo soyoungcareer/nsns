@@ -47,7 +47,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 	 <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="resources/bootstrap/docs/css/main.css">
+    
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -67,7 +67,7 @@
 		        .animate({ scrollTop: $('#scrollDiv')[0].scrollHeight }, 1000);
 			},
 			receiveMessage: function(str) {
-				$('#divChatData').append('<div>' + str + '</div><br>');			
+				$('#divChatData').append('<div style=": #556677;">' + str + '</div><br>');			
 				$('#scrollDiv')
 		        .stop()
 		        .animate({ scrollTop: $('#scrollDiv')[0].scrollHeight }, 1000);
@@ -120,41 +120,36 @@
 					<li><a class="nav-link scrollto" href="crawMain.cer">취업지원</a></li>
 					<li><a class="nav-link scrollto" href="chat.do">채팅</a></li>
 					<li><a class="nav-link scrollto" href="#pricing"></a></li>
+					
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->
-
-
 		</div>
 	</header>
 	<!-- End Header -->
-	<section class="material-half-bg">
-    <div class="cover"></div>
-    </section>
+	
     
     <div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold" style="color:#0d6efd;">낙성대 공용 커뮤니티</h6>
 			</div>
     
-    <section class="login-content" style="background:gray;">
-      <div class="logo">
-        <h1>NS 실시간 채팅</h1>
-       </div>
+    <section class="login-content" >
+     
        <div class="row">
         <div>
           <div class="tile">
           
-            <div class="tile-body">
-            <div id="scrollDiv" style="overflow:auto; width: 800px; height: 700px; padding: 10px; border: solid 1px #e1e3e9;">
+            
+            <div id="scrollDiv" style="background: #9bbbd4; overflow:auto; width: 800px; height: 650px; padding: 10px; border: solid 1px #e1e3e9; float: none; margin:0 auto;">
 				<div id="divChatData"></div>
 			</div>
-            </div>
+           
             
-            <div class="tile-footer">
-              <div style="width: 100%; height: 10%; padding: 10px;">
-				<input type="text" id="message" size="100" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" />
+            <div style="text-align: center;">
+              <div style="width: 100%; height: 10%; margin-top:10px;">
+				<input type="text" id="message" size="83" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" />
 				<input type="button" id="btnSend" value="전송" onclick="webSocket.sendChat()" />
 			  </div>
             </div>
@@ -166,8 +161,28 @@
      <script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
     <script src="resources/bootstrap/docs/js/popper.min.js"></script>
     <script src="resources/bootstrap/docs/js/bootstrap.min.js"></script>
-    <script src="resources/bootstrap/docs/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
+   
+    	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+
+	<!-- Vendor JS Files -->
+	<script src="resources/bootstrap/docs/assets/vendor/aos/aos.js"></script>
+	<script
+		src="resources/bootstrap/docs/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="resources/bootstrap/docs/assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script
+		src="resources/bootstrap/docs/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script
+		src="resources/bootstrap/docs/assets/vendor/php-email-form/validate.js"></script>
+	<script
+		src="resources/bootstrap/docs/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="resources/bootstrap/docs/js/mainn.js"></script>
+    
 </body>
 </html>

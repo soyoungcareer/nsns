@@ -19,6 +19,11 @@
 		<jsp:include page="cAMenubar.jsp"/>  
 	</c:if>
 	
+	<!-- 교수 로그인시 보이는 메뉴바 -->
+	<c:if test="${not empty loginPrf }">
+		<jsp:include page="cSMenubar.jsp"/>  
+	</c:if>
+	
     <main class="app-content">
     
        <div class="app-title">
@@ -26,7 +31,17 @@
           <h1><i class="fa fa-calendar"></i> 학사일정</h1>
         </div>
        <ul class="app-breadcrumb breadcrumb">
-           <li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		<c:if test="${ !empty loginStu }">
+           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/stuinfo.st" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		</c:if>
+       		
+       		<c:if test="${ !empty loginAdm }">
+           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/subModifyList.adm" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		</c:if>
+       		
+       		<c:if test="${ !empty loginPrf }">
+           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/profMypage.pr" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		</c:if>
         </ul>
       </div>
       

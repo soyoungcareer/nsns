@@ -78,7 +78,7 @@
                 <div class="form-group row">
                   <label class="control-label col-md-3">휴학사유</label>
                   <div class="col-md-8">
-	                   <textarea class="form-control" rows="5" id="offReason" name="offReason" required></textarea>
+	                   <textarea class="form-control" rows="5" id="offReason" name="offReason" placeholder="(100자 제한)" required></textarea>
                   </div>
                 </div>
               
@@ -111,6 +111,22 @@
     
 
     <script>
+    
+    $('textarea').on('keydown', function() {
+        if($(this).val().length > 100) {
+        	
+            $(this).val($(this).val().substring(0, 100));
+            
+            var str = ' <div class="alert alert-dismissible alert-danger">'
+				+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+				+ ' <strong>확인!</strong> 상담사유는 100자를 넘어갈 수 없습니다. '
+				+ ' </div> '
+
+			$('.bs-component').empty();
+			$('.bs-component').append(str);
+            
+        }
+    });
    
     	$(function(){ 
     		//신청일에 현재 날짜 고정시키기!
