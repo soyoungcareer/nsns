@@ -62,7 +62,6 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
 		return studentSubjectDao.selectListCount(sqlsession, sc);
 	}
 
-	
 
 	@Override
 	public ArrayList<StudentSubject> searchSubject(SearchCondition sc, PageInfo pi) {

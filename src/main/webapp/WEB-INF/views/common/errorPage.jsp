@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="resources/bootstrap/docs/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -136,29 +137,20 @@
     </aside>
     <main class="app-content">
       <div class="page-error tile">
-        <h1><i class="fa fa-exclamation-circle"></i> Error 404: Page not found</h1>
-        <p>The page you have requested is not found.</p>
+        <h1><i class="fa fa-exclamation-circle"></i> Error</h1>
+        <p>${msg}</p>
         <p><a class="btn btn-primary" href="javascript:window.history.back();">Go Back</a></p>
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
+    <script src="resources/bootstrap/docs/js/popper.min.js"></script>
+    <script src="resources/bootstrap/docs/js/bootstrap.min.js"></script>
+    <script src="resources/bootstrap/docs/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
+    <script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <!-- Google analytics script-->
-    <script type="text/javascript">
-      if(document.location.hostname == 'pratikborsadiya.in') {
-         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-         ga('create', 'UA-72504830-1', 'auto');
-         ga('send', 'pageview');
-      }
-    </script>
+   
   </body>
 </html>

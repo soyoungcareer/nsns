@@ -34,25 +34,24 @@
     <header class="app-header"><a class="app-header__logo" href="index.jsp">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
-      <ul class="app-nav">
-        
-        <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="page-user.jsp"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="page-login.jsp"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
+     
     </header>
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" >
          <div style="margin-left:10px;">
-            <p class="app-sidebar__user-name">${loginStu.stuName }</p>
+         
+         <c:if test="${not empty loginPrf }">
+         	 <p class="app-sidebar__user-name">${loginPrf.profName }</p>
+          	<p class="app-sidebar__user-designation">교번 : ${loginPrf.profId }</p>
+         </c:if>
+         
+          <c:if test="${not empty loginStu }">
+         	<p class="app-sidebar__user-name">${loginStu.stuName }</p>
           	<p class="app-sidebar__user-designation">학번 : ${loginStu.stuId }</p>
+         </c:if>
+            
         </div>
       </div>
     </aside>

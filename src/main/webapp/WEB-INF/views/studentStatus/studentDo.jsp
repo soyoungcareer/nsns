@@ -31,7 +31,7 @@
              
              <hr style="boder: 1px solid black">
              
-              <form class="form-horizontal" action="insertStuDo.stu" method="post" onsubmit="return checkDo();">
+              <form id="stuDoForm" class="form-horizontal" action="insertStuDo.stu" method="post" onsubmit="return checkDo();">
               	 	<div style="margin-left:300px;">
 			             <label for="stuId"><b>학번 :</b> ${loginStu.stuId} </label> &nbsp;&nbsp;
 			             
@@ -59,7 +59,7 @@
                 <div class="form-group row">
                   <label class="control-label col-md-3">자퇴사유</label>
                   <div class="col-md-8">
-	                   <textarea class="form-control" rows="5" id="doReason" name="doReason" required></textarea>
+	                   <textarea class="form-control" rows="5" id="doReason" name="doReason" placeholder="(100자 제한)" required></textarea>
                   </div>
                 </div>
               
@@ -69,7 +69,7 @@
                 
               <div class="row">
                 <div class="col-md-8 col-md-offset-3">
-                  <button class="btn btn-primary" type="submit">신청</button>
+                  <button class="btn btn-primary" type="submit" id="submitBtn">신청</button>
                 </div>
               </div>
             </div>
@@ -99,7 +99,30 @@
 		var day = new Date().toISOString().substring(0, 10);
 	    $('#offDay').val(day);
 	     
-	})
+	});
+    
+  
+
+	  $('textarea').on('keydown', function() {
+	        if($(this).val().length > 100) {
+	        	
+	            $(this).val($(this).val().substring(0, 100));
+	            
+	            var str = ' <div class="alert alert-dismissible alert-danger">'
+					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+					+ ' <strong>확인!</strong> 자퇴사유는 100자를 넘어갈 수 없습니다. '
+					+ ' </div> '
+
+				$('.bs-component').empty();
+				$('.bs-component').append(str);
+				
+				$('#submitBtn').prop('disabled', false);
+	            
+	        } else {
+	        	
+	        	$('#submitBtn').prop('disabled', true);
+	        }
+	    });
 	
 	 function checkDo() {
 	    var stuId = $("#stuId").val();

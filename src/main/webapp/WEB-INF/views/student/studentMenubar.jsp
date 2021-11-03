@@ -32,19 +32,11 @@
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
 
-      	<!-- <li class="calendar">
-         <a class="calendar-link" href="calendar.ca" style="color: white;">학사일정</a>
-
-      수강신청 페이지 확인용
-       <li class="register">
-         <a class="register-link" href="register.reg" style="color: white;">수강신청</a>
-        </li>
-         -->
 
   		<li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
-        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+        <i class="fa fa-smile-o  fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item"  href="board.me"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>임시 커뮤티니</a></li>
+            <li><a class="dropdown-item"  href="board.me"> <i class="fa fa-smile-o  fa-lg" aria-hidden="true"></i>커뮤티니</a></li>
           </ul>
 
         
@@ -157,19 +149,15 @@
 					<h4 class="modal-title">강의 인증</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-		
-  
 						<a id="aa" name="aa"></a> <input type="text" name="from" id="from" />
 						<input type="button" onclick="sendSMS()" value="인증번호 받기" id="check" name="check"/> 
 						<input type="hidden" id="ch" name="ch">
 						  
-						 <input type="hidden" name="fromm" id="fromm" /></li>
+						<input type="hidden" name="fromm" id="fromm" /></li>
 						<input type="hidden" id="checkk" name="checkk" onclick="sendSMSCheck()" value="확인하기"/> 
 						<form method="post" id="smsForm" action="lecMove.me" >
-						<input type="hidden" id="id" name="id" value="123"/>
-				 
-						  </form>
-						
+							<input type="hidden" id="id" name="id" value="123"/>
+						</form>
 			</div>
 		</div>
 	</div>
@@ -192,15 +180,10 @@
 					$("#checkk").attr("type","button");
 					$("#fromm").attr("type","text");
 					
-					
-					
-					
 				},error:function(){
 					console.log("통신 실패");
 				}
 			});
-			
-	
 		}
 		
 		function sendSMSCheck() {
