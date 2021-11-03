@@ -16,7 +16,7 @@
 				<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i><div>나가기</div></a></li>
+				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/subModifyList.adm" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
 			</ul>
 		</div>
 		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
@@ -101,9 +101,9 @@
 	                  	<option value="3" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 3 }"> selected</c:if> >3교시</option>
 	                  	<option value="4" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 4 }"> selected</c:if> >4교시</option>
 	                  	<option value="5" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 5 }"> selected</c:if> >5교시</option>
-	                  	<option value="3" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 6 }"> selected</c:if> >6교시</option>
-	                  	<option value="4" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 7 }"> selected</c:if> >7교시</option>
-	                  	<option value="5" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 8 }"> selected</c:if> >8교시</option>
+	                  	<option value="6" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 6 }"> selected</c:if> >6교시</option>
+	                  	<option value="7" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 7 }"> selected</c:if> >7교시</option>
+	                  	<option value="8" <c:if test="${ fn:substring(reDetail.subject.subTime,1,2) eq 8 }"> selected</c:if> >8교시</option>
 	                  </select>
                     	</div>
 						<c:if test="${fn:length(reDetail.subject.subTime)<=3 }">
@@ -114,9 +114,9 @@
 	                  	<option value="3" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 3 }"> selected</c:if> >3교시</option>
 	                  	<option value="4" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 4 }"> selected</c:if> >4교시</option>
 	                  	<option value="5" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 5 }"> selected</c:if> >5교시</option>
-	                  	<option value="3" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 6 }"> selected</c:if> >6교시</option>
-	                  	<option value="4" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 7 }"> selected</c:if> >7교시</option>
-	                  	<option value="5" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 8 }"> selected</c:if> >8교시</option>
+	                  	<option value="6" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 6 }"> selected</c:if> >6교시</option>
+	                  	<option value="7" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 7 }"> selected</c:if> >7교시</option>
+	                  	<option value="8" <c:if test="${ fn:substring(reDetail.subject.subTime,2,3) eq 8 }"> selected</c:if> >8교시</option>
 	                  </select>
                     	</div>
 						</c:if>
@@ -130,9 +130,9 @@
 	                  	<option value="3" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 3 }"> selected</c:if> >3교시</option>
 	                  	<option value="4" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 4 }"> selected</c:if> >4교시</option>
 	                  	<option value="5" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 5 }"> selected</c:if> >5교시</option>
-	                  	<option value="3" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 6 }"> selected</c:if> >6교시</option>
-	                  	<option value="4" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 7 }"> selected</c:if> >7교시</option>
-	                  	<option value="5" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 8 }"> selected</c:if> >8교시</option>
+	                  	<option value="6" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 6 }"> selected</c:if> >6교시</option>
+	                  	<option value="7" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 7 }"> selected</c:if> >7교시</option>
+	                  	<option value="8" <c:if test="${ fn:substring(reDetail.subject.subTime,i,i+1) eq 8 }"> selected</c:if> >8교시</option>
 	                  	</c:if>
 	                  	</c:forEach>
 	                  	
