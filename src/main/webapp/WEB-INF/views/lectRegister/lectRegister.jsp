@@ -16,7 +16,7 @@
 			<h1><i class="fa fa-pencil fa-lg" aria-hidden="true" style="margin-right: 10px;"></i>수강신청</h1>
 			</div>
 			<ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+				<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/stuinfo.st" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
 			</ul>
 		</div>
 		<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px">
@@ -136,27 +136,6 @@
 						                        </c:forEach>--%>
 						                    </tr>
 					                    </c:forEach>
-					                    
-					                    
-										<!--
-										<tr>
-										테스트 연결 서버
-											우선 LectRegisterController로 연결 
-											<td><a
-												href="evaluation.ev">강의평가 페이지</a></td>
-											<td><a
-												href="gradeObject.obj">이의신청 페이지</a></td>
-											<td><a
-												href="credit.reg">학점조회 페이지</a></td> 
-												CertificateController로 연결 
-											<td><a
-												href="graduation.cer">졸업증명서 페이지</a></td>
-											<td><a
-												href="certificate.cer">자격증/봉사활동</a></td>
-											<td style="padding: 0px; padding-top: 5px"><button
-													class="btn btn-primary" type="button"
-													style="margin-left: 10px;">수강신청</button></td>
-										</tr> -->
 									</tbody>
 								</table>
 							</div>
