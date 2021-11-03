@@ -14,7 +14,7 @@ import com.kh.spring.studentEval.vo.Grade;
 import com.kh.spring.studentEval.vo.SearchGrade;
 import com.kh.spring.studentEval.vo.SearchSubject;
 
-@Repository
+@Repository 
 public class GradeDao {
 	/*
 	public ArrayList<Grade> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String subCode, int gradeYear, int gradeSemester) {

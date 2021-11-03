@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>낙성대학교(교수) - 상담관리 상세</title>
 </head>
-<body>
+<body> 
 	<jsp:include page="menubarProf.jsp"/>
  
 	<main class="app-content">

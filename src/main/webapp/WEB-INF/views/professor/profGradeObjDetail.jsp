@@ -9,7 +9,7 @@
 	<title>낙성대학교(교수) - 이의신청 상세</title>
 	</head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
+	<script> 
 		/* 이의신청 승인/반려 체크 후 저장 */
 		$(document).on("click", "#saveObjCheck", function(){
 			var status = $('input[name="answer"]:checked').val();

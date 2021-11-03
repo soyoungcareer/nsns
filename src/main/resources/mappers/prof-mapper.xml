@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="profMapper">
 
-	<!-- 교수 -->
+	<!-- 교수 --> 
 	<resultMap id="profResultSet" type="Professor">
 		<id property="profId" column="PROF_ID"/>
 		<result property="profPwd" column="PROF_PWD"/>

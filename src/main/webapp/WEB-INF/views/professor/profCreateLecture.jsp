@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>낙성대학교(교수) - 강의개설</title>
-</head>
+</head> 
 <body>
 	<jsp:include page="menubarProf.jsp"/>
 	

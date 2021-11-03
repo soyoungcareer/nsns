@@ -41,7 +41,7 @@ import com.kh.spring.studentStatus.model.vo.StudentOff;
 
 
 @Controller 
-public class ProfController {
+public class ProfController { 
 	
 	@Autowired
 	private ProfService profService;

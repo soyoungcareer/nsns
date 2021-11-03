@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gradeMapper">
 
-	<!-- 강의 -->
+	<!-- 강의 --> 
 	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<resultMap id="profSubList" type="Subject">
 		<id property="subCode" column="SUB_CODE"/>

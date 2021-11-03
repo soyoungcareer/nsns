@@ -36,7 +36,7 @@ import com.kh.spring.studentEval.vo.Grade;
 @Controller
 public class LectRegisterController {
 
-	@Autowired
+	@Autowired 
 	private LectRegisterService lectRegisterService;
 	
 	@Autowired

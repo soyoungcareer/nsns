@@ -35,7 +35,7 @@ public class GradeController {
 	@RequestMapping("profGradeMain.pr")
 	public String selectList(Model model) {
 		// 임시 데이터
-		/*
+		/* 
 		String profId = "EC1901";
 		String subCode = "2101001";
 		int gradeYear = 2021;

@@ -7,7 +7,7 @@
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta charset="UTF-8">
 <title>낙성대학교(교수) - 강의개설/수정/삭제 신청내역</title>

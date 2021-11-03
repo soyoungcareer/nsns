@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 성적 관리</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
+	<script> 
 		/* 과목 선택시 성적 목록 출력 */
 		/* 같은행 4번씩 반복해서 출력됨.... */
 		$(document).on("click", "#subTable>tbody>tr", function(){

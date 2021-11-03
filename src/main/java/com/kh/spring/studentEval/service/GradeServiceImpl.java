@@ -22,7 +22,7 @@ import com.kh.spring.studentEval.vo.SearchSubject;
 @Service
 public class GradeServiceImpl implements GradeService {
 
-	@Autowired
+	@Autowired 
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired

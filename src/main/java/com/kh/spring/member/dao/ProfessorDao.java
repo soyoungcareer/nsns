@@ -23,7 +23,7 @@ import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 @Repository
 public class ProfessorDao {
-
+ 
 	public int profLectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("profMapper.profLectListCount");
 	}

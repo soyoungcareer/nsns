@@ -10,7 +10,7 @@ import com.kh.spring.studentEval.vo.Grade;
 import com.kh.spring.studentEval.vo.SearchGrade;
 import com.kh.spring.studentEval.vo.SearchSubject;
 
-public interface GradeService {
+public interface GradeService { 
 
 	ArrayList<Subject> loadSubList(String profId, int gradeYear, int gradeSemester);
 	

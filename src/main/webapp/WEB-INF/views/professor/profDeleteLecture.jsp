@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 강의삭제</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
+	<script> 
 		/* 수정할 강의코드 넘기기 */
 		$(document).on("click", "#delBtn", function(){
 			var subCode = $(this).parent().parent().children().eq(1).text();

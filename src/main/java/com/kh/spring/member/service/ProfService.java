@@ -16,7 +16,7 @@ import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 
-public interface ProfService {
+public interface ProfService { 
 
 	ArrayList<Subject> selectSubList(String profId, PageInfo pi);
 
