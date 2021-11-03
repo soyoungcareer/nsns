@@ -43,7 +43,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label">담당학과</label> 
-							<input class="form-control" type="text" name="deptTitle" value="${prof.department.deptTitle}" readonly>
+							<input class="form-control" type="text" name="profDeptTitle" value="${prof.profDeptTitle}" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">이메일</label> 

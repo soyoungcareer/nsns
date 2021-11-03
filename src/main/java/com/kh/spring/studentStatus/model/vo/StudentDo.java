@@ -2,6 +2,8 @@ package com.kh.spring.studentStatus.model.vo;
 
 import java.util.Date;
 
+import com.kh.spring.member.vo.Student;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +25,6 @@ public class StudentDo { //자퇴
 	
 	private String stuName;
 	private String stuStatus;
+	private Student student;
+	private StudentStatus studentStatus;
 }

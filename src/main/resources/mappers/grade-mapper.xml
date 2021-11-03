@@ -151,21 +151,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectFilteredGrade" parameterType="SearchGrade" resultMap="gradeResultSet">
 		SELECT D.DEPT_TITLE, A.STU_ID, C.STU_NAME, C.STU_STATUS, A.ATTENDANCE, A.ASSIGNMENT, A.MIDEXAM, 
 				A.FINEXAM, (A.ATTENDANCE + A.ASSIGNMENT + A.MIDEXAM + A.FINEXAM) AS GRADE_TOTAL,
-				A.GRADE_RESULT, A.GRADE_CREDIT
+				A.GRADE_RESULT, A.GRADE_CREDIT, E.SUB_CODE, A.GRADE_YEAR, A.GRADE_SEMESTER, A.GRADE_NO
 		FROM GRADE A 
-		JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
-		JOIN STUDENT C ON A.STU_ID=C.STU_ID
-		JOIN DEPARTMENT D ON C.DEPT_CODE=D.DEPT_CODE
-		JOIN SUBJECT E ON A.SUB_CODE=E.SUB_CODE
-		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
+		LEFT JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
+		JOIN STUDENT C ON A.STU_ID=C.STU_ID AND B.STU_ID=C.STU_ID
+		LEFT JOIN DEPARTMENT D ON C.DEPT_CODE=D.DEPT_CODE
+		LEFT JOIN SUBJECT E ON A.SUB_CODE=E.SUB_CODE AND B.SUB_CODE=E.SUB_CODE
+		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester} 
+		AND B.YEAR=#{gradeYear} AND B.SEMESTER=${gradeSemester}
 		ORDER BY STU_ID DESC
 	</select>
 	
 	<!-- 성적 수정 -->
 	<update id="updateGrade" parameterType="Grade">
+	<!-- 쿼리문 잘돌아감. -->
 		UPDATE GRADE 
-		SET ATTENDANCE=#{attend}, ASSIGNMENT=#{assign}, MIDEXAM=#{mid}, FINEXAM=#{fin}
-		WHERE STU_ID=#{stuId} AND SUB_CODE=#{subCode} 
+		SET ATTENDANCE=#{attendance}, ASSIGNMENT=#{assignment}, MIDEXAM=#{midExam}, FINEXAM=#{finExam}
+		WHERE STU_ID=#{studentId} AND SUB_CODE=#{subCode} 
 		AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
 	</update>
 	
@@ -176,8 +178,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- JOIN LECT_REGISTER USING(SUB_CODE)
 		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester} -->
 	</select>
-	
-	
+
+
 	<update id="increaseCount" parameterType="_int">
 		UPDATE GRADE
 		SET COUNT = COUNT + 1
@@ -190,7 +192,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE GRADE_NO={gradeNo}
 	</select>
 	
-	
+	<!-- 수강신청시 학생정보 INSERT -->
+	<insert id="gradeInsert" parameterType="Grade">
+		INSERT INTO GRADE(GRADE_NO, STU_ID, SUB_CODE, GRADE_YEAR, GRADE_SEMESTER)
+		VALUES(SEQ_GRADE_NO.NEXTVAL, #{studentId}, #{subCode}, #{gradeYear}, #{gradeSemester})
+	</insert>
+	<!-- 수강취소시 학생정보 DELETE -->
+	<delete id="gradeDelete" parameterType="Grade">
+		DELETE FROM GRADE
+		WHERE STU_ID=#{studentId} AND SUB_CODE=#{subCode} 
+		AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=#{gradeSemester}
+	</delete>
 	
 	<!-- 이의신청 확인 -->
 	<select id="objListCount" resultType="_int">

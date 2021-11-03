@@ -1,28 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	int count = 1;
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 학적변동 승인</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<script>
 		$(document).on("click", "#doTable>tbody>tr", function(){
 			var tr = $(this);
 			var td = tr.children();
-			var doNo = td.eq(0).text();
+			var applicationNo = td.eq(0).text();
 			
-			console.log(doNo);
+			console.log(applicationNo);
 			
 			$.ajax({
 				url:"detailDo.pr",
-				type:"GET",
+				type:"POST",
 				data:{
-					doNo:doNo
+					applicationNo:applicationNo
 				},
 				dataType:"json",
 				success:function(detailDo){
@@ -32,20 +31,19 @@
             			+ '<input class="form-control" id="stuId" type="text" value="' + detailDo.stuId + '" readonly></div>'
           				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
             			+ '<input class="form-control" id="stuName" type="text" value="' + detailDo.student.stuName + '" readonly></div>'
-          				+ '<div class="form-group row"><label class="col-form-label" for="title">학적상태</label>'
-            			+ '<input class="form-control" id="title" type="text" value="' + detailDo.student.stuStatus + '" readonly></div>'
-            			+ '<div class="form-group row"><label class="col-form-label" for="offDate">자퇴신청일자</label>'
-            			+ '<input class="form-control" id="offDate" type="text" value="' + moment(detailDo.doDate).format("YYYY년MM월DD일 HH:mm") + '" readonly></div>'
-            			+ '<div class="form-group row"><label class="col-form-label" for="offReason">자퇴사유</label>'
-            			+ '<input class="form-control" id="offReason" type="text" value="' + detailDo.doReason + '" readonly></div>'
+          				+ '<div class="form-group row"><label class="col-form-label" for="stuStatus">학적상태</label>'
+            			+ '<input class="form-control" id="stuStatus" type="text" value="' + detailDo.student.stuStatus + '" readonly></div>'
+            			+ '<div class="form-group row"><label class="col-form-label" for="doDate">자퇴신청일자</label>'
+            			+ '<input class="form-control" id="doDate" type="text" value="' + moment(detailDo.doDate).format("YYYY년MM월DD일") + '" readonly></div>'
+            			+ '<div class="form-group row"><label class="col-form-label" for="doReason">자퇴사유</label>'
+            			+ '<input class="form-control" id="doReason" type="text" value="' + detailDo.doReason + '" readonly></div>'
+            			+ '<div class="form-group row"><input class="form-control" id="applicationNo" type="hidden" value="' + applicationNo + '" readonly></div>'
           				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
           				+ '<div class="w-100"></div>'
               			+ '<div class="form-check"><label class="form-check-label">'
                   		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
               			+ '<div class="form-check"><label class="form-check-label">'
-                  		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
-          				+ '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>'
-            			+ '<input class="form-control" id="reason" type="text" placeholder="반려사유 입력"></div>'
+                  		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>';
 					$("#modalBody").html(result);
 				},
 				error:function() {
@@ -59,13 +57,17 @@
 		$(document).on("click", "#saveDoCheck", function(){
 			var status = $('input[name="answer"]:checked').val();
 			var reason = $("#reason").val();
+			var applicationNo = $("#applicationNo").val();
+			
+			console.log(applicationNo);
 			
 			$.ajax({
 				url: "profDoCheck.pr",
 				type: "POST",
 				data:{
 					status:status,
-					reason:reason
+					reason:reason,
+					applicationNo:applicationNo
 				},
 				dataType:"json",
 				success:function(checkDo) {
@@ -147,12 +149,12 @@
 												<c:when test="${!empty doList}">
 													<c:forEach var="doList" items="${doList}">
 														<tr role="row">
-															<td class="sorting_1"><%= count++ %></td>
+															<td class="sorting_1">${doList.applicationNo }</td>
 															<td><c:out value="${doList.stuName}"/></td>
-															<td><c:out value="${doList.doDate}"/></td>
+															<td><fmt:formatDate pattern="yyyy년MM월dd일 " value="${doList.doDate}"/></td>
 															<td><c:out value="${doList.stuStatus}"/></td>
 															<td><c:out value="${doList.doReason}"/></td>
-															<td><c:out value="${doList.status}"/></td>
+															<td>${doList.studentStatus.stsProcess}</td>
 														</tr>
 													</c:forEach>
 												</c:when>
@@ -167,7 +169,6 @@
 							  <div class="modal fade" id="myModal">
 							    <div class="modal-dialog">
 							      <div class="modal-content">
-							      <form action="profObjCheck.pr">
 							        <!-- Modal Header -->
 							        <div class="modal-header">
 							          <h4 class="modal-title">자퇴신청 상세조회</h4>
@@ -184,7 +185,6 @@
 							          <button class="btn btn-primary" type="submit" id="saveDoCheck">저장</button>
 							          <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
 							        </div>
-							       </form>
 							      </div>
 							    </div>
 							  </div>

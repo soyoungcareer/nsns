@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.consult.model.vo.Consult;
+import com.kh.spring.consult.model.vo.ConsultStatus;
 import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
@@ -17,6 +18,7 @@ import com.kh.spring.member.dao.ProfessorDao;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.SearchStudent;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
 
@@ -129,6 +131,9 @@ public class ProfServiceImpl implements ProfService {
 
 	@Override
 	public void editLectReq(RequestedSubject reqSubject) {
+		
+		System.out.println("=================reqSubject ServiceImpl : " + reqSubject);
+		
 		int result = professorDao.editLectReq(sqlSession, reqSubject);
 		
 		if (result < 0) {
@@ -153,23 +158,54 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public StudentOff detailOff(String offNo) {
-		return professorDao.detailOff(sqlSession, offNo);
+	public StudentOff detailOff(int applicationNo) {
+		return professorDao.detailOff(sqlSession, applicationNo);
 	}
 
 	@Override
-	public StudentDo detailDo(String doNo) {
-		return professorDao.detailDo(sqlSession, doNo);
+	public StudentDo detailDo(int applicationNo) {
+		return professorDao.detailDo(sqlSession, applicationNo);
 	}
 
 	@Override
-	public int profOffCheck(String offNo) {
-		return professorDao.profOffCheck(sqlSession, offNo);
+	public int profOffCheck(StudentOff stuOff) {
+		return professorDao.profOffCheck(sqlSession, stuOff);
 	}
 
 	@Override
-	public int profDoCheck(String doNo) {
-		return professorDao.profDoCheck(sqlSession, doNo);
+	public int profDoCheck(StudentDo stuDo) {
+		return professorDao.profDoCheck(sqlSession, stuDo);
+	}
+
+	@Override
+	public Consult detailConsult(String conNo) {
+		return professorDao.detailConsult(sqlSession, conNo);
+	}
+
+	@Override
+	public int profConCheck(Consult consult) {
+		return professorDao.profConCheck(sqlSession, consult);
+	}
+
+	@Override
+	public int evalSubCount(SearchSubject searchSubject) {
+		return professorDao.evalSubCount(sqlSession, searchSubject);
+	}
+
+	@Override
+	public ArrayList<Subject> evalSubList(SearchSubject searchSubject, PageInfo pi) {
+		return professorDao.evalSubList(sqlSession, searchSubject, pi);
+	}
+
+	@Override
+	public Evaluation selectFilteredEval(Map map) {
+		System.out.println("================eval ServiceImpl : " + map);
+		return professorDao.selectFilteredEval(sqlSession, map);
+	}
+
+	@Override
+	public int profConComplete(ConsultStatus conStatus) {
+		return professorDao.profConComplete(sqlSession, conStatus);
 	}
 
 }

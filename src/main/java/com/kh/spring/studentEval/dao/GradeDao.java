@@ -53,9 +53,9 @@ public class GradeDao {
 		return (ArrayList)sqlSession.selectList("gradeMapper.selectFilteredGrade", searchGrade);
 	}
 
-	public int updateGrade(SqlSessionTemplate sqlSession, Map map) {
-		System.out.println("============================map Dao : " + map);
-		return sqlSession.update("gradeMapper.updateGrade", map);
+	public int updateGrade(SqlSessionTemplate sqlSession, Grade grade) {
+		System.out.println("============================map Dao : " + grade);
+		return sqlSession.update("gradeMapper.updateGrade", grade);
 	}
 
 	public int objListCount(SqlSessionTemplate sqlSession, String profId) {
@@ -66,8 +66,20 @@ public class GradeDao {
 		return sqlSession.selectOne("gradeMapper.detailObjection", objNo);
 	}
 
-	public int profObjCheck(SqlSessionTemplate sqlSession, String objNo) {
-		return sqlSession.update("gradeMapper.profObjCheck", objNo);
+	public int profObjCheck(SqlSessionTemplate sqlSession, GradeObject gradeObject) {
+		return sqlSession.update("gradeMapper.profObjCheck", gradeObject);
+	}
+
+	public int selectGradeCount(SqlSessionTemplate sqlSession, SearchGrade searchGrade) {
+		return sqlSession.selectOne("gradeMapper.selectGradeCount", searchGrade);
+	}
+
+	public int gradeInsert(SqlSessionTemplate sqlSession, Grade grade) {
+		return sqlSession.insert("gradeMapper.gradeInsert", grade);
+	}
+
+	public int gradeDelete(SqlSessionTemplate sqlSession, Grade grade) {
+		return sqlSession.delete("gradeMapper.gradeDelete", grade);
 	}
 
 }

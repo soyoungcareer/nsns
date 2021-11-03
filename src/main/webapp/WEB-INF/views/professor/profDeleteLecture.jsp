@@ -4,8 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>낙성대학교(교수) - 강의삭제</title>
+	<meta charset="UTF-8">
+	<title>낙성대학교(교수) - 강의삭제</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		/* 수정할 강의코드 넘기기 */
+		$(document).on("click", "#delBtn", function(){
+			var subCode = $(this).parent().parent().children().eq(1).text();
+			location.href="profDeleteLec.pr?subCode="+subCode;
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -73,7 +81,7 @@
 		            </div>
 		            <div class="row">
 		                <div class="form-group col-md-4 align-self-end">
-		                  <button class="btn btn-danger" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>삭제 신청</button>
+		                  <button class="btn btn-danger" id="delBtn" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>삭제 신청</button>
 		                </div>
 	                </div>
 	              </form>

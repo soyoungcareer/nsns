@@ -44,20 +44,20 @@
 					var result = "<tr role='row'>";
 					$.each(gList, function(index, item) {
 						result += "<td class='sorting_1'>" + item.deptTitle + "</td>"
-							   + "<td>" + item.studentId + "</td>"
+							   + "<td><input type='hidden' name='studentId' value='" + item.studentId + "'>" + item.studentId + "</td>"
 							   + "<td>" + item.studentName + "</td>"
 							   + "<td>" + item.studentStatus + "</td>"
-							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.attendance + "'></td>"
-							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.assignment + "'></td>"
-							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.midExam + "'></td>"
-							   + "<td><input type='number' min='0' max='25' step='5' value='" + item.finExam + "'></td>"
+							   + "<td><input name='attendance' type='number' min='0' max='25' step='5' value='" + item.attendance + "'></td>"
+							   + "<td><input name='assignment' type='number' min='0' max='25' step='5' value='" + item.assignment + "'></td>"
+							   + "<td><input name='midExam' type='number' min='0' max='25' step='5' value='" + item.midExam + "'></td>"
+							   + "<td><input name='finExam' type='number' min='0' max='25' step='5' value='" + item.finExam + "'></td>"
 							   + "<td>" + item.gradeTotal + "</td>"
 							   + "<td>" + item.gradeResult + "</td>"
 							   + "<td>" + item.gradeCredit + "</td>"
 							   + "<td><input type='hidden' name='subCode' value='" + item.subCode + "'>"
 							   + "<input type='hidden' name='gradeYear' value='" + item.gradeYear + "'>"
 							   + "<input type='hidden' name='gradeSemester' value='" + item.gradeSemester + "'>"
-							   + "<button class='btn btn-primary btn-sm' type='submit'>저장</button></td></tr>"
+							   + "<button class='btn btn-primary btn-sm' type='button'>저장</button></td></tr>"
 					});
 					$('#gradeTable tbody').html(result);
 				},
@@ -69,26 +69,40 @@
 		
 		/* 성적 저장 */
 		/* 저장안됨.... 콘솔에 에러도 안뜸... */
-		$(document).on("click", "#subTable>tbody>tr>td>button", function(){
-			var td = $(this).parent();
-			var tr = td.parent();
-			var attend = tr.children().eq(4).text();
-			var assign = tr.children().eq(5).text();
-			var mid = tr.children().eq(6).text();
-			var fin = tr.children().eq(7).text();
-			var stuId = tr.children().eq(1).text();
-			var subCode = tr.children().$("input[name=subCode]").text();
-			var gradeYear = tr.children().$("input[name=gradeYear]").text();
-			var gradeSemester = tr.children().$("input[name=gradeSemester]").text();
+ 		$(document).on("click", "#gradeTable>tbody>tr>td>button", function(){
+			var attendTr = $(this).parent().parent().children().eq(4);
+			var attend = attendTr.children().val();
 			
-			console.log(attend);
-			console.log(assign);
-			console.log(mid);
-			console.log(fin);
-			console.log(stuId);
-			console.log(subCode);
-			console.log(gradeYear);
-			console.log(gradeSemester);
+			var assignTr = $(this).parent().parent().children().eq(5);
+			var assign = assignTr.children().val();
+			
+			var midTr = $(this).parent().parent().children().eq(6);
+			var mid = midTr.children().val();
+			
+			var finTr = $(this).parent().parent().children().eq(7);
+			var fin = finTr.children().val();
+			
+			var stuIdTr = $(this).parent().parent().children().eq(1);
+			var stuId = stuIdTr.children().val();
+			
+			var subCodeTr = $(this).parent().parent().children().eq(11);
+			var subCode = subCodeTr.children().eq(0).val();
+			
+			var gradeYearTr = $(this).parent().parent().children().eq(11);
+			var gradeYear = gradeYearTr.children().eq(1).val();
+			
+			var gradeSemesterTr = $(this).parent().parent().children().eq(11);
+			var gradeSemester = gradeSemesterTr.children().eq(2).val();
+			
+			
+			console.log("attend : " + attend);
+			console.log("assign : " + assign);
+			console.log("mid : " + mid);
+			console.log("fin : " + fin);
+			console.log("stuId : " + stuId);
+			console.log("subCode : " + subCode);
+			console.log("gradeYear : " + gradeYear);
+			console.log("gradeSemester : " + gradeSemester); 
 			
 			$.ajax({
 				url: "updateGrade.pr",
@@ -119,7 +133,7 @@
 					alert("로딩 실패");
 				}
 			});
-		});
+		}); 
 	</script>
 
 </head>
@@ -152,42 +166,43 @@
 							</div>
 							
 							<form action="filteredSubject.pr">
-							<div class="row">
-								<!-- <div class="form-group col-md-5">
-								  <label class="control-label" for="evalType">평가방법</label>
-								  <select class="form-control" id="evalType">
-								    <option>상대평가</option>
-								    <option>절대평가</option>
-								  </select>
-								</div> -->
-								<div class="form-group col-md-3">
-								  <label class="control-label" for="con1">학년도 </label>
-								  <select class="form-control" id="con1" name="con1">
-								  	<option value="0">전체</option>
-								  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
-								    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
-								  </select>
-								</div>
-								<div class="form-group col-md-3">
-								  <label class="control-label" for="con2">학기 </label>
-								  <select class="form-control" id="con2" name="con2">
-								  	<option value="0">전체</option>
-								    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
-								    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
-								  </select>
-								</div>
-								<div class="col-sm-12 col-md-6">
-									<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
-										<label>강의명 
-											<input type="search" class="form-control form-control-sm"
-												aria-controls="sampleTable" name="keyword" value="${ keyword }">
-										</label>
-										<button class="btn btn-primary btn-sm" type="submit"
-										style="margin-left: 10px;" id="readList">조 회</button>
+								<div class="row">
+									<!-- <div class="form-group col-md-5">
+									  <label class="control-label" for="evalType">평가방법</label>
+									  <select class="form-control" id="evalType">
+									    <option>상대평가</option>
+									    <option>절대평가</option>
+									  </select>
+									</div> -->
+									<div class="form-group col-md-3">
+									  <label class="control-label" for="con1">학년도 
+										  <select class="form-control" id="con1" name="con1">
+										  	<option value="0">전체</option>
+										  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+										    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
+										  </select>
+									  </label>
+									</div>
+									<div class="form-group col-md-3">
+									  <label class="control-label" for="con2">학기 
+									 	  <select class="form-control" id="con2" name="con2">
+										  	<option value="0">전체</option>
+										    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+										    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
+										  </select>
+									  </label>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
+											<label>강의명 
+												<input type="search" class="form-control form-control-sm"
+													aria-controls="sampleTable" name="keyword" value="${ keyword }">
+											</label>
+											<button class="btn btn-primary btn-sm" type="submit"
+											style="margin-left: 10px;" id="readList">조 회</button>
+										</div>
 									</div>
 								</div>
-							</div>
-							
 							</form>
 							
 							<div class="row">
@@ -267,6 +282,8 @@
 									</table>
 								</div>
 							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -403,6 +420,7 @@
 				                	</c:choose>
 				                </ul>
 				            </div>
+				            
 						</div>
 					</div>
 				</div>

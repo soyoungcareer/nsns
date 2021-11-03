@@ -29,6 +29,8 @@ import com.kh.spring.major.vo.Department;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
+import com.kh.spring.studentEval.service.GradeService;
+import com.kh.spring.studentEval.vo.Grade;
 
 
 @Controller
@@ -36,6 +38,9 @@ public class LectRegisterController {
 
 	@Autowired
 	private LectRegisterService lectRegisterService;
+	
+	@Autowired
+	private GradeService gradeService;
 	
 	@RequestMapping("register.reg") // 수강신청 페이지-----------------
 	public String registerPage(@RequestParam(value="currentPage", required=false, defaultValue="1") 
@@ -78,6 +83,10 @@ public class LectRegisterController {
 		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
 		  //int stuId = 20193019;//임시 아이디 
 		  int result = lectRegisterService.regiInsert(subCode, stuId);
+		  
+		  // 수강신청시 성적테이블에 학생정보 insert
+		  int gradeResult = gradeService.gradeInsert(subCode, stuId);
+		  
 		  return new GsonBuilder().create().toJson(result);
 		 
 	}
@@ -87,6 +96,9 @@ public class LectRegisterController {
 		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
 		  //int stuId = 20193019;//임시 아이디 
 		  int result = lectRegisterService.registerDelete(subCode, stuId);
+		  
+		  // 수강신청취소시 성적테이블에 학생정보 delete
+		  int gradeResult = gradeService.gradeDelete(subCode, stuId);
 		  return new GsonBuilder().create().toJson(result);
 		 
 	}

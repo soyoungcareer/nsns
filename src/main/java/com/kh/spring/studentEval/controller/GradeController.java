@@ -87,7 +87,8 @@ public class GradeController {
 	// 성적 조회
 	@ResponseBody
 	@RequestMapping(value="filteredGrade.pr", produces="application/json; charset=utf-8")
-	public String filteredGrade(String subCode, String gradeYear, String gradeSemester, HttpSession session) {
+	public String filteredGrade(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								String subCode, String gradeYear, String gradeSemester, HttpSession session, Model model) {
 		// 임시 데이터
 		//String profId = "EC1901";
 		
@@ -107,6 +108,8 @@ public class GradeController {
 				
 		ArrayList<Grade> gList = gradeService.selectFilteredGrade(searchGrade);
 		
+		System.out.println("==================gList controller : " + gList);
+		
 		return new GsonBuilder().create().toJson(gList);
 
 	}
@@ -114,28 +117,24 @@ public class GradeController {
 	// 성적 등록
 	@ResponseBody
 	@RequestMapping(value="updateGrade.pr", produces="application/json; charset=utf-8")
-	public String updateGrade(String attend, String assign, String mid, String fin, String stuId, 
-							  String subCode, String gradeYear, String gradeSemester) {
+	public String updateGrade(int attend, int assign, int mid, int fin, int stuId,
+			String subCode, int gradeYear, int gradeSemester) {
 		
-		int numAttend = Integer.parseInt(attend);
-		int numAssign = Integer.parseInt(assign);
-		int numMid = Integer.parseInt(mid);
-		int numFin = Integer.parseInt(fin);
-		int numStuId = Integer.parseInt(stuId);
 		
-		Map map = new HashMap();
-		map.put("attend", numAttend);
-		map.put("assign", numAssign);
-		map.put("mid", numMid);
-		map.put("fin", numFin);
-		map.put("stuId", numStuId);
-		map.put("subCode", subCode);
-		map.put("gradeYear", gradeYear);
-		map.put("gradeSemester", gradeSemester);
-
-		System.out.println("=================map Controller : " + map);
+		Grade grade = new Grade();
+		grade.setAttendance(attend);
+		grade.setAssignment(assign);
+		grade.setMidExam(mid);
+		grade.setFinExam(fin);
+		grade.setStudentId(stuId);
+		grade.setSubCode(subCode);
+		grade.setGradeYear(gradeYear);
+		grade.setGradeSemester(gradeSemester);
 		
-		int result = gradeService.updateGrade(map);
+		System.out.println("===========================grade : " + grade);
+		int result = gradeService.updateGrade(grade);
+		
+		System.out.println("===========================result : " + result);
 		
 		return new GsonBuilder().create().toJson(result);
 	}
@@ -178,9 +177,15 @@ public class GradeController {
 	// 이의신청 승인
 	@ResponseBody
 	@RequestMapping(value="profObjCheck.pr", produces="applicatoin/json; charset=utf-8;")
-	public String profObjCheck(String objNo) {
+	public String profObjCheck(String status, String reason,
+			@RequestParam(value="objNo", defaultValue = "0") int objNo) {
 	
-		int checkObj = gradeService.profObjCheck(objNo);
+		GradeObject gradeObject = new GradeObject();
+		gradeObject.setObjNo(objNo);
+		gradeObject.setStatus(status);
+		gradeObject.setReason(reason);
+		
+		int checkObj = gradeService.profObjCheck(gradeObject);
 		
 		return new GsonBuilder().create().toJson(checkObj);
 	}

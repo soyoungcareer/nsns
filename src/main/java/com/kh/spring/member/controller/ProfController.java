@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +26,8 @@ import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.consult.model.vo.Consult;
+import com.kh.spring.consult.model.vo.ConsultStatus;
 import com.kh.spring.evaluation.vo.Evaluation;
-import com.kh.spring.gradeObject.vo.GradeObject;
 import com.kh.spring.major.vo.RequestedSubject;
 import com.kh.spring.major.vo.Subject;
 import com.kh.spring.member.service.ProfService;
@@ -48,9 +49,19 @@ public class ProfController {
 	@Autowired
 	private GradeService gradeService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	// ============= 교수메뉴바 =============
 	@RequestMapping("profMenu.pr")
-	public String profMenu() {
+	public String profMenu(HttpSession session, Model model) {
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
+		
+		Professor prof = profService.selectMypage(profId);
+		
+		model.addAttribute("prof", prof);
+		
 		return "professor/menubarProf";
 	}
 	
@@ -60,14 +71,10 @@ public class ProfController {
 	public String profMypage(Model model, HttpSession session) {
 		// 임시 데이터
 		//String profId = "EC1901";
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
-		////////////////////////////////////////
-		// 로그인 세션값으로 수정한 이후로 갑자기 학과정보 안뜸
-		////////////////////////////////////////
-		
-		profService.selectMypage(profId);
+		Professor prof = profService.selectMypage(profId);
 		
 		model.addAttribute("prof", prof);
 		
@@ -84,13 +91,16 @@ public class ProfController {
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
+		String oldPwd = prof.getProfPwd();
 		
 		profService.loginProfessor(profId);
+		
+		String encPwd = bCryptPasswordEncoder.encode(profPwd);
 		
 		
 		//Professor prof = new Professor();
 		prof.setProfId(profId);
-		prof.setProfPwd(profPwd);
+		prof.setProfPwd(encPwd);
 		prof.setProfEmail(profEmail);
 		prof.setProfPhone(profPhone);
 		prof.setProfAddress(profAddress);
@@ -108,14 +118,10 @@ public class ProfController {
 	@RequestMapping("profLectInfoLoad.pr")
 	public String profLectInfoLoad(HttpServletRequest httpServletRequest, Model model, HttpSession session) {
 		//String profId = "EC1901";
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
-		////////////////////////////////////////
-		// 로그인 세션값으로 수정한 이후로 갑자기 학과정보 안뜸
-		////////////////////////////////////////
-		
-		profService.profInfoLoad(profId);
+		Professor prof = profService.profInfoLoad(profId);
 		
 		model.addAttribute("prof", prof);
 		
@@ -203,6 +209,17 @@ public class ProfController {
 		
 		return changeName;
 	}
+	
+	// 파일 삭제 메소드
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources+"\\upload_files\\";
+
+		System.out.println("savePath: "+ savePath);
+		
+		File deleteFile = new File(savePath+fileName);
+		deleteFile.delete();
+	}
 
 	// 강의목록 조회
 	@RequestMapping("profLectureDetail.pr")
@@ -230,20 +247,22 @@ public class ProfController {
 	// 강의정보 수정
 	// 강의 수정시 뷰에 데이터 로드
 	@RequestMapping("lectEditInfoLoad.pr")
-	public String lectEditInfoLoad(HttpSession session, Model model) {
+	public String lectEditInfoLoad(HttpSession session, Model model, String subCode) {
 		
 		// 임시데이터
 		//String profId = "EC1901";
-		String subCode = "2101002";
+		//String subCode = "2101002";
 		
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
 		Map map = new HashMap();
 		map.put("profId", profId);
 		map.put("subCode", subCode);
 		
-		profService.profInfoLoad(profId);
+		System.out.println("======== 수정전 로드 subCode : " + subCode);
+		
+		Professor prof = profService.profInfoLoad(profId);
 		Subject sub = profService.subInfoLoad(map);
 		
 		model.addAttribute("prof", prof);
@@ -254,18 +273,32 @@ public class ProfController {
 	
 	// 강의 수정
 	@RequestMapping("profEditLec.pr")
-	public String profEditLecture(HttpSession session, HttpServletRequest request, RequestedSubject reqSubject, 
-							      int subDivs, int subType, String subTitle,
-							      int subCredit, String subDay, String subStartTime, String subEndTime,
-							      @RequestParam(name="editLectFile", required=false) MultipartFile file, 
+	public String profEditLecture(HttpSession session, HttpServletRequest request, RequestedSubject reqSubject,
+								Subject subject,
+								  /*
+								  @RequestParam(value="subDivs", defaultValue="0") int subDivs, 
+								  @RequestParam(value="subType", defaultValue="0") int subType,
+								  @RequestParam(value="subTitle", defaultValue="") String subTitle,
+								  @RequestParam(value="subCredit", defaultValue="0") int subCredit,
+								  @RequestParam(value="subCode", defaultValue="") String subCode,
+								  */
+								  @RequestParam(value="subDay") String subDay,
+								  @RequestParam(value="subStartTime") String subStartTime,
+								  @RequestParam(value="subEndTime") String subEndTime,
+								  @RequestParam(value="changeName", required=false) String changeName,
+								  @RequestParam(value="originName", required=false) String originName,
+							      @RequestParam(value="editLectFile", required=false) MultipartFile file, 
 							      Model model) {
-		System.out.println("file : " + file);
+		System.out.println("================Controller===================");
+		System.out.println("======== file : " + file);
+		System.out.println("=============================================");
+		System.out.println("===================reqSubject " + reqSubject);
 		////////////////////////////////////////
 		// file NullPointerException
 		////////////////////////////////////////
 		
 		// 임시데이터
-		String subCode = "2101002";
+		//String subCode = "2101002";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
@@ -286,7 +319,28 @@ public class ProfController {
 		
 		String subTime = subDay + subStartTime + subEndTime;
 		
+		System.out.println("=============== subTime : " + subTime);
+		
+		if(!file.getOriginalFilename().equals("")) { // 널이 아니면 파일이 있는 것
+			deleteFile(subject.getOriginName(), request);
+			
+			changeName = saveFile(file, request);
+			reqSubject.setAttChange(changeName);
+		}
+		
+		/*
+		if(!file.getOriginalFilename().equals("")) { // 널이 아니면 파일이 있는 것
+			if(reqSubject.getAttChange() != null) {
+				deleteFile(reqSubject.getAttOrigin(), request);
+			}
+			
+			changeName = saveFile(file, request);
+			//reqSubject.setAttOrigin(file.getOriginalFilename());
+			reqSubject.setAttChange(changeName);
+		}
+		*/
 		// 파일명
+		/*
 		if (!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
 
@@ -295,16 +349,17 @@ public class ProfController {
 				reqSubject.setAttChange(changeName);
 			}
 		}
+		*/
 		
 		// 강의 수정 데이터 뷰에서 받아오기
 		reqSubject.setDeptCode(deptCode);
-		reqSubject.setSubDivs(subDivs);
-		reqSubject.setSubType(subType);
-		reqSubject.setSubTitle(subTitle);
+//		reqSubject.setSubDivs(subDivs);
+//		reqSubject.setSubType(subType);
+//		reqSubject.setSubTitle(subTitle);
 		reqSubject.setProfId(profId);
-		reqSubject.setSubCredit(subCredit);
+//		reqSubject.setSubCredit(subCredit);
 		reqSubject.setSubTime(subTime);
-		reqSubject.setSubCode(subCode);
+//		reqSubject.setSubCode(subCode);
 		
 		System.out.println("======================= reqSubject Controller : " + reqSubject + "====================");
 
@@ -317,19 +372,20 @@ public class ProfController {
 	// 강의 삭제
 	// 강의 삭제시 뷰에 데이터 로드
 	@RequestMapping("lectDelInfoLoad.pr")
-	public String lectDelInfoLoad(HttpServletRequest httpServletRequest, Model model, HttpSession session) {
+	public String lectDelInfoLoad(HttpServletRequest httpServletRequest, Model model, HttpSession session
+								  ,String subCode) {
 		// 임시데이터
 		//String profId = "EC1901";
-		String subCode = "2101002";
+		//String subCode = "2101002";
 		
-		Professor prof = (Professor)session.getAttribute("loginPrf");
-		String profId = prof.getProfId();
+		Professor professor = (Professor)session.getAttribute("loginPrf");
+		String profId = professor.getProfId();
 		
 		Map map = new HashMap();
 		map.put("profId", profId);
 		map.put("subCode", subCode);
 		
-		profService.profInfoLoad(profId);
+		Professor prof = profService.profInfoLoad(profId);
 		Subject sub = profService.subInfoLoad(map);
 
 		model.addAttribute("prof", prof);
@@ -340,7 +396,8 @@ public class ProfController {
 	
 	// 강의 삭제
 	@RequestMapping("profDeleteLec.pr")
-	public String profDeleteLecture(HttpSession session, HttpServletRequest request, String subCode) {
+	public String profDeleteLecture(HttpSession session, HttpServletRequest request, 
+								    @RequestParam(value="subCode", defaultValue="") String subCode) {
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
@@ -348,14 +405,11 @@ public class ProfController {
 		// 임시 데이터
 		//String subCode = "2101002";
 		
-		//////////////////////////////////
-		// subCode 임시데이터로 할 때만 먹힘;;
-		// jsp에 input hidden으로 subCode 가져오기 안됨. 컨트롤러에 파라미터 String subCode 추가해도 안됨.
-		//////////////////////////////////
-		
 		Map map = new HashMap();
 		map.put("profId", profId);
 		map.put("subCode", subCode);
+		
+		System.out.println("======== 삭제 subCode : " + subCode);
 		
 		Subject sub = profService.delSubInfo(map);
 		
@@ -404,10 +458,10 @@ public class ProfController {
 	// 학생목록 조회 > 과목 조회
 	@RequestMapping("filteredSub.pr")
 	public String filteredSub(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
-								    @RequestParam(name="con1", required=false, defaultValue="0") int con1,
-								    @RequestParam(name="con2", required=false, defaultValue="0") int con2,
-								    @RequestParam(name="keyword", required=false, defaultValue="%") String keyword,
-								    Model model, HttpSession session) {
+					    	  @RequestParam(name="con1", required=false, defaultValue="0") int con1,
+					    	  @RequestParam(name="con2", required=false, defaultValue="0") int con2,
+					    	  @RequestParam(name="keyword", required=false, defaultValue="%") String keyword,
+					    	  Model model, HttpSession session) {
 		// 임시 데이터
 		//String profId = "EC1901";
 		
@@ -476,11 +530,42 @@ public class ProfController {
 	}
 	
 	// 상담 관리 상세
-	@RequestMapping("profConsultDetail.pr")
-	public String profConsultDetail() {
+	@ResponseBody
+	@RequestMapping(value="profConsultDetail.pr", produces="applicatoin/json; charset=utf-8;")
+	public String profConsultDetail(String conNo) {
+		Consult detailCon = profService.detailConsult(conNo);
 		
+		return new GsonBuilder().create().toJson(detailCon);
+	}
+	
+	// 상담신청 승인
+	@ResponseBody
+	@RequestMapping(value="profConCheck.pr", produces="applicatoin/json; charset=utf-8;")
+	public String profConCheck(String status, String rejectReason,
+							   @RequestParam(value="conNo", defaultValue = "0") int conNo) {
+	
+		Consult consult = new Consult();
+		consult.setConNo(conNo);
+		//consult.setStatus(status);
+		consult.setRejectReason(rejectReason);
 		
-		return "professor/profConsultDetail";
+		ConsultStatus conStatus = new ConsultStatus();
+		conStatus.setConNo(conNo);
+		conStatus.setStatus(status);
+		
+		int checkCon = profService.profConCheck(consult);
+		int completeCon = profService.profConComplete(conStatus);
+		
+		System.out.println("==================consult controller : " + consult);
+		
+		return new GsonBuilder().create().toJson(checkCon);
+	}
+	
+	// 강의평가
+	@RequestMapping("profEvaluation.pr")
+	public String profEvaluation() {
+		
+		return "professor/profEvaluation";
 	}
 	
 	// 강의평가 조회
@@ -516,69 +601,70 @@ public class ProfController {
 		return "professor/profEvaluation";
 	}
 	
-	/*
+	// 강의평가점수 조회
 	@ResponseBody
 	@RequestMapping(value="filteredEval.pr", produces="application/json; charset=utf-8")
-	public String filteredEval(String subCode, String year, String semester, HttpSession session) {
+	public String filteredEval(int subCode, HttpSession session) {
 		// 임시 데이터
 		//String profId = "EC1901";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
 		
+		Map map = new HashMap();
+		map.put("profId", profId);
+		map.put("subCode", subCode);
 		
-		SearchStudent searchStudent = new SearchStudent();
-		searchStudent.setSubCode(subCode);
-		searchStudent.setYear(year);
-		searchStudent.setSemester(semester);
-		searchStudent.setProfId(profId);
+		//ArrayList<Evaluation> evalList = profService.selectFilteredEval(map);
 		
-		
-		ArrayList<Evaluation> evalList = profService.selectFilteredEval(searchStudent);
+		Evaluation evalList = profService.selectFilteredEval(map);
+		System.out.println("====================evalList Controller : " + evalList);
 		
 		return new GsonBuilder().create().toJson(evalList);
 
 	}
-	*/
+	
 
-	// 강의평가
-	@RequestMapping("profEvaluation.pr")
+	
+	/*
+	// 강의평가 -- 삭제할 것. 관련 DAO, SERVICE도 삭제할 것.
+	@RequestMapping("evalSubLoad.pr")
 	public String profEvaluation(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
-								 Model model, String subYear, String subSmst, HttpSession session) {
-		/*
+								 @RequestParam(name="con1", required=false, defaultValue="0") int con1,
+								 @RequestParam(name="con2", required=false, defaultValue="0") int con2,
+								 @RequestParam(name="keyword", required=false, defaultValue="%") String keyword,					
+								 Model model, HttpSession session) {
+		
 		// 임시 데이터
 		//String profId = "EC1901";
-		String subCode = "2101001";
+		//String subCode = "2101001";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
+
+		// 조건별 과목 검색
+		SearchSubject searchSubject = new SearchSubject();
+		searchSubject.setCon1(con1);
+		searchSubject.setCon2(con2);
+		searchSubject.setKeyword(keyword);
+		searchSubject.setProfId(profId);
 		
-//		int intYear = Integer.parseInt(subYear);
-//		int intSemester = Integer.parseInt(subSmst);
-		
-		int intYear = 2021;
-		int intSemester = 1;
-		
-		int listCount = profService.subListCount(profId);
+		int listCount = profService.evalSubCount(searchSubject);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		Subject sub = new Subject();
-		sub.setSubYear(intYear);
-		sub.setSubSmst(intSemester);
-		sub.setSubCode(subCode);
-		sub.setProfId(profId);
-		
 		//========== 교수별 강의목록 먼저 조회 후, 강의별 강의평가 조회하기.
-		ArrayList<Subject> subList = profService.selectSubList(profId, pi);
-		ArrayList<Evaluation> evalList = profService.loadEvalList(sub);
+		ArrayList<Subject> subList = profService.evalSubList(searchSubject, pi);
+		//ArrayList<Evaluation> evalList = profService.loadEvalList(sub);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("subList", subList);
-		model.addAttribute("evalList", evalList);
-			*/
+		model.addAttribute("con1", con1);
+		model.addAttribute("con2", con2);
+		//model.addAttribute("evalList", evalList);
+		
 		return "professor/profEvaluation";
 	}
-
+*/
 	// 학적변동 - 휴학 승인
 	@RequestMapping("profStudentOff.pr")
 	public String profStudentOff(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
@@ -594,6 +680,8 @@ public class ProfController {
 		
 		ArrayList<StudentOff> offList = profService.loadOffList(profId, pi);
 		
+		System.out.println("===========offList Controller : " + offList);
+		
 		model.addAttribute("pi", pi);
 		model.addAttribute("offList", offList);
 		
@@ -603,18 +691,24 @@ public class ProfController {
 	// 휴학 상세 모달
 	@ResponseBody
 	@RequestMapping(value="detailOff.pr", produces="applicatoin/json; charset=utf-8;")
-	public String detailOff(String offNo) {
+	public String detailOff(int applicationNo) {
 		
-		StudentOff detailOff = profService.detailOff(offNo);
+		StudentOff detailOff = profService.detailOff(applicationNo);
+		
+		System.out.println("================detailOff Controller : " + detailOff);
+		
 		return new GsonBuilder().create().toJson(detailOff);
 	}
 	
 	// 휴학신청 승인
 	@ResponseBody
 	@RequestMapping(value="profOffCheck.pr", produces="applicatoin/json; charset=utf-8;")
-	public String profOffCheck(String offNo) {
+	public String profOffCheck(@RequestParam(value="applicationNo", defaultValue = "0") int applicationNo) {
 	
-		int checkOff = profService.profOffCheck(offNo);
+		StudentOff stuOff = new StudentOff();
+		stuOff.setApplicationNo(applicationNo);
+		
+		int checkOff = profService.profOffCheck(stuOff);
 		return new GsonBuilder().create().toJson(checkOff);
 	}
 	
@@ -633,6 +727,8 @@ public class ProfController {
 		
 		ArrayList<StudentDo> doList = profService.loadDoList(profId, pi);
 		
+		System.out.println("===========doList Controller : " + doList);
+		
 		model.addAttribute("pi", pi);
 		model.addAttribute("doList", doList);
 		
@@ -642,18 +738,21 @@ public class ProfController {
 	// 자퇴 상세 모달
 	@ResponseBody
 	@RequestMapping(value="detailDo.pr", produces="applicatoin/json; charset=utf-8;")
-	public String detailDo(String doNo) {
+	public String detailDo(int applicationNo) {
 		
-		StudentDo detailDo = profService.detailDo(doNo);
+		StudentDo detailDo = profService.detailDo(applicationNo);
 		return new GsonBuilder().create().toJson(detailDo);
 	}
 	
 	// 자퇴신청 승인
 	@ResponseBody
 	@RequestMapping(value="profDoCheck.pr", produces="applicatoin/json; charset=utf-8;")
-	public String profDoCheck(String doNo) {
+	public String profDoCheck(@RequestParam(value="applicationNo", defaultValue = "0") int applicationNo) {
 	
-		int checkDo = profService.profDoCheck(doNo);
+		StudentDo stuDo = new StudentDo();
+		stuDo.setApplicationNo(applicationNo);
+		
+		int checkDo = profService.profDoCheck(stuDo);
 		return new GsonBuilder().create().toJson(checkDo);
 	}
 	
