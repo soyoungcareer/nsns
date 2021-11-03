@@ -29,10 +29,15 @@
       
         <form id="loginForm" class="login-form" action="login.ber" method="post">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>낙성학사행정시스템</h3>
-          <div class="login-position">
-          	<input id="stuLogin" type="radio" name="position" value="student" />학생
-          	<input id="prfLogin" type="radio" name="position" value="professor" />교수
-          	<input id="admLogin" type="radio" name="position" value="admin" />관리자
+          <div class="login-position">         	
+          	<input id="stuLogin" type="radio" name="position" value="student" />
+          	<label for="stuLogin">학생</label>
+          	
+          	<input id="prfLogin" type="radio" name="position" value="professor" />
+          	<label for="prfLogin">교수</label>
+          	
+          	<input id="admLogin" type="radio" name="position" value="admin" />
+          	<label for="admLogin">관리자</label>
           </div>
           <br>
           <div class="form-group">

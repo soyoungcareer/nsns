@@ -55,6 +55,8 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public void createRequestSubject(RequestedSubject reqSub) {
+		
+		//System.out.println("==========impl reqSub : " + reqSub);
 
 		int result = subjectDao.createRequestSubject(sqlSession, reqSub);
 		
@@ -62,6 +64,66 @@ public class SubjectServiceImpl implements SubjectService {
 			throw new CommException("과목 등록 중 오류 발생");
 		}
 		
+	}
+
+	@Override
+	public void modifySubject(Subject sub) {
+		
+		int result = subjectDao.modifySubject(sqlSession, sub);
+		
+		if(result < 0) {
+			throw new CommException("과목 수정 중 오류 발생");
+		}
+		
+	}
+
+	@Override
+	public void modifyRequestedSubject(RequestedSubject reqSub) {
+		
+		System.out.println("==========modify impl reqSub : " + reqSub);
+		
+		int result = subjectDao.modifyRequestedSubject(sqlSession, reqSub);
+		
+		if(result < 0) {
+			throw new CommException("과목 등록 중 오류 발생");
+		}
+		
+	}
+
+	@Override
+	public void deleteSubject(Subject sub) {
+		
+		int result = subjectDao.deleteSubject(sqlSession, sub);
+		
+		if(result < 0) {
+			throw new CommException("과목 삭제 중 오류 발생");
+		}
+		
+	}
+
+	@Override
+	public void deleteRequestedSubject(RequestedSubject reqSub) {
+		
+		System.out.println("==========delete impl reqSub : " + reqSub);
+		
+		int result = subjectDao.deleteRequestedSubject(sqlSession, reqSub);
+		
+		if(result < 0) {
+			throw new CommException("과목 삭제 중 오류 발생");
+		}
+		
+	}
+
+	@Override
+	public int subAllListCount() {
+		
+		return subjectDao.subAllListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Subject> subAllList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return subjectDao.subAllList(sqlSession, pi);
 	}
 
 }

@@ -51,11 +51,22 @@
 	                <input class="form-control" id="reqSubNo" name="reqSubNo" type="text" value="${ sl.reqSubNo }" readonly>
                   </div> -->
                   <input type="hidden" name="reqSubNo" id="reqSubNo" value="${reqSub.reqSubNo }">
-				  <input type="button" name="attChange" value="${ reqSub.attChange }">
+				  <input type="hidden" name="changeName" value="${ reqSub.attChange }">
 
                   <div class="form-group">
-                    <label for="ntcCategory">과목코드</label><!-- 입력 -->
-                    <input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
+                    <label for="subCode">과목코드</label><!-- 입력 -->
+                    
+                    <c:if test="${ !empty reqSub.subCode }">
+                    	<!-- <a>${reqSub.subCode }</a> -->
+                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${reqSub.subCode }">
+                    </c:if>
+                    
+                    <c:if test="${ empty reqSub.subCode }">
+                    	<!-- 기존 -->
+                    	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
+                    
+                    </c:if>
+                    
                   </div>
                   
                   <div class="form-group">
@@ -86,18 +97,38 @@
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">강의실</label><!-- 입력 -->
-                    <input class="form-control" id="subClass" name="subClass" type="text">
+                    <label for="subClass">강의실</label><!-- 입력 -->
+                    <!-- 기존 <input class="form-control" id="subClass" name="subClass" type="text"> -->
+                    <input class="form-control" id="subClass" name="subClass" type="text" value="${sub.subClass }">
+                    <!-- 
+                    <c:if test="${ !empty sub.subClass }">
+                    	
+                    	<input class="form-control" id="subClass" name="subClass" type="text" value="${sub.subClass }">
+                    </c:if>
+                    
+                    <c:if test="${ empty sub.subClass }">
+                    	
+                    	<input class="form-control" id="subClass" name="subClass" type="text" placeholder="">
+                    
+                    </c:if> -->
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">강의시간</label>             
+                    <label for="subTime">강의시간</label>             
                     <input class="form-control" id="subTime" name="subTime" type="text" value="${ reqSub.subTime }">               
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">강의형태</label>
+                    <label for="subType">강의형태</label>
                     <input class="form-control" id="subType" name="subType" type="hidden" value="${ reqSub.subType }">
+                    
+                    <!-- <select onload="test1();">
+                    	<option value=1>집체</option>
+                    	<option value=2>온라인</option> 	
+                    </select> -->
+                    	
+                    
+                    
                     <c:choose>
                     	<c:when test="${ reqSub.subType == 1 }">
                     		<input class="form-control" value="집체">
@@ -126,7 +157,7 @@
                   
                   <div class="form-group">
                         
-                        <input type="button" name="attOrigin" value="${ reqSub.attOrigin }">
+                        <input type="hidden" name="originName" value="${ reqSub.attOrigin }">
                   		<c:if test="${ !empty reqSub.attOrigin }">
                         	<!-- <a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${reqSub.attChange}" download="${ reqSub.attOrigin }">${ reqSub.attOrigin }</a>
                         				 -->	

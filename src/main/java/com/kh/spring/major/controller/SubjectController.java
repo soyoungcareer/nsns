@@ -47,15 +47,24 @@ public class SubjectController {
 		
 		System.out.println("=======================" + reqSub);
 		
+		/////////test
+//		Subject sub = new Subject();
+//		System.out.println("=======deleteTest subs : " + sub);
+//		System.out.println("=======deleteTest subClass : " + sub.getSubClass());
+		/////////
+		
 		return mv;
 	}
-	///
+	
 	@RequestMapping("createSub.adm") //강의 신청 승인 - 등록
 	public String createSubject(Model model, HttpServletRequest request
 								, @RequestParam(value="subAttachment", required=false) MultipartFile file
-								, @RequestParam(value="attOrigin", required=false) String attOrigin
-								, @RequestParam(value="attChange", required=false) String attChange
+								, @RequestParam(name="originName", required=false) String originName
+								, @RequestParam(name="changeName", required=false) String changeName
+								, @RequestParam("deptCode") int deptCode
+								, @RequestParam("profId") String profId
 								, Subject sub
+								, RequestedSubject reqSub
 								) {
 		
 		//3,4,7,10 SET //value="" ?
@@ -76,10 +85,10 @@ public class SubjectController {
 		*/
 		
 		//Subject sub = new Subject();
-		System.out.println(sub);
+		System.out.println("=======sub : " + sub);
 //		System.out.println("=======subCode : " + subCode);
-//		System.out.println("=======deptCode : " + deptCode);
-//		System.out.println("=======profId : " + profId);
+		System.out.println("=======deptCode : " + deptCode);
+		System.out.println("=======profId : " + profId);
 //		System.out.println("=======subClass : " + subClass);
 //		System.out.println("=======subYear : " + subYear);
 //		System.out.println("=======subSmst : " + subSmst);
@@ -94,17 +103,26 @@ public class SubjectController {
 //		sub.setSubClass(subClass);
 //		sub.setSubYear(subYear);
 //		sub.setSubSmst(subSmst);
-		sub.setOriginName(attOrigin);
-		sub.setChangeName(attChange);
+		
+		//System.out.println("=======attOrigin : " + attOrigin);
+		//System.out.println("=======attChange : " + attChange);
+		System.out.println("=======originName : " + originName);
+		System.out.println("=======changeName : " + changeName);
+		//sub.setOriginName(attOrigin);
+		//sub.setChangeName(attChange);
 		
 		
 		
 		
 	
-		//subjectService.createSubject(sub);
+		subjectService.createSubject(sub);
 		
+		System.out.println("========sub : " + sub);
 		
-		//subjectService.createRequestSubject(reqSub);
+		//RequestedSubject reqSub = new RequestedSubject();
+		subjectService.createRequestSubject(reqSub);
+		
+		System.out.println("==========controller reqSub : " + reqSub);
 		
 		return "redirect:subModifyList.adm";
 	}
@@ -117,5 +135,93 @@ public class SubjectController {
 		
 		return "redirect:subModifyList.adm";
 	}*/
+	
+	@RequestMapping("modifySub.adm") //
+	public String modifySubject(Model model, HttpServletRequest request
+								, @RequestParam(value="subAttachment", required=false) MultipartFile file
+								, @RequestParam(name="originName", required=false) String originName
+								, @RequestParam(name="changeName", required=false) String changeName
+								, @RequestParam("deptCode") int deptCode
+								, @RequestParam("profId") String profId
+								, Subject sub
+								, RequestedSubject reqSub
+								) {
+		
+		
+		System.out.println("=======modify sub : " + sub);
 
+		System.out.println("=======modify deptCode : " + deptCode);
+		System.out.println("=======modify profId : " + profId);	
+		System.out.println("=======modify originName : " + originName);
+		System.out.println("=======modify changeName : " + changeName);
+	
+		subjectService.modifySubject(sub);
+		
+		
+		
+		System.out.println("========modify sub : " + sub);
+		
+		subjectService.modifyRequestedSubject(reqSub);
+		
+		System.out.println("==========modify controller reqSub : " + reqSub);
+		
+		return "redirect:subModifyList.adm";
+	}
+	
+	@RequestMapping("deleteSub.adm")
+	public String deleteSubject(Model model, HttpServletRequest request
+								, @RequestParam(value="subAttachment", required=false) MultipartFile file
+								, @RequestParam(name="originName", required=false) String originName
+								, @RequestParam(name="changeName", required=false) String changeName
+								, @RequestParam("deptCode") int deptCode
+								, @RequestParam("profId") String profId
+								, Subject sub
+								, RequestedSubject reqSub
+								, @RequestParam("subClass") int subClass
+								, @RequestParam("subYear") int subYear
+								, @RequestParam("subSmst") int subSmst
+								
+								) {
+		
+		
+		System.out.println("=======delete sub : " + sub);
+
+		System.out.println("=======delete deptCode : " + deptCode);
+		System.out.println("=======delete profId : " + profId);	
+		System.out.println("=======delete originName : " + originName);
+		System.out.println("=======delete changeName : " + changeName);
+	
+		//sub.setSubClass(subClass);
+		//sub.setSubYear(subYear);
+		//sub.setSubSmst(subSmst);
+		
+		subjectService.deleteSubject(sub);
+		
+		
+		
+		System.out.println("========delete sub : " + sub);
+		
+		subjectService.deleteRequestedSubject(reqSub);	
+		System.out.println("==========delete controller reqSub : " + reqSub);
+		
+		return "redirect:subModifyList.adm";
+	}
+
+	@RequestMapping("subAllList.adm")
+	public String subAllList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
+		
+		int listCount = subjectService.subAllListCount();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Subject> subAllList = subjectService.subAllList(pi);
+		System.out.println("subAllList : " + subAllList);
+		model.addAttribute("subAllList", subAllList);
+		model.addAttribute("pi", pi);
+		
+		return "major/subjectAllList";
+	}
+	
+	
+	
 }
