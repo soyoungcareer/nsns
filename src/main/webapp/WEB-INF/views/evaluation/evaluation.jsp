@@ -91,7 +91,7 @@
 						                    </tr>
 						                     <input type="hidden" name="evalList[${ eNum.index }].evalNum" value="${ eval.lectEvaNo }">
 						                     <input type="hidden" name="evalList[${ eNum.index }].lectNum" value="${ eval.lectRegNo }">
-						                     <input type="hidden" name="evalList[${ eNum.index }].stuId" value="20193019"><!-- 세션 아이디로 수정 필요 -->
+						                     <input type="hidden" name="evalList[${ eNum.index }].stuId" value="${ loginStu.stuId }"><!-- 세션 아이디로 수정 필요 -->
 					                    </c:forEach>
 									</tbody>
 								</table>
