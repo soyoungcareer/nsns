@@ -53,7 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
-		SELECT * FROM PROFESSOR
+		SELECT A.*, B.DEPT_TITLE 
+		FROM PROFESSOR A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		WHERE PROF_ID = #{profId}
 	</select>
 	<!-- 암호화

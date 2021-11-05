@@ -7,15 +7,6 @@
 	<meta charset="UTF-8">
 	<title>낙성대학교(교수) - 강의정보 수정</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script> 
-		/* 수정할 강의코드 넘기기 */
-		/*
-		$(document).on("click", "#editBtn", function(){
-			var subCode = $(this).parent().parent().children().eq(1).text();
-			location.href="profEditLec.pr?subCode="+subCode;
-		});
-		*/
-	</script>
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -38,7 +29,7 @@
 	          <div class="tile">
 	            <h3 class="tile-title">강의정보 수정</h3>
 	            <div class="tile-body">
-	              <form id="editForm" method="get" action="profEditLec.pr" enctype="multipart/form-data">
+	              <form id="editForm" method="post" action="profEditLec.pr" enctype="multipart/form-data">
 	              	<div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">학과명</label>
@@ -142,9 +133,11 @@
 								<input type="hidden" name="changeName" value="${ sub.changeName }">
 	                            <input type="hidden" name="originName" value="${ sub.originName }">
 								<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${ sub.changeName }" 
-									download="${ sub.originName }"><button class="btn badge badge-pill badge-warning" type="button">${ sub.originName }</button></a>
+									download="${ sub.originName }">
+									<button class="btn badge badge-pill badge-warning" type="button">${ sub.originName }</button>
+								</a>
 							</c:if>
-							<input class="form-control-file" id="editLectFile" type="file" name="editLectFile" aria-describedby="fileHelp">
+							<input class="form-control-file" id="file" type="file" name="file" aria-describedby="fileHelp">
 		                </div>
 		            </div>
 		            <div class="row">

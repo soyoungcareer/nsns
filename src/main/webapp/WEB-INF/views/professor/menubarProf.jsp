@@ -29,20 +29,17 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- style -->
-	<style>
+	<!-- <style>
 	.app-header__logo {
 		font-size: large;
 	}	
-	</style>
+	</style> -->
   </head>
 
   <body class="app sidebar-mini">
    
-   
-   
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }">
-    <i class="fa fa-briefcase mr-2" aria-hidden="true"></i>낙성학사행정시스템</a>
+    <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }">낙성대학교</a>
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       
@@ -52,7 +49,12 @@
           <input class="app-search__input" type="search" placeholder="Search">
           <button class="app-search__button"><i class="fa fa-search"></i></button>
         </li> -->
-         
+       	<li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
+        <i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item"  href="register.reg"> <i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i>공지사항</a></li>
+          </ul>
+        </li>
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
@@ -60,12 +62,6 @@
           </ul>
         </li>
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
-        <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item"  href="register.reg"> <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>수강신청</a></li>
-          </ul>
-        </li>
-          <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-archive fa-lg"  aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item"  href="facMove.me"> <i class="fa fa-archive fa-lg" aria-hidden="true"></i>시설물대여</a></li>
@@ -94,8 +90,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><!-- <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image"> -->
         <div>
-          <p class="app-sidebar__user-name"><span>${ prof.profName }교수</span></p>
-          <p class="app-sidebar__user-designation">${ prof.profDeptTitle }과</p>
+          <p class="app-sidebar__user-name ml-3"><span>${ loginPrf.profName }교수</span></p>
+          <p class="app-sidebar__user-designation ml-3">${ loginPrf.profDeptTitle }과</p>
         </div>
       </div>
       <ul class="app-menu">
@@ -117,7 +113,7 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="profStudentDetail.pr"><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
-            <li><a class="treeview-item" href="profAttend.pr"><i class="icon fa fa-circle-o"></i> 출결 관리</a></li>
+            <!-- <li><a class="treeview-item" href="profAttend.pr"><i class="icon fa fa-circle-o"></i> 출결 관리</a></li> -->
             <li><a class="treeview-item" href="profEvaluation.pr"><i class="icon fa fa-circle-o"></i> 강의평가 조회</a></li>
             <li><a class="treeview-item" href="profConsult.pr"><i class="icon fa fa-circle-o"></i> 상담 관리</a></li>
             <li><a class="treeview-item" href="profStudentOff.pr"><i class="icon fa fa-circle-o"></i> 학적변동 - 휴학 승인</a></li>

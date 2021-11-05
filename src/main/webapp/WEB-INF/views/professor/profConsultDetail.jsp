@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>낙성대학교(교수) - 상담관리 상세</title>
 </head>
+<!-- ----------------------------
+	AJAX로 처리함. 페이지 삭제할 것!! 
+	------------------------------->
 <body> 
 	<jsp:include page="menubarProf.jsp"/>
  
@@ -16,12 +19,12 @@
 					<i class="fa fa-edit"></i> 학생 관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">학생 관리</li>
 				<li class="breadcrumb-item"><a href="profConsult.pr">상담 관리</a></li>
 				<li class="breadcrumb-item"><a href="profConsultDetail.pr">상담관리 상세</a></li>
-			</ul>
+			</ul> -->
 		</div>
 
 		<div class="container-fluid">
