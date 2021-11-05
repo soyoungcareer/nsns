@@ -22,13 +22,17 @@
       <div class="cover"></div>
     </section>
     <section class="login-content">
-      <div class="logo">
-        <h1>낙성대학교</h1>
+      <div style="float:left;">
+        <!-- <h1>낙성대학교</h1> class="logo"-->
+        <h2 style="color:white;"><img alt="낙성대학교" src="resources/upload_files/nsLogo.png" width="50" height="50" style="margin-bottom:15px;"> &nbsp;&nbsp; 낙성대학교</h2>
+      	<!-- <img alt="낙성대학교" src="resources/upload_files/nsLogo.png" width="80" height="80" style="float:left;"> -->  	
       </div>
+      
+      
       <div class="login-box">
       
         <form id="loginForm" class="login-form" action="login.ber" method="post">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>낙성학사행정시스템</h3>
+          <h4 class="login-head">로그인</h4>
           <div class="login-position">         	
           	<input id="stuLogin" type="radio" name="position" value="student" />
           	<label for="stuLogin">학생</label>
@@ -39,7 +43,7 @@
           	<input id="admLogin" type="radio" name="position" value="admin" />
           	<label for="admLogin">관리자</label>
           </div>
-          <br>
+          
           <div class="form-group">
             <label class="control-label">학번/교번</label>
             <input class="form-control" type="text" id="userId" name="userId">
@@ -61,7 +65,7 @@
                   <input type="checkbox"><span class="label-text">Stay Signed in</span>
                 </label> -->
               </div>
-              <p class="semibold-text mb-2">아이디 분실 시 행정팀 문의 &nbsp;&nbsp;&nbsp;<a href="#" data-toggle="flip">비밀번호 찾기</a></p>
+              <!-- <p class="semibold-text mb-2">계정 분실 시 학사팀 문의</p> -->
             </div>
           </div>
           <div class="form-group btn-container">
@@ -69,19 +73,7 @@
           </div>
         </form>
         
-        <form class="forget-form" action="index.jsp">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
-          <div class="form-group">
-            <label class="control-label">EMAIL</label>
-            <input class="form-control" type="text" placeholder="Email">
-          </div>
-          <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
-          </div>
-          <div class="form-group mt-3">
-            <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
-          </div>
-        </form>
+        
       </div>
     </section>
     				

@@ -33,9 +33,9 @@ public interface MemberService {
 
 	void deleteProfessor(String profId);
 
-	int studentStatusFormCount();
+	int studentStatusListCount();
 
-	ArrayList<Student> studentStatusForm(PageInfo pi);
+	ArrayList<Student> studentStatusList(PageInfo pi);
 
 	void studentStatusUpdate(int stuId);
 	

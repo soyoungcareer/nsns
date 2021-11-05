@@ -27,18 +27,13 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="" style="font-size:17px;">낙성학사행정시스템</a>
+    <header class="app-header"><a class="app-header__logo" href="">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
 
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
         
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
-        <i class="fa fa-headphones fa-lg" aria-hidden="true"></i></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="list.ntc"> <i class="fa fa-headphones fa-lg" aria-hidden="true"></i>공지사항</a></li>
-          </ul>
-        </li>
+        
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
@@ -107,7 +102,7 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="stuEnrollForm.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 등록</a></li>
             <li><a class="treeview-item" href="stuList.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 조회</a></li>
-            <li><a class="treeview-item" href="stuStaUpdateList.adm"><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
+            <li><a class="treeview-item" href="stuStaList.adm"><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
           </ul>
         </li>
         

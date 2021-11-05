@@ -102,7 +102,7 @@ public class MemberServiceImpl implements MemberService {
 			throw new CommException("교수 등록 중 오류가 발생하였습니다.");
 		}
 		
-	}///
+	}
 	
 	@Override
 	public int studentListCount() {
@@ -151,15 +151,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int studentStatusFormCount() {
+	public int studentStatusListCount() {
 		// TODO Auto-generated method stub
-		return memberDao.studentStatusFormCount(sqlSession);
+		return memberDao.studentStatusListCount(sqlSession);
 	}
 
 	@Override
-	public ArrayList<Student> studentStatusForm(PageInfo pi) {
+	public ArrayList<Student> studentStatusList(PageInfo pi) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.studentStatusList(sqlSession, pi);
 	}
 	
 	@Override
@@ -168,7 +168,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDao.studentStatusUpdate(sqlSession, stuId);
 		
 		if(result < 0) {
-			throw new CommException("해당 학생 학적을 변경하는 도중 에러가 발생하였습니다.");
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
 		}
 		
 	}

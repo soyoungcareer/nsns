@@ -34,11 +34,7 @@
         <div>
           <h1><i class="fa fa-th-list"></i> 전체 교수 계정</h1>
         </div>
-        <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">교수관리</li>
-          <li class="breadcrumb-item active"><a href="#">교수 계정 조회</a></li>
-        </ul>
+        
       </div>
       <div class="row">
         <div class="col-md-12">
