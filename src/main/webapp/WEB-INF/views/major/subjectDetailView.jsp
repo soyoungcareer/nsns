@@ -34,11 +34,7 @@
           <h1><i class="fa fa-edit"></i> 강의 신청 내역</h1>
           
         </div>
-        <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">강의 신청 내역</li>
-          <li class="breadcrumb-item"><a href="#">강의 신청 내역 상세조회</a></li>
-        </ul>
+        
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -55,13 +51,13 @@
 
                   <div class="form-group">
                     <label for="subCode">과목코드</label><!-- 입력 -->
-                    
-                    <c:if test="${ !empty reqSub.subCode }">
+                    <input type="hidden" name="subCode" value="${ sub.subCode }">
+                    <c:if test="${ !empty sub.subCode }">
                     	<!-- <a>${reqSub.subCode }</a> -->
-                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${reqSub.subCode }">
+                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${sub.subCode }">
                     </c:if>
                     
-                    <c:if test="${ empty reqSub.subCode }">
+                    <c:if test="${ empty sub.subCode }">
                     	<!-- 기존 -->
                     	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
                     

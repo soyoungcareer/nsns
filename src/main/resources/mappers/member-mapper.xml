@@ -53,7 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
-		SELECT * FROM PROFESSOR
+		SELECT A.*, B.DEPT_TITLE 
+		FROM PROFESSOR A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		WHERE PROF_ID = #{profId}
 	</select>
 	<!-- 암호화
@@ -120,12 +122,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET PROF_STATUS = 'N'
 		WHERE PROF_ID = #{profId}
 	</update>
+	 
+	<select id="studentStatusListCount" resultType="_int">
+		SELECT COUNT (*)
+		FROM STU_OFF
+	</select>
+	<!--학생(이름, 학번), 학적, 휴학(신청일자), 복학(신청일자), 교수(이름), 학과(이름)
+	<select id="studentStatusList" resultMap="studentResultSet">
+		SELECT B.STU_ID, A.STS_PROCESS, A.STS_COMPLETE, A.STS_CATEGORY, A.STATUS, A.APPLICATION_NO_OFF, A.APPLICATION_NO_DO, C.DEPT_TITLE, D.PROF_NAME, B.STU_NAME
+		FROM STU_STATUS_PRO A
+		LEFT JOIN STU_DO E ON (A.APPLICATION_NO_DO = E.APPLICATION_NO)
+		LEFT JOIN STU_OFF F ON (A.APPLICATION_NO_OFF = F.APPLICATION_NO)
+		LEFT JOIN STUDENT B ON (B.STU_ID = E.APPLICATION_NO)
+		LEFT JOIN DEPARTMENT C ON (B.DEPT_CODE = C.DEPT_CODE)
+		LEFT JOIN PROFESSOR D ON (B.PROF_ID = D.PROF_ID)
+		ORDER BY A.STS_NO DESC
+	</select>
 	
 	<update id="studentStatusUpdate" parameterType="_int">
 		UPDATE STUDENT
-		SET STU_STATUS = '휴학'
-		WHERE STU_ID = #{stuId}
-	</update>
+		SET STS_PROCESS = #{stsProcess}, STS_COMPLETE = #{stsComplete}
+		WHERE STS_NO = #{stsNo}
+	</update> -->
 	
 
 </mapper>

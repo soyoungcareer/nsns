@@ -38,6 +38,8 @@
 	                			+ '<input class="form-control" id="stuId" type="text" value="' + detailObj.stuId + '" readonly></div>'
 	              				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
 	                			+ '<input class="form-control" id="stuName" type="text" value="' + detailObj.student.stuName + '" readonly></div>'
+	                			+ '<div class="form-group row"><label class="col-form-label" for="grade">성적</label>'
+	                			+ '<input class="form-control" id="grade" type="text" value="' + detailObj.grade.gradeCredit + '" readonly></div>'
 	              				+ '<div class="form-group row"><label class="col-form-label" for="title">제목</label>'
 	                			+ '<input class="form-control" id="title" type="text" value="' + detailObj.title + '" readonly></div>'
 	              				+ '<div class="form-group row"><label class="col-form-label" for="content">내용</label>'
@@ -50,7 +52,7 @@
 	                  			+ '<div class="form-check"><label class="form-check-label">'
 	                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
 	              				+ '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>'
-	                			+ '<input class="form-control" id="reason" type="text" placeholder="반려사유 입력"></div>'
+	                			+ '<input class="form-control" id="reason" name="reason" type="text" placeholder="반려사유 입력"></div>'
 					$("#modalBody").html(result);
 					
 				},
@@ -84,6 +86,7 @@
 					
 					if (checkObj > 0) {
 						alert("저장 성공");
+						readOnly();
 					} else {
 						alert("저장 실패");
 					}
@@ -93,6 +96,16 @@
 				}
 			});
 		});
+		
+		function readOnly() {
+			var radio = $('#modalBody input[name="answer"]');
+			var reason = $('#modalBody input[name="reason"]');
+			var button = $('#saveObjCheck');
+			
+			radio.attr("disabled", true);
+			reason.attr("readonly", true);
+			button.attr("hidden", true);
+		}
 	</script>
 </head>
 <body>
@@ -105,11 +118,11 @@
 				<i class="fa fa-edit"></i> 성적 관리
 			</h1>
 		</div>
-		<ul class="app-breadcrumb breadcrumb">
+		<!-- <ul class="app-breadcrumb breadcrumb">
 			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 			<li class="breadcrumb-item">성적 관리</li>
 			<li class="breadcrumb-item"><a href="profGradeObj.pr">이의신청 확인</a></li>
-		</ul>
+		</ul> -->
 	</div>
 	
 	<div class="container-fluid">
@@ -117,19 +130,19 @@
 			<h3 class="tile-title">이의신청 확인</h3>
 			<div class="tile-body">
 				<div class="tile">
-            <div class="mailbox-controls">
-              <!-- <div class="animated-checkbox">
+            <!-- <div class="mailbox-controls">
+              <div class="animated-checkbox">
                 <label>
                   <input type="checkbox"><span class="label-text"></span>
                 </label>
-              </div> -->
+              </div>
               <div class="btn-group">
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-trash-o"></i></button>
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-reply"></i></button>
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share"></i></button>
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-refresh"></i></button>
               </div>
-            </div>
+            </div> -->
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover" id="objTable">
               	<thead>
@@ -138,27 +151,22 @@
 	              		<th>학생이름</th>
 	              		<th>제목</th>
 	              		<th>신청일자</th>
+	              		<th>처리상태</th>
               		</tr>
               	</thead>
                 <tbody>
                 	<c:choose>
 						<c:when test="${empty objList}">
-							<tr><td colspan="4">이의신청 내역이 없습니다.</td></tr>
+							<tr><td colspan="5">이의신청 내역이 없습니다.</td></tr>
 						</c:when>
 						<c:when test="${!empty objList}">
 							<c:forEach var="objList" items="${objList}">
 								<tr>
-				                    <!-- <td>
-				                      <div class="animated-checkbox">
-				                        <label>
-				                          <input type="checkbox"><span class="label-text"> </span>
-				                        </label>
-				                      </div>
-				                    </td> -->
 				                    <td>${ objList.objNo }</td>
 				                    <td>${ objList.student.stuName }</td>
 				                    <td class="mail-subject"><b>${ objList.title }</b></td>
 				                    <td><fmt:formatDate pattern="yyyy년MM월dd일 HH:mm" value="${ objList.objDate }"/></td>
+				                    <td>${ objList.status }</td>
 			                	</tr>
 							</c:forEach>
 						</c:when>
@@ -206,7 +214,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="profGradeObj.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -216,7 +224,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="profGradeObj.pr?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -226,10 +234,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="profGradeObj.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="profGradeObj.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

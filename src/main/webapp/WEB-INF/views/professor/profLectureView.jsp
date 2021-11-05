@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	int count = 1;
-	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -35,11 +35,11 @@
 					<i class="fa fa-edit"></i> 강의 관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">강의 관리</li>
 				<li class="breadcrumb-item"><a href="profLectureDetail.pr">강의목록 조회</a></li>
-			</ul>
+			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -59,58 +59,17 @@
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
-												<!-- <th>
-													<div class="animated-checkbox">
-								                        <label>
-								                          <input type="checkbox"><span class="label-text"></span>
-								                        </label>
-								                    </div>
-												</th> -->
-												<th class="sorting_asc" tabindex="0"
-													aria-controls="sampleTable" rowspan="1" colspan="1"
-													aria-sort="ascending"
-													aria-label="Name: activate to sort column descending"
-													style="width: 80px;">NO</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">강의코드</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">교과목명</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Position: activate to sort column ascending"
-													style="width: 130.762px;">이수구분</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">학점</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의실</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의시간</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의형태</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의계획서</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">수정</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">삭제</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 20px;">NO</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">강의코드</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">교과목명</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">이수구분</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학점</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 80px;">강의실</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">강의시간</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">강의형태</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 80px;">강의계획서</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">수정</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">삭제</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -121,23 +80,19 @@
 												<c:when test="${!empty subList}">
 													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
-															<!-- <td>
-																<div class="animated-checkbox">
-											                        <label>
-											                          <input type="checkbox"><span class="label-text"> </span>
-											                        </label>
-											                    </div>
-															</td> -->
-															<td class="sorting_1"><%=count++ %></td>
-															<td><c:out value="${subList.subCode}"/></td>
-															<td><c:out value="${subList.subTitle}"/></td>
+															<td><%=count++ %></td>
+															<td>${subList.subCode}</td>
+															<td>${subList.subTitle}</td>
 															<td>
 																<c:if test="${subList.subDivs eq '1'}"><c:out value="전공"/></c:if>
 																<c:if test="${subList.subDivs eq '2'}"><c:out value="교양"/></c:if>
 															</td>
-															<td><c:out value="${subList.subCredit}"/></td>
-															<td><c:out value="${subList.subClass}"/></td>
-															<td><c:out value="${subList.subTime}"/></td>
+															<td>${subList.subCredit}</td>
+															<td>
+																<c:if test="${fn:substring(subList.subClass,0,1) eq '1'}"><c:out value="강감찬관 ${fn:substring(subList.subClass,1,4)}호"/></c:if>
+																<c:if test="${fn:substring(subList.subClass,0,1) eq '2'}"><c:out value="별관 ${fn:substring(subList.subClass,1,4)}호"/></c:if>
+															</td>
+															<td>${subList.subTime}</td>
 															<td>
 																<c:if test="${subList.subType eq '1'}"><c:out value="집체"/></c:if>
 																<c:if test="${subList.subType eq '2'}"><c:out value="온라인"/></c:if>

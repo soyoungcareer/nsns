@@ -58,15 +58,15 @@
 
 		<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
-		<div
-			class="container d-flex align-items-center justify-content-between">
+			<div
+			class="container d-flex align-items-center justify-content-between" style="height: 80px">
 
 			<div class="logo">
 				<a href="boardMoves.me"><img
-					src="resources/bootstrap/docs/images/logo.png" alt=""
-					class="img-fluid"></a>
+					src="resources/bootstrap/docs/images/nakseongLogo.png" alt="" style=" width:60px"
+					class="img-fluid">
+					</a>
 			</div>
-
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="nav-link scrollto " href="#hero"></a></li>
@@ -89,14 +89,14 @@
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4" >
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">낙성대 공용 커뮤니티</h6>
+				<h6 class="m-0 font-weight-bold text-primary">낙성대 취업지원</h6>
 			</div>
-				<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px; margin-left: 50px; margin-right: 50px">
+				<div class="app-title" style="background: none; box-shadow: none; height: 76px; margin-bottom: 0px; margin-top: 30px; max-width:1140px; margin-left: 100px; ">
 			<h2 class="" id="buttons">
 							일간 채용 TOP
 			</h2>
 		</div>
-		<div class="tile mb-4" style="margin-left: 50px; margin-right: 50px">
+		<div class="tile mb-4" style="margin-left: 100px; margin-right: 100px">
 						<div id="sampleTable_wrapper"
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 							<div class="row">

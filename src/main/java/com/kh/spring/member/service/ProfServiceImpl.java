@@ -208,4 +208,5 @@ public class ProfServiceImpl implements ProfService {
 		return professorDao.profConComplete(sqlSession, conStatus);
 	}
 
+
 }

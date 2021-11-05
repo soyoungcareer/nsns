@@ -180,7 +180,7 @@ public class SubjectController {
 								, @RequestParam("subClass") int subClass
 								, @RequestParam("subYear") int subYear
 								, @RequestParam("subSmst") int subSmst
-								
+								, @RequestParam("subCode") int subCode
 								) {
 		
 		
@@ -190,6 +190,7 @@ public class SubjectController {
 		System.out.println("=======delete profId : " + profId);	
 		System.out.println("=======delete originName : " + originName);
 		System.out.println("=======delete changeName : " + changeName);
+		System.out.println("=======delete changeName : " + subCode);
 	
 		//sub.setSubClass(subClass);
 		//sub.setSubYear(subYear);

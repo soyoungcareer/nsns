@@ -20,7 +20,7 @@
 		
 		$.ajax({
 			url: "profConsultDetail.pr",
-			type: "GET",
+			type: "POST",
 			data: {
 				conNo:conNo
 			},
@@ -103,11 +103,11 @@
 				<i class="fa fa-edit"></i> 학생 관리
 			</h1>
 		</div>
-		<ul class="app-breadcrumb breadcrumb">
+		<!-- <ul class="app-breadcrumb breadcrumb">
 			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 			<li class="breadcrumb-item">학생 관리</li>
 			<li class="breadcrumb-item"><a href="profConsult.pr">상담 관리</a></li>
-		</ul>
+		</ul> -->
 	</div>
 	
 	<div class="container-fluid">
@@ -115,7 +115,7 @@
 			<h3 class="tile-title">상담 관리</h3>
 			<div class="tile-body">
 				<div class="tile">
-            <div class="mailbox-controls">
+            <!-- <div class="mailbox-controls">
               <div class="animated-checkbox">
                 <label>
                   <input type="checkbox"><span class="label-text"></span>
@@ -127,7 +127,7 @@
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share"></i></button>
                 <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-refresh"></i></button>
               </div>
-            </div>
+            </div> -->
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover" id="conTable">
               	<thead>
@@ -147,13 +147,6 @@
 						<c:when test="${!empty conList}">
 							<c:forEach var="conList" items="${conList}">
 								<tr>
-				                    <!-- <td>
-				                      <div class="animated-checkbox">
-				                        <label>
-				                          <input type="checkbox"><span class="label-text"> </span>
-				                        </label>
-				                      </div>
-				                    </td> -->
 				                    <td>${ conList.conNo }</td>
 				                    <td>${ conList.conCategory }</td>
 				                    <td class="mail-subject"><b>${ conList.student.stuName }</b></td>
@@ -198,7 +191,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="profConsult.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -208,7 +201,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="profConsult.pr?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -218,10 +211,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="profConsult.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="profConsult.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

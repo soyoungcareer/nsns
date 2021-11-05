@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +17,11 @@
 					<i class="fa fa-edit"></i> 개인정보관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">마이페이지</li>
 				<li class="breadcrumb-item"><a href="profMypage.pr">개인정보관리</a></li>
-			</ul>
+			</ul> -->
 		</div>
 
 
@@ -40,6 +41,11 @@
 						<div class="form-group">
 							<label class="control-label">교수명</label> 
 							<input class="form-control" type="text" name="profName" value="${prof.profName}" readonly>
+						</div>
+						<div class="form-group">
+							<label class="control-label">생년월일</label> 
+							<input class="form-control" type="text" name="profName" 
+							value="${fn:substring(prof.profRrn,0,2)}년 ${fn:substring(prof.profRrn,2,4)}월 ${fn:substring(prof.profRrn,4,6)}일" readonly>
 						</div>
 						<div class="form-group">
 							<label class="control-label">담당학과</label> 

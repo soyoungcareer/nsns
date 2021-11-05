@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	int count = 1;
-%>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -15,8 +12,8 @@
 			var tr = $(this);
 			var td = tr.children();
 			var subCode = td.eq(2).text();
-			var year = $("#con1 option:selected").val();
-			var semester = $("#con2 option:selected").val();
+			var year = td.eq(0).text();
+			var semester = td.eq(1).text();
 			var subTitle = td.eq(5).text();
 			
 			console.log(subCode);
@@ -41,8 +38,16 @@
 					
 					
 					var result = "<tr role='row'>"
-							   	+ "<td>" + evalList.dscore + "</td></tr>"
+							   	+ "<td>"; 
+							   	if (evalList == null) {
+							   		result += "제출된 강의평가가 없습니다</td></tr>";
+							   	} else {
+							   		result += evalList.dscore + "점</td></tr>"
+							   	}
+							   	
+							   	
 					$('#evalTable tbody').html(result);
+					
 				},
 				error:function() {
 					alert("로딩 실패");
@@ -61,11 +66,11 @@
 					<i class="fa fa-edit"></i> 학생 관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">학생 관리</li>
 				<li class="breadcrumb-item"><a href="profEvaluation.pr">강의평가 조회</a></li>
-			</ul>
+			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -87,6 +92,7 @@
 										  	<option value="0">전체</option>
 										  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
 										    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
+										    <option value="2019" <c:if test="${ con1 == '2019' }">selected</c:if>>2019</option>
 										  </select>
 									  </label>
 									</div>
@@ -116,50 +122,18 @@
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
-										id="subTable" role="grid"
-										aria-describedby="sampleTable_info">
+										id="subTable" role="grid">
 										<thead>
 											<tr role="row">
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">학년도</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">학기</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">강의코드</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">학과(전공)</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Position: activate to sort column ascending"
-													style="width: 130.762px;">이수구분</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">교과목명</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">학점</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의형태</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">교수명</th>
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의평가점수</th> -->
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학년도</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학기</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">강의코드</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">학과(전공)</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">이수구분</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">교과목명</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학점</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">강의형태</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">교수명</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -209,6 +183,7 @@
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 
 							<div class="row" id="divTitle">
+								<h3 class="tile-title">강의를 클릭하세요</h3>
 							</div>
 
 
@@ -220,39 +195,10 @@
 										aria-describedby="sampleTable_info" id="evalTable">
 										<thead>
 											<tr role="row">
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">NO</th> -->
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">강의평가내용</th> -->
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Position: activate to sort column ascending"
-													style="width: 130.762px;">수강구분</th> -->
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">강의평가점수</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 52.9125px;">강의평가점수 평균 (5점 만점)</th>
 											</tr>
 										</thead>
 										<tbody>
-											<%-- <c:choose>
-												<c:when test="${empty evalList}">
-													<tr><td colspan="3">제출된 강의평가가 없습니다.</td></tr>
-												</c:when>
-												<c:when test="${!empty evalList}">
-													<c:forEach var="evalList" items="${evalList}">
-														<tr role="row">
-															<td class="sorting_1"><%=count++ %></td>
-															<td><c:out value="${evalList.question}"/></td>
-															<td><c:out value="${evalList.score}"/></td>
-														</tr>
-													</c:forEach>
-												</c:when>
-											</c:choose> --%>
 										</tbody>
 									</table>
 								</div>
@@ -263,7 +209,7 @@
 				                <ul class="pagination">
 				                	<c:choose>
 				                		<c:when test="${ pi.currentPage ne 1 }">
-				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+				                			<li class="page-item"><a class="page-link" href="filteredEval.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 				                		</c:when>
 				                		<c:otherwise>
 				                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -273,7 +219,7 @@
 				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 				                    	<c:choose>
 					                		<c:when test="${ pi.currentPage ne p }">
-				                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+				                    			<li class="page-item"><a class="page-link" href="filteredEval.pr?currentPage=${ p }">${ p }</a></li>
 					                		</c:when>
 					                		<c:otherwise>
 					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -283,10 +229,10 @@
 				                    
 				                    <c:choose>
 				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item"><a class="page-link" href="profEvaluation.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href="filteredEval.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:otherwise>
 				                	</c:choose>
 				                </ul>

@@ -31,7 +31,7 @@
   </style>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.jsp">낙성대학교</a>
+    <header class="app-header"><a class="app-header__logo" href="${ pageContext.servletContext.contextPath }/subModifyList.adm">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       

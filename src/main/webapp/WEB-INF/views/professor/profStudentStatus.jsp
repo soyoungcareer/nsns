@@ -96,11 +96,11 @@
 					<i class="fa fa-edit"></i> 학생 관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">학생 관리</li>
 				<li class="breadcrumb-item"><a href="profStudentOff.pr">학적변동 승인</a></li>
-			</ul>
+			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -120,43 +120,15 @@
 										aria-describedby="sampleTable_info">
 										<thead>
 											<tr role="row">
-												<th class="sorting_asc" tabindex="0"
-													aria-controls="sampleTable" rowspan="1" colspan="1"
-													aria-sort="ascending"
-													aria-label="Name: activate to sort column descending"
-													style="width: 80px;">NO</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">학생이름</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Start date: activate to sort column ascending"
-													style="width: 60.375px;">신청일자</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Position: activate to sort column ascending"
-													style="width: 130.762px;">학적상태</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학구분</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학학기수</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학학기</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">휴학사유</th>
-												<th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Salary: activate to sort column ascending"
-													style="width: 52.9125px;">승인상태</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 20px;">신청번호</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">학생이름</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">신청일자</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학적상태</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">휴학구분</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">휴학학기수</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">휴학학기</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 80px;">휴학사유</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">승인상태</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -167,15 +139,15 @@
 												<c:when test="${!empty offList}">
 													<c:forEach var="offList" items="${offList}">
 														<tr role="row">
-															<td class="sorting_1">${offList.applicationNo}</td>
-															<td><c:out value="${offList.student.stuName}"/></td>
+															<td>${offList.applicationNo}</td>
+															<td>${offList.student.stuName}</td>
 															<td><fmt:formatDate pattern="yyyy년MM월dd일 " value="${offList.offDate}"/></td>
-															<td><c:out value="${offList.student.stuStatus}"/></td>
-															<td><c:out value="${offList.offCategory}"/></td>
-															<td><c:out value="${offList.offSemCnt}"/></td>
-															<td><c:out value="${offList.offSem}"/></td>
-															<td><c:out value="${offList.offReason}"/></td>
-															<td><c:out value="${offList.studentStatus.stsProcess}"/></td>
+															<td>${offList.student.stuStatus}</td>
+															<td>${offList.offCategory}</td>
+															<td>${offList.offSemCnt}</td>
+															<td>${offList.offSem}</td>
+															<td>${offList.offReason}</td>
+															<td>${offList.studentStatus.stsProcess}</td>
 														</tr>
 													</c:forEach>
 												</c:when>
@@ -216,7 +188,7 @@
 				                <ul class="pagination">
 				                	<c:choose>
 				                		<c:when test="${ pi.currentPage ne 1 }">
-				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+				                			<li class="page-item"><a class="page-link" href="profStudentOff.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 				                		</c:when>
 				                		<c:otherwise>
 				                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -226,7 +198,7 @@
 				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 				                    	<c:choose>
 					                		<c:when test="${ pi.currentPage ne p }">
-				                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+				                    			<li class="page-item"><a class="page-link" href="profStudentOff.pr?currentPage=${ p }">${ p }</a></li>
 					                		</c:when>
 					                		<c:otherwise>
 					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -236,33 +208,15 @@
 				                    
 				                    <c:choose>
 				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-				                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item"><a class="page-link" href="profStudentOff.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href="profStudentOff.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:otherwise>
 				                	</c:choose>
 				                </ul>
 				            </div>
 							
-							
-<!-- 							<div class="row">
-								<label class="control-label col-md-3">
-					              <input type="checkbox"><span class="label-text">승인</span>
-					            </label>
-					            <label class="control-label col-md-3">
-					              <input type="checkbox"><span class="label-text">반려</span>
-					            </label>
-								<div class="form-group row">
-				                  <label class="control-label col-md-3">반려사유</label>
-				                  <div class="col-md-8">
-				                    <input class="form-control" type="text" placeholder="반려사유 입력">
-				                  </div>
-				                </div>
-				                <div class="form-group col-md-4 align-self-end">
-				                  <input type="button" class="btn btn-primary" type="button" onclick="" value="저장"/>
-				                </div>
-			                </div> -->
 							
 						</div>
 					</div>

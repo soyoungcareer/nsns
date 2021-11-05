@@ -32,47 +32,63 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 전체 학생 계정</h1>
+          <h1><i class="fa fa-th-list"></i> 학적 변경</h1>
         </div>
-        <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">학생관리</li>
-          <li class="breadcrumb-item active"><a href="#">학생 계정 조회</a></li>
-        </ul>
+        
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
+            <form id="stuStaList" action="" method="post">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
                     <tr>
+                      <th>신청번호</th>
                       <th>학번</th>
                       <th>이름</th>
                       <th>학과</th>
-                      <th>이메일</th>
-                      <th>연락처</th>
+                      <!-- <th>휴학학기</th>                      
+                      <th>휴학학기 수</th> --><!-- 휴학기간 -->
+                      <!-- <th>신청일자</th> -->
+                      <th>신청단계</th>
+                      <th>완료여부</th>
+                      <th>신청내용</th>
+                      <!-- <th>상태</th> -->                      
+                      <th>기존신청번호</th>
                       <th>담당교수</th>
-                      <th>상태</th>
                       <th>승인</th><!-- 학적변경승인 -->
                     </tr>
                   </thead>
                   <tbody align="center">
+                  
                   	<c:if test="${ empty staList }">
                   		<tr>
-                  			<td colspan=8>학적 변경 신청이 없습니다.</td>
+                  			<td colspan=9>학적 변경 신청이 없습니다.</td>
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ staList }" var="sta">
 	                    <tr>
-	                        <td id="stuId" name="stuId">${ sta.stuId }</td>
-	                        <td>${ sta.stuName }</td>
-	                        <td>${ sta.deptTitle }</td><!-- deptTitle -->
-	                        <td>${ sta.email }</td>
-	                        <td>${ sta.phone }</td>
-	                        <td>${ sta.profName }</td><!-- profName -->
-	                        <td>${ sta.stuStatus }</td>
+	                    	<td><input type="text" id="stsNo" name="stsNo" value="${ sta.stsNo }" readonly style="background-color:white;"></td>                        
+	                        <td>
+	                        	<input type="hidden" id="stuId" name="stuId" value="${ sta.stuId }" readonly>
+	                        </td>
+	                        <td>
+	                        	<input type="text" id="stuName" name="stuName" value="${ sta.stuName }" readonly>
+	                        </td>                      
+	                        <td>
+	                        	<input type="text" id="deptTitle" name="deptTitle" value="${ sta.deptTitle }" readonly>
+	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ sta.deptCode }">
+	                        </td>
+	                        <td><input type="text" id="stsCategory" name="stsCategory" value="${ sta.stsCategory }" readonly></td>
+	                        <td><input type="text" id="stsProcess" name="stsProcess" value="${ sta.stsProcess }" readonly></td>	                        
+	                        <td><input type="text" id="stsComplete" name="stsComplete" value="${ sta.stsComplete }" readonly></td>
+	                        <td><input type="text" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }" readonly></td>
+	                        <td>
+	                        	<input type="text" id="profName" name="profName" value="${ sta.profName }" readonly>
+	                        	<input type="hidden" id="profId" name="profId" value="${ sta.profId }">
+	                        </td>	                        
 	                        <td>
 	                        	<button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button>
 	                        </td>
@@ -81,7 +97,9 @@
                     
                   </tbody>
                 </table>
+                
               </div>
+              </form>
             </div>
           </div>
         </div>
@@ -95,7 +113,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -105,7 +123,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -116,10 +134,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>
