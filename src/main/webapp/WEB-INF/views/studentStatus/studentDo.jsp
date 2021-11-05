@@ -101,12 +101,10 @@
 	     
 	});
     
-  
-
 	  $('textarea').on('keydown', function() {
-	        if($(this).val().length > 100) {
+	        if($(this).val().length > 30) {
 	        	
-	            $(this).val($(this).val().substring(0, 100));
+	            $(this).val($(this).val().substring(0, 30));
 	            
 	            var str = ' <div class="alert alert-dismissible alert-danger">'
 					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
@@ -116,11 +114,12 @@
 				$('.bs-component').empty();
 				$('.bs-component').append(str);
 				
-				$('#submitBtn').prop('disabled', false);
+				$('#submitBtn').prop('disabled', true);
 	            
 	        } else {
 	        	
-	        	$('#submitBtn').prop('disabled', true);
+	        	$('#submitBtn').prop('disabled', false);
+	        	$('.bs-component').empty();
 	        }
 	    });
 	

@@ -82,7 +82,7 @@ public class CalendarController {
 		
 		ArrayList<Acalendar> list = calendarService.calendarList(sc);
 		
-		return new GsonBuilder().create().toJson(list);
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(list);
 	}
 
 	//일정 삭제

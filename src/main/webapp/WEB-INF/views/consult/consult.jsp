@@ -69,7 +69,7 @@
             <div class="tile-footer">
               <div class="row">
                 <div class="col-md-8 col-md-offset-3">
-                  <button class="btn btn-primary" type="submit">신청</button>
+                  <button class="btn btn-primary" type="submit" id="submitBtn">신청</button>
                 </div>
               </div>
             </div>
@@ -91,20 +91,26 @@
     <script type="text/javascript">
     
     $('textarea').on('keydown', function() {
-        if($(this).val().length > 100) {
-        	
-            $(this).val($(this).val().substring(0, 100));
-            
-            var str = ' <div class="alert alert-dismissible alert-danger">'
-				+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
-				+ ' <strong>확인!</strong> 상담사유는 100자를 넘어갈 수 없습니다. '
-				+ ' </div> '
+   	 if($(this).val().length > 30) {
+	        	
+	            $(this).val($(this).val().substring(0, 30));
+	            
+	            var str = ' <div class="alert alert-dismissible alert-danger">'
+					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+					+ ' <strong>확인!</strong> 자퇴사유는 100자를 넘어갈 수 없습니다. '
+					+ ' </div> '
 
-			$('.bs-component').empty();
-			$('.bs-component').append(str);
-            
-        }
-    });
+				$('.bs-component').empty();
+				$('.bs-component').append(str);
+				
+				$('#submitBtn').prop('disabled', true);
+	            
+	        } else {
+	        	
+	        	$('#submitBtn').prop('disabled', false);
+	        	$('.bs-component').empty();
+	        }
+   });
 
 					$('#conD').datepicker({
 						format : "yyyy-mm-dd",
