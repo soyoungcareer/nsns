@@ -221,6 +221,9 @@
 							<input class="form-control col-md-12" type="date" value="" name="day" id="day">
 							</div>
 						</div>
+						<div class="form-group row" id="cerappend">
+						</div>
+						
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
@@ -301,7 +304,7 @@
 
 				<form action="volAdd.cer" method="post" enctype="multipart/form-data">
 					<!-- Modal Body -->
-					<div class="modal-body">
+					<div class="modal-body volnew">
 
 						<div class="form-group row">
 							<label class="control-label col-md-2">봉사명</label>
@@ -330,6 +333,8 @@
 							<div class="col-md-10">
 								<input class="form-control" type="file" id="file" name="uploadFile"> 
 							</div>
+						</div>
+						<div class="form-group row" id="volappend">
 						</div>
 					</div>
 					<!-- Modal footer -->
@@ -465,6 +470,29 @@
 	           alert("숫자만 입력 가능합니다.");
 	        }
 	})
+	
+	/*  $('.volnew').on('change','#sDay', function() {
+        	 var startDate = $(this).val()
+ 	         var endDate = $('#eDay').val()
+
+ 	        var startArray = startDate.split('-');
+	        var endArray = endDate.split('-');   
+
+	        var start_date = new Date(startArray[0], startArray[1], startArray[2]);
+	        var end_date = new Date(endArray[0], endArray[1], endArray[2]);
+
+
+	        if(start_date.getTime() > end_date.getTime()) {
+
+            var str = ' <div class="alert alert-dismissible alert-danger">'
+				+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+				+ ' <strong>확인!</strong> 날짜가 바르지 않습니다. '
+				+ ' </div> '
+
+			$('#volappend').empty();
+			$('#volappend').append(str);
+	        }
+    }); */
 	</script>
 </body>
 </html>

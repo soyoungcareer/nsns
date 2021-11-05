@@ -248,7 +248,7 @@
 			 <div class="col-md-6">
           <div class="tile">
           <c:choose>
-					  <c:when test = "${condition1 eq 0 and condition2 eq 0}">
+					  <c:when test = "${condition1 eq 0 and condition2 eq 0 or empty condition2}">
 							<h5 >전체년도  전체학기</h5>
 						 </c:when>
 						 <c:when test = "${condition1 eq 0}">
@@ -272,7 +272,7 @@
 			 <div class="col-md-6">
           <div class="tile">
           <c:choose>
-					  <c:when test = "${condition1 eq 0 and condition2 eq 0}">
+					  <c:when test = "${condition1 eq 0 and condition2 eq 0 or empty condition2 }">
 							<h5 >전체년도  전체학기</h5>
 						 </c:when>
 						 <c:when test = "${condition1 eq 0}">
