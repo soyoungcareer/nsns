@@ -31,11 +31,23 @@
   </style>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.jsp">낙성대학교</a>
-      <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    	<c:if test="${ !empty loginStu }">
+       		 <header class="app-header">
+	       		 <a class="app-header__logo" href="${ pageContext.servletContext.contextPath }/stuinfo.st">낙성대학교</a>
+	       		 <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+       		 </header>
+       	</c:if>
+       		
+       	<c:if test="${ !empty loginPrf }">
+       		 <header class="app-header">
+	       		 <a class="app-header__logo" href="${ pageContext.servletContext.contextPath }/profMypage.pr">낙성대학교</a>
+	       		 <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+       		 </header>
+       	</c:if>
+      <!-- Sidebar toggle button-->
       <!-- Navbar Right Menu-->
      
-    </header>
+   
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">

@@ -23,7 +23,7 @@ public class Consult {
 	private String conReason; //상담사유
 	private String rejectReason; //반려사유
 	private String status; //상태값
-	private String stuId; //학번
+	private int stuId; //학번
 	
 	private Student student;
 	
