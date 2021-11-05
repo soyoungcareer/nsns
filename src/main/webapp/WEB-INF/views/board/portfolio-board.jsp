@@ -58,12 +58,13 @@
 	<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
 		<div
-			class="container d-flex align-items-center justify-content-between">
+			class="container d-flex align-items-center justify-content-between" style="height: 80px">
 
 			<div class="logo">
 				<a href="boardMoves.me"><img
-					src="resources/bootstrap/docs/images/logo.png" alt=""
-					class="img-fluid"></a>
+					src="resources/bootstrap/docs/images/nakseongLogo.png" alt="" style=" width:60px"
+					class="img-fluid">
+					</a>
 			</div>
 
 			<nav id="navbar" class="navbar">

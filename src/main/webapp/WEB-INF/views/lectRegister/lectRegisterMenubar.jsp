@@ -46,6 +46,7 @@
         </div>
       </div>
       <ul class="app-menu">
+       <li><a class="app-menu__item" href="questionIn.ev"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">평가 insert예시</span></a></li>
         <li><a class="app-menu__item" href="register.reg"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">수강신청</span></a></li>
         <li><a class="app-menu__item" href="cart.reg" ><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">장바구니</span></a>
         </li>
