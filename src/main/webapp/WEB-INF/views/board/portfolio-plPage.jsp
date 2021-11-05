@@ -55,55 +55,34 @@
 
 <body>
 
-	<!-- ======= Header ======= -->
-	<header id="header" class="d-flex align-items-center">
-		<div
-			class="container d-flex align-items-center justify-content-between">
+		<!-- ======= Header ======= -->
+	 <header id="header" class="d-flex align-items-center">
+         <div
+         class="container d-flex align-items-center justify-content-between" style="height: 80px">
 
-			<div class="logo">
-				<a href="boardMoves.me"><img
-					src="resources/bootstrap/docs/images/logo.png" alt=""
-					class="img-fluid"></a>
-			</div>
-
+         <div class="logo">
+            <a href="boardMoves.me"><img
+               src="resources/bootstrap/docs/images/nakseongLogo.png" alt="" style=" width:60px"
+               class="img-fluid">
+               </a>
+         </div>
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="nav-link scrollto " href="#hero"></a></li>
 					<li><a class="nav-link scrollto" href="boardMovesss.me">게시글</a></li>
 					<li><a class="nav-link scrollto" href="boardMovess.me">MY게시글</a></li>
-									<li><a class="nav-link scrollto" href="chat.do">익명채팅</a></li>
 					<li><a class="nav-link scrollto" href="crawMain.cer">취업지원</a></li>
+					<li><a class="nav-link scrollto" href="chat.do">채팅</a></li>
 					<li><a class="nav-link scrollto" href="#pricing"></a></li>
-					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="#">Drop Down 1</a></li>
-							<li class="dropdown"><a href="#"><span>Deep Drop
-										Down</span> <i class="bi bi-chevron-right"></i></a>
-								<ul>
-									<li><a href="#">Deep Drop Down 1</a></li>
-									<li><a href="#">Deep Drop Down 2</a></li>
-									<li><a href="#">Deep Drop Down 3</a></li>
-									<li><a href="#">Deep Drop Down 4</a></li>
-									<li><a href="#">Deep Drop Down 5</a></li>
-								</ul></li>
-							<li><a href="#">Drop Down 2</a></li>
-							<li><a href="#">Drop Down 3</a></li>
-							<li><a href="#">Drop Down 4</a></li>
-						</ul></li>
-					<li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+					
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->
-
-
-
-
 		</div>
 	</header>
 	<!-- End Header -->
-
+	
 	<main id="main" data-aos="fade-up">
 
 

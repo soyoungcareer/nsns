@@ -56,7 +56,7 @@
 
 <body>
 
-	<!-- ======= Header ======= -->
+		<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -72,20 +72,18 @@
 					<li><a class="nav-link scrollto " href="#hero"></a></li>
 					<li><a class="nav-link scrollto" href="boardMovesss.me">게시글</a></li>
 					<li><a class="nav-link scrollto" href="boardMovess.me">MY게시글</a></li>
-									<li><a class="nav-link scrollto" href="chat.do">익명채팅</a></li>
 					<li><a class="nav-link scrollto" href="crawMain.cer">취업지원</a></li>
+					<li><a class="nav-link scrollto" href="chat.do">채팅</a></li>
+					<li><a class="nav-link scrollto" href="#pricing"></a></li>
 					
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 			<!-- .navbar -->
-
-
-
-
 		</div>
 	</header>
 	<!-- End Header -->
+	
 
 	<main id="main" data-aos="fade-up">
 		<!-- DataTales Example -->
