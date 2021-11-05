@@ -120,6 +120,40 @@ public class GradeController {
 	public String updateGrade(int attend, int assign, int mid, int fin, int stuId,
 			String subCode, int gradeYear, int gradeSemester) {
 		
+		int total = attend+assign+mid+fin;
+		String gradeResult = String.valueOf(total);
+		Double gradeCredit = 0.0;
+		
+		if (total==100) {
+			gradeCredit = 4.5;
+		} else if (total>=98 && total<100) {
+			gradeCredit = 4.3;
+		} else if (total>=95 && total<98) {
+			gradeCredit = 4.0;
+		} else if (total>=93 && total<95) {
+			gradeCredit = 3.8;
+		} else if (total>=90 && total<93) {
+			gradeCredit = 3.5;
+		} else if (total>=88 && total<90) {
+			gradeCredit = 3.3;
+		} else if (total>=85 && total<88) {
+			gradeCredit = 3.0;
+		} else if (total>=83 && total<85) {
+			gradeCredit = 2.8;
+		} else if (total>=80 && total<83) {
+			gradeCredit = 2.5;
+		} else if (total>=78 && total<80) {
+			gradeCredit = 2.3;
+		} else if (total>=75 && total<78) {
+			gradeCredit = 2.0;
+		} else if (total>=73 && total<75) {
+			gradeCredit = 1.8;
+		} else if (total>=70 && total<73) {
+			gradeCredit = 1.5;
+		} else {
+			gradeCredit = 0.0;
+		}
+		
 		
 		Grade grade = new Grade();
 		grade.setAttendance(attend);
@@ -130,6 +164,8 @@ public class GradeController {
 		grade.setSubCode(subCode);
 		grade.setGradeYear(gradeYear);
 		grade.setGradeSemester(gradeSemester);
+		grade.setGradeResult(gradeResult);
+		grade.setGradeCredit(gradeCredit);
 		
 		System.out.println("===========================grade : " + grade);
 		int result = gradeService.updateGrade(grade);

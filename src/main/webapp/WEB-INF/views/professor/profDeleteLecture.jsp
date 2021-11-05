@@ -25,11 +25,11 @@
 					<i class="fa fa-edit"></i> 강의관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">강의 관리</li>
 				<li class="breadcrumb-item"><a href="profEditLec.pr">강의 삭제</a></li>
-			</ul>
+			</ul> -->
 		</div>
         <!-- ------------------------------------
       		선택된 강의의 값으로 value 넣기 
@@ -74,9 +74,6 @@
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">강의시간</label>
 		                  <input class="form-control" type="text" value="${ sub.subTime }" readonly>
-		                  <!-- -------------------------------------
-		                  	강의요일, 시간 한번에 끌어오기
-		                  --------------------------------------- -->
 		                </div>
 		            </div>
 		            <div class="row">

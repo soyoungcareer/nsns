@@ -16,11 +16,11 @@
 					<i class="fa fa-edit"></i> 강의 관리
 				</h1>
 			</div>
-			<ul class="app-breadcrumb breadcrumb">
+			<!-- <ul class="app-breadcrumb breadcrumb">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
 				<li class="breadcrumb-item">강의 관리</li>
 				<li class="breadcrumb-item"><a href="profLectInfoLoad.pr">강의개설 신청</a></li>
-			</ul>
+			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -33,7 +33,18 @@
 		                  <label class="control-label">학과명</label>
 		                  <input class="form-control" type="text" value="${ prof.profDeptTitle }" readonly>
 		                </div>
-						<div class="form-group col-md-3">
+		                <div class="form-group col-md-3">
+		                  <label class="control-label">교수명</label>
+		                  <input class="form-control" type="text" value="${ prof.profName }" readonly>
+		                  <input type="hidden" name="profId" value="${ prof.profId }">
+		                </div>
+		                <div class="form-group col-md-3">
+		                  <label class="control-label">교과목명</label>
+		                  <input class="form-control" type="text" placeholder="교과목명 입력" name="subTitle" required>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="form-group col-md-3">
 							<div class="form-group">
 							  <label class="control-label" for="subDivs">이수구분</label>
 							  <select class="form-control" id="subDivs" name="subDivs" required>
@@ -43,27 +54,6 @@
 							  </select>
 							</div>
 						</div>
-						<div class="form-group col-md-3">
-							<div class="form-group">
-							  <label class="control-label" for="subType">강의형태</label>
-							  <select class="form-control" id="subType" name="subType" required>
-							  	<option hidden>=== 선택 ===</option>
-							    <option value="1">집체</option>
-							    <option value="2">온라인</option>
-							  </select>
-							</div>
-		                </div>
-		            </div>
-		            <div class="row">
-		                <div class="form-group col-md-3">
-		                  <label class="control-label">교과목명</label>
-		                  <input class="form-control" type="text" placeholder="교과목명 입력" name="subTitle" required>
-		                </div>
-		                <div class="form-group col-md-3">
-		                  <label class="control-label">교수명</label>
-		                  <input class="form-control" type="text" value="${ prof.profName }" readonly>
-		                  <input type="hidden" name="profId" value="${ prof.profId }">
-		                </div>
 		                <div class="form-group col-md-3">
 							<div class="form-group">
 							  <label class="control-label" for="credit">학점</label>
@@ -71,6 +61,16 @@
 							  	<option hidden>=== 선택 ===</option>
 							    <option>3</option>
 							    <option>2</option>
+							  </select>
+							</div>
+		                </div>
+		                <div class="form-group col-md-3">
+							<div class="form-group">
+							  <label class="control-label" for="subType">강의형태</label>
+							  <select class="form-control" id="subType" name="subType" required>
+							  	<option hidden>=== 선택 ===</option>
+							    <option value="1">집체</option>
+							    <option value="2">온라인</option>
 							  </select>
 							</div>
 		                </div>
@@ -87,6 +87,10 @@
 							    <option>목</option>
 							    <option>금</option>
 							  </select>
+						    </div>
+					    </div>
+						<div class="form-group col-md-3">
+		                  	<div class="form-group">
 							  <label class="control-label" for="subStartTime">강의시작시간</label>
 							  <select class="form-control" id="subStartTime" name="subStartTime" required>
 							  	<option hidden>=== 선택 ===</option>
@@ -99,6 +103,10 @@
 							    <option>7</option>
 							    <option>8</option>
 							  </select>
+							</div>
+					    </div>
+						<div class="form-group col-md-3">
+		                  	<div class="form-group">
 							  <label class="control-label" for="subEndTime">강의종료시간</label>
 							  <select class="form-control" id="subEndTime" name="subEndTime" required>
 							  	<option hidden>=== 선택 ===</option>
@@ -116,6 +124,8 @@
 							  	--------------------------------------->
 							</div>
 		                </div>
+		            </div>
+		            <div class="row">
 		                <div class="form-group col-md-3">
 		                  <label class="control-label">강의계획서</label>
 		                  <input class="form-control-file" id="createLectFile" type="file" name="createLectFile" aria-describedby="fileHelp">

@@ -55,13 +55,6 @@ public class ProfController {
 	// ============= 교수메뉴바 =============
 	@RequestMapping("profMenu.pr")
 	public String profMenu(HttpSession session, Model model) {
-		Professor professor = (Professor)session.getAttribute("loginPrf");
-		String profId = professor.getProfId();
-		
-		Professor prof = profService.selectMypage(profId);
-		
-		model.addAttribute("prof", prof);
-		
 		return "professor/menubarProf";
 	}
 	
@@ -69,8 +62,7 @@ public class ProfController {
 	// 마이페이지 조회
 	@RequestMapping("profMypage.pr")
 	public String profMypage(Model model, HttpSession session) {
-		// 임시 데이터
-		//String profId = "EC1901";
+
 		Professor professor = (Professor)session.getAttribute("loginPrf");
 		String profId = professor.getProfId();
 		
@@ -210,6 +202,7 @@ public class ProfController {
 		return changeName;
 	}
 	
+	/*
 	// 파일 삭제 메소드
 	private void deleteFile(String fileName, HttpServletRequest request) {
 		String resources = request.getSession().getServletContext().getRealPath("resources");
@@ -220,6 +213,7 @@ public class ProfController {
 		File deleteFile = new File(savePath+fileName);
 		deleteFile.delete();
 	}
+	*/
 
 	// 강의목록 조회
 	@RequestMapping("profLectureDetail.pr")
@@ -274,28 +268,17 @@ public class ProfController {
 	// 강의 수정
 	@RequestMapping("profEditLec.pr")
 	public String profEditLecture(HttpSession session, HttpServletRequest request, RequestedSubject reqSubject,
-								Subject subject,
-								  /*
-								  @RequestParam(value="subDivs", defaultValue="0") int subDivs, 
-								  @RequestParam(value="subType", defaultValue="0") int subType,
-								  @RequestParam(value="subTitle", defaultValue="") String subTitle,
-								  @RequestParam(value="subCredit", defaultValue="0") int subCredit,
-								  @RequestParam(value="subCode", defaultValue="") String subCode,
-								  */
 								  @RequestParam(value="subDay") String subDay,
 								  @RequestParam(value="subStartTime") String subStartTime,
 								  @RequestParam(value="subEndTime") String subEndTime,
-								  @RequestParam(value="changeName", required=false) String changeName,
-								  @RequestParam(value="originName", required=false) String originName,
-							      @RequestParam(value="editLectFile", required=false) MultipartFile file, 
+								  @RequestParam(name="changeName", required=false, defaultValue="") String changeName,
+								  @RequestParam(name="originName", required=false, defaultValue="") String originName,
+							      @RequestParam(name="file", required=false) MultipartFile file, 
 							      Model model) {
 		System.out.println("================Controller===================");
-		System.out.println("======== file : " + file);
-		System.out.println("=============================================");
+		System.out.println("=================== file : " + file);
 		System.out.println("===================reqSubject " + reqSubject);
-		////////////////////////////////////////
-		// file NullPointerException
-		////////////////////////////////////////
+		System.out.println("=============================================");
 		
 		// 임시데이터
 		//String subCode = "2101002";
@@ -319,50 +302,37 @@ public class ProfController {
 		
 		String subTime = subDay + subStartTime + subEndTime;
 		
-		System.out.println("=============== subTime : " + subTime);
-		
-		if(!file.getOriginalFilename().equals("")) { // 널이 아니면 파일이 있는 것
-			deleteFile(subject.getOriginName(), request);
-			
-			changeName = saveFile(file, request);
-			reqSubject.setAttChange(changeName);
-		}
-		
-		/*
-		if(!file.getOriginalFilename().equals("")) { // 널이 아니면 파일이 있는 것
-			if(reqSubject.getAttChange() != null) {
-				deleteFile(reqSubject.getAttOrigin(), request);
-			}
-			
-			changeName = saveFile(file, request);
-			//reqSubject.setAttOrigin(file.getOriginalFilename());
-			reqSubject.setAttChange(changeName);
-		}
-		*/
 		// 파일명
-		/*
-		if (!file.getOriginalFilename().equals("")) {
-			String changeName = saveFile(file, request);
-
-			if (changeName != null) {
-				reqSubject.setAttOrigin(file.getOriginalFilename());
+		if (!changeName.equals("")) { // 이전 첨부파일이 있으면
+			reqSubject.setAttOrigin(originName);
+			
+			if (!file.getOriginalFilename().equals("")) { // 새로 첨부된 파일이 있으면
+				String attChange = saveFile(file, request);
+				System.out.println("===========attChange : " + attChange);
+				
+				if (attChange != null) {
+					reqSubject.setAttChange(attChange);
+				}
+			} else {
 				reqSubject.setAttChange(changeName);
 			}
+		} else { // 이전 첨부파일 없으면
+			if (!file.getOriginalFilename().equals("")) { // 새로 첨부된 파일이 있으면
+				String attOrigin = file.getOriginalFilename();
+				reqSubject.setAttOrigin(attOrigin);
+				
+				String attChange = saveFile(file, request);
+				reqSubject.setAttChange(attChange);
+			}
 		}
-		*/
+		
 		
 		// 강의 수정 데이터 뷰에서 받아오기
 		reqSubject.setDeptCode(deptCode);
-//		reqSubject.setSubDivs(subDivs);
-//		reqSubject.setSubType(subType);
-//		reqSubject.setSubTitle(subTitle);
 		reqSubject.setProfId(profId);
-//		reqSubject.setSubCredit(subCredit);
 		reqSubject.setSubTime(subTime);
-//		reqSubject.setSubCode(subCode);
 		
 		System.out.println("======================= reqSubject Controller : " + reqSubject + "====================");
-
 		
 		profService.editLectReq(reqSubject);
 		
@@ -564,7 +534,6 @@ public class ProfController {
 	// 강의평가
 	@RequestMapping("profEvaluation.pr")
 	public String profEvaluation() {
-		
 		return "professor/profEvaluation";
 	}
 	

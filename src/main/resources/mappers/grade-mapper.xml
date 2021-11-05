@@ -50,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 		<result property="reason" column="REASON"/>
 		<collection property="student" resultMap="StudentSet"/>
+		<collection property="grade" resultMap="gradeResultSet"/>
 	</resultMap>
 	
 	<resultMap id="StudentSet" type="Student">
@@ -150,8 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 과목, 학년도, 학기별 성적 조회 -->
 	<select id="selectFilteredGrade" parameterType="SearchGrade" resultMap="gradeResultSet">
 		SELECT D.DEPT_TITLE, A.STU_ID, C.STU_NAME, C.STU_STATUS, A.ATTENDANCE, A.ASSIGNMENT, A.MIDEXAM, 
-				A.FINEXAM, (A.ATTENDANCE + A.ASSIGNMENT + A.MIDEXAM + A.FINEXAM) AS GRADE_TOTAL,
-				A.GRADE_RESULT, A.GRADE_CREDIT, E.SUB_CODE, A.GRADE_YEAR, A.GRADE_SEMESTER, A.GRADE_NO
+				A.FINEXAM, A.GRADE_RESULT, A.GRADE_CREDIT, E.SUB_CODE, A.GRADE_YEAR, A.GRADE_SEMESTER, A.GRADE_NO
 		FROM GRADE A 
 		LEFT JOIN LECT_REGISTER B ON A.SUB_CODE=B.SUB_CODE
 		JOIN STUDENT C ON A.STU_ID=C.STU_ID AND B.STU_ID=C.STU_ID
@@ -166,7 +166,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateGrade" parameterType="Grade">
 	<!-- 쿼리문 잘돌아감. -->
 		UPDATE GRADE 
-		SET ATTENDANCE=#{attendance}, ASSIGNMENT=#{assignment}, MIDEXAM=#{midExam}, FINEXAM=#{finExam}
+		SET ATTENDANCE=#{attendance}, ASSIGNMENT=#{assignment}, MIDEXAM=#{midExam}, FINEXAM=#{finExam},
+		GRADE_RESULT=#{gradeResult}, GRADE_CREDIT=#{gradeCredit}
 		WHERE STU_ID=#{studentId} AND SUB_CODE=#{subCode} 
 		AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
 	</update>
@@ -212,7 +213,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN GRADE C ON A.GRADE_NO=C.GRADE_NO
 		JOIN SUBJECT D ON D.SUB_CODE=C.SUB_CODE
 		WHERE D.PROF_ID=#{profId}
-		
 	</select>
 	<select id="loadObjList" parameterType="GradeObject" resultMap="objectionResultSet">
 		SELECT A.GRA_OBJ_NO, B.STU_NAME, A.TITLE, A.GRA_OBJ_DATE, A.STATUS
@@ -226,9 +226,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 이의신청 상세 -->
 	<select id="detailObjection" resultType="GradeObject" resultMap="objectionResultSet">
-		SELECT *
-		FROM GRA_OBJECT
-		JOIN STUDENT USING(STU_ID)
+		SELECT A.*, B.STU_NAME, C.GRADE_CREDIT
+		FROM GRA_OBJECT A
+		JOIN STUDENT B ON A.STU_ID=B.STU_ID
+		LEFT JOIN GRADE C ON A.GRADE_NO=C.GRADE_NO
 		WHERE GRA_OBJ_NO=#{objNo}
 	</select>
 	
