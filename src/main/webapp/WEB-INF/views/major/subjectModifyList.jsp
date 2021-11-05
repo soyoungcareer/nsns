@@ -34,11 +34,7 @@
         <div>
           <h1><i class="fa fa-th-list"></i> 강의 신청 내역</h1>
         </div>
-        <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">강의관리</li>
-          <li class="breadcrumb-item active"><a href="#">강의 신청 내역</a></li>
-        </ul>
+        
       </div>
       <div class="row">
         <div class="col-md-12">

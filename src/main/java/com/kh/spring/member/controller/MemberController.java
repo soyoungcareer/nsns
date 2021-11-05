@@ -41,13 +41,16 @@ public class MemberController {
 
 	//-------------- 로그인 --------------	
 	@RequestMapping("login.ber")
-	public String loginMember(Admin a, Student s, Professor p, Model model, HttpSession session
+	public String loginMember(Admin a, Student s, Professor p, Model model, HttpSession session, HttpServletRequest request
 							, @RequestParam("position") String position
 							, @RequestParam("userId") String userId
 							, @RequestParam("userPwd") String userPwd) {
 		
+		
+		
 		System.out.println("position : " + position);	
 		session.setAttribute("position", position);
+		
 		if(position.equals("admin")) {
 			
 			a.setAdmId(userId);
@@ -65,7 +68,7 @@ public class MemberController {
 			session.setAttribute("loginAdm", loginAdm);
 			System.out.println("session 저장 : " + session.getAttribute("loginAdm"));
 			
-			return "member/professorEnrollForm";
+			return "redirect:subModifyList.adm";
 			
 		}else if(position.equals("student")) {
 			
@@ -207,8 +210,8 @@ public class MemberController {
 	}
 	
 	//-------------- 계정 삭제 --------------
-	@RequestMapping("stuDelete.adm")
-	public String deleteStudent(int stuId, HttpServletRequest request) { //학생 계정 제한 - 퇴학
+	@RequestMapping("stuDelete.adm") //학생 계정 제한 - 퇴학
+	public String deleteStudent(int stuId, HttpServletRequest request) {
 		
 		System.out.println("MC_start stuId : " + stuId);
 		memberService.deleteStudent(stuId);
@@ -217,8 +220,7 @@ public class MemberController {
 		return "redirect:stuList.adm";
 	}
 	
-	//교수관리-교수 삭제 - 계약 종료
-	@RequestMapping("prfDelete.adm")
+	@RequestMapping("prfDelete.adm") //교수관리-교수 삭제 - 계약 종료
 	public String deleteProfessor(String profId) {
 	
 		memberService.deleteProfessor(profId);
@@ -228,14 +230,15 @@ public class MemberController {
 	
 	//-------------- 학생 학적 변경 --------------
 	//학적변경 리스트
-	@RequestMapping("stuStaUpdateList.adm")
-	public String studentStatusForm(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
+/*
+	@RequestMapping("stuStaList.adm")
+	public String studentStatusList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
-		int listCount = memberService.studentStatusFormCount();
+		int listCount = memberService.studentStatusListCount();
 		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
-		ArrayList<Student> staList = memberService.studentStatusForm(pi);
+		ArrayList<Student> staList = memberService.studentStatusList(pi);
 		System.out.println("staList : " + staList);
 		model.addAttribute("staList", staList);
 		model.addAttribute("pi", pi);
@@ -252,5 +255,5 @@ public class MemberController {
 		
 		return "redirect:stuStaUpdateList.adm";
 	}
-	
+	*/
 }

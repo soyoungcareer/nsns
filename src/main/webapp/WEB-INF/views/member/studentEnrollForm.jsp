@@ -33,11 +33,7 @@
           <h1><i class="fa fa-edit"></i> 학생 관리</h1>
           <p>학생 계정 등록</p>
         </div>
-        <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">학생관리</li>
-          <li class="breadcrumb-item"><a href="#">학생 계정 등록</a></li>
-        </ul>
+        
       </div>
       <div class="row">
         <div class="col-md-6">

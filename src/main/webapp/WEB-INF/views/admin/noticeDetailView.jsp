@@ -42,26 +42,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <form>
-                	<!-- <table style="width:300px">
-                		<tr>
-                			<td><label class="control-label">제목</label></td>
-                			<td class="form-control">${ n.ntcTitle }</td>
-                			<!-- <td><input class="form-control" type="text" placeholder="글자 수 제한 255Byte" value="${ n.ntcTitle }" maxlength="255" readonly></td>
-                		</tr>
-                		<tr>
-                			<td>분류</td>
-                		</tr>
-                		<tr>
-                			<td>내용</td>
-                		</tr>
-                		<tr>
-                			<td>첨부파일</td>
-                		</tr>
-                		<tr>
-                			<td>날짜</td>
-                		</tr>
-                	</table> -->
-                  <!-- form all -->
+                	
                   <div class="form-group">
 	                <label class="ntcTitle">제목</label>
 	                <input class="form-control" id="ntcTitle" type="text" value="${ n.ntcTitle }" readonly>

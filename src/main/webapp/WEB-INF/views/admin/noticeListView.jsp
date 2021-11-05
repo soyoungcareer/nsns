@@ -35,9 +35,13 @@
           <h1><i class="fa fa-th-list"></i> 공지사항</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">공지사항</li>
-          <li class="breadcrumb-item active"><a href="#">공지사항 조회</a></li>
+          
+          <c:if test="${not empty loginStu }">
+          	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/stuinfo.st" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>   		
+          </c:if>
+          <c:if test="${not empty loginPrf }">
+          	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/profMypage.pr" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>   		
+          </c:if>
         </ul>
       </div>
       <div class="row">

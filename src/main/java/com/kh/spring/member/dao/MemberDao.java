@@ -75,15 +75,24 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("memberMapper.deleteProfessor", profId);
 	}
-//
-	public int studentStatusFormCount(SqlSessionTemplate sqlSession) {
+
+	public int studentStatusListCount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("memberMapper.studentStatusFormCount");
+		return sqlSession.selectOne("memberMapper.studentStatusListCount");
+	}
+	
+	public ArrayList<Student> studentStatusList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.studentStatusList", null, rowBounds);
 	}
 
 	public int studentStatusUpdate(SqlSessionTemplate sqlSession, int stuId) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("memberMapper.studentStatusUpdate", stuId);
 	}
+
+	
 
 }
