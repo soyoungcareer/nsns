@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bootstrap/docs/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
     <title>낙성대학교 학사행정시스템</title>
   </head>
   
@@ -77,6 +79,31 @@
       </div>
     </section>
     				
+    				
+    <script>
+	$(function(){
+    boom();
+    
+    function boom(){
+		var bno = "a";
+		$.ajax({
+			url:"boom.me",
+			data:{bno:bno},
+			type:"get",
+			success:function(data){
+				console.log("!@#");
+			
+			},error:function(){
+				console.log("댓글 리스트조회용 ajax 통신 실패");
+			}
+		});
+	}
+    
+	});
+	
+
+    
+    </script>
     
     <!-- Essential javascripts for application to work-->
     <script src="${pageContext.request.contextPath}/resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>

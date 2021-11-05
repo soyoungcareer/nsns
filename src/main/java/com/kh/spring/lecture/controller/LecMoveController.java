@@ -283,7 +283,7 @@ public class LecMoveController {
 
 			s.setStuId(st.getStuId());
 			s.setStuPwd(st.getStuPwd());
-			Student loginStu = memberService.loginStudent(s); // bCPwdEncoder,
+			Student loginStu = memberService.loginStudent(null, s); // bCPwdEncoder,
 
 			model.addAttribute("loginStu", loginStu);
 
@@ -296,7 +296,7 @@ public class LecMoveController {
 
 			p.setProfId(pf.getProfId());
 			p.setProfPwd(pf.getProfPwd());
-			Professor loginPrf = memberService.loginProfessor(p); // (bCPwdEncoder, p);
+			Professor loginPrf = memberService.loginProfessor(null, p); // (bCPwdEncoder, p);
 
 			model.addAttribute("loginPrf", loginPrf);
 

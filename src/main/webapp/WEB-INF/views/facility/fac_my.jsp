@@ -30,42 +30,15 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <body>
-<c:if test="${position eq 'student'}">
 
-	<jsp:include page="../../views/student/studentMenubar.jsp" />
+	<jsp:include page="facMenuBar.jsp" />
 
-</c:if>
-<c:if test="${position eq 'admin'}">
-
-	<jsp:include page="../../views/admin/adminMenubar.jsp" />
-
-</c:if>
 
 
 <main class="app-content">
 	<div class="app-title">
 
-		<div>
-
-			<button class="btn btn-primary" type="button"
-				onclick="location.href='facMove.me'">대여목록</button>
-
-			<c:if test="${position eq 'student'}">
-				<button class="btn btn-primary" type="button"
-					onclick="location.href='facMovess.me'">MY대여</button>
-			</c:if>
-
-			<c:if test="${position eq 'admin'}">
-				<button class="btn btn-primary" type="button"
-					onclick="location.href='facMovesss.me'">관리자 확인</button>
-			</c:if>
-
-			<c:if test="${position eq 'admin'}">
-				<button class="btn btn-primary" type="button"
-					onclick="location.href='facMovessss.me'">관리 목록</button>
-			</c:if>
-				<p></p>
-			</div>
+	
 
 			<ul class="app-breadcrumb breadcrumb side">
 				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
