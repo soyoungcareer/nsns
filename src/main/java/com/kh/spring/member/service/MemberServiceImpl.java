@@ -163,9 +163,72 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void studentStatusUpdate(int stuId) {
+	public void studentStatusUpdate(int stsNo) {
 		
-		int result = memberDao.studentStatusUpdate(sqlSession, stuId);
+		int result = memberDao.studentStatusUpdate(sqlSession, stsNo);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+
+	@Override
+	public void stuDoUpdateStu(int stuId) {
+		
+		System.out.println("MSI start stuId : " + stuId);
+		int result = memberDao.stuDoUpdateStu(sqlSession, stuId);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+
+	@Override
+	public ArrayList<Student> studentOffStaList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return memberDao.studentOffStaList(sqlSession, pi);
+	}
+
+	@Override
+	public void stuOffStaUpdate(int stsNo) {
+
+		int result = memberDao.stuOffStaUpdate(sqlSession, stsNo);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+
+	@Override
+	public void stuOffUpdate(int stuId) {
+		
+		System.out.println("MSI start stuId : " + stuId);
+		int result = memberDao.stuOffUpdate(sqlSession, stuId);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+
+	@Override
+	public void stuOnStaUpdate(int stsNo) {
+
+		int result = memberDao.stuOnStaUpdate(sqlSession, stsNo);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+
+	@Override
+	public void stuOnUpdate(int stuId) {
+		
+		int result = memberDao.stuOnUpdate(sqlSession, stuId);
 		
 		if(result < 0) {
 			throw new CommException("학적 변경 중 에러가 발생하였습니다.");

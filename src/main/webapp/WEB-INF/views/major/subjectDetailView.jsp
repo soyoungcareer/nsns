@@ -155,8 +155,8 @@
                         
                         <input type="hidden" name="originName" value="${ reqSub.attOrigin }">
                   		<c:if test="${ !empty reqSub.attOrigin }">
-                        	<!-- <a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${reqSub.attChange}" download="${ reqSub.attOrigin }">${ reqSub.attOrigin }</a>
-                        				 -->	
+                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${reqSub.attChange}" download="${ reqSub.attOrigin }">${ reqSub.attOrigin }</a>
+                        					
                         </c:if>
                         <c:if test="${ empty reqSub.attOrigin }">
                         	첨부파일이 없습니다.

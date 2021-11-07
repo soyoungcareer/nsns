@@ -7,6 +7,8 @@ import com.kh.spring.evaluation.vo.QuestionList;
 
 public interface CreateEvService {
 
-	ArrayList<QuestionList> createEv(Evaluation ev, QuestionList ql);
+	void createEv(Evaluation ev);
+
+	//ArrayList<QuestionList> createEv(Evaluation ev, QuestionList ql);
 
 }

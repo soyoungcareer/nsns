@@ -88,9 +88,41 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.studentStatusList", null, rowBounds);
 	}
 
-	public int studentStatusUpdate(SqlSessionTemplate sqlSession, int stuId) {
+	public int studentStatusUpdate(SqlSessionTemplate sqlSession, int stsNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("memberMapper.studentStatusUpdate", stuId);
+		return sqlSession.update("memberMapper.studentStatusUpdate", stsNo);
+	}
+
+	public int stuDoUpdateStu(SqlSessionTemplate sqlSession, int stuId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.stuDoUpdateStu", stuId);
+	}
+
+	public ArrayList<Student> studentOffStaList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.studentOffStaList", null, rowBounds);
+	}
+
+	public int stuOffStaUpdate(SqlSessionTemplate sqlSession, int stsNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.stuOffStaUpdate", stsNo);
+	}
+
+	public int stuOffUpdate(SqlSessionTemplate sqlSession, int stuId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.stuOffUpdate", stuId);
+	}
+
+	public int stuOnStaUpdate(SqlSessionTemplate sqlSession, int stsNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.stuOnStaUpdate", stsNo);
+	}
+
+	public int stuOnUpdate(SqlSessionTemplate sqlSession, int stuId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.stuOnUpdate", stuId);
 	}
 
 	

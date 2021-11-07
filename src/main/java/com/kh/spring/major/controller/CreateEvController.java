@@ -2,6 +2,8 @@ package com.kh.spring.major.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +13,18 @@ import com.kh.spring.evaluation.vo.Evaluation;
 import com.kh.spring.evaluation.vo.QuestionList;
 import com.kh.spring.major.model.service.CreateEvService;
 
-//@Controller
+@Controller
 public class CreateEvController {
 	
 	@Autowired
 	private CreateEvService createEvService;
 	
-	@RequestMapping("ceateEv.adm")
-	public String createEv(Evaluation ev, QuestionList ql, Model model) {
+	@RequestMapping("subEvQ.adm")
+	public String createEv(Evaluation ev, Model model, HttpServletRequest request) { //QuestionList ql, 
 		
-		ArrayList<QuestionList> questionList = createEvService.createEv(ev, ql);
+		System.out.println("=========ev=========" + ev);
+		//ArrayList<QuestionList> questionList = createEvService.createEv(ev);
+		createEvService.createEv(ev);
 		
 		return "major/subjectEvaluationQ";
 	}

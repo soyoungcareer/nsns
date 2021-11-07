@@ -33,7 +33,6 @@
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
         
-        
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
@@ -55,9 +54,7 @@
         
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i> Profile</a></li> -->
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">            
             <li><a class="dropdown-item" href="logout.adm"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
@@ -70,31 +67,22 @@
       <!-- <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image"> -->
         <div>
           <p class="app-sidebar__user-name">관리자</p>
-          <!-- <p class="app-sidebar__user-designation">Frontend Developer</p> -->
         </div>
       </div>
       <ul class="app-menu">
-      
-        <!-- <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">수강 신청</span></a></li> -->
-          
-        
+       
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의 관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="subModifyList.adm"><i class="icon fa fa-circle-o"></i> 강의 신청 내역</a></li>
             <!-- <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li> -->
             <li><a class="treeview-item" href="subAllList.adm"><i class="icon fa fa-circle-o"></i> 전체 강의 조회</a></li>
-            <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Widgets</a></li> -->
           </ul>
         </li>
-        
-        <!-- <li><a class="app-menu__item" href=""><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li> -->
         
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">교수 관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="prfEnrollForm.adm"><i class="icon fa fa-circle-o"></i> 교수 계정 등록</a></li>
             <li><a class="treeview-item" href="prfList.adm"><i class="icon fa fa-circle-o"></i> 교수 계정 조회</a></li>
-            <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Form Notifications</a></li> -->
           </ul>
         </li>
         
@@ -102,7 +90,8 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="stuEnrollForm.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 등록</a></li>
             <li><a class="treeview-item" href="stuList.adm"><i class="icon fa fa-circle-o"></i> 학생 계정 조회</a></li>
-            <li><a class="treeview-item" href="stuStaList.adm"><i class="icon fa fa-circle-o"></i> 학적 변경</a></li>
+            <li><a class="treeview-item" href="stuOffStaList.adm"><i class="icon fa fa-circle-o"></i> 학적 변경 휴학</a></li>
+            <li><a class="treeview-item" href="stuStaList.adm"><i class="icon fa fa-circle-o"></i> 학적 변경 자퇴</a></li>
           </ul>
         </li>
         
@@ -111,11 +100,6 @@
             <li><a class="treeview-item" href="addLec.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 등록</a></li>
             <li><a class="treeview-item" href="rstLec.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 결과</a></li>
             <li><a class="treeview-item" href="subject.anc"><i class="icon fa fa-circle-o"></i> 강의 평가 공개</a></li>
-            <!-- <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> User Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i> Error Page</a></li> -->
           </ul>
         </li>
         
@@ -130,10 +114,8 @@
               <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
             </div> -->
           </div>
-      </div>
-      <div>
-      	<h1> </h1>
-      </div>
+      
+      
     <!-- Essential javascripts for application to work-->
     <script src="${pageContext.request.contextPath}/resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
     <script src="resources/bootstrap/docs/js/popper.min.js"></script>

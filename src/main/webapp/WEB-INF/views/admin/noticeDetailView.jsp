@@ -45,13 +45,53 @@
                 	
                   <div class="form-group">
 	                <label class="ntcTitle">제목</label>
-	                <input class="form-control" id="ntcTitle" type="text" value="${ n.ntcTitle }" readonly>
+	                <input class="form-control" id="ntcTitle" name="ntcTitle" type="text" value="${ n.ntcTitle }" readonly>
                   </div>
 
                   <div class="form-group">
                     <label for="ntcCategory">분류</label>
-                    <input class="form-control" id="ntcCategory" type="text" value="${ n.ntcCategory }" readonly>
-                    
+                    <input class="form-control" id="ntcCategory" name="ntcCategory" type="hidden" value="${ n.ntcCategory }" readonly>
+                    <c:choose>
+                    	<c:when test="${ n.ntcCategory == 91 }">
+                    		<input class="form-control" value="전체">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 92 }">
+                    		<input class="form-control" value="학사">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 93 }">
+                    		<input class="form-control" value="학생">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 1 }">
+                    		<input class="form-control" value="경제학">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 2 }">
+                    		<input class="form-control" value="국어국문">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 3 }">
+                    		<input class="form-control" value="철학">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 4 }">
+                    		<input class="form-control" value="호텔경영">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 5 }">
+                    		<input class="form-control" value="시각디자인">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 6 }">
+                    		<input class="form-control" value="역사학">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 7 }">
+                    		<input class="form-control" value="정보통신">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 8 }">
+                    		<input class="form-control" value="연극영화">
+                  		</c:when>
+                  		<c:when test="${ n.ntcCategory == 99 }">
+                    		<input class="form-control" value="교양">
+                  		</c:when>
+                  		<c:otherwise>
+                  			<input class="form-control" value="기타">
+                  		</c:otherwise>
+                  </c:choose>
                   </div>
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
