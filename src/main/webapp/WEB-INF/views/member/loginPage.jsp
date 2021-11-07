@@ -26,12 +26,10 @@
     <section class="login-content">
       <div style="float:left;">
         <!-- <h1>낙성대학교</h1> class="logo"-->
-        <h2 style="color:white;"><img alt="낙성대학교" src="resources/upload_files/nsLogo.png" width="50" height="50" style="margin-bottom:15px;"> &nbsp;&nbsp; 낙성대학교</h2>
-      	<!-- <img alt="낙성대학교" src="resources/upload_files/nsLogo.png" width="80" height="80" style="float:left;"> -->  	
+        <img src="resources/bootstrap/docs/images/nakseongLogowhite.png" width="200px" height="200px" style="margin-bottom:20px;"> 
       </div>
       
-      
-      <div class="login-box">
+      <div class="login-box"  style="margin-bottom:20px;">
       
         <form id="loginForm" class="login-form" action="login.ber" method="post">
           <h4 class="login-head">로그인</h4>

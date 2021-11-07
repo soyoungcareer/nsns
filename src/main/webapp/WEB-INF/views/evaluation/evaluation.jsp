@@ -82,7 +82,7 @@
 												<label for="grade${ eNum.index+1 }1">1</label> </td>
 												<td><input type="radio" value="2" name="evalList[${ eNum.index }].grade" id="grade${ eNum.index+1 }2">
 													<label for="grade${ eNum.index+1 }2">2</label></td>
-												<td><input type="radio" value="2" name="evalList[${ eNum.index }].grade" id="grade${ eNum.index+1 }3">
+												<td><input type="radio" value="2" name="evalList[${ eNum.index }].grade" id="grade${ eNum.index+1 }3" checked>
 													<label for="grade${ eNum.index+1 }3">3</label></td>
 												<td><input type="radio" value="4" name="evalList[${ eNum.index }].grade" id="grade${ eNum.index+1 }4">
 													<label for="grade${ eNum.index+1 }4">4</label></td>

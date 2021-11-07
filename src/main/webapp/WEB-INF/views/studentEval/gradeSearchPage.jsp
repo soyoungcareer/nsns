@@ -449,7 +449,7 @@
 								'<div class="form-group row">'+
 								'<label class="control-label col-md-2">이의 제목</label>'+
 								'<div class="col-md-10">'+
-									'<input class="form-control col-md-12" type="text" name="objTitle"  id="objTitle">'+
+									'<input class="form-control col-md-12" type="text" name="objTitle"  id="objTitle" >'+
 								'</div>'+
 							'</div>'+
 							'<div class="form-group row">'+
