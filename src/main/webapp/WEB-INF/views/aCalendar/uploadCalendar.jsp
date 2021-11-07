@@ -136,9 +136,9 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/select2.min.js"></script>
-    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/sweetalert.min.js"></script>
     
@@ -155,19 +155,20 @@
     </c:if>
     
     <script type="text/javascript">
-      $('#start').datepicker({
-    	  	format : "yyyy/mm/dd",
-      		autoclose: true,
-      		todayHighlight: true
-      });
-      
-      $('#end').datepicker({
-    	  	format : "yyyy/mm/dd",
-      		autoclose: true,
-      		todayHighlight: true
-      });
-      
-     
+    	
+    	$( "#start" ).datepicker({ 
+    		format : "yyyy/mm/dd",
+       		autoclose: true,
+       		todayHighlight: true
+    	});
+
+    	 
+       $('#end').datepicker({
+     	  	format : "yyyy/mm/dd",
+       		autoclose: true,
+       		todayHighlight: true
+       });
+  
       //유효성 체크 - 시작날짜보다  마지막날짜가 앞설 수 없다 !! 
       function chekcDate() {
     	  
@@ -250,8 +251,6 @@
        }
        
    
-       
-       
        function deleteEvents(){
     	   for(let i = 1; i<calendarTable.rows.length; i++){
     		   let acId = calendarTable.rows[i].cells[0].innerText;

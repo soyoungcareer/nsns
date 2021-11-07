@@ -113,7 +113,7 @@
     <script>
     
     $('textarea').on('keydown', function() {
-    	 if($(this).val().length > 30) {
+    	 if($(this).val().length > 101) {
 	        	
 	            $(this).val($(this).val().substring(0, 30));
 	            
