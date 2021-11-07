@@ -39,15 +39,24 @@
 
 
 <main class="app-content">
-	<div class="app-title">
-
-
-		<ul class="app-breadcrumb breadcrumb side">
-			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item">Tables</li>
-			<li class="breadcrumb-item active"><a href="#">faility</a></li>
-		</ul>
-	</div>
+	   <div class="app-title">
+        <div>
+          <h1><i class="fa fa-archive"></i> 시설물대여</h1>
+        </div>
+       <ul class="app-breadcrumb breadcrumb">
+       		<c:if test="${ !empty loginStu }">
+           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/stuinfo.st" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		</c:if>
+       		
+       		<c:if test="${ !empty loginAdm }">
+           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/subModifyList.adm" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		</c:if>
+       		
+       		<c:if test="${ !empty loginPrf }">
+           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/profMypage.pr" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
+       		</c:if>
+        </ul>
+      </div>
 	<div class="row">
 		<form action="facMovecate.me">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label> 카테고리 선택 <select
@@ -271,7 +280,6 @@
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal">취소</button>
 									</div>
-
 
 								</form>
 							</div>

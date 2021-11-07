@@ -160,8 +160,8 @@
 						<input type="hidden" id="ch" name="ch">
 						  
 						<input type="hidden" name="fromm" id="fromm" /></li>
-						<input type="hidden" id="checkk" name="checkk" onclick="sendSMSCheck()" value="확인하기"/> 
-						<form method="post" id="smsForm" action="lecMove.me" >
+						<input type="hidden" id="checkk" name="checkk" onclick="sendSMSCheck()" value="확인하기" data-dismiss="modal"/> 
+						<form method="post" id="smsForm" name="smsForm" action="/" >
 							<input type="hidden" id="id" name="id" value="123"/>
 						</form>
 			</div>
@@ -206,9 +206,15 @@
 			
 			console.log(check);
 			if(dd == 1){
-			
-					$("#smsForm").submit();
 				
+				 var gsWin = window.open('about:blank','payviewer','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+			      var frm =document.smsForm;
+			      frm.action = 'lecMove.me';
+			      frm.target ="payviewer";
+			      frm.method ="post";
+			
+				$("#smsForm").submit();
+			
 			}else{
 				alert("일치하지 않습니다");
 			}
