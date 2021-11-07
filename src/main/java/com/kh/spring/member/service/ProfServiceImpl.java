@@ -80,8 +80,8 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public ArrayList<Consult> loadConsultList(String profId) {
-		return professorDao.loadConsultList(sqlSession, profId);
+	public ArrayList<Consult> loadConsultList(String profId, PageInfo pi) {
+		return professorDao.loadConsultList(sqlSession, profId, pi);
 	}
 
 	@Override
@@ -206,6 +206,26 @@ public class ProfServiceImpl implements ProfService {
 	@Override
 	public int profConComplete(ConsultStatus conStatus) {
 		return professorDao.profConComplete(sqlSession, conStatus);
+	}
+
+	@Override
+	public int loadConsultCount(String profId) {
+		return professorDao.loadConsultCount(sqlSession, profId);
+	}
+
+	@Override
+	public int createDuplCheck(RequestedSubject reqSubject) {
+		return professorDao.createDuplCheck(sqlSession, reqSubject);
+	}
+
+	@Override
+	public int delDuplCheck(RequestedSubject reqSubject) {
+		return professorDao.delDuplCheck(sqlSession, reqSubject);
+	}
+
+	@Override
+	public int editDuplCheck(RequestedSubject reqSubject) {
+		return professorDao.editDuplCheck(sqlSession, reqSubject);
 	}
 
 

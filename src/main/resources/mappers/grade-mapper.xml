@@ -59,6 +59,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="stuName" column="STU_NAME"/>	
 	</resultMap>
 	
+	<!-- 전체 과목 불러오기 -->
+	<select id="mainSubCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM SUBJECT
+		WHERE PROF_ID=#{profId}
+	</select>
+	<select id="selectMainSub" parameterType="Subject" resultMap="profSubList">
+		SELECT A.SUB_YEAR, A.SUB_SMST, A.SUB_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TITLE, A.SUB_CREDIT, A.SUB_TYPE, C.PROF_NAME
+		FROM SUBJECT A
+		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE 
+		JOIN PROFESSOR C ON A.PROF_ID=C.PROF_ID
+		WHERE A.PROF_ID=#{profId}
+	</select>
+	
 	<!-- 과목 조건 검색 개수 -->
 	<select id="selectSubListCount" resultType="_int" parameterType="SearchSubject">
 		SELECT COUNT(*)

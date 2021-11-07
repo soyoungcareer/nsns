@@ -14,8 +14,11 @@
 			var tr = $(this);
 			var td = tr.children();
 			var applicationNo = td.eq(0).text();
+			var stsProcess = td.eq(8).text();
+			var button = $('#saveOffCheck');
 			
 			console.log(applicationNo);
+			console.log(stsProcess);
 			
 			$.ajax({
 				url:"detailOff.pr",
@@ -27,29 +30,37 @@
 				success:function(detailOff){
 					$("#myModal").modal();
 					
-					var result = '<div class="form-group row"><label class="col-form-label" for="stuId">학번</label>'
+					var result = '<div class="mt-2 ml-4 mr-4"><div class="form-group form-inline row"><label class="col-form-label mr-2" for="stuId">학번&emsp;&emsp;&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="stuId" type="text" value="' + detailOff.stuId + '" readonly></div>'
-          				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
+          				+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="stuName">학생이름&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="stuName" type="text" value="' + detailOff.student.stuName + '" readonly></div>'
-          				+ '<div class="form-group row"><label class="col-form-label" for="stuStatus">학적상태</label>'
+          				+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="stuStatus">학적상태&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="stuStatus" type="text" value="' + detailOff.student.stuStatus + '" readonly></div>'
-            			+ '<div class="form-group row"><label class="col-form-label" for="offDate">휴학신청일자</label>'
+            			+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="offDate">휴학신청일자</label>'
             			+ '<input class="form-control" id="offDate" type="text" value="' + moment(detailOff.offDate).format("YYYY년MM월DD일") + '" readonly></div>'
-          				+ '<div class="form-group row"><label class="col-form-label" for="offCate">휴학구분</label>'
+          				+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="offCate">휴학구분&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="offCate" type="text" value="' + detailOff.offCategory + '" readonly></div>'
-            			+ '<div class="form-group row"><label class="col-form-label" for="offSemCnt">휴학학기수</label>'
+            			+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="offSemCnt">휴학학기수&emsp;</label>'
             			+ '<input class="form-control" id="offSemCnt" type="text" value="' + detailOff.offSemCnt + '" readonly></div>'
-            			+ '<div class="form-group row"><label class="col-form-label" for="offSem">휴학학기</label>'
+            			+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="offSem">휴학학기&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="offSem" type="text" value="' + detailOff.offSem + '" readonly></div>'
-            			+ '<div class="form-group row"><label class="col-form-label" for="offReason">휴학사유</label>'
+            			+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="offReason">휴학사유&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="offReason" type="text" value="' + detailOff.offReason + '" readonly></div>'
-            			+ '<div class="form-group row"><input class="form-control" id="applicationNo" type="hidden" value="' + applicationNo + '" readonly></div>'
-          				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
-          				+ '<div class="w-100"></div>'
-              			+ '<div class="form-check"><label class="form-check-label">'
-                  		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
-              			+ '<div class="form-check"><label class="form-check-label">'
-                  		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>';
+            			+ '<div class="form-group row mb-2"><input class="form-control" id="applicationNo" type="hidden" value="' + applicationNo + '" readonly></div><hr><br>';
+          				
+            			if (stsProcess == "교수승인대기") {
+            				button.prop("hidden", false);
+            				result += '<div class="form-group form-inline row mr-4"><label class="control-label mr-2">승인/반려&emsp;&emsp;</label>'
+	                  			+ '<div class="form-check"><label class="form-check-label mr-3">'
+	                      		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
+	                  			+ '<div class="form-check"><label class="form-check-label">'
+	                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div></div>';
+            			} else {
+            				button.prop("hidden", true);
+      						result += '<div class="form-group row"><label class="col-form-label" for="status">처리상태&emsp;&emsp;&emsp;</label>'
+            					+ '<input class="form-control" id="status" type="text" value="' + stsProcess + '" readonly></div>';
+            			}
+            			
 					$("#modalBody").html(result);
 				},
 				error:function() {
@@ -77,7 +88,25 @@
 				},
 				dataType:"json",
 				success:function(checkOff) {
-					alert("저장 성공");
+					if (checkOff > 0) {
+						swal({
+				      		title: "저장 성공",
+				      		type: "success",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
+					} else {
+						swal({
+				      		title: "저장 실패",
+				      		type: "error",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
+					}
+					
+					setTimeout(function(){
+						location.reload();
+					}, 3000);
 				},
 				error:function() {
 					alert("ajax 로딩 실패");
@@ -93,7 +122,7 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 학생 관리
+					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
 			<!-- <ul class="app-breadcrumb breadcrumb">
@@ -109,7 +138,7 @@
 					<div class="table-responsive">
 						<div id="sampleTable_wrapper"
 							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-							<div class="row">
+							<div class="row mb-3">
 								<h3 class="tile-title">휴학신청 목록</h3>
 							</div>
 							<div class="row">
@@ -118,7 +147,7 @@
 										class="table table-hover table-bordered dataTable no-footer"
 										id="offTable" role="grid"
 										aria-describedby="sampleTable_info">
-										<thead>
+										<thead class="tableInfo">
 											<tr role="row">
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 20px;">신청번호</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">학생이름</th>

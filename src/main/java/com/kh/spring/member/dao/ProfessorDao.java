@@ -67,8 +67,10 @@ public class ProfessorDao {
 		return (ArrayList)sqlSession.selectList("profMapper.profStudentDetail", subCode);
 	}
 
-	public ArrayList<Consult> loadConsultList(SqlSessionTemplate sqlSession, String profId) {
-		return (ArrayList)sqlSession.selectList("profMapper.loadConsultList", profId);
+	public ArrayList<Consult> loadConsultList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("profMapper.loadConsultList", profId, rowBounds);
 	}
 
 	public ArrayList<Evaluation> loadEvalList(SqlSessionTemplate sqlSession, Subject sub) {
@@ -169,6 +171,22 @@ public class ProfessorDao {
 
 	public int profConComplete(SqlSessionTemplate sqlSession, ConsultStatus conStatus) {
 		return sqlSession.update("profMapper.profConComplete", conStatus);
+	}
+
+	public int loadConsultCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("profMapper.loadConsultCount", profId);
+	}
+
+	public int createDuplCheck(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
+		return sqlSession.selectOne("profMapper.createDuplCheck", reqSubject);
+	}
+
+	public int delDuplCheck(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
+		return sqlSession.selectOne("profMapper.delDuplCheck", reqSubject);
+	}
+
+	public int editDuplCheck(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
+		return sqlSession.selectOne("profMapper.editDuplCheck", reqSubject);
 	}
 
 

@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	int count = 1;
-%>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -18,7 +15,7 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 강의 관리
+					<i class="fa fa-briefcase"></i> 강의 관리
 				</h1>
 			</div>
 			<!-- <ul class="app-breadcrumb breadcrumb">
@@ -38,14 +35,20 @@
 								<h3 class="tile-title">강의개설/수정/삭제 신청목록</h3>
 							</div>
 							<div class="row">
+								<p>
+									※${ loginPrf.profName }교수님이 신청하신 내역입니다.<br>
+									※관리자 승인 후 신청내역이 반영됩니다.
+								</p>
+							</div>
+							<br>
+							<div class="row">
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
 										id="sampleTable" role="grid"
 										aria-describedby="sampleTable_info">
-										<thead>
+										<thead class="tableInfo">
 											<tr role="row">
-												<th tabindex="0" rowspan="1" colspan="1" style="width: 20px;">NO</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 70px;">신청일자</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">신청형태</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">이수구분</th>
@@ -65,7 +68,6 @@
 												<c:when test="${!empty reqSub}">
 													<c:forEach var="reqSub" items="${reqSub}">
 														<tr role="row">
-															<td class="sorting_1"><%=count++ %></td>
 															<td><fmt:formatDate pattern="yyyy년MM월dd일" value="${reqSub.reqDate}"/></td>
 															<td>
 																<c:if test="${reqSub.reqType eq 'C' }"><c:out value="개설"/></c:if>

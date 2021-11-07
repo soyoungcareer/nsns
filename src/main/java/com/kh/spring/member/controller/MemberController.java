@@ -126,7 +126,7 @@ public class MemberController {
 			session.setAttribute("loginPrf", loginPrf);
 			System.out.println("session 저장 : " + session.getAttribute("loginPrf"));
 
-			return "redirect:profMypage.pr";
+			return "redirect:profLectureDetail.pr";
 
 		} else {
 			throw new CommException("로그인 실패");

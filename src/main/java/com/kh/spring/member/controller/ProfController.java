@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
@@ -54,7 +55,7 @@ public class ProfController {
 	
 	// ============= 교수메뉴바 =============
 	@RequestMapping("profMenu.pr")
-	public String profMenu(HttpSession session, Model model) {
+	public String profMenu() {
 		return "professor/menubarProf";
 	}
 	
@@ -76,6 +77,7 @@ public class ProfController {
 	// 교수 개인정보 수정
 	@RequestMapping(value="profEditMypage.pr", method=RequestMethod.POST)
 	public String profEditMypage(String profPwd, String profEmail, String profPhone, String profAddress,
+								String postNum, String address1, String address2,
 								Model model, HttpSession session) {
 		
 		// 임시 데이터
@@ -88,14 +90,23 @@ public class ProfController {
 		profService.loginProfessor(profId);
 		
 		String encPwd = bCryptPasswordEncoder.encode(profPwd);
+		String newAddress = "";
+		System.out.println("========postNum : " + postNum);
+		System.out.println("========address1 : " + address1);
+		System.out.println("========address2 : " + address2);
 		
+		if (postNum == "" || address1 == "" || address2 == "") {
+			newAddress = profAddress;
+		} else {
+			newAddress = "(" + postNum + ") " + address1 + " " + address2;
+		}
 		
 		//Professor prof = new Professor();
 		prof.setProfId(profId);
 		prof.setProfPwd(encPwd);
 		prof.setProfEmail(profEmail);
 		prof.setProfPhone(profPhone);
-		prof.setProfAddress(profAddress);
+		prof.setProfAddress(newAddress);
 		
 		profService.editMypage(prof);
 		
@@ -174,6 +185,23 @@ public class ProfController {
 		profService.profCreateLecture(reqSubject);
 		
 		return "redirect:profLectureReq.pr";
+	}
+	
+	// 강의 개설 중복 확인
+	@ResponseBody
+	@RequestMapping(value="createDuplCheck.pr", produces="application/json; charset=utf-8")
+	public String createDuplCheck(HttpSession session, String subTitle) {
+		
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
+		
+		RequestedSubject reqSubject = new RequestedSubject();
+		reqSubject.setProfId(profId);
+		reqSubject.setSubTitle(subTitle);
+		
+		int result = profService.createDuplCheck(reqSubject);
+		
+		return new GsonBuilder().create().toJson(result);
 	}
 	
 	// 첨부파일
@@ -339,6 +367,24 @@ public class ProfController {
 		return "redirect:profLectureReq.pr";
 	}
 	
+	// 강의 수정 중복 확인
+	@ResponseBody
+	@RequestMapping(value="editDuplCheck.pr", produces="application/json; charset=utf-8")
+	public String editDuplCheck(HttpSession session, String subTitle) {
+		
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
+		
+		RequestedSubject reqSubject = new RequestedSubject();
+		reqSubject.setProfId(profId);
+		reqSubject.setSubTitle(subTitle);
+		
+		int result = profService.editDuplCheck(reqSubject);
+		
+		return new GsonBuilder().create().toJson(result);
+	}
+	
+	
 	// 강의 삭제
 	// 강의 삭제시 뷰에 데이터 로드
 	@RequestMapping("lectDelInfoLoad.pr")
@@ -397,6 +443,23 @@ public class ProfController {
 		return "redirect:profLectureReq.pr";
 	}
 	
+	// 강의 삭제 중복 확인
+	@ResponseBody
+	@RequestMapping(value="delDuplCheck.pr", produces="application/json; charset=utf-8")
+	public String delDuplCheck(HttpSession session, String subTitle) {
+		
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
+		
+		RequestedSubject reqSubject = new RequestedSubject();
+		reqSubject.setProfId(profId);
+		reqSubject.setSubTitle(subTitle);
+		
+		int result = profService.delDuplCheck(reqSubject);
+		
+		return new GsonBuilder().create().toJson(result);
+	}
+	
 	// 강의 개설/수정/삭제 신청내역 조회
 	@RequestMapping("profLectureReq.pr")
 	public String profLectureReq(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
@@ -419,9 +482,21 @@ public class ProfController {
 	}
 	
 	// ============= 학생 관리 =============
-	// 학생목록 조회 nothing
+	// 학생목록 조회
 	@RequestMapping("profStudentDetail.pr")
-	public String profStudentDetail() {
+	public String profStudentDetail(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+			 HttpSession session, Model model) {
+		
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
+		
+		int listCount = gradeService.mainSubCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Subject> subList = gradeService.selectMainSub(profId, pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("subList", subList);
+		
 		return "professor/profStudentDetail";
 	}
 	
@@ -483,17 +558,22 @@ public class ProfController {
 	
 	// 상담 관리
 	@RequestMapping("profConsult.pr")
-	public String profConsult(Model model, HttpSession session) {
+	public String profConsult(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+							  Model model, HttpSession session) {
 		// 임시 데이터
 		//String profId = "HI1301";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
 		
-		ArrayList<Consult> conList = profService.loadConsultList(profId);
+		int listCount = profService.loadConsultCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Consult> conList = profService.loadConsultList(profId, pi);
 		
 		System.out.println("============ conList Controller : " + conList);
 		
+		model.addAttribute("pi", pi);
 		model.addAttribute("conList", conList);
 		
 		return "professor/profConsult";
@@ -533,7 +613,18 @@ public class ProfController {
 	
 	// 강의평가
 	@RequestMapping("profEvaluation.pr")
-	public String profEvaluation() {
+	public String profEvaluation(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+								 HttpSession session, Model model) {
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
+		
+		int listCount = gradeService.mainSubCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Subject> subList = gradeService.selectMainSub(profId, pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("subList", subList);
+		
 		return "professor/profEvaluation";
 	}
 	

@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%
-	int count = 1;
-%>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -14,16 +11,17 @@
 	<script>
 		/* 수정할 강의코드 넘기기 */
 		$(document).on("click", "#subTable tbody tr td:nth-last-child(2) input", function(){
-			var subCode = $(this).parent().parent().children().eq(1).text();
+			var subCode = $(this).parent().parent().children().eq(2).text();
 			location.href="lectEditInfoLoad.pr?subCode="+subCode;
 		});
 		
 		/* 삭제할 강의코드 넘기기 */
 		$(document).on("click", "#subTable tbody tr td:nth-last-child(1) input", function(){
-			var subCode = $(this).parent().parent().children().eq(1).text();
+			var subCode = $(this).parent().parent().children().eq(2).text();
 			location.href="lectDelInfoLoad.pr?subCode="+subCode;
 		});
 	</script>
+	
 </head>
 <body>
 	<jsp:include page="menubarProf.jsp"/>
@@ -32,7 +30,7 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 강의 관리
+					<i class="fa fa-briefcase"></i> 강의 관리
 				</h1>
 			</div>
 			<!-- <ul class="app-breadcrumb breadcrumb">
@@ -52,14 +50,22 @@
 								<h3 class="tile-title">강의목록</h3>
 							</div>
 							<div class="row">
+								<p>
+									※${ loginPrf.profName }교수님이 담당하신 강의목록입니다.
+								</p>
+							</div>
+							<br>
+							
+							<div class="row">
 								<div class="col-sm-12">
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
 										id="subTable" role="grid"
 										aria-describedby="sampleTable_info">
-										<thead>
+										<thead class="tableInfo">
 											<tr role="row">
-												<th tabindex="0" rowspan="1" colspan="1" style="width: 20px;">NO</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">학년도</th>
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">학기</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">강의코드</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">교과목명</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 40px;">이수구분</th>
@@ -80,7 +86,8 @@
 												<c:when test="${!empty subList}">
 													<c:forEach var="subList" items="${subList}">
 														<tr role="row">
-															<td><%=count++ %></td>
+															<td>${subList.subYear}</td>
+															<td>${subList.subSmst}</td>
 															<td>${subList.subCode}</td>
 															<td>${subList.subTitle}</td>
 															<td>

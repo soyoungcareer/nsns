@@ -34,11 +34,13 @@ public interface GradeService {
 
 	int profObjCheck(GradeObject gradeObject);
 
-	int selectGradeCount(SearchGrade searchGrade);
-
 	int gradeInsert(String subCode, int stuId);
 
 	int gradeDelete(String subCode, int stuId);
+
+	int mainSubCount(String profId);
+
+	ArrayList<Subject> selectMainSub(String profId, PageInfo pi);
 
 
 }

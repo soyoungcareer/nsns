@@ -70,16 +70,22 @@ public class GradeDao {
 		return sqlSession.update("gradeMapper.profObjCheck", gradeObject);
 	}
 
-	public int selectGradeCount(SqlSessionTemplate sqlSession, SearchGrade searchGrade) {
-		return sqlSession.selectOne("gradeMapper.selectGradeCount", searchGrade);
-	}
-
 	public int gradeInsert(SqlSessionTemplate sqlSession, Grade grade) {
 		return sqlSession.insert("gradeMapper.gradeInsert", grade);
 	}
 
 	public int gradeDelete(SqlSessionTemplate sqlSession, Grade grade) {
 		return sqlSession.delete("gradeMapper.gradeDelete", grade);
+	}
+
+	public int mainSubCount(SqlSessionTemplate sqlSession, String profId) {
+		return sqlSession.selectOne("gradeMapper.mainSubCount", profId);
+	}
+
+	public ArrayList<Subject> selectMainSub(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("gradeMapper.selectMainSub", profId, rowBounds);
 	}
 
 }
