@@ -186,7 +186,7 @@ public class MemberController {
 		memberService.insertStudent(s);
 		session.setAttribute("msg", "학생 등록 성공");
 
-		return "redirect:/";
+		return "redirect:stuList.adm";
 	}
 
 	@RequestMapping("insertPrf.adm") // 교수관리-교수 등록
@@ -261,9 +261,7 @@ public class MemberController {
 
 	
 	//-------------- 학생 학적 변경 --------------
-	//학적변경 리스트
-/*
-	@RequestMapping("stuStaList.adm")
+	@RequestMapping("stuStaList.adm") //학적변경 자퇴 신청 리스트
 	public String studentStatusList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
 		int listCount = memberService.studentStatusListCount();
@@ -279,17 +277,62 @@ public class MemberController {
 		return "member/studentStatusUpdate";
 	}
 
-	// 학적변경 승인
-	@RequestMapping("stuStaUpdate.adm")
-	public String studentStatusUpdate(int stuId, HttpServletRequest request) {
+	
+	@RequestMapping("stuStaUpdate.adm") // 학적변경 자퇴 승인
+	public String studentStatusUpdate(int stsNo, HttpServletRequest request
+									, int stuId) { //@RequestParam("stuId") int stuId
 
-		memberService.studentStatusUpdate(stuId);
-		System.out.println("MC stuId : " + stuId);
+		memberService.studentStatusUpdate(stsNo);
+		System.out.println("MC stsNo : " + stsNo);
+		
+		System.out.println("MC start stuId : " + stuId);
+		memberService.stuDoUpdateStu(stuId);
+//		System.out.println("MC end stuId : " + stuId);
 
-		return "redirect:stuStaUpdateList.adm";
+		return "redirect:stuStaList.adm";
 	}
+	
+	@RequestMapping("stuOffStaList.adm") //학적변경 휴학 신청 리스트
+	public String studentOffStaList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
+		
+		int listCount = memberService.studentStatusListCount();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Student> staList = memberService.studentOffStaList(pi);
 
-=======
-	*/
+		System.out.println("staList : " + staList);
+		model.addAttribute("staList", staList);
+		model.addAttribute("pi", pi);
+
+		return "member/studentOffStatusList";
+	}
+	
+	@RequestMapping("stuOffUpdate.adm") // 학적변경 자퇴 승인
+	public String stuOffStaUpdate(int stsNo, HttpServletRequest request
+								, @RequestParam("stuId") int stuId) { //@RequestParam("stuId") int stuId
+
+		memberService.stuOffStaUpdate(stsNo);
+		System.out.println("MC stsNo : " + stsNo);
+		
+		System.out.println("MC start stuId : " + stuId);
+		memberService.stuOffUpdate(stuId);
+//		System.out.println("MC end stuId : " + stuId);
+
+		return "redirect:stuOffStaList.adm";
+	}
+	
+	@RequestMapping("stuOnUpdate.adm") // 학적변경 복학
+	public String stuOnStaUpdate(int stsNo, HttpServletRequest request
+								, int stuId) {
+
+		memberService.stuOnStaUpdate(stsNo);
+		System.out.println("MC stsNo 복학: " + stsNo);
+		
+		System.out.println("MC start stuId 복학 : " + stuId);
+		memberService.stuOnUpdate(stuId);
+
+		return "redirect:stuOffStaList.adm";
+	}
 
 }

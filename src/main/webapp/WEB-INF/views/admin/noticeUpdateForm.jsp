@@ -74,7 +74,7 @@
 					<!-- 에러 시 name -->
                   <div class="form-group">
                     <label for="ntcCategory">분류</label>
-                    <select class="form-control" id="ntcCategory" name="ntcCategory">
+                    <select class="form-control" id="ntcCategory" name="ntcCategory" value="${ n.ntcCategory }">
                       <option value=91>전체</option>
                       <option value=92>학사</option>
                       <option value=93>학생</option>

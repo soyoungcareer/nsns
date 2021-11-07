@@ -37,9 +37,18 @@ public interface MemberService {
 
 	ArrayList<Student> studentStatusList(PageInfo pi);
 
-	void studentStatusUpdate(int stuId);
-	
+	void studentStatusUpdate(int stsNo);
 
-	
+	void stuDoUpdateStu(int stuId);
+
+	ArrayList<Student> studentOffStaList(PageInfo pi);
+
+	void stuOffStaUpdate(int stsNo);
+
+	void stuOffUpdate(int stuId);
+
+	void stuOnStaUpdate(int stsNo);
+
+	void stuOnUpdate(int stuId);
 
 }

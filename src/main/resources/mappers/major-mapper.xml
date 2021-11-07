@@ -7,12 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="reqSubjectResultSet" type="RequestedSubject">
 		<id property="reqSubNo" column="REQSUB_NO"/>
 		<result property="deptCode" column="DEPT_CODE"/>
-		<result property="deptTitle" column="DEPT_TITLE"/><!--  -->
+		<result property="deptTitle" column="DEPT_TITLE"/>
 		<result property="subDivs" column="SUB_DIVS"/>
 		<result property="subType" column="SUB_TYPE"/>
 		<result property="subTitle" column="SUB_TITLE"/>
 		<result property="profId" column="PROF_ID"/>
-		<result property="profName" column="PROF_NAME"/><!--  -->
+		<result property="profName" column="PROF_NAME"/>
 		<result property="subCredit" column="SUB_CREDIT"/>
 		<result property="subTime" column="SUB_TIME"/>
 		<result property="reqType" column="REQ_TYPE"/>
@@ -26,10 +26,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="subCode" column="SUB_CODE"/>
 		<result property="subTitle" column="SUB_TITLE"/>
 		<result property="deptCode" column="DEPT_CODE"/>
-		<result property="deptTitle" column="DEPT_TITLE"/><!--  -->
+		<result property="deptTitle" column="DEPT_TITLE"/>
 		<result property="subDivs" column="SUB_DIVS"/>
 		<result property="profId" column="PROF_ID"/>
-		<result property="profName" column="PROF_NAME"/><!--  -->
+		<result property="profName" column="PROF_NAME"/>
 		<result property="subCredit" column="SUB_CREDIT"/>
 		<result property="subClass" column="SUB_CLASS"/>
 		<result property="subTime" column="SUB_TIME"/>
@@ -41,6 +41,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="changeName" column="CHANGE_NAME"/>
 	</resultMap>
 	
+	<resultMap id="lectEvaluationResultSet" type="LectEvaluation">
+		<id property="lectEvaNo" column="LECT_EVA_NO"/>
+		<result property="lectRegNum" column="LECT_REG_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="question" column="QUESTION"/>
+		<result property="score" column="SCORE"/>
+		<result property="year" column="YEAR"/>
+		<result property="semester" column="SEMESTER"/>
+		<result property="status" column="STATUS"/>
+		
+	</resultMap>
 	
 	<select id="subjectModifyListCount" resultType="_int">
 		SELECT COUNT (*)
@@ -117,5 +128,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE A.STATUS = 'Y'
 		ORDER BY A.SUB_CODE DESC
 	</select>
+	
+	<insert id="createEv" parameterType="LectEvaluation">
+		INSERT INTO LECT_EVALUATE(LECT_EVA_NO, LECT_REG_NO, STU_ID, QUESTION, YEAR, SEMESTER, STATUS)
+		VALUES (SEQ_LECT_EVA_NO.NEXTVAL, #{lectRegNum}, #{stuId}, #{question}, #{year}, #{semester}, default)
+	</insert>
 
 </mapper>

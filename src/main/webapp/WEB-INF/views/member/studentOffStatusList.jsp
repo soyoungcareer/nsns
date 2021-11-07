@@ -34,13 +34,12 @@
         <div>
           <h1><i class="fa fa-th-list"></i> 학적 변경</h1><!-- 자퇴 -->
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-            <form id="stuStaList" action="stuStaUpdate.adm" method="post">
+            <form id="stuOnOffStaList" action="" method="post">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
@@ -48,20 +47,26 @@
                       <th>신청번호</th>
                       <th>학번</th>
                       <th>이름</th>
-                      <th>학과</th>                      
+                      <th>학과</th>
+                      <th>휴학사유</th>
+                      <th>휴학학기</th>                      
+                      <th>휴학학기 수</th><!-- 휴학기간 -->
+                      <!-- <th>신청일자</th> -->
                       <th>신청단계</th>
-                      <th>완료여부</th>
-                      <th>신청내용</th>                    
+                      <th>복학여부</th>
+                      <th>신청내용</th>
+                      <!-- <th>상태</th> -->                      
                       <th>기존신청번호</th>
                       <th>담당교수</th>
                       <th>승인</th><!-- 학적변경승인 -->
+                      <th>복학</th>
                     </tr>
                   </thead>
                   <tbody align="center">
                   
                   	<c:if test="${ empty staList }">
                   		<tr>
-                  			<td colspan=10>학적 변경 신청이 없습니다.</td>
+                  			<td colspan=14>휴학 신청이 없습니다.</td>
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ staList }" var="sta">
@@ -75,6 +80,16 @@
 	                        <td>${ sta.stuName }</td>                      
 	                        <td>${ sta.deptTitle }
 	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ sta.deptCode }">
+	                        	<input type="hidden" id="deptTitle" name="deptTitle" value="${ sta.deptTitle }">
+	                        </td>
+	                        <td>${ sta.offCategory }
+	                        	<input type="hidden" id="offCategory" name="offCategory" value="${ sta.offCategory }">
+	                        </td>
+	                        <td>${ sta.offSem }
+	                        	<input type="hidden" id="offSem" name="offSem" value="${ sta.offSem }">
+	                        </td>
+	                        <td>${ sta.offSemCnt }
+	                        	<input type="hidden" id="offSemCnt" name="offSemCnt" value="${ sta.offSemCnt }">
 	                        </td>
 	                        <td>${ sta.stsCategory }
 	                        	<input type="hidden" id="stsCategory" name="stsCategory" value="${ sta.stsCategory }" readonly>
@@ -87,29 +102,28 @@
 	                        </td>
 	                        <td>${ sta.applicationNo }
 	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }" readonly>
-	                        </td><!-- 확인 -->
+	                        </td>
 	                        <td>${ sta.profName }
 	                        	<input type="hidden" id="profName" name="profName" value="${ sta.profName }" readonly>
 	                        	<input type="hidden" id="profId" name="profId" value="${ sta.profId }">
 	                        </td>	                        
 	                        <td>
 	                        	<!-- <button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button> -->
-	                        	<button class="btn btn-primary" type="submit">승인</button>
+	                        	<button class="btn btn-primary" id="stuOffTerm" onclick="stuStaSubmit(1)">승인</button>
+	                        </td>
+	                        <td>
+	                        	<button class="btn btn-secondary" id="stuOnTerm" onclick="stuStaSubmit(2)">복학</button>
 	                        </td>
 	                    </tr>
                     </c:forEach>
                     
                   </tbody>
                 </table>
-                
               </div>
               </form>
             </div>
           </div>
         </div>
-        
-       
-        
       </div>
       
       		<!-- 페이징 - div 위치 수정 -->
@@ -135,7 +149,6 @@
 	                	</c:choose>
                     </c:forEach>
                     
-                    
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
                 			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
@@ -155,6 +168,53 @@
     			location.href="stuStaUpdate.adm?stsNo=" + $(this).children().eq(0).text();
     		});
     	});
+    </script>
+    
+    <script>
+		function stuStaSubmit(num){
+			var stuStaUpdate = $("#stuOnOffStaList");
+			
+			if(num == 1){
+				stuStaUpdate.attr("action", "stuOffUpdate.adm");
+			}else if(num == 2){
+				stuStaUpdate.attr("action", "stuOnUpdate.adm");
+			}
+			stuStaUpdate.submit();
+		}
+	</script>
+    
+    <script>
+    	var Now = new Date();
+    	var nowMonth = Now.getMonth() + 1;
+        var nowDay = Now.getDate();
+        var nowHour = Now.getHours();
+        var nowMins = Now.getMinutes();
+        function changeNum(time){
+            var time = time.toString();
+            if(time.length < 2){
+                time = '0' + time;
+                return time;
+	        }else{
+	            return time;
+	        }
+        }
+    	
+    	nowMonth = changeNum(nowMonth);
+        nowDay = changeNum(nowDay);
+        nowHour = changeNum(nowHour);
+        nowMins = changeNum(nowMins);
+    	
+    	var nowtime = nowMonth + nowDay + nowHour + nowMins;	
+    	var startDateWinter = 01011200 //겨울 시작 시간 : 1월 1일 자정
+    	var endDateWinter = 03311159 //겨울 끝 시간 : 3월 31일 11시 59분
+    	var startDateSummer = 07011200 //여름 시작 시간 : 7월 1일 자정
+    	var endDateSummer = 09311159 //여름 끝 시간 : 8월 31일 11시 59분
+    	
+    	if(endDateWinter < nowtime){ //3월 31일보다 크면 버튼 비활성화
+            $('.btn').attr('disabled', 'true'); //승인 버튼 활성화, 비활성화
+        }else if(startDateSummer > nowTime || endDateSummer < nowTime){ //7월 1일보다 작거나 9월 31일보다 크면 버튼 비활성화
+        	$('.btn').attr('disabled', 'true');
+        }
     </script>
     
     <!-- Essential javascripts for application to work-->

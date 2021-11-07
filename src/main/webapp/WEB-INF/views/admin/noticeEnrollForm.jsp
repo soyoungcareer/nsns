@@ -46,7 +46,7 @@
                   <div class="form-group">
 	                <label for=title class="control-label">제목</label>
 	                <input class="form-control" id="title" name="ntcTitle" type="text" placeholder="제목 글자 수 제한 255Byte" required>
-	                 <input class="form-control" id="writer" name="ntcWriter" type="hidden" value="admin" required>
+	                 <input class="form-control" id="writer" name="ntcWriter" type="hidden"><!--  value="admin" -->
                   </div>
 
                   <div class="form-group">

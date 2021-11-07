@@ -68,7 +68,51 @@
                     <c:forEach items="${ list }" var="n">
 	                    <tr>
 	                        <td>${ n.ntcNo }</td>
-	                        <td>${ n.ntcCategory }</td><!-- // -->
+	                        <td><!-- ${ n.ntcCategory }
+	                        	<input type="hidden" value="${ n.ntcCategory }"> -->
+	                        	<c:choose>
+			                    	<c:when test="${ n.ntcCategory == 91 }">
+			                    		전체
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 92 }">
+			                    		학사
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 93 }">
+			                    		학생
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 1 }">
+			                    		경제학
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 2 }">
+			                    		국어국문
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 3 }">
+			                    		철학
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 4 }">
+			                    		호텔경영
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 5 }">
+			                    		시각디자인
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 6 }">
+			                    		역사학
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 7 }">
+			                    		정보통신
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 8 }">
+			                    		연극영화
+			                  		</c:when>
+			                  		<c:when test="${ n.ntcCategory == 99 }">
+			                    		교양
+			                  		</c:when>
+			                  		<c:otherwise>
+			                  			기타
+			                  		</c:otherwise>
+		                    	</c:choose>
+	                        
+	                        </td>
 	                        <td>${ n.ntcTitle }</td>
 	                        <td>${ n.count }</td>
 	                        <td>${ n.createDate }</td> 
@@ -83,9 +127,11 @@
         </div>
         
         <!-- admin 등록<button> -->
+        <c:if test="${not empty loginAdm}">
         <div>
         	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록</button>
         </div>
+        </c:if>
         
       </div>
       

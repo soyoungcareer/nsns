@@ -48,19 +48,34 @@
                   <thead align="center">
                     <tr>
                       <th>항목</th>
+                      <th>학년도</th>
+                      <th>학기</th>
+                      <th>등록</th>
                     </tr>
                   </thead>
                   <tbody align="center">
                     <!-- <c:forEach items="${ questionList }" var="ql"> -->
 	                    <tr>
 	                        <td>
-	                        	<input type="text" id="question" name="question" placeholder="강의 평가 항목 생성">
+	                        	<input type="text" id="question" name="question" placeholder="글자 수 최대 1000byte" required>
+	                        </td>
+	                        <td>
+	                        	<input type="text" id="year" name="year" required>
+	                        </td>
+	                        <td>
+	                        	<input type="text" id="semester" name="semester" required>
+	                        	<input type="hidden" id="lectRegNum" name="lectRegNum">
+	                        	<input type="hidden" id="stuId" name="stuId">
+	                        </td>
+	                        <td>
+	                        	<button class="btn btn-primary">항목 등록</button>
 	                        </td>
 	                    </tr>
                     <!-- </c:forEach> -->
                   </tbody>
                 </table>       
               </div>
+              
               <div>
               	<button class="btn btn-primary" type="submit">등록</button>
               </div>

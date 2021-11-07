@@ -7,7 +7,7 @@
 	</settings>
 
 	<typeAliases>
-
+		<typeAlias type="com.kh.spring.major.vo.LectEvaluation" alias="LectEvaluation"/>
 		<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.member.vo.Admin" alias="Admin"/>
 		<typeAlias type="com.kh.spring.member.vo.Student" alias="Student"/>
@@ -72,7 +72,7 @@
 		<mapper resource="/mappers/consult-mapper.xml"/>
 		<mapper resource="/mappers/prof-mapper.xml"/>
 		<mapper resource="/mappers/lecture-mapper.xml"/>
-		<mapper resource="/mappers/admin-mapper.xml"/>
+		<!-- <mapper resource="/mappers/admin-mapper.xml"/> -->
 		<mapper resource="/mappers/grade-mapper.xml"/>
 		<mapper resource="/mappers/gradeStu-mapper.xml"/>
 		<mapper resource="/mappers/gradeStu-mapper.xml"/>

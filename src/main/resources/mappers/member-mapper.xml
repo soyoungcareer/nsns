@@ -41,6 +41,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profEmpdate" column="PROF_EMPDATE"/>
 	</resultMap>
 	
+	<resultMap id="studentStatusResultSet" type="StudentStatus">
+		<id property="stsNo" column="STS_NO"/>
+		<result property="stsProcess" column="STS_PROCESS"/>
+		<result property="stsCategory" column="STS_CATEGORY"/>
+		<result property="stsComplete" column="STS_COMPLETE"/>
+		<result property="status" column="STATUS"/>
+		<result property="applicationNo" column="APPLICATION_NO_OFF"/>
+		<result property="applicationNo" column="APPLICATION_NO_DO"/>
+		<!-- <collection property="department" resultMap="departmentResultSet"/>
+		<collection property="professor" resultMap="professorResultSet"/>
+		<collection property="student" resultMap="studentResultSet"/>
+		<collection property="studentOff" resultMap="studentOffResultSet"/>
+		<collection property="studentDo" resultMap="studentDoResultMap"/> -->
+		<result property="stuId" column="STU_ID"/>
+		<result property="stuName" column="STU_NAME"/>
+		<result property="profId" column="PROF_ID"/>
+		<result property="profName" column="PROF_NAME"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptTitle" column="DEPT_TITLE"/>
+		<result property="offCategory" column="OFF_CATEGORY"/>
+		<result property="offDate" column="OFF_DATE"/>
+		<result property="offSemCnt" column="OFF_SEM_CNT"/>
+		<result property="offSem" column="OFF_SEM"/>
+	</resultMap>
+	
+	<resultMap id="studentOffResultSet" type="StudentOff">
+		<result property="applicationNo" column="APPLICATION_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="offCategory" column="OFF_CATEGORY"/>
+		<result property="offDate" column="OFF_DATE"/>
+		<result property="offSemCnt" column="OFF_SEM_CNT"/>
+		<result property="offSem" column="OFF_SEM"/>
+		<result property="offReason" column="OFF_REASON"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<resultMap id="studentDoResultMap" type="StudentDo">
+		<result property="applicationNo" column="APPLICATION_NO"/>
+		<result property="stuId" column="STU_ID"/>
+		<result property="doDate" column="DO_DATE" javaType="java.sql.Date"/>
+		<result property="doReason" column="DO_REASON"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<resultMap id="departmentResultSet" type="Department">
+		<id property="deptCode" column="DEPT_CODE"/>
+		<result property="deptTitle" column="DEPT_TITLE"/>
+	</resultMap>
+	
 	
 	<select id="loginAdmin" parameterType="Admin" resultMap="adminResultSet">
 		SELECT * FROM ADMIN
@@ -128,22 +177,80 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM STU_OFF
 	</select>
 	<!--학생(이름, 학번), 학적, 휴학(신청일자), 복학(신청일자), 교수(이름), 학과(이름)
-	<select id="studentStatusList" resultMap="studentResultSet">
-		SELECT B.STU_ID, A.STS_PROCESS, A.STS_COMPLETE, A.STS_CATEGORY, A.STATUS, A.APPLICATION_NO_OFF, A.APPLICATION_NO_DO, C.DEPT_TITLE, D.PROF_NAME, B.STU_NAME
+	<select id="studentStatusList" resultMap="studentStatusResultSet">
+		SELECT E.STU_ID, F.STU_ID, A.*, C.DEPT_TITLE, H.DEPT_TITLE, D.PROF_NAME, I.PROF_NAME, B.STU_NAME, G.STU_NAME
 		FROM STU_STATUS_PRO A
 		LEFT JOIN STU_DO E ON (A.APPLICATION_NO_DO = E.APPLICATION_NO)
 		LEFT JOIN STU_OFF F ON (A.APPLICATION_NO_OFF = F.APPLICATION_NO)
-		LEFT JOIN STUDENT B ON (B.STU_ID = E.APPLICATION_NO)
+		LEFT JOIN STUDENT B ON (B.STU_ID = E.STU_ID)
+		LEFT JOIN STUDENT G ON (G.STU_ID = F.STU_ID)
 		LEFT JOIN DEPARTMENT C ON (B.DEPT_CODE = C.DEPT_CODE)
+		LEFT JOIN DEPARTMENT H ON (G.DEPT_CODE = H.DEPT_CODE)
 		LEFT JOIN PROFESSOR D ON (B.PROF_ID = D.PROF_ID)
+		LEFT JOIN PROFESSOR I ON (G.PROF_ID = I.PROF_ID)
+		WHERE STS_PROCESS = '관리자승인대기'
+		ORDER BY A.STS_NO DESC
+	</select> -->
+	
+	<select id="studentStatusList" resultMap="studentStatusResultSet">
+		SELECT B.STU_ID, A.*, D.DEPT_CODE, D.DEPT_TITLE, E.PROF_ID, E.PROF_NAME, C.STU_NAME
+		FROM STU_STATUS_PRO A
+		LEFT JOIN STU_DO B ON (A.APPLICATION_NO_DO = B.APPLICATION_NO)
+		LEFT JOIN STUDENT C ON (C.STU_ID = B.STU_ID)
+		LEFT JOIN DEPARTMENT D ON (D.DEPT_CODE = C.DEPT_CODE)
+		LEFT JOIN PROFESSOR E ON (E.PROF_ID = C.PROF_ID)
+		WHERE STS_PROCESS = '관리자승인대기'
+		AND STS_NO = APPLICATION_NO
 		ORDER BY A.STS_NO DESC
 	</select>
 	
 	<update id="studentStatusUpdate" parameterType="_int">
-		UPDATE STUDENT
-		SET STS_PROCESS = #{stsProcess}, STS_COMPLETE = #{stsComplete}
+		UPDATE STU_STATUS_PRO
+		SET STS_PROCESS = '승인완료', STS_COMPLETE = '완료'
 		WHERE STS_NO = #{stsNo}
-	</update> -->
+	</update>
 	
+	<update id="stuDoUpdateStu" parameterType="_int">
+		UPDATE STUDENT
+		SET STU_STATUS = '자퇴'
+		WHERE STU_ID = #{stuId}
+	</update>
+	
+	<select id="studentOffStaList" resultMap="studentStatusResultSet">
+		SELECT B.STU_ID, A.*, D.DEPT_CODE, D.DEPT_TITLE, E.PROF_ID, E.PROF_NAME, C.STU_NAME, B.OFF_CATEGORY, B.OFF_DATE, B.OFF_SEM_CNT, B.OFF_SEM
+		FROM STU_STATUS_PRO A
+		LEFT JOIN STU_OFF B ON (A.APPLICATION_NO_OFF = B.APPLICATION_NO)
+		LEFT JOIN STUDENT C ON (C.STU_ID = B.STU_ID)
+		LEFT JOIN DEPARTMENT D ON (D.DEPT_CODE = C.DEPT_CODE)
+		LEFT JOIN PROFESSOR E ON (E.PROF_ID = C.PROF_ID)
+		WHERE STS_COMPLETE = '처리중'
+		AND STS_NO = APPLICATION_NO
+		ORDER BY A.STS_NO DESC
+	</select>
+	
+	<update id="stuOffStaUpdate" parameterType="_int">
+		UPDATE STU_STATUS_PRO
+		SET STS_PROCESS = '승인완료'
+		WHERE STS_NO = #{stsNo}
+	</update>
+	<!-- STS_PROCESS = '승인완료', STS_COMPLETE = '완료' -->
+	
+	<update id="stuOffUpdate" parameterType="_int">
+		UPDATE STUDENT
+		SET STU_STATUS = '휴학'
+		WHERE STU_ID = #{stuId}
+	</update>
+	
+	<update id="stuOnStaUpdate" parameterType="_int">
+		UPDATE STU_STATUS_PRO
+		SET STS_COMPLETE = '완료'
+		WHERE STS_NO = #{stsNo}
+	</update>
+	
+	<update id="stuOnUpdate" parameterType="_int">
+		UPDATE STUDENT
+		SET STU_STATUS = '재학'
+		WHERE STU_ID = #{stuId}
+	</update>
 
 </mapper>
