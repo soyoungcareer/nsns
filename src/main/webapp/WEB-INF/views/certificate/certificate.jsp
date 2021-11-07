@@ -208,17 +208,17 @@
 							</div>
 							<label class="control-label col-md-2">자격증명</label>
 							<div class="col-md-4">
-								<input class="form-control col-md-12" type="text" value="" name="title" id="title">
+								<input class="form-control col-md-12" type="text" value="" name="title" id="title" required>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="control-label col-md-2">시행처</label>
 							<div class="col-md-4">
-								<input class="form-control col-md-12" type="text" value="" name="agency" id="agency">
+								<input class="form-control col-md-12" type="text" value="" name="agency" id="agency" required>
 							</div>
 							<label class="control-label col-md-2">취득일자</label>
 							<div class="col-md-4">
-							<input class="form-control col-md-12" type="date" value="" name="day" id="day">
+							<input class="form-control col-md-12" type="date" value="" name="day" id="day" required>
 							</div>
 						</div>
 						<div class="form-group row" id="cerappend">
@@ -309,23 +309,23 @@
 						<div class="form-group row">
 							<label class="control-label col-md-2">봉사명</label>
 							<div class="col-md-10">
-							<input class="form-control col-md-12" type="text" value="" name="volTitle" id="volTitle">
+							<input class="form-control col-md-12" type="text" value="" name="volTitle" id="volTitle" required>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="control-label col-md-2">시작일</label>
 							<div class="col-md-4">
-								<input class="form-control col-md-12" type="date" value="" name="sDay" id="sDay">
+								<input class="form-control col-md-12" type="date" value="" name="sDay" id="sDay" required>
 							</div>
 							<label class="control-label col-md-2">마감일</label>
 							<div class="col-md-4">
-								<input class="form-control col-md-12" type="date" value="" name="eDay" id="eDay">
+								<input class="form-control col-md-12" type="date" value="" name="eDay" id="eDay" required>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="control-label col-md-2">봉사시간</label>
 							<div class="col-md-10">
-								<input class="form-control col-md-12" type="text" value="" name="volTime" id="volTime" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+								<input class="form-control col-md-12" type="text" value="" name="volTime" id="volTime" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -334,7 +334,7 @@
 								<input class="form-control" type="file" id="file" name="uploadFile"> 
 							</div>
 						</div>
-						<div class="form-group row" id="volappend">
+						<div class="form-group row" id="volappend" style="padding-left:15px; padding-right:15px">
 						</div>
 					</div>
 					<!-- Modal footer -->
@@ -384,18 +384,18 @@
 						value+= '</div>'+ 
 					'<label class="control-label col-md-2">자격증명</label>'+
 					'<div class="col-md-4">'+
-						'<input class="form-control col-md-12" type="text" value="'+cer.title+'" name="title" id="title">'+
+						'<input class="form-control col-md-12" type="text" value="'+cer.title+'" name="title" id="title" required>'+
 						'<input class="form-control col-md-12"  name="cerNo" id="cerNo" type="hidden" value="'+ cer.cerNo +'"/>'+
 					'</div>'+ 
 				'</div>'+
 				'<div class="form-group row">'+
 					'<label class="control-label col-md-2">시행처</label>'+
 					'<div class="col-md-4">'+
-						'<input class="form-control col-md-12" type="text" value="'+cer.agency+'" name="agency" id="agency">'+
+						'<input class="form-control col-md-12" type="text" value="'+cer.agency+'" name="agency" id="agency" required>'+
 					'</div>'+
 					'<label class="control-label col-md-2">취득일자</label>'+
 					'<div class="col-md-4">'+
-					'<input class="form-control col-md-12" type="date" value="'+cer.getDate+'" name="uday" id="uday">'+
+					'<input class="form-control col-md-12" type="date" value="'+cer.getDate+'" name="uday" id="uday" required>'+
 					'</div>'+
 				'</div>' 
 					$(".cerUpModal").html(value);
@@ -417,24 +417,24 @@
 					value += '<div class="form-group row">'+
 					'<label class="control-label col-md-2">봉사명</label>'+
 					'<div class="col-md-10">'+
-					'<input class="form-control col-md-12" type="text" value="'+vol.volTitle+'" name="volTitle" id="volTitle">'+
+					'<input class="form-control col-md-12" type="text" value="'+vol.volTitle+'" name="volTitle" id="volTitle" required>'+
 					'<input class="" name="volNo" id="volNo" type="hidden"  value="'+vol.volNo+'">'+
 					'</div>'+
 				'</div>'  +
 				'<div class="form-group row">'+
 					'<label class="control-label col-md-2">시작일</label>'+
 					'<div class="col-md-4">'+
-						'<input class="form-control col-md-12" type="date" value="'+vol.startDate+'" name="sDay" id="sDay">'+
+						'<input class="form-control col-md-12" type="date" value="'+vol.startDate+'" name="sDay" id="sDay" required>'+
 					'</div>'+
 					'<label class="control-label col-md-2">마감일</label>'+
 					'<div class="col-md-4">'+
-						'<input class="form-control col-md-12" type="date" value="'+vol.endDate+'" name="eDay" id="eDay">'+
+						'<input class="form-control col-md-12" type="date" value="'+vol.endDate+'" name="eDay" id="eDay" required>'+
 					'</div>'+
 				'</div>'+
 				'<div class="form-group row">'+
 					'<label class="control-label col-md-2">봉사시간</label>'+
 					'<div class="col-md-10">'+
-						'<input class="form-control col-md-12" type="text" value="'+vol.volTime+'" name="volTime" id="volTime" >'+
+						'<input class="form-control col-md-12" type="text" value="'+vol.volTime+'" name="volTime" id="volTime" required>'+
 					'</div>'+
 				'</div>'+
 				'<div class="form-group row">'+
@@ -455,6 +455,8 @@
 									value +='<input class="form-control col-md-12" type="text" disabled value="첨부파일이 없습니다." style="color:red;">'
 										 } 
 						 value +=	'</div>'+
+							'</div>'+
+							'<div class="form-group row" id="voledit" style="padding-left:15px; padding-right:15px">'+
 							'</div>'
 					$(".volUpModal").html(value);
 			},error:function(){
@@ -467,12 +469,27 @@
 	$(".volUpModal").on("keydown"," #volTime",function() {
 		if((event.keyCode<48 || event.keyCode>57 )&& event.keyCode !== 8){
 	           event.returnValue=false;
-	           alert("숫자만 입력 가능합니다.");
+	           var str = ' <div class="alert alert-dismissible alert-danger col-md-12">'
+					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+					+ ' <strong>확인!</strong> 봉사시간에는 숫자만 입력 가능합니다.'
+					+ ' </div> '
+				$('#voledit').empty();
+				$('#voledit').append(str);
+	        }
+	})
+	$(".volnew").on("keydown"," #volTime",function() {
+		if((event.keyCode<48 || event.keyCode>57 )&& event.keyCode !== 8){
+	           var str = ' <div class="alert alert-dismissible alert-danger col-md-12">'
+					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+					+ ' <strong>확인!</strong> 봉사시간에는 숫자만 입력 가능합니다.'
+					+ ' </div> '
+				$('#volappend').empty();
+				$('#volappend').append(str);
 	        }
 	})
 	
-	/*  $('.volnew').on('change','#sDay', function() {
-        	 var startDate = $(this).val()
+	 $('.volnew').on('change','input[type=date]', function() {
+        	 var startDate = $('#sDay').val()
  	         var endDate = $('#eDay').val()
 
  	        var startArray = startDate.split('-');
@@ -484,15 +501,18 @@
 
 	        if(start_date.getTime() > end_date.getTime()) {
 
-            var str = ' <div class="alert alert-dismissible alert-danger">'
+            var str = ' <div class="alert alert-dismissible alert-danger col-md-12">'
 				+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
 				+ ' <strong>확인!</strong> 날짜가 바르지 않습니다. '
 				+ ' </div> '
 
 			$('#volappend').empty();
 			$('#volappend').append(str);
+	        }else{
+	        	$('#volappend').empty();
 	        }
-    }); */
+    });
+	
 	</script>
 </body>
 </html>
