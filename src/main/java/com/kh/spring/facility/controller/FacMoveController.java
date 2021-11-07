@@ -152,7 +152,7 @@ public class FacMoveController {
 	@RequestMapping(value = "facMoves.me", method = { RequestMethod.POST })
 	public String facSemi(facility f, Model model, @RequestParam(value = "no") int no) {
 
-		System.out.println("adsalskqlflafasf " + no);
+		System.out.println("adsalskqlflafasf************************* " + no);
 
 		f = fs.selectFacility(no);
 

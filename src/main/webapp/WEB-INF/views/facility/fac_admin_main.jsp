@@ -30,23 +30,50 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style>
-#images,  {
+img {
 	margin-left: 30px;
-	
+}
+
+#aa{
+	margin-left: 100px;
+
 }
 </style>
-	<jsp:include page="facMenuBar.jsp" />
+<jsp:include page="facMenuBar.jsp" />
 
 
 
 <main class="app-content">
 	<div class="app-title">
+		<div>
+			<h1>
+				<i class="fa fa-archive"></i> 시설물대여
+			</h1>
+		</div>
+		<ul class="app-breadcrumb breadcrumb">
+			<c:if test="${ !empty loginStu }">
+				<li class="breadcrumb-item"><a
+					href="${ pageContext.servletContext.contextPath }/stuinfo.st"
+					style="color: #222d32; margin-left: 4px"><i
+						class="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+						<div>나가기</div></a></li>
+			</c:if>
 
+			<c:if test="${ !empty loginAdm }">
+				<li class="breadcrumb-item"><a
+					href="${ pageContext.servletContext.contextPath }/subModifyList.adm"
+					style="color: #222d32; margin-left: 4px"><i
+						class="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+						<div>나가기</div></a></li>
+			</c:if>
 
-		<ul class="app-breadcrumb breadcrumb side">
-			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item">Tables</li>
-			<li class="breadcrumb-item active"><a href="#">faility</a></li>
+			<c:if test="${ !empty loginPrf }">
+				<li class="breadcrumb-item"><a
+					href="${ pageContext.servletContext.contextPath }/profMypage.pr"
+					style="color: #222d32; margin-left: 4px"><i
+						class="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+						<div>나가기</div></a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div class="row">
@@ -177,6 +204,8 @@
 
 					<input id="chk" value="" type="hidden">
 
+
+
 					<script>
 						$('#example-table-1 tr')
 								.click(
@@ -224,7 +253,7 @@
 																	.attr(
 																			'src',
 																			a);
-															$('layerpop')
+															$('#layerpop')
 																	.modal();
 
 														},
@@ -257,13 +286,11 @@
 								<form action="facdel.me" method="post">
 									<!-- Modal Body -->
 									<div class="modal-body">
-										<label for="userId" class="mr-sm-2"> 신청사유 : </label> <input
-											type="text" class="form-control mb-2 mr-sm-2"
-											placeholder="Enter ID" id="userId" name="userId" width="300"
-											height="300"> <br>
+										<br>
 									</div>
 									<div>
-										<img src="..." width="700" height="370" class="img-responsive" id="datatoin" alt="Responsive image">
+										<img src="..." width="700" height="370" class="img-responsive"
+											id="datatoin" alt="Responsive image">
 									</div>
 
 									<input id="hiddenNo" type="hidden" display:none name="hiddenNO"
@@ -272,7 +299,7 @@
 									<!-- Modal footer -->
 
 									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary">삭제</button>
+
 										<button type="button" class="btn btn-danger"
 											data-dismiss="modal">취소</button>
 									</div>
@@ -293,17 +320,19 @@
 								</div>
 								<form id="enrollForm" method="post" action="facpl.me"
 									enctype="multipart/form-data">
-									<br> <br>
+									<div id ="aa">
 									<div class="form-group row">
-										<label class="control-label col-md-3">시설물 이름 : </label>
+
 										<div class="col-md-8">
-											<input class="form-control" type="text" placeholder=""
+											<label class="control-label col-md-3">시설물 이름  </label> <input
+												class="form-control mb-2 mr-sm-2" type="text" placeholder=""
 												name="facName" required>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="control-label col-md-3">Identity Proof</label>
+
 										<div class="col-md-8">
+											<label class="control-label col-md-3">파일 첨부</label> <br>
 											<input class="form-control" type="file" name="uploadFile">
 										</div>
 									</div>
@@ -334,9 +363,11 @@
 									<br>
 
 									<div align="center">
+																		</div>
+									
 										<button type="submit" class="btn btn-primary">등록하기</button>
-										<button type="reset" class="btn btn-danger">취소하기</button>
 									</div>
+									
 								</form>
 							</div>
 						</div>

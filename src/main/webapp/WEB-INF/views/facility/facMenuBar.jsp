@@ -83,38 +83,9 @@
 		</ul>
 	</aside>
 
- <main class="app-content">
-    
-       <div class="app-title">
-        <div>
-          <h1><i class="fa fa-archive"></i> 시설물대여</h1>
-        </div>
-       <ul class="app-breadcrumb breadcrumb">
-       		<c:if test="${ !empty loginStu }">
-           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/stuinfo.st" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
-       		</c:if>
-       		
-       		<c:if test="${ !empty loginAdm }">
-           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/subModifyList.adm" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
-       		</c:if>
-       		
-       		<c:if test="${ !empty loginPrf }">
-           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/profMypage.pr" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>
-       		</c:if>
-        </ul>
-      </div>
-      
-      <div class="row">
-         <div class="col-md-12">
-          <div class="tile row">
-            <div class="col-md-12">
-           
-              <div id="calendar"></div>
-            </div>
-            </div>
-            </div>
-       </div>
-    </main>
+ 
+   
+  
 	<!-- Essential javascripts for application to work-->
 	<script src="resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
 	<script src="resources/bootstrap/docs/js/popper.min.js"></script>

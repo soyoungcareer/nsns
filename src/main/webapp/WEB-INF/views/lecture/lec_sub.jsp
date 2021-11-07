@@ -63,7 +63,7 @@
 
 	<div class="container">
 
-
+	
 			<button class="btn btn-outline-info" type="button"
 				onclick="location.href='lecpl.me?no=${no}'">추가
 			</button>
