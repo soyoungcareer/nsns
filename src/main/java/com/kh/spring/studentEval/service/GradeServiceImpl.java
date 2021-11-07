@@ -93,11 +93,6 @@ public class GradeServiceImpl implements GradeService {
 	}
 
 	@Override
-	public int selectGradeCount(SearchGrade searchGrade) {
-		return gradeDao.selectGradeCount(sqlSession, searchGrade);
-	}
-
-	@Override
 	public int gradeInsert(String subCode, int stuId) {
 		Grade grade = new Grade();
 		grade.setStudentId(stuId);
@@ -145,6 +140,16 @@ public class GradeServiceImpl implements GradeService {
 		}
 		
 		return gradeDao.gradeDelete(sqlSession, grade);
+	}
+
+	@Override
+	public int mainSubCount(String profId) {
+		return gradeDao.mainSubCount(sqlSession, profId);
+	}
+
+	@Override
+	public ArrayList<Subject> selectMainSub(String profId, PageInfo pi) {
+		return gradeDao.selectMainSub(sqlSession, profId, pi);
 	}
 
 	

@@ -33,21 +33,17 @@ public class GradeController {
 	// 교수 > 성적 관리 > 성적 등록/조회/수정
 	// 전체 데이터 조회
 	@RequestMapping("profGradeMain.pr")
-	public String selectList(Model model) {
-		// 임시 데이터
-		/* 
-		String profId = "EC1901";
-		String subCode = "2101001";
-		int gradeYear = 2021;
-		int gradeSemester = 1;
+	public String selectList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+							 HttpSession session, Model model) {
+		Professor prof = (Professor)session.getAttribute("loginPrf");
+		String profId = prof.getProfId();
 		
-		ArrayList<Subject> subList = gradeService.loadSubList(profId, gradeYear, gradeSemester);
-		ArrayList<Grade> gradeList = gradeService.selectList(subCode, gradeYear, gradeSemester);
+		int listCount = gradeService.mainSubCount(profId);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Subject> subList = gradeService.selectMainSub(profId, pi);
 		
+		model.addAttribute("pi", pi);
 		model.addAttribute("subList", subList);
-		model.addAttribute("gradeList", gradeList);
-		*/
-		
 		
 		return "professor/profGradeMain";
 	}
@@ -87,8 +83,7 @@ public class GradeController {
 	// 성적 조회
 	@ResponseBody
 	@RequestMapping(value="filteredGrade.pr", produces="application/json; charset=utf-8")
-	public String filteredGrade(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
-								String subCode, String gradeYear, String gradeSemester, HttpSession session, Model model) {
+	public String filteredGrade(String subCode, String gradeYear, String gradeSemester, HttpSession session, Model model) {
 		// 임시 데이터
 		//String profId = "EC1901";
 		

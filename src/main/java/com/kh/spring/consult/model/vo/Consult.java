@@ -26,5 +26,6 @@ public class Consult {
 	private int stuId; //학번
 	
 	private Student student;
+	private ConsultStatus consultStatus;
 	
 }

@@ -15,8 +15,11 @@
 		var tr = $(this);
 		var td = tr.children();
 		var conNo = td.eq(0).text();
+		var conProcess = td.eq(4).text();
+		var button = $('#saveConCheck');
 		
 		console.log(conNo);
+		console.log(conProcess);
 		
 		$.ajax({
 			url: "profConsultDetail.pr",
@@ -29,25 +32,44 @@
 				$("#myModal").modal();
 				
 				
-				var result ='<div class="form-group row"><label class="col-form-label" for="conDate">희망일자</label>'
+				var result ='<div class="mt-2 ml-4 mr-4"><div class="form-group form-inline row"><label class="col-form-label mr-4" for="conDate">희망일자</label>'
                 			+ '<input class="form-control" id="conDate" type="text" value="' + moment(detailCon.conDate).format("YYYY년MM월DD일") + '" readonly></div>'
-              				+ '<div class="form-group row"><label class="col-form-label" for="conCategory">상담구분</label>'
+              				+ '<div class="form-group form-inline row"><label class="col-form-label mr-4" for="conCategory">상담구분</label>'
                 			+ '<input class="form-control" id="conCategory" type="text" value="' + detailCon.conCategory + '" readonly></div>'
-              				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
+              				+ '<div class="form-group form-inline row"><label class="col-form-label mr-4" for="stuName">학생이름</label>'
                 			+ '<input class="form-control" id="stuName" type="text" value="' + detailCon.student.stuName + '" readonly></div>'
-              				+ '<div class="form-group row"><label class="col-form-label" for="stuId">학번</label>'
+              				+ '<div class="form-group form-inline row"><label class="col-form-label mr-4" for="stuId">학번&emsp;&emsp;</label>'
                 			+ '<input class="form-control" id="stuId" type="text" value="' + detailCon.stuId + '" readonly></div>'
-              				+ '<div class="form-group row"><label class="col-form-label" for="conReason">내용</label>'
+              				+ '<div class="form-group form-inline row"><label class="col-form-label mr-4" for="conReason">내용&emsp;&emsp;</label>'
                 			+ '<input class="form-control" id="conReason" type="text" value="' + detailCon.conReason + '" readonly></div>'
-                			+ '<div class="form-group row"><input class="form-control" id="conNo" type="hidden" value="' + detailCon.conNo + '" readonly></div>'
-              				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
-              				+ '<div class="w-100"></div>'
-                  			+ '<div class="form-check"><label class="form-check-label">'
-                      		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인완료" checked>승인</label></div>'
-                  			+ '<div class="form-check"><label class="form-check-label">'
-                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
-              				+ '<div class="form-group row"><label class="col-form-label" for="rejectReason">반려사유</label>'
-                			+ '<input class="form-control" id="rejectReason" type="text" placeholder="반려사유 입력"></div>'
+                			+ '<div class="form-group row"><input class="form-control" id="conNo" type="hidden" value="' + detailCon.conNo + '" readonly></div><hr><br>';
+              				
+                			if (conProcess =="교수승인대기중"){
+                				button.prop("hidden", false);
+	                			result += '<div class="form-group form-inline row"><label class="control-label mr-4">승인/반려</label>'
+		                  			+ '<div class="form-check"><label class="form-check-label mr-4" for="approve">'
+		                      		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인완료" checked>승인</label></div>'
+		                  			+ '<div class="form-check"><label class="form-check-label" for="reject">'
+		                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
+		              				+ '<div class="form-group row"><label class="col-form-label" for="rejectReason">반려사유</label>'
+		                			+ '<input class="form-control" id="rejectReason" type="text" placeholder="반려사유 입력"></div></div>';
+	                				
+                			} else {
+                				button.prop("hidden", true);
+                				result += '<div class="form-group row"><label class="col-form-label" for="status">처리상태&emsp;&emsp;&emsp;</label>'
+                					+ '<input class="form-control" id="status" type="text" value="' + conProcess + '" readonly></div>';
+                				if (conProcess == "승인완료") {
+                					result += "";
+                				} else {
+	              					result += '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>';
+	              					if (detailCon.rejectReason == undefined) {
+	              						result += '<input class="form-control" id="reason" name="reason" type="text" value="미입력" readonly></div></div>';
+	              					} else {
+	              						result += '<input class="form-control" id="reason" name="reason" type="text" value="' + detailCon.rejectReason + '" readonly></div></div>';
+	              					}
+              					}
+                			}
+                			
 				$("#modalBody").html(result);
 				
 			},
@@ -80,10 +102,24 @@
 				success:function(checkCon) {
 					
 					if (checkCon > 0) {
-						alert("저장 성공");
+						swal({
+				      		title: "저장 성공",
+				      		type: "success",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
 					} else {
-						alert("저장 실패");
+						swal({
+				      		title: "저장 실패",
+				      		type: "error",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
 					}
+					
+					setTimeout(function(){
+						location.reload();
+					}, 3000);
 				},
 				error:function() {
 					alert("ajax 로딩 실패");
@@ -100,7 +136,7 @@
       <div class="app-title">
 		<div>
 			<h1>
-				<i class="fa fa-edit"></i> 학생 관리
+				<i class="fa fa-comments"></i> 학생 관리
 			</h1>
 		</div>
 		<!-- <ul class="app-breadcrumb breadcrumb">
@@ -112,7 +148,7 @@
 	
 	<div class="container-fluid">
 		<div class="tile">
-			<h3 class="tile-title">상담 관리</h3>
+			<h3 class="tile-title">상담 관리</h3><br>
 			<div class="tile-body">
 				<div class="tile">
             <!-- <div class="mailbox-controls">
@@ -130,7 +166,7 @@
             </div> -->
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover" id="conTable">
-              	<thead>
+              	<thead class="tableInfo">
               		<tr>
 	              		<th>상담번호</th>
 	              		<th>구분</th>
@@ -151,7 +187,7 @@
 				                    <td>${ conList.conCategory }</td>
 				                    <td class="mail-subject"><b>${ conList.student.stuName }</b></td>
 				                    <td><fmt:formatDate pattern="yyyy년MM월dd일" value="${ conList.conDate }"/></td>
-				                    <td></td>
+				                    <td>${ conList.consultStatus.conProcess }</td>
 			                	</tr>
 							</c:forEach>
 						</c:when>

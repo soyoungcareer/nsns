@@ -63,7 +63,7 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 학생 관리
+					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
 			<!-- <ul class="app-breadcrumb breadcrumb">
@@ -83,39 +83,42 @@
 							<div class="row">
 								<h3 class="tile-title">강의평가 조회</h3>
 							</div>
+							<div class="row">
+								<p>
+									※조회버튼을 클릭하시면 해당과목이 나옵니다.<br>
+									※과목을 클릭하시면 해당과목의 강의평가점수가 나옵니다.
+								</p>
+							</div>
 							
 							<form action="evalSubLoad.pr">
 							<div class="row">
-								<div class="form-group col-md-3">
-									  <label class="control-label" for="con1">학년도 
-										  <select class="form-control" id="con1" name="con1">
-										  	<option value="0">전체</option>
-										  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
-										    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
-										    <option value="2019" <c:if test="${ con1 == '2019' }">selected</c:if>>2019</option>
-										  </select>
-									  </label>
+								<div class="form-group form-inline col-md-2">
+								  <select class="form-control" id="con1" name="con1">
+								  	<option value="0">전체</option>
+								  	<option value="2021" <c:if test="${ con1 == '2021' }">selected</c:if>>2021</option>
+								    <option value="2020" <c:if test="${ con1 == '2020' }">selected</c:if>>2020</option>
+								    <option value="2019" <c:if test="${ con1 == '2019' }">selected</c:if>>2019</option>
+								  </select>
+								  <label class="control-label ml-2" for="con1">학년도</label>
+								</div>
+								<div class="form-group form-inline col-md-2">
+							 	  <select class="form-control" id="con2" name="con2">
+								  	<option value="0">전체</option>
+								    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
+								    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
+								  </select>
+								  <label class="control-label ml-2" for="con2">학기</label> 
+								</div>
+								<div class="form-group form-inline col-md-4">
+									<label class="control-label mr-2" for="keyword">강의명</label>
+									<div class="form-inline"> 
+										<input type="search" class="form-control col-md-12" id="keyword" name="keyword" value="${ keyword }">
 									</div>
-									<div class="form-group col-md-3">
-									  <label class="control-label" for="con2">학기 
-									 	  <select class="form-control" id="con2" name="con2">
-										  	<option value="0">전체</option>
-										    <option value="1" <c:if test="${ con2 == '1' }">selected</c:if>>1</option>
-										    <option value="2" <c:if test="${ con2 == '2' }">selected</c:if>>2</option>
-										  </select>
-									  </label>
-									</div>
-									<div class="col-sm-12 col-md-6">
-										<div id="sampleTable_filter" class="dataTables_filter" style="padding-right: 15px">
-											<label>강의명 
-												<input type="search" class="form-control form-control-sm"
-													aria-controls="sampleTable" name="keyword" value="${ keyword }">
-											</label>
-											<button class="btn btn-primary btn-sm" type="submit"
-											style="margin-left: 10px;" id="readList">조 회</button>
-										</div>
+									<div class="form-inline"> 
+										<button class="btn btn-primary ml-2" type="submit">조 회</button>
 									</div>
 								</div>
+							</div>
 							</form>
 							
 							<div class="row">
@@ -123,7 +126,7 @@
 									<table
 										class="table table-hover table-bordered dataTable no-footer"
 										id="subTable" role="grid">
-										<thead>
+										<thead class="tableInfo">
 											<tr role="row">
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학년도</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 30px;">학기</th>
@@ -170,39 +173,6 @@
 									</table>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="tile">
-				<div class="tile-body">
-					<div class="table-responsive">
-						<div id="sampleTable_wrapper"
-							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-
-							<div class="row" id="divTitle">
-								<h3 class="tile-title">강의를 클릭하세요</h3>
-							</div>
-
-
-							<div class="row">
-								<div class="col-sm-12">
-									<table
-										class="table table-hover table-bordered dataTable no-footer"
-										id="evalTable" role="grid"
-										aria-describedby="sampleTable_info" id="evalTable">
-										<thead>
-											<tr role="row">
-												<th tabindex="0" rowspan="1" colspan="1" style="width: 52.9125px;">강의평가점수 평균 (5점 만점)</th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div>
 							
 							<!-- 페이징 처리 -->
 							<div id="pagingArea">
@@ -237,6 +207,48 @@
 				                	</c:choose>
 				                </ul>
 				            </div>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="tile">
+				<div class="tile-body">
+					<div class="table-responsive">
+						<div id="sampleTable_wrapper"
+							class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+
+							<div class="row" id="divTitle">
+								<h3 class="tile-title">강의를 클릭하세요</h3>
+							</div>
+							<div class="row">
+								<p>
+									※강의평가 총평균점수이며 최고점수 <b>5점</b>입니다.<br>
+								</p>
+							</div>
+
+
+							<div class="row">
+								<div class="col-sm-12">
+									<table
+										class="table table-hover table-bordered dataTable no-footer"
+										id="evalTable" role="grid"
+										aria-describedby="sampleTable_info" id="evalTable">
+										<thead class="secTableInfo">
+											<tr role="row">
+												<th tabindex="0" rowspan="1" colspan="1" style="width: 52.9125px;">강의평가점수</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+							
 							
 						</div>
 					</div>

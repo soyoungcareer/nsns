@@ -18,12 +18,15 @@
 			var tr = $(this);
 			var td = tr.children();
 			var objNo = td.eq(0).text();
+			var status = td.eq(4).text();
+			var button = $('#saveObjCheck');
 			
 			console.log(objNo);
+			console.log(status);
 			
 			$.ajax({
 				url: "profGradeObjDetail.pr",
-				type: "GET",
+				type: "POST",
 				data: {
 					objNo:objNo
 				},
@@ -31,30 +34,46 @@
 				success:function(detailObj){
 					$("#myModal").modal();
 					
-					
-					var result ='<div class="form-group row"><label class="col-form-label" for="objDate">이의신청일자</label>'
-	                			+ '<input class="form-control" id="objDate" type="text" value="' + moment(detailObj.objDate).format("YYYY년MM월DD일 HH:mm") + '" readonly></div>'
-	              				+ '<div class="form-group row"><label class="col-form-label" for="stuId">학번</label>'
-	                			+ '<input class="form-control" id="stuId" type="text" value="' + detailObj.stuId + '" readonly></div>'
-	              				+ '<div class="form-group row"><label class="col-form-label" for="stuName">학생이름</label>'
-	                			+ '<input class="form-control" id="stuName" type="text" value="' + detailObj.student.stuName + '" readonly></div>'
-	                			+ '<div class="form-group row"><label class="col-form-label" for="grade">성적</label>'
-	                			+ '<input class="form-control" id="grade" type="text" value="' + detailObj.grade.gradeCredit + '" readonly></div>'
-	              				+ '<div class="form-group row"><label class="col-form-label" for="title">제목</label>'
-	                			+ '<input class="form-control" id="title" type="text" value="' + detailObj.title + '" readonly></div>'
-	              				+ '<div class="form-group row"><label class="col-form-label" for="content">내용</label>'
-	                			+ '<input class="form-control" id="content" type="text" value="' + detailObj.content + '" readonly></div>'
-	                			+ '<div class="form-group row"><input class="form-control" id="objNo" type="hidden" value="' + detailObj.objNo + '" readonly></div>'
-	              				+ '<div class="form-group row"><label class="control-label">승인/반려</label>'
-	              				+ '<div class="w-100"></div>'
-	                  			+ '<div class="form-check"><label class="form-check-label">'
-	                      		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
-	                  			+ '<div class="form-check"><label class="form-check-label">'
-	                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
-	              				+ '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>'
-	                			+ '<input class="form-control" id="reason" name="reason" type="text" placeholder="반려사유 입력"></div>'
+					var result = '<div class="mt-2 ml-4 mr-4"><div class="form-group form-inline row"><label class="col-form-label" for="objDate">이의신청일자&emsp;</label>'
+	                			+ '<input class="form-control col-md-6" id="objDate" type="text" value="' + moment(detailObj.objDate).format("YYYY년MM월DD일") + '" readonly></div>'
+	              				+ '<div class="form-group form-inline row"><label class="col-form-label" for="stuId">학번&emsp;&emsp;&emsp;&emsp;&emsp;</label>'
+	                			+ '<input class="form-control col-md-6" id="stuId" type="text" value="' + detailObj.stuId + '" readonly></div>'
+	              				+ '<div class="form-group form-inline row"><label class="col-form-label" for="stuName">학생이름&emsp;&emsp;&emsp;</label>'
+	                			+ '<input class="form-control col-md-6" id="stuName" type="text" value="' + detailObj.student.stuName + '" readonly></div>'
+	                			+ '<div class="form-group form-inline row"><label class="col-form-label" for="grade">성적&emsp;&emsp;&emsp;&emsp;&emsp;</label>'
+	                			+ '<input class="form-control col-md-6" id="grade" type="text" value="' + detailObj.grade.gradeCredit + ' / 4.5" readonly></div>'
+	              				+ '<div class="form-group form-inline row"><label class="col-form-label" for="title">제목&emsp;&emsp;&emsp;&emsp;&emsp;</label>'
+	                			+ '<input class="form-control col-md-6" id="title" type="text" value="' + detailObj.title + '" readonly></div>'
+	              				+ '<div class="form-group form-inline row mb-4"><label class="col-form-label" for="content">내용&emsp;&emsp;&emsp;&emsp;&emsp;</label>'
+	                			+ '<input class="form-control col-md-6" id="content" type="text" value="' + detailObj.content + '" readonly></div><hr>'
+	                			+ '<div class="form-group row"><input class="form-control" id="objNo" type="hidden" value="' + detailObj.objNo + '" readonly></div>';
+	              				
+	              				if (status == "처리중") {
+	              					button.prop("hidden", false);
+		                  			result += '<div class="form-group form-inline row"><label class="control-label">승인/반려&emsp;&emsp;&emsp;</label>'
+		                  				+ '<div class="form-check mr-3"><label class="form-check-label" for="approve">'
+		                  				+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
+			                  			+ '<div class="form-check"><label class="form-check-label" for="reject">'
+			                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div>'
+			              				+ '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>'
+			                			+ '<input class="form-control" id="reason" name="reason" type="text" placeholder="반려사유 입력"></div></div>';
+	              				} else {
+	                				button.prop("hidden", true);
+              						result += '<div class="form-group row"><label class="col-form-label" for="status">처리상태&emsp;&emsp;&emsp;</label>'
+	                					+ '<input class="form-control" id="status" type="text" value="' + status + '" readonly></div>';
+	                				if (status == "승인") {
+	                					result += "";
+	                				} else {
+    	              					result += '<div class="form-group row"><label class="col-form-label" for="reason">반려사유</label>';
+    	              					if (detailObj.reason == undefined) {
+    	              						result += '<input class="form-control" id="reason" name="reason" type="text" value="미입력" readonly></div></div>';
+    	              					} else {
+    	              						result += '<input class="form-control" id="reason" name="reason" type="text" value="' + detailObj.reason + '" readonly></div></div>';
+    	              					}
+	              					}
+	              				}
+	                				
 					$("#modalBody").html(result);
-					
 				},
 				error:function() {
 					alert("ajax 로딩 실패");
@@ -62,7 +81,7 @@
 			});
 		});
 	</script>
-	<script>
+	<script type="text/javascript">
 		/* 이의신청 승인/반려 체크 후 저장 */
 		$(document).on("click", "#saveObjCheck", function(){
 			var status = $('input[name="answer"]:checked').val();
@@ -76,6 +95,7 @@
 			$.ajax({
 				url: "profObjCheck.pr",
 				type: "POST",
+				async: false,
 				data:{
 					status:status,
 					reason:reason,
@@ -83,13 +103,28 @@
 				},
 				dataType:"json",
 				success:function(checkObj) {
-					
 					if (checkObj > 0) {
-						alert("저장 성공");
-						readOnly();
+						swal({
+				      		title: "저장 성공",
+				      		type: "success",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
+						//readOnly();
 					} else {
-						alert("저장 실패");
+						swal({
+				      		title: "저장 실패",
+				      		type: "error",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
 					}
+					
+					setTimeout(function(){
+						location.reload();
+					}, 3000);
+					
+					
 				},
 				error:function() {
 					alert("ajax 로딩 실패");
@@ -97,15 +132,48 @@
 			});
 		});
 		
-		function readOnly() {
+		
+		/*
+		<script type="text/javascript">
+	      $('#demoNotify').click(function(){
+	      	$.notify({
+	      		title: "Update Complete : ",
+	      		message: "Something cool is just updated!",
+	      		icon: 'fa fa-check' 
+	      	},{
+	      		type: "info"
+	      	});
+	      });
+	      $('#demoSwal').click(function(){
+	      	swal({
+	      		title: "Are you sure?",
+	      		text: "You will not be able to recover this imaginary file!",
+	      		type: "warning",
+	      		showCancelButton: true,
+	      		confirmButtonText: "Yes, delete it!",
+	      		cancelButtonText: "No, cancel plx!",
+	      		closeOnConfirm: false,
+	      		closeOnCancel: false
+	      	}, function(isConfirm) {
+	      		if (isConfirm) {
+	      			swal("Deleted!", "Your imaginary file has been deleted.", "success");
+	      		} else {
+	      			swal("Cancelled", "Your imaginary file is safe :)", "error");
+	      		}
+	      	});
+	      }); 
+		*/
+		/*
+		 function readOnly() {
 			var radio = $('#modalBody input[name="answer"]');
 			var reason = $('#modalBody input[name="reason"]');
 			var button = $('#saveObjCheck');
 			
-			radio.attr("disabled", true);
-			reason.attr("readonly", true);
-			button.attr("hidden", true);
-		}
+			radio.prop("disabled", true);
+			reason.prop("readonly", true);
+			button.prop("hidden", true);
+		} 
+		*/ 
 	</script>
 </head>
 <body>
@@ -127,7 +195,7 @@
 	
 	<div class="container-fluid">
 		<div class="tile">
-			<h3 class="tile-title">이의신청 확인</h3>
+			<h3 class="tile-title">이의신청 확인</h3><br>
 			<div class="tile-body">
 				<div class="tile">
             <!-- <div class="mailbox-controls">
@@ -145,7 +213,7 @@
             </div> -->
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover" id="objTable">
-              	<thead>
+              	<thead class="tableInfo">
               		<tr>
 	              		<th>이의신청번호</th>
 	              		<th>학생이름</th>
@@ -165,7 +233,7 @@
 				                    <td>${ objList.objNo }</td>
 				                    <td>${ objList.student.stuName }</td>
 				                    <td class="mail-subject"><b>${ objList.title }</b></td>
-				                    <td><fmt:formatDate pattern="yyyy년MM월dd일 HH:mm" value="${ objList.objDate }"/></td>
+				                    <td><fmt:formatDate pattern="yyyy년MM월dd일" value="${ objList.objDate }"/></td>
 				                    <td>${ objList.status }</td>
 			                	</tr>
 							</c:forEach>

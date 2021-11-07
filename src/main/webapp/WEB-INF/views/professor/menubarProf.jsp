@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.spring.member.vo.Professor"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en"> 
   <head>
@@ -29,11 +29,19 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- style -->
-	<!-- <style>
-	.app-header__logo {
-		font-size: large;
-	}	
-	</style> -->
+	<style>
+		.tableInfo {
+		    background-color: #c3e6cb;
+		    border-color: #8fd19e;
+		    /* background-color: #bee5eb;
+		    border-color: #86cfda; */
+		}
+		.secTableInfo {
+			background-color: #ffeeba;
+			border-color: #ffdf7e;
+		}
+		
+	</style>
   </head>
 
   <body class="app sidebar-mini">
@@ -78,7 +86,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <!-- <li><a class="dropdown-item" href=""><i class="fa fa-cog fa-lg"></i> Settings</a></li> -->
-            <li><a class="dropdown-item" href="profMypage.pr"><i class="fa fa-user fa-lg"></i>개인정보관리</a></li>
+            <li><a class="dropdown-item" href="profMypage.pr"><i class="fa fa-lock fa-lg"></i> 개인정보관리</a></li>
             <li><a class="dropdown-item" href="logout.prf"><i class="fa fa-sign-out fa-lg"></i>로그아웃</a></li>
           </ul>
         </li>
@@ -95,8 +103,8 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="profMenu.pr"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <!-- <li><a class="app-menu__item active" href="profMenu.pr"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">메인</span></a></li> -->
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-briefcase"></i><span class="app-menu__label">강의관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="profLectureDetail.pr"><i class="icon fa fa-circle-o"></i> 강의목록 조회</a></li>
             <li><a class="treeview-item" href="profLectInfoLoad.pr"><i class="icon fa fa-circle-o"></i> 강의개설 신청</a></li>
@@ -110,7 +118,7 @@
             <li><a class="treeview-item" href="profGradeObj.pr"><i class="icon fa fa-circle-o"></i> 이의신청 확인</a></li>
           </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments"></i><span class="app-menu__label">학생관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="profStudentDetail.pr"><i class="icon fa fa-circle-o"></i> 학생목록 조회</a></li>
             <!-- <li><a class="treeview-item" href="profAttend.pr"><i class="icon fa fa-circle-o"></i> 출결 관리</a></li> -->
@@ -133,8 +141,8 @@
     <script src="resources/bootstrap/docs/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/chart.js"></script>
-    <script type="text/javascript">
-    </script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="resources/bootstrap/docs/js/plugins/sweetalert.min.js"></script>
     
     <!-- 로그인 클릭 시 뜨는 모달  -->
 	<div class="modal fade" id="loginModal">
@@ -215,9 +223,6 @@
 	
 		}
 	</script>
-
-
-
     
   </body>
 </html>

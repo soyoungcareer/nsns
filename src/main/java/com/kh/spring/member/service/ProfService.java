@@ -34,7 +34,7 @@ public interface ProfService {
 
 	ArrayList<Student> profStudentDetail(String subCode);
 
-	ArrayList<Consult> loadConsultList(String profId);
+	ArrayList<Consult> loadConsultList(String profId, PageInfo pi);
 
 	ArrayList<Evaluation> loadEvalList(Subject sub);
 
@@ -79,6 +79,14 @@ public interface ProfService {
 	Evaluation selectFilteredEval(Map map);
 
 	int profConComplete(ConsultStatus conStatus);
+
+	int loadConsultCount(String profId);
+
+	int createDuplCheck(RequestedSubject reqSubject);
+
+	int delDuplCheck(RequestedSubject reqSubject);
+
+	int editDuplCheck(RequestedSubject reqSubject);
 
 
 
