@@ -52,10 +52,9 @@
                       <th>강의형태</th><!-- 집체/온라인 -->
                       <th>강의시간</th>                      
                       <th>학점</th>
-                      <th>신청형태</th><!-- create, edit, delete -->
+                      <th>신청형태</th>
                       <th>승인상태</th>
                       <th>강의실</th><!-- 강의실 지정 -->
-                      <!-- <th>승인</th>변경 사항 승인(생성, 수정) -->
                       <!-- <th>강의계획서 첨부파일</th> -->
                     </tr>
                   </thead>
@@ -88,7 +87,18 @@
 	                        <td>${ sl.subType }</td>
 	                        <td>${ sl.subTime }</td>
 	                        <td>${ sl.subCredit }</td>
-	                        <td>${ sl.reqType }</td>
+	                        <td>
+	                        	<input type="hidden" name="reqType" value="${ sl.reqType }">	                        
+	                        	<c:if test="${ sl.reqType == 'C' }">
+	                        		등록
+	                        	</c:if>
+	                        	<c:if test="${ sl.reqType == 'D' }">
+	                        		삭제
+	                        	</c:if>
+	                        	<c:if test="${ sl.reqType == 'E' }">
+	                        		수정
+	                        	</c:if>
+	                        </td>
 	                        <td>${ sl.status }</td>
 	                        <td>강의실
 	                        	<input type="hidden" id="attOrigin" name="attOrigin" value="${ sl.attOrigin }">
@@ -100,8 +110,6 @@
                     
                   </tbody>
                 </table>
-                
-                
                 
               </div>
             </div>

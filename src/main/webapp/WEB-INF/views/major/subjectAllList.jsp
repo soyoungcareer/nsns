@@ -148,14 +148,7 @@
             
             
     </main>
-    <!-- detailView
-    <script>
-    	$(function(){
-    		$("#sampleTable tbody tr").click(function(){
-    			location.href="detailSub.adm?sno=" + $(this).children().eq(0).text();
-    		});
-    	});
-    </script> -->
+    
     
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>

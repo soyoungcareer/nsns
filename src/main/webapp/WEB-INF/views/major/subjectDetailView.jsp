@@ -51,17 +51,17 @@
 
                   <div class="form-group">
                     <label for="subCode">과목코드</label><!-- 입력 -->
-                    <input type="hidden" name="subCode" value="${ sub.subCode }">
+                   <!--  <input type="hidden" name="subCode" value="${ sub.subCode }">
                     <c:if test="${ !empty sub.subCode }">
-                    	<!-- <a>${reqSub.subCode }</a> -->
-                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${sub.subCode }">
-                    </c:if>
+                    	<a>${reqSub.subCode }</a> -->
+                    	<!-- <input class="form-control" id="subCode" name="subCode" type="text" value="${sub.subCode }">
+                    </c:if> -->
                     
-                    <c:if test="${ empty sub.subCode }">
-                    	<!-- 기존 -->
+                   <!--  <c:if test="${ empty sub.subCode }">
+                    	기존 -->
                     	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
                     
-                    </c:if>
+                    <!-- </c:if> -->
                     
                   </div>
                   
@@ -162,14 +162,20 @@
                         	첨부파일이 없습니다.
                         </c:if>
                         
-                    	
-                       
                   </div>
                   
                   <div align="center">
-	                <button class="btn btn-primary" onclick="subModSubmit(1);">등록</button>
-	                <button class="btn btn-outline-primary" onclick="subModSubmit(2);">수정</button>
-	                <button class="btn btn-danger" onclick="subModSubmit(3);">삭제</button>
+                  
+                  	<c:if test="${ reqSub.reqType == 'C' }">
+                  		<button class="btn btn-primary" onclick="subModSubmit(1);">등록</button>
+                  	</c:if>
+                  	<c:if test="${ reqSub.reqType == 'E' }">
+                  		<button class="btn btn-outline-primary" onclick="subModSubmit(2);">수정</button>
+                  	</c:if>
+                  	<c:if test="${ reqSub.reqType == 'D' }">
+                  		<button class="btn btn-danger" onclick="subModSubmit(3);">삭제</button>
+                  	</c:if>
+	                
 	              </div>
                   
                 </form>

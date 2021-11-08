@@ -26,7 +26,15 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="app sidebar-mini">
-    <jsp:include page="adminMenubar.jsp" />
+    <c:if test="${not empty loginAdm }">
+    	<jsp:include page="adminMenubar.jsp" />
+    </c:if>
+    <c:if test="${not empty loginPrf }">
+      	<jsp:include page="noticeMenubar.jsp" />
+    </c:if>
+    <c:if test="${not empty loginStu }">
+      	<jsp:include page="noticeMenubar.jsp" />
+    </c:if>
     
     <main class="app-content">
       <div class="app-title">
@@ -116,11 +124,13 @@
               
             </div>
             
-            <!-- <c:if test="${ loginUser.userId eq b.boardWriter }"> -->
-	            <div align="center">
+            <div align="center">
+            
+            	<button class="btn btn-outline-primary" onclick="location.href='list.ntc'">목록으로</button>
+            <c:if test="${not empty loginAdm }">
+	            
 	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
 	                <button class="btn btn-secondary" onclick="postFormSubmit(2);">삭제하기</button>
-	            </div>
 	            
 	            <form id="postForm" action="" method="post">
 					<input type="hidden" name="bno" id="bno" value="${n.ntcNo }">
@@ -138,8 +148,10 @@
 						postForm.submit();
 					}
 				</script>
-            <!-- </c:if> -->
-            
+            </c:if>
+            	
+            </div>
+			
           </div>
         </div>
       </div>

@@ -40,6 +40,7 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
+            <form action="stuDelete.adm" method="post">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
@@ -62,7 +63,9 @@
                   	</c:if>
                     <c:forEach items="${ sList }" var="s">
 	                    <tr>
-	                        <td id="stuId" name="stuId">${ s.stuId }</td>
+	                        <td>${ s.stuId }
+	                        	<input type="hidden" name="stuId" value="${ s.stuId }">
+	                        </td>
 	                        <td>${ s.stuName }</td>
 	                        <td>${ s.deptName }</td>
 	                        <td>${ s.email }</td>
@@ -70,7 +73,7 @@
 	                        <td>${ s.proName }</td>
 	                        <td>${ s.stuStatus }</td>
 	                        <td>
-	                        	<button class="btn btn-primary" type="button" onclick="location.href='stuDelete.adm'">삭제</button>
+	                        	<button class="btn btn-primary">삭제</button>
 	                        </td>
 	                    </tr>
                     </c:forEach>
@@ -78,6 +81,7 @@
                   </tbody>
                 </table>
               </div>
+              </form>
             </div>
           </div>
         </div>
@@ -123,12 +127,12 @@
             
             
     </main>
-    <script>
+    <!-- <script>
     	$(function(){
     		$("#sampleTable tbody tr").click(function(){
     			location.href="stuDelete.adm?stuId=" + $(this).children().eq(0).text();
     		});
-    	});
+    	}); -->
     </script>
     
     <!-- Essential javascripts for application to work-->

@@ -49,11 +49,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 		<result property="applicationNo" column="APPLICATION_NO_OFF"/>
 		<result property="applicationNo" column="APPLICATION_NO_DO"/>
-		<!-- <collection property="department" resultMap="departmentResultSet"/>
-		<collection property="professor" resultMap="professorResultSet"/>
-		<collection property="student" resultMap="studentResultSet"/>
-		<collection property="studentOff" resultMap="studentOffResultSet"/>
-		<collection property="studentDo" resultMap="studentDoResultMap"/> -->
 		<result property="stuId" column="STU_ID"/>
 		<result property="stuName" column="STU_NAME"/>
 		<result property="profId" column="PROF_ID"/>
@@ -107,22 +102,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		WHERE PROF_ID = #{profId}
 	</select>
-	<!-- 암호화
-	<select id="loginAdmin" parameterType="Admin" resultMap="adminResultSet">
-		SELECT * FROM ADMIN
-		WHERE ADM_ID=#{admId} AND ADM_PWD=#{admPwd}
-	</select>
 	
-	<select id="loginStudent" parameterType="Student" resultMap="studentResultSet">
-		SELECT * FROM STUDENT
-		WHERE STU_ID=#{stuId} AND STU_PWD=#{stuPwd}	
-	</select>
 	
-	<select id="loginProfessor" parameterType="Professor" resultMap="professorResultSet">
-		SELECT * 
-		FROM PROFESSOR
-		WHERE PROF_ID=#{profId} AND PROF_PWD=#{profPwd}
-	</select>-->
 
 	<insert id="insertStudent" parameterType="Student">
 		INSERT INTO STUDENT
@@ -157,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT A.PROF_ID, A.PROF_NAME, B.DEPT_TITLE, A.PROF_EMAIL, A.PROF_PHONE, A.PROF_STATUS, A.PROF_EMPDATE
 		FROM PROFESSOR A
 		LEFT JOIN DEPARTMENT B USING (DEPT_CODE)
-		ORDER BY PROF_ID DESC
+		ORDER BY A.PROF_ID DESC
 	</select>
 	
 	<update id="deleteStudent" parameterType="_int">
@@ -176,21 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT (*)
 		FROM STU_OFF
 	</select>
-	<!--학생(이름, 학번), 학적, 휴학(신청일자), 복학(신청일자), 교수(이름), 학과(이름)
-	<select id="studentStatusList" resultMap="studentStatusResultSet">
-		SELECT E.STU_ID, F.STU_ID, A.*, C.DEPT_TITLE, H.DEPT_TITLE, D.PROF_NAME, I.PROF_NAME, B.STU_NAME, G.STU_NAME
-		FROM STU_STATUS_PRO A
-		LEFT JOIN STU_DO E ON (A.APPLICATION_NO_DO = E.APPLICATION_NO)
-		LEFT JOIN STU_OFF F ON (A.APPLICATION_NO_OFF = F.APPLICATION_NO)
-		LEFT JOIN STUDENT B ON (B.STU_ID = E.STU_ID)
-		LEFT JOIN STUDENT G ON (G.STU_ID = F.STU_ID)
-		LEFT JOIN DEPARTMENT C ON (B.DEPT_CODE = C.DEPT_CODE)
-		LEFT JOIN DEPARTMENT H ON (G.DEPT_CODE = H.DEPT_CODE)
-		LEFT JOIN PROFESSOR D ON (B.PROF_ID = D.PROF_ID)
-		LEFT JOIN PROFESSOR I ON (G.PROF_ID = I.PROF_ID)
-		WHERE STS_PROCESS = '관리자승인대기'
-		ORDER BY A.STS_NO DESC
-	</select> -->
+	
 	
 	<select id="studentStatusList" resultMap="studentStatusResultSet">
 		SELECT B.STU_ID, A.*, D.DEPT_CODE, D.DEPT_TITLE, E.PROF_ID, E.PROF_NAME, C.STU_NAME

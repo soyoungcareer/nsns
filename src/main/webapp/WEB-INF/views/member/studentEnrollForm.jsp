@@ -80,8 +80,8 @@
                   
                   <div class="form-group">
                   <label class="control-label">학번 생성</label>
-                  <input class="form-control" type="text" id="stuId" name="stuId" required placeholder="입학년도+랜덤값">
-                  <!-- <input class="form-control" type="text" id="CreatestuId" name="CreatestuId" required readonly> -->
+                  <input class="form-control" type="text" id="stuId" name="CreateStuId" required placeholder="입학년도 입력 시 자동생성">
+                  <!-- <input class="form-control" type="text" id="CreatestuId" name="CreateStuId" required readonly> -->
                 </div>
                 
                 

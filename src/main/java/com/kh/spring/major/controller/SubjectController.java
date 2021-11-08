@@ -47,12 +47,6 @@ public class SubjectController {
 		
 		System.out.println("=======================" + reqSub);
 		
-		/////////test
-//		Subject sub = new Subject();
-//		System.out.println("=======deleteTest subs : " + sub);
-//		System.out.println("=======deleteTest subClass : " + sub.getSubClass());
-		/////////
-		
 		return mv;
 	}
 	
@@ -67,45 +61,13 @@ public class SubjectController {
 								, RequestedSubject reqSub
 								) {
 		
-		//3,4,7,10 SET //value="" ?
-		/*Subject sub, 
-		, @RequestParam("deptCode") int deptCode
-		, @RequestParam("profId") String profId
-		, @RequestParam("subClass") int subClass
-		, @RequestParam("subYear") int subYear
-		, @RequestParam("subSmst") int subSmst
-		attOrigin
 		
-		, @RequestParam("subCode") String subCode
-								, @RequestParam("deptCode") int deptCode
-								, @RequestParam("profId") String profId
-								, @RequestParam("subClass") int subClass
-								, @RequestParam("subYear") int subYear
-								, @RequestParam("subSmst") int subSmst
-		*/
 		
-		//Subject sub = new Subject();
 		System.out.println("=======sub : " + sub);
-//		System.out.println("=======subCode : " + subCode);
 		System.out.println("=======deptCode : " + deptCode);
 		System.out.println("=======profId : " + profId);
-//		System.out.println("=======subClass : " + subClass);
-//		System.out.println("=======subYear : " + subYear);
-//		System.out.println("=======subSmst : " + subSmst);
 		
-		//, RequestedSubject reqSub
-		//System.out.println(reqSub);
-		//System.out.println(sub);
 		
-//		sub.setSubCode(subCode);
-//		sub.setDeptCode(deptCode);
-//		sub.setProfId(profId);
-//		sub.setSubClass(subClass);
-//		sub.setSubYear(subYear);
-//		sub.setSubSmst(subSmst);
-		
-		//System.out.println("=======attOrigin : " + attOrigin);
-		//System.out.println("=======attChange : " + attChange);
 		System.out.println("=======originName : " + originName);
 		System.out.println("=======changeName : " + changeName);
 		//sub.setOriginName(attOrigin);
@@ -119,22 +81,13 @@ public class SubjectController {
 		
 		System.out.println("========sub : " + sub);
 		
-		//RequestedSubject reqSub = new RequestedSubject();
 		subjectService.createRequestSubject(reqSub);
 		
 		System.out.println("==========controller reqSub : " + reqSub);
 		
 		return "redirect:subModifyList.adm";
 	}
-	/*
-	@RequestMapping("createReqSub.adm")
-	public String createRequestSubject(RequestedSubject reqSub) {
-		
-		System.out.println(reqSub);
-		subjectService.createRequestSubject(reqSub);
-		
-		return "redirect:subModifyList.adm";
-	}*/
+	
 	
 	@RequestMapping("modifySub.adm") //
 	public String modifySubject(Model model, HttpServletRequest request

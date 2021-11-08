@@ -27,8 +27,16 @@
   </head>
   
   <body class="app sidebar-mini">
-    <jsp:include page="adminMenubar.jsp" />
-    
+  
+    <c:if test="${not empty loginAdm }">
+    	<jsp:include page="adminMenubar.jsp" />
+    </c:if>
+    <c:if test="${not empty loginPrf }">
+      	<jsp:include page="noticeMenubar.jsp" />
+    </c:if>
+    <c:if test="${not empty loginStu }">
+      	<jsp:include page="noticeMenubar.jsp" />
+    </c:if>
     <main class="app-content">
       <div class="app-title">
         <div>
@@ -122,17 +130,18 @@
                   </tbody>
                 </table>
               </div>
+              
+              
             </div>
+            
+            <c:if test="${not empty loginAdm}">
+		        <div align="right">
+		        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록</button>
+		        </div>
+	       </c:if>
+            
           </div>
         </div>
-        
-        <!-- admin 등록<button> -->
-        <c:if test="${not empty loginAdm}">
-        <div>
-        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록</button>
-        </div>
-        </c:if>
-        
       </div>
       
       		<!-- 페이징 - div 위치 수정 -->
