@@ -5,7 +5,7 @@
 <html>
 <head> 
 	<meta charset="UTF-8">
-	<title>낙성대학교(교수) - 학생목록 조회</title>
+	<title>낙성대학교</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		$(document).on("click", "#subTable>tbody>tr", function(){
@@ -14,7 +14,7 @@
 			var subCode = td.eq(2).text();
 			var year = td.eq(0).text();
 			var semester = td.eq(1).text();
-			var subTitle = td.eq(3).text();
+			var subTitle = td.eq(5).text();
 			
 			console.log(subCode);
 			console.log(year);

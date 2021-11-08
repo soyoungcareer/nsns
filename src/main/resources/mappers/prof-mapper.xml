@@ -230,7 +230,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="editDuplCheck" parameterType="RequestedSubject" resultType="_int">
 		SELECT COUNT(*)
 		FROM REQ_SUBJECT
-		WHERE PROF_ID=#{profId} AND SUB_TITLE=#{subTitle} AND REQ_TYPE='E' AND STATUS='N'
+		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode} AND REQ_TYPE='E' AND STATUS='N'
 	</select>
 	
 	<!-- 강의삭제 -->
@@ -246,7 +246,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="delDuplCheck" parameterType="RequestedSubject" resultType="_int">
 		SELECT COUNT(*)
 		FROM REQ_SUBJECT
-		WHERE PROF_ID=#{profId} AND SUB_TITLE=#{subTitle} AND REQ_TYPE='D' AND STATUS='N'
+		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode} AND REQ_TYPE='D' AND STATUS='N'
 	</select>
 	
 	<!-- 강의개설/수정/삭제 목록 -->
@@ -429,7 +429,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="profDoCheck" parameterType="StudentStatus">
 		UPDATE STU_STATUS_PRO
-		SET STS_PROCESS='관리자승인대기'
+		SET STS_PROCESS=#{stsProcess}, STS_COMPLETE=#{stsComplete}
 		WHERE APPLICATION_NO_DO=#{applicationNo}
 	</update>
 
@@ -459,7 +459,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="profOffCheck" parameterType="StudentStatus">
 		UPDATE STU_STATUS_PRO
-		SET STS_PROCESS='관리자승인대기'
+		SET STS_PROCESS=#{stsProcess}, STS_COMPLETE=#{stsComplete}
 		WHERE APPLICATION_NO_OFF=#{applicationNo}
 	</update>
 	

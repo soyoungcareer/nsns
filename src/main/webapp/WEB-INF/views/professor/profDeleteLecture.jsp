@@ -5,21 +5,21 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>낙성대학교(교수) - 강의삭제</title>
+	<title>낙성대학교</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script> 
 		// 신청 중복 체크
 		function duplCheck() {
-			var subTitle = $("#subTitle").val();
+			var subCode = $("#subCode").val();
 			var flag = null;
 			
-			console.log(subTitle);
+			console.log(subCode);
 			
 			$.ajax({
 				url: "delDuplCheck.pr",
 				type: "post",
 				data:{
-					subTitle:subTitle
+					subCode:subCode
 				},
 				dataType:"json",
 				async : false,
@@ -89,7 +89,7 @@
 		                <div class="form-group form-inline col-md-3">
 		                  <label class="control-label" for="subTitle">교과목명&emsp;</label>
 						  <input class="form-control" type="text" id="subTitle" name="subTitle" value="${ sub.subTitle }" readonly>
-						  <input type="hidden" name="subCode" value="${ sub.subCode }">
+						  <input type="hidden" id="subCode" name="subCode" value="${ sub.subCode }">
 		                </div>
 						<div class="form-group form-inline col-md-3">
 						  <label class="control-label" for="subDivs">이수구분&emsp;</label>

@@ -6,7 +6,7 @@
 <html>
 <head> 
 	<meta charset="UTF-8">
-	<title>낙성대학교(교수) - 강의목록 조회</title>
+	<title>낙성대학교</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		/* 수정할 강의코드 넘기기 */

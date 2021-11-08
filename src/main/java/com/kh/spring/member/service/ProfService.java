@@ -15,6 +15,7 @@ import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
+import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 public interface ProfService { 
 
@@ -64,9 +65,9 @@ public interface ProfService {
 
 	StudentDo detailDo(int applicationNo);
 
-	int profOffCheck(StudentOff stuOff);
+	int profOffCheck(StudentStatus stuOff);
 
-	int profDoCheck(StudentDo stuDo);
+	int profDoCheck(StudentStatus stuDo);
 
 	Consult detailConsult(String conNo);
 
