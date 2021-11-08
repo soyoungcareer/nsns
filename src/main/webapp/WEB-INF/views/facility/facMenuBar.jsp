@@ -52,14 +52,22 @@
 	<aside class="app-sidebar">
 		<div class="app-sidebar__user">
 			<div style="margin-left: 10px">
-				<p class="app-sidebar__user-name">${loginStu.stuName }</p>
-				<p class="app-sidebar__user-designation">학번 : ${loginStu.stuId }</p>
+				    <c:if test="${not empty loginPrf }">
+         	 <p class="app-sidebar__user-name">${loginPrf.profName }</p>
+          	<p class="app-sidebar__user-designation">교번 : ${loginPrf.profId }</p>
+         </c:if>
+         
+          <c:if test="${not empty loginAdm }">
+         	<p class="app-sidebar__user-name">괸리자</p>
+          	<p class="app-sidebar__user-designation">ADMIN</p>
+         </c:if>
 			</div>
 		</div>
-
+	<c:if test="${position eq 'student'}">
 		<ul class="app-menu">
 			<li><a class="app-menu__item" href="facMove.me"><i
 					class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">대여목록</span></a></li>
+			</c:if>
 
 			<c:if test="${position eq 'student'}">
 				<li><a class="app-menu__item" href="facMovess.me"><i
