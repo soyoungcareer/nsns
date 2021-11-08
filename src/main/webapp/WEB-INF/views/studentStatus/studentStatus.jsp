@@ -179,11 +179,10 @@
 							str1 +=  '<div class="form-group row">'+'<label class="control-label col-md-3"> 휴학구분 </label>'+'<div class="col-md-5">'
 								+'<input class="form-control" type="text" value="'+ obj.offCategory +'" readonly>'+'</div>'+'</div>'
 								+'<div class="form-group row">' + '<label class="control-label col-md-3">신청일자</label>' + '<div class="col-md-5">'
-								+'<input class="form-control" type="text" value="'+ obj.offDate +'"readonly>'
-								+'</div>'+'</div>'
+								+'<input class="form-control" type="text" value="'+ obj.offDate +'"readonly>'+'</div>'+'</div>'
 								+'<div class="form-group row">' + '<label class="control-label col-md-3">휴학학기수</label>' + '<div class="col-md-5">'
 								+'<input class="form-control" type="text" value="'+ obj.offSemCnt +'" readonly>'+'</div>'+'</div>'
-								+'<div class="form-group row">' + '<label clㄴass="control-label col-md-3">휴학 시작 학기</label>' + '<div class="col-md-5">'
+								+'<div class="form-group row">' + '<label class="control-label col-md-3">휴학 시작 학기</label>' + '<div class="col-md-5">'
 								+'<input class="form-control" type="text" value="'+ obj.offSem +'" readonly>'+'</div>'+'</div>'
 								+ '<div class="form-group row">' + '<label class="control-label col-md-3">휴학사유</label>' + '<div class="col-md-8">'
 								+ '<textarea class="form-control" rows="4" readonly>'+obj.offReason+'</textarea>'+'</div>'+'</div>'
@@ -196,15 +195,22 @@
     		              				+ '</tr>'+'</tbody> </table> </div>'
     		              				
     								} else if(stsPro == '관리자승인대기'){
-    									str2 += '<tbody> <tr>'+'<td>'+
+    		              					str2 += '<tbody> <tr>'+'<td>'+
     										+ "관리자 승인 대기중" + '</td><td>'
-    										+ '</td>'
+    										+ "해당 신청은 취소가 불가합니다. 관리자에게 문의해주세요"+'</td>'
     		              					+ '</tr>'+'</tbody> </table> </div>'
+    		    						
     		    						
     								} else if(stsPro == '승인완료'){
     									str2 += '<tbody> <tr>'+'<td>'
     									+ "승인 완료" + '</td><td>'
-    									+ '</td>'
+    									+ "이미 신청이 완료된 건입니다. 관리자에게 문의해주세요" +'</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
+    		              				
+    								} else if(stsPro == '반려'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+ "반려" + '</td><td>'
+    									+ "해당 신청이 반려되었습니다. 관리자에게 문의해주세요" +'</td>'
     		              				+ '</tr>'+'</tbody> </table> </div>'
     								}
     								
@@ -259,7 +265,14 @@
     									+ "승인 완료" + '</td><td>'
     									+ "이미 신청이 완료된 건입니다. 관리자에게 문의해주세요" +'</td>'
     		              				+ '</tr>'+'</tbody> </table> </div>'
+    		              				
+    								}  else if(stsPro == '반려'){
+    									str2 += '<tbody> <tr>'+'<td>'
+    									+ "반려" + '</td><td>'
+    									+ "해당 신청이 반려되었습니다. 관리자에게 문의해주세요" +'</td>'
+    		              				+ '</tr>'+'</tbody> </table> </div>'
     								}
+    								
     								
     					}
 										

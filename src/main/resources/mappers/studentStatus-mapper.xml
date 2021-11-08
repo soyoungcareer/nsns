@@ -131,7 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="stuBackPage" resultMap="studentBackResultMap"  parameterType="_int">
 		SELECT NTC_NO, NTC_TITLE, NTC_CONTENT, ORIGIN_NAME, CHANGE_NAME
 		FROM NOTICE 
-		WHERE NTC_NO = #{bno} AND STATUS = 'Y'
+		WHERE NTC_CATEGORY = #{category} AND STATUS = 'Y'
 	</select>
 	
 	

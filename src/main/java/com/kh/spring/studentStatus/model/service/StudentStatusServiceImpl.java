@@ -149,9 +149,9 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 	}
 
 	@Override
-	public StudentBack stuBackPage(int bno) {
+	public StudentBack stuBackPage(int category) {
 
-		StudentBack stuBack = studentStatusDao.stuBackPage(sqlSession, bno);
+		StudentBack stuBack = studentStatusDao.stuBackPage(sqlSession, category);
 		
 		return stuBack;
 	}

@@ -27,6 +27,6 @@ public interface StudentStatusService {
 
 	void deleteDo(int appNo);
 
-	StudentBack stuBackPage(int bno);
+	StudentBack stuBackPage(int category);//
 	
 }
