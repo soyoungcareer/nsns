@@ -68,7 +68,6 @@
                   <label class="control-label">연락처</label>
                   <input class="form-control" type="text" id="profPhone" name="profPhone" required>
                 </div>
-                
                 <div class="form-group">
                     <label for="profDept">학과</label>
                     <select class="form-control" id="profDept" name="profDept" onchange="selectDept(this.value);" required>
@@ -82,12 +81,8 @@
                       <option value=8>연극영화</option>
                     </select>
                   </div>
-                  
                   <script type="text/javascript">
-                  	
                   	var selectDept = function(value){
-                  		
-                  		
                   		if(value == 1){
                   			$("#profId").val("EC");
                   		}else if(value == 2){
@@ -107,46 +102,23 @@
                   		}else{
                   			$("#profId").val("없는 학과입니다.");
                   		}
-                  		
-                  		
-                  		/*
-                  		switch(value){
-                  		case 1:
-                  			$("#profId").val("EC");
-                  			break;
-                  		case 2:
-                  			$("#profId").val("KO");
-                  			break;
-                  		case 3:
-                  			$("#profId").val("PH");
-                  			break;
-                  		case 4:
-                  			$("#profId").val("HO");
-                  			break;
-                  		case 5:
-                  			$("#profId").val("VI");
-                  			break;
-                  		case 6:
-                  			$("#profId").val("HI");
-                  			break;
-                  		case 7:
-                  			$("#profId").val("IN");
-                  			break;
-                  		case 8:
-                  			$("#profId").val("MO");
-                  			break;
-                  		default:
-                  			$("#profId").val("");
-                  			break;
-                  		}*/
-                  		
                   	}
-                  	
                   </script>
+                  
+                  <!-- <div class="form-group">
+                    <label for="profYear">학과</label>
+                    <select class="form-control" id="profYear" onchange="">
+                     
+                    </select>
+                  </div>
+                  
+                  <script type="text/javascript">
+                  	
+                  </script> -->
                   
                 
                 <div class="form-group">
-                  <label class="control-label">교번 생성</label><!-- profId -->
+                  <label class="control-label">교번 생성</label>
                   <input class="form-control" type="text" id="profId" name="profId" required>
                 </div>
                 

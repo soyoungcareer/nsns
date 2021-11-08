@@ -73,6 +73,7 @@ public class MemberDao {
 
 	public int deleteProfessor(SqlSessionTemplate sqlSession, String profId) {
 		// TODO Auto-generated method stub
+		System.out.println("MD profId : " + profId);
 		return sqlSession.update("memberMapper.deleteProfessor", profId);
 	}
 

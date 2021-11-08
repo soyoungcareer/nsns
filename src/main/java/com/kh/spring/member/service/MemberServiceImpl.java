@@ -142,6 +142,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteProfessor(String profId) {
 		
+		System.out.println("MSI profId : " + profId);
+		
 		int result = memberDao.deleteProfessor(sqlSession, profId);
 		
 		if(result < 0) {

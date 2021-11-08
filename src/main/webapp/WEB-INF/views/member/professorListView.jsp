@@ -40,6 +40,7 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
+            <form id="profDeleteForm" action="prfDelete.adm" method="post">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
@@ -54,21 +55,23 @@
                     </tr>
                   </thead>
                   <tbody align="center">
-                  	<c:if test="${ empty list }">
+                  	<c:if test="${ empty prfList }">
                   		<tr>
                   			<td colspan=7>교수 계정이 존재하지 않습니다.</td>
                   		</tr>
                   	</c:if>
-                    <c:forEach items="${ list }" var="p">
+                    <c:forEach items="${ prfList }" var="p">
 	                    <tr>
-	                        <td>${ p.profId }</td>
+	                        <td>${ p.profId }
+	                        	<input type="hidden" name="profId" value="${ p.profId }">
+	                        </td>
 	                        <td>${ p.profName }</td>
 	                        <td>${ p.profDeptTitle }</td>
 	                        <td>${ p.profEmail }</td>
 	                        <td>${ p.profPhone }</td>
 	                        <td>${ p.profStatus }</td>
 	                        <td>
-	                        	<button class="btn btn-primary" type="button" onclick="location.href='prfDelete.adm'">삭제</button>
+	                        	<button class="btn btn-primary" type="submit">삭제</button>
 	                        </td>
 	                    </tr>
                     </c:forEach>
@@ -76,6 +79,7 @@
                   </tbody>
                 </table>
               </div>
+              </form>
             </div>
           </div>
         </div>
@@ -120,13 +124,13 @@
             
             
     </main>
-    <script>
+    <!-- <script>
     	$(function(){
     		$("#sampleTable tbody tr").click(function(){
     			location.href="prfDelete.adm?profId=" + $(this).children().eq(0).text();
     		});
     	});
-    </script>
+    </script> -->
     
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>

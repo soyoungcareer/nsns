@@ -26,17 +26,12 @@ public class StudentStatus {
 	private int applicationNo; //신청번호
 	
 	//관리자
-	//private Department department;
 	private int deptCode;
 	private String deptTitle;
-	//private Professor professor;
 	private String profId;
 	private String profName;
-	//private Student student;
 	private int stuId;
 	private String stuName;
-	//private StudentOff studentOff;
-	//private StudentDo studentDo;
 	private String offCategory; //휴학구분 (일반, 군)
 	private Date offDate; // 휴학신청일 (sysdate)
 	private int offSemCnt; // 휴학학기수

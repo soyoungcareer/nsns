@@ -209,12 +209,12 @@
     	var endDateWinter = 03311159 //겨울 끝 시간 : 3월 31일 11시 59분
     	var startDateSummer = 07011200 //여름 시작 시간 : 7월 1일 자정
     	var endDateSummer = 09311159 //여름 끝 시간 : 8월 31일 11시 59분
-    	
-    	if(endDateWinter < nowtime){ //3월 31일보다 크면 버튼 비활성화
-            $('.btn').attr('disabled', 'true'); //승인 버튼 활성화, 비활성화
-        }else if(startDateSummer > nowTime || endDateSummer < nowTime){ //7월 1일보다 작거나 9월 31일보다 크면 버튼 비활성화
+    	/*
+    	if(endDateWinter < nowtime){
+            $('.btn').attr('disabled', 'true');
+        }else if(startDateSummer > nowTime || endDateSummer < nowTime){
         	$('.btn').attr('disabled', 'true');
-        }
+        }*/
     </script>
     
     <!-- Essential javascripts for application to work-->

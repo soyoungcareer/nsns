@@ -1,6 +1,7 @@
 package com.kh.spring.member.controller;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,13 +27,14 @@ import com.kh.spring.member.vo.Student;
 
 @Controller
 public class MemberController {
-	///
+	
 	@Autowired
 	private MemberService memberService;
 
-	// 암호화 등록
 	@Autowired
 	private BCryptPasswordEncoder bCPwdEncoder;
+	
+	private static int stuCount = 1;
 
 	@ResponseBody
 	@RequestMapping("boom.me") // 로그인 페이지 이동
@@ -84,10 +86,7 @@ public class MemberController {
 			a.setAdmId(userId);
 			a.setAdmPwd(userPwd);
 
-			Admin loginAdm = memberService.loginAdmin(bCPwdEncoder, a); // bCPwdEncoder,
-
-			// a.setAdmId(userId);
-			// a.setAdmPwd(userPwd);
+			Admin loginAdm = memberService.loginAdmin(bCPwdEncoder, a);
 
 			System.out.println("loginAdm : " + loginAdm);
 
@@ -105,7 +104,7 @@ public class MemberController {
 			s.setStuId(Integer.parseInt(userId));
 			s.setStuPwd(userPwd);
 
-			Student loginStu = memberService.loginStudent(bCPwdEncoder, s); // bCPwdEncoder,
+			Student loginStu = memberService.loginStudent(bCPwdEncoder, s);
 			System.out.println("loginStu : " + loginStu);
 			model.addAttribute("loginStu", loginStu);
 
@@ -119,7 +118,7 @@ public class MemberController {
 			p.setProfId(userId);
 			p.setProfPwd(userPwd);
 
-			Professor loginPrf = memberService.loginProfessor(bCPwdEncoder, p); // (bCPwdEncoder, p);
+			Professor loginPrf = memberService.loginProfessor(bCPwdEncoder, p);
 			System.out.println("loginPrf : " + loginPrf);
 			model.addAttribute("loginPrf", loginPrf);
 
@@ -130,9 +129,7 @@ public class MemberController {
 
 		} else {
 			throw new CommException("로그인 실패");
-			// System.out.println("로그인 중 오류가 발생하였습니다.");
-
-			// return "redirect:/";
+			
 		}
 
 	}
@@ -144,7 +141,7 @@ public class MemberController {
 		session.invalidate();
 		System.out.println("로그아웃되었습니다.");
 
-		return "redirect:/"; // 로그아웃 세션 종료 후 페이지
+		return "redirect:/";
 	}
 
 	@RequestMapping("logout.stu")
@@ -174,7 +171,8 @@ public class MemberController {
 
 	// -------------- 계정 등록 --------------
 	@RequestMapping("insertStu.adm") // 학생관리-학생 등록
-	public String insertStudent(@ModelAttribute Student s, HttpSession session) {
+	public String insertStudent(@ModelAttribute Student s, HttpSession session
+								, @RequestParam("CreateStuId") String CreateStuId) { //
 
 		System.out.println("student : " + s);
 		System.out.println("기존 비밀번호 : " + s.getStuPwd());
@@ -182,7 +180,24 @@ public class MemberController {
 		String encPwd = bCPwdEncoder.encode(s.getStuPwd());
 		System.out.println("암호화 비밀번호 : " + encPwd);
 		s.setStuPwd(encPwd);
-
+		
+		int[] stuIdCount = new int[9999];
+		Random r = new Random();
+		for(int i = 0; i < 9999; i++) {
+			stuIdCount[i] = r.nextInt(9999)+1;
+			for(int j = 0; j < i; j++) {
+				if(stuIdCount[i] == stuIdCount[j]) {
+					i--;
+				}
+			}
+		}
+		for(int b = 0; b < 9999; b++) {
+			stuCount = stuIdCount[b];
+		}
+		String grantId = String.format("%04d", stuCount);
+		int stuId = Integer.parseInt(CreateStuId + grantId);
+		s.setStuId(stuId);
+		
 		memberService.insertStudent(s);
 		session.setAttribute("msg", "학생 등록 성공");
 
@@ -230,9 +245,9 @@ public class MemberController {
 		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 
-		ArrayList<Professor> list = memberService.professorList(pi);
-		System.out.println("list : " + list);
-		model.addAttribute("list", list);
+		ArrayList<Professor> prfList = memberService.professorList(pi);
+		System.out.println("prfList : " + prfList);
+		model.addAttribute("prfList", prfList);
 		model.addAttribute("pi", pi);
 
 		return "member/professorListView";
@@ -242,21 +257,24 @@ public class MemberController {
 	@RequestMapping("stuDelete.adm") //학생 계정 제한 - 퇴학
 	public String deleteStudent(int stuId, HttpServletRequest request) {
 		
-
+		//request.getParameter("stuId");
 		System.out.println("MC_start stuId : " + stuId);
 		memberService.deleteStudent(stuId);
-		System.out.println("MC_finish stuId : " + stuId);
+		//System.out.println("MC_finish stuId : " + stuId);
 
 		return "redirect:stuList.adm";
 	}
 
 	
 	@RequestMapping("prfDelete.adm") //교수관리-교수 삭제 - 계약 종료
-	public String deleteProfessor(String profId) {
+	public String deleteProfessor(HttpServletRequest request
+									) { //, @RequestParam("profId") String profId
 
+		String profId = request.getParameter("profId");
+		System.out.println("MC_start profId : " + profId);
 		memberService.deleteProfessor(profId);
 
-		return "redirect:stuList.adm";
+		return "redirect:prfList.adm";
 	}
 
 	
@@ -308,7 +326,7 @@ public class MemberController {
 		return "member/studentOffStatusList";
 	}
 	
-	@RequestMapping("stuOffUpdate.adm") // 학적변경 자퇴 승인
+	@RequestMapping("stuOffUpdate.adm") // 학적변경 휴학 승인
 	public String stuOffStaUpdate(int stsNo, HttpServletRequest request
 								, @RequestParam("stuId") int stuId) { //@RequestParam("stuId") int stuId
 
