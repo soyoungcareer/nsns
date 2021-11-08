@@ -26,12 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT DISTINCT GRADE_YEAR
 		FROM GRADE
 		WHERE STU_ID = #{stuId}
+		ORDER BY GRADE_YEAR
 	</select>
 	
 	<select id="selectSemester" parameterType="_int" resultType="_int">
 		SELECT DISTINCT GRADE_SEMESTER
 		FROM GRADE
 		WHERE STU_ID = #{stuId}
+		ORDER BY GRADE_SEMESTER
 	</select>
 	
 	<select id="selectListCount" parameterType="_int" resultType="_int">

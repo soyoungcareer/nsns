@@ -79,7 +79,7 @@ public class StudentSubjectController {
 			
 			int listCount = studentSubjectService.selectListCount(sc);
 			
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 5);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 5, 7);
 			
 			ArrayList<StudentSubject> list = studentSubjectService.searchSubject(sc, pi);
 			

@@ -183,13 +183,13 @@ public class StudentStatusController {
 	@RequestMapping("stuBackPage.stu")
 	public String stuBackPage(Model model) { 
 		
-	    int bno = 13;
+	    int category = 100;
 		
-	    StudentBack stuBack =  studentStatusService.stuBackPage(bno);
+	    StudentBack stuBack =  studentStatusService.stuBackPage(category);
 		
 		model.addAttribute("stuBack", stuBack);
 		
-		return "studentStatus/studentBack";
+		return "studentStatus/studentBack"; 
 	}
 	
 	

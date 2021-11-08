@@ -162,9 +162,6 @@
 
 			        	var popupWindow = window.open(windowUrl, windowName, "top=200px, left=300px, height=350px, width=450px, resizable=no")
 
-			        			출처: https://jinstale.tistory.com/111 [HINARI]");
-			        	
-			        	
 						var popupForm = document.popupForm;
 			        	
 			        	popupForm = document.createElement("form");

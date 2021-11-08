@@ -167,13 +167,13 @@
     									+'<button class="btn btn-danger btn-sm" type="button" onclick="deleteCon('+obj.conNo+')">신청취소</button>' + '</td>'
     		              				+ '</tr>'+'</tbody> </table> </div>'
     		              				
-    								} else if(stsPro == '승인완료'){
+    								} else if(conPro == '승인완료'){
     									str2 += '<tbody> <tr>'+'<td>'+
     										+ "승인 완료" + '</td><td>'
     										+ "승인 완료된 신청은 취소가 불가합니다."+'</td>'
     		              					+ '</tr>'+'</tbody> </table> </div>'
     		    						
-    								} else if(stsPro == '반려'){
+    								} else if(conPro == '반려'){
     									str2 += '<tbody> <tr>'+'<td>'
     									+ "반려" + '</td><td>'+obj.rejectReason
     									+ '</td>'

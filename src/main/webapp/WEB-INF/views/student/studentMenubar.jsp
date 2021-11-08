@@ -74,7 +74,7 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i>내 정보 확인</a></li>
+            <li><a class="dropdown-item" href="stuinfo.st"><i class="fa fa-user fa-lg"></i>개인정보 관리</a></li>
             <li><a class="dropdown-item" href="logout.stu"><i class="fa fa-sign-out fa-lg"></i> 로그아웃</a></li>
           </ul>
         </li>

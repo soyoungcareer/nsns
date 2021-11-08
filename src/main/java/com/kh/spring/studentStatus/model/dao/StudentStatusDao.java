@@ -83,9 +83,9 @@ public class StudentStatusDao {
 		return sqlSession.update("studentStatusMapper.deleteStsDo", appNo);
 	}
 
-	public StudentBack stuBackPage(SqlSessionTemplate sqlSession, int bno) {
+	public StudentBack stuBackPage(SqlSessionTemplate sqlSession, int category) {
 		
-		return sqlSession.selectOne("studentStatusMapper.stuBackPage", bno);
+		return sqlSession.selectOne("studentStatusMapper.stuBackPage", category);
 	}
 
 

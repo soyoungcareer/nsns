@@ -115,7 +115,7 @@
     $('textarea').on('keydown', function() {
     	 if($(this).val().length > 101) {
 	        	
-	            $(this).val($(this).val().substring(0, 30));
+    		 	$(this).val($(this).val().substring(0, 101));
 	            
 	            var str = ' <div class="alert alert-dismissible alert-danger">'
 					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
