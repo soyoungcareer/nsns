@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>낙성대학교(교수) - 마이페이지</title>
+	<title>낙성대학교</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 	<script type="text/javascript">
@@ -51,7 +51,7 @@
 		<div class="app-title">
 			<div>
 				<h1>
-					<i class="fa fa-edit"></i> 개인정보관리
+					<i class="fa fa-lock"></i> 개인정보관리
 				</h1>
 			</div>
 			<!-- <ul class="app-breadcrumb breadcrumb">

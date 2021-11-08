@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
@@ -39,6 +38,7 @@ import com.kh.spring.studentEval.service.GradeService;
 import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
+import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 
 @Controller 
@@ -79,9 +79,6 @@ public class ProfController {
 	public String profEditMypage(String profPwd, String profEmail, String profPhone, String profAddress,
 								String postNum, String address1, String address2,
 								Model model, HttpSession session) {
-		
-		// 임시 데이터
-		//String profId = "EC1901";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
@@ -370,14 +367,16 @@ public class ProfController {
 	// 강의 수정 중복 확인
 	@ResponseBody
 	@RequestMapping(value="editDuplCheck.pr", produces="application/json; charset=utf-8")
-	public String editDuplCheck(HttpSession session, String subTitle) {
+	public String editDuplCheck(HttpSession session, String subCode) {
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
 		
 		RequestedSubject reqSubject = new RequestedSubject();
 		reqSubject.setProfId(profId);
-		reqSubject.setSubTitle(subTitle);
+		reqSubject.setSubCode(subCode);
+		
+		System.out.println("============================ check subCode : " + reqSubject);
 		
 		int result = profService.editDuplCheck(reqSubject);
 		
@@ -390,9 +389,6 @@ public class ProfController {
 	@RequestMapping("lectDelInfoLoad.pr")
 	public String lectDelInfoLoad(HttpServletRequest httpServletRequest, Model model, HttpSession session
 								  ,String subCode) {
-		// 임시데이터
-		//String profId = "EC1901";
-		//String subCode = "2101002";
 		
 		Professor professor = (Professor)session.getAttribute("loginPrf");
 		String profId = professor.getProfId();
@@ -417,9 +413,6 @@ public class ProfController {
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
-		
-		// 임시 데이터
-		//String subCode = "2101002";
 		
 		Map map = new HashMap();
 		map.put("profId", profId);
@@ -446,14 +439,14 @@ public class ProfController {
 	// 강의 삭제 중복 확인
 	@ResponseBody
 	@RequestMapping(value="delDuplCheck.pr", produces="application/json; charset=utf-8")
-	public String delDuplCheck(HttpSession session, String subTitle) {
+	public String delDuplCheck(HttpSession session, String subCode) {
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
 		
 		RequestedSubject reqSubject = new RequestedSubject();
 		reqSubject.setProfId(profId);
-		reqSubject.setSubTitle(subTitle);
+		reqSubject.setSubCode(subCode);
 		
 		int result = profService.delDuplCheck(reqSubject);
 		
@@ -763,10 +756,13 @@ public class ProfController {
 	// 휴학신청 승인
 	@ResponseBody
 	@RequestMapping(value="profOffCheck.pr", produces="applicatoin/json; charset=utf-8;")
-	public String profOffCheck(@RequestParam(value="applicationNo", defaultValue = "0") int applicationNo) {
+	public String profOffCheck(@RequestParam(value="applicationNo", defaultValue = "0") int applicationNo,
+								String stsProcess, String stsComplete) {
 	
-		StudentOff stuOff = new StudentOff();
+		StudentStatus stuOff = new StudentStatus();
 		stuOff.setApplicationNo(applicationNo);
+		stuOff.setStsProcess(stsProcess);
+		stuOff.setStsComplete(stsComplete);
 		
 		int checkOff = profService.profOffCheck(stuOff);
 		return new GsonBuilder().create().toJson(checkOff);
@@ -807,10 +803,13 @@ public class ProfController {
 	// 자퇴신청 승인
 	@ResponseBody
 	@RequestMapping(value="profDoCheck.pr", produces="applicatoin/json; charset=utf-8;")
-	public String profDoCheck(@RequestParam(value="applicationNo", defaultValue = "0") int applicationNo) {
+	public String profDoCheck(@RequestParam(value="applicationNo", defaultValue = "0") int applicationNo,
+							  String stsProcess, String stsComplete) {
 	
-		StudentDo stuDo = new StudentDo();
+		StudentStatus stuDo = new StudentStatus();
 		stuDo.setApplicationNo(applicationNo);
+		stuDo.setStsProcess(stsProcess);
+		stuDo.setStsComplete(stsComplete);
 		
 		int checkDo = profService.profDoCheck(stuDo);
 		return new GsonBuilder().create().toJson(checkDo);

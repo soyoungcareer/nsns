@@ -137,11 +137,11 @@ public class ProfessorDao {
 		return sqlSession.selectOne("profMapper.detailDo", applicationNo);
 	}
 
-	public int profOffCheck(SqlSessionTemplate sqlSession, StudentOff stuOff) {
+	public int profOffCheck(SqlSessionTemplate sqlSession, StudentStatus stuOff) {
 		return sqlSession.update("profMapper.profOffCheck", stuOff);
 	}
 
-	public int profDoCheck(SqlSessionTemplate sqlSession, StudentDo stuDo) {
+	public int profDoCheck(SqlSessionTemplate sqlSession, StudentStatus stuDo) {
 		return sqlSession.update("profMapper.profDoCheck", stuDo);
 	}
 

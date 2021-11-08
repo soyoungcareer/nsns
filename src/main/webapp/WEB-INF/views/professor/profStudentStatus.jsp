@@ -6,7 +6,7 @@
 <html>
 <head> 
 	<meta charset="UTF-8">
-	<title>낙성대학교(교수) - 학적변동 승인</title>
+	<title>낙성대학교</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<script>
@@ -15,7 +15,8 @@
 			var td = tr.children();
 			var applicationNo = td.eq(0).text();
 			var stsProcess = td.eq(8).text();
-			var button = $('#saveOffCheck');
+			var approveBtn = $('#saveApprove');
+			var rejectBtn = $('#saveReject');
 			
 			console.log(applicationNo);
 			console.log(stsProcess);
@@ -46,17 +47,14 @@
             			+ '<input class="form-control" id="offSem" type="text" value="' + detailOff.offSem + '" readonly></div>'
             			+ '<div class="form-group form-inline row"><label class="col-form-label mr-2" for="offReason">휴학사유&emsp;&emsp;</label>'
             			+ '<input class="form-control" id="offReason" type="text" value="' + detailOff.offReason + '" readonly></div>'
-            			+ '<div class="form-group row mb-2"><input class="form-control" id="applicationNo" type="hidden" value="' + applicationNo + '" readonly></div><hr><br>';
+            			+ '<div class="form-group row mb-2"><input class="form-control" id="applicationNo" type="hidden" value="' + applicationNo + '" readonly></div>';
           				
             			if (stsProcess == "교수승인대기") {
-            				button.prop("hidden", false);
-            				result += '<div class="form-group form-inline row mr-4"><label class="control-label mr-2">승인/반려&emsp;&emsp;</label>'
-	                  			+ '<div class="form-check"><label class="form-check-label mr-3">'
-	                      		+ '<input class="form-check-input" type="radio" name="answer" id="approve" value="승인" checked>승인</label></div>'
-	                  			+ '<div class="form-check"><label class="form-check-label">'
-	                      		+ '<input class="form-check-input" type="radio" name="answer" id="reject" value="반려">반려</label></div></div></div>';
+            				approveBtn.prop("hidden", false);
+            				rejectBtn.prop("hidden", false);
             			} else {
-            				button.prop("hidden", true);
+            				approveBtn.prop("hidden", true);
+            				rejectBtn.prop("hidden", true);
       						result += '<div class="form-group row"><label class="col-form-label" for="status">처리상태&emsp;&emsp;&emsp;</label>'
             					+ '<input class="form-control" id="status" type="text" value="' + stsProcess + '" readonly></div>';
             			}
@@ -70,11 +68,11 @@
 		});
 	</script>
 	<script>
-		/* 승인/반려 체크 후 저장 */
-		$(document).on("click", "#saveOffCheck", function(){
-			var status = $('input[name="answer"]:checked').val();
-			var reason = $("#reason").val();
+		/* 승인 체크 후 저장 */
+		$(document).on("click", "#saveApprove", function(){
 			var applicationNo = $("#applicationNo").val();
+			var stsProcess = "관리자승인대기";
+			var stsComplete = "처리중";
 			
 			console.log(applicationNo);
 			
@@ -82,15 +80,60 @@
 				url: "profOffCheck.pr",
 				type: "POST",
 				data:{
-					status:status,
-					reason:reason,
-					applicationNo:applicationNo
+					applicationNo:applicationNo,
+					stsProcess:stsProcess,
+					stsComplete:stsComplete
 				},
 				dataType:"json",
 				success:function(checkOff) {
 					if (checkOff > 0) {
 						swal({
-				      		title: "저장 성공",
+				      		title: "승인 완료",
+				      		type: "success",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
+					} else {
+						swal({
+				      		title: "저장 실패",
+				      		type: "error",
+				      		showCancelButton: false,
+				      		closeOnConfirm: true
+				      	});
+					}
+					
+					setTimeout(function(){
+						location.reload();
+					}, 3000);
+				},
+				error:function() {
+					alert("ajax 로딩 실패");
+				}
+			});
+		});
+		
+		
+		/* 반려 체크 후 저장 */
+		$(document).on("click", "#saveReject", function(){
+			var applicationNo = $("#applicationNo").val();
+			var stsProcess = "반려";
+			var stsComplete = "완료";
+			
+			console.log(applicationNo);
+			
+			$.ajax({
+				url: "profOffCheck.pr",
+				type: "POST",
+				data:{
+					applicationNo:applicationNo,
+					stsProcess:stsProcess,
+					stsComplete:stsComplete
+				},
+				dataType:"json",
+				success:function(checkOff) {
+					if (checkOff > 0) {
+						swal({
+				      		title: "반려하였습니다",
 				      		type: "success",
 				      		showCancelButton: false,
 				      		closeOnConfirm: true
@@ -204,7 +247,8 @@
 							        
 							        <!-- Modal footer -->
 							        <div class="modal-footer">
-							          <button class="btn btn-primary" type="submit" id="saveOffCheck">저장</button>
+							          <button class="btn btn-primary" type="submit" id="saveApprove">승인</button>
+							          <button class="btn btn-danger" type="submit" id="saveReject">반려</button>
 							          <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
 							        </div>
 							      </div>

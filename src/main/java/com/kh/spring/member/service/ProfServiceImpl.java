@@ -1,6 +1,6 @@
 package com.kh.spring.member.service;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,6 +21,7 @@ import com.kh.spring.member.vo.Student;
 import com.kh.spring.studentEval.vo.SearchSubject;
 import com.kh.spring.studentStatus.model.vo.StudentDo;
 import com.kh.spring.studentStatus.model.vo.StudentOff;
+import com.kh.spring.studentStatus.model.vo.StudentStatus;
 
 @Service
 public class ProfServiceImpl implements ProfService {
@@ -168,12 +169,12 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public int profOffCheck(StudentOff stuOff) {
+	public int profOffCheck(StudentStatus stuOff) {
 		return professorDao.profOffCheck(sqlSession, stuOff);
 	}
 
 	@Override
-	public int profDoCheck(StudentDo stuDo) {
+	public int profDoCheck(StudentStatus stuDo) {
 		return professorDao.profDoCheck(sqlSession, stuDo);
 	}
 
