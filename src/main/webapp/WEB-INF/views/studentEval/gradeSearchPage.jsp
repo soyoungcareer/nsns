@@ -288,6 +288,13 @@
 				$("#modelAbout").html("");
 				$("#gradeAboutModal").modal('show');
 				var value="";
+				if(typeof grDetail!='object'){
+					value +='<div class="form-group row">'+
+							'<h2 class="col-md-12">'+
+								'해당 성적이 입력되지 않아, 성적확인이 불가능합니다.'+
+								'</h2>'+
+								'</div>'
+				}else{ 
 				value +='<div class="form-group row">' +
 						'<label class="control-label col-md-2">교과목명</label>'+
 						'<div class="col-md-4">'+
@@ -368,6 +375,7 @@
 						'<input class="form-control col-md-12" type="text" disabled value="'+grDetail.grade.gradeCredit+' / 4.5">'+
 						'</div>'+
 						'</div>'
+				}
 				$("#modelAbout").html(value);
 			},
 		     error:function(){
@@ -395,7 +403,16 @@
 					$("#objecModal").html("");
 					$("#gradeObjModal").modal('show');
 					var value="";
-					value +='<div class="form-group row">' +
+					if(typeof grDetail!='object'){
+						value +='<div class="form-group row">'+
+								'<h2 class="col-md-12">'+
+									'해당 성적이 입력되지 않아, 이의 신청이 불가능 합니다.'+
+									'</h2>'+
+									'</div>'
+						$("#objSubmit").css('display', 'none');
+					}else{ 
+					
+					value +='<div class="form-group row">'+
 							'<label class="control-label col-md-2">교과목명</label>'+
 							'<div class="col-md-4">'+
 							'<input class="form-control col-md-12" type="hidden" id="gradeNo" name="gradeNo" disabled value="'+grDetail.grade.gradeNo+'">'+
@@ -458,6 +475,8 @@
 									'<textarea class="form-control" rows="6" placeholder="" name="objContent" id="objContent" style="resize: none;"></textarea>'+
 									'</div>'+
 									'</div>'
+									$("#objSubmit").css('display', 'block');
+					}
 					$("#objecModal").html(value);
 				}
 			});  
