@@ -42,7 +42,7 @@
   		<li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-smile-o  fa-lg" aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item"  href="board.me"> <i class="fa fa-smile-o  fa-lg" aria-hidden="true"></i>커뮤니티</a></li>
+            <li><a class="dropdown-item"  href="javascript:window.open('board.me')"> <i class="fa fa-smile-o  fa-lg" aria-hidden="true"></i>커뮤니티</a></li>
           </ul>
 
         
