@@ -185,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 과목정보 불러오기 -->
 	<select id="subInfoLoad" parameterType="Map" resultMap="profSubResultSet">
-		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, SUB_CODE, ORIGIN_NAME, CHANGE_NAME
+		SELECT SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, SUB_CODE, ORIGIN_NAME, CHANGE_NAME, DEPT_CODE
 		FROM SUBJECT
 		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
 	</select>
@@ -235,13 +235,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 강의삭제 -->
 	<select id="delSubInfo" parameterType="Map" resultMap="profSubResultSet">
-		SELECT SUB_CODE, SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME
+		SELECT SUB_CODE, SUB_DIVS, SUB_TYPE, SUB_TITLE, SUB_CREDIT, SUB_TIME, DEPT_CODE
 		FROM SUBJECT
 		WHERE PROF_ID=#{profId} AND SUB_CODE=#{subCode}
 	</select>
 	<insert id="delLectReq" parameterType="RequestedSubject">
-		INSERT INTO REQ_SUBJECT(REQSUB_NO, PROF_ID, REQ_TYPE, STATUS, SUB_CODE, SUB_DIVS, SUB_TITLE, SUB_CREDIT, SUB_TYPE, SUB_TIME)
-		VALUES(SEQ_REQSUB_NO.NEXTVAL, #{profId}, 'D', DEFAULT, #{subCode}, #{subDivs}, #{subTitle}, #{subCredit}, #{subType}, #{subTime})
+		INSERT INTO REQ_SUBJECT(REQSUB_NO, DEPT_CODE, PROF_ID, REQ_TYPE, STATUS, SUB_CODE, SUB_DIVS, SUB_TITLE, SUB_CREDIT, SUB_TYPE, SUB_TIME)
+		VALUES(SEQ_REQSUB_NO.NEXTVAL, #{deptCode}, #{profId}, 'D', DEFAULT, #{subCode}, #{subDivs}, #{subTitle}, #{subCredit}, #{subType}, #{subTime})
 	</insert>
 	<select id="delDuplCheck" parameterType="RequestedSubject" resultType="_int">
 		SELECT COUNT(*)

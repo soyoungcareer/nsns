@@ -399,6 +399,8 @@ public class ProfController {
 		
 		Professor prof = profService.profInfoLoad(profId);
 		Subject sub = profService.subInfoLoad(map);
+		
+		System.out.println("삭제과목 데이터 로드 : " + sub);
 
 		model.addAttribute("prof", prof);
 		model.addAttribute("sub", sub);
@@ -430,6 +432,7 @@ public class ProfController {
 		reqSubject.setSubCredit(sub.getSubCredit());
 		reqSubject.setSubType(sub.getSubType());
 		reqSubject.setSubTime(sub.getSubTime());
+		reqSubject.setDeptCode(sub.getDeptCode());
 		
 		profService.delLectReq(reqSubject);
 		
