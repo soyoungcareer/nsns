@@ -71,7 +71,7 @@ public class StudentController {
 	}
 	
 	
-	 
+	//이메일 인증번호 전송
 	@ResponseBody
     @RequestMapping(value="mailCheck", method=RequestMethod.GET)
     public String mailCheckGET(String email) throws Exception{
@@ -118,6 +118,7 @@ public class StudentController {
 		return "student/inputPW";
 	}
 	
+	//비밀번호 업데이트 (암호화)
 	@ResponseBody
 	@RequestMapping(value="changePW.stu", produces="application/json; charset=utf-8")
 	public String ChangePW(String stuPwd, HttpSession session) { 
