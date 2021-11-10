@@ -92,30 +92,42 @@
 						                        <td>${ ar.department.deptTitle }</td>
 						                        <td>${ ar.subject.subCredit }</td>
 						                        <c:choose>
-											         <c:when test = "${ar.grade.gradeResult>=95}">
+											        <c:when test = "${ar.grade.gradeResult==100}">
 											            <td>A+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=90 and ar.grade.gradeResult<95}">
+											         <c:when test = "${ar.grade.gradeResult>=98 and ar.grade.gradeResult<100}">
 											             <td>A</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=85 and ar.grade.gradeResult<90}">
+											         <c:when test = "${ar.grade.gradeResult>=95 and ar.grade.gradeResult<98}">
+											             <td>A-</td>
+											         </c:when>
+											         <c:when test = "${ar.grade.gradeResult>=93 and ar.grade.gradeResult<95}">
 											             <td>B+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=80 and ar.grade.gradeResult<85}">
+											         <c:when test = "${ar.grade.gradeResult>=90 and ar.grade.gradeResult<93}">
 											             <td>B</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=75 and ar.grade.gradeResult<80}">
+											         <c:when test = "${ar.grade.gradeResult>=88 and ar.grade.gradeResult<90}">
+											             <td>B-</td>
+											         </c:when>
+											         <c:when test = "${ar.grade.gradeResult>=85 and ar.grade.gradeResult<88}">
 											             <td>C+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=70 and ar.grade.gradeResult<75}">
+											         <c:when test = "${ar.grade.gradeResult>=83 and ar.grade.gradeResult<85}">
 											             <td>C</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=65 and ar.grade.gradeResult<70}">
+											         <c:when test = "${ar.grade.gradeResult>=80 and ar.grade.gradeResult<83}">
+											             <td>C-</td>
+											         </c:when>
+											         <c:when test = "${ar.grade.gradeResult>=78 and ar.grade.gradeResult<80}">
 											             <td>D+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=60 and ar.grade.gradeResult<65}">
+											         <c:when test = "${ar.grade.gradeResult>=75 and ar.grade.gradeResult<78}">
 											             <td>D</td>
-											         </c:when>
+											          </c:when>   
+											           <c:when test = "${ar.grade.gradeResult>=73 and ar.grade.gradeResult<75}">
+											             <td>D-</td>
+											          </c:when>   
 											         <c:when test = "${empty ar.grade.gradeResult}">
 											             <td>미정</td>
 											         </c:when>
@@ -196,29 +208,41 @@
 											</c:choose>
 											<th style="background: #222d32; color: white; width: 16%">등급</th>
 											<c:choose>
-											         <c:when test = "${cCredit.gradeRe>=95}">
+											         <c:when test = "${cCredit.gradeRe==100}">
 											            <td style=" width: 16%">A+</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=90 and cCredit.gradeRe<95}">
+											         <c:when test = "${cCredit.gradeRe>=98 and cCredit.gradeRe<100}">
 											             <td style=" width: 16%">A</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=85 and cCredit.gradeRe<90}">
+											         <c:when test = "${cCredit.gradeRe>=95 and cCredit.gradeRe<98}">
+											             <td style=" width: 16%">A-</td>
+											         </c:when>
+											         <c:when test = "${cCredit.gradeRe>=93 and cCredit.gradeRe<95}">
 											             <td style=" width: 16%">B+</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=80 and cCredit.gradeRe<85}">
+											         <c:when test = "${cCredit.gradeRe>=90 and cCredit.gradeRe<93}">
 											             <td style=" width: 16%">B</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=75 and cCredit.gradeRe<80}">
+											         <c:when test = "${cCredit.gradeRe>=88 and cCredit.gradeRe<90}">
+											             <td style=" width: 16%">B-</td>
+											         </c:when>
+											         <c:when test = "${cCredit.gradeRe>=85 and cCredit.gradeRe<88}">
 											             <td style=" width: 16%">C+</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=70 and cCredit.gradeRe<75}">
+											         <c:when test = "${cCredit.gradeRe>=83 and cCredit.gradeRe<85}">
 											             <td style=" width: 16%">C</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=65 and cCredit.gradeRe<70}">
+											         <c:when test = "${cCredit.gradeRe>=80 and cCredit.gradeRe<83}">
+											             <td style=" width: 16%">C-</td>
+											         </c:when>
+											         <c:when test = "${cCredit.gradeRe>=78 and cCredit.gradeRe<80}">
 											             <td style=" width: 16%">D+</td>
 											         </c:when>
-											         <c:when test = "${cCredit.gradeRe>=60 and cCredit.gradeRe<65}">
+											         <c:when test = "${cCredit.gradeRe>=75 and cCredit.gradeRe<78}">
 											             <td style=" width: 16%">D</td>
+											         </c:when>
+											         <c:when test = "${cCredit.gradeRe>=73 and cCredit.gradeRe<75}">
+											             <td style=" width: 16%">D-</td>
 											         </c:when>
 											         <c:when test = "${empty cCredit.gradeRe}">
 											             <td style=" width: 16%">미정</td>
@@ -320,9 +344,9 @@
 	          			pointHighlightStroke: "rgba(151,187,205,1)",
 	          			data: [${cCredit.majorC}, ${cCredit.elseC}, ${cCredit.allC},${cCredit.gradeRe}]
 	          		}
-	          	]
-	          };  
-	    
+		          	]
+		          };  
+		    
 	      var ctxb = $("#barChartDemo").get(0).getContext("2d");
 	      var barChart = new Chart(ctxb).Bar(data);
 	      
