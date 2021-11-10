@@ -16,12 +16,12 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 공지사항</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/bootstrap/docs/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -115,9 +115,9 @@
 			                  		<c:when test="${ n.ntcCategory == 99 }">
 			                    		교양
 			                  		</c:when>
-			                  		<c:otherwise>
-			                  			기타
-			                  		</c:otherwise>
+			                  		<c:when test="${ n.ntcCategory == 100 }">
+			                    		복학
+			                  		</c:when>
 		                    	</c:choose>
 	                        
 	                        </td>

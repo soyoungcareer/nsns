@@ -257,6 +257,28 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 	}
-	
+//
+	@Override
+	public void deleteStuPrf(String profId) {
+
+		int result = memberDao.deleteStuPrf(sqlSession, profId);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+/*
+	@Override
+	public void studentUpdatePrf(int stuId) {
+
+		int result = memberDao.studentUpdatePrf(sqlSession, stuId);
+		
+		if(result < 0) {
+			throw new CommException("학적 변경 중 에러가 발생하였습니다.");
+		}
+		
+	}
+	*/
 
 }

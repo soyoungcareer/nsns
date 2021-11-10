@@ -51,4 +51,10 @@ public interface MemberService {
 
 	void stuOnUpdate(int stuId);
 
+	void deleteStuPrf(String profId);
+//
+	//void studentUpdatePrf(int stuId);
+
+	//void studentUpdatePrf(String profId);
+
 }

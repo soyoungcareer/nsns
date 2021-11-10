@@ -56,7 +56,7 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">            
-            <li><a class="dropdown-item" href="logout.adm"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            <li><a class="dropdown-item" href="logout.adm"><i class="fa fa-sign-out fa-lg"></i> 로그아웃</a></li>
           </ul>
         </li>
       </ul>
@@ -67,7 +67,7 @@
       <div class="app-sidebar__user">
       <!-- <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image"> -->
         <div>
-          <p class="app-sidebar__user-name">관리자</p>
+          <p class="app-sidebar__user-name"> &nbsp;&nbsp; admin <br> &nbsp;&nbsp;낙성대학교 관리자</p>
         </div>
       </div>
       <ul class="app-menu">

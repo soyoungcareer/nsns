@@ -126,6 +126,21 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.stuOnUpdate", stuId);
 	}
 
+	public int deleteStuPrf(SqlSessionTemplate sqlSession, String profId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.deleteStuPrf", profId);
+	}
+
+	public int studentUpdatePrf(SqlSessionTemplate sqlSession, int stuId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.studentUpdatePrf", stuId);
+	}
+
+	public int studentUpdatePrf(SqlSessionTemplate sqlSession, int stuId, String profId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.studentUpdatePrf", stuId);
+	}
+
 	
 
 }

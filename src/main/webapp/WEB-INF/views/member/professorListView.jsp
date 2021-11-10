@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 교수 계정 조회</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,7 +69,9 @@
 	                        <td>${ p.profDeptTitle }</td>
 	                        <td>${ p.profEmail }</td>
 	                        <td>${ p.profPhone }</td>
-	                        <td>${ p.profStatus }</td>
+	                        <td>${ p.profStatus }
+	                        	<input type="hidden" name="profStatus" value="${ p.profStatus }">
+	                        </td>
 	                        <td>
 	                        	<button class="btn btn-primary">삭제</button>
 	                        </td>
@@ -127,9 +129,29 @@
     <script>
     	$(function(){
     		$("#prfListTable tbody tr button").click(function(){
-    			location.href="prfDelete.adm?profId=" + $(this).parent().parent().children().eq(0).text();
+    			var answer = confirm("해당 교수를 비활성화 하겠습니까?");
+    			if(answer == true){
+    				location.href="prfDelete.adm?profId=" + $(this).parent().parent().children().eq(0).text();
+    			}
     		});
     	});
+    </script>
+    
+    <script>
+    	
+    /*$(function(){
+    		var status = $('input[name=profStatus]').val();
+    		if(status == 'N'){
+    	        $('.btn').attr('disabled', 'true');
+			}
+    	});*/
+    	$(function(){
+    		//var status = ${ p.profStatus }
+    		if("${ p.profStatus }" == 'N'){
+    	        $('.btn').attr('disabled', 'true');
+			}
+    	});
+    	
     </script>
     
     <!-- Essential javascripts for application to work-->

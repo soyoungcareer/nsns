@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 공지사항</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,44 +61,44 @@
                     <input class="form-control" id="ntcCategory" name="ntcCategory" type="hidden" value="${ n.ntcCategory }" readonly>
                     <c:choose>
                     	<c:when test="${ n.ntcCategory == 91 }">
-                    		<input class="form-control" value="전체">
+                    		<input class="form-control" value="전체" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 92 }">
-                    		<input class="form-control" value="학사">
+                    		<input class="form-control" value="학사" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 93 }">
-                    		<input class="form-control" value="학생">
+                    		<input class="form-control" value="학생" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 1 }">
-                    		<input class="form-control" value="경제학">
+                    		<input class="form-control" value="경제학" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 2 }">
-                    		<input class="form-control" value="국어국문">
+                    		<input class="form-control" value="국어국문" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 3 }">
-                    		<input class="form-control" value="철학">
+                    		<input class="form-control" value="철학" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 4 }">
-                    		<input class="form-control" value="호텔경영">
+                    		<input class="form-control" value="호텔경영" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 5 }">
-                    		<input class="form-control" value="시각디자인">
+                    		<input class="form-control" value="시각디자인" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 6 }">
-                    		<input class="form-control" value="역사학">
+                    		<input class="form-control" value="역사학" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 7 }">
-                    		<input class="form-control" value="정보통신">
+                    		<input class="form-control" value="정보통신" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 8 }">
-                    		<input class="form-control" value="연극영화">
+                    		<input class="form-control" value="연극영화" readonly>
                   		</c:when>
                   		<c:when test="${ n.ntcCategory == 99 }">
-                    		<input class="form-control" value="교양">
+                    		<input class="form-control" value="교양" readonly>
                   		</c:when>
-                  		<c:otherwise>
-                  			<input class="form-control" value="기타">
-                  		</c:otherwise>
+                  		<c:when test="${ n.ntcCategory == 100 }">
+                  			<input class="form-control" value="복학" readonly>
+                  		</c:when>
                   </c:choose>
                   </div>
                   <div class="form-group">

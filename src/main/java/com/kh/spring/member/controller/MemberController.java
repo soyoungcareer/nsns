@@ -56,8 +56,6 @@ public class MemberController {
 	@RequestMapping("login.mem") // 로그인 페이지 이동
 	public String loginPage(HttpSession session) {
 
-		//session.invalidate();
-
 		return "member/loginPage";
 	}
 
@@ -130,20 +128,9 @@ public class MemberController {
 			return "redirect:profLectureDetail.pr";
 
 		} else {
-			/*
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>alert('체크 사항 및 아이디, 비밀번호를 다시 확인해 주세요.'); </script>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				
-			}*/
+			
 			throw new CommException("로그인 실패");
-			//return "redirect:/";
+			
 			
 		}
 
@@ -154,8 +141,6 @@ public class MemberController {
 	public String logoutAdmin(HttpSession session) {
 
 		session.invalidate();
-		System.out.println("로그아웃되었습니다.");
-
 		return "redirect:/";
 	}
 
@@ -267,6 +252,19 @@ public class MemberController {
 
 		return "member/professorListView";
 	}
+	
+	//-------------- 학생 담당교수 변경--------------
+	@RequestMapping("stuUpdatePrf.adm") //
+	public String studentUpdatePrf(int stuId, @RequestParam("profId") String profId) {
+		
+		//request.getParameter("stuId");
+		System.out.println("MC_start stuId : " + stuId);
+		//memberService.studentUpdatePrf(stuId);
+		System.out.println("MC_start profId : " + profId);
+		//memberService.studentUpdatePrf(profId);
+
+		return "redirect:stuList.adm";
+	}
 
 	//-------------- 계정 삭제 --------------
 	@RequestMapping("stuDelete.adm") //학생 계정 제한 - 퇴학
@@ -275,7 +273,6 @@ public class MemberController {
 		//request.getParameter("stuId");
 		System.out.println("MC_start stuId : " + stuId);
 		memberService.deleteStudent(stuId);
-		//System.out.println("MC_finish stuId : " + stuId);
 
 		return "redirect:stuList.adm";
 	}
@@ -283,11 +280,13 @@ public class MemberController {
 	
 	@RequestMapping("prfDelete.adm") //교수관리-교수 삭제 - 계약 종료
 	public String deleteProfessor(String profId, HttpServletRequest request
-									) { //, @RequestParam("profId") String profId, HttpServletRequest request
+									) {
 
 		profId = request.getParameter("profId");
 		System.out.println("MC_start profId : " + profId);
 		memberService.deleteProfessor(profId);
+		
+		//memberService.deleteStuPrf(profId);
 
 		return "redirect:prfList.adm";
 	}
@@ -359,7 +358,7 @@ public class MemberController {
 	public String stuOnStaUpdate(int stsNo, HttpServletRequest request
 								, int stuId) {
 
-		memberService.stuOnStaUpdate(stsNo);
+		//memberService.stuOnStaUpdate(stsNo);
 		System.out.println("MC stsNo 복학: " + stsNo);
 		
 		System.out.println("MC start stuId 복학 : " + stuId);

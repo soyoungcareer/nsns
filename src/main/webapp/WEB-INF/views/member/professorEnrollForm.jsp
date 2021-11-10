@@ -105,7 +105,7 @@
                   	}
                   </script>
                   
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="profYear">연도</label>
                     <select class="form-control" id="profYear" onchange="">
                      
@@ -114,7 +114,7 @@
                   
                   <script type="text/javascript">
                   	
-                  </script>
+                  </script> -->
                   
                 
                 <div class="form-group">
