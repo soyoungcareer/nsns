@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 공지사항</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,32 +46,13 @@
             <div class="row">
               <div class="col-lg-6">
                 <form id="noticeUpdateForm" method="post" action="update.ntc" enctype="multipart/form-data">
-                	<!-- <table style="width:300px">
-                		<tr>
-                			<td><label class="control-label">제목</label></td>
-                			<td class="form-control">${ n.ntcTitle }</td>
-                			<!-- <td><input class="form-control" type="text" placeholder="글자 수 제한 255Byte" value="${ n.ntcTitle }" maxlength="255" readonly></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td></td>
-                		</tr>
-                		<tr>
-                			<td>수정날짜(작성날짜 외)</td>
-                		</tr>
-                	</table> -->
-                  <!-- form all -->
+                
                   <input type="hidden" name="ntcNo" value="${ n.ntcNo }">
                   <div class="form-group">
 	                <label class="control-label">제목</label>
 	                <input class="form-control" type="text" id="ntcTitle" name="ntcTitle" placeholder="글자 수 제한 255byte" value="${ n.ntcTitle }" maxlength="255" required>
                   </div>
-					<!-- 에러 시 name -->
+				
                   <div class="form-group">
                     <label for="ntcCategory">분류</label>
                     <select class="form-control" id="ntcCategory" name="ntcCategory" value="${ n.ntcCategory }">
@@ -87,6 +68,7 @@
                       <option value=7>정보통신</option>
                       <option value=8>연극영화</option>
                       <option value=99>교양</option>
+                      <option value=100>복학</option>
                     </select>
                   </div>
                   <div class="form-group">

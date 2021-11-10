@@ -29,4 +29,5 @@ public class Student { //학생
 	private Date graduationDate; //졸업날짜
 	private Date addmissionDate; //입학날짜
 	private String stuStatus; //학적상태 (재학, 졸업, 휴학, 자퇴)
+	private String profStatus;
 }

@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 학생 계정 조회</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +44,7 @@
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
                     <tr>
-                      <th>신청번호</th>
+                      <!-- <th>신청번호</th> -->
                       <th>학번</th>
                       <th>이름</th>
                       <th>학과</th>
@@ -53,10 +53,10 @@
                       <th>휴학학기 수</th><!-- 휴학기간 -->
                       <!-- <th>신청일자</th> -->
                       <th>신청단계</th>
-                      <th>복학여부</th>
+                      <th>처리결과</th>
                       <th>신청내용</th>
                       <!-- <th>상태</th> -->                      
-                      <th>기존신청번호</th>
+                      <!-- <th>기존신청번호</th> -->
                       <th>담당교수</th>
                       <th>승인</th><!-- 학적변경승인 -->
                       <th>복학</th>
@@ -66,21 +66,23 @@
                   
                   	<c:if test="${ empty staList }">
                   		<tr>
-                  			<td colspan=14>휴학 신청이 없습니다.</td>
+                  			<td colspan=12>휴학 신청이 없습니다.</td>
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ staList }" var="sta">
 	                    <tr>
-	                    	<td>${ sta.stsNo }
+	                    	<!-- <td>${ sta.stsNo }
 	                    		<input type="hidden" id="stsNo" name="stsNo" value="${ sta.stsNo }">
-	                    	</td>                   
+	                    	</td> -->                   
 	                        <td>${ sta.stuId }
 	                        	<input type="hidden" id="stuId" name="stuId" value="${ sta.stuId }">
+	                        	<input type="hidden" id="stsNo" name="stsNo" value="${ sta.stsNo }">
 	                        </td>
 	                        <td>${ sta.stuName }</td>                      
 	                        <td>${ sta.deptTitle }
 	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ sta.deptCode }">
 	                        	<input type="hidden" id="deptTitle" name="deptTitle" value="${ sta.deptTitle }">
+	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }">
 	                        </td>
 	                        <td>${ sta.offCategory }
 	                        	<input type="hidden" id="offCategory" name="offCategory" value="${ sta.offCategory }">
@@ -100,9 +102,9 @@
 	                        <td>${ sta.stsComplete }
 	                        	<input type="hidden" id="stsComplete" name="stsComplete" value="${ sta.stsComplete }" readonly>
 	                        </td>
-	                        <td>${ sta.applicationNo }
-	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }" readonly>
-	                        </td>
+	                        <!-- <td>${ sta.applicationNo }
+	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }">
+	                        </td> -->
 	                        <td>${ sta.profName }
 	                        	<input type="hidden" id="profName" name="profName" value="${ sta.profName }" readonly>
 	                        	<input type="hidden" id="profId" name="profId" value="${ sta.profId }">
@@ -205,10 +207,10 @@
         nowMins = changeNum(nowMins);
     	
     	var nowtime = nowMonth + nowDay + nowHour + nowMins;	
-    	var startDateWinter = 01011200 //겨울 시작 시간 : 1월 1일 자정
-    	var endDateWinter = 03311159 //겨울 끝 시간 : 3월 31일 11시 59분
-    	var startDateSummer = 07011200 //여름 시작 시간 : 7월 1일 자정
-    	var endDateSummer = 09311159 //여름 끝 시간 : 8월 31일 11시 59분
+    	var startDateWinter = 01011200
+    	var endDateWinter = 03311159
+    	var startDateSummer = 07011200
+    	var endDateSummer = 09311159
     	/*
     	if(endDateWinter < nowtime){
             $('.btn').attr('disabled', 'true');

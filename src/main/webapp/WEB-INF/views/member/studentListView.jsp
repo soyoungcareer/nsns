@@ -64,17 +64,31 @@
                     <c:forEach items="${ sList }" var="s">
 	                    <tr>
 	                        <td>${ s.stuId }
-	                        	<input type="hidden" name="stuId" value="${ s.stuId }">
+	                        	<!-- <input type="hidden" name="stuId" value="${ s.stuId }"> -->
 	                        </td>
 	                        <td>${ s.stuName }</td>
 	                        <td>${ s.deptName }</td>
 	                        <td>${ s.email }</td>
 	                        <td>${ s.phone }</td>
-	                        <td>${ s.proName }</td>
+	                        <td>
+	                        	<input type="hidden" name="profStatus" value="${ s.profStatus }">
+	                        	<!-- <input type="hidden" name="proName" value="${ s.proName }"> -->
+	                        	<c:if test="${ s.profStatus == 'Y' }">
+	                        		${ s.proName }
+	                        	</c:if>
+	                        	<c:if test="${ s.profStatus == 'N' }">
+	                        		<input type="submit" class="btn btn-outline-danger" value="없음">
+	                        	</c:if>
+	                        	
+	                        	<form id="profIdChange" method="post" action="">
+	                        	<input type="hidden" name="profId" value="${ s.profId }">	                        	
+	                        	<input type="hidden" name="stuId" value="${ s.stuId }"></form>
+	                        </td>
 	                        <td>${ s.stuStatus }</td>
 	                        <td>
 	                        	<button class="btn btn-primary">삭제</button>
 	                        </td>
+	                        
 	                    </tr>
                     </c:forEach>
                     
@@ -128,11 +142,57 @@
     <script>
     	$(function(){
     		$("#stuListTable tbody tr button").click(function(){
-    			location.href="stuDelete.adm?stuId=" + $(this).parent().parent().children().eq(0).text();
+    			
+    			var answer = confirm("해당 학생을 퇴학 처리하겠습니까?");
+    			if(answer == true){
+    				location.href="stuDelete.adm?stuId=" + $(this).parent().parent().children().eq(0).text();
+    			}
+    			
     		});
     		
     	});
     </script>
+    <script type="text/javascript">
+    	$(document).on("click", "#stuListTable tbody tr td input", function(){ //"#stuListTable tbody tr td:nth-child(6)" 교수 이름 칸 선택
+    		
+    		//if($("input[name=profStatus]").val()=="N"){
+    			var result = prompt("변경할 담당교수의 교번을 입력하세요.");
+        		
+        		if(result != ""){
+        			//$("input[name=profId]").text(result);
+
+        			var stuUpdate = $("#profIdChange");
+        			
+        			stuUpdate.attr("action", "stuUpdatePrf.adm");
+        			
+        			stuUpdate.submit();
+        		}else{
+        			alert("다시 입력하세요.");
+        		}
+        		
+        		
+        			
+        		
+        		
+    		//}
+    	
+    		
+    	});
+    </script>
+    <!-- <script>
+    
+    	$(function(){
+    		$("#stuListTable tbody tr").click(function(){
+    			/*if(${ s.profStatus == 'N' }){
+    				$("input[name=profId]").attr("type", "text");
+    				
+    			}*/
+    			
+    			location.href="stuUpdatePrf.adm?stuId=" + $(this).children().eq(0).text();
+    		});
+    		
+    	});
+    </script> -->
     
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -145,7 +205,7 @@
     <!-- Data table plugin-->
     <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">$('#stuListTable').DataTable();</script>
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {

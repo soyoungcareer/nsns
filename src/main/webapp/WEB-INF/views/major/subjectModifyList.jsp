@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 강의 관리</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,6 +69,7 @@
 	                        <td>${ sl.reqSubNo }</td>
 	                        <td>${ sl.subTitle }</td>
 	                        <td>${ sl.deptTitle }
+	                        	<input type="hidden" id="deptTitle" name="deptTitle" value="${ sl.deptTitle }">
 	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ sl.deptCode }">
 	                        </td><!-- deptCode -->	                        
 	                        <td>${ sl.profName }
