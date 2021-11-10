@@ -52,14 +52,14 @@
 	<aside class="app-sidebar">
 		<div class="app-sidebar__user">
 			<div style="margin-left: 10px">
-				    <c:if test="${not empty loginPrf }">
-         	 <p class="app-sidebar__user-name">${loginPrf.profName }</p>
-          	<p class="app-sidebar__user-designation">교번 : ${loginPrf.profId }</p>
+				    <c:if test="${not empty loginStu }">
+         	 <p class="app-sidebar__user-name">${loginStu.stuName }</p>
+          	<p class="app-sidebar__user-designation">교번 : ${loginStu.stuId }</p>
          </c:if>
          
           <c:if test="${not empty loginAdm }">
-         	<p class="app-sidebar__user-name">괸리자</p>
-          	<p class="app-sidebar__user-designation">ADMIN</p>
+                 <p class="app-sidebar__user-name">admin</p>
+          <p class="app-sidebar__user-designation">낙성대학교 관리자</p>
          </c:if>
 			</div>
 		</div>

@@ -42,11 +42,11 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">김경준</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">정보통신공학과</a></li>
+						aria-current="page" href="#">교수용</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">/a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
 						<ul class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Action</a></li>
@@ -87,7 +87,7 @@
                   </div>
                 
                 </div>
-                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Insert</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Insert</button>&nbsp;&nbsp;&nbsp;<a class="btn btn-secondary" href="lecMoves.me?no=${no}&id='1'"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
               
               </form>
             </div>
