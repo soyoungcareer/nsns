@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 학생 계정 조회</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,9 +40,9 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-            <form action="stuDelete.adm" method="post">
+            
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
+                <table class="table table-hover table-bordered" id="stuListTable">
                   <thead align="center">
                     <tr>
                       <th>학번</th>
@@ -81,7 +81,7 @@
                   </tbody>
                 </table>
               </div>
-              </form>
+              
             </div>
           </div>
         </div>
@@ -113,7 +113,6 @@
 	                	</c:choose>
                     </c:forEach>
                     
-                    
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
                 			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
@@ -125,14 +124,14 @@
                 </ul>
             </div>
             
-            
     </main>
-    <!-- <script>
+    <script>
     	$(function(){
-    		$("#sampleTable tbody tr").click(function(){
-    			location.href="stuDelete.adm?stuId=" + $(this).children().eq(0).text();
+    		$("#stuListTable tbody tr button").click(function(){
+    			location.href="stuDelete.adm?stuId=" + $(this).parent().parent().children().eq(0).text();
     		});
-    	}); -->
+    		
+    	});
     </script>
     
     <!-- Essential javascripts for application to work-->

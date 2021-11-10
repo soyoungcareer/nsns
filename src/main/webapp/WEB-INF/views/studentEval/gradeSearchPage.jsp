@@ -288,7 +288,7 @@
 				$("#modelAbout").html("");
 				$("#gradeAboutModal").modal('show');
 				var value="";
-				if(typeof grDetail!='object'){
+				if(grDetail.grade.gradeResult==null){
 					value +='<div class="form-group row">'+
 							'<h2 class="col-md-12">'+
 								'해당 성적이 입력되지 않아, 성적확인이 불가능합니다.'+
@@ -403,10 +403,10 @@
 					$("#objecModal").html("");
 					$("#gradeObjModal").modal('show');
 					var value="";
-					if(typeof grDetail!='object'){
+					if(grDetail.grade.gradeResult==null){
 						value +='<div class="form-group row">'+
 								'<h2 class="col-md-12">'+
-									'해당 성적이 입력되지 않아, 이의 신청이 불가능 합니다.'+
+									'해당 성적이 입력되지 않아, 이의 신청이 불가능 합니다.'
 									'</h2>'+
 									'</div>'
 						$("#objSubmit").css('display', 'none');

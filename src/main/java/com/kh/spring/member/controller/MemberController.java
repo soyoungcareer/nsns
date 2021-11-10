@@ -1,9 +1,12 @@
 package com.kh.spring.member.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +66,8 @@ public class MemberController {
 
 	public String loginMember(Admin a, Student s, Professor p, Model model, HttpSession session,
 			@RequestParam("position") String position, @RequestParam("userId") String userId,
-			@RequestParam("userPwd") String userPwd) {
+			@RequestParam("userPwd") String userPwd
+			, HttpServletResponse response) {
 
 		if(session.getAttribute("loginStu")!=null) {
 			session.removeAttribute("loginStu");
@@ -82,7 +86,6 @@ public class MemberController {
 		session.setAttribute("position", position);
 		if (position.equals("admin")) {
 
-
 			a.setAdmId(userId);
 			a.setAdmPwd(userPwd);
 
@@ -100,7 +103,6 @@ public class MemberController {
 			
 		}else if(position.equals("student")) {
 			
-
 			s.setStuId(Integer.parseInt(userId));
 			s.setStuPwd(userPwd);
 
@@ -128,7 +130,20 @@ public class MemberController {
 			return "redirect:profLectureDetail.pr";
 
 		} else {
+			/*
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('체크 사항 및 아이디, 비밀번호를 다시 확인해 주세요.'); </script>");
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}*/
 			throw new CommException("로그인 실패");
+			//return "redirect:/";
 			
 		}
 
@@ -267,10 +282,10 @@ public class MemberController {
 
 	
 	@RequestMapping("prfDelete.adm") //교수관리-교수 삭제 - 계약 종료
-	public String deleteProfessor(HttpServletRequest request
-									) { //, @RequestParam("profId") String profId
+	public String deleteProfessor(String profId, HttpServletRequest request
+									) { //, @RequestParam("profId") String profId, HttpServletRequest request
 
-		String profId = request.getParameter("profId");
+		profId = request.getParameter("profId");
 		System.out.println("MC_start profId : " + profId);
 		memberService.deleteProfessor(profId);
 

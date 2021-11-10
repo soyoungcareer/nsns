@@ -40,9 +40,9 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-            <form id="profDeleteForm" action="prfDelete.adm" method="post">
+            
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
+                <table class="table table-hover table-bordered" id="prfListTable">
                   <thead align="center">
                     <tr>
                       <th>교번</th>
@@ -71,7 +71,7 @@
 	                        <td>${ p.profPhone }</td>
 	                        <td>${ p.profStatus }</td>
 	                        <td>
-	                        	<button class="btn btn-primary" type="submit">삭제</button>
+	                        	<button class="btn btn-primary">삭제</button>
 	                        </td>
 	                    </tr>
                     </c:forEach>
@@ -79,7 +79,7 @@
                   </tbody>
                 </table>
               </div>
-              </form>
+              
             </div>
           </div>
         </div>
@@ -124,13 +124,13 @@
             
             
     </main>
-    <!-- <script>
+    <script>
     	$(function(){
-    		$("#sampleTable tbody tr").click(function(){
-    			location.href="prfDelete.adm?profId=" + $(this).children().eq(0).text();
+    		$("#prfListTable tbody tr button").click(function(){
+    			location.href="prfDelete.adm?profId=" + $(this).parent().parent().children().eq(0).text();
     		});
     	});
-    </script> -->
+    </script>
     
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>

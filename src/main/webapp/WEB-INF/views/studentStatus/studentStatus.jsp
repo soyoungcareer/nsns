@@ -195,7 +195,7 @@
     		              				+ '</tr>'+'</tbody> </table> </div>'
     		              				
     								} else if(stsPro == '관리자승인대기'){
-    		              					str2 += '<tbody> <tr>'+'<td>'+
+    		              					str2 += '<tbody> <tr>'+'<td>'
     										+ "관리자 승인 대기중" + '</td><td>'
     										+ "해당 신청은 취소가 불가합니다. 관리자에게 문의해주세요"+'</td>'
     		              					+ '</tr>'+'</tbody> </table> </div>'

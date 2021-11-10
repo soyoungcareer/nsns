@@ -15,7 +15,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 교수 등록</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -105,8 +105,8 @@
                   	}
                   </script>
                   
-                  <!-- <div class="form-group">
-                    <label for="profYear">학과</label>
+                  <div class="form-group">
+                    <label for="profYear">연도</label>
                     <select class="form-control" id="profYear" onchange="">
                      
                     </select>
@@ -114,13 +114,16 @@
                   
                   <script type="text/javascript">
                   	
-                  </script> -->
+                  </script>
                   
                 
                 <div class="form-group">
                   <label class="control-label">교번 생성</label>
                   <input class="form-control" type="text" id="profId" name="profId" required>
+                  
                 </div>
+                
+                
                 
                 <div class="tile-footer">
               		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>&nbsp;&nbsp;&nbsp;
