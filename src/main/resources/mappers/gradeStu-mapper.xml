@@ -227,7 +227,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN PROFESSOR C ON B.PROF_ID=C.PROF_ID
 		LEFT JOIN DEPARTMENT D ON B.DEPT_CODE=D.DEPT_CODE
 		LEFT JOIN GRADE E ON A.STU_ID=E.STU_ID AND B.SUB_CODE=E.SUB_CODE
-		WHERE A.SUB_CODE=#{subCode} AND A.STU_ID=#{stuId} AND A.YEAR=#{year} AND A.SEMESTER=#{semester} AND A.STATUS='Y'
+		WHERE A.SUB_CODE=#{subCode} AND A.STU_ID=#{stuId} AND A.YEAR=#{year} AND A.SEMESTER=#{semester} AND E.GRADE_YEAR=#{year} AND E.GRADE_SEMESTER=#{semester} AND A.STATUS='Y'
 </select>
 <select id="objectList" parameterType="_int" resultMap="GradeObjectSet">
 		SELECT *
