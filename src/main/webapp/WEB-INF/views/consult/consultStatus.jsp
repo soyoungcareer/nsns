@@ -168,7 +168,7 @@
     		              				+ '</tr>'+'</tbody> </table> </div>'
     		              				
     								} else if(conPro == '승인완료'){
-    									str2 += '<tbody> <tr>'+'<td>'+
+    									str2 += '<tbody> <tr>'+'<td>'
     										+ "승인 완료" + '</td><td>'
     										+ "승인 완료된 신청은 취소가 불가합니다."+'</td>'
     		              					+ '</tr>'+'</tbody> </table> </div>'
