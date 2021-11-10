@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    <title>낙성대학교 학사행정시스템</title>
+    <title>낙성대학교</title>
   </head>
   
   <body>
@@ -31,7 +32,7 @@
       
       <div class="login-box"  style="margin-bottom:20px;">
       
-        <form id="loginForm" class="login-form" action="login.ber" method="post">
+        <form id="loginForm" name="loginCheck" action="login.ber" class="login-form" method="post"><!-- action="login.ber"  -->
           <h4 class="login-head">로그인</h4>
           <div class="login-position">         	
           	<input id="stuLogin" type="radio" name="position" value="student" />
@@ -47,16 +48,10 @@
           <div class="form-group">
             <label class="control-label">학번/교번</label>
             <input class="form-control" type="text" id="userId" name="userId">
-            <!-- <input class="form-control" type="text" id="admId" name="admId" placeholder="admin">
-            <input class="form-control" type="hidden" id="stuId" name="stuId" placeholder="student">
-            <input class="form-control" type="text" id="profId" name="profId" placeholder="professor"> -->
           </div>
           <div class="form-group">
             <label class="control-label">비밀번호</label>
             <input class="form-control" type="password" id="userPwd" name="userPwd">
-            <!-- <input class="form-control" type="password" id="admPwd" name="admPwd" placeholder="admin">
-            <input class="form-control" type="hidden" id="stuPwd" name="stuPwd" placeholder="student">
-            <input class="form-control" type="password" id="profPwd" name="profPwd" placeholder="professor"> -->
           </div>
           <div class="form-group">
             <div class="utility">
@@ -69,13 +64,32 @@
             </div>
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>로그인</button>
+            <button class="btn btn-primary btn-block" onclick="loginAlert();"><i class="fa fa-sign-in fa-lg fa-fw"></i>로그인</button>
           </div>
         </form>
         
         
       </div>
     </section>
+    
+    <script>
+    	function loginAlert(){
+    		var formCh = document.loginCheck;
+    		if(!formCh.userId.value){
+    			alert("직번/교번을 입력하세요.");
+    			formCh.userId.focus();
+    			return false;
+    		}
+    		if(!formCh.userPwd.value){
+    			alert("비밀번호를 입력하세요.");
+    			formCh.userPwd.focus();
+    			return false;
+    		}
+    		
+    		//formCh.action = "login.ber";
+    		formCh.submit();
+    	}
+    </script>
     				
     				
     <script>

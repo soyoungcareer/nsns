@@ -1,6 +1,10 @@
 package com.kh.spring.member.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +28,29 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 
 	@Override
-	public Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a) { //BCryptPasswordEncoder bCPwdEncoder, 
+	public Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a) {
 
 		Admin loginAdm = memberDao.loginAdmin(sqlSession, a);
 		
 		if(loginAdm == null) {
-			throw new CommException("관리자 로그인 중 오류가 발생하였습니다.");
+			//throw new CommException("관리자 로그인 중 오류가 발생하였습니다.");
+			
+			
+			
+			/////////
+			/*HttpServletResponse response = null;
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = null;
+			try {
+				out = response.getWriter();
+			} catch (IOException e) {
+				out.println("<script>alert('옵션 체크를 다시 확인해 주세요.'); </script>");
+				out.flush();
+			}*/
+			///////////
+			
 		}
+		
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + bCPwdEncoder.encode(a.getAdmPwd()));
 		System.out.println(bCPwdEncoder.matches(a.getAdmPwd(), loginAdm.getAdmPwd()));
 		
