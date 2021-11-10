@@ -93,30 +93,42 @@
 						                        <td>${ ar.department.deptTitle }</td>
 						                        <td>${ ar.subject.subCredit }</td>
 						                        <c:choose>
-											         <c:when test = "${ar.grade.gradeResult>=95}">
+											         <c:when test = "${ar.grade.gradeResult==100}">
 											            <td>A+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=90 and ar.grade.gradeResult<95}">
+											         <c:when test = "${ar.grade.gradeResult>=98 and ar.grade.gradeResult<100}">
 											             <td>A</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=85 and ar.grade.gradeResult<90}">
+											         <c:when test = "${ar.grade.gradeResult>=95 and ar.grade.gradeResult<98}">
+											             <td>A-</td>
+											         </c:when>
+											         <c:when test = "${ar.grade.gradeResult>=93 and ar.grade.gradeResult<95}">
 											             <td>B+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=80 and ar.grade.gradeResult<85}">
+											         <c:when test = "${ar.grade.gradeResult>=90 and ar.grade.gradeResult<93}">
 											             <td>B</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=75 and ar.grade.gradeResult<80}">
+											         <c:when test = "${ar.grade.gradeResult>=88 and ar.grade.gradeResult<90}">
+											             <td>B-</td>
+											         </c:when>
+											         <c:when test = "${ar.grade.gradeResult>=85 and ar.grade.gradeResult<88}">
 											             <td>C+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=70 and ar.grade.gradeResult<75}">
+											         <c:when test = "${ar.grade.gradeResult>=83 and ar.grade.gradeResult<85}">
 											             <td>C</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=65 and ar.grade.gradeResult<70}">
+											         <c:when test = "${ar.grade.gradeResult>=80 and ar.grade.gradeResult<83}">
+											             <td>C-</td>
+											         </c:when>
+											         <c:when test = "${ar.grade.gradeResult>=78 and ar.grade.gradeResult<80}">
 											             <td>D+</td>
 											         </c:when>
-											         <c:when test = "${ar.grade.gradeResult>=60 and ar.grade.gradeResult<65}">
+											         <c:when test = "${ar.grade.gradeResult>=75 and ar.grade.gradeResult<78}">
 											             <td>D</td>
-											         </c:when>
+											          </c:when>   
+											           <c:when test = "${ar.grade.gradeResult>=73 and ar.grade.gradeResult<75}">
+											             <td>D-</td>
+											          </c:when>   
 											         <c:when test = "${empty ar.grade.gradeResult}">
 											             <td>미정</td>
 											         </c:when>
@@ -348,22 +360,30 @@
 						'<div class="form-group row">' +
 						 '<label class="control-label col-md-2">등급 </label>'+
 							'<div class="col-md-4">'
-							if(grDetail.grade.gradeResult>=95){
+						 if(grDetail.grade.gradeResult==100){
 								value +='<input class="form-control col-md-12" type="text" disabled value="A+">'
-						      }else if(grDetail.grade.gradeResult>=90 && grDetail.grade.gradeResult<95){
+						      }else if(grDetail.grade.gradeResult>=98 && grDetail.grade.gradeResult<100){
 						    	value +='<input class="form-control col-md-12" type="text" disabled value="A">'
-						      }else if(grDetail.grade.gradeResult>=85 && grDetail.grade.gradeResult<90){
+						      }else if(grDetail.grade.gradeResult>=95 && grDetail.grade.gradeResult<98){
+							    	value +='<input class="form-control col-md-12" type="text" disabled value="A-">'
+						      }else if(grDetail.grade.gradeResult>=93 && grDetail.grade.gradeResult<95){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="B+">'
-						      }else if(grDetail.grade.gradeResult>=80 && grDetail.grade.gradeResult<85){
+						      }else if(grDetail.grade.gradeResult>=90 && grDetail.grade.gradeResult<93){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="B">'
-						      }else if(grDetail.grade.gradeResult>=75 && grDetail.grade.gradeResult<80){
+						      }else if(grDetail.grade.gradeResult>=88 && grDetail.grade.gradeResult<90){
+							    	value +='<input class="form-control col-md-12" type="text" disabled value="B-">'
+						      }else if(grDetail.grade.gradeResult>=85 && grDetail.grade.gradeResult<88){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="C+">'
-						      }else if(grDetail.grade.gradeResult>=70 && grDetail.grade.gradeResult<75){
+						      }else if(grDetail.grade.gradeResult>=83 && grDetail.grade.gradeResult<85){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="C">'
-						      }else if(grDetail.grade.gradeResult>=65 && grDetail.grade.gradeResult<70){
+						      }else if(grDetail.grade.gradeResult>=80 && grDetail.grade.gradeResult<83){
+							    	value +='<input class="form-control col-md-12" type="text" disabled value="C-">'
+						      }else if(grDetail.grade.gradeResult>=78 && grDetail.grade.gradeResult<80){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="D+">'
-						      }else if(grDetail.grade.gradeResult>=60 && grDetail.grade.gradeResult<65){
+						      }else if(grDetail.grade.gradeResult>=75 && grDetail.grade.gradeResult<78){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="D">'
+						      }else if(grDetail.grade.gradeResult>=73 && grDetail.grade.gradeResult<75){
+							    	value +='<input class="form-control col-md-12" type="text" disabled value="D-">'
 						      }else if(typeof grDetail.grade.gradeResult== "undefined"){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="미정">'
 						      } else{
@@ -436,22 +456,30 @@
 								'<div class="form-group row">' +
 								 '<label class="control-label col-md-2">등급 </label>'+
 									'<div class="col-md-4">'
-									if(grDetail.grade.gradeResult>=95){
+									if(grDetail.grade.gradeResult==100){
 										value +='<input class="form-control col-md-12" type="text" disabled value="A+">'
-								      }else if(grDetail.grade.gradeResult>=90 && grDetail.grade.gradeResult<95){
+								      }else if(grDetail.grade.gradeResult>=98 && grDetail.grade.gradeResult<100){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="A">'
-								      }else if(grDetail.grade.gradeResult>=85 && grDetail.grade.gradeResult<90){
+								      }else if(grDetail.grade.gradeResult>=95 && grDetail.grade.gradeResult<98){
+									    	value +='<input class="form-control col-md-12" type="text" disabled value="A-">'
+								      }else if(grDetail.grade.gradeResult>=93 && grDetail.grade.gradeResult<95){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="B+">'
-								      }else if(grDetail.grade.gradeResult>=80 && grDetail.grade.gradeResult<85){
+								      }else if(grDetail.grade.gradeResult>=90 && grDetail.grade.gradeResult<93){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="B">'
-								      }else if(grDetail.grade.gradeResult>=75 && grDetail.grade.gradeResult<80){
+								      }else if(grDetail.grade.gradeResult>=88 && grDetail.grade.gradeResult<90){
+									    	value +='<input class="form-control col-md-12" type="text" disabled value="B-">'
+								      }else if(grDetail.grade.gradeResult>=85 && grDetail.grade.gradeResult<88){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="C+">'
-								      }else if(grDetail.grade.gradeResult>=70 && grDetail.grade.gradeResult<75){
+								      }else if(grDetail.grade.gradeResult>=83 && grDetail.grade.gradeResult<85){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="C">'
-								      }else if(grDetail.grade.gradeResult>=65 && grDetail.grade.gradeResult<70){
+								      }else if(grDetail.grade.gradeResult>=80 && grDetail.grade.gradeResult<83){
+									    	value +='<input class="form-control col-md-12" type="text" disabled value="C-">'
+								      }else if(grDetail.grade.gradeResult>=78 && grDetail.grade.gradeResult<80){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="D+">'
-								      }else if(grDetail.grade.gradeResult>=60 && grDetail.grade.gradeResult<65){
+								      }else if(grDetail.grade.gradeResult>=75 && grDetail.grade.gradeResult<78){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="D">'
+								      }else if(grDetail.grade.gradeResult>=73 && grDetail.grade.gradeResult<75){
+									    	value +='<input class="form-control col-md-12" type="text" disabled value="D-">'
 								      }else if(typeof grDetail.grade.gradeResult== "undefined"){
 									    	value +='<input class="form-control col-md-12" type="text" disabled value="미정">'
 								      } else{
@@ -474,6 +502,8 @@
 								'<div class="col-md-10">'+
 									'<textarea class="form-control" rows="6" placeholder="" name="objContent" id="objContent" style="resize: none;"></textarea>'+
 									'</div>'+
+									'</div>'+
+									'<div class="form-group row" id="objsu" style="padding-left:15px; padding-right:15px">'+
 									'</div>'
 									$("#objSubmit").css('display', 'block');
 					}
@@ -496,7 +526,18 @@
 		$("input[name='subCode']").val(subCode);
 		$("input[name='date']").val(date);
 		
-		$("#postForm").submit();
+		if(title==""||content==""){
+			 var str = ' <div class="alert alert-dismissible alert-danger col-md-12">'
+					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+					+ ' <strong>확인!</strong> 모든 정보를 작성해주세요'
+					+ ' </div> '
+					
+					$('#objsu').empty();
+					$('#objsu').append(str);
+			//$("#postForm").submit();
+		} else{
+			$("#postForm").submit();
+		}
 	});
 	</script>
 </body>

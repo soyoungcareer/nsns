@@ -489,8 +489,8 @@
 	})
 	
 	 $('.volnew').on('change','input[type=date]', function() {
-        	 var startDate = $('#sDay').val()
- 	         var endDate = $('#eDay').val()
+        	 var startDate = $('.volnew #sDay').val()
+ 	         var endDate = $('.volnew #eDay').val()
 
  	        var startArray = startDate.split('-');
 	        var endArray = endDate.split('-');   
@@ -512,6 +512,30 @@
 	        	$('#volappend').empty();
 	        }
     });
+	 $('.volUpModal').on('change','input[type=date]', function() {
+    	 var startDate = $('.volUpModal #sDay').val()
+	         var endDate = $('.volUpModal #eDay').val()
+
+	        var startArray = startDate.split('-');
+        var endArray = endDate.split('-');   
+
+        var start_date = new Date(startArray[0], startArray[1], startArray[2]);
+        var end_date = new Date(endArray[0], endArray[1], endArray[2]);
+
+
+        if(start_date.getTime() > end_date.getTime()) {
+
+        var str = ' <div class="alert alert-dismissible alert-danger col-md-12">'
+			+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
+			+ ' <strong>확인!</strong> 날짜가 바르지 않습니다. '
+			+ ' </div> '
+
+		$('#voledit').empty();
+		$('#voledit').append(str);
+        }else{
+        	$('#voledit').empty();
+        }
+});
 	
 	</script>
 </body>

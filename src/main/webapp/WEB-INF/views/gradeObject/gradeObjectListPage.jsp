@@ -63,29 +63,41 @@
 						                        <td>${ obj.department.deptTitle }</td>
 						                        <td>${ obj.subject.subCredit }</td>
 						                        <c:choose>
-											         <c:when test = "${obj.grade.gradeResult>=95}">
+											         <c:when test = "${obj.grade.gradeResult==100}">
 											            <td>A+</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=90 and obj.grade.gradeResult<95}">
+											         <c:when test = "${obj.grade.gradeResult>=98 and obj.grade.gradeResult<100}">
 											             <td>A</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=85 and obj.grade.gradeResult<90}">
+											         <c:when test = "${obj.grade.gradeResult>=95 and obj.grade.gradeResult<98}">
+											             <td>A-</td>
+											         </c:when>
+											         <c:when test = "${obj.grade.gradeResult>=93 and obj.grade.gradeResult<95}">
 											             <td>B+</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=80 and obj.grade.gradeResult<85}">
+											         <c:when test = "${obj.grade.gradeResult>=90 and obj.grade.gradeResult<93}">
 											             <td>B</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=75 and obj.grade.gradeResult<80}">
+											         <c:when test = "${obj.grade.gradeResult>=88 and obj.grade.gradeResult<90}">
+											             <td>B-</td>
+											         </c:when>
+											         <c:when test = "${obj.grade.gradeResult>=85 and obj.grade.gradeResult<88}">
 											             <td>C+</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=70 and obj.grade.gradeResult<75}">
+											         <c:when test = "${obj.grade.gradeResult>=83 and obj.grade.gradeResult<85}">
 											             <td>C</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=65 and obj.grade.gradeResult<70}">
+											          <c:when test = "${obj.grade.gradeResult>=80 and obj.grade.gradeResult<83}">
+											             <td>C-</td>
+											         </c:when>
+											         <c:when test = "${obj.grade.gradeResult>=78 and obj.grade.gradeResult<80}">
 											             <td>D+</td>
 											         </c:when>
-											         <c:when test = "${obj.grade.gradeResult>=60 and obj.grade.gradeResult<65}">
+											         <c:when test = "${obj.grade.gradeResult>=75 and obj.grade.gradeResult<78}">
 											             <td>D</td>
+											         </c:when>
+											         <c:when test = "${obj.grade.gradeResult>=73 and obj.grade.gradeResult<75}">
+											             <td>D-</td>
 											         </c:when>
 											         <c:when test = "${empty obj.grade.gradeResult}">
 											             <td>미정</td>
@@ -173,22 +185,30 @@ var date;
 							'<div class="form-group row">' +
 							 '<label class="control-label col-md-2">등급 </label>'+
 								'<div class="col-md-4">'
-								if(objDe.grade.gradeResult>=95){
+							 if(objDe.grade.gradeResult==100){
 									value +='<input class="form-control col-md-12" type="text" disabled value="A+">'
-							      }else if(objDe.grade.gradeResult>=90 && objDe.grade.gradeResult<95){
+							      }else if(objDe.grade.gradeResult>=98 && objDe.grade.gradeResult<100){
 							    	value +='<input class="form-control col-md-12" type="text" disabled value="A">'
-							      }else if(objDe.grade.gradeResult>=85 && objDe.grade.gradeResult<90){
+							      }else if(objDe.grade.gradeResult>=95 && objDe.grade.gradeResult<98){
+								    	value +='<input class="form-control col-md-12" type="text" disabled value="A-">'
+							      }else if(objDe.grade.gradeResult>=93 && objDe.grade.gradeResult<95){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="B+">'
-							      }else if(objDe.grade.gradeResult>=80 && objDe.grade.gradeResult<85){
+							      }else if(objDe.grade.gradeResult>=90 && objDe.grade.gradeResult<93){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="B">'
-							      }else if(objDe.grade.gradeResult>=75 && objDe.grade.gradeResult<80){
+							      }else if(objDe.grade.gradeResult>=88 && objDe.grade.gradeResult<90){
+								    	value +='<input class="form-control col-md-12" type="text" disabled value="B-">'
+							      }else if(objDe.grade.gradeResult>=85 && objDe.grade.gradeResult<88){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="C+">'
-							      }else if(objDe.grade.gradeResult>=70 && objDe.grade.gradeResult<75){
+							      }else if(objDe.grade.gradeResult>=83 && objDe.grade.gradeResult<85){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="C">'
-							      }else if(objDe.grade.gradeResult>=65 && objDe.grade.gradeResult<70){
+							      }else if(objDe.grade.gradeResult>=80 && objDe.grade.gradeResult<83){
+								    	value +='<input class="form-control col-md-12" type="text" disabled value="C-">'
+							      }else if(objDe.grade.gradeResult>=78 && objDe.grade.gradeResult<80){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="D+">'
-							      }else if(objDe.grade.gradeResult>=60 && objDe.grade.gradeResult<65){
+							      }else if(objDe.grade.gradeResult>=75 && objDe.grade.gradeResult<78){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="D">'
+							      }else if(objDe.grade.gradeResult>=73 && objDe.grade.gradeResult<75){
+								    	value +='<input class="form-control col-md-12" type="text" disabled value="D-">'
 							      }else if(typeof objDe.grade.gradeResult== "undefined"){
 								    	value +='<input class="form-control col-md-12" type="text" disabled value="미정">'
 							      } else{
