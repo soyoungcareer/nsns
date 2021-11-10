@@ -79,6 +79,7 @@
 		                <div class="form-group form-inline col-md-3">
 		                  <label class="control-label" for="deptTitle">학과명&emsp;&emsp;</label>
 		                  <input class="form-control" id="deptTitle" type="text" value="${ prof.profDeptTitle }" readonly>
+		                  <input class="form-control" id="deptCode" type="hidden" value="${ sub.deptCode }" readonly>
 		                </div>
 		                <div class="form-group form-inline col-md-3">
 		                  <label class="control-label" for="profName">교수명&emsp;&emsp;</label>
