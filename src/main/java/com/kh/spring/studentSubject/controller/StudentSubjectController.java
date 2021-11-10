@@ -46,7 +46,6 @@ public class StudentSubjectController {
 		
 		ArrayList<StuGradeAndCredit> gradeList = studentSubjectService.selectGradeList(stuId);
 		
-		
 		model.addAttribute("yearList", yearList);
 		
 		model.addAttribute("semesterList", semesterList);
@@ -87,8 +86,6 @@ public class StudentSubjectController {
 			
 			result.put("pi", pi);
 			
-			System.out.println("list : " + list);
-
 			return new GsonBuilder().create().toJson(result);
 	            
 	}

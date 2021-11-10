@@ -77,14 +77,20 @@ public class StudentStatusController {
 		return "studentStatus/studentOff";
 	}
 	
-	//해당학생이 현재 휴학 신청 중인지 확인
+	//해당학생이 현재 휴학 신청 중인지 확인 + 자퇴신청 중인지도 확인
 	@ResponseBody 
 	@RequestMapping(value="offCount.stu", produces="application/json; charset=utf-8")
 	public String selectOffCount (HttpSession session) { 
 		
 		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
 		
-		int count = studentStatusService.selectOffCount(stuId);
+		int count = 0;
+		
+		int countOff = studentStatusService.selectOffCount(stuId);
+		
+		int countDo = studentStatusService.selectDoCount(stuId);
+		
+		count = countOff +  countDo;
 			
 		return new GsonBuilder().create().toJson(count);
 	}
@@ -127,7 +133,13 @@ public class StudentStatusController {
 		
 		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();	
 		
-		int count = studentStatusService.selectDoCount(stuId);
+		int count = 0;
+		
+		int countOff = studentStatusService.selectOffCount(stuId);
+		
+		int countDo = studentStatusService.selectDoCount(stuId);
+		
+		count = countOff +  countDo;
 				
 		return new GsonBuilder().create().toJson(count);
 	}
@@ -192,9 +204,7 @@ public class StudentStatusController {
 		return "studentStatus/studentBack"; 
 	}
 	
-	
 
-	
 	
 
 }

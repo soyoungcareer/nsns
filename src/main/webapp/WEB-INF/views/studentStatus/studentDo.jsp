@@ -102,9 +102,9 @@
 	});
     
 	  $('textarea').on('keydown', function() {
-	        if($(this).val().length > 101) {
+	        if($(this).val().length > 100) {
 	        	
-	        	$(this).val($(this).val().substring(0, 101));
+	        	$(this).val($(this).val().substring(0, 100));
 	            
 	            var str = ' <div class="alert alert-dismissible alert-danger">'
 					+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
@@ -137,7 +137,7 @@
 					 if(count != 0) {
 						  var str = ' <div class="alert alert-dismissible alert-danger">' 
 				        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
-				        		+ ' <strong>확인!</strong> 자퇴 신청 중인 내역이 있습니다. '
+				        		+ ' <strong>확인!</strong> 휴학 또는 자퇴 신청 중인 내역이 있습니다. '
 				        		+ ' </div> '
 				        				
 				        		$('.bs-component').empty();
