@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 강의관리</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,17 +50,19 @@
 				  <input type="hidden" name="changeName" value="${ reqSub.attChange }">
 
                   <div class="form-group">
-                    <label for="subCode">과목코드</label><!-- 입력 -->
-                   <!--  <input type="hidden" name="subCode" value="${ sub.subCode }">
-                    <c:if test="${ !empty sub.subCode }">
-                    	<a>${reqSub.subCode }</a> -->
-                    	<!-- <input class="form-control" id="subCode" name="subCode" type="text" value="${sub.subCode }">
-                    </c:if> -->
+                    <label for="subCode">과목코드</label>
+                   <!-- <input type="hidden" name="subCode" value="${ sub.subCode }"> -->
+                    <c:if test="${ !empty reqSub.subCode }">
+                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${reqSub.subCode }">
+                    </c:if>
+                    <c:if test="${ empty reqSub.subCode }">
+                    	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
+                    </c:if>
                     
                    <!--  <c:if test="${ empty sub.subCode }">
-                    	기존 -->
+                    	기존 
                     	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
-                    
+                    -->
                     <!-- </c:if> -->
                     
                   </div>
@@ -139,8 +141,19 @@
                   
                   <div class="form-group">
                     <label for="ntcCategory">학년도</label><!-- 연도 입력 -->
+                    <!-- <c:if test="${ empty sub.subYear }">
                     <input class="form-control" id="subYear" name="subYear" type="text" placeholder="학년도 네자리 입력">
+                  	</c:if>
+                  	<c:if test="${ !empty sub.subYear }">
+                  		<input class="form-control" id="subYear" name="subYear" type="text" value="${ sub.subYear }">
+                  	</c:if> -->
+                  	<input class="form-control" id="subYear" name="subYear" type="text">
+                  
                   </div>
+                  <script>
+                	document.getElementById('subYear').value=new Date().getFullYear().toString();
+                
+                </script>
                   
                   <div class="form-group">
                     <label for="ntcCategory">학기</label><!-- 입력 -->

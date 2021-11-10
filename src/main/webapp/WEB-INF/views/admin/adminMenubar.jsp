@@ -99,8 +99,7 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">강의 평가</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="addLec.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 등록</a></li>
-            <li><a class="treeview-item" href="rstLec.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 결과</a></li>
-            <li><a class="treeview-item" href="subject.anc"><i class="icon fa fa-circle-o"></i> 강의 평가 공개</a></li>
+            
           </ul>
         </li>
         

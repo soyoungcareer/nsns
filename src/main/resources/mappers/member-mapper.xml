@@ -147,7 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE STU_ID = #{stuId}
 	</update>
 	
-	<update id="deleteProfessor" parameterType="_int">
+	<update id="deleteProfessor" parameterType="string">
 		UPDATE PROFESSOR
 		SET PROF_STATUS = 'N'
 		WHERE PROF_ID = #{profId}

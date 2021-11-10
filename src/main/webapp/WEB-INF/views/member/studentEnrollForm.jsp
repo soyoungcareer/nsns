@@ -15,7 +15,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 학생 등록</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -79,15 +79,38 @@
                   </div>
                   
                   <div class="form-group">
-                  <label class="control-label">학번 생성</label>
-                  <input class="form-control" type="text" id="stuId" name="CreateStuId" required placeholder="입학년도 입력 시 자동생성">
+                  <label class="control-label">학번 생성 (자동)</label>
+                  <input class="form-control" type="text" id="stuId" name="CreateStuId" required><!--  placeholder="입학년도 입력 시 자동생성" -->
                   <!-- <input class="form-control" type="text" id="CreatestuId" name="CreateStuId" required readonly> -->
                 </div>
+                
+                <script>
+                	/*
+                	$(document).ready(function(){
+                		plusYear();
+                	});
+                	
+                	function plusYear(){
+                		var date = new Date();
+                		var currentYear = date.getFullYear();
+                		
+                		//var currentYear = date.getFullYear().toString();
+                		//var grantYear = currentYear.substr(2, 2);
+                		
+                		$('#stuId').append('currentYear');
+                	}*/
+                	
+                	document.getElementById('stuId').value=new Date().getFullYear().toString();
+                
+                </script>
                 
                 
                 <div class="form-group">
                   <label class="control-label">담당교수</label>
                   <input class="form-control" type="text" id="profId" name="profId" required>
+                  <!-- <select id="sltPrf" onchange="sltPrf();">
+                  	<option></option>
+                  </select> -->
                 </div>
                 
                 
