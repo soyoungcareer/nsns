@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 			<when
 				test='cate1.equals("선택")  and cate4.equals("선택") and !cate3.equals("선택")'>
-				WHERE FAC_NAME=#{cate3}
+				WHERE FAC_NAME LIKE '%'||#{cate3}||'%'
 			</when>
 
 			<when
@@ -121,20 +121,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when
 				test='!cate1.equals("선택")  and cate2.equals("선택") and !cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
-				AND FAC_NAME=#{cate3}
+				AND FAC_NAME LIKE  '%'||#{cate3}||'%'
 			</when>
 			<when
 				test='cate1.equals("선택")  and !cate2.equals("선택") and !cate3.equals("선택")'>
 				WHERE FAC_STATUS=#{cate4}
-				AND FAC_NAME=#{cate3}
-			</when>
+				AND FAC_NAME LIKE  '%'||#{cate3}||'%'
+			</when> 
 
 			<when
 				test='!cate1.equals("선택")  and !cate2.equals("선택") and !cate3.equals("선택")'>
 				WHERE CATEGORY=#{cate1}
 				AND FAC_STATUS=#{cate4}
 				AND
-				FAC_NAME=#{cate3}
+				FAC_NAME LIKE '%'||#{cate3}||'%'
 			</when>
 
 
