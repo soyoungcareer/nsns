@@ -16,14 +16,7 @@ import com.kh.spring.studentEval.vo.SearchSubject;
 
 @Repository 
 public class GradeDao {
-	/*
-	public ArrayList<Grade> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String subCode, int gradeYear, int gradeSemester) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("gradeMapper.selectList", null, rowBounds);
-	}
-	*/
+
 	public ArrayList<Subject> loadSubList(SqlSessionTemplate sqlSession, Subject sub) {
 		return (ArrayList)sqlSession.selectList("gradeMapper.loadSubList", sub);
 	}
@@ -54,7 +47,6 @@ public class GradeDao {
 	}
 
 	public int updateGrade(SqlSessionTemplate sqlSession, Grade grade) {
-		System.out.println("============================map Dao : " + grade);
 		return sqlSession.update("gradeMapper.updateGrade", grade);
 	}
 

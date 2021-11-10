@@ -18,9 +18,6 @@
 			var status = td.eq(4).text();
 			var button = $('#saveObjCheck');
 			
-			console.log(objNo);
-			console.log(status);
-			
 			$.ajax({
 				url: "profGradeObjDetail.pr",
 				type: "POST",
@@ -85,10 +82,6 @@
 			var reason = $("#reason").val();
 			var objNo = $("#objNo").val();
 			
-			console.log("status : " + status);
-			console.log("reason : " + reason);
-			console.log("objNo : " + objNo)
-			
 			$.ajax({
 				url: "profObjCheck.pr",
 				type: "POST",
@@ -107,7 +100,6 @@
 				      		showCancelButton: false,
 				      		closeOnConfirm: true
 				      	});
-						//readOnly();
 					} else {
 						swal({
 				      		title: "저장 실패",
@@ -129,48 +121,6 @@
 			});
 		});
 		
-		
-		/*
-		<script type="text/javascript">
-	      $('#demoNotify').click(function(){
-	      	$.notify({
-	      		title: "Update Complete : ",
-	      		message: "Something cool is just updated!",
-	      		icon: 'fa fa-check' 
-	      	},{
-	      		type: "info"
-	      	});
-	      });
-	      $('#demoSwal').click(function(){
-	      	swal({
-	      		title: "Are you sure?",
-	      		text: "You will not be able to recover this imaginary file!",
-	      		type: "warning",
-	      		showCancelButton: true,
-	      		confirmButtonText: "Yes, delete it!",
-	      		cancelButtonText: "No, cancel plx!",
-	      		closeOnConfirm: false,
-	      		closeOnCancel: false
-	      	}, function(isConfirm) {
-	      		if (isConfirm) {
-	      			swal("Deleted!", "Your imaginary file has been deleted.", "success");
-	      		} else {
-	      			swal("Cancelled", "Your imaginary file is safe :)", "error");
-	      		}
-	      	});
-	      }); 
-		*/
-		/*
-		 function readOnly() {
-			var radio = $('#modalBody input[name="answer"]');
-			var reason = $('#modalBody input[name="reason"]');
-			var button = $('#saveObjCheck');
-			
-			radio.prop("disabled", true);
-			reason.prop("readonly", true);
-			button.prop("hidden", true);
-		} 
-		*/ 
 	</script>
 </head>
 <body>
@@ -183,11 +133,6 @@
 				<i class="fa fa-edit"></i> 성적 관리
 			</h1>
 		</div>
-		<!-- <ul class="app-breadcrumb breadcrumb">
-			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item">성적 관리</li>
-			<li class="breadcrumb-item"><a href="profGradeObj.pr">이의신청 확인</a></li>
-		</ul> -->
 	</div>
 	
 	<div class="container-fluid">
@@ -195,19 +140,6 @@
 			<h3 class="tile-title">이의신청 확인</h3><br>
 			<div class="tile-body">
 				<div class="tile">
-            <!-- <div class="mailbox-controls">
-              <div class="animated-checkbox">
-                <label>
-                  <input type="checkbox"><span class="label-text"></span>
-                </label>
-              </div>
-              <div class="btn-group">
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-trash-o"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-reply"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-refresh"></i></button>
-              </div>
-            </div> -->
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover" id="objTable">
               	<thead class="tableInfo">
@@ -265,15 +197,6 @@
 		    </div>
 		  </div>
 		  
-		  
-			            
-            
-            <!-- <div class="text-right"><span class="text-muted mr-2">Showing 1-15 out of 60</span>
-              <div class="btn-group">
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-chevron-left"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-chevron-right"></i></button>
-              </div>
-            </div> -->
             <!-- 페이징 처리 -->
 			<div id="pagingArea">
                 <ul class="pagination">

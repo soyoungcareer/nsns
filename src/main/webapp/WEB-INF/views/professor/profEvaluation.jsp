@@ -16,10 +16,6 @@
 			var semester = td.eq(1).text();
 			var subTitle = td.eq(5).text();
 			
-			console.log(subCode);
-			console.log(year);
-			console.log(semester);
-			
 			$.ajax({
 				url: "filteredEval.pr",
 				type:"POST",
@@ -66,11 +62,6 @@
 					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profEvaluation.pr">강의평가 조회</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">

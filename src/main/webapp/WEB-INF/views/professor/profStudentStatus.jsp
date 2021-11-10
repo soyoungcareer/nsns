@@ -18,9 +18,6 @@
 			var approveBtn = $('#saveApprove');
 			var rejectBtn = $('#saveReject');
 			
-			console.log(applicationNo);
-			console.log(stsProcess);
-			
 			$.ajax({
 				url:"detailOff.pr",
 				type:"POST",
@@ -74,8 +71,6 @@
 			var stsProcess = "관리자승인대기";
 			var stsComplete = "처리중";
 			
-			console.log(applicationNo);
-			
 			$.ajax({
 				url: "profOffCheck.pr",
 				type: "POST",
@@ -118,8 +113,6 @@
 			var applicationNo = $("#applicationNo").val();
 			var stsProcess = "반려";
 			var stsComplete = "완료";
-			
-			console.log(applicationNo);
 			
 			$.ajax({
 				url: "profOffCheck.pr",
@@ -168,11 +161,6 @@
 					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profStudentOff.pr">학적변동 승인</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">

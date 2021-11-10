@@ -151,37 +151,5 @@ public class GradeServiceImpl implements GradeService {
 	public ArrayList<Subject> selectMainSub(String profId, PageInfo pi) {
 		return gradeDao.selectMainSub(sqlSession, profId, pi);
 	}
-
-	
-	
-	/*
-	@Override
-	public ArrayList<Grade> selectFilteredGrade(String subCode, int subYear, int subSmst) {
-		
-		Grade grade = new Grade();
-		grade.setSubCode(subCode);
-		grade.setGradeYear(subYear);
-		grade.setGradeSemester(subSmst);
-		
-		ArrayList<Grade> result = gradeDao.selectFilteredGrade(sqlSession, grade);
-		
-		return result;
-	}
-	
-	
-	@Override
-	public Grade selectGrade(int gno) {
-		Grade g = null;
-		int result = gradeDao.increaseCount(sqlSession, gno);
-		if (result < 0) {
-			throw new CommException("increaseCount 실패");
-		} else {
-			g = gradeDao.selectGrade(sqlSession, gno);
-		}
-		
-		return g;
-	}
-	*/
-
  
 }

@@ -30,5 +30,4 @@ public class Grade {
 	private int finExam;			// 기말
 	private int gradeTotal;				// 점수(총점)
 	
-	// 학년, 평가방법?
 }

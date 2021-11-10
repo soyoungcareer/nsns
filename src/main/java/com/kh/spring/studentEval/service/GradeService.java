@@ -22,8 +22,6 @@ public interface GradeService {
 
 	ArrayList<Subject> selectFilteredSubList(SearchSubject searchSubject, PageInfo pi);
 
-	//ArrayList<Grade> selectFilteredGrade(String subCode, int subYear, int subSmst);
-
 	ArrayList<Grade> selectFilteredGrade(SearchGrade searchGrade);
 
 	int updateGrade(Grade grade);

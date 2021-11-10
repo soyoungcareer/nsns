@@ -16,10 +16,6 @@
 			var semester = td.eq(1).text();
 			var subTitle = td.eq(5).text();
 			
-			console.log(subCode);
-			console.log(year);
-			console.log(semester);
-			
 			$.ajax({
 				url: "filteredStudent.pr",
 				type:"GET",
@@ -76,11 +72,6 @@
 					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profStudentDetail.pr">학생목록 조회</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -102,13 +93,6 @@
 							
 							<form action="filteredSub.pr">
 							<div class="row">
-								<!-- <div class="form-group col-md-5">
-								  <label class="control-label" for="evalType">평가방법</label>
-								  <select class="form-control" id="evalType">
-								    <option>상대평가</option>
-								    <option>절대평가</option>
-								  </select>
-								</div> -->
 								<div class="form-group form-inline col-md-2">
 								  <select class="form-control" id="con1" name="con1">
 								  	<option value="0">전체</option>
@@ -245,10 +229,6 @@
 										id="stuListTable" role="grid">
 										<thead class="secTableInfo">
 											<tr role="row">
-												<!-- <th class="sorting" tabindex="0" aria-controls="sampleTable"
-													rowspan="1" colspan="1"
-													aria-label="Office: activate to sort column ascending"
-													style="width: 57.475px;">NO</th> -->
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">학과(전공)</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">학번</th>
 												<th tabindex="0" rowspan="1" colspan="1" style="width: 50px;">성명</th>
@@ -258,25 +238,6 @@
 											</tr>
 										</thead>
 										<tbody>
-											<%-- <c:choose>
-												<c:when test="${empty stuList}">
-													<tr><td colspan="8">수강중인 학생이 없습니다.</td></tr>
-												</c:when>
-												<c:when test="${!empty stuList}">
-													<c:forEach var="stuList" items="${stuList}">
-														<tr role="row">
-															<td class="sorting_1"><%=count++ %></td>
-															<td><c:out value="${stuList.subCode}"/></td>
-															<td><c:out value="${stuList.subTitle}"/></td>
-															<td><c:out value="${stuList.subDivs}"/></td>
-															<td><c:out value="${stuList.subCredit}"/></td>
-															<td><c:out value="${stuList.subClass}"/></td>
-															<td><c:out value="${stuList.subTime}"/></td>
-															<td><c:out value="${stuList.subType}"/></td>
-														</tr>
-													</c:forEach>
-												</c:when>
-											</c:choose> --%>
 										</tbody>
 									</table>
 								</div>

@@ -18,8 +18,6 @@
 			var approveBtn = $('#saveApprove');
 			var rejectBtn = $('#saveReject');
 			
-			console.log(applicationNo);
-			
 			$.ajax({
 				url:"detailDo.pr",
 				type:"POST",
@@ -66,8 +64,6 @@
 			var stsProcess = "관리자승인대기";
 			var stsComplete = "처리중";
 			
-			console.log(applicationNo);
-			
 			$.ajax({
 				url: "profDoCheck.pr",
 				type: "POST",
@@ -110,8 +106,6 @@
 			var applicationNo = $("#applicationNo").val();
 			var stsProcess = "반려";
 			var stsComplete = "완료";
-			
-			console.log(applicationNo);
 			
 			$.ajax({
 				url: "profDoCheck.pr",
@@ -160,11 +154,6 @@
 					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profStudentDo.pr">학적변동 승인</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -276,24 +265,6 @@
 				                </ul>
 				            </div>
 							
-							
-<!-- 							<div class="row">
-								<label class="control-label col-md-3">
-					              <input type="checkbox"><span class="label-text">승인</span>
-					            </label>
-					            <label class="control-label col-md-3">
-					              <input type="checkbox"><span class="label-text">반려</span>
-					            </label>
-								<div class="form-group row">
-				                  <label class="control-label col-md-3">반려사유</label>
-				                  <div class="col-md-8">
-				                    <input class="form-control" type="text" placeholder="반려사유 입력">
-				                  </div>
-				                </div>
-				                <div class="form-group col-md-4 align-self-end">
-				                  <input type="button" class="btn btn-primary" type="button" onclick="" value="저장"/>
-				                </div>
-			                </div> -->
 							
 						</div>
 					</div>

@@ -18,9 +18,6 @@
 		var conProcess = td.eq(4).text();
 		var button = $('#saveConCheck');
 		
-		console.log(conNo);
-		console.log(conProcess);
-		
 		$.ajax({
 			url: "profConsultDetail.pr",
 			type: "POST",
@@ -86,10 +83,6 @@
 			var rejectReason = $("#rejectReason").val();
 			var conNo = $("#conNo").val();
 			
-			console.log("status : " + status);
-			console.log("rejectReason : " + rejectReason);
-			console.log("conNo : " + conNo)
-			
 			$.ajax({
 				url: "profConCheck.pr",
 				type: "POST",
@@ -139,11 +132,6 @@
 				<i class="fa fa-comments"></i> 학생 관리
 			</h1>
 		</div>
-		<!-- <ul class="app-breadcrumb breadcrumb">
-			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item">학생 관리</li>
-			<li class="breadcrumb-item"><a href="profConsult.pr">상담 관리</a></li>
-		</ul> -->
 	</div>
 	
 	<div class="container-fluid">
@@ -151,19 +139,6 @@
 			<h3 class="tile-title">상담 관리</h3><br>
 			<div class="tile-body">
 				<div class="tile">
-            <!-- <div class="mailbox-controls">
-              <div class="animated-checkbox">
-                <label>
-                  <input type="checkbox"><span class="label-text"></span>
-                </label>
-              </div>
-              <div class="btn-group">
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-trash-o"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-reply"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-share"></i></button>
-                <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-refresh"></i></button>
-              </div>
-            </div> -->
             <div class="table-responsive mailbox-messages">
               <table class="table table-hover" id="conTable">
               	<thead class="tableInfo">

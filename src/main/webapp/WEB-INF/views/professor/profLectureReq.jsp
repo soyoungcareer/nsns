@@ -18,11 +18,6 @@
 					<i class="fa fa-briefcase"></i> 강의 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">강의 관리</li>
-				<li class="breadcrumb-item"><a href="profLectureDetail.pr">강의개설/수정/삭제 신청내역</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">

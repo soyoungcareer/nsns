@@ -55,8 +55,7 @@ public class GradeController {
 							   @RequestParam(name="con2", required=false, defaultValue="0") int con2,
 							   @RequestParam(name="keyword", required=false, defaultValue="%") String keyword,
 							   Model model, HttpSession session) {
-		// 임시 데이터
-		//String profId = "EC1901";
+
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
 		
@@ -84,8 +83,6 @@ public class GradeController {
 	@ResponseBody
 	@RequestMapping(value="filteredGrade.pr", produces="application/json; charset=utf-8")
 	public String filteredGrade(String subCode, String gradeYear, String gradeSemester, HttpSession session, Model model) {
-		// 임시 데이터
-		//String profId = "EC1901";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
@@ -96,14 +93,7 @@ public class GradeController {
 		searchGrade.setGradeSemester(gradeSemester);
 		searchGrade.setProfId(profId);
 		
-		System.out.println("=========searchGrade Controller : " + searchGrade);
-		System.out.println("=========subCode Controller : " + subCode);
-		System.out.println("=========gradeYear Controller : " + gradeYear);
-		System.out.println("=========gradeSemester Controller : " + gradeSemester);
-				
 		ArrayList<Grade> gList = gradeService.selectFilteredGrade(searchGrade);
-		
-		System.out.println("==================gList controller : " + gList);
 		
 		return new GsonBuilder().create().toJson(gList);
 
@@ -162,10 +152,7 @@ public class GradeController {
 		grade.setGradeResult(gradeResult);
 		grade.setGradeCredit(gradeCredit);
 		
-		System.out.println("===========================grade : " + grade);
 		int result = gradeService.updateGrade(grade);
-		
-		System.out.println("===========================result : " + result);
 		
 		return new GsonBuilder().create().toJson(result);
 	}
@@ -175,8 +162,6 @@ public class GradeController {
 	@RequestMapping("profGradeObj.pr")
 	public String profGradeObjection(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
 									 Model model, HttpSession session) {
-		// 임시 데이터
-		//String profId = "EC1901";
 		
 		Professor prof = (Professor)session.getAttribute("loginPrf");
 		String profId = prof.getProfId();
@@ -185,8 +170,6 @@ public class GradeController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<GradeObject> objList = gradeService.loadObjList(profId, pi);
-		
-		System.out.println("===================objList Controller : " + objList);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("objList", objList);
