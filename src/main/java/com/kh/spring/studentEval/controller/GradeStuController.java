@@ -109,6 +109,7 @@ public class GradeStuController {
 		int stuId = ((Student)session.getAttribute("loginStu")).getStuId();
 		//int stuId = 20193019;//임시 아이디 
 		LecRegPro grDetail =gradeStuService.gradeDetailList(stuId, subCode, date);
+		System.out.println(grDetail);
 		return new GsonBuilder().create().toJson(grDetail);
 	}
 }
