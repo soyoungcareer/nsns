@@ -233,9 +233,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE STU_ID = #{stuId}
 	</update>
 	
-	<update id="studentUpdatePrf" parameterType="_int">
+	<!-- <update id="studentUpdatePrf" parameterType="_int">
+		
+	</update> -->
+	
+	<select id="studentUpdate" resultType="_int" resultMap="studentResultSet">
+		SELECT *
+		FROM STUDENT
+		WHERE STU_ID = #{stuId}
+	</select>
+	
+	<update id="studentUpdateProfId" parameterType="Student">
 		UPDATE STUDENT
-		SET STU_STATUS = '재학'
+		SET PROF_ID = #{profId}
 		WHERE STU_ID = #{stuId}
 	</update>
 

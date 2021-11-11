@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.common.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.common.exception.CommException;
+import com.kh.spring.member.service.LoginAlert;
 import com.kh.spring.member.service.MemberService;
 import com.kh.spring.member.vo.Admin;
 import com.kh.spring.member.vo.Professor;
@@ -65,7 +67,7 @@ public class MemberController {
 	public String loginMember(Admin a, Student s, Professor p, Model model, HttpSession session,
 			@RequestParam("position") String position, @RequestParam("userId") String userId,
 			@RequestParam("userPwd") String userPwd
-			, HttpServletResponse response) {
+			, HttpServletResponse response) throws IOException {
 
 		if(session.getAttribute("loginStu")!=null) {
 			session.removeAttribute("loginStu");
@@ -92,11 +94,9 @@ public class MemberController {
 			System.out.println("loginAdm : " + loginAdm);
 
 			model.addAttribute("loginAdm", loginAdm);
-
 			session.setAttribute("loginAdm", loginAdm);
 			System.out.println("session 저장 : " + session.getAttribute("loginAdm"));
 
-			
 			return "redirect:subModifyList.adm";
 			
 		}else if(position.equals("student")) {
@@ -118,7 +118,7 @@ public class MemberController {
 			p.setProfId(userId);
 			p.setProfPwd(userPwd);
 
-			Professor loginPrf = memberService.loginProfessor(bCPwdEncoder, p);
+			Professor loginPrf = memberService.loginProfessor(bCPwdEncoder, p, response);
 			System.out.println("loginPrf : " + loginPrf);
 			model.addAttribute("loginPrf", loginPrf);
 
@@ -129,9 +129,11 @@ public class MemberController {
 
 		} else {
 			
-			throw new CommException("로그인 실패");
+			throw new CommException("로그인 중 오류가 발생하였습니다.");
+			//return "redirect:/";
 			
-			
+			//LoginAlert.alert(response, "로그인 실패");
+			//return "redirect:/";
 		}
 
 	}
@@ -252,7 +254,7 @@ public class MemberController {
 
 		return "member/professorListView";
 	}
-	
+	/*
 	//-------------- 학생 담당교수 변경--------------
 	@RequestMapping("stuUpdatePrf.adm") //
 	public String studentUpdatePrf(int stuId, @RequestParam("profId") String profId) {
@@ -264,7 +266,7 @@ public class MemberController {
 		//memberService.studentUpdatePrf(profId);
 
 		return "redirect:stuList.adm";
-	}
+	}*/
 
 	//-------------- 계정 삭제 --------------
 	@RequestMapping("stuDelete.adm") //학생 계정 제한 - 퇴학
@@ -366,5 +368,24 @@ public class MemberController {
 
 		return "redirect:stuOffStaList.adm";
 	}
+	
+	
+	@RequestMapping("stuUpdatePrf.adm")
+	public ModelAndView studentUpdate(int stuId, ModelAndView mv) {
+		
+		Student s = memberService.studentUpdate(stuId);
+		mv.addObject("s", s).setViewName("member/studentUpdatePrfForm");
+		
+		return mv;
+	}
+	@RequestMapping("UpdateProfId.adm")
+	public ModelAndView studentUpdateProfId(Student s, ModelAndView mv) {
+
+		memberService.studentUpdateProfId(s);
+		mv.addObject("stuId", s.getStuId()).setViewName("redirect:stuList.adm");
+		
+		return mv;
+		}
+
 
 }

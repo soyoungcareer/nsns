@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,71 +25,42 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="app sidebar-mini">
-    <jsp:include page="adminMenubar.jsp" />
-    
+    <jsp:include page="../admin/adminMenubar.jsp" />
+      
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
-          
+          <h1><i class="fa fa-edit"></i> 학생 관리</h1>
+          <p>학생 정보 변경</p>
         </div>
         
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="tile">
-            <div class="row">
-              <div class="col-lg-6">
-                <form id="NoticeEnrollForm" method="post" action="insert.ntc" enctype="multipart/form-data">
-                	
-                  <div class="form-group">
-	                <label for=title class="control-label">제목</label>
-	                <input class="form-control" id="title" name="ntcTitle" type="text" placeholder="제목 글자 수 제한 255byte" maxlength="255" required>
-	                 <input class="form-control" id="writer" name="ntcWriter" type="hidden">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="category">분류</label>
-                    <select class="form-control" id="category" name="ntcCategory">
-                      <option value=91>전체</option>
-                      <option value=92>학사</option>
-                      <option value=93>학생</option>
-                      <option value=1>경제학</option>
-                      <option value=2>국어국문</option>
-                      <option value=3>철학</option>
-                      <option value=4>호텔경영</option>
-                      <option value=5>시각디자인</option>
-                      <option value=6>역사학</option>
-                      <option value=7>정보통신</option>
-                      <option value=8>연극영화</option>
-                      <option value=99>교양</option>
-                      <option value=100>복학</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="content">내용</label>
-                    <textarea class="form-control" id="content" name="ntcContent" rows="3" placeholder="내용 글자 수 제한 3500byte" maxlength="3500" style="resize:none;"></textarea>
-                  </div>
-                  
-                  <div class="form-group">
-                  	<label for="attachment">파일 첨부</label>
-                    <input class="form-control-file" id="attachment" name="ntcAttachment" type="file" aria-describedby="fileHelp">
-                  </div>
-                  
-                  <div class="tile-footer">
-	              	<button class="btn btn-primary" type="submit">등록하기</button>
-	              	<button class="btn btn-secondary" type="reset">취소하기</button>
-	              </div>
-                  
-                </form>
+            <h3 class="tile-title">학생 정보 변경</h3>
+            <div class="tile-body">
+              <form id="studentEnrollForm" action="UpdateProfId.adm" method="post">
+                <div class="form-group">
+                  <label class="control-label">담당교수 변경(교번) </label>
+                  <input class="form-control" type="text" id="profId" name="profId" required>
+                  <input type="hidden" name="stuId" value="${s.stuId}">
+                </div>
                 
-              </div>
-              
+                
+                <div class="tile-footer">
+              		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>변경</button>
+            	</div>
+                
+              </form>
             </div>
+            
           </div>
-        </div>
+        </div>   
+      
       </div>
     </main>
+    
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>

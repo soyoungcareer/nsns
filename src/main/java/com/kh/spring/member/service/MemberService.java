@@ -1,6 +1,9 @@
 package com.kh.spring.member.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -10,12 +13,12 @@ import com.kh.spring.member.vo.Professor;
 import com.kh.spring.member.vo.Student;
 
 public interface MemberService {
-///
-	Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a); //BCryptPasswordEncoder bCPwdEncoder, 
+
+	Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a);
 
 	Student loginStudent(BCryptPasswordEncoder bCPwdEncoder, Student s);
 
-	Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p);
+	Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p, HttpServletResponse response) throws IOException;
 
 	void insertStudent(Student s);
 
@@ -54,6 +57,10 @@ public interface MemberService {
 	void deleteStuPrf(String profId);
 //
 	//void studentUpdatePrf(int stuId);
+
+	Student studentUpdate(int stuId);
+
+	void studentUpdateProfId(Student s);
 
 	//void studentUpdatePrf(String profId);
 

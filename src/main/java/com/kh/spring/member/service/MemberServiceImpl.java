@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 		Admin loginAdm = memberDao.loginAdmin(sqlSession, a);
 		
 		if(loginAdm == null) {
-			//throw new CommException("관리자 로그인 중 오류가 발생하였습니다.");
+			throw new CommException("관리자 로그인 중 오류가 발생하였습니다.");
 			
 			
 			
@@ -83,12 +83,33 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p) {
+	public Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p, HttpServletResponse response) throws IOException {
 
 		Professor loginPrf = memberDao.loginProfessor(sqlSession, p);
 		
 		if(loginPrf == null) {
-			throw new CommException("교수 로그인 중 오류가 발생하였습니다.");
+			
+			//throw new CommException("교수 로그인 중 오류가 발생하였습니다.");
+			
+			
+			//LoginAlert.alert(response, "로그인 실패");
+			
+			
+			//HttpServletResponse response;
+			response.setContentType("text/html; charset=euc-kr");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('계정 속성을 다시 확인하십시오.'); </script>");
+			out.flush();
+			//location.href='member/loginPage'; 
+			//throw new CommException("로그인 실패");
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + bCPwdEncoder.encode(p.getProfPwd()));
 
@@ -280,5 +301,25 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	*/
+
+	@Override
+	public Student studentUpdate(int stuId) {
+		
+		Student s = memberDao.studentUpdate(sqlSession, stuId);
+		
+		
+		return s;
+	}
+
+	@Override
+	public void studentUpdateProfId(Student s) {
+
+		int result = memberDao.studentUpdateProfId(sqlSession, s);
+		
+		if(result < 0) {
+			throw new CommException("학생 정보 수정 중 오류가 발생하였습니다.");
+		}
+		
+	}
 
 }

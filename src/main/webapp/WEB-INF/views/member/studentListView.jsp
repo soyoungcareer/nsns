@@ -72,17 +72,17 @@
 	                        <td>${ s.phone }</td>
 	                        <td>
 	                        	<input type="hidden" name="profStatus" value="${ s.profStatus }">
-	                        	<!-- <input type="hidden" name="proName" value="${ s.proName }"> -->
 	                        	<c:if test="${ s.profStatus == 'Y' }">
 	                        		${ s.proName }
 	                        	</c:if>
 	                        	<c:if test="${ s.profStatus == 'N' }">
+	                        		<form id="profIdChange" method="post" action="stuUpdatePrf.adm">
+			                        	<input type="hidden" name="profId" value="${ s.profId }">	                        	
+			                        	<input type="hidden" name="stuId" value="${ s.stuId }">
+		                        	</form>
+	                        	
 	                        		<input type="submit" class="btn btn-outline-danger" value="없음">
 	                        	</c:if>
-	                        	
-	                        	<form id="profIdChange" method="post" action="">
-	                        	<input type="hidden" name="profId" value="${ s.profId }">	                        	
-	                        	<input type="hidden" name="stuId" value="${ s.stuId }"></form>
 	                        </td>
 	                        <td>${ s.stuStatus }</td>
 	                        <td>
@@ -152,45 +152,70 @@
     		
     	});
     </script>
-    <script type="text/javascript">
-    	$(document).on("click", "#stuListTable tbody tr td input", function(){ //"#stuListTable tbody tr td:nth-child(6)" 교수 이름 칸 선택
-    		
-    		//if($("input[name=profStatus]").val()=="N"){
+    
+    <script>
+    	$(function(){
+    		$("#stuListTable tbody tr input").click(function(){
+    			location.href="stuUpdatePrf.adm?stuId=" + $(this).parent().parent().children().eq(0).text();
+    		});
+    	});
+    </script>
+    
+    
+    <!-- temp
+    <script>
+    	/*$(document).on("click", "#stuListTable tbody tr td input", function(){
+    			
     			var result = prompt("변경할 담당교수의 교번을 입력하세요.");
-        		
         		if(result != ""){
-        			//$("input[name=profId]").text(result);
-
+        			//$("input[name=profId]").text(result); //}
+        			location.href="stuDelete.adm?profId=" + result;
+        			
         			var stuUpdate = $("#profIdChange");
         			
-        			stuUpdate.attr("action", "stuUpdatePrf.adm");
-        			
+        			stuUpdate.attr("action", "stuUpdatePrf.adm");  			
         			stuUpdate.submit();
+        			
+        			//location.href="stuDelete.adm?profId=" + result;
         		}else{
         			alert("다시 입력하세요.");
         		}
-        		
-        		
-        			
-        		
-        		
-    		//}
+    	});*/
+    	$(document).on("click", "#stuListTable tbody tr td input", function(){
+			
+			var result = prompt("변경할 담당교수의 교번을 입력하세요.");
+    		if(result != ""){
+    			
+    			function profIdSend(url, params){
+    				var form = document.createElement("form");
+    				form.setAttribute("method", "post");
+    				form.setAttribute("action", "stuUpdatePrf.adm");
+    				document.charset = "utf-8";
+    				for(var profId in result){
+    					var hiddenField = document.createElement("input");
+    					hiddenField.setAttribute("type", "hidden");
+    					hiddenField.setAttribute("name", profId);
+    					hiddenField.setAttribute("value", result[profId]);
+    					form.appendChild(hiddenField);
+    				}
+    				document.body.appendChild(form);
+    				form.submit();
+    			}
+    			
+    		}else{
+    			alert("다시 입력하세요.");
+    		}
+	});
     	
-    		
-    	});
-    </script>
+    </script> -->
     <!-- <script>
-    
     	$(function(){
     		$("#stuListTable tbody tr").click(function(){
     			/*if(${ s.profStatus == 'N' }){
     				$("input[name=profId]").attr("type", "text");
-    				
     			}*/
-    			
     			location.href="stuUpdatePrf.adm?stuId=" + $(this).children().eq(0).text();
     		});
-    		
     	});
     </script> -->
     

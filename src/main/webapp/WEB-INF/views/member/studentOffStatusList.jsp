@@ -53,8 +53,8 @@
                       <th>휴학학기 수</th><!-- 휴학기간 -->
                       <!-- <th>신청일자</th> -->
                       <th>신청단계</th>
+                      <th>승인상태</th>
                       <th>처리결과</th>
-                      <th>신청내용</th>
                       <!-- <th>상태</th> -->                      
                       <!-- <th>기존신청번호</th> -->
                       <th>담당교수</th>
@@ -111,10 +111,21 @@
 	                        </td>	                        
 	                        <td>
 	                        	<!-- <button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button> -->
-	                        	<button class="btn btn-primary" id="stuOffTerm" onclick="stuStaSubmit(1)">승인</button>
+	                        	<button class="btn btn-primary" name="stuOffTerm" onclick="stuStaSubmit(1)">승인</button>
+		                        	
+		                        	<!-- <c:if test = "${ sta.stsComplete eq '완료' }">
+			                        	<script>
+			                        		$(".btn-primary").attr("disabled", "true");
+			                        	</script>
+		                        	</c:if> -->
 	                        </td>
 	                        <td>
-	                        	<button class="btn btn-secondary" id="stuOnTerm" onclick="stuStaSubmit(2)">복학</button>
+	                        	<button class="btn btn-secondary" name="stuOnTerm" onclick="stuStaSubmit(2)">복학</button>
+	                        		<!-- <c:if test = "${ sta.stsComplete eq '완료' }">
+			                        	<script type="text/javascript">
+			                        		$(".btn-secondary").attr("disabled", "true");
+			                        	</script>
+		                        	</c:if> -->
 	                        </td>
 	                    </tr>
                     </c:forEach>
@@ -178,6 +189,9 @@
 			
 			if(num == 1){
 				stuStaUpdate.attr("action", "stuOffUpdate.adm");
+				//var result = $("#sampleTable tbody tr").children().eq(8).text();
+					//$("input[name=stsComplete]").val();
+				//alert(result);
 			}else if(num == 2){
 				stuStaUpdate.attr("action", "stuOnUpdate.adm");
 			}
@@ -217,6 +231,20 @@
         }else if(startDateSummer > nowTime || endDateSummer < nowTime){
         	$('.btn').attr('disabled', 'true');
         }*/
+        
+    </script>
+    <script>
+    
+  /*
+    var result = $("input[name=stsComplete]").val();
+    if(result === "처리중"){
+		$("button[name=stuOffTerm]").attr("disabled", "true");
+    }else{
+    	$(".btn-secondary").attr("disabled", "true");
+    }
+    */
+
+    
     </script>
     
     <!-- Essential javascripts for application to work-->
