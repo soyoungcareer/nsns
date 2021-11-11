@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수강신청 관리자</title>
+<title>낙성대학교</title>
 </head>
 <body>
  <jsp:include page="lectRegisterMenubarAdmin.jsp"/> 

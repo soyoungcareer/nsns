@@ -13,7 +13,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>졸업증명서 출력</title> 
+<title>낙성대학교</title> 
 </head>
 <body>
 	<jsp:include page="../student/studentMenubar.jsp"/>

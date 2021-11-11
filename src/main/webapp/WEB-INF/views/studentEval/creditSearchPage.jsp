@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이수학점조회</title>
+<title>낙성대학교</title>
 </head>
 <body>
 	<jsp:include page="../student/studentMenubar.jsp"/> 
