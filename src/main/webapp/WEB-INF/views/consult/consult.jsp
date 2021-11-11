@@ -122,8 +122,8 @@
 					function checkCon() {
 						var stuId = $("#stuId").val();
 						var flag = true;
-						$
-								.ajax({
+						
+								$.ajax({
 									url : "consultCount.con",
 									dataType : "json",
 									data : {

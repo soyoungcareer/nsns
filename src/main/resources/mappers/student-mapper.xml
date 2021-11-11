@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="stuStatus" column="STU_STATUS"/>
 	</resultMap>
 	
+	<!-- 학생 정보 조회 -->
 	<select id="studentInfo" parameterType="_int" resultMap="studentResultMap">
 		SELECT 
 		STU_ID,STU_NAME,DEPT_TITLE,PROF_NAME,SSN,EMAIL,PHONE,ADDRESS,STU_CREDIT,STU_STATUS
@@ -26,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE STU_ID = #{stuId}
 	</select>
 	
+	<!-- 학생 정보 수정 -->
 	<update id="updateStu" parameterType="Student">
 		UPDATE STUDENT
 		SET EMAIL= #{email} ,PHONE= #{phone}, ADDRESS = #{address}

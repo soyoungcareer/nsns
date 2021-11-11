@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,7 +17,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>User Profile - Vali Admin</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">

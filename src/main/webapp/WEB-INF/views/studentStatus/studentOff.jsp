@@ -62,7 +62,7 @@
                 </div>
                 
                  <div class="form-group row">
-                  <label class="control-label col-md-3">휴학학기</label>
+                  <label class="control-label col-md-3">휴학 시작학기</label>
                   <div class="col-md-4">
 	                    <input class="form-control" type="text" id="offSem" name="offSem" readonly>
                   </div>
