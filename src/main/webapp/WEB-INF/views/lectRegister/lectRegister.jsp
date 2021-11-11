@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수강신청</title>
+<title>낙성대학교</title>
 </head>
 <body>
  <jsp:include page="lectRegisterMenubar.jsp"/> 
@@ -504,7 +504,7 @@
 				$.ajax({
 					url:"reInsert.reg",
 					type:"post",
-					async: false, //이렇게 안해주면 무조건 실행... 시바... 
+					async: false, 
 					data:{subCode:subCode},
 					success:function(result){
 						if(result > 0){

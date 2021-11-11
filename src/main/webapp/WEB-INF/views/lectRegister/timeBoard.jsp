@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시간표</title>
+<title>낙성대학교</title>
 </head>
 <body>
 	<jsp:include page="lectRegisterMenubar.jsp" /> 

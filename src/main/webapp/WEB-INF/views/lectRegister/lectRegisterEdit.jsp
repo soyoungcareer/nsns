@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>강의 설명 수정 페이지</title>
+<title>낙성대학교</title>
 </head>
 <body>
 <jsp:include page="lectRegisterMenubarAdmin.jsp"/> 

@@ -195,7 +195,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkRegister" parameterType="LectRegister" resultMap="RegisterResultSet">
 		SELECT *
 		FROM LECT_REGISTER
-		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} AND SEMESTER=#{semester} AND STATUS='Y'
+		WHERE SUB_CODE=#{subCode} AND STU_ID=#{stuId} AND YEAR=#{year} 
+		AND SEMESTER=#{semester} AND STATUS='Y'
 	</select>
 	<select id="checkCredit" parameterType="LectRegister" resultType="Integer">
 		SELECT SUM(B.SUB_CREDIT)

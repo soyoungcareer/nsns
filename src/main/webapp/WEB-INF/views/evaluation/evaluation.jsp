@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>성적조회페이지</title>
+<title>낙성대학교</title>
 </head>
 <body>
 	<jsp:include page="../student/studentMenubar.jsp"/> 
