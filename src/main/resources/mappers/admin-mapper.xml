@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE NTC_NO= #{bno}
 		AND STATUS= 'Y'
 	</select>
-	<!--  -->
+	
 	<insert id="insertNBoard" parameterType="Notice">
 		INSERT INTO NOTICE
 		VALUES (SEQ_NTC_NO.NEXTVAL, #{ntcCategory}, #{ntcTitle}, #{ntcContent}, 'admin', #{originName}, #{changeName}, default, sysdate, default)

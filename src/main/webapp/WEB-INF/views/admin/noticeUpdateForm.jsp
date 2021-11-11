@@ -31,20 +31,15 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 공지사항</h1>
-          
+          <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
         </div>
-        <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-          <li class="breadcrumb-item">공지사항</li>
-          <li class="breadcrumb-item"><a href="#">공지사항 수정</a></li>
-        </ul>
+        
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <form id="noticeUpdateForm" method="post" action="update.ntc" enctype="multipart/form-data">
                 
                   <input type="hidden" name="ntcNo" value="${ n.ntcNo }">

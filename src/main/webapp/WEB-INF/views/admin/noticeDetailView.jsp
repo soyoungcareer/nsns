@@ -39,7 +39,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 공지사항</h1>
+          <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
           
         </div>
         
@@ -48,7 +48,7 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <form>
                 	
                   <div class="form-group">
@@ -104,6 +104,8 @@
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
                     <textarea class="form-control" id="ntcContent" rows="3" style="resize:none" readonly>${n.ntcContent }</textarea>
+                    <br>
+                    <br>
                     <img src="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}">
                   </div>
                   
@@ -130,7 +132,7 @@
             <c:if test="${not empty loginAdm }">
 	            
 	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
-	                <button class="btn btn-secondary" onclick="postFormSubmit(2);">삭제하기</button>
+	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
 	            
 	            <form id="postForm" action="" method="post">
 					<input type="hidden" name="bno" id="bno" value="${n.ntcNo }">

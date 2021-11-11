@@ -129,9 +129,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY A.SUB_CODE DESC
 	</select>
 	
-	<insert id="createEv" parameterType="LectEvaluation">
-		INSERT INTO LECT_EVALUATE(LECT_EVA_NO, LECT_REG_NO, STU_ID, QUESTION, YEAR, SEMESTER, STATUS)
-		VALUES (SEQ_LECT_EVA_NO.NEXTVAL, #{lectRegNum}, #{stuId}, #{question}, #{year}, #{semester}, default)
+	<insert id="createQuestion" parameterType="LectEvaluation">
+		<![CDATA[
+		MERGE INTO LECT_EVALUATE C
+		USING (
+		        SELECT 
+		            B.LECT_REG_NO AS LECT_REG_NO
+		            , B.STU_ID AS STU_ID
+		            , B.YEAR AS YEAR
+		            , B.SEMESTER AS SEMESTER
+		        FROM LECT_REGISTER B
+		        WHERE 1=1
+		        ) D
+		    ON (C.LECT_REG_NO = D.LECT_REG_NO
+		    AND C.STU_ID = D.STU_ID
+		    AND QUESTION <> QUESTION)
+		    WHEN NOT MATCHED THEN
+		INSERT (LECT_EVA_NO, LECT_REG_NO, STU_ID, QUESTION, YEAR, SEMESTER, STATUS)
+		VALUES (SEQ_LECT_EVA_NO.NEXTVAL, D.LECT_REG_NO, D.STU_ID, #{question}, D.YEAR, D.SEMESTER, DEFAULT)
+		]]>
 	</insert>
-
+	
 </mapper>

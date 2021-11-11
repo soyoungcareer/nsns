@@ -40,7 +40,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 공지사항</h1>
+          <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
           
@@ -133,10 +133,10 @@
               
               
             </div>
-            
+            <br>
             <c:if test="${not empty loginAdm}">
 		        <div align="right">
-		        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록</button>
+		        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록하기</button>
 		        </div>
 	       </c:if>
             

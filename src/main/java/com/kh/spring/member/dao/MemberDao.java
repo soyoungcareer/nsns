@@ -136,11 +136,21 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.studentUpdatePrf", stuId);
 	}
 
-	public int studentUpdatePrf(SqlSessionTemplate sqlSession, int stuId, String profId) {
+	public Student studentUpdate(SqlSessionTemplate sqlSession, int stuId) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("memberMapper.studentUpdatePrf", stuId);
+		return sqlSession.selectOne("memberMapper.studentUpdate", stuId);
 	}
 
+	public int studentUpdateProfId(SqlSessionTemplate sqlSession, Student s) {
+		
+		return sqlSession.update("memberMapper.studentUpdateProfId", s);
+	}
+
+	
+
+	
+
+	
 	
 
 }
