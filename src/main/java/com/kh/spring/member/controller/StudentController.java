@@ -36,12 +36,9 @@ public class StudentController {
 	@RequestMapping("stuinfo.st")
 	public String selectStuInfo(Model model, HttpSession session) {  
 		
-		//로그인 세션의 학번을 가져와서 전달
 		int stuId = ((Student)session.getAttribute("loginStu")).getStuId(); 
 		
 		Student student = studentService.studentInfo(stuId);
-		
-		System.out.println(" student : " + student);
 		
 		model.addAttribute("student", student);
 		
@@ -75,15 +72,13 @@ public class StudentController {
 	@ResponseBody
     @RequestMapping(value="mailCheck", method=RequestMethod.GET)
     public String mailCheckGET(String email) throws Exception{
-        
 
         //인증번호(난수) 생성 
         Random random = new Random();
         int checkNum = random.nextInt(888888) + 111111;
         
-
         //이메일 보내기 
-        String setFrom = "annie9434@gamil.com";
+        String setFrom = "nsnsuniversity@gmail.com";
         String toMail = email;
         String title = "비밀번호 변경을 위한 인증번호 전송메일입니다.";
         String content = 
@@ -94,7 +89,6 @@ public class StudentController {
                 "해당 인증번호를 확인란에 기입해주세요.";
         
        try {
-            
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(setFrom);
@@ -102,7 +96,6 @@ public class StudentController {
             helper.setSubject(title);
             helper.setText(content,true);
             mailSender.send(message);
-            
         }catch(Exception e) {
             e.printStackTrace();
         }

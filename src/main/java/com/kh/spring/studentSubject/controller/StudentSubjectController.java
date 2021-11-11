@@ -30,7 +30,8 @@ public class StudentSubjectController {
 	
 	//수강과목 전체 조회하기 (페이징 처리)
 	@RequestMapping("subject.li")
-	public String selectStuSubjectList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model, HttpSession session) { 
+	public String selectStuSubjectList(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+										Model model, HttpSession session) { 
 			
 		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
 			
@@ -59,20 +60,19 @@ public class StudentSubjectController {
 		return "student/studentSubject";
 	}
 	
-	
+	//수강과목 검색결과 페이징 처리하기 
 	 @ResponseBody
 	 @RequestMapping(value="searchList.su", produces="application/json; charset=utf-8;")
-	 public String searchSubject(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, String sYear, String sMonth, String search, HttpSession session ) {
+	 public String searchSubject(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, 
+			 					 String sYear, String sMonth, String search, HttpSession session ) {
 		 
-		 	int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  //로그인한 세션의 학생 학번 가져오기
+		 	int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();  
 			
 			if(search.equals("")) {
 				search = "%";
 			}
 			
 			SearchCondition sc = new SearchCondition(stuId, sYear, sMonth, search);
-			
-			System.out.println("sc : " + sc);
 			
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			
