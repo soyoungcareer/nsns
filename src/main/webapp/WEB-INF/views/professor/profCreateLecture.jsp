@@ -36,8 +36,6 @@
 			var subTitle = $("#subTitle").val();
 			var flag = null;
 			
-			console.log(subTitle);
-			
 			$.ajax({
 				url: "createDuplCheck.pr",
 				type: "post",
@@ -62,7 +60,6 @@
 					console.log("ajax 통신 실패");
 				}
 			});
-			console.log(flag);
 			
 			return flag;
 		}
@@ -79,11 +76,6 @@
 					<i class="fa fa-briefcase"></i> 강의 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">강의 관리</li>
-				<li class="breadcrumb-item"><a href="profLectInfoLoad.pr">강의개설 신청</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -186,9 +178,6 @@
 							    <option>7</option>
 							    <option>8</option>
 							  </select>
-							  <!-- -----------------------------------
-							  	강의시작시작 시간 이전 강의종료시간 안뜨게 하기 
-							  	--------------------------------------->
 							</div>
 		                </div>
 		            </div>

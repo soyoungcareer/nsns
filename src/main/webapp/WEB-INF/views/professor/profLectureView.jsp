@@ -33,11 +33,6 @@
 					<i class="fa fa-briefcase"></i> 강의 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">강의 관리</li>
-				<li class="breadcrumb-item"><a href="profLectureDetail.pr">강의목록 조회</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -158,14 +153,6 @@
 				                </ul>
 				            </div>
 							
-<%-- 							<div class="row">
-				                <div class="form-group col-md-4 align-self-end">
-				                  <input type="button" class="btn btn-warning" onclick="location.href='<%=contextPath%>/lectEditInfoLoad.pr'" value="강의수정"/>
-				                  <input type="button" class="btn btn-warning" id="editBtn" onclick="" value="강의수정"/>
-				                  <input type="button" class="btn btn-danger" onclick="location.href='<%=contextPath%>/lectDelInfoLoad.pr'" value="강의삭제"/>
-				                  <input type="button" class="btn btn-danger" onclick="" value="강의삭제"/>
-				                </div>
-			                </div> --%>
 							
 						</div>
 					</div>

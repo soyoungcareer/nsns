@@ -17,10 +17,6 @@
 			var gradeSemester = td.eq(1).text();
 			var subTitle = td.eq(5).text();
 			
-			console.log(subCode);
-			console.log(gradeYear);
-			console.log(gradeSemester);
-			
 			$.ajax({
 				url: "filteredGrade.pr",
 				type:"GET",
@@ -125,16 +121,6 @@
 			var gradeSemesterTr = $(this).parent().parent().children().eq(11);
 			var gradeSemester = gradeSemesterTr.children().eq(2).val();
 			
-			
-			console.log("attend : " + attend);
-			console.log("assign : " + assign);
-			console.log("mid : " + mid);
-			console.log("fin : " + fin);
-			console.log("stuId : " + stuId);
-			console.log("subCode : " + subCode);
-			console.log("gradeYear : " + gradeYear);
-			console.log("gradeSemester : " + gradeSemester); 
-			
 			$.ajax({
 				url: "updateGrade.pr",
 				type:"POST",
@@ -151,16 +137,11 @@
 				},
 				dataType:"json",
 				success:function(result){
-					
-					console.log("result : " + result);
-					
 					if (result > 0) {
 						$.notify({
 							message: "저장 성공",
 							icon: 'fa fa-check'
 						});
-						
-						//$("#gradeTable>tbody>tr").remove();
 						
 					} else {
 						$.notify({
@@ -168,8 +149,6 @@
 							icon: 'fa fa-times'
 						});
 					}
-					
-					//reloadData();
 				},
 				error:function() {
 					alert("ajax 통신 실패");
@@ -189,11 +168,6 @@
 					<i class="fa fa-edit"></i> 성적 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">성적 관리</li>
-				<li class="breadcrumb-item"><a href="profGradeMain.pr">성적 등록/조회/수정</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -215,13 +189,6 @@
 							
 							<form action="filteredSubject.pr" class="form-horizontal">
 								<div class="row">
-									<!-- <div class="form-group col-md-5">
-									  <label class="control-label" for="evalType">평가방법</label>
-									  <select class="form-control" id="evalType">
-									    <option>상대평가</option>
-									    <option>절대평가</option>
-									  </select>
-									</div> -->
 									<div class="form-group form-inline col-md-2">
 									  <select class="form-control" id="con1" name="con1">
 									  	<option value="0">전체</option>

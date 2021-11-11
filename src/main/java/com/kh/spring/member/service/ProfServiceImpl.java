@@ -76,18 +76,8 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public ArrayList<Student> profStudentDetail(String subCode) {
-		return professorDao.profStudentDetail(sqlSession, subCode);
-	}
-
-	@Override
 	public ArrayList<Consult> loadConsultList(String profId, PageInfo pi) {
 		return professorDao.loadConsultList(sqlSession, profId, pi);
-	}
-
-	@Override
-	public ArrayList<Evaluation> loadEvalList(Subject sub) {
-		return professorDao.loadEvalList(sqlSession, sub);
 	}
 
 	@Override
@@ -132,9 +122,6 @@ public class ProfServiceImpl implements ProfService {
 
 	@Override
 	public void editLectReq(RequestedSubject reqSubject) {
-		
-		System.out.println("=================reqSubject ServiceImpl : " + reqSubject);
-		
 		int result = professorDao.editLectReq(sqlSession, reqSubject);
 		
 		if (result < 0) {
@@ -189,18 +176,7 @@ public class ProfServiceImpl implements ProfService {
 	}
 
 	@Override
-	public int evalSubCount(SearchSubject searchSubject) {
-		return professorDao.evalSubCount(sqlSession, searchSubject);
-	}
-
-	@Override
-	public ArrayList<Subject> evalSubList(SearchSubject searchSubject, PageInfo pi) {
-		return professorDao.evalSubList(sqlSession, searchSubject, pi);
-	}
-
-	@Override
 	public Evaluation selectFilteredEval(Map map) {
-		System.out.println("================eval ServiceImpl : " + map);
 		return professorDao.selectFilteredEval(sqlSession, map);
 	}
 

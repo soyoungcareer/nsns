@@ -33,11 +33,7 @@ public interface ProfService {
 
 	Professor loginProfessor(String profId);
 
-	ArrayList<Student> profStudentDetail(String subCode);
-
 	ArrayList<Consult> loadConsultList(String profId, PageInfo pi);
-
-	ArrayList<Evaluation> loadEvalList(Subject sub);
 
 	ArrayList<StudentDo> loadDoList(String profId, PageInfo pi);
 
@@ -72,10 +68,6 @@ public interface ProfService {
 	Consult detailConsult(String conNo);
 
 	int profConCheck(Consult consult);
-
-	int evalSubCount(SearchSubject searchSubject);
-
-	ArrayList<Subject> evalSubList(SearchSubject searchSubject, PageInfo pi);
 
 	Evaluation selectFilteredEval(Map map);
 

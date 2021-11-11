@@ -16,10 +16,6 @@
 			var semester = td.eq(1).text();
 			var subTitle = td.eq(5).text();
 			
-			console.log(subCode);
-			console.log(year);
-			console.log(semester);
-			
 			$.ajax({
 				url: "filteredEval.pr",
 				type:"POST",
@@ -66,11 +62,6 @@
 					<i class="fa fa-comments"></i> 학생 관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">학생 관리</li>
-				<li class="breadcrumb-item"><a href="profEvaluation.pr">강의평가 조회</a></li>
-			</ul> -->
 		</div>
 		
 		<div class="container-fluid">
@@ -179,7 +170,7 @@
 				                <ul class="pagination">
 				                	<c:choose>
 				                		<c:when test="${ pi.currentPage ne 1 }">
-				                			<li class="page-item"><a class="page-link" href="filteredEval.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+				                			<li class="page-item"><a class="page-link" href="evalSubLoad.pr?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 				                		</c:when>
 				                		<c:otherwise>
 				                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -189,7 +180,7 @@
 				                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 				                    	<c:choose>
 					                		<c:when test="${ pi.currentPage ne p }">
-				                    			<li class="page-item"><a class="page-link" href="filteredEval.pr?currentPage=${ p }">${ p }</a></li>
+				                    			<li class="page-item"><a class="page-link" href="evalSubLoad.pr?currentPage=${ p }">${ p }</a></li>
 					                		</c:when>
 					                		<c:otherwise>
 					                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -199,10 +190,10 @@
 				                    
 				                    <c:choose>
 				                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-				                			<li class="page-item"><a class="page-link" href="profEvaluation.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item"><a class="page-link" href="evalSubLoad.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:when>
 				                		<c:otherwise>
-				                			<li class="page-item disabled"><a class="page-link" href="filteredEval.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				                			<li class="page-item disabled"><a class="page-link" href="evalSubLoad.pr?currentPage=${ pi.currentPage+1 }">Next</a></li>
 				                		</c:otherwise>
 				                	</c:choose>
 				                </ul>

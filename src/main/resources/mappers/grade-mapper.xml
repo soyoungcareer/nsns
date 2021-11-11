@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="gradeMapper">
 
 	<!-- 강의 --> 
-	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<resultMap id="profSubList" type="Subject">
 		<id property="subCode" column="SUB_CODE"/>
 		<result property="deptTitle" column="DEPT_TITLE"/>
@@ -110,7 +109,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 	
-	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<!-- 과목 조건 검색 리스트 -->
 	<select id="selectFilteredSubList" parameterType="SearchSubject" resultMap="profSubList">
 		SELECT A.SUB_YEAR, A.SUB_SMST, A.SUB_CODE, B.DEPT_TITLE, A.SUB_DIVS, A.SUB_TITLE, A.SUB_CREDIT, A.SUB_TYPE, C.PROF_NAME
@@ -151,13 +149,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY SUB_YEAR DESC, SUB_SMST DESC
 	</select>
 	
-	<!-- 학과명, 교수명 과목객체에 추가해야함. -->
 	<!-- 교수, 학년도, 학기별 과목 조회 -->
 	<select id="loadSubList" parameterType="Subject" resultMap="profSubList">
 		SELECT SUB_CODE, DEPT_CODE, SUB_DIVS, SUB_TITLE, SUB_CREDIT, SUB_TYPE, PROF_ID
 		FROM SUBJECT
-		<!-- JOIN DEPARTMENT USING(DEPT_CODE)
-		JOIN PROFESSOR USING(PROF_ID) -->
 		WHERE PROF_ID=#{profId} AND SUB_YEAR=#{gradeYear} AND SUB_SMST=${gradeSemester}
 	</select>
 	
@@ -173,39 +168,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN SUBJECT E ON A.SUB_CODE=E.SUB_CODE AND B.SUB_CODE=E.SUB_CODE
 		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester} 
 		AND B.YEAR=#{gradeYear} AND B.SEMESTER=${gradeSemester}
+		AND B.STATUS='Y'
 		ORDER BY STU_ID DESC
 	</select>
 	
 	<!-- 성적 수정 -->
 	<update id="updateGrade" parameterType="Grade">
-	<!-- 쿼리문 잘돌아감. -->
 		UPDATE GRADE 
 		SET ATTENDANCE=#{attendance}, ASSIGNMENT=#{assignment}, MIDEXAM=#{midExam}, FINEXAM=#{finExam},
 		GRADE_RESULT=#{gradeResult}, GRADE_CREDIT=#{gradeCredit}
 		WHERE STU_ID=#{studentId} AND SUB_CODE=#{subCode} 
 		AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester}
 	</update>
-	
-	
-	<select id="selectListCount" parameterType="_int" resultMap="gradeResultSet">
-		SELECT COUNT(*)
-		FROM GRADE
-		<!-- JOIN LECT_REGISTER USING(SUB_CODE)
-		WHERE SUB_CODE=#{subCode} AND GRADE_YEAR=#{gradeYear} AND GRADE_SEMESTER=${gradeSemester} -->
-	</select>
-
-
-	<update id="increaseCount" parameterType="_int">
-		UPDATE GRADE
-		SET COUNT = COUNT + 1
-		WHERE GRADE_NO=#{gradeNo}
-	</update>
-	
-	<select id="selectGrade" parameterType="_int" resultMap="gradeResultSet">
-		SELECT *
-		FROM GRADE
-		WHERE GRADE_NO={gradeNo}
-	</select>
 	
 	<!-- 수강신청시 학생정보 INSERT -->
 	<insert id="gradeInsert" parameterType="Grade">

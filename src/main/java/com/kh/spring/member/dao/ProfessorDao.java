@@ -39,13 +39,10 @@ public class ProfessorDao {
 	}
 
 	public Professor profInfoLoad(SqlSessionTemplate sqlSession, String profId) {
-		System.out.println("======================profId Dao : " + profId);
 		return sqlSession.selectOne("profMapper.profInfoLoad", profId);
 	}
 
 	public int profCreateLecture(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
-		System.out.println("======================= reqSubject Dao : " + reqSubject + "====================");
-		
 		return sqlSession.insert("profMapper.profCreateLecture", reqSubject);
 	}
 
@@ -54,8 +51,6 @@ public class ProfessorDao {
 	}
 
 	public int editMypage(SqlSessionTemplate sqlSession, Professor prof) {
-		System.out.println("======================= prof Dao : " + prof + "====================");
-		
 		return sqlSession.update("profMapper.editMypage", prof);
 	}
 
@@ -63,18 +58,10 @@ public class ProfessorDao {
 		return sqlSession.selectOne("profMapper.loginProfessor", profId);
 	}
 
-	public ArrayList<Student> profStudentDetail(SqlSessionTemplate sqlSession, String subCode) {
-		return (ArrayList)sqlSession.selectList("profMapper.profStudentDetail", subCode);
-	}
-
 	public ArrayList<Consult> loadConsultList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("profMapper.loadConsultList", profId, rowBounds);
-	}
-
-	public ArrayList<Evaluation> loadEvalList(SqlSessionTemplate sqlSession, Subject sub) {
-		return (ArrayList)sqlSession.selectList("profMapper.loadEvalList", sub);
 	}
 
 	public ArrayList<StudentDo> loadDoList(SqlSessionTemplate sqlSession, String profId, PageInfo pi) {
@@ -116,8 +103,6 @@ public class ProfessorDao {
 	}
 
 	public int editLectReq(SqlSessionTemplate sqlSession, RequestedSubject reqSubject) {
-		
-		System.out.println("=================reqSubject Dao : " + reqSubject);
 		return sqlSession.insert("profMapper.editLectReq", reqSubject);
 	}
 
@@ -150,22 +135,10 @@ public class ProfessorDao {
 	}
 
 	public int profConCheck(SqlSessionTemplate sqlSession, Consult consult) {
-		System.out.println("=================consult Dao : " + consult);
 		return sqlSession.update("profMapper.profConCheck", consult);
 	}
 
-	public int evalSubCount(SqlSessionTemplate sqlSession, SearchSubject searchSubject) {
-		return sqlSession.selectOne("profMapper.evalSubCount", searchSubject);
-	}
-
-	public ArrayList<Subject> evalSubList(SqlSessionTemplate sqlSession, SearchSubject searchSubject, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("profMapper.evalSubList", searchSubject , rowBounds);
-	}
-
 	public Evaluation selectFilteredEval(SqlSessionTemplate sqlSession, Map map) {
-		System.out.println("=================eval Dao : " + map);
 		return sqlSession.selectOne("profMapper.selectFilteredEval", map);
 	}
 

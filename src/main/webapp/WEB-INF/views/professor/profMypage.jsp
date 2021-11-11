@@ -22,26 +22,6 @@
 			}
 			return true;
 		}
-		
-		/*
-		function completeMsg() {
-			swal({
-				title: "정말로 수정하시겠습니까?",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonText: "수정",
-				cancelButtonText: "취소",
-				closeOnConfirm: false,
-	      		closeOnCancel: false
-			}, function(isConfirm) {
-				if (isConfirm) {
-					swal("수정완료", "개인정보가 정상적으로 수정되었습니다.", "success");
-				} else {
-	      			swal("수정취소", "개인정보 수정을 취소합니다.", "error");
-	      		}
-			});
-		}
-		*/
 	</script>
 </head>
 <body> 
@@ -54,11 +34,6 @@
 					<i class="fa fa-lock"></i> 개인정보관리
 				</h1>
 			</div>
-			<!-- <ul class="app-breadcrumb breadcrumb">
-				<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-				<li class="breadcrumb-item">마이페이지</li>
-				<li class="breadcrumb-item"><a href="profMypage.pr">개인정보관리</a></li>
-			</ul> -->
 		</div>
 
 
@@ -151,30 +126,6 @@
 					</div>
 					</form>
 					
-					
-					<!-- The Modal -->
-					  <div class="modal fade" id="myModal">
-					    <div class="modal-dialog">
-					      <div class="modal-content">
-					        <!-- Modal Header -->
-					        <div class="modal-header">
-					          <h4 class="modal-title">확인</h4>
-					          <button type="button" class="close" data-dismiss="modal">×</button>
-					        </div>
-					        
-					        <!-- Modal body -->
-					        <div class="modal-body" id="modalBody">
-					        	<p>개인정보가 수정되었습니다.</p>
-					        </div>
-					        
-					        <!-- Modal footer -->
-					        <div class="modal-footer">
-					          <button class="btn btn-secondary" type="button" data-dismiss="modal">닫기</button>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					  
 				</div>
 			</div>
 		</div>
