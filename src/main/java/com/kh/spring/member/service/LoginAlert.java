@@ -15,9 +15,10 @@ public class LoginAlert {
 	public static void alert(HttpServletResponse response, String alertText) throws IOException {
 		
 		init(response);
+		String path = "login.mem";
 		PrintWriter out = response.getWriter();
-        out.println("<script>alert('" + alertText + "');</script> ");
-        out.flush();
+		out.println("<script>alert('로그인 중 오류가 발생하였습니다.'); location.href='" + path + "' </script>");
+		out.close();
 	}
 
 }

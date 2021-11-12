@@ -32,8 +32,7 @@
       <div class="app-title">
         <div>
           <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
-        </div>
-        
+        </div> 
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -41,7 +40,6 @@
             <div class="row">
               <div class="col-lg-12">
                 <form id="noticeUpdateForm" method="post" action="update.ntc" enctype="multipart/form-data">
-                
                   <input type="hidden" name="ntcNo" value="${ n.ntcNo }">
                   <div class="form-group">
 	                <label class="control-label">제목</label>
@@ -66,33 +64,28 @@
                       <option value=100>복학</option>
                     </select>
                   </div>
+                  
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
                     <textarea class="form-control" id="ntcContent" name="ntcContent" rows="3" placeholder="글자수 제한 3500byte" style="resize:none">${n.ntcContent }</textarea>
                   </div>
                   
-                  <div class="form-group"> 
-                    
+                  <div class="form-group">  
                     <input class="form-control-file" type="file" id="attachment" name="reUploadFile" aria-describedby="fileHelp">
-                            <c:if test="${ !empty n.originName }">
-	                                                               현재 파일 : ${ n.originName } <br>
-	                            <input type="hidden" name="changeName" value="${ n.changeName }">
-	                            <input type="hidden" name="originName" value="${ n.originName }">
-                            </c:if>
-                            
+	                    <c:if test="${ !empty n.originName }">
+	                                                        현재 파일 : ${ n.originName } <br>
+	                      <input type="hidden" name="changeName" value="${ n.changeName }">
+	                      <input type="hidden" name="originName" value="${ n.originName }">
+	                    </c:if>     
                   </div>
                   
                   <div class="tile-footer">
-		            <!-- admin button -->
 		              <button class="btn btn-primary" type="submit">수정하기</button>
 		              <button type="button" class="btn btn-secondary" onclick="javascript:history.go(-1);">취소하기</button>
 		            </div>
-                  
                 </form>
               </div>
-              
             </div>
-            
           </div>
         </div>
       </div>

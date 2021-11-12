@@ -23,13 +23,13 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public int subjectModifyListCount() {
-		// TODO Auto-generated method stub
+		
 		return subjectDao.subjectModifyListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<RequestedSubject> subjectModifyList(PageInfo pi) {
-		// TODO Auto-generated method stub
+		
 		return subjectDao.subjectModifyList(sqlSession, pi);
 	}
 
@@ -37,7 +37,6 @@ public class SubjectServiceImpl implements SubjectService {
 	public RequestedSubject selectSubjectModify(int sno) {
 		
 		RequestedSubject reqSub = null;
-		
 		reqSub = subjectDao.selectSubjectModify(sqlSession, sno);
 		
 		return reqSub;
@@ -49,19 +48,17 @@ public class SubjectServiceImpl implements SubjectService {
 		int result = subjectDao.createSubject(sqlSession, sub);
 		
 		if(result < 0) {
-			throw new CommException("과목 등록 중 오류 발생");
+			throw new CommException("과목 등록 중 오류가 발생하였습니다.");
 		}
 	}
 
 	@Override
 	public void createRequestSubject(RequestedSubject reqSub) {
 		
-		//System.out.println("==========impl reqSub : " + reqSub);
-
 		int result = subjectDao.createRequestSubject(sqlSession, reqSub);
 		
 		if(result < 0) {
-			throw new CommException("과목 등록 중 오류 발생");
+			throw new CommException("과목 등록 중 오류가 발생하였습니다.");
 		}
 		
 	}
@@ -72,7 +69,7 @@ public class SubjectServiceImpl implements SubjectService {
 		int result = subjectDao.modifySubject(sqlSession, sub);
 		
 		if(result < 0) {
-			throw new CommException("과목 수정 중 오류 발생");
+			throw new CommException("과목 수정 중 오류가 발생하였습니다.");
 		}
 		
 	}
@@ -80,12 +77,10 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public void modifyRequestedSubject(RequestedSubject reqSub) {
 		
-		System.out.println("==========modify impl reqSub : " + reqSub);
-		
 		int result = subjectDao.modifyRequestedSubject(sqlSession, reqSub);
 		
 		if(result < 0) {
-			throw new CommException("과목 등록 중 오류 발생");
+			throw new CommException("과목 수정 중 오류가 발생하였습니다.");
 		}
 		
 	}
@@ -96,7 +91,7 @@ public class SubjectServiceImpl implements SubjectService {
 		int result = subjectDao.deleteSubject(sqlSession, sub);
 		
 		if(result < 0) {
-			throw new CommException("과목 삭제 중 오류 발생");
+			throw new CommException("과목 삭제 중 오류가 발생하였습니다.");
 		}
 		
 	}
@@ -104,12 +99,10 @@ public class SubjectServiceImpl implements SubjectService {
 	@Override
 	public void deleteRequestedSubject(RequestedSubject reqSub) {
 		
-		System.out.println("==========delete impl reqSub : " + reqSub);
-		
 		int result = subjectDao.deleteRequestedSubject(sqlSession, reqSub);
 		
 		if(result < 0) {
-			throw new CommException("과목 삭제 중 오류 발생");
+			throw new CommException("과목 삭제 중 오류가 발생하였습니다.");
 		}
 		
 	}
@@ -122,7 +115,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public ArrayList<Subject> subAllList(PageInfo pi) {
-		// TODO Auto-generated method stub
+		
 		return subjectDao.subAllList(sqlSession, pi);
 	}
 

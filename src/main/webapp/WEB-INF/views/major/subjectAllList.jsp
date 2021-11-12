@@ -32,9 +32,8 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 강의 신청 내역</h1>
-        </div>
-        
+          <h1><i class="fa fa-check-square-o"></i> 강의 관리</h1>
+        </div>    
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -70,10 +69,10 @@
 	                        <td>${ al.subTitle }</td>
 	                        <td>${ al.deptTitle }
 	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ al.deptCode }">
-	                        </td><!-- deptCode -->	                        
+	                        </td>	                        
 	                        <td>${ al.profName }
 	                        	<input type="hidden" id="profId" name="profId" value="${ al.profId }">
-	                        </td><!-- profId -->
+	                        </td>
 	                        <td>
 	                        	<c:choose>
 	                        		<c:when test="${ al.subDivs == 1 }">
@@ -89,66 +88,53 @@
 	                        <td>${ al.subCredit }</td>
 	                        <td>${ al.subYear }</td>
 	                        <td>${ al.subSmst }</td>
-	                        
 	                        <td>${ al.subClass }
 	                        	<input type="hidden" id="originName" name="originName" value="${ al.originName }">
                 				<input type="hidden" id="changeName" name="changeName" value="${ al.changeName }">
-	                        </td>
-	                        
+	                        </td>  
 	                    </tr>
                     </c:forEach>
-                    
                   </tbody>
                 </table>
-                
-                
-                
               </div>
             </div>
           </div>
-        </div>
-        
-
+        </div>       
       </div>
       
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="subAllList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="subAllList.adm?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="subAllList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="subAllList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="subAllList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+	          		<c:when test="${ pi.currentPage ne p }">
+	             			<li class="page-item"><a class="page-link" href="subAllList.adm?currentPage=${ p }">${ p }</a></li>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	          		</c:otherwise>
+	          	</c:choose>
+             </c:forEach>
+
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="subAllList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="subAllList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+      </div>    
     </main>
-    
     
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>

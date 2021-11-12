@@ -32,9 +32,8 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 학적 변경</h1><!-- 자퇴 -->
+          <h1><i class="fa fa-address-card-o"></i> 학생 관리</h1>
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -54,11 +53,10 @@
                       <th>신청내용</th>                    
                       <th>기존신청번호</th>
                       <th>담당교수</th>
-                      <th>승인</th><!-- 학적변경승인 -->
+                      <th>승인</th>
                     </tr>
                   </thead>
                   <tbody align="center">
-                  
                   	<c:if test="${ empty staList }">
                   		<tr>
                   			<td colspan=10>학적 변경 신청이 없습니다.</td>
@@ -87,68 +85,59 @@
 	                        </td>
 	                        <td>${ sta.applicationNo }
 	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }" readonly>
-	                        </td><!-- 확인 -->
+	                        </td>
 	                        <td>${ sta.profName }
 	                        	<input type="hidden" id="profName" name="profName" value="${ sta.profName }" readonly>
 	                        	<input type="hidden" id="profId" name="profId" value="${ sta.profId }">
 	                        </td>	                        
 	                        <td>
-	                        	<!-- <button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button> -->
 	                        	<button class="btn btn-primary" type="submit">승인</button>
 	                        </td>
 	                    </tr>
-                    </c:forEach>
-                    
+                    </c:forEach> 
                   </tbody>
                 </table>
-                
               </div>
               </form>
             </div>
           </div>
-        </div>
-        
-       
-        
+        </div> 
       </div>
       
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+          		<c:when test="${ pi.currentPage ne p }">
+             			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ p }">${ p }</a></li>
+          		</c:when>
+          		<c:otherwise>
+          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+          		</c:otherwise>
+          	</c:choose>
+             </c:forEach>
+
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+      </div>        
     </main>
+    
     <script>
     	$(function(){
     		$("#sampleTable tbody tr").click(function(){

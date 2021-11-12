@@ -28,28 +28,21 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
-	/*
-	@RequestMapping("list.ntc")
-	public String noticeTest() {
-		return "admin/noticeListView";
-	}*/
 	
-	@RequestMapping("list.ntc")//공지사항 목록 조회
+	@RequestMapping("list.ntc") //공지사항 목록 조회
 	public String selectList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
 		int listCount = noticeService.selectNListCount();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Notice> list = noticeService.selectNList(pi);
-		System.out.println("list : " + list);
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
 		return "admin/noticeListView";
 	}
 	
-	@RequestMapping("detail.ntc")//공지사항 게시글 상세조회
+	@RequestMapping("detail.ntc") //공지사항 게시글 상세조회
 	public ModelAndView selectNBoard(int bno, ModelAndView mv) {
 		
 		Notice n = noticeService.selectNBoard(bno);
@@ -58,18 +51,15 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping("enrollFrom.ntc")//게시글 입력 폼 페이지로 전환
+	@RequestMapping("enrollFrom.ntc") //게시글 입력 폼 페이지로 전환
 	public String enrollForm() {
+		
 		return "admin/noticeEnrollForm";
 	}
 	
-	@RequestMapping("insert.ntc")//게시글 등록
+	@RequestMapping("insert.ntc") //게시글 등록
 	public String insertNBoard(Notice n, HttpServletRequest request, Model model
 							, @RequestParam(name="ntcAttachment", required=false) MultipartFile file) {
-		
-		//확인용
-		System.out.println(n);
-		System.out.println(file.getOriginalFilename());
 		
 		if(!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
@@ -82,49 +72,42 @@ public class NoticeController {
 		
 		noticeService.insertNBoard(n);
 		
-		return "redirect:list.ntc"; // 작성한 글 상세 페이지
+		return "redirect:list.ntc";
 	}
 	
-	private String saveFile(MultipartFile file, HttpServletRequest request) {//첨부파일 등록
+	private String saveFile(MultipartFile file, HttpServletRequest request) { //첨부파일 등록
 		
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources + "\\upload_files\\";
-		
-		System.out.println("savePath" + savePath);
-		
 		String originName = file.getOriginalFilename();
+		
 		String saveTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		String ext = originName.substring(originName.lastIndexOf("."));
-		
 		String changeName = saveTime + ext;
 		
 		try {
 			file.transferTo(new File(savePath + changeName));
-		} catch (IllegalStateException e) { //change project compliance and jre to 1.7
-			// TODO Auto-generated catch block
+		} catch (IllegalStateException e) {
 			e.printStackTrace();
 			throw new CommException("파일 첨부 오류가 발생하였습니다.");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new CommException("파일 첨부 오류가 발생하였습니다.");
 		}
 		
 		return changeName;
 	}
-	
-	
-	
-	@RequestMapping("updateForm.ntc") //게시글 수정 페이지로 이동
+
+	@RequestMapping("updateForm.ntc") //게시글 수정 페이지 이동
 	public ModelAndView updateForm(int bno, ModelAndView mv) {
 		
 		Notice n = noticeService.selectNBoard(bno);
 		mv.addObject("n", n).setViewName("admin/noticeUpdateForm");
-		 //jsp "n" - n
+		
 		return mv;
 	}
 	
-	@RequestMapping("update.ntc")
+	@RequestMapping("update.ntc") //게시글 수정
 	public ModelAndView updateNBoard(Notice n, ModelAndView mv, HttpServletRequest request,
 									@RequestParam(value="reUploadFile", required=false) MultipartFile file) {
 		
@@ -147,15 +130,12 @@ public class NoticeController {
 	}
 
 	private void deleteFile(String fileName, HttpServletRequest request) { //게시글 첨부파일 삭제
-		//String fileName, changeName
+
 		String resources = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = resources + "\\upload_files\\";
 		
-		System.out.println("savePath : " + savePath);
-		
 		File deleteFile = new File(savePath + fileName);
 		deleteFile.delete();
-		
 	}
 	
 	@RequestMapping("delete.ntc") //게시글 삭제

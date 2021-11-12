@@ -27,7 +27,6 @@
   </head>
   
   <body class="app sidebar-mini">
-  
     <c:if test="${not empty loginAdm }">
     	<jsp:include page="adminMenubar.jsp" />
     </c:if>
@@ -37,13 +36,13 @@
     <c:if test="${not empty loginStu }">
       	<jsp:include page="noticeMenubar.jsp" />
     </c:if>
+    
     <main class="app-content">
       <div class="app-title">
         <div>
           <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
-          
           <c:if test="${not empty loginStu }">
           	<li class="breadcrumb-item"><a href="${ pageContext.servletContext.contextPath }/stuinfo.st" style="color: #222d32;margin-left: 4px"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i><div>나가기</div></a></li>   		
           </c:if>
@@ -76,8 +75,7 @@
                     <c:forEach items="${ list }" var="n">
 	                    <tr>
 	                        <td>${ n.ntcNo }</td>
-	                        <td><!-- ${ n.ntcCategory }
-	                        	<input type="hidden" value="${ n.ntcCategory }"> -->
+	                        <td>
 	                        	<c:choose>
 			                    	<c:when test="${ n.ntcCategory == 91 }">
 			                    		전체
@@ -119,19 +117,15 @@
 			                    		복학
 			                  		</c:when>
 		                    	</c:choose>
-	                        
 	                        </td>
 	                        <td>${ n.ntcTitle }</td>
 	                        <td>${ n.count }</td>
 	                        <td>${ n.createDate }</td> 
 	                    </tr>
                     </c:forEach>
-                    
                   </tbody>
                 </table>
               </div>
-              
-              
             </div>
             <br>
             <c:if test="${not empty loginAdm}">
@@ -139,48 +133,44 @@
 		        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록하기</button>
 		        </div>
 	       </c:if>
-            
           </div>
         </div>
       </div>
       
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+          		<c:when test="${ pi.currentPage ne p }">
+             			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ p }">${ p }</a></li>
+          		</c:when>
+          		<c:otherwise>
+          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+          		</c:otherwise>
+          	</c:choose>
+             </c:forEach>
+              
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="list.ntc?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+      </div>      
     </main>
+    
     <script>
     	$(function(){
     		$("#sampleTable tbody tr").click(function(){

@@ -40,9 +40,7 @@
       <div class="app-title">
         <div>
           <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
-          
-        </div>
-        
+        </div> 
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -50,7 +48,6 @@
             <div class="row">
               <div class="col-lg-12">
                 <form>
-                	
                   <div class="form-group">
 	                <label class="ntcTitle">제목</label>
 	                <input class="form-control" id="ntcTitle" name="ntcTitle" type="text" value="${ n.ntcTitle }" readonly>
@@ -101,39 +98,34 @@
                   		</c:when>
                   </c:choose>
                   </div>
+                  
                   <div class="form-group">
                     <label for="ntcContent">내용</label>
                     <textarea class="form-control" id="ntcContent" rows="3" style="resize:none" readonly>${n.ntcContent }</textarea>
-                    <br>
-                    <br>
-                    <img src="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}">
+                    <br> 
                   </div>
                   
-                  <div class="form-group"> 
-                    	
-                    	
+                  <div class="form-group"> 	
                   		<c:if test="${ !empty n.originName }">
-                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}" download="${ n.originName }">${ n.originName }</a>
-                        					
+                  			<img src="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}">
+                  			<br>
+                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${n.changeName}" download="${ n.originName }">${ n.originName }</a>				
                         </c:if>
                         <c:if test="${ empty n.originName }">
                         	첨부파일이 없습니다.
                         </c:if>
+                        <br><br><br>
                   </div>
-                  
                 </form>
               </div>
-              
             </div>
             
             <div align="center">
+            	<button class="btn btn-outline-primary" onclick="location.href='list.ntc'">목록으로</button>&nbsp;&nbsp;&nbsp;
             
-            	<button class="btn btn-outline-primary" onclick="location.href='list.ntc'">목록으로</button>
             <c:if test="${not empty loginAdm }">
-	            
-	                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>
-	                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
-	            
+                <button class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</button>
 	            <form id="postForm" action="" method="post">
 					<input type="hidden" name="bno" id="bno" value="${n.ntcNo }">
 					<input type="hidden" name="fileName" value="${ n.changeName }"> 
@@ -145,19 +137,21 @@
 						if(num == 1){
 							postForm.attr("action", "updateForm.ntc");
 						}else{
-							postForm.attr("action", "delete.ntc");
+							var answer = confirm("해당 공지사항을 정말로 삭제하시겠습니까?");
+							if(answer == true){
+								postForm.attr("action", "delete.ntc");
+							}
 						}
 						postForm.submit();
 					}
 				</script>
-            </c:if>
-            	
+             </c:if>	
             </div>
-			
           </div>
         </div>
       </div>
     </main>
+    
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>

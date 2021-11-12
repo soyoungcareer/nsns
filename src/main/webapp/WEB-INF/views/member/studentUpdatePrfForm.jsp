@@ -30,10 +30,8 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 학생 관리</h1>
-          <p>학생 정보 변경</p>
+          <h1><i class="fa fa-address-card-o"></i> 학생 관리</h1>
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -46,18 +44,14 @@
                   <input class="form-control" type="text" id="profId" name="profId" required>
                   <input type="hidden" name="stuId" value="${s.stuId}">
                 </div>
-                
-                
+ 
                 <div class="tile-footer">
               		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>변경</button>
             	</div>
-                
               </form>
-            </div>
-            
+            </div> 
           </div>
         </div>   
-      
       </div>
     </main>
     

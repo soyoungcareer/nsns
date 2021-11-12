@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Subject {
-	///
+	
 	private String subCode; //과목코드
 	private String subTitle; //과목이름
 	private int deptCode; //학과코드
@@ -31,7 +31,5 @@ public class Subject {
 	private String changeName; //파일수정명
 	private String deptTitle; // 학과명
 	private String profName; // 교수명
-	//private String test; // 교수명
 
-	
 }

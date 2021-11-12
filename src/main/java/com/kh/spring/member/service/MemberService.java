@@ -14,9 +14,9 @@ import com.kh.spring.member.vo.Student;
 
 public interface MemberService {
 
-	Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a);
+	Admin loginAdmin(BCryptPasswordEncoder bCPwdEncoder, Admin a, HttpServletResponse response) throws IOException;
 
-	Student loginStudent(BCryptPasswordEncoder bCPwdEncoder, Student s);
+	Student loginStudent(BCryptPasswordEncoder bCPwdEncoder, Student s, HttpServletResponse response) throws IOException;
 
 	Professor loginProfessor(BCryptPasswordEncoder bCPwdEncoder, Professor p, HttpServletResponse response) throws IOException;
 
@@ -54,14 +54,8 @@ public interface MemberService {
 
 	void stuOnUpdate(int stuId);
 
-	void deleteStuPrf(String profId);
-//
-	//void studentUpdatePrf(int stuId);
-
 	Student studentUpdate(int stuId);
 
 	void studentUpdateProfId(Student s);
-
-	//void studentUpdatePrf(String profId);
 
 }

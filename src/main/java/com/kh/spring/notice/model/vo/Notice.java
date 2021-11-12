@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Notice {
 	
-	private int ntcNo; //공지사항 번호(시퀀스)
+	private int ntcNo; //공지사항 번호
 	private int ntcCategory; //분류
 	private String ntcTitle;
 	private String ntcContent;
@@ -25,21 +25,5 @@ public class Notice {
 	private int count; //조회수
 	private Date createDate;
 	private String status;
-
-	/*
-	public Notice(int ntcNo, int ntcCategory, String ntcTitle, String ntcContent, String ntcWriter, int count,
-			Date createDate, String status) {
-		super();
-		this.ntcNo = ntcNo;
-		this.ntcCategory = ntcCategory;
-		this.ntcTitle = ntcTitle;
-		this.ntcContent = ntcContent;
-		this.ntcWriter = ntcWriter;
-		this.count = count;
-		this.createDate = createDate;
-		this.status = status;
-	}*/
-	
-	
 
 }

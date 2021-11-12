@@ -28,11 +28,9 @@ public class SubjectController {
 	public String subjectModifyList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
 		int listCount = subjectService.subjectModifyListCount();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<RequestedSubject> subList = subjectService.subjectModifyList(pi);
-		System.out.println("subList : " + subList);
 		model.addAttribute("subList", subList);
 		model.addAttribute("pi", pi);
 		
@@ -44,8 +42,6 @@ public class SubjectController {
 		
 		RequestedSubject reqSub = subjectService.selectSubjectModify(sno);
 		mv.addObject("reqSub", reqSub).setViewName("major/subjectDetailView");
-		
-		System.out.println("=======================" + reqSub);
 		
 		return mv;
 	}
@@ -60,36 +56,16 @@ public class SubjectController {
 								, Subject sub
 								, RequestedSubject reqSub
 								) {
-		
-		
-		
-		System.out.println("=======sub : " + sub);
-		System.out.println("=======deptCode : " + deptCode);
-		System.out.println("=======profId : " + profId);
-		
-		
-		System.out.println("=======originName : " + originName);
-		System.out.println("=======changeName : " + changeName);
-		//sub.setOriginName(attOrigin);
-		//sub.setChangeName(attChange);
-		
-		
-		
-		
-	
+			
 		subjectService.createSubject(sub);
 		
-		System.out.println("========sub : " + sub);
-		
 		subjectService.createRequestSubject(reqSub);
-		
-		System.out.println("==========controller reqSub : " + reqSub);
 		
 		return "redirect:subModifyList.adm";
 	}
 	
 	
-	@RequestMapping("modifySub.adm") //
+	@RequestMapping("modifySub.adm") //강의 신청 승인 - 수정
 	public String modifySubject(Model model, HttpServletRequest request
 								, @RequestParam(value="subAttachment", required=false) MultipartFile file
 								, @RequestParam(name="originName", required=false) String originName
@@ -100,28 +76,14 @@ public class SubjectController {
 								, RequestedSubject reqSub
 								) {
 		
-		
-		System.out.println("=======modify sub : " + sub);
-
-		System.out.println("=======modify deptCode : " + deptCode);
-		System.out.println("=======modify profId : " + profId);	
-		System.out.println("=======modify originName : " + originName);
-		System.out.println("=======modify changeName : " + changeName);
-	
 		subjectService.modifySubject(sub);
-		
-		
-		
-		System.out.println("========modify sub : " + sub);
-		
+
 		subjectService.modifyRequestedSubject(reqSub);
-		
-		System.out.println("==========modify controller reqSub : " + reqSub);
 		
 		return "redirect:subModifyList.adm";
 	}
 	
-	@RequestMapping("deleteSub.adm")
+	@RequestMapping("deleteSub.adm") //강의 신청 승인 - 삭제
 	public String deleteSubject(Model model, HttpServletRequest request
 								, @RequestParam(value="subAttachment", required=false) MultipartFile file
 								, @RequestParam(name="originName", required=false) String originName
@@ -135,41 +97,21 @@ public class SubjectController {
 								, @RequestParam("subSmst") int subSmst
 								, @RequestParam("subCode") int subCode
 								) {
-		
-		
-		System.out.println("=======delete sub : " + sub);
-
-		System.out.println("=======delete deptCode : " + deptCode);
-		System.out.println("=======delete profId : " + profId);	
-		System.out.println("=======delete originName : " + originName);
-		System.out.println("=======delete changeName : " + changeName);
-		System.out.println("=======delete changeName : " + subCode);
-	
-		//sub.setSubClass(subClass);
-		//sub.setSubYear(subYear);
-		//sub.setSubSmst(subSmst);
-		
+				
 		subjectService.deleteSubject(sub);
 		
-		
-		
-		System.out.println("========delete sub : " + sub);
-		
 		subjectService.deleteRequestedSubject(reqSub);	
-		System.out.println("==========delete controller reqSub : " + reqSub);
 		
 		return "redirect:subModifyList.adm";
 	}
 
-	@RequestMapping("subAllList.adm")
+	@RequestMapping("subAllList.adm") //전체 강의 목록 조회
 	public String subAllList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
 		int listCount = subjectService.subAllListCount();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Subject> subAllList = subjectService.subAllList(pi);
-		System.out.println("subAllList : " + subAllList);
 		model.addAttribute("subAllList", subAllList);
 		model.addAttribute("pi", pi);
 		

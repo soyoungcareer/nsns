@@ -30,5 +30,4 @@ public interface SubjectService {
 
 	ArrayList<Subject> subAllList(PageInfo pi);
 
-	
 }

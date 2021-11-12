@@ -25,23 +25,21 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  
   <body class="app sidebar-mini">
     <jsp:include page="../admin/adminMenubar.jsp" />
     
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 강의 신청 내역</h1>
-        </div>
-        
+          <h1><i class="fa fa-check-square-o"></i> 강의 관리</h1>
+        </div>  
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="sampleTable">
+                <table class="table table-hover table-bordered" id="subModTable">
                   <thead align="center">
                     <tr>
                       <th>신청번호</th>
@@ -71,10 +69,10 @@
 	                        <td>${ sl.deptTitle }
 	                        	<input type="hidden" id="deptTitle" name="deptTitle" value="${ sl.deptTitle }">
 	                        	<input type="hidden" id="deptCode" name="deptCode" value="${ sl.deptCode }">
-	                        </td><!-- deptCode -->	                        
+	                        </td>	                        
 	                        <td>${ sl.profName }
 	                        	<input type="hidden" id="profId" name="profId" value="${ sl.profId }">
-	                        </td><!-- profId -->
+	                        </td>
 	                        <td>
 	                        	<c:choose>
 	                        		<c:when test="${ sl.subDivs == 1 }">
@@ -105,62 +103,53 @@
 	                        	<input type="hidden" id="attOrigin" name="attOrigin" value="${ sl.attOrigin }">
                 				<input type="hidden" id="attChange" name="attChange" value="${ sl.attChange }">
 	                        </td>
-	                        
 	                    </tr>
                     </c:forEach>
-                    
                   </tbody>
                 </table>
-                
               </div>
             </div>
           </div>
         </div>
-        
-
       </div>
       
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+	          		<c:when test="${ pi.currentPage ne p }">
+	             			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ p }">${ p }</a></li>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	          		</c:otherwise>
+          		</c:choose>
+             </c:forEach>
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+      </div>
     </main>
+    
     <!-- detailView -->
     <script>
     	$(function(){
-    		$("#sampleTable tbody tr").click(function(){
+    		$("#subModTable tbody tr").click(function(){
     			location.href="detailSub.adm?sno=" + $(this).children().eq(0).text();
     		});
     	});

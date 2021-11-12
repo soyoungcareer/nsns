@@ -1,9 +1,5 @@
 package com.kh.spring.major.vo;
 
-import java.util.List;
-
-import com.kh.spring.evaluation.vo.Evaluation;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
   </head>
   
   <body class="app sidebar-mini">
@@ -32,15 +33,13 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 전체 학생 계정</h1>
-        </div>
-        
+          <h1><i class="fa fa-address-card-o"></i> 학생 관리</h1>
+        </div> 
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-            
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="stuListTable">
                   <thead align="center">
@@ -63,9 +62,7 @@
                   	</c:if>
                     <c:forEach items="${ sList }" var="s">
 	                    <tr>
-	                        <td>${ s.stuId }
-	                        	<!-- <input type="hidden" name="stuId" value="${ s.stuId }"> -->
-	                        </td>
+	                        <td>${ s.stuId }</td>
 	                        <td>${ s.stuName }</td>
 	                        <td>${ s.deptName }</td>
 	                        <td>${ s.email }</td>
@@ -88,71 +85,60 @@
 	                        <td>
 	                        	<button class="btn btn-primary">삭제</button>
 	                        </td>
-	                        
 	                    </tr>
                     </c:forEach>
-                    
                   </tbody>
                 </table>
               </div>
-              
             </div>
           </div>
         </div>
-        
-       
-        
       </div>
       
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+	          		<c:when test="${ pi.currentPage ne p }">
+	             			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ p }">${ p }</a></li>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	          		</c:otherwise>
+          		</c:choose>
+             </c:forEach>
+             
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="stuList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+     </div>       
     </main>
+    
     <script>
     	$(function(){
     		$("#stuListTable tbody tr button").click(function(){
-    			
     			var answer = confirm("해당 학생을 퇴학 처리하겠습니까?");
     			if(answer == true){
     				location.href="stuDelete.adm?stuId=" + $(this).parent().parent().children().eq(0).text();
     			}
-    			
     		});
-    		
     	});
     </script>
-    
     <script>
     	$(function(){
     		$("#stuListTable tbody tr input").click(function(){
@@ -160,65 +146,7 @@
     		});
     	});
     </script>
-    
-    
-    <!-- temp
-    <script>
-    	/*$(document).on("click", "#stuListTable tbody tr td input", function(){
-    			
-    			var result = prompt("변경할 담당교수의 교번을 입력하세요.");
-        		if(result != ""){
-        			//$("input[name=profId]").text(result); //}
-        			location.href="stuDelete.adm?profId=" + result;
-        			
-        			var stuUpdate = $("#profIdChange");
-        			
-        			stuUpdate.attr("action", "stuUpdatePrf.adm");  			
-        			stuUpdate.submit();
-        			
-        			//location.href="stuDelete.adm?profId=" + result;
-        		}else{
-        			alert("다시 입력하세요.");
-        		}
-    	});*/
-    	$(document).on("click", "#stuListTable tbody tr td input", function(){
-			
-			var result = prompt("변경할 담당교수의 교번을 입력하세요.");
-    		if(result != ""){
-    			
-    			function profIdSend(url, params){
-    				var form = document.createElement("form");
-    				form.setAttribute("method", "post");
-    				form.setAttribute("action", "stuUpdatePrf.adm");
-    				document.charset = "utf-8";
-    				for(var profId in result){
-    					var hiddenField = document.createElement("input");
-    					hiddenField.setAttribute("type", "hidden");
-    					hiddenField.setAttribute("name", profId);
-    					hiddenField.setAttribute("value", result[profId]);
-    					form.appendChild(hiddenField);
-    				}
-    				document.body.appendChild(form);
-    				form.submit();
-    			}
-    			
-    		}else{
-    			alert("다시 입력하세요.");
-    		}
-	});
-    	
-    </script> -->
-    <!-- <script>
-    	$(function(){
-    		$("#stuListTable tbody tr").click(function(){
-    			/*if(${ s.profStatus == 'N' }){
-    				$("input[name=profId]").attr("type", "text");
-    			}*/
-    			location.href="stuUpdatePrf.adm?stuId=" + $(this).children().eq(0).text();
-    		});
-    	});
-    </script> -->
-    
+
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>

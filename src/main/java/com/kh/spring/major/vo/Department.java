@@ -15,7 +15,5 @@ public class Department {
 
 	private int deptCode;
 	private String deptTitle;
-	
-	
-	
+
 }
