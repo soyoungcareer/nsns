@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>낙성대 커뮤니티</title>
+	<title>낙성대  - 커뮤니티</title>
 	<meta content="" name="description">
 <meta content="" name="keywords">
 

@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Portfolio Details - Knight Bootstrap Template</title>
+<title>낙성대 - 커뮤니티</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 
@@ -137,7 +137,7 @@
 							<c:choose>
 								<c:when test="${ pi.currentPage ne 1 }">
 									<li class="page-item"><a class="page-link"
-										href="lecMove.me?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+										href="boardMovesss.me?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item disabled"><a class="page-link"
@@ -150,7 +150,7 @@
 								<c:choose>
 									<c:when test="${ pi.currentPage ne p }">
 										<li class="page-item"><a class="page-link"
-											href="lecMove.me?currentPage=${ p }">${ p }</a></li>
+											href="boardMovesss.me?currentPage=${ p }">${ p }</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item disabled"><a class="page-link"
@@ -163,11 +163,11 @@
 							<c:choose>
 								<c:when test="${ pi.currentPage ne pi.maxPage }">
 									<li class="page-item"><a class="page-link"
-										href="lecMove.me?currentPage=${ pi.currentPage+1 }">Next</a></li>
+										href="boardMovesss.me?currentPage=${ pi.currentPage+1 }">Next</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item disabled"><a class="page-link"
-										href="lecMove.me?currentPage=${ pi.currentPage+1 }">Next</a></li>
+										href="boardMovesss.me?currentPage=${ pi.currentPage+1 }">Next</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>

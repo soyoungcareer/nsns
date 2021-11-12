@@ -227,7 +227,7 @@ public class FacMoveController {
 
 		fs.insertFacility(f);
 
-		return "redirect:facMove.me";
+		return "redirect:facMovessss.me";
 
 	}
 

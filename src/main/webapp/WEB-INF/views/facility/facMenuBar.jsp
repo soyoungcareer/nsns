@@ -54,7 +54,7 @@
 			<div style="margin-left: 10px">
 				    <c:if test="${not empty loginStu }">
          	 <p class="app-sidebar__user-name">${loginStu.stuName }</p>
-          	<p class="app-sidebar__user-designation">교번 : ${loginStu.stuId }</p>
+          	<p class="app-sidebar__user-designation">학번 : ${loginStu.stuId }</p>
          </c:if>
          
           <c:if test="${not empty loginAdm }">
