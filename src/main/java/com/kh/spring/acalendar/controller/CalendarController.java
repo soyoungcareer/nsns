@@ -52,7 +52,8 @@ public class CalendarController {
 	
 	//학사일정 이벤트에 insert
 	@RequestMapping("insert.ca") 
-	public String insertCalendar(String title, String start, String end, String backgroundColor, RedirectAttributes redirectAttributes) throws ParseException { // 일정 db에 업로드
+	public String insertCalendar(String title, String start, String end, String backgroundColor, 
+								RedirectAttributes redirectAttributes) throws ParseException  { 
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		Date startDay = format.parse(start);

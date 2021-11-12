@@ -198,7 +198,7 @@
 												<c:if test="${ ! empty gradeList }" >
 													<c:forEach items="${ gradeList }" var="gradeList">
 														<tr>
-															<td>${ gradeList.year }</td>
+															<td class="year">${ gradeList.year }</td>
 															<td>${ gradeList.semester }</td>
 															<td>${ gradeList.gradeCredit }</td>
 															<td>${ gradeList.stuCredit }</td>
@@ -336,11 +336,21 @@
 
 			});
 
-});
-									
+		});
 
 			function selectAll() {
 				location.href = "subject.li";
 			}
+			
+			$(".year").each(function() {
+				  var rows = $(".year:contains('" + $(this).text() + "')");
+				  console.log(rows);
+				  
+				  if (rows.length > 1) {
+				    rows.eq(0).attr("rowspan", rows.length);
+				    rows.eq(0).attr("rowspan", rows.length);
+				    rows.not(":eq(0)").remove();
+				  }
+			});
 		</script>
 </html>

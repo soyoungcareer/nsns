@@ -56,7 +56,7 @@
          
          <c:if test="${not empty loginPrf }">
          	 <p class="app-sidebar__user-name">${loginPrf.profName }</p>
-          	<p class="app-sidebar__user-designation">교번 : ${loginPrf.profId }</p>
+          	<p class="app-sidebar__user-designation"> ${loginPrf.profDeptTitle }</p>
          </c:if>
          
           <c:if test="${not empty loginStu }">

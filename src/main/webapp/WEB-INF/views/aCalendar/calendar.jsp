@@ -67,10 +67,10 @@
     <script type="text/javascript">
     
     $(function() {
-		fn_get_events();
+		getEvents();
 	});
     
-    function fn_set_calendar(events){
+    function setCalendar(events){
 		$('#calendar').fullCalendar({
 			  locale                    : 'ko',    
     		  timezone                  : "local", 
@@ -78,13 +78,12 @@
 		});
 	}
     
-    function fn_get_events(){
+    function getEvents(){
 		$.ajax({
 			url: 'calendarEvent.ca', 
 			dataType: 'json', 
 			success: function(list) {
-				console.log(list);
-				fn_set_calendar(list);
+				setCalendar(list);
 			}
 		}); 
 	}
