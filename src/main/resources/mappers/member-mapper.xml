@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="studentResultSet" type="Student">
 		<id property="stuId" column="STU_ID"/>
 		<result property="deptCode" column="DEPT_CODE"/>
-		<result property="deptName" column="DEPT_TITLE"/><!--  -->
+		<result property="deptName" column="DEPT_TITLE"/>
 		<result property="profId" column="PROF_ID"/>
 		<result property="proName" column="PROF_NAME"/>
 		<result property="profStatus" column="PROF_STATUS"/>
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="profPwd" column="PROF_PWD"/>
 		<result property="profName" column="PROF_NAME"/>
 		<result property="profDept" column="DEPT_CODE"/>
-		<result property="profDeptTitle" column="DEPT_TITLE"/><!--  -->
+		<result property="profDeptTitle" column="DEPT_TITLE"/>
 		<result property="profRrn" column="PROF_RRN"/>
 		<result property="profEmail" column="PROF_EMAIL"/>
 		<result property="profPhone" column="PROF_PHONE"/>
@@ -103,8 +103,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN DEPARTMENT B ON A.DEPT_CODE=B.DEPT_CODE
 		WHERE PROF_ID = #{profId}
 	</select>
-	
-	
 
 	<insert id="insertStudent" parameterType="Student">
 		INSERT INTO STUDENT
@@ -119,7 +117,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="studentListCount" resultType="_int">
 		SELECT COUNT (*)
 		FROM STUDENT
-		
 	</select>
 	
 	<select id="studentList" resultMap="studentResultSet">
@@ -153,18 +150,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET PROF_STATUS = 'N'
 		WHERE PROF_ID = #{profId}
 	</update>
-	
-	<!-- <update id="deleteStuPrf" parameterType="_int">
-		UPDATE STUDENT
-		SET PROF_ID
-		WHERE PROF_ID = #{profId}
-	</update> -->
-	 
+		 
 	<select id="studentStatusListCount" resultType="_int">
 		SELECT COUNT (*)
 		FROM STU_OFF
 	</select>
-	
 	
 	<select id="studentStatusList" resultMap="studentStatusResultSet">
 		SELECT B.STU_ID, A.*, D.DEPT_CODE, D.DEPT_TITLE, E.PROF_ID, E.PROF_NAME, C.STU_NAME
@@ -220,22 +210,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE STU_ID = #{stuId}
 	</update>
 	
-	<!-- <update id="stuOnStaUpdate" parameterType="_int">
-		UPDATE STU_STATUS_PRO
-		SET STS_COMPLETE = '완료'
-		WHERE STS_NO = #{stsNo}
-	</update> -->
-	<!-- STS_PROCESS = '승인완료', STS_COMPLETE = '완료' -->
-	
 	<update id="stuOnUpdate" parameterType="_int">
 		UPDATE STUDENT
 		SET STU_STATUS = '재학'
 		WHERE STU_ID = #{stuId}
 	</update>
-	
-	<!-- <update id="studentUpdatePrf" parameterType="_int">
-		
-	</update> -->
 	
 	<select id="studentUpdate" resultType="_int" resultMap="studentResultSet">
 		SELECT *

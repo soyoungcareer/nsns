@@ -30,8 +30,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 학생 관리</h1>
-          <p>학생 계정 등록</p>
+          <h1><i class="fa fa-address-card-o"></i> 학생 관리</h1>
         </div>
         
       </div>
@@ -39,8 +38,7 @@
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">학생 계정 등록</h3>
-            <div class="tile-body">
-              
+            <div class="tile-body">  
               <form id="studentEnrollForm" action="insertStu.adm" method="post">
                 <div class="form-group">
                   <label class="control-label">이름</label>
@@ -80,51 +78,26 @@
                   
                   <div class="form-group">
                   <label class="control-label">학번 생성 (자동)</label>
-                  <input class="form-control" type="text" id="stuId" name="CreateStuId" required><!--  placeholder="입학년도 입력 시 자동생성" -->
-                  <!-- <input class="form-control" type="text" id="CreatestuId" name="CreateStuId" required readonly> -->
+                  <input class="form-control" type="text" id="stuId" name="CreateStuId" required>
                 </div>
                 
                 <script>
-                	/*
-                	$(document).ready(function(){
-                		plusYear();
-                	});
-                	
-                	function plusYear(){
-                		var date = new Date();
-                		var currentYear = date.getFullYear();
-                		
-                		//var currentYear = date.getFullYear().toString();
-                		//var grantYear = currentYear.substr(2, 2);
-                		
-                		$('#stuId').append('currentYear');
-                	}*/
-                	
-                	document.getElementById('stuId').value=new Date().getFullYear().toString();
-                
+                	document.getElementById('stuId').value=new Date().getFullYear().toString(); 
                 </script>
-                
-                
+
                 <div class="form-group">
                   <label class="control-label">담당교수</label>
                   <input class="form-control" type="text" id="profId" name="profId" required>
-                  <!-- <select id="sltPrf" onchange="sltPrf();">
-                  	<option></option>
-                  </select> -->
                 </div>
-                
                 
                 <div class="tile-footer">
               		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>&nbsp;&nbsp;&nbsp;
               		<a class="btn btn-secondary" type="reset"><i class="fa fa-fw fa-lg fa-times-circle"></i>취소</a>
-            	</div>
-                
+            	</div>  
               </form>
             </div>
-            
           </div>
         </div>   
-      
       </div>
     </main>
     

@@ -17,7 +17,7 @@
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- <title>Vali Admin - Free Bootstrap 4 Admin Template</title> -->
-    <title>메뉴바</title>
+    <title>관리자 메뉴바</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">낙성대학교</a>
+    <header class="app-header"><a class="app-header__logo" href="" style="font-size:25px;">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
 
       <!-- Navbar Right Menu-->
@@ -66,17 +66,14 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
-      <!-- <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image"> -->
         <div>
-          <p class="app-sidebar__user-name"> &nbsp;&nbsp; admin <br> &nbsp;&nbsp;낙성대학교 관리자</p>
+          <p class="app-sidebar__user-name" style="font-size:17px;"> &nbsp;&nbsp; admin <br> &nbsp;&nbsp;낙성대학교 관리자</p>
         </div>
       </div>
       <ul class="app-menu">
-       
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-check-square-o"></i><span class="app-menu__label">강의 관리</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="subModifyList.adm"><i class="icon fa fa-circle-o"></i> 강의 신청 내역</a></li>
-            <!-- <li><a class="treeview-item" href="" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li> -->
             <li><a class="treeview-item" href="subAllList.adm"><i class="icon fa fa-circle-o"></i> 전체 강의 조회</a></li>
           </ul>
         </li>
@@ -100,23 +97,12 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">강의 평가</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="LectEvQ.adm"><i class="icon fa fa-circle-o"></i> 강의 평가 등록</a></li>
-            
           </ul>
         </li>
         
         <li><a class="app-menu__item" href="list.ntc"><i class="app-menu__icon fa fa-bullhorn"></i><span class="app-menu__label">공지사항</span></a></li>
       </ul>
     </aside>
-   
-        <div class="col-md-6">
-          <!-- <div class="tile">
-            <h3 class="tile-title">Support Requests</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-              <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-            </div> -->
-          </div>
-      
-      
     <!-- Essential javascripts for application to work-->
     <script src="${pageContext.request.contextPath}/resources/bootstrap/docs/js/jquery-3.3.1.min.js"></script>
     <script src="resources/bootstrap/docs/js/popper.min.js"></script>

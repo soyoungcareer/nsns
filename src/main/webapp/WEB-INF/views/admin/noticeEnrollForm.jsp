@@ -32,23 +32,19 @@
       <div class="app-title">
         <div>
           <h1><i class="fa fa-bullhorn"></i> 공지사항</h1>
-          
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-10" style="float:none; margin:0 auto;">
                 <form id="NoticeEnrollForm" method="post" action="insert.ntc" enctype="multipart/form-data">
-                	
-                  <div class="form-group">
-	                <label for=title class="control-label">제목</label>
-	                <input class="form-control" id="title" name="ntcTitle" type="text" placeholder="제목 글자 수 제한 255byte" maxlength="255" required>
-	                 <input class="form-control" id="writer" name="ntcWriter" type="hidden">
+                  <div>
+                  	<br>
+                  	<h3 class="tile-title">공지사항 등록</h3>
                   </div>
-
+				  <br>
                   <div class="form-group">
                     <label for="category">분류</label>
                     <select class="form-control" id="category" name="ntcCategory">
@@ -67,25 +63,29 @@
                       <option value=100>복학</option>
                     </select>
                   </div>
+                  
+                  <div class="form-group">
+	                <label for=title class="control-label">제목</label>
+	                <input class="form-control" id="title" name="ntcTitle" type="text" placeholder="제목 글자 수 제한 255byte" maxlength="255" required>
+	                 <input class="form-control" id="writer" name="ntcWriter" type="hidden">
+                  </div>
+                  
                   <div class="form-group">
                     <label for="content">내용</label>
                     <textarea class="form-control" id="content" name="ntcContent" rows="3" placeholder="내용 글자 수 제한 3500byte" maxlength="3500" style="resize:none;"></textarea>
                   </div>
-                  
+                  <br>
                   <div class="form-group">
                   	<label for="attachment">파일 첨부</label>
                     <input class="form-control-file" id="attachment" name="ntcAttachment" type="file" aria-describedby="fileHelp">
                   </div>
-                  
-                  <div class="tile-footer">
+                  <br>
+                  <div class="tile-footer" align="center">
 	              	<button class="btn btn-primary" type="submit">등록하기</button>
 	              	<button class="btn btn-secondary" type="reset">취소하기</button>
-	              </div>
-                  
+	              </div> 
                 </form>
-                
               </div>
-              
             </div>
           </div>
         </div>

@@ -50,7 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="year" column="YEAR"/>
 		<result property="semester" column="SEMESTER"/>
 		<result property="status" column="STATUS"/>
-		
 	</resultMap>
 	
 	<select id="subjectModifyListCount" resultType="_int">
@@ -132,22 +131,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="createQuestion" parameterType="LectEvaluation">
 		<![CDATA[
 		MERGE INTO LECT_EVALUATE C
-		USING (
-		        SELECT 
+		USING (SELECT 
 		            B.LECT_REG_NO AS LECT_REG_NO
 		            , B.STU_ID AS STU_ID
 		            , B.YEAR AS YEAR
 		            , B.SEMESTER AS SEMESTER
 		        FROM LECT_REGISTER B
-		        WHERE 1=1
-		        ) D
+		        WHERE 1=1) D
 		    ON (C.LECT_REG_NO = D.LECT_REG_NO
-		    AND C.STU_ID = D.STU_ID
-		    AND QUESTION <> QUESTION)
+		        AND C.STU_ID = D.STU_ID
+		        AND QUESTION = QUESTION
+		        AND (TO_CHAR(SYSDATE, 'YYYY')) <> D.YEAR)
 		    WHEN NOT MATCHED THEN
 		INSERT (LECT_EVA_NO, LECT_REG_NO, STU_ID, QUESTION, YEAR, SEMESTER, STATUS)
 		VALUES (SEQ_LECT_EVA_NO.NEXTVAL, D.LECT_REG_NO, D.STU_ID, #{question}, D.YEAR, D.SEMESTER, DEFAULT)
 		]]>
 	</insert>
+	
+	<select id="selectEvQList" resultMap="lectEvaluationResultSet">
+		SELECT DISTINCT QUESTION, LECT_EVA_NO, LECT_REG_NO, STU_ID, SCORE, YEAR, SEMESTER, STATUS
+		FROM LECT_EVALUATE
+	</select>
+	<!-- join where -->
 	
 </mapper>

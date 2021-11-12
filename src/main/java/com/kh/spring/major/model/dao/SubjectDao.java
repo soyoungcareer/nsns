@@ -14,7 +14,7 @@ import com.kh.spring.major.vo.Subject;
 public class SubjectDao {
 
 	public int subjectModifyListCount(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("majorMapper.subjectModifyListCount");
 	}
 
@@ -27,49 +27,47 @@ public class SubjectDao {
 	}
 
 	public RequestedSubject selectSubjectModify(SqlSessionTemplate sqlSession, int sno) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("majorMapper.selectSubjectModify", sno);
 	}
 	
 	public int createSubject(SqlSessionTemplate sqlSession, Subject sub) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.insert("majorMapper.createSubject", sub);
 	}
 
 	public int createRequestSubject(SqlSessionTemplate sqlSession, RequestedSubject reqSub) {
-		// TODO Auto-generated method stub
-		System.out.println("==========dao reqSub : " + reqSub);
+		
 		return sqlSession.update("majorMapper.createRequestSubject", reqSub);
 	}
 
 	public int modifySubject(SqlSessionTemplate sqlSession, Subject sub) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.update("majorMapper.modifySubject", sub);
 	}
 
 	public int modifyRequestedSubject(SqlSessionTemplate sqlSession, RequestedSubject reqSub) {
 		
-		System.out.println("==========modify dao reqSub : " + reqSub);
-		
 		return sqlSession.update("majorMapper.modifyRequestedSubject", reqSub);
 	}
 
 	public int deleteSubject(SqlSessionTemplate sqlSession, Subject sub) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.update("majorMapper.deleteSubject", sub);
 	}
 
 	public int deleteRequestedSubject(SqlSessionTemplate sqlSession, RequestedSubject reqSub) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.update("majorMapper.deleteRequestedSubject", reqSub);
 	}
 
 	public int subAllListCount(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne("majorMapper.subAllListCount");
 	}
 
 	public ArrayList<Subject> subAllList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
 		int offset = (pi.getCurrentPage() -1)*pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		

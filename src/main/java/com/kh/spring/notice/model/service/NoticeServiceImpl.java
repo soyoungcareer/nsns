@@ -28,7 +28,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public ArrayList<Notice> selectNList(PageInfo pi) {
-		// TODO Auto-generated method stub
+		
 		return noticeDao.selectNList(sqlSession, pi);
 	}
 

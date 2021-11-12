@@ -31,10 +31,8 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 강의 신청 내역</h1>
-          
+          <h1><i class="fa fa-check-square-o"></i> 강의 관리</h1>
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -42,60 +40,48 @@
             <div class="row">
               <div class="col-lg-6">
                 <form id="subjectUpdateForm" action="" method="post" enctype="multipart/form-data">
-                  <!-- <div class="form-group">
-	                <label class="">강의 신청번호</label>
-	                <input class="form-control" id="reqSubNo" name="reqSubNo" type="text" value="${ sl.reqSubNo }" readonly>
-                  </div> -->
                   <input type="hidden" name="reqSubNo" id="reqSubNo" value="${reqSub.reqSubNo }">
 				  <input type="hidden" name="changeName" value="${ reqSub.attChange }">
 
                   <div class="form-group">
                     <label for="subCode">과목코드</label>
-                   <!-- <input type="hidden" name="subCode" value="${ sub.subCode }"> -->
-                    <c:if test="${ !empty reqSub.subCode }">
-                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${reqSub.subCode }">
-                    </c:if>
-                    <c:if test="${ empty reqSub.subCode }">
-                    	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
-                    </c:if>
-                    
-                   <!--  <c:if test="${ empty sub.subCode }">
-                    	기존 
-                    	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
-                    -->
-                    <!-- </c:if> -->
-                    
+	                    <c:if test="${ !empty reqSub.subCode }">
+	                    	<input class="form-control" id="subCode" name="subCode" type="text" value="${reqSub.subCode }">
+	                    </c:if>
+	                    <c:if test="${ empty reqSub.subCode }">
+	                    	<input class="form-control" id="subCode" name="subCode" type="text" placeholder="연도 두자리+학과코드 두자리+등록순서 세자리">
+	                    </c:if>
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">교과목명</label>
+                    <label for="subTitle">교과목명</label>
                     <input class="form-control" id="subTitle" name="subTitle" type="text" value="${ reqSub.subTitle }">
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">학과이름</label>
+                    <label for="deptTitle">학과이름</label>
                     <input class="form-control" id="deptTitle" name="deptTitle" type="text" value="${ reqSub.deptTitle }">
                     <input class="form-control" type="hidden" id="deptCode" name="deptCode" value="${ reqSub.deptCode }">
-                  </div><!--  -->
+                  </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">이수구분</label>
+                    <label for="subDivs">이수구분</label>
                     <input class="form-control" id="subDivs" name="subDivs" type="text" value="${ reqSub.subDivs }">
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">교수</label><!-- 교번// -->
+                    <label for="profName">교수</label>
                     <input class="form-control" id="profName" name="profName" type="text" value="${ reqSub.profName }">
                     <input class="form-control" type="hidden" id="profId" name="profId" value="${ reqSub.profId }">
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">학점</label>
+                    <label for="subCredit">학점</label>
                     <input class="form-control" id="subCredit" name="subCredit" type="text" value="${ reqSub.subCredit }">
                   </div>
                   
                   <div class="form-group">
-                    <label for="subClass">강의실</label><!-- 입력 -->
+                    <label for="subClass">강의실</label>
                     <!-- 기존 <input class="form-control" id="subClass" name="subClass" type="text"> -->
                     <input class="form-control" id="subClass" name="subClass" type="text" value="${sub.subClass }">
                     <!-- 
@@ -124,8 +110,6 @@
                     	<option value=1>집체</option>
                     	<option value=2>온라인</option> 	
                     </select> -->
-                    	
-                    
                     
                     <c:choose>
                     	<c:when test="${ reqSub.subType == 1 }">
@@ -187,38 +171,28 @@
                   	</c:if>
                   	<c:if test="${ reqSub.reqType == 'D' }">
                   		<button class="btn btn-danger" onclick="subModSubmit(3);">삭제</button>
-                  	</c:if>
-	                
+                  	</c:if>   
 	              </div>
-                  
                 </form>
-              </div>
-              
+              </div> 
             </div>
             
-            <!-- <c:if test="${ loginUser.userId eq b.boardWriter }">
-	             <form id="subMod" action="" method="post"> -->
+			<script>
+				function subModSubmit(num){
+					var subMod = $("#subjectUpdateForm");
 					
-					
-				<!-- </form> -->
-				<script>
-					function subModSubmit(num){
-						var subMod = $("#subjectUpdateForm");
-						
-						if(num == 1){
-							subMod.attr("action", "createSub.adm");
-							//subMod.attr("action", "createReqSub.adm");
-						}else if(num == 2){
-							subMod.attr("action", "modifySub.adm");
-						}else{
-							subMod.attr("action", "deleteSub.adm");
-						}
-						
-						subMod.submit();
+					if(num == 1){
+						subMod.attr("action", "createSub.adm");
+						//subMod.attr("action", "createReqSub.adm");
+					}else if(num == 2){
+						subMod.attr("action", "modifySub.adm");
+					}else{
+						subMod.attr("action", "deleteSub.adm");
 					}
-				</script>
-            <!-- </c:if> -->
-            
+					
+					subMod.submit();
+				}
+			</script>
           </div>
         </div>
       </div>

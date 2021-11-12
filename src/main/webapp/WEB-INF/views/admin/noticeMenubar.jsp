@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>메뉴바</title>
+    <title>공지사항 메뉴바</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,25 +27,28 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">낙성대학교</a>
+    <header class="app-header"><a class="app-header__logo" href="" style="font-size:25px;">낙성대학교</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
-
     </header>
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    
     <aside class="app-sidebar">
       <div class="app-sidebar__user">
       	<c:if test="${not empty loginStu }">
       		<div>
-          		<p class="app-sidebar__user-name">&nbsp;&nbsp;&nbsp;${loginStu.stuName }</p>
+          		<p class="app-sidebar__user-name" style="font-size:19px;">&nbsp;&nbsp;&nbsp;${loginStu.stuName }</p>
+          		<p class="app-sidebar__user-name" style="font-size:15px;">&nbsp;&nbsp;&nbsp;학번: ${loginStu.stuId }</p>
         	</div>
       	</c:if>
       	<c:if test="${not empty loginPrf }">
       		<div>
-	        	<p class="app-sidebar__user-name">&nbsp;&nbsp;&nbsp;${loginPrf.profName }</p>
+	        	<p class="app-sidebar__user-name" style="font-size:19px;">&nbsp;&nbsp;&nbsp;${loginPrf.profName } 교수</p>
+	        	<p class="app-sidebar__user-name" style="font-size:15px;">&nbsp;&nbsp;&nbsp;${loginPrf.profDeptTitle }과</p>
 	        </div>
       	</c:if>
       </div>
+      
       <ul class="app-menu"> 
         <li><a class="app-menu__item" href="list.ntc"><i class="app-menu__icon fa fa-bullhorn"></i><span class="app-menu__label">공지사항</span></a></li>
       </ul>

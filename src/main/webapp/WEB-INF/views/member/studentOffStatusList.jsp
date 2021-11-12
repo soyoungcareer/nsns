@@ -32,7 +32,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 학적 변경</h1><!-- 자퇴 -->
+          <h1><i class="fa fa-address-card-o"></i> 학생 관리</h1>
         </div>
       </div>
       <div class="row">
@@ -44,21 +44,17 @@
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
                     <tr>
-                      <!-- <th>신청번호</th> -->
                       <th>학번</th>
                       <th>이름</th>
                       <th>학과</th>
                       <th>휴학사유</th>
                       <th>휴학학기</th>                      
-                      <th>휴학학기 수</th><!-- 휴학기간 -->
-                      <!-- <th>신청일자</th> -->
+                      <th>휴학학기 수</th>
                       <th>신청단계</th>
                       <th>승인상태</th>
-                      <th>처리결과</th>
-                      <!-- <th>상태</th> -->                      
-                      <!-- <th>기존신청번호</th> -->
+                      <th>처리결과</th>                   
                       <th>담당교수</th>
-                      <th>승인</th><!-- 학적변경승인 -->
+                      <th>승인</th>
                       <th>복학</th>
                     </tr>
                   </thead>
@@ -70,10 +66,7 @@
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ staList }" var="sta">
-	                    <tr>
-	                    	<!-- <td>${ sta.stsNo }
-	                    		<input type="hidden" id="stsNo" name="stsNo" value="${ sta.stsNo }">
-	                    	</td> -->                   
+	                    <tr>                 
 	                        <td>${ sta.stuId }
 	                        	<input type="hidden" id="stuId" name="stuId" value="${ sta.stuId }">
 	                        	<input type="hidden" id="stsNo" name="stsNo" value="${ sta.stsNo }">
@@ -90,7 +83,7 @@
 	                        <td>${ sta.offSem }
 	                        	<input type="hidden" id="offSem" name="offSem" value="${ sta.offSem }">
 	                        </td>
-	                        <td>${ sta.offSemCnt }
+	                        <td>${ sta.offSemCnt } 학기
 	                        	<input type="hidden" id="offSemCnt" name="offSemCnt" value="${ sta.offSemCnt }">
 	                        </td>
 	                        <td>${ sta.stsCategory }
@@ -102,15 +95,11 @@
 	                        <td>${ sta.stsComplete }
 	                        	<input type="hidden" id="stsComplete" name="stsComplete" value="${ sta.stsComplete }" readonly>
 	                        </td>
-	                        <!-- <td>${ sta.applicationNo }
-	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }">
-	                        </td> -->
 	                        <td>${ sta.profName }
 	                        	<input type="hidden" id="profName" name="profName" value="${ sta.profName }" readonly>
 	                        	<input type="hidden" id="profId" name="profId" value="${ sta.profId }">
 	                        </td>	                        
 	                        <td>
-	                        	<!-- <button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button> -->
 	                        	<button class="btn btn-primary" name="stuOffTerm" onclick="stuStaSubmit(1)">승인</button>
 		                        	
 		                        	<!-- <c:if test = "${ sta.stsComplete eq '완료' }">
@@ -128,8 +117,7 @@
 		                        	</c:if> -->
 	                        </td>
 	                    </tr>
-                    </c:forEach>
-                    
+                    </c:forEach>  
                   </tbody>
                 </table>
               </div>
@@ -139,42 +127,40 @@
         </div>
       </div>
       
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+	          		<c:when test="${ pi.currentPage ne p }">
+	             			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ p }">${ p }</a></li>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	          		</c:otherwise>
+	          	</c:choose>
+             </c:forEach>
+             
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="stuStaList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+       </div>        
     </main>
+    
     <script>
     	$(function(){
     		$("#sampleTable tbody tr").click(function(){
@@ -182,23 +168,18 @@
     		});
     	});
     </script>
-    
     <script>
 		function stuStaSubmit(num){
 			var stuStaUpdate = $("#stuOnOffStaList");
 			
 			if(num == 1){
 				stuStaUpdate.attr("action", "stuOffUpdate.adm");
-				//var result = $("#sampleTable tbody tr").children().eq(8).text();
-					//$("input[name=stsComplete]").val();
-				//alert(result);
 			}else if(num == 2){
 				stuStaUpdate.attr("action", "stuOnUpdate.adm");
 			}
 			stuStaUpdate.submit();
 		}
 	</script>
-    
     <script>
     	var Now = new Date();
     	var nowMonth = Now.getMonth() + 1;
@@ -231,20 +212,16 @@
         }else if(startDateSummer > nowTime || endDateSummer < nowTime){
         	$('.btn').attr('disabled', 'true');
         }*/
-        
     </script>
     <script>
-    
-  /*
-    var result = $("input[name=stsComplete]").val();
-    if(result === "처리중"){
-		$("button[name=stuOffTerm]").attr("disabled", "true");
-    }else{
-    	$(".btn-secondary").attr("disabled", "true");
-    }
-    */
-
-    
+	  /*
+	    var result = $("input[name=stsComplete]").val();
+	    if(result === "처리중"){
+			$("button[name=stuOffTerm]").attr("disabled", "true");
+	    }else{
+	    	$(".btn-secondary").attr("disabled", "true");
+	    }
+	    */
     </script>
     
     <!-- Essential javascripts for application to work-->

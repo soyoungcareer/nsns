@@ -32,15 +32,13 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-th-list"></i> 전체 교수 계정</h1>
-        </div>
-        
+          <h1><i class="fa fa-address-card"></i> 전체 교수 계정</h1>
+        </div> 
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-            
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="prfListTable">
                   <thead align="center">
@@ -77,54 +75,47 @@
 	                        </td>
 	                    </tr>
                     </c:forEach>
-                    
                   </tbody>
                 </table>
-              </div>
-              
+              </div> 
             </div>
           </div>
         </div>
-        
-
       </div>
-      
-      		<!-- 페이징 - div 위치 수정 -->
-      		<div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="prfList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    	<c:choose>
-	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="prfList.adm?currentPage=${ p }">${ p }</a></li>
-	                		</c:when>
-	                		<c:otherwise>
-	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	                		</c:otherwise>
-	                	</c:choose>
-                    </c:forEach>
-                    
-                    
-                    <c:choose>
-                		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="prfList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:when>
-                		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="prfList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                </ul>
-            </div>
-            
-            
+ 
+	  <div id="pagingArea">
+         <ul class="pagination">
+         	<c:choose>
+         		<c:when test="${ pi.currentPage ne 1 }">
+         			<li class="page-item"><a class="page-link" href="prfList.adm?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         	
+             <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+             	<c:choose>
+	          		<c:when test="${ pi.currentPage ne p }">
+	             			<li class="page-item"><a class="page-link" href="prfList.adm?currentPage=${ p }">${ p }</a></li>
+	          		</c:when>
+	          		<c:otherwise>
+	          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	          		</c:otherwise>
+          		</c:choose>
+             </c:forEach>
+             
+             <c:choose>
+         		<c:when test="${ pi.currentPage ne pi.maxPage }">
+         			<li class="page-item"><a class="page-link" href="prfList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:when>
+         		<c:otherwise>
+         			<li class="page-item disabled"><a class="page-link" href="prfList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
+         		</c:otherwise>
+         	</c:choose>
+         </ul>
+     </div>
+                  
     </main>
     <script>
     	$(function(){
@@ -150,8 +141,7 @@
     		if("${ p.profStatus }" == 'N'){
     	        $('.btn').attr('disabled', 'true');
 			}
-    	});
-    	
+    	});	
     </script>
     
     <!-- Essential javascripts for application to work-->

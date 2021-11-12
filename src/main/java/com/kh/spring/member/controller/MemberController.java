@@ -54,7 +54,6 @@ public class MemberController {
 	}
 	
 	
-	
 	@RequestMapping("login.mem") // 로그인 페이지 이동
 	public String loginPage(HttpSession session) {
 
@@ -80,62 +79,45 @@ public class MemberController {
 
 		}
 		
-		
-
-		System.out.println("position : " + position);
 		session.setAttribute("position", position);
 		if (position.equals("admin")) {
 
 			a.setAdmId(userId);
 			a.setAdmPwd(userPwd);
 
-			Admin loginAdm = memberService.loginAdmin(bCPwdEncoder, a);
-
-			System.out.println("loginAdm : " + loginAdm);
+			Admin loginAdm = memberService.loginAdmin(bCPwdEncoder, a, response);
 
 			model.addAttribute("loginAdm", loginAdm);
 			session.setAttribute("loginAdm", loginAdm);
-			System.out.println("session 저장 : " + session.getAttribute("loginAdm"));
 
-			return "redirect:subModifyList.adm";
-			
+			return "redirect:subModifyList.adm";		
 		}else if(position.equals("student")) {
 			
 			s.setStuId(Integer.parseInt(userId));
 			s.setStuPwd(userPwd);
 
-			Student loginStu = memberService.loginStudent(bCPwdEncoder, s);
-			System.out.println("loginStu : " + loginStu);
+			Student loginStu = memberService.loginStudent(bCPwdEncoder, s, response);
 			model.addAttribute("loginStu", loginStu);
 
 			session.setAttribute("loginStu", loginStu);
-			System.out.println("session 저장 : " + session.getAttribute("loginStu"));
 
 			return "redirect:stuinfo.st";
-
 		} else if (position.equals("professor")) {
 
 			p.setProfId(userId);
 			p.setProfPwd(userPwd);
 
 			Professor loginPrf = memberService.loginProfessor(bCPwdEncoder, p, response);
-			System.out.println("loginPrf : " + loginPrf);
 			model.addAttribute("loginPrf", loginPrf);
 
 			session.setAttribute("loginPrf", loginPrf);
-			System.out.println("session 저장 : " + session.getAttribute("loginPrf"));
 
 			return "redirect:profLectureDetail.pr";
-
 		} else {
 			
+			//LoginAlert.alert(response, "로그인 중 오류가 발생하였습니다.");
 			throw new CommException("로그인 중 오류가 발생하였습니다.");
-			//return "redirect:/";
-			
-			//LoginAlert.alert(response, "로그인 실패");
-			//return "redirect:/";
 		}
-
 	}
 
 	// -------------- 로그아웃 --------------
@@ -174,7 +156,7 @@ public class MemberController {
 	// -------------- 계정 등록 --------------
 	@RequestMapping("insertStu.adm") // 학생관리-학생 등록
 	public String insertStudent(@ModelAttribute Student s, HttpSession session
-								, @RequestParam("CreateStuId") String CreateStuId) { //
+								, @RequestParam("CreateStuId") String CreateStuId) {
 
 		System.out.println("student : " + s);
 		System.out.println("기존 비밀번호 : " + s.getStuPwd());
@@ -227,12 +209,10 @@ public class MemberController {
 	public String studentList(
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 
-		int listCount = memberService.studentListCount(); // 전체 학생 수 조회
-		System.out.println(listCount);
+		int listCount = memberService.studentListCount();
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 
 		ArrayList<Student> sList = memberService.studentList(pi);
-		System.out.println("sList : " + sList);
 		model.addAttribute("sList", sList);
 		model.addAttribute("pi", pi);
 
@@ -244,51 +224,29 @@ public class MemberController {
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage, Model model) {
 
 		int listCount = memberService.professorListCount();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 
 		ArrayList<Professor> prfList = memberService.professorList(pi);
-		System.out.println("prfList : " + prfList);
 		model.addAttribute("prfList", prfList);
 		model.addAttribute("pi", pi);
 
 		return "member/professorListView";
 	}
-	/*
-	//-------------- 학생 담당교수 변경--------------
-	@RequestMapping("stuUpdatePrf.adm") //
-	public String studentUpdatePrf(int stuId, @RequestParam("profId") String profId) {
-		
-		//request.getParameter("stuId");
-		System.out.println("MC_start stuId : " + stuId);
-		//memberService.studentUpdatePrf(stuId);
-		System.out.println("MC_start profId : " + profId);
-		//memberService.studentUpdatePrf(profId);
-
-		return "redirect:stuList.adm";
-	}*/
 
 	//-------------- 계정 삭제 --------------
 	@RequestMapping("stuDelete.adm") //학생 계정 제한 - 퇴학
-	public String deleteStudent(int stuId, HttpServletRequest request) {
+	public String deleteStudent(int stuId) {
 		
-		//request.getParameter("stuId");
-		System.out.println("MC_start stuId : " + stuId);
 		memberService.deleteStudent(stuId);
 
 		return "redirect:stuList.adm";
 	}
-
 	
 	@RequestMapping("prfDelete.adm") //교수관리-교수 삭제 - 계약 종료
-	public String deleteProfessor(String profId, HttpServletRequest request
-									) {
+	public String deleteProfessor(String profId, HttpServletRequest request) {
 
 		profId = request.getParameter("profId");
-		System.out.println("MC_start profId : " + profId);
 		memberService.deleteProfessor(profId);
-		
-		//memberService.deleteStuPrf(profId);
 
 		return "redirect:prfList.adm";
 	}
@@ -299,12 +257,10 @@ public class MemberController {
 	public String studentStatusList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
 		int listCount = memberService.studentStatusListCount();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Student> staList = memberService.studentStatusList(pi);
 
-		System.out.println("staList : " + staList);
 		model.addAttribute("staList", staList);
 		model.addAttribute("pi", pi);
 
@@ -313,15 +269,10 @@ public class MemberController {
 
 	
 	@RequestMapping("stuStaUpdate.adm") // 학적변경 자퇴 승인
-	public String studentStatusUpdate(int stsNo, HttpServletRequest request
-									, int stuId) { //@RequestParam("stuId") int stuId
+	public String studentStatusUpdate(int stsNo, int stuId) {
 
 		memberService.studentStatusUpdate(stsNo);
-		System.out.println("MC stsNo : " + stsNo);
-		
-		System.out.println("MC start stuId : " + stuId);
 		memberService.stuDoUpdateStu(stuId);
-//		System.out.println("MC end stuId : " + stuId);
 
 		return "redirect:stuStaList.adm";
 	}
@@ -330,12 +281,10 @@ public class MemberController {
 	public String studentOffStaList(@RequestParam(value="currentPage", required = false, defaultValue="1") int currentPage , Model model) {
 		
 		int listCount = memberService.studentStatusListCount();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Student> staList = memberService.studentOffStaList(pi);
 
-		System.out.println("staList : " + staList);
 		model.addAttribute("staList", staList);
 		model.addAttribute("pi", pi);
 
@@ -344,32 +293,23 @@ public class MemberController {
 	
 	@RequestMapping("stuOffUpdate.adm") // 학적변경 휴학 승인
 	public String stuOffStaUpdate(int stsNo, HttpServletRequest request
-								, @RequestParam("stuId") int stuId) { //@RequestParam("stuId") int stuId
+								, @RequestParam("stuId") int stuId) {
 
 		memberService.stuOffStaUpdate(stsNo);
-		System.out.println("MC stsNo : " + stsNo);
-		
-		System.out.println("MC start stuId : " + stuId);
 		memberService.stuOffUpdate(stuId);
-//		System.out.println("MC end stuId : " + stuId);
 
 		return "redirect:stuOffStaList.adm";
 	}
 	
 	@RequestMapping("stuOnUpdate.adm") // 학적변경 복학
-	public String stuOnStaUpdate(int stsNo, HttpServletRequest request
-								, int stuId) {
+	public String stuOnStaUpdate(int stsNo, int stuId) {
 
-		//memberService.stuOnStaUpdate(stsNo);
-		System.out.println("MC stsNo 복학: " + stsNo);
-		
-		System.out.println("MC start stuId 복학 : " + stuId);
 		memberService.stuOnUpdate(stuId);
 
 		return "redirect:stuOffStaList.adm";
 	}
 	
-	
+	//-------------- 학생 담당교수 변경(담당교수 삭제 시) --------------
 	@RequestMapping("stuUpdatePrf.adm")
 	public ModelAndView studentUpdate(int stuId, ModelAndView mv) {
 		
@@ -378,6 +318,7 @@ public class MemberController {
 		
 		return mv;
 	}
+	
 	@RequestMapping("UpdateProfId.adm")
 	public ModelAndView studentUpdateProfId(Student s, ModelAndView mv) {
 
@@ -386,6 +327,5 @@ public class MemberController {
 		
 		return mv;
 		}
-
 
 }

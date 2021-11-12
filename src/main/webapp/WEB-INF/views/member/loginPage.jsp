@@ -26,12 +26,10 @@
     </section>
     <section class="login-content">
       <div style="float:left;">
-        <!-- <h1>낙성대학교</h1> class="logo"-->
         <img src="resources/bootstrap/docs/images/nakseongLogowhite.png" width="200px" height="200px" style="margin-bottom:20px;"> 
       </div>
       
       <div class="login-box"  style="margin-bottom:20px;">
-      
         <form id="loginForm" name="loginCheck" action="login.ber" class="login-form" method="post"><!-- action="login.ber"  -->
           <h4 class="login-head">로그인</h4>
           <div class="login-position">         	
@@ -53,22 +51,10 @@
             <label class="control-label">비밀번호</label>
             <input class="form-control" type="password" id="userPwd" name="userPwd">
           </div>
-          <div class="form-group">
-            <div class="utility">
-              <div class="animated-checkbox">
-                <!-- <label>
-                  <input type="checkbox"><span class="label-text">Stay Signed in</span>
-                </label> -->
-              </div>
-              <!-- <p class="semibold-text mb-2">계정 분실 시 학사팀 문의</p> -->
-            </div>
-          </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block" onclick="loginAlert();"><i class="fa fa-sign-in fa-lg fa-fw"></i>로그인</button>
           </div>
         </form>
-        
-        
       </div>
     </section>
     
@@ -85,13 +71,9 @@
     			formCh.userPwd.focus();
     			return false;
     		}
-    		
-    		//formCh.action = "login.ber";
     		formCh.submit();
     	}
-    </script>
-    				
-    				
+    </script>				
     <script>
 	$(function(){
     boom();
@@ -112,9 +94,6 @@
 	}
     
 	});
-	
-
-    
     </script>
     
     <!-- Essential javascripts for application to work-->

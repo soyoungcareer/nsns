@@ -31,36 +31,57 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-edit"></i> 공지사항</h1>
-          
+          <h1><i class="fa fa-edit"></i> 강의 평가</h1>
         </div>
-        
       </div>
       <div class="row">
         <div class="col-md-12">
+        
           <div class="tile">
             <div class="row">
               <div class="col-lg-12">
                 <form id="subjectEvQForm" method="post" action="createEvQ.adm">
-                	
                   <div class="form-group">
 	                <label for="question" class="control-label">평가 항목 등록</label>
-	                <input class="form-control" id="question" name="question" type="text" placeholder="최대 1000byte" required>
-	                
+	                <input class="form-control" id="question" name="question" type="text" placeholder="최대 1000byte" required> 
                   </div>
-
-                 
-                  
                   <div class="tile-footer" align="center">
 	              	<button class="btn btn-primary" type="submit">등록하기</button>
 	              </div>
-                  
                 </form>
-                
-              </div>
-              
+              </div> 
             </div>
           </div>
+
+          <!-- <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead align="center">
+                    <tr>
+                      <th>항목</th>
+					  <th>삭제</th>
+                    </tr>
+                  </thead>
+                  <tbody align="center">
+                  	<c:if test="${ empty evQList }">
+                  		<tr>
+                  			<td colspan=2>강의 평가 항목이 존재하지 않습니다.</td>
+                  		</tr>
+                  	</c:if>
+                    <c:forEach items="${ evQList }" var="eql">
+	                    <tr>
+	                        <td>${ eql.question }</td>
+	                        <td>
+	                        
+	                        </td>
+	                    </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
     </main>

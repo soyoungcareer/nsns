@@ -10,6 +10,6 @@ public interface CreateEvService {
 
 	void createQuestion(LectEvaluation le);
 
-	//ArrayList<QuestionList> createEv(Evaluation ev, QuestionList ql);
+	ArrayList<LectEvaluation> selectEvQList();
 
 }
