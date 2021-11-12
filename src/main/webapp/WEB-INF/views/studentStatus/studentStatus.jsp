@@ -289,11 +289,11 @@
     			
     		});
     		
-    		function deleteOff(appNo){
+    	function deleteOff(appNo){
     			
-    			location.href="/deleteOff.stu?appNo="+appNo;
+    		location.href="/deleteOff.stu?appNo="+appNo;
     			
-    		}
+    	}
 			
     		function deleteDo(appNo){
     			

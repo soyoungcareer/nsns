@@ -57,7 +57,7 @@ public class StudentStatusServiceImpl implements StudentStatusService {
 			
 		} else {
 			
-			int result2 = studentStatusDao.insertStsOff(sqlSession); //SEQ_APPLICATION_NO.CURRVAL으로 application_no를 넣어준다.
+			int result2 = studentStatusDao.insertStsOff(sqlSession); 
 			
 			if(result2 < 0) {
 				

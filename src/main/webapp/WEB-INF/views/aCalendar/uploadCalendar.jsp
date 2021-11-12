@@ -170,8 +170,7 @@
        });
   
       //유효성 체크 - 시작날짜보다  마지막날짜가 앞설 수 없다 !! 
-      function chekcDate() {
-    	  
+      	function chekcDate() {
     	  if ($('#start').val() >  $('#end').val()) {
     		  var str = ' <div class="alert alert-dismissible alert-danger">' 
 	        		+ ' <button class="close" type="button" data-dismiss="alert">×</button>'
@@ -184,7 +183,6 @@
               $('#end').select();
               return false;
           }
-    	  
           return true
       }
       
@@ -215,7 +213,6 @@
 				},
 				dataType:"json",
 				success: function(list){
-					console.log(list);
 					
 					if(list.length != 0){
 						$("#calendarTable > tbody").empty();

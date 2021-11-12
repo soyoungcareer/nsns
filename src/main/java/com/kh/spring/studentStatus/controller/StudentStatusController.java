@@ -40,12 +40,9 @@ public class StudentStatusController {
 	@RequestMapping(value="stuStsPro.stu", produces="application/json; charset=utf-8")
 	public String studentProList(HttpSession session) { 
 		
-		int stuId = ((Student)session.getAttribute("loginStu")).getStuId(); //로그인한 세션의 학생 학번 가져오기
+		int stuId = ((Student)session.getAttribute("loginStu")).getStuId(); 
 				
 		ArrayList<StudentStatus> list = studentStatusService.studentProList(stuId);
-		
-		
-		System.out.println("list : " + list);
 		
 		return new GsonBuilder().create().toJson(list);
 	}
@@ -100,19 +97,17 @@ public class StudentStatusController {
 	@RequestMapping("insertStuOff.stu")
 	public String insertStuOff(StudentOff stuOff, RedirectAttributes redirectAttributes, HttpSession session) { 
 		
-		String stuStatus = ((Student)session.getAttribute("loginStu")).getStuStatus();//세션 로그인 학생정보에서 stuStatus를 가져온다. 
+		String stuStatus = ((Student)session.getAttribute("loginStu")).getStuStatus();
 		
 		int stuId =  ((Student)session.getAttribute("loginStu")).getStuId();
 		
 		stuOff.setStuId(stuId);
 		
 		if(stuStatus.equals("재학")) {
-			
 			studentStatusService.insertStuOff(stuOff);
 			redirectAttributes.addFlashAttribute("message", "성공적으로 휴학 신청이 완료되었습니다.");
 			
 		} else {
-			
 			redirectAttributes.addFlashAttribute("message", "현재 재학 상태가 아니라 휴학 신청이 불가합니다.");
 		}
 		
