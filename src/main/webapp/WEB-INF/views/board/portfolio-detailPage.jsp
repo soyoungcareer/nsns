@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Portfolio Details - Knight Bootstrap Template</title>
+<title>낙성대 - 커뮤니티</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 
@@ -101,7 +101,7 @@
 
 			<div class="card o-hidden border-0 shadow-lg my-5">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">게시글 작성</h6>
+					<h6 class="m-0 font-weight-bold text-primary">게시글 </h6>
 				</div>
 				<div class="card-body p-0">
 					<!-- Nested Row within Card Body -->
@@ -110,20 +110,20 @@
 						<div class="col-lg-7">
 							<div class="p-5">
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">게시글을 작성해주세요!</h1>
+									<h1 class="h4 text-gray-900 mb-4">게시글!!</h1>
 								</div>
 								<form class="user" action="boardplus.me">
 									<div class="form-group row">
 										<div class="col-sm-6 mb-3 mb-sm-0">
 											<input type="text" class="form-control form-control-user"
-												id="title" name="title" value="${b.title }">
+												id="title" name="title" value="${b.title }" readonly>
 										</div>
 
 									</div>
 									<br>
 									<div class="form-group">
 										<textarea id="story" class="form-control form-control-user"
-											name="content" id="content" rows="7" cols="33">${b.content }</textarea>
+											name="content" id="content" rows="7" cols="33" readonly>${b.content }</textarea>
 									</div>
 									<br>
 

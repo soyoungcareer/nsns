@@ -54,9 +54,9 @@
   <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 뒤로
 </button>
 		<div class="text-center mt-5">
-			<h1>Network security practice.</h1>
+			<h1>Online lecture at Nakseong University.</h1>
 			<p class="lead"></p>
-			<p>학습중인 과정</p>
+			<p>강의 리스트</p>
 		</div>
 	</div>
 

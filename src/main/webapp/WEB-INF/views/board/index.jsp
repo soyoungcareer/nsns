@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Knight Bootstrap Template - Index</title>
+<title>낙성대 - 커뮤니티</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 

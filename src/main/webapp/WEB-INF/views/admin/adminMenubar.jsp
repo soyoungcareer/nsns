@@ -44,7 +44,7 @@
           <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
         <i class="fa fa-archive fa-lg"  aria-hidden="true"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item"  href="facMove.me"> <i class="fa fa-archive fa-lg" aria-hidden="true"></i>시설물대여</a></li>
+            <li><a class="dropdown-item"  href="facMovessss.me"> <i class="fa fa-archive fa-lg" aria-hidden="true"></i>시설물대여</a></li>
           </ul>
         </li>
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
