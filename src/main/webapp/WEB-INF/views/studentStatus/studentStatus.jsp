@@ -291,13 +291,13 @@
     		
     	function deleteOff(appNo){
     			
-    		location.href="/deleteOff.stu?appNo="+appNo;
+    		location.href="deleteOff.st?appNo="+appNo;
     			
     	}
 			
     		function deleteDo(appNo){
     			
-    			location.href="/deleteDo.stu?appNo="+appNo;
+    			location.href="deleteDo.stu?appNo="+appNo;
     			
     		}
 			
