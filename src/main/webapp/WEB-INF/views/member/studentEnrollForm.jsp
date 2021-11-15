@@ -35,7 +35,7 @@
         
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-10" style="float:none; margin:0 auto;">
           <div class="tile">
             <h3 class="tile-title">학생 계정 등록</h3>
             <div class="tile-body">  
@@ -55,11 +55,11 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label">이메일</label>
-                  <input class="form-control" type="email" id="email" name="email" required>
+                  <input class="form-control" type="email" id="email" name="email">
                 </div>
                 <div class="form-group">
                   <label class="control-label">연락처</label>
-                  <input class="form-control" type="text" id="phone" name="phone" required>
+                  <input class="form-control" type="text" id="phone" name="phone">
                 </div>
                 
                 <div class="form-group">
@@ -90,9 +90,8 @@
                   <input class="form-control" type="text" id="profId" name="profId" required>
                 </div>
                 
-                <div class="tile-footer">
-              		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>&nbsp;&nbsp;&nbsp;
-              		<a class="btn btn-secondary" type="reset"><i class="fa fa-fw fa-lg fa-times-circle"></i>취소</a>
+                <div class="tile-footer" align="center">
+              		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>
             	</div>  
               </form>
             </div>

@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
   </head>
   
   <body class="app sidebar-mini">
@@ -40,9 +39,13 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
+            <div>
+            	<h3 class="tile-title">학생 계정 조회</h3>
+            	<br>
+            </div>
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="stuListTable">
-                  <thead align="center">
+                  <thead align="center" style="background-color:#EBEAFE">
                     <tr>
                       <th>학번</th>
                       <th>이름</th>
@@ -77,7 +80,6 @@
 			                        	<input type="hidden" name="profId" value="${ s.profId }">	                        	
 			                        	<input type="hidden" name="stuId" value="${ s.stuId }">
 		                        	</form>
-	                        	
 	                        		<input type="submit" class="btn btn-outline-danger" value="없음">
 	                        	</c:if>
 	                        </td>

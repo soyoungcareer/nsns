@@ -19,8 +19,8 @@ public class CreateEvController {
 	@RequestMapping("LectEvQ.adm") //강의 평가 항목 생성 페이지 이동
 	public String lectEvQuestion(Model model) {
 		
-		//ArrayList<LectEvaluation> evQList = createEvService.selectEvQList();
-		//model.addAttribute("evQList", evQList);
+		ArrayList<LectEvaluation> evQList = createEvService.selectEvQList();
+		model.addAttribute("evQList", evQList);
 		
 		return "major/subjectEvaluationQ";
 	}

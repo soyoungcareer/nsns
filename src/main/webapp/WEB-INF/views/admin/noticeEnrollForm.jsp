@@ -72,7 +72,7 @@
                   
                   <div class="form-group">
                     <label for="content">내용</label>
-                    <textarea class="form-control" id="content" name="ntcContent" rows="3" placeholder="내용 글자 수 제한 3500byte" maxlength="3500" style="resize:none;"></textarea>
+                    <textarea class="form-control" id="content" name="ntcContent" rows="3" placeholder="내용 글자 수 제한 3500byte" style="resize:none;"></textarea>
                   </div>
                   <br>
                   <div class="form-group">

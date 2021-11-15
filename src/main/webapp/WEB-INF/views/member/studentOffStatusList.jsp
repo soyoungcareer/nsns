@@ -32,7 +32,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-address-card-o"></i> 학생 관리</h1>
+          <h1><i class="fa fa-th-list"></i> 학적 변경</h1><!-- 자퇴 -->
         </div>
       </div>
       <div class="row">
@@ -42,7 +42,7 @@
             <form id="stuOnOffStaList" action="" method="post">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
-                  <thead align="center">
+                  <thead align="center" style="background-color:#EBEAFE">
                     <tr>
                       <th>학번</th>
                       <th>이름</th>
@@ -52,7 +52,7 @@
                       <th>휴학학기 수</th>
                       <th>신청단계</th>
                       <th>승인상태</th>
-                      <th>처리결과</th>                   
+                      <th>처리결과</th>
                       <th>담당교수</th>
                       <th>승인</th>
                       <th>복학</th>
@@ -66,7 +66,7 @@
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ staList }" var="sta">
-	                    <tr>                 
+	                    <tr>                  
 	                        <td>${ sta.stuId }
 	                        	<input type="hidden" id="stuId" name="stuId" value="${ sta.stuId }">
 	                        	<input type="hidden" id="stsNo" name="stsNo" value="${ sta.stsNo }">
@@ -83,7 +83,7 @@
 	                        <td>${ sta.offSem }
 	                        	<input type="hidden" id="offSem" name="offSem" value="${ sta.offSem }">
 	                        </td>
-	                        <td>${ sta.offSemCnt } 학기
+	                        <td>${ sta.offSemCnt }
 	                        	<input type="hidden" id="offSemCnt" name="offSemCnt" value="${ sta.offSemCnt }">
 	                        </td>
 	                        <td>${ sta.stsCategory }
@@ -95,29 +95,23 @@
 	                        <td>${ sta.stsComplete }
 	                        	<input type="hidden" id="stsComplete" name="stsComplete" value="${ sta.stsComplete }" readonly>
 	                        </td>
+	                        <!-- <td>${ sta.applicationNo }
+	                        	<input type="hidden" id="applicationNo" name="applicationNo" value="${ sta.applicationNo }">
+	                        </td> -->
 	                        <td>${ sta.profName }
 	                        	<input type="hidden" id="profName" name="profName" value="${ sta.profName }" readonly>
 	                        	<input type="hidden" id="profId" name="profId" value="${ sta.profId }">
 	                        </td>	                        
 	                        <td>
+	                        	<!-- <button class="btn btn-primary" type="button" onclick="location.href='stuStaUpdate.adm'">승인</button> -->
 	                        	<button class="btn btn-primary" name="stuOffTerm" onclick="stuStaSubmit(1)">승인</button>
-		                        	
-		                        	<!-- <c:if test = "${ sta.stsComplete eq '완료' }">
-			                        	<script>
-			                        		$(".btn-primary").attr("disabled", "true");
-			                        	</script>
-		                        	</c:if> -->
 	                        </td>
 	                        <td>
 	                        	<button class="btn btn-secondary" name="stuOnTerm" onclick="stuStaSubmit(2)">복학</button>
-	                        		<!-- <c:if test = "${ sta.stsComplete eq '완료' }">
-			                        	<script type="text/javascript">
-			                        		$(".btn-secondary").attr("disabled", "true");
-			                        	</script>
-		                        	</c:if> -->
 	                        </td>
 	                    </tr>
-                    </c:forEach>  
+                    </c:forEach>
+                    
                   </tbody>
                 </table>
               </div>
@@ -126,7 +120,7 @@
           </div>
         </div>
       </div>
-      
+ 
 	  <div id="pagingArea">
          <ul class="pagination">
          	<c:choose>
@@ -158,16 +152,15 @@
          		</c:otherwise>
          	</c:choose>
          </ul>
-       </div>        
+      </div>             
     </main>
-    
     <script>
     	$(function(){
     		$("#sampleTable tbody tr").click(function(){
     			location.href="stuStaUpdate.adm?stsNo=" + $(this).children().eq(0).text();
     		});
     	});
-    </script>
+    </script>    
     <script>
 		function stuStaSubmit(num){
 			var stuStaUpdate = $("#stuOnOffStaList");
@@ -179,7 +172,7 @@
 			}
 			stuStaUpdate.submit();
 		}
-	</script>
+	</script>   
     <script>
     	var Now = new Date();
     	var nowMonth = Now.getMonth() + 1;
@@ -206,22 +199,12 @@
     	var endDateWinter = 03311159
     	var startDateSummer = 07011200
     	var endDateSummer = 09311159
-    	/*
+    	
     	if(endDateWinter < nowtime){
             $('.btn').attr('disabled', 'true');
         }else if(startDateSummer > nowTime || endDateSummer < nowTime){
         	$('.btn').attr('disabled', 'true');
-        }*/
-    </script>
-    <script>
-	  /*
-	    var result = $("input[name=stsComplete]").val();
-	    if(result === "처리중"){
-			$("button[name=stuOffTerm]").attr("disabled", "true");
-	    }else{
-	    	$(".btn-secondary").attr("disabled", "true");
-	    }
-	    */
+        }
     </script>
     
     <!-- Essential javascripts for application to work-->

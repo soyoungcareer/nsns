@@ -34,18 +34,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-10" style="float:none; margin:0 auto;">
           <div class="tile">
             <h3 class="tile-title">학생 정보 변경</h3>
             <div class="tile-body">
               <form id="studentEnrollForm" action="UpdateProfId.adm" method="post">
                 <div class="form-group">
-                  <label class="control-label">담당교수 변경(교번) </label>
+                  <label class="control-label">담당교수 변경(교번 입력) </label>
                   <input class="form-control" type="text" id="profId" name="profId" required>
                   <input type="hidden" name="stuId" value="${s.stuId}">
                 </div>
  
-                <div class="tile-footer">
+                <div class="tile-footer" align="center">
               		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>변경</button>
             	</div>
               </form>

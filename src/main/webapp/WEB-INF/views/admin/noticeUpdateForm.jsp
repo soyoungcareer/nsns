@@ -79,8 +79,8 @@
 	                    </c:if>     
                   </div>
                   
-                  <div class="tile-footer">
-		              <button class="btn btn-primary" type="submit">수정하기</button>
+                  <div class="tile-footer" align="center">
+		              <button class="btn btn-primary" type="submit">수정하기</button>&nbsp;&nbsp;&nbsp;
 		              <button type="button" class="btn btn-secondary" onclick="javascript:history.go(-1);">취소하기</button>
 		            </div>
                 </form>
