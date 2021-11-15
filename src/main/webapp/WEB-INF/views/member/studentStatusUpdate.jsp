@@ -42,7 +42,7 @@
             <form id="stuStaList" action="stuStaUpdate.adm" method="post">
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
-                  <thead align="center">
+                  <thead align="center" style="background-color:#EBEAFE">
                     <tr>
                       <th>신청번호</th>
                       <th>학번</th>

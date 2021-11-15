@@ -31,11 +31,10 @@
       <div class="app-title">
         <div>
           <h1><i class="fa fa-address-card"></i> 교수 관리</h1>
-          <p>교수 계정 등록</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-10" style="float:none; margin:0 auto;">
           <div class="tile">
             <h3 class="tile-title">교수 계정 등록</h3>
             <div class="tile-body">
@@ -103,24 +102,13 @@
                   	}
                   </script>
                   
-                  <!-- <div class="form-group">
-                    <label for="profYear">연도</label>
-                    <select class="form-control" id="profYear" onchange="">  
-                    </select>
-                  </div>
-                  
-                  <script type="text/javascript">
-    	
-                  </script> -->
-
                 <div class="form-group">
                   <label class="control-label">교번 생성</label>
                   <input class="form-control" type="text" id="profId" name="profId" required>           
                 </div>
    
-                <div class="tile-footer">
-              		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>&nbsp;&nbsp;&nbsp;
-              		<a class="btn btn-secondary" type="reset"><i class="fa fa-fw fa-lg fa-times-circle"></i>취소</a>
+                <div class="tile-footer" align="center">
+              		<button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>등록</button>
             	</div>  
               </form>
             </div>
@@ -128,23 +116,6 @@
         </div>   
       </div>
     </main>
-    
-    <script>
-	    /*
-		$(document).ready(function(){
-			plusYear();
-		});
-		
-		function plusYear(){
-			var date = new Date();
-			var currentYear = date.getFullYear();
-			
-			//var currentYear = date.getFullYear().toString();
-			//var grantYear = currentYear.substr(2, 2);
-			
-			$('#stuId').append('currentYear');
-		}*/
-    </script>
     
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>

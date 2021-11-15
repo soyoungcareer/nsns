@@ -67,7 +67,6 @@ public class MemberDao {
 
 	public int deleteStudent(SqlSessionTemplate sqlSession, int stuId) {
 		
-		System.out.println("MD stuId : " + stuId);
 		return sqlSession.update("memberMapper.deleteStudent", stuId);
 	}
 

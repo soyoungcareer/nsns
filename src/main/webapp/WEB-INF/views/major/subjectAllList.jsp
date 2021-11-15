@@ -16,7 +16,7 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>낙성대학교 강의 관리</title>
+    <title>낙성대학교</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,28 +39,32 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
+            <div>
+            	<h3 class="tile-title">전체 강의 조회</h3>
+            	<br>
+            </div>
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="sampleTable">
-                  <thead align="center">
+                  <thead align="center" style="background-color:#EBEAFE">
                     <tr>
                       <th>과목코드</th>
                       <th>교과목명</th>
                       <th>학과</th>
                       <th>교수</th>
-                      <th>이수구분</th><!-- 전공, 교양 -->
-                      <th>강의형태</th><!-- 집체/온라인 -->
+                      <th>이수구분</th>
+                      <th>강의형태</th>
                       <th>강의시간</th>                      
                       <th>학점</th>
                       <th>학년도</th>
                       <th>학기</th>
                       <th>강의실</th>
-                      <!-- <th>강의계획서 첨부파일</th> -->
+                      <th>첨부파일</th>
                     </tr>
                   </thead>
                   <tbody align="center">
                   	<c:if test="${ empty subAllList }">
                   		<tr>
-                  			<td colspan=11>강의 변경 신청 내역이 존재하지 않습니다.</td>
+                  			<td colspan=12>강의 변경 신청 내역이 존재하지 않습니다.</td>
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ subAllList }" var="al">
@@ -83,14 +87,32 @@
 	                        		</c:otherwise>
 	                        	</c:choose>	                      
 	                        </td>
-	                        <td>${ al.subType }</td>
+	                        <td>
+	                        	<c:choose>
+	                        		<c:when test="${ al.subType == 1 }">
+	                        			집체
+	                        		</c:when>
+	                        		<c:otherwise>
+	                        			온라인
+	                        		</c:otherwise>
+	                        	</c:choose>
+	                        </td>
 	                        <td>${ al.subTime }</td>
 	                        <td>${ al.subCredit }</td>
 	                        <td>${ al.subYear }</td>
 	                        <td>${ al.subSmst }</td>
-	                        <td>${ al.subClass }
+	                        <td>${ al.subClass }</td>
+	                        <td>
 	                        	<input type="hidden" id="originName" name="originName" value="${ al.originName }">
                 				<input type="hidden" id="changeName" name="changeName" value="${ al.changeName }">
+                				<c:choose>
+	                        		<c:when test="${ !empty al.changeName }">
+	                        			${ al.changeName }
+	                        		</c:when>
+	                        		<c:otherwise>
+	                        			없음
+	                        		</c:otherwise>
+	                        	</c:choose>
 	                        </td>  
 	                    </tr>
                     </c:forEach>

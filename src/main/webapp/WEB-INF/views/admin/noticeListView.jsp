@@ -132,7 +132,7 @@
 		        <div align="right">
 		        	<button class="btn btn-primary" type="button" onclick="location.href='enrollFrom.ntc'">등록하기</button>
 		        </div>
-	       </c:if>
+	        </c:if>
           </div>
         </div>
       </div>

@@ -66,7 +66,15 @@
                   
                   <div class="form-group">
                     <label for="subDivs">이수구분</label>
-                    <input class="form-control" id="subDivs" name="subDivs" type="text" value="${ reqSub.subDivs }">
+                    <input class="form-control" id="subDivs" name="subDivs" type="hidden" value="${ reqSub.subDivs }">
+                    <c:choose>
+                    	<c:when test="${ reqSub.subDivs == 1 }">
+                    		<input class="form-control" value="전공">
+                  		</c:when>
+                  		<c:otherwise>
+                  			<input class="form-control" value="교양">
+                  		</c:otherwise>
+                    </c:choose>
                   </div>
                   
                   <div class="form-group">
@@ -82,19 +90,7 @@
                   
                   <div class="form-group">
                     <label for="subClass">강의실</label>
-                    <!-- 기존 <input class="form-control" id="subClass" name="subClass" type="text"> -->
-                    <input class="form-control" id="subClass" name="subClass" type="text" value="${sub.subClass }">
-                    <!-- 
-                    <c:if test="${ !empty sub.subClass }">
-                    	
-                    	<input class="form-control" id="subClass" name="subClass" type="text" value="${sub.subClass }">
-                    </c:if>
-                    
-                    <c:if test="${ empty sub.subClass }">
-                    	
-                    	<input class="form-control" id="subClass" name="subClass" type="text" placeholder="">
-                    
-                    </c:if> -->
+                    <input class="form-control" id="subClass" name="subClass" type="text" value="0">                    
                   </div>
                   
                   <div class="form-group">
@@ -105,12 +101,6 @@
                   <div class="form-group">
                     <label for="subType">강의형태</label>
                     <input class="form-control" id="subType" name="subType" type="hidden" value="${ reqSub.subType }">
-                    
-                    <!-- <select onload="test1();">
-                    	<option value=1>집체</option>
-                    	<option value=2>온라인</option> 	
-                    </select> -->
-                    
                     <c:choose>
                     	<c:when test="${ reqSub.subType == 1 }">
                     		<input class="form-control" value="집체">
@@ -119,29 +109,18 @@
                   			<input class="form-control" value="온라인">
                   		</c:otherwise>
                     </c:choose>
-                    
-                  	
                   </div>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">학년도</label><!-- 연도 입력 -->
-                    <!-- <c:if test="${ empty sub.subYear }">
-                    <input class="form-control" id="subYear" name="subYear" type="text" placeholder="학년도 네자리 입력">
-                  	</c:if>
-                  	<c:if test="${ !empty sub.subYear }">
-                  		<input class="form-control" id="subYear" name="subYear" type="text" value="${ sub.subYear }">
-                  	</c:if> -->
+                    <label for="subYear">학년도</label>
                   	<input class="form-control" id="subYear" name="subYear" type="text">
-                  
                   </div>
                   <script>
                 	document.getElementById('subYear').value=new Date().getFullYear().toString();
-                
                 </script>
                   
                   <div class="form-group">
-                    <label for="ntcCategory">학기</label><!-- 입력 -->
-                    <!-- <input class="form-control" id="subSmst" type="text" value=""> -->
+                    <label for="subSmst">학기</label>
                     <select id="subSmst" name="subSmst">
                     	<option value=1>1</option>
                     	<option value=2>2</option>
@@ -149,20 +128,16 @@
                   </div>
                   
                   <div class="form-group">
-                        
                         <input type="hidden" name="originName" value="${ reqSub.attOrigin }">
                   		<c:if test="${ !empty reqSub.attOrigin }">
-                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${reqSub.attChange}" download="${ reqSub.attOrigin }">${ reqSub.attOrigin }</a>
-                        					
+                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${reqSub.attChange}" download="${ reqSub.attOrigin }">${ reqSub.attOrigin }</a>				
                         </c:if>
                         <c:if test="${ empty reqSub.attOrigin }">
                         	첨부파일이 없습니다.
                         </c:if>
-                        
                   </div>
                   
                   <div align="center">
-                  
                   	<c:if test="${ reqSub.reqType == 'C' }">
                   		<button class="btn btn-primary" onclick="subModSubmit(1);">등록</button>
                   	</c:if>
@@ -183,7 +158,6 @@
 					
 					if(num == 1){
 						subMod.attr("action", "createSub.adm");
-						//subMod.attr("action", "createReqSub.adm");
 					}else if(num == 2){
 						subMod.attr("action", "modifySub.adm");
 					}else{

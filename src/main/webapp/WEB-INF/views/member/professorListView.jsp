@@ -32,16 +32,20 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-address-card"></i> 전체 교수 계정</h1>
+          <h1><i class="fa fa-address-card"></i> 교수 관리</h1>
         </div> 
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
+            <div>
+            	<h3 class="tile-title">전체 교수 조회</h3>
+            	<br>
+            </div>
               <div class="table-responsive">
                 <table class="table table-hover table-bordered" id="prfListTable">
-                  <thead align="center">
+                  <thead align="center" style="background-color:#EBEAFE">
                     <tr>
                       <th>교번</th>
                       <th>이름</th>
@@ -120,28 +124,12 @@
     <script>
     	$(function(){
     		$("#prfListTable tbody tr button").click(function(){
-    			var answer = confirm("해당 교수를 비활성화 하겠습니까?");
+    			var answer = confirm("해당 교수를 비활성화하겠습니까?");
     			if(answer == true){
     				location.href="prfDelete.adm?profId=" + $(this).parent().parent().children().eq(0).text();
     			}
     		});
     	});
-    </script>
-    
-    <script>
-    	
-    /*$(function(){
-    		var status = $('input[name=profStatus]').val();
-    		if(status == 'N'){
-    	        $('.btn').attr('disabled', 'true');
-			}
-    	});*/
-    	$(function(){
-    		//var status = ${ p.profStatus }
-    		if("${ p.profStatus }" == 'N'){
-    	        $('.btn').attr('disabled', 'true');
-			}
-    	});	
     </script>
     
     <!-- Essential javascripts for application to work-->

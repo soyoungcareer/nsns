@@ -25,41 +25,43 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
+  
   <body class="app sidebar-mini">
     <jsp:include page="../admin/adminMenubar.jsp" />
     
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-check-square-o"></i> 강의 관리</h1>
-        </div>  
+          <h1><i class="fa fa-th-list"></i> 강의 신청 내역</h1>
+        </div>
+        
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="subModTable">
+                <table class="table table-hover table-bordered" id="sampleTable">
                   <thead align="center">
                     <tr>
                       <th>신청번호</th>
                       <th>교과목명</th>
                       <th>학과</th>
                       <th>교수</th>
-                      <th>이수구분</th><!-- 전공, 교양 -->
-                      <th>강의형태</th><!-- 집체/온라인 -->
+                      <th>이수구분</th>
+                      <th>강의형태</th>
                       <th>강의시간</th>                      
                       <th>학점</th>
                       <th>신청형태</th>
                       <th>승인상태</th>
-                      <th>강의실</th><!-- 강의실 지정 -->
-                      <!-- <th>강의계획서 첨부파일</th> -->
+                      <th>강의실</th>
+                      <th>첨부파일</th>
                     </tr>
                   </thead>
                   <tbody align="center">
                   	<c:if test="${ empty subList }">
                   		<tr>
-                  			<td colspan=11>강의 변경 신청 내역이 존재하지 않습니다.</td>
+                  			<td colspan=12>강의 변경 신청 내역이 존재하지 않습니다.</td>
                   		</tr>
                   	</c:if>
                     <c:forEach items="${ subList }" var="sl">
@@ -83,7 +85,16 @@
 	                        		</c:otherwise>
 	                        	</c:choose>	                      
 	                        </td>
-	                        <td>${ sl.subType }</td>
+	                        <td>
+	                        	<c:choose>
+	                        		<c:when test="${ sl.subType == 1 }">
+	                        			집체
+	                        		</c:when>
+	                        		<c:otherwise>
+	                        			온라인
+	                        		</c:otherwise>
+	                        	</c:choose>	
+	                        </td>
 	                        <td>${ sl.subTime }</td>
 	                        <td>${ sl.subCredit }</td>
 	                        <td>
@@ -100,8 +111,16 @@
 	                        </td>
 	                        <td>${ sl.status }</td>
 	                        <td>강의실
+	                        </td>
+	                        <td>
 	                        	<input type="hidden" id="attOrigin" name="attOrigin" value="${ sl.attOrigin }">
                 				<input type="hidden" id="attChange" name="attChange" value="${ sl.attChange }">
+                				<c:if test="${sl.attChange }">
+                					${!empty sl.attOrigin }
+                				</c:if>
+                				<c:if test="${empty sl.attChange }">
+                					없음
+                				</c:if>
 	                        </td>
 	                    </tr>
                     </c:forEach>
@@ -110,9 +129,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
-      
+
 	  <div id="pagingArea">
          <ul class="pagination">
          	<c:choose>
@@ -126,14 +145,15 @@
          	
              <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
              	<c:choose>
-	          		<c:when test="${ pi.currentPage ne p }">
-	             			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ p }">${ p }</a></li>
-	          		</c:when>
-	          		<c:otherwise>
-	          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
-	          		</c:otherwise>
-          		</c:choose>
+          		<c:when test="${ pi.currentPage ne p }">
+             			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ p }">${ p }</a></li>
+          		</c:when>
+          		<c:otherwise>
+          			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+          		</c:otherwise>
+          	</c:choose>
              </c:forEach>
+
              <c:choose>
          		<c:when test="${ pi.currentPage ne pi.maxPage }">
          			<li class="page-item"><a class="page-link" href="subModifyList.adm?currentPage=${ pi.currentPage+1 }">Next</a></li>
@@ -144,12 +164,13 @@
          	</c:choose>
          </ul>
       </div>
+            
+            
     </main>
-    
     <!-- detailView -->
     <script>
     	$(function(){
-    		$("#subModTable tbody tr").click(function(){
+    		$("#sampleTable tbody tr").click(function(){
     			location.href="detailSub.adm?sno=" + $(this).children().eq(0).text();
     		});
     	});
