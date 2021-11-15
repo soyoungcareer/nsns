@@ -165,7 +165,7 @@ public class StudentStatusController {
 	} 
 	
 	//학생 휴학 신청 취소
-	@RequestMapping("deleteOff.stu")
+	@RequestMapping("deleteOff.st")
 	public String deleteOff(int appNo, RedirectAttributes redirectAttributes) { 
 		
 		studentStatusService.deleteOff(appNo);
@@ -176,7 +176,7 @@ public class StudentStatusController {
 	}
 	
 	//학생 지퇴 신청 취소
-	@RequestMapping("deleteDo.stu")
+	@RequestMapping("deleteDo.st")
 	public String deleteDo(int appNo, RedirectAttributes redirectAttributes) { 
 			
 		studentStatusService.deleteDo(appNo);

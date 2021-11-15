@@ -250,10 +250,13 @@
    
        function deleteEvents(){
     	   for(let i = 1; i<calendarTable.rows.length; i++){
-    		   let acId = calendarTable.rows[i].cells[0].innerText;
-    		   location.href="delete.ca?acId="+ acId;
-    	   }
-       }
+    		   calendarTable.rows[i].cells[4].onclick = function(){
+    			    let acId = calendarTable.rows[i].cells[0].innerText;
+    			    location.href="delete.ca?acId="+ acId;
+    		}
+    	}
+      }
+       
        
     
     </script>
